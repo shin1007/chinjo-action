@@ -9,13 +9,7 @@
     ['北海道・東北', 0, 7], ['関東', 7, 14], ['中部', 14, 23], ['近畿', 23, 30],
     ['中国', 30, 35], ['四国', 35, 39], ['九州・沖縄', 39, 47],
   ];
-  const ROLES = [
-    ['apart', '子どもと離れて暮らす親', '私自身、子どもと離れて暮らす親として、子どもが親の別居・離婚後も父母双方と関わり続けられる社会を願っています。'],
-    ['grand', '孫と会えなくなった祖父母・親族', '私は孫と会えなくなった家族の一人として、子どもが家族とのつながりを保ち続けられる社会を願っています。'],
-    ['parent', '子育て中の親', '子育て中の親として、どの子どもも父母双方から愛情を受けて育つことができる社会を願っています。'],
-    ['citizen', '関心のある市民・支援者', '一市民として、親の別居・離婚によって子どもが一方の親との関係を失うことのない社会を願っています。'],
-    ['none', '書かない', ''],
-  ];
+  const ROLES = [...window.THEME.roles, ['none', '書かない', '']];
 
   const state = { step: 0, pref: '', councils: [], type: '', items: [], role: '' };
 
@@ -209,7 +203,7 @@
 
   // 内容ごとに1つの欄で直す。2つ目以降の議会には、宛名と自治体名を差し替えて同じ文面を使う
   // 直した文面は内容ごとに、そのとき宛てた議会・立場と一緒に端末の中にだけ残す（再読み込み・選び直しで消えないように）
-  const EDITS_KEY = 'wz-edits';
+  const EDITS_KEY = window.THEME.key('wz-edits');
   let edits = {};
   try { edits = JSON.parse(localStorage.getItem(EDITS_KEY)) || {}; } catch { edits = {}; }
   const saveEdits = () => { try { localStorage.setItem(EDITS_KEY, JSON.stringify(edits)); } catch { /* 保存できない環境では、この画面の間だけ残す */ } };
@@ -235,7 +229,7 @@
         <div class="out-toolbar"><button type="button" class="btn btn-small" data-doc-print="${i}">この内容だけPDFで保存（${state.councils.length}通）</button>${e ? `<button type="button" class="btn btn-small" data-doc-reset="${esc(k)}">元の文面に戻す</button>` : ''}</div>
       </details>`;
     }).join('');
-    $('wzLabels').href = `/labels?c=${encodeURIComponent(state.councils.join(','))}`;
+    $('wzLabels').href = `labels?c=${encodeURIComponent(state.councils.join(','))}`;
     $('wzSummary').textContent = `${state.councils.length}つの議会 × ${state.items.length}つの内容 ＝ 陳情書 ${state.councils.length * state.items.length}通`;
     renderOffices();
   }
@@ -274,7 +268,7 @@
       const p = window.Postage.estimate(n);
       if (!p.yen) return `<li>${esc(label(c))}：${n}枚・約${p.g}g。郵便局の窓口で出してください。</li>`;
       return `<li>${esc(label(c))}：${n}枚・約${p.g}g → <b>${p.yen}円</b>（${p.limit}gまで）${p.safe ? `。ぎりぎりなので、心配なら<b>${p.safe}円</b>分貼っておくと安心です` : ''}</li>`;
-    }).join('')}</ul><p class="hint-sm">クリアファイル1枚と、宛名・差出人のラベル、のりを含めた重さです。切手は多めに貼っても届きます（多い分は戻りません）。不安なときは郵便局の窓口で量ってもらうのが確実です。<a href="/guide#send">送り方を見る</a></p>`;
+    }).join('')}</ul><p class="hint-sm">クリアファイル1枚と、宛名・差出人のラベル、のりを含めた重さです。切手は多めに貼っても届きます（多い分は戻りません）。不安なときは郵便局の窓口で量ってもらうのが確実です。<a href="guide#send">送り方を見る</a></p>`;
     $('wzPostage').hidden = false;
   }
   const fileName = () => `陳情書_${nameOf(state.councils[0])}${state.councils.length > 1 ? `ほか${state.councils.length - 1}件` : ''}_${window.PdfDoc.today()}.pdf`;
@@ -427,7 +421,7 @@
     qr.addData(url);
     qr.make();
     $('wzQr').innerHTML = qr.createSvgTag({ cellSize: 4, margin: 4, scalable: true });
-    const subject = '陳情書（子どもの権利を守る陳情アクション）';
+    const subject = `陳情書（${window.THEME.name}）`;
     $('wzMail').href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`あとで開く陳情書のリンク：\n${url}`)}`;
     $('wzShare').hidden = !navigator.share;
     $('wzShare').onclick = () => navigator.share({ title: subject, url }).catch(() => {});

@@ -17,7 +17,7 @@ window.Report = (() => {
       .catch(() => counts);
 
   // 同じ端末から同じ議会を二度数えないよう、報告済みの議会を覚えておく
-  const DONE_KEY = 'reported';
+  const DONE_KEY = window.THEME.key('reported');
   const done = () => { try { return JSON.parse(localStorage.getItem(DONE_KEY)) || []; } catch { return []; } };
   const reported = (id) => done().includes(id);
 

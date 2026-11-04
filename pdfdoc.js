@@ -20,10 +20,10 @@ window.PdfDoc = (() => {
   });
   function load() {
     assets = assets || Promise.all([
-      window.PDFLib ? null : loadScript('vendor/pdf-lib.min.js'),
-      window.fontkit ? null : loadScript('vendor/fontkit.umd.min.js'),
-      loadFont('fonts/BIZUDMincho-Regular.subset.ttf'),
-      loadFont('fonts/BIZUDMincho-Bold.subset.ttf'),
+      window.PDFLib ? null : loadScript('/vendor/pdf-lib.min.js'),
+      window.fontkit ? null : loadScript('/vendor/fontkit.umd.min.js'),
+      loadFont('/fonts/BIZUDMincho-Regular.subset.ttf'),
+      loadFont('/fonts/BIZUDMincho-Bold.subset.ttf'),
     ]).then(([, , regular, bold]) => ({ regular, bold }))
       .catch((e) => { assets = null; throw e; });
     return assets;

@@ -7,8 +7,8 @@ const path = require('node:path');
 const vm = require('node:vm');
 
 const ROOT = path.join(__dirname, '..');
-const FILES = ['data/prefs.js', 'data/asks-national.js', 'data/asks-local.js', 'data/template.js', 'data/municipalities.js',
-  'data/offices.js', 'data/sites.js', 'data/councils.js', 'data/kana.js', 'data/reasons.js', 'common.js', 'places.js', 'petition.js'];
+const FILES = ['themes/kodomo/theme.js', 'data/prefs.js', 'themes/kodomo/asks-national.js', 'themes/kodomo/asks-local.js', 'themes/kodomo/template.js', 'data/municipalities.js',
+  'data/offices.js', 'data/sites.js', 'data/councils.js', 'data/kana.js', 'themes/kodomo/reasons.js', 'common.js', 'places.js', 'petition.js'];
 
 function load() {
   const ctx = { FormData };

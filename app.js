@@ -129,11 +129,11 @@
 （氏名・住所・連絡先）`;
 
   document.querySelectorAll('[data-template="mp"]').forEach((b) =>
-    b.addEventListener('click', () => copy(MP_TEMPLATE, '文例をコピーしました'))
+    b.addEventListener('click', () => copy(window.THEME.mpTemplate, '文例をコピーしました'))
   );
 
   const url = encodeURIComponent(location.href.split('#')[0]);
-  const text = encodeURIComponent('子どもには両方の親と関わり続ける権利がある。3分で陳情書をつくれます。 #共同親権 #実子誘拐');
+  const text = encodeURIComponent(window.THEME.shareText);
   document.getElementById('shareX').href = `https://x.com/intent/post?text=${text}&url=${url}`;
   document.getElementById('shareLine').href = `https://social-plugins.line.me/lineit/share?url=${url}`;
   document.getElementById('wzShareX').href = document.getElementById('shareX').href;
