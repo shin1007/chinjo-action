@@ -95,3 +95,25 @@ test('鏡文に議会事務局・差出人・同封する陳情書の件名が�
   assert.match(c, /一　陳情書「.+」　1通\n二　陳情書「.+」　1通/);
   assert.doesNotMatch(c, /\{[^}]+\}/);
 });
+
+// ほかの分野も、同じ仕組みで文面ができることを確かめる
+for (const theme of ['dansei', 'nihonjin']) {
+  test(`${theme}：すべての求める事項で文面と指示文ができる`, () => {
+    const ctx = { FormData };
+    ctx.window = ctx;
+    vm.createContext(ctx);
+    for (const f of FILES.map((f) => f.replace('themes/kodomo/', `themes/${theme}/`))) {
+      vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), ctx, { filename: f });
+    }
+    assert.strictEqual(ctx.THEME.id, theme);
+    const ids = ctx.ASKS.map((a) => a.id);
+    assert.strictEqual(new Set(ids).size, ids.length);
+    for (const a of ctx.ASKS) {
+      const fd = form(a.scope === 'local' ? 'local' : 'ikensho', [a.id]);
+      const t = ctx.Petition.build(fd, '札幌市議会', [a.id]);
+      assert.doesNotMatch(t, /undefined|\{[^}]+\}/, a.id);
+      assert.doesNotMatch(t, /子ども/, a.id);
+      assert.doesNotMatch(ctx.Petition.buildPrompt(fd, ['札幌市議会']), /undefined|子ども/, a.id);
+    }
+  });
+}

@@ -17,11 +17,6 @@
   ],
   "redirects": [
     {
-      "source": "/",
-      "destination": "/kodomo",
-      "permanent": false
-    },
-    {
       "source": "/guide",
       "destination": "/kodomo/guide",
       "permanent": true
