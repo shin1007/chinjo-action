@@ -82,9 +82,22 @@
 
   // 出し方の目安。住民以外・郵送の陳情は配布だけになる議会があるので、作る前に選び直せるよう議会を選んだ時点で出す
   // 読み取れた議会は一部だけなので、書いていない議会は「わからない」として扱う
+  // 案内ページの一文から、郵送で出して審査してもらえるかを分ける。読み取れた議会だけで、書いていない議会は出さない
+  // ok：郵送で出せる／jisan：審査してもらうには持参が必要／outside：住民以外の郵送は配付だけ／none：出し方に関わらず配付だけ
+  function mailRule(info) {
+    const t = [info.yusoNote, info.outsideNote].filter((x) => x && /郵送/.test(x)).join(' ');
+    if (!t) return null;
+    if (/関わらず|持参（または郵送）/.test(t)) return { c: 'none', label: '持参でも郵送でも、陳情は審査されず配付だけのようです' };
+    if (/郵送[^。]{0,8}可/.test(t)) return { c: 'ok', label: '📮 郵送で出せます' };
+    if (/(市|町|村)外[^。]{0,12}郵送|外に住所[^。]{0,12}郵送/.test(t)) return { c: 'jisan', label: '🚶 住民以外が審査してもらうには持参が必要です（郵送は配付だけ）' };
+    if (/配布|配付|参考|審議[はを]?行わ|審査[はを]?行わ|報告はありません|持参してください/.test(t)) return { c: 'jisan', label: '🚶 審査してもらうには持参が必要です（郵送は配付だけ）' };
+    return { c: 'ok', label: '📮 郵送でも受け付けます' };
+  }
+  const mailBadge = (info) => { const r = mailRule(info); return r ? `<span class="wz-mail ${r.c === 'ok' ? 'ok' : r.c === 'none' ? 'none' : 'jisan'}">${esc(r.label)}</span>` : ''; };
   const ONLY_HANDOUT = /配布|配付|参考資料/;
   function howTo(info) {
     const n = [];
+    if (mailRule(info)) n.push(mailBadge(info));
     if (info.denshi) n.push('✅ 電子申請でも出せるようです。');
     const y = info.yusoNote && clip(info.yusoNote);
     if (y) n.push(`${ONLY_HANDOUT.test(y) ? '⚠ 郵送だと審査されないようです' : '郵送について'}：「${esc(y)}」`);
@@ -403,6 +416,8 @@
       ].filter(Boolean).join('');
       return `<li><b>${esc(label(c))}事務局</b>
         <span>${addr ? `${zip ? '〒' + esc(zip) + '　' : ''}${esc(addr)}${info.office ? '' : '（本庁舎）'}` : '住所は公式サイトで確認してください'}</span>
+        ${mailBadge(info) || '<span class="wz-mail none">郵送で審査してもらえるかは載っていませんでした（事務局に確認を）</span>'}
+        <span class="wz-chair">⚠ 宛名の「議長」のあとに、議長の氏名を必ず書き入れてください（下の「議長名を調べる」で確認）。</span>
         ${accessHtml(pref, key)}
         ${notes(info)}
         ${page ? '' : '<span>陳情の出し方のページが見つかりませんでした。小さな議会では案内ページを置いていないことも多いので、議会事務局に電話で出し方と締切を聞くのが確実です。</span>'}
