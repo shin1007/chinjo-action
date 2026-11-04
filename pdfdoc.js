@@ -100,7 +100,7 @@ window.PdfDoc = (() => {
     const LH = BODY * 1.85;
     const textW = A4.w - M.left - M.right;
     const ITEM = /^([一二三四五六七八九十]+　|\d+．)/;
-    const SENDER = /^(住所|氏名|電話|連絡先（電話）)　/;
+    const SENDER = /^(住所|氏名|電話)　/;
 
     // 1つの文書（改行区切りの文面）を、新しいページから書く。ページ番号は文書ごとに振る
     function addDocument(text) {
@@ -135,13 +135,26 @@ window.PdfDoc = (() => {
           wrap(s, size, textW).forEach((l) => { drawLine(page, l, M.left, y, size); y -= size * 1.8; });
           return;
         }
-        // 差出人の住所・氏名：右半分に、項目名をそろえて書く
+        // 差出人の住所・氏名：右寄りに、項目名をそろえて書く
         const sm = s.match(SENDER);
         if (sm) {
-          const x = M.left + textW * 0.45;
-          const labelW = BODY * 4.5;
-          const label = sm[1].replace('連絡先（電話）', '連絡先');
-          wrap(s.slice(sm[0].length), BODY, A4.w - M.right - x - labelW).forEach((l, j) => {
+          const x = M.left + textW * 0.3;
+          const labelW = BODY * 3.5;
+          const label = sm[1];
+          const value = s.slice(sm[0].length);
+          // 空欄なら、手書きで書けるよう右端まで下線を引き、行の間も広げる（氏名は右端に「印」を残す）
+          if (value.startsWith(BLANK)) {
+            const seal = value.slice(BLANK.length).trim();
+            const end = A4.w - M.right - (seal ? BODY * 2 : 0);
+            y -= LH * 0.4;
+            need(LH);
+            page.drawText(label, { x, y, size: BODY, font: R, color: gray });
+            page.drawLine({ start: { x: x + labelW, y: y - 3 }, end: { x: end, y: y - 3 }, thickness: 0.5, color: black });
+            if (seal) page.drawText(safe(seal), { x: end + BODY * 0.6, y, size: BODY, font: R, color: black });
+            y -= LH * 1.2;
+            return;
+          }
+          wrap(value, BODY, A4.w - M.right - x - labelW).forEach((l, j) => {
             need(LH);
             if (!j) page.drawText(label, { x, y, size: BODY, font: R, color: gray });
             drawLine(page, l, x + labelW, y, BODY);

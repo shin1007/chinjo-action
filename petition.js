@@ -86,7 +86,8 @@ window.Petition = (() => {
     return L.join('\n');
   }
 
-  // 文面の住所・氏名・電話の行を、差出人（Common.sender の形）で書き換える。手で直した文面にも使えるよう、行ごと置き換える
+  // 文面の住所・氏名の行を、差出人（Common.sender の形）で書き換える。手で直した文面にも使えるよう、行ごと置き換える
+  // 電話番号は陳情書には入れない（陳情書は公開されることがあるため）。議会事務局だけが読む鏡文に入れる
   function withSender(text, s) {
     const addr = [s.zip && `〒${s.zip}`, s.address].filter(Boolean).join('　') || BLANK_TEXT;
     const t = text
@@ -94,13 +95,13 @@ window.Petition = (() => {
       .replace(/^住所　.*$/m, () => `住所　${addr}`)
       .replace(/^氏名　.*?(　+印)$/m, (_, seal) => `氏名　${s.name || BLANK_TEXT}${seal}`)
       .replace(/^電話　.*\n/m, '');
-    return s.tel ? t.replace(/^(氏名　.*)$/m, (line) => `${line}\n電話　${s.tel}`) : t;
+    return t;
   }
 
   // 郵送で陳情書の上に重ねる鏡文（送付状）。docs はその議会に送る陳情書の文面（件名を一覧にする）
   function cover(council, docs, s) {
     const addr = [s.zip && `〒${s.zip}`, s.address].filter(Boolean).join('　') || BLANK_TEXT;
-    const from = [`住所　${addr}`, `氏名　${s.name || BLANK_TEXT}`, `連絡先（電話）　${s.tel || BLANK_TEXT}`];
+    const from = [`住所　${addr}`, `氏名　${s.name || BLANK_TEXT}`, `電話　${s.tel || BLANK_TEXT}`];
     const subjects = docs.map((d) => (d.match(/^件名　(.+)$/m) || [])[1]).filter(Boolean);
     const list = subjects.length
       ? subjects.map((t, i) => `${KANSUJI[i] || i + 1}　陳情書「${t}」　1通`).join('\n')
