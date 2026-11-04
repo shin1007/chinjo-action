@@ -4,10 +4,10 @@
 
 | 直したいもの | ファイル |
 |---|---|
-| 国に意見書を求める陳情の内容（件名の言葉・求めること・理由） | [asks-national.js](asks-national.js) |
-| 自治体に取り組んでもらう陳情の内容 | [asks-local.js](asks-local.js) |
-| 件名・趣旨・結びの決まった文章、意見書の提出先 | [template.js](template.js) |
-| 陳情書ビルダーで追加できる理由の例文（出典つき） | [reasons.js](reasons.js) |
+| 国に意見書を求める陳情の内容（件名の言葉・求めること・理由） | [../themes/kodomo/asks-national.js](../themes/kodomo/asks-national.js) |
+| 自治体に取り組んでもらう陳情の内容 | [../themes/kodomo/asks-local.js](../themes/kodomo/asks-local.js) |
+| 件名・趣旨・結びの決まった文章、意見書の提出先 | [../themes/kodomo/template.js](../themes/kodomo/template.js) |
+| 陳情書ビルダーで追加できる理由の例文（出典つき） | [../themes/kodomo/reasons.js](../themes/kodomo/reasons.js) |
 | 都道府県の一覧 | [prefs.js](prefs.js) |
 
 以下のファイルは自動で作ったデータなので、手で直す必要はありません。
@@ -16,6 +16,7 @@
 - [kana.js](kana.js)：市区町村名の読み（ひらがなで議会を絞り込むため）
 - [sites.js](sites.js)：公式サイトと、陳情・請願の案内ページへのリンク（自動で見つけたもの）
 - [councils.js](councils.js)：議長名・議会事務局の住所・提出方法の注意（各議会のページから自動で読み取ったもの）
+- [access.js](access.js)：議会事務局（なければ本庁舎）の位置と最寄り駅（`node scripts/access.js` で作る）
 
 ## 直すときの注意
 - 文章は `'` と `'` で囲まれています。文章の中に半角の `'` を書くと壊れるので、使うときは全角の「’」にしてください。

@@ -36,7 +36,7 @@ document.querySelectorAll('[data-send-figs]').forEach((box, n) => {
         <rect x="44" y="196" width="50" height="16" fill="none" stroke="#c00"/>
         <text x="69" y="208" font-size="9" text-anchor="middle" fill="#c00">陳情書在中</text>
       </svg>
-      <figcaption><b>② 封筒の表（角2・縦長）</b><br>切手は<b>左上に180円分</b>（紙16枚・陳情書6件ほどまでなら、これで足ります。それより多いときは<a href="/guide#stamp">切手の表</a>を見てください）。宛名のラベルは真ん中に。ラベルに「陳情書在中」が入っていなければ、左下に赤で書きます。</figcaption>
+      <figcaption><b>② 封筒の表（角2・縦長）</b><br>切手は<b>左上に180円分</b>（紙16枚・陳情書6件ほどまでなら、これで足ります。それより多いときは<a href="guide#stamp">切手の表</a>を見てください）。宛名のラベルは真ん中に。ラベルに「陳情書在中」が入っていなければ、左下に赤で書きます。</figcaption>
     </figure>
     <figure>
       <svg viewBox="0 0 200 250" role="img" aria-labelledby="fig${n}BackTitle">

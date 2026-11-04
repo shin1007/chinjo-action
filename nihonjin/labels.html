@@ -3,26 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>郵送用の宛名ラベル｜子どもの権利を守る陳情アクション</title>
+<title>郵送用の宛名ラベル｜日本人の権利を守る陳情アクション</title>
+<meta name="description" content="陳情書を郵送するための議会あて宛名ラベルを印刷できます。">
+<link rel="canonical" href="https://kenri-chinjo.vercel.app/nihonjin/labels">
+<meta property="og:site_name" content="日本人の権利を守る陳情アクション">
+<meta property="og:title" content="郵送用の宛名ラベル">
+<meta property="og:description" content="陳情書を郵送するための議会あて宛名ラベルを印刷できます。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://kenri-chinjo.vercel.app/nihonjin/labels">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="labels.css">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/labels.css">
 </head>
 <body>
 <header class="site-header">
   <div class="wrap header-inner">
-    <a href="/" class="logo">子どもの権利を守る<span>陳情アクション</span></a>
+    <a href="/nihonjin" class="logo">日本人の権利を守る<span>陳情アクション</span></a>
     <nav>
-      <a href="/">トップ</a>
-      <a href="/guide">陳情の出し方</a>
-      <a href="/labels">宛名ラベル</a>
+      <a href="/nihonjin">トップ</a>
+      <a href="/nihonjin/guide">陳情の出し方</a>
+      <a href="/nihonjin/labels">宛名ラベル</a>
     </nav>
   </div>
 </header>
 
 <main class="wrap labels">
   <h1>郵送用の宛名ラベル</h1>
-  <p class="lead-sm">封筒に貼る宛名ラベルを、A4のラベル用紙にまとめて印刷します。宛先が多いときは複数ページになります。陳情書はA4を折らずに入れられる<b>角2封筒</b>で送るのがおすすめです（<a href="/guide#send">印象のよい送り方</a>）。</p>
+  <p class="lead-sm">封筒に貼る宛名ラベルを、A4のラベル用紙にまとめて印刷します。宛先が多いときは複数ページになります。陳情書はA4を折らずに入れられる<b>角2封筒</b>で送るのがおすすめです（<a href="/nihonjin/guide#send">印象のよい送り方</a>）。</p>
   <div class="privacy">🔒 入力した内容はサーバーには送られません。次に開いたときのために、<b>この端末のブラウザの中にだけ</b>残ります。</div>
 
   <section class="lb-box">
@@ -82,7 +91,7 @@
     <details class="send-howto">
       <summary>郵送するときの送り方（図解）と切手の目安</summary>
       <div data-send-figs></div>
-      <p class="hint-sm">切手は重さで決まります。A4を折らずに角2封筒へ入れるとき、紙3枚までなら<b>140円</b>、16枚までなら<b>180円</b>が目安です。境目に近いときは1つ上の料金分を貼っておけば安心です。<a href="/guide#send">送り方をくわしく見る</a></p>
+      <p class="hint-sm">切手は重さで決まります。A4を折らずに角2封筒へ入れるとき、紙3枚までなら<b>140円</b>、16枚までなら<b>180円</b>が目安です。境目に近いときは1つ上の料金分を貼っておけば安心です。<a href="/nihonjin/guide#send">送り方をくわしく見る</a></p>
     </details>
     <div class="netprint">
       <p><b>プリンターがないときは、コンビニで印刷できます。</b>コンビニにはラベル用紙がないので、「普通紙（切って貼る）」を選んで保存し、切り取り線で切ってのりで貼ります。</p>
@@ -95,19 +104,24 @@
   </section>
 </main>
 
+<footer class="site-footer">
+  <div class="wrap"><p class="small others">ほかの陳情：<a href="/kodomo">子どもの権利を守る陳情アクション</a>　｜　<a href="/dansei">男性の権利を守る陳情アクション</a></p></div>
+</footer>
+
 <p id="toast" class="toast" role="status" hidden></p>
 
-<script src="data/prefs.js"></script>
-<script src="data/asks-national.js"></script>
-<script src="data/asks-local.js"></script>
-<script src="data/template.js"></script>
-<script src="data/municipalities.js"></script>
-<script src="data/offices.js"></script>
-<script src="data/councils.js"></script>
-<script src="common.js"></script>
-<script src="places.js"></script>
-<script src="pdfdoc.js"></script>
-<script src="labels.js"></script>
-<script src="send-figs.js"></script>
+<script src="/themes/nihonjin/theme.js"></script>
+<script src="/data/prefs.js"></script>
+<script src="/themes/nihonjin/asks-national.js"></script>
+<script src="/themes/nihonjin/asks-local.js"></script>
+<script src="/themes/nihonjin/template.js"></script>
+<script src="/data/municipalities.js"></script>
+<script src="/data/offices.js"></script>
+<script src="/data/councils.js"></script>
+<script src="/common.js"></script>
+<script src="/places.js"></script>
+<script src="/pdfdoc.js"></script>
+<script src="/labels.js"></script>
+<script src="/send-figs.js"></script>
 </body>
 </html>

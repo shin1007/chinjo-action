@@ -3,19 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>陳情書ビルダー｜子どもの権利を守る陳情アクション</title>
+<title>陳情書ビルダー｜日本人の権利を守る陳情アクション</title>
+<meta name="description" content="項目を選んで埋めるだけで、地方議会あての陳情書を作成できます。">
+<link rel="canonical" href="https://kenri-chinjo.vercel.app/nihonjin/builder">
+<meta property="og:site_name" content="日本人の権利を守る陳情アクション">
+<meta property="og:title" content="陳情書ビルダー">
+<meta property="og:description" content="項目を選んで埋めるだけで、地方議会あての陳情書を作成できます。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://kenri-chinjo.vercel.app/nihonjin/builder">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="builder.css">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/builder.css">
 </head>
 <body>
 <header class="site-header">
   <div class="wrap header-inner">
-    <a href="/" class="logo">子どもの権利を守る<span>陳情アクション</span></a>
+    <a href="/nihonjin" class="logo">日本人の権利を守る<span>陳情アクション</span></a>
     <nav>
-      <a href="/">トップ</a>
-      <a href="/guide">陳情の出し方</a>
-      <a href="/builder">陳情書ビルダー</a>
+      <a href="/nihonjin">トップ</a>
+      <a href="/nihonjin/guide">陳情の出し方</a>
+      <a href="/nihonjin/builder">陳情書ビルダー</a>
     </nav>
   </div>
 </header>
@@ -49,7 +58,7 @@
   <!-- STEP 2 -->
   <section class="step">
     <h2><span class="step-no">2</span>宛先リスト</h2>
-    <p class="hint">議会への陳情・請願、首長への要望、議員への手紙を宛先ごとに登録します。<b>一覧から選ぶと、役所の本庁舎の郵便番号と住所が自動で入ります</b>（議会事務局の多くは本庁舎にあります。念のため確認してください）。<b>議長・首長の氏名は空欄で構いません。</b>空欄なら「○○市議会　議長　様」と役職名だけで宛名を作ります。役職名だけでも正式な宛名として通用し、議長が交代しても書き直す必要がありません。住所・郵送の扱いは各議会事務局のサイトで確認してください。<a href="/guide#mail">郵送の注意点</a></p>
+    <p class="hint">議会への陳情・請願、首長への要望、議員への手紙を宛先ごとに登録します。<b>一覧から選ぶと、役所の本庁舎の郵便番号と住所が自動で入ります</b>（議会事務局の多くは本庁舎にあります。念のため確認してください）。<b>議長・首長の氏名は空欄で構いません。</b>空欄なら「○○市議会　議長　様」と役職名だけで宛名を作ります。役職名だけでも正式な宛名として通用し、議長が交代しても書き直す必要がありません。住所・郵送の扱いは各議会事務局のサイトで確認してください。<a href="/nihonjin/guide#mail">郵送の注意点</a></p>
     <div class="picker">
       <div class="picker-filters">
         <label>都道府県
@@ -152,20 +161,21 @@
 </main>
 
 <footer class="site-footer">
-  <div class="wrap"><p class="small">本サイトは市民による政策提言のための情報提供サイトです。法的助言を行うものではありません。</p><p class="small credit">市区町村の一覧：<a href="https://github.com/geolonia/japanese-addresses" target="_blank" rel="noopener">Geolonia 住所データ</a>（<a href="https://creativecommons.org/licenses/by/4.0/deed.ja" target="_blank" rel="noopener">CC BY 4.0</a>）を加工して作成。役所の住所：<a href="https://nlftp.mlit.go.jp/ksj/" target="_blank" rel="noopener">国土数値情報</a>（市区町村役場等及び公的集会施設、国・都道府県の機関）（国土交通省）を加工して作成。郵便番号：日本郵便の郵便番号データ（<a href="https://github.com/yubinbango/yubinbango-data" target="_blank" rel="noopener">yubinbango-data</a> 経由）</p></div>
+  <div class="wrap"><p class="small">本サイトは市民による政策提言のための情報提供サイトです。法的助言を行うものではありません。</p><p class="small credit">市区町村の一覧：<a href="https://github.com/geolonia/japanese-addresses" target="_blank" rel="noopener">Geolonia 住所データ</a>（<a href="https://creativecommons.org/licenses/by/4.0/deed.ja" target="_blank" rel="noopener">CC BY 4.0</a>）を加工して作成。役所の住所：<a href="https://nlftp.mlit.go.jp/ksj/" target="_blank" rel="noopener">国土数値情報</a>（市区町村役場等及び公的集会施設、国・都道府県の機関）（国土交通省）を加工して作成。郵便番号：日本郵便の郵便番号データ（<a href="https://github.com/yubinbango/yubinbango-data" target="_blank" rel="noopener">yubinbango-data</a> 経由）</p><p class="small others">ほかの陳情：<a href="/kodomo">子どもの権利を守る陳情アクション</a>　｜　<a href="/dansei">男性の権利を守る陳情アクション</a></p></div>
 </footer>
 
 <div id="printRoot"></div>
 
-<script src="data/prefs.js"></script>
-<script src="data/asks-national.js"></script>
-<script src="data/asks-local.js"></script>
-<script src="data/template.js"></script>
-<script src="data/reasons.js"></script>
-<script src="data/municipalities.js"></script>
-<script src="data/offices.js"></script>
-<script src="common.js"></script>
-<script src="places.js"></script>
-<script src="builder.js"></script>
+<script src="/themes/nihonjin/theme.js"></script>
+<script src="/data/prefs.js"></script>
+<script src="/themes/nihonjin/asks-national.js"></script>
+<script src="/themes/nihonjin/asks-local.js"></script>
+<script src="/themes/nihonjin/template.js"></script>
+<script src="/themes/nihonjin/reasons.js"></script>
+<script src="/data/municipalities.js"></script>
+<script src="/data/offices.js"></script>
+<script src="/common.js"></script>
+<script src="/places.js"></script>
+<script src="/builder.js"></script>
 </body>
 </html>

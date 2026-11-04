@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>日本人の権利を守る陳情アクション｜外国人の生活保護・社会保険・土地のルール</title>
+<meta name="description" content="国民の生活と安全を守るため、外国人への生活保護の見直し、社会保険料の未納対策、重要な土地の取得規制などを求める陳情・請願を、誰でも簡単に作成・提出できるサイトです。">
+<link rel="canonical" href="https://kenri-chinjo.vercel.app/nihonjin">
+<meta property="og:site_name" content="日本人の権利を守る陳情アクション">
+<meta property="og:title" content="日本人の権利を守る陳情アクション">
+<meta property="og:description" content="陳情書を3分で作成。税と社会保障のルールを、国民が納得できる形に。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kenri-chinjo.vercel.app/nihonjin">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="#" class="logo">日本人の権利を守る<span>陳情アクション</span></a>
+    <nav>
+      <a href="#generator">陳情書をつくる</a>
+      <a href="/nihonjin/guide#tips">採択されるコツ</a>
+      <a href="#faq">よくある質問</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">税と社会保障のルールを、国民が納得できる形に。</p>
+    <h1>あなたの一通の陳情が、<br>制度を動かす。</h1>
+    <p class="lead">外国人への生活保護の見直し、社会保険料の未納対策、安全保障上重要な土地の取得規制。<br>地方議会への陳情書を、このページで3分で作成できます。</p>
+    <a href="#generator" class="btn btn-primary">陳情書をつくる</a>
+  </div>
+</section>
+
+<section id="issues" class="section">
+  <div class="wrap">
+    <h2>私たちが求める3つのこと</h2>
+    <div class="cards">
+      <article class="card">
+        <div class="num">1</div>
+        <h3>外国人への生活保護の見直し</h3>
+        <p>生活保護法の対象は「国民」です。外国人への生活保護は、法律ではなく1954年の通知に基づく行政措置として続いています。最高裁も2014年、外国人には法律上の受給権がないと判断しました。廃止を含めて在り方を見直し、法律で定めるよう求めます。</p>
+      </article>
+      <article class="card">
+        <div class="num">2</div>
+        <h3>社会保険料の未納対策</h3>
+        <p>外国人の国民健康保険料の納付率は約6割と報じられ、未納分は誠実に納める加入者の負担になります。政府が示した、滞納者の在留審査への反映（2027年6月から）を確実に実施し、自治体の徴収を強めるよう求めます。</p>
+      </article>
+      <article class="card">
+        <div class="num">3</div>
+        <h3>重要な土地の取得規制</h3>
+        <p>防衛施設の周辺や水源地などの土地は、国民の生活と安全に関わります。今の法律では事前の届出までで、取得そのものは止められません。許可制の導入を含め、実効性のある規制を求めます。</p>
+      </article>
+    </div>
+    <p class="note">※ 本サイトは外国人の方を排斥するものではありません。ルールを明確にし公平に運用することは、ルールを守って暮らす外国人の方のためでもあると考えます。</p>
+  </div>
+</section>
+
+<section id="generator" class="section alt">
+  <div class="wrap">
+    <h2>陳情書をつくる</h2>
+    <p class="lead-sm">選択肢を押していくだけで、議会に出せる陳情書ができます。文字の入力はいりません。<br>選んだ内容や直した文面は、このサイトのサーバーに送信されません。</p>
+
+    <div id="wizard" class="wizard">
+      <div class="wz-progress"><div class="wz-bar" id="wzBar"></div></div>
+      <p class="wz-stepno" id="wzStepNo"></p>
+
+      <div class="wz-step" data-step="pref" hidden>
+        <h3>どの都道府県の議会に出しますか？</h3>
+        <p class="wz-picked" id="wzPrefPicked"></p>
+        <div id="wzPrefs"></div>
+        <div class="wz-near">
+          <button type="button" id="wzNearBtn" class="btn btn-small">📍 現在地から近い議会を探す</button>
+          <span class="hint-sm">持参して出すときに。現在地はこの端末の中だけで使い、送信しません。</span>
+          <div id="wzNear" class="wz-grid" hidden></div>
+        </div>
+      </div>
+
+      <div class="wz-step" data-step="council" hidden>
+        <h3>出す議会を選んでください <small>（いくつでも）</small></h3>
+        <p class="hint-sm">住んでいる自治体の議会がいちばん確実です。<span id="wzCountHint" hidden>「出した人 ○人」はこのサイトで提出を報告した人の数です。まだ誰も出していない議会に出すと、全国に広がります。</span></p>
+        <input type="search" id="wzFilter" class="wz-filter" placeholder="名前で絞り込む（ひらがな・ローマ字でも）">
+        <div id="wzCouncils" class="wz-grid wz-scroll"></div>
+        <p class="wz-picked" id="wzPicked"></p>
+        <button type="button" id="wzMorePref" class="btn btn-small">＋ ほかの都道府県の議会も選ぶ</button>
+        <div id="wzDeadline" class="wz-deadline" hidden></div>
+      </div>
+
+      <div class="wz-step" data-step="type">
+        <h3>何を求めますか？</h3>
+        <div class="wz-cards">
+          <button type="button" class="wz-card" data-type="local"><b>この自治体に取り組んでほしい</b><span>生活保護の状況の公表や、国民健康保険料の徴収など、自治体が自分でできること。採択されやすいのはこちらです。</span></button>
+          <button type="button" class="wz-card" data-type="ikensho"><b>国に意見書を出してほしい</b><span>生活保護の在り方や、土地取得の規制など、国の制度のこと。議会から国へ意見書を出してもらいます。</span></button>
+        </div>
+      </div>
+
+      <div class="wz-step" data-step="items" hidden>
+        <h3>求める内容を選んでください <small>（いくつでも）</small></h3>
+        <p class="hint-sm">1つの内容につき1通の陳情書ができます。迷ったら、★の付いたものがおすすめです。</p>
+        <div id="wzItems" class="wz-cards"></div>
+      </div>
+
+      <div class="wz-step" data-step="role" hidden>
+        <h3>あなたの立場に近いものは？</h3>
+        <p class="hint-sm">陳情書の最後に、立場に合った一文を添えます。個人の事情は書きません。</p>
+        <div id="wzRoles" class="wz-cards"></div>
+      </div>
+
+      <div class="wz-step" data-step="done" hidden>
+        <h3>できあがりました</h3>
+        <p id="wzSummary" class="wz-summary"></p>
+
+        <h4 class="wz-sub">文面を確かめる</h4>
+        <p class="hint-sm">内容ごとに下の欄で自由に直せます。直した文面はこの端末のブラウザの中だけに残ります。サーバーには送られません。</p>
+        <div id="wzDocs" class="wz-docs"></div>
+
+        <h4 class="wz-sub">あなたの住所・氏名を入れる（任意）</h4>
+        <p class="hint-sm">住所は陳情書に、氏名は鏡文（送付状）と封筒の差出人に入ります。<b>陳情書の氏名は、印刷してから手書きで署名</b>します。空欄のままなら下線になり、手書きで記入できます。🔒 サーバーには送られず、次に開いたときのために<b>この端末のブラウザの中にだけ</b>残ります。共用のパソコンでは、終わったら「この端末から消す」を押してください。</p>
+        <div id="wzSender" class="sender-form">
+          <label>郵便番号<input data-sender="zip" inputmode="numeric" autocomplete="postal-code" placeholder="例：123-4567"></label>
+          <label class="wide">住所<input data-sender="address" autocomplete="street-address" placeholder="例：東京都○○市△△1-2-3"></label>
+          <label>氏名（鏡文と封筒用）<input data-sender="name" autocomplete="name" placeholder="例：佐藤 花子"></label>
+          <label>電話番号（任意・鏡文にだけ入ります）<input data-sender="tel" autocomplete="tel" inputmode="tel" placeholder="例：090-0000-0000"></label>
+          <button type="button" id="wzSenderClear" class="btn btn-small">この端末から消す</button>
+        </div>
+
+        <ol class="wz-flow">
+          <li>
+            <h4>① PDFで保存して、印刷する</h4>
+            <label class="check"><input type="checkbox" id="wzCover" checked> 郵送用に、議会ごとの鏡文（送付状）を1枚目につける</label>
+            <label class="check"><input type="checkbox" id="wzWithLabels" checked> 封筒（角2）の表に貼る宛名と、裏に貼る差出人を、最後のページにつける（普通紙に印刷して切って貼る）</label>
+            <div class="pdf-actions">
+              <button type="button" id="wzPdf" class="btn btn-primary">PDFで保存する</button>
+              <button type="button" id="wzShare" class="btn" hidden>アプリに送る（ネットプリントなど）</button>
+            </div>
+            <div id="wzPostage" class="postage" hidden></div>
+            <details class="send-howto">
+              <summary>郵送するときの送り方（図解）と切手の目安</summary>
+              <div data-send-figs></div>
+              <p class="hint-sm">切手は重さで決まります。A4を折らずに角2封筒へ入れるとき、紙3枚までなら<b>140円</b>、16枚までなら<b>180円</b>が目安です。境目に近いときは1つ上の料金分を貼っておけば安心です。<a href="/nihonjin/guide#send">送り方をくわしく見る</a></p>
+            </details>
+            <p class="hint-sm">陳情書・鏡文・宛名が、そのまま提出できる体裁の1つのPDFになります。家のプリンターなら、保存したPDFを開いて<b>A4・倍率100%</b>で印刷します。</p>
+            <div class="netprint">
+              <p><b>プリンターがなければ、コンビニで印刷できます。</b>保存したPDFをサイトかアプリで登録し、お店のマルチコピー機で表示される番号を入れて印刷します。</p>
+              <ul class="netprint-links">
+                <li><a href="https://www.printing.ne.jp/" target="_blank" rel="noopener">セブン‐イレブン：ネットプリント</a></li>
+                <li><a href="https://networkprint.ne.jp/" target="_blank" rel="noopener">ファミリーマート・ローソンなど：ネットワークプリント</a></li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <h4>② 手書きで記入し、署名する</h4>
+            <p class="hint-sm">陳情書の<b>氏名欄に手書きで署名</b>します（印は押さなくても受け付ける議会が多いですが、押すとより丁寧です）。空欄にした住所も手書きで記入します。<b>議長名</b>は下の「議長名を調べる」で確かめて書きます（空欄のままでも受け付ける議会が多いです）。</p>
+          </li>
+          <li>
+            <h4>③ 締切までに議会事務局へ出す</h4>
+            <p class="hint-sm">出し方は議会ごとに下に書いてあります。<b>電子申請</b>ができる議会はそれがいちばん手軽です。郵送で出せる議会もありますが、郵送だと審査されず配布だけになる議会もあるので、遠い議会には先に電話で「郵送でも審査されますか」と聞くのが確実です（<a href="/nihonjin/guide#mail">詳しく</a>）。締切は定例会の1〜2週間前が多いです。郵送するときは<a href="/nihonjin/guide#send">印象のよい送り方</a>も見てください。</p>
+            <ul id="wzOffices" class="wz-offices"></ul>
+            <p><a id="wzLabels" class="btn btn-small" href="/nihonjin/labels">ラベル用紙に宛名を印刷する（角2封筒用）</a></p>
+            <p class="hint-sm">住所は本庁舎のものです。案内ページは自動で見つけたもので、違うこともあります。</p>
+          </li>
+        </ol>
+
+        <details class="wz-more">
+          <summary>ほかの操作（コピー・スマホに送る・生成AIで整える）</summary>
+          <div class="out-toolbar">
+            <button type="button" id="wzCopy" class="btn btn-small">すべてコピー</button>
+            <button type="button" id="wzSend" class="btn btn-small">スマホに送る・あとで開く</button>
+            <button type="button" id="wzAi" class="btn btn-small">生成AIで整える</button>
+          </div>
+          <div id="wzSendBox" class="wz-send" hidden>
+            <p class="hint-sm">QRコードかリンクで、同じ陳情書をスマホやあとで開けます。<b>手で直した文面は含まれません</b>。直した場合は「すべてコピー」で保存してください。</p>
+            <div id="wzQr" class="wz-qr"></div>
+            <div class="out-toolbar">
+              <button type="button" id="wzLinkCopy" class="btn btn-small">リンクをコピー</button>
+              <a id="wzMail" class="btn btn-small">メールで自分に送る</a>
+              <button type="button" id="wzShare" class="btn btn-small" hidden>共有…</button>
+            </div>
+          </div>
+          <div id="wzAiBox" hidden>
+            <div class="ai-launch" data-source="wzPrompt"></div>
+            <textarea id="wzPrompt" rows="8" readonly></textarea>
+          </div>
+        </details>
+
+        <p class="hint-sm">できたら、ほかの人にも広めてください：<a id="wzShareX" target="_blank" rel="noopener">Xで共有</a>／<a id="wzShareLine" target="_blank" rel="noopener">LINEで共有</a></p>
+      </div>
+
+      <p id="wzCount" class="hint-sm wz-count" hidden></p>
+      <div class="wz-nav">
+        <button type="button" id="wzBack" class="btn btn-small">← もどる</button>
+        <button type="button" id="wzNext" class="btn btn-primary">次へ →</button>
+        <button type="button" id="wzRestart" class="btn btn-small" hidden>最初からやり直す</button>
+      </div>
+    </div>
+
+    <details class="advanced">
+      <summary>自分で入力して作る（詳しい版：住所・氏名の入力、議会名の直接入力、生成AIへの指示文など）</summary>
+
+    <form id="genForm" class="gen-form">
+      <div class="gen-step">
+        <h3><span class="step-badge">1</span>どの議会に出しますか</h3>
+        <datalist id="councilList"></datalist>
+        <ol id="councilRows" class="council-rows"></ol>
+        <button type="button" id="councilAdd" class="btn btn-small">＋ 提出先を増やす</button>
+        <p class="hint-sm">自治体名を入力すると候補が出ます。選んだ議会の数だけ、宛名を変えた陳情書ができます。議長名は空欄にしてあり、印刷すると下線になるので手書きで記入できます。</p>
+      </div>
+
+      <div class="gen-step">
+        <h3><span class="step-badge">2</span>何を求めますか</h3>
+        <div class="type-switch" role="radiogroup">
+          <label class="type-card"><input type="radio" name="type" value="ikensho" checked>
+            <b>国に意見書を出してもらう</b><span>議会から国へ、法制度の見直しを求める意見書を出してもらいます。</span></label>
+          <label class="type-card"><input type="radio" name="type" value="local">
+            <b>その自治体の施策を求める</b><span>その市区町村・都道府県が自分でできる取り組みを求めます。</span></label>
+        </div>
+        <fieldset>
+          <legend id="itemsLegend"></legend>
+          <div id="itemList"></div>
+          <p id="itemHint" class="hint-sm"></p>
+          <p id="splitNote" class="hint-sm split-note" hidden>選んだ項目ごとに1通ずつ陳情書を作ります。多くの議会が「1件ごとに分けて提出」を求めており、項目ごとに担当の委員会で審査されるので、1つに反対があってもほかの項目は採択されます。<a href="/nihonjin/guide#split">詳しく</a></p>
+        </fieldset>
+      </div>
+
+      <div class="gen-step">
+        <h3><span class="step-badge">3</span>あなたについて</h3>
+        <p class="privacy">🔒 ここに入力した内容は、このサイトのサーバーに送信も保存もされません。文案づくりはすべてお使いの端末の中で行われ、ページを閉じると消えます。</p>
+        <div class="gen-grid">
+          <label>住所<input name="address" placeholder="例：東京都○○市△△1-2-3"></label>
+          <label>氏名<input name="name" placeholder="例：佐藤 花子"></label>
+          <label>電話番号（任意）<input name="tel" placeholder="例：090-0000-0000"></label>
+        </div>
+        <p class="hint-sm">空欄のままでも作れます。印刷すると下線になるので手書きで記入できます。</p>
+        <label>陳情者としての一言（任意・2〜3文まで）
+          <textarea name="story" rows="3" maxlength="300" placeholder="例：税や保険料を納める一住民として、制度が公平に運用されているのか、確かめられるようにしてほしいと考えています。"></textarea>
+        </label>
+        <p id="storyHint" class="hint-sm">陳情書は公開されます。個人の事情を詳しく書くと、「個人のプライバシー」「係争中の事件」として審査の対象から外されることがあります。日付・地名・相手方・裁判の経過は書かず、一般的な言葉で短く。詳しい事情は <a href="/nihonjin/guide#personal">議員への手紙や面談で</a> 伝えましょう。</p>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block">文案をつくる</button>
+      <button type="button" id="aiBtn" class="btn btn-block btn-ai">生成AIに書いてもらう（指示文をつくる）</button>
+      <p class="hint-sm center">ChatGPT・Gemini・Claude などの無料の生成AIに貼り付けるだけで、あなたの思いを生かした文案を書いてもらえる指示文をつくります。</p>
+    </form>
+
+
+    <div id="aiOutput" class="gen-output" hidden>
+      <h3>生成AIへの指示文</h3>
+      <ol class="ai-steps">
+        <li>使いたい生成AIのボタンを押します。指示文が入った状態でAIが開きます。</li>
+        <li>入っていなければ、入力欄に貼り付けて送信します（指示文はコピー済みです）。</li>
+        <li>できた文案の「【要確認】」の部分と事実・出典を、必ず自分で確かめてから使います。</li>
+      </ol>
+      <div class="ai-launch" data-source="aiPrompt"></div>
+      <div class="out-toolbar">
+        <button type="button" id="aiCopyBtn" class="btn btn-small">指示文だけコピー</button>
+      </div>
+      <textarea id="aiPrompt" rows="18"></textarea>
+      <p class="hint-sm">指示文には、氏名・住所・電話番号は入れていません。生成AIの文案に名前や住所を書き込むのは、印刷してからにしましょう。経験談に個人を特定できる内容があれば、貼り付ける前に消してください。</p>
+    </div>
+
+    <div id="genOutput" class="gen-output" hidden>
+      <h3>できあがった文案</h3>
+      <p class="hint-sm">自由に書き換えられます。陳情書は議会ごと・項目ごとに1通ずつ作られ、「━━ 次の陳情 ━━」で区切られます。区切り線は消さないでください。印刷すると1通ずつ改ページされます。</p>
+      <div class="out-toolbar">
+        <button type="button" id="copyBtn" class="btn btn-small">コピー</button>
+        <button type="button" id="dlBtn" class="btn btn-small">テキスト保存</button>
+        <button type="button" id="printBtn" class="btn btn-small btn-primary">印刷</button>
+      </div>
+      <textarea id="output" rows="24"></textarea>
+      <p class="hint-sm">鏡文（送付状）や封筒に貼る宛名、根拠を選んで理由を組み立てる機能は <a href="/nihonjin/builder">陳情書ビルダー</a> にあります。</p>
+    </div>
+
+    </details>
+
+    <div class="howto">
+      <h3>提出のしかた</h3>
+      <ol>
+        <li>議会事務局のウェブサイトで「陳情」「請願」の提出方法・締切を確認します（定例会ごとに締切があります）。</li>
+        <li>文案を印刷し、署名（または記名押印）します。</li>
+        <li>締切までに議会事務局へ出します。持参がいちばん確実ですが、電子申請や郵送で出せる議会もあります。郵送だと審査されず配布だけになる議会もあります（<a href="/nihonjin/guide#mail">詳しく</a>）。多くの議会で、居住地以外の議会にも提出できます。</li>
+        <li>請願の場合は紹介議員が必要です。共感してくれそうな議員に相談しましょう。</li>
+        <li>審査日を確認し、可能なら傍聴しましょう。結果はSNSで共有を。</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section id="actions" class="section alt">
+  <div class="wrap">
+    <h2>ほかにできること</h2>
+    <div class="cards">
+      <article class="card">
+        <h3>議員に手紙・メールを送る</h3>
+        <p>地元選出の国会議員・地方議員に、この問題への考えを聞いてみましょう。丁寧で短い文章ほど読まれます。</p>
+        <button type="button" class="btn btn-small" data-template="mp">短い文例をコピー</button>
+      </article>
+      <article class="card">
+        <h3>パブリックコメントに参加する</h3>
+        <p>国の省庁が規則・指針の意見募集を行う際は、e-Govで誰でも意見を出せます。</p>
+        <a class="btn btn-small" href="https://public-comment.e-gov.go.jp/" target="_blank" rel="noopener">e-Govパブコメへ</a>
+      </article>
+      <article class="card">
+        <h3>SNSで広める</h3>
+        <p>このサイトを共有して、陳情の輪を広げてください。</p>
+        <a id="shareX" class="btn btn-small" target="_blank" rel="noopener">Xで共有</a>
+        <a id="shareLine" class="btn btn-small" target="_blank" rel="noopener">LINEで共有</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="section">
+  <div class="wrap">
+    <h2>よくある質問</h2>
+    <details><summary>陳情と請願の違いは？</summary><p>請願は紹介議員が必要で、法律（請願法・地方自治法）に基づき審査されます。陳情は紹介議員なしで誰でも提出でき、扱いは議会ごとに異なります（審査・配布のみ等）。</p></details>
+    <details><summary>住んでいない自治体の議会にも出せますか？</summary><p>多くの議会で可能ですが、「市内在住者に限る」「郵送は配布のみ」など運用が異なります。事前に議会事務局へ確認してください。</p></details>
+    <details><summary>外国人差別ではないのですか？</summary><p>このサイトの陳情は、外国人そのものではなく、制度・財源・ルールの公平さを問うものです。国籍や民族をおとしめる表現は使いません。そうした表現は、ヘイトスピーチ解消法の趣旨に反し、議会に受理されない理由にもなります。</p></details>
+    <details><summary>入力した個人情報は保存されますか？</summary><p>いいえ。陳情書の作成はすべてお使いのブラウザ内で行われ、サーバーには送信・保存されません。かんたん作成で直した文面だけは、続きから使えるようにお使いの端末のブラウザ内に残ります（住所・氏名は入りません）。「最初からやり直す」で消えます。</p></details>
+    <details><summary>特定の人や団体を批判してもいいですか？</summary><p>陳情書は公文書として公開されることがあります。個人名や事件を特定できる記載、誹謗中傷は避け、制度の問題として記載してください。</p></details>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>日本人の権利を守る陳情アクション</p>
+    <p class="small">本サイトは市民による政策提言のための情報提供サイトです。法的助言を行うものではありません。</p>
+    <p class="small"><a href="/nihonjin/guide">陳情の出し方ガイド</a>　｜　<a href="/nihonjin/builder">陳情書ビルダー（複数の宛先・鏡文・宛名をまとめて印刷）</a></p>
+    <p class="small credit">市区町村の一覧：<a href="https://github.com/geolonia/japanese-addresses" target="_blank" rel="noopener">Geolonia 住所データ</a>（<a href="https://creativecommons.org/licenses/by/4.0/deed.ja" target="_blank" rel="noopener">CC BY 4.0</a>）を加工して作成。最寄り駅：<a href="https://nlftp.mlit.go.jp/ksj/" target="_blank" rel="noopener">国土数値情報</a>（鉄道データ）（国土交通省）を加工して作成。位置：<a href="https://maps.gsi.go.jp/" target="_blank" rel="noopener">地理院地図</a>の住所検索</p>
+  <p class="small others">ほかの陳情：<a href="/kodomo">子どもの権利を守る陳情アクション</a>　｜　<a href="/dansei">男性の権利を守る陳情アクション</a></p></div>
+</footer>
+<p id="toast" class="toast" hidden>コピーしました</p>
+
+<script src="/themes/nihonjin/theme.js"></script>
+<script src="/data/prefs.js"></script>
+<script src="/themes/nihonjin/asks-national.js"></script>
+<script src="/themes/nihonjin/asks-local.js"></script>
+<script src="/themes/nihonjin/template.js"></script>
+<script src="/data/municipalities.js"></script>
+<script src="/data/offices.js"></script>
+<script src="/data/sites.js"></script>
+<script src="/data/councils.js"></script>
+<script src="/data/access.js"></script>
+<script src="/data/kana.js"></script>
+<script src="/vendor/qrcode.js"></script>
+<script src="/yomi.js"></script>
+<script src="/common.js"></script>
+<script src="/places.js"></script>
+<script src="/petition.js"></script>
+<script src="/pdfdoc.js"></script>
+<script src="/postage.js"></script>
+<script src="/report.js"></script>
+<script src="/app.js"></script>
+<script src="/wizard.js"></script>
+<script src="/ai-launch.js"></script>
+<script src="/send-figs.js"></script>
+</body>
+</html>

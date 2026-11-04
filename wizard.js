@@ -9,13 +9,7 @@
     ['北海道・東北', 0, 7], ['関東', 7, 14], ['中部', 14, 23], ['近畿', 23, 30],
     ['中国', 30, 35], ['四国', 35, 39], ['九州・沖縄', 39, 47],
   ];
-  const ROLES = [
-    ['apart', '子どもと離れて暮らす親', '私自身、子どもと離れて暮らす親として、子どもが親の別居・離婚後も父母双方と関わり続けられる社会を願っています。'],
-    ['grand', '孫と会えなくなった祖父母・親族', '私は孫と会えなくなった家族の一人として、子どもが家族とのつながりを保ち続けられる社会を願っています。'],
-    ['parent', '子育て中の親', '子育て中の親として、どの子どもも父母双方から愛情を受けて育つことができる社会を願っています。'],
-    ['citizen', '関心のある市民・支援者', '一市民として、親の別居・離婚によって子どもが一方の親との関係を失うことのない社会を願っています。'],
-    ['none', '書かない', ''],
-  ];
+  const ROLES = [...window.THEME.roles, ['none', '書かない', '']];
 
   const state = { step: 0, pref: '', councils: [], type: '', items: [], role: '' };
 
@@ -162,6 +156,12 @@
       state.pref = d.pref;
       $('wzFilter').value = '';
       go(1);
+    } else if (d.near) {
+      // 近い議会を選んだら、その都道府県の議会の一覧へ進む（選んだ議会には印が付いている）
+      state.pref = prefOf(d.near);
+      if (!state.councils.includes(d.near)) state.councils.push(d.near);
+      $('wzFilter').value = '';
+      go(1);
     } else if (d.council) {
       const i = state.councils.indexOf(d.council);
       i < 0 ? state.councils.push(d.council) : state.councils.splice(i, 1);
@@ -209,7 +209,7 @@
 
   // 内容ごとに1つの欄で直す。2つ目以降の議会には、宛名と自治体名を差し替えて同じ文面を使う
   // 直した文面は内容ごとに、そのとき宛てた議会・立場と一緒に端末の中にだけ残す（再読み込み・選び直しで消えないように）
-  const EDITS_KEY = 'wz-edits';
+  const EDITS_KEY = window.THEME.key('wz-edits');
   let edits = {};
   try { edits = JSON.parse(localStorage.getItem(EDITS_KEY)) || {}; } catch { edits = {}; }
   const saveEdits = () => { try { localStorage.setItem(EDITS_KEY, JSON.stringify(edits)); } catch { /* 保存できない環境では、この画面の間だけ残す */ } };
@@ -235,7 +235,7 @@
         <div class="out-toolbar"><button type="button" class="btn btn-small" data-doc-print="${i}">この内容だけPDFで保存（${state.councils.length}通）</button>${e ? `<button type="button" class="btn btn-small" data-doc-reset="${esc(k)}">元の文面に戻す</button>` : ''}</div>
       </details>`;
     }).join('');
-    $('wzLabels').href = `/labels?c=${encodeURIComponent(state.councils.join(','))}`;
+    $('wzLabels').href = `labels?c=${encodeURIComponent(state.councils.join(','))}`;
     $('wzSummary').textContent = `${state.councils.length}つの議会 × ${state.items.length}つの内容 ＝ 陳情書 ${state.councils.length * state.items.length}通`;
     renderOffices();
   }
@@ -274,7 +274,7 @@
       const p = window.Postage.estimate(n);
       if (!p.yen) return `<li>${esc(label(c))}：${n}枚・約${p.g}g。郵便局の窓口で出してください。</li>`;
       return `<li>${esc(label(c))}：${n}枚・約${p.g}g → <b>${p.yen}円</b>（${p.limit}gまで）${p.safe ? `。ぎりぎりなので、心配なら<b>${p.safe}円</b>分貼っておくと安心です` : ''}</li>`;
-    }).join('')}</ul><p class="hint-sm">クリアファイル1枚と、宛名・差出人のラベル、のりを含めた重さです。切手は多めに貼っても届きます（多い分は戻りません）。不安なときは郵便局の窓口で量ってもらうのが確実です。<a href="/guide#send">送り方を見る</a></p>`;
+    }).join('')}</ul><p class="hint-sm">クリアファイル1枚と、宛名・差出人のラベル、のりを含めた重さです。切手は多めに貼っても届きます（多い分は戻りません）。不安なときは郵便局の窓口で量ってもらうのが確実です。<a href="guide#send">送り方を見る</a></p>`;
     $('wzPostage').hidden = false;
   }
   const fileName = () => `陳情書_${nameOf(state.councils[0])}${state.councils.length > 1 ? `ほか${state.councils.length - 1}件` : ''}_${window.PdfDoc.today()}.pdf`;
@@ -333,6 +333,57 @@
     return n.length ? `<ul class="wz-notes">${n.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>` : '';
   }
 
+
+  // ---------- 持参するときの行き方 ----------
+  // data/access.js：[緯度, 経度, 最寄り駅, 路線, 駅からの直線距離(m)]。道のりは直線の1.3倍、徒歩は分速80mとみる
+  const accessOf = (pref, key) => ((window.ACCESS || {})[pref] || {})[key];
+  const km = (m) => (m < 1000 ? `${Math.round(m / 10) * 10}m` : `${(m / 1000).toFixed(1)}km`);
+  function accessHtml(pref, key) {
+    const a = accessOf(pref, key);
+    if (!a) return '';
+    const [lat, lng, st, line, d] = a;
+    const walk = Math.ceil((d * 1.3) / 80);
+    const train = d <= 2500
+      ? `🚃 ${esc(st)}駅（${esc(line)}）から徒歩約${walk}分`
+      : `🚃 最寄りの${esc(st)}駅（${esc(line)}）から約${km(d)}。バスかタクシーが便利です`;
+    const to = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
+    return `<span class="wz-access">${train}</span>
+        <span class="wz-links"><a href="${to}&travelmode=transit" target="_blank" rel="noopener">電車での行き方・運賃</a><a href="${to}&travelmode=driving" target="_blank" rel="noopener">車での行き方</a><span>（駐車場は公式サイトで確認してください）</span></span>`;
+  }
+
+  // 現在地から近い議会。都道府県をまたいで、直線距離の近い順に出す
+  $('wzNearBtn').hidden = !navigator.geolocation || !window.ACCESS;
+  $('wzNearBtn').addEventListener('click', (e) => {
+    const btn = e.currentTarget;
+    btn.disabled = true;
+    btn.textContent = '現在地を調べています…';
+    navigator.geolocation.getCurrentPosition((p) => {
+      const me = { lat: p.coords.latitude, lng: p.coords.longitude };
+      const rad = Math.PI / 180;
+      const dist = (a) => {
+        const x = (a[1] - me.lng) * rad * Math.cos(((a[0] + me.lat) / 2) * rad);
+        const y = (a[0] - me.lat) * rad;
+        return Math.sqrt(x * x + y * y) * 6371000;
+      };
+      const near = window.Places.all()
+        .map((pl) => ({ pl, a: accessOf(pl.pref, pl.key) }))
+        .filter((x) => x.a)
+        .map((x) => ({ ...x, d: dist(x.a) }))
+        .sort((a, b) => a.d - b.d)
+        .slice(0, 8);
+      $('wzNear').innerHTML = near.map(({ pl, d }) => {
+        councilsOf(pl.pref);
+        return `<button type="button" class="wz-chip" data-near="${esc(idOf(pl.pref, pl.council))}">${esc(pl.council)}<small class="wz-n">約${km(d)}</small></button>`;
+      }).join('');
+      $('wzNear').hidden = false;
+      btn.disabled = false;
+      btn.textContent = '📍 現在地から近い議会を探す';
+    }, () => {
+      btn.disabled = false;
+      btn.textContent = '現在地が分かりませんでした。もう一度試す';
+    }, { timeout: 10000, maximumAge: 600000 });
+  });
+
   function renderOffices() {
     $('wzOffices').innerHTML = state.councils.map((c) => {
       const [pref, key] = officeKeys[c] || [];
@@ -352,6 +403,7 @@
       ].filter(Boolean).join('');
       return `<li><b>${esc(label(c))}事務局</b>
         <span>${addr ? `${zip ? '〒' + esc(zip) + '　' : ''}${esc(addr)}${info.office ? '' : '（本庁舎）'}` : '住所は公式サイトで確認してください'}</span>
+        ${accessHtml(pref, key)}
         ${notes(info)}
         ${page ? '' : '<span>陳情の出し方のページが見つかりませんでした。小さな議会では案内ページを置いていないことも多いので、議会事務局に電話で出し方と締切を聞くのが確実です。</span>'}
         <span class="wz-links">${links}</span>
@@ -427,7 +479,7 @@
     qr.addData(url);
     qr.make();
     $('wzQr').innerHTML = qr.createSvgTag({ cellSize: 4, margin: 4, scalable: true });
-    const subject = '陳情書（子どもの権利を守る陳情アクション）';
+    const subject = `陳情書（${window.THEME.name}）`;
     $('wzMail').href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`あとで開く陳情書のリンク：\n${url}`)}`;
     $('wzShare').hidden = !navigator.share;
     $('wzShare').onclick = () => navigator.share({ title: subject, url }).catch(() => {});

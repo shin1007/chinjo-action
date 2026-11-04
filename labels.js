@@ -16,8 +16,8 @@
 
   // ---------- 宛先 ----------
   // 1件：{ id：都道府県/議会名, zip, address, main：本庁舎の住所か }
-  const STORE = 'chinjo-labels';
-  const OPT_STORE = 'chinjo-labels-opt';
+  const STORE = window.THEME.key('chinjo-labels');
+  const OPT_STORE = window.THEME.key('chinjo-labels-opt');
   const load = (k, d) => { try { return JSON.parse(localStorage.getItem(k)) || d; } catch { return d; } };
   const store = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* この画面の間だけ残す */ } };
 

@@ -7,8 +7,8 @@ const path = require('node:path');
 const vm = require('node:vm');
 
 const ROOT = path.join(__dirname, '..');
-const FILES = ['data/prefs.js', 'data/asks-national.js', 'data/asks-local.js', 'data/template.js', 'data/municipalities.js',
-  'data/offices.js', 'data/sites.js', 'data/councils.js', 'data/kana.js', 'data/reasons.js', 'common.js', 'places.js', 'petition.js'];
+const FILES = ['themes/kodomo/theme.js', 'data/prefs.js', 'themes/kodomo/asks-national.js', 'themes/kodomo/asks-local.js', 'themes/kodomo/template.js', 'data/municipalities.js',
+  'data/offices.js', 'data/sites.js', 'data/councils.js', 'data/kana.js', 'themes/kodomo/reasons.js', 'common.js', 'places.js', 'petition.js'];
 
 function load() {
   const ctx = { FormData };
@@ -72,12 +72,12 @@ test('役所の住所の鍵が、自治体の一覧と食い違わない', () =>
   assert.ok(missing.length < w.Places.all().length * 0.05, `住所が見つからない自治体が多すぎる：${missing.length}`);
 });
 
-test('差出人を入れると住所・氏名の行が書き換わり、電話は陳情書に入らず、消すと下線に戻る', () => {
+test('差出人を入れると住所が入り、氏名は手書き用の下線のまま、電話は陳情書に入らない', () => {
   const k = w.ASKS[0].id;
   const t = w.Petition.build(form('ikensho', [k]), '横浜市議会', [k]);
   const s = { zip: '123-4567', address: '横浜市中区1-1', name: '佐藤花子', tel: '090-0000-0000' };
   const filled = w.Petition.withSender(t, s);
-  assert.match(filled, /住所　〒123-4567　横浜市中区1-1\n氏名　佐藤花子　　　　印\n/);
+  assert.match(filled, /住所　〒123-4567　横浜市中区1-1\n氏名　＿＿＿＿＿＿　　　　印\n/);
   assert.doesNotMatch(filled, /090-0000-0000/);
   const cleared = w.Petition.withSender(filled, { zip: '', address: '', name: '', tel: '' });
   assert.strictEqual(cleared, t);
@@ -95,3 +95,25 @@ test('鏡文に議会事務局・差出人・同封する陳情書の件名が�
   assert.match(c, /一　陳情書「.+」　1通\n二　陳情書「.+」　1通/);
   assert.doesNotMatch(c, /\{[^}]+\}/);
 });
+
+// ほかの分野も、同じ仕組みで文面ができることを確かめる
+for (const theme of ['dansei', 'nihonjin']) {
+  test(`${theme}：すべての求める事項で文面と指示文ができる`, () => {
+    const ctx = { FormData };
+    ctx.window = ctx;
+    vm.createContext(ctx);
+    for (const f of FILES.map((f) => f.replace('themes/kodomo/', `themes/${theme}/`))) {
+      vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), ctx, { filename: f });
+    }
+    assert.strictEqual(ctx.THEME.id, theme);
+    const ids = ctx.ASKS.map((a) => a.id);
+    assert.strictEqual(new Set(ids).size, ids.length);
+    for (const a of ctx.ASKS) {
+      const fd = form(a.scope === 'local' ? 'local' : 'ikensho', [a.id]);
+      const t = ctx.Petition.build(fd, '札幌市議会', [a.id]);
+      assert.doesNotMatch(t, /undefined|\{[^}]+\}/, a.id);
+      assert.doesNotMatch(t, /子ども/, a.id);
+      assert.doesNotMatch(ctx.Petition.buildPrompt(fd, ['札幌市議会']), /undefined|子ども/, a.id);
+    }
+  });
+}
