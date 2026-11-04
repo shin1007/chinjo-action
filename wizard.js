@@ -1,6 +1,6 @@
-// かんたん作成：選択肢を押していくだけで陳情書を作る。文面の組み立ては app.js の Petition.build を使う。
+// かんたん作成：選択肢を押していくだけで陳情書を作る。文面の組み立ては petition.js の Petition.build を使う。
 (() => {
-  const { copy, printTexts } = window.Common;
+  const { copy, printTexts, esc } = window.Common;
   const $ = (id) => document.getElementById(id);
   const STEPS = ['type', 'items', 'pref', 'council', 'role', 'done'];
 
@@ -24,7 +24,6 @@
       ${window.PREFS.slice(a, b).map((p) => `<button type="button" class="wz-chip" data-pref="${p}">${p}</button>`).join('')}
     </div></div>`).join('');
 
-  // 町村は郡名を外して議会名にする（小郡市のような市名は対象外）
   // 議会名 → data/offices.js の鍵（都道府県庁は "@"、町村は郡名つき）
   // 同じ名前の市が別の県にもある（府中市・伊達市など）ので、選んだ議会は「都道府県/議会名」で持つ
   const officeKeys = {};
@@ -34,21 +33,17 @@
   const prefOf = (id) => id.slice(0, id.indexOf('/'));
   const names = () => state.councils.map(nameOf);
   function councilsOf(pref) {
-    officeKeys[idOf(pref, pref + '議会')] = [pref, '@'];
-    kanaOf[pref + '議会'] = (window.KANA[pref] || {})['@'] || '';
-    return [pref + '議会', ...(window.MUNICIPALITIES[pref] || []).map((m) => {
-      const g = m.match(/^(.+?郡)(.+[町村])$/);
-      const name = (g ? g[2] : m) + '議会';
-      officeKeys[idOf(pref, name)] = [pref, m];
+    return window.Places.of(pref).map((pl) => {
+      officeKeys[idOf(pref, pl.council)] = [pref, pl.key];
       // 読みも郡名（「…グン」）を外して、議会名と同じ範囲にする
-      const kana = (window.KANA[pref] || {})[m] || '';
-      kanaOf[name] = g && kana.includes('グン') ? kana.slice(kana.indexOf('グン') + 2) : kana;
-      return name;
-    })];
+      const kana = (window.KANA[pref] || {})[pl.key] || '';
+      kanaOf[pl.council] = pl.gun && kana.includes('グン') ? kana.slice(kana.indexOf('グン') + 2) : kana;
+      return pl.council;
+    });
   }
 
-  // 1つの議会に一度に多くの陳情を出すと、1件ごとの重みが薄れる（app.js と同じ目安）
-  const MANY = 3;
+  // 1つの議会に一度に多くの陳情を出すと、1件ごとの重みが薄れる（詳しい版と同じ目安）
+  const { MANY } = window.Petition;
   function renderCount() {
     const s = STEPS[state.step];
     const el = $('wzCount');
@@ -271,7 +266,6 @@
   // 都道府県をまたいで選んだときは、どこの議会かわかるよう都道府県名を添える
   const label = (c) => (new Set(state.councils.map(prefOf)).size > 1 && !nameOf(c).startsWith(prefOf(c)) ? `${nameOf(c)}（${prefOf(c)}）` : nameOf(c));
   const search = (c) => (nameOf(c).startsWith(prefOf(c)) ? nameOf(c) : `${prefOf(c)} ${nameOf(c)}`);
-  const esc = (t) => t.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   // 案内ページから読み取った、提出のしかたで気をつけること
   // 自動で読み取ったので、サイトのメニューや書式一覧を拾ったものは出さず、長いものは切る
   const JUNK = /サイトマップ|文字サイズ|本文へ|メニュー|閉じる|ログイン|（PDF|（Word/;

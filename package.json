@@ -1,0 +1,8 @@
+{
+  "name": "chinjo",
+  "private": true,
+  "description": "陳情書作成サイト（ビルド不要の静的サイト）",
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  }
+}

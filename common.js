@@ -6,6 +6,7 @@ window.Common = (() => {
   let timer;
   function flash(msg, ms = 1800) {
     const t = document.getElementById('toast');
+    if (!t) return;
     t.textContent = msg;
     t.hidden = false;
     clearTimeout(timer);
@@ -24,7 +25,8 @@ window.Common = (() => {
     }
   }
 
-  const esc = (s) => s.replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+  // 本文にも属性の値にも使えるよう、引用符もエスケープする
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
   // 1つの文書を1ページ以上として印刷する
   function printTexts(texts) {
@@ -46,5 +48,15 @@ window.Common = (() => {
     return `令和${y === 1 ? '元' : y}年${d.getMonth() + 1}月${d.getDate()}日`;
   }
 
-  return { BLANK_TEXT, flash, copy, printTexts, reiwaToday };
+  // data/ のファイルを手で直して書き間違えると、そのファイルが読み込めず画面が空になる。どこが悪いかを画面に出す
+  const DATA = { PREFS: 'prefs.js', ASKS: 'asks-national.js または asks-local.js', TEMPLATE: 'template.js', MUNICIPALITIES: 'municipalities.js' };
+  const broken = Object.keys(DATA).filter((k) => !window[k] || (k === 'ASKS' && !window.ASKS.length));
+  if (broken.length && typeof document !== 'undefined') {
+    const p = document.createElement('p');
+    p.className = 'data-error';
+    p.textContent = `文面のデータを読み込めませんでした（data/${broken.map((k) => DATA[k]).join('、data/')}）。直したところに「,」や「'」の抜けがないか見直してください。`;
+    document.body.prepend(p);
+  }
+
+  return { BLANK_TEXT, esc, flash, copy, printTexts, reiwaToday };
 })();
