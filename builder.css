@@ -1,0 +1,81 @@
+.builder { padding-top: 32px; padding-bottom: 64px; }
+.builder h1 { text-align: center; }
+.step { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 24px; margin: 24px 0; }
+.step h2 { margin-top: 0; font-size: 1.3rem; }
+.step-no { display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--main); color: #fff; margin-right: 8px; }
+.step label { display: block; font-weight: 700; font-size: 0.92rem; margin-bottom: 10px; }
+.step input:not([type=checkbox]), .step select, .step textarea { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 6px; font: inherit; font-weight: 400; margin-top: 2px; }
+.step label.check { font-weight: 400; margin-bottom: 4px; }
+.step label.inline { display: inline-block; margin-right: 16px; }
+.step label.inline input, .step label.inline select { width: auto; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; }
+.hint { color: var(--muted); font-size: 0.88rem; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 8px; }
+.toolbar select { width: auto !important; }
+.file-btn { cursor: pointer; }
+
+.table-wrap { overflow-x: auto; }
+#recipientTable { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+#recipientTable th, #recipientTable td { border-bottom: 1px solid var(--line); padding: 4px; text-align: left; white-space: nowrap; }
+#recipientTable td input:not([type=checkbox]), #recipientTable td select { padding: 4px; margin: 0; }
+#recipientTable td:nth-child(3) input { min-width: 140px; }
+#recipientTable td:nth-child(8) input { min-width: 220px; }
+#recipientTable .empty { text-align: center; color: var(--muted); padding: 16px; }
+.row-actions a { font-size: 0.8rem; margin-right: 6px; }
+.row-actions button { border: none; background: none; color: #b33; font-size: 1.1rem; cursor: pointer; }
+
+fieldset label.check { display: block; }
+.block-cat { margin-bottom: 10px; border: 1px solid var(--line); border-radius: 8px; padding: 8px 14px; }
+.block-cat summary { font-weight: 700; }
+.step label.block { display: flex; gap: 10px; font-weight: 400; padding: 10px 0; border-top: 1px dashed var(--line); cursor: pointer; }
+.block-body { display: flex; flex-direction: column; gap: 4px; }
+.block-text { font-size: 0.88rem; }
+.block-src { font-size: 0.8rem; color: #2f6f9f; }
+.block-caution { font-size: 0.8rem; color: #a3460f; background: #fff2e6; padding: 2px 6px; border-radius: 4px; }
+
+.tabs { display: flex; gap: 4px; margin-bottom: -1px; }
+.tab { border: 1px solid #ccc; border-bottom: none; background: #f5f5f5; padding: 6px 16px; border-radius: 6px 6px 0 0; cursor: pointer; font: inherit; }
+.tab.active { background: #fff; font-weight: 700; }
+.body-text { font-size: 0.9rem; line-height: 1.7; border-radius: 0 6px 6px 6px !important; }
+.print-opts { display: flex; flex-wrap: wrap; gap: 4px 20px; align-items: center; }
+
+#printRoot { display: none; }
+
+@media (max-width: 800px) { .grid2 { grid-template-columns: 1fr; } }
+
+@media print {
+  #printRoot { display: block; }
+  @page { size: A4; margin: 20mm 22mm; }
+  p { margin: 0; }
+  /* 論理プロパティなので縦書きでは左側の傍線になる */
+  .blank { display: inline-block; inline-size: 8em; block-size: 1.2em; border-block-end: 0.3mm solid #000; vertical-align: bottom; }
+  .blank.long { inline-size: 14em; }
+
+  .doc { white-space: pre-wrap; font-family: "Yu Mincho", "Hiragino Mincho ProN", serif; font-size: 10.5pt; line-height: 1.85; break-after: page; }
+
+  @page cut { size: A4; margin: 8mm 20mm; }
+  .cut-sheet { page: cut; display: grid; grid-template-columns: repeat(2, 80mm); grid-auto-rows: 140mm; justify-content: center; break-after: page; }
+  .piece { position: relative; width: 80mm; height: 140mm; border: 0.3mm dashed #999; overflow: hidden; font-family: "Yu Mincho", "Hiragino Mincho ProN", serif; }
+  .piece.v .zip { position: absolute; top: 5mm; right: 5mm; font-size: 12pt; letter-spacing: 0.15em; font-family: sans-serif; }
+  .piece.v .v-addr, .piece.v .v-name, .piece.v .v-zaichu { position: absolute; writing-mode: vertical-rl; }
+  .piece.v .v-addr { top: 16mm; right: 6mm; font-size: 11pt; line-height: 1.5; max-height: 118mm; }
+  .piece.v .v-name { top: 22mm; right: 26mm; font-size: 15pt; line-height: 1.5; max-height: 112mm; }
+  .piece.v .dept { font-size: 10.5pt; }
+  .piece.v .v-zaichu { bottom: 6mm; left: 5mm; color: #c00; border: 0.4mm solid #c00; padding: 2mm 0.5mm; font-size: 10pt; }
+  .piece.h { padding: 12mm 7mm; font-size: 11pt; line-height: 1.7; }
+  .piece.h .h-name { font-size: 15pt; margin-top: 6mm; }
+  .piece.h .h-zaichu { position: absolute; bottom: 8mm; left: 7mm; color: #c00; border: 0.4mm solid #c00; padding: 0.5mm 3mm; font-size: 10pt; }
+}
+}
+
+.picker { border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; margin-bottom: 12px; background: var(--bg-alt); }
+.picker-filters { display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 0 12px; }
+.picker-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-bottom: 8px; }
+.picker-actions #pickAdd { margin-left: auto; }
+.pick-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 2px 8px; max-height: 300px; overflow-y: auto; background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 8px; }
+.step label.pick { font-weight: 400; margin: 0; padding: 2px 4px; border-radius: 4px; cursor: pointer; }
+.step label.pick:hover { background: var(--bg-alt); }
+.pick small { color: var(--muted); margin-left: 6px; font-size: 0.75rem; }
+.pick.added { color: var(--muted); cursor: default; }
+@media (max-width: 800px) { .picker-filters { grid-template-columns: 1fr; } }
+#recipientTable td:nth-child(2) select, #recipientTable td:nth-child(9) select { min-width: 5.5em; }
