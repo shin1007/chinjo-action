@@ -190,3 +190,22 @@ summary { cursor: pointer; font-weight: 700; }
 .wz-deadline ul { margin: 0; padding-left: 1.2em; }
 .wz-deadline a { margin-left: 6px; }
 .data-error { margin: 0; padding: 12px 16px; background: #fde8e8; color: #8a1c1c; font-weight: bold; }
+.sender-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px 12px; align-items: end; margin-bottom: 16px; }
+.sender-form label { display: flex; flex-direction: column; font-size: 0.9rem; }
+.sender-form .wide { grid-column: 1 / -1; }
+.sender-form input { padding: 8px; border: 1px solid var(--line); border-radius: 6px; font: inherit; }
+.sender-form .btn { justify-self: start; }
+.pdf-actions { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+.netprint { background: var(--bg-alt); border-radius: 10px; padding: 4px 16px 8px; margin-top: 12px; }
+.netprint-links { display: flex; flex-wrap: wrap; gap: 4px 20px; padding-left: 1.2em; margin: 6px 0; }
+.postage { background: #fff; border: 1px solid var(--line); border-left: 4px solid var(--main); border-radius: 8px; padding: 4px 16px; margin: 8px 0; }
+.postage ul { margin: 4px 0; padding-left: 1.2em; }
+.send-figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 16px 0; }
+.send-figs figure { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
+.send-figs svg { display: block; width: 100%; max-width: 220px; margin: 0 auto 8px; font-family: serif; }
+.send-figs figcaption { font-size: 0.9rem; line-height: 1.6; }
+.stamp-table { border-collapse: collapse; width: 100%; margin: 8px 0; background: #fff; }
+.stamp-table th, .stamp-table td { border: 1px solid var(--line); padding: 6px 10px; text-align: left; }
+.stamp-table th { background: var(--bg-alt); }
+.send-howto { margin: 8px 0; border: 1px solid var(--line); border-radius: 10px; padding: 8px 14px; background: #fff; }
+.send-howto summary { cursor: pointer; font-weight: 700; color: var(--main-dark); }

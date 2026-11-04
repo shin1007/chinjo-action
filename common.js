@@ -48,6 +48,34 @@ window.Common = (() => {
     return `令和${y === 1 ? '元' : y}年${d.getMonth() + 1}月${d.getDate()}日`;
   }
 
+  // 差出人（陳情者）の住所・氏名。陳情書と郵送用ラベルで共通に使い、この端末のブラウザの中にだけ残す
+  const SENDER_KEY = 'chinjo-sender';
+  const SENDER_FIELDS = ['zip', 'address', 'name', 'tel'];
+  function sender() {
+    let v = {};
+    try { v = JSON.parse(localStorage.getItem(SENDER_KEY)) || {}; } catch { /* 読めなければ空 */ }
+    return Object.fromEntries(SENDER_FIELDS.map((k) => [k, String(v[k] || '')]));
+  }
+  function saveSender(v) {
+    try { localStorage.setItem(SENDER_KEY, JSON.stringify(v)); } catch { /* この画面の間だけ使う */ }
+  }
+  function forgetSender() {
+    try { localStorage.removeItem(SENDER_KEY); } catch { /* 残していなければ消すものもない */ }
+  }
+  // <input data-sender="zip|address|name|tel"> を差出人とつなぐ。直すたびに保存して onChange を呼ぶ
+  function bindSender(root, onChange = () => {}) {
+    const v = sender();
+    root.querySelectorAll('[data-sender]').forEach((el) => {
+      el.value = v[el.dataset.sender] || '';
+      el.addEventListener('input', () => {
+        v[el.dataset.sender] = el.value;
+        saveSender(v);
+        onChange(v);
+      });
+    });
+    return v;
+  }
+
   // data/ のファイルを手で直して書き間違えると、そのファイルが読み込めず画面が空になる。どこが悪いかを画面に出す
   const DATA = { PREFS: 'prefs.js', ASKS: 'asks-national.js または asks-local.js', TEMPLATE: 'template.js', MUNICIPALITIES: 'municipalities.js' };
   const broken = Object.keys(DATA).filter((k) => !window[k] || (k === 'ASKS' && !window.ASKS.length));
@@ -58,5 +86,5 @@ window.Common = (() => {
     document.body.prepend(p);
   }
 
-  return { BLANK_TEXT, esc, flash, copy, printTexts, reiwaToday };
+  return { BLANK_TEXT, esc, sender, bindSender, forgetSender, flash, copy, printTexts, reiwaToday };
 })();

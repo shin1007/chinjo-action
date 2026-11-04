@@ -1,0 +1,16 @@
+.labels h1 { text-align: center; }
+.lb-box { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 8px 24px 20px; margin: 20px 0; }
+.lb-box h2 { font-size: 1.1rem; }
+.lb-rows { list-style: none; padding: 0; margin: 0 0 12px; }
+.lb-rows li { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.lb-rows li > *:not(button) { grid-column: 1; }
+.lb-rows li label { display: flex; gap: 6px; align-items: center; font-size: 0.9rem; }
+.lb-rows li input { flex: 1; padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px; font: inherit; }
+.lb-rows li button { grid-row: 1; grid-column: 2; border: none; background: none; font-size: 1.2rem; cursor: pointer; color: var(--muted); }
+.lb-rows li .hint-sm { margin: 0; }
+.lb-add { display: flex; gap: 8px; align-items: center; }
+.lb-add input { flex: 1; padding: 8px; border: 1px solid var(--line); border-radius: 6px; font: inherit; }
+.lb-opts { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px 16px; }
+.lb-opts > label:not(.check) { display: flex; flex-direction: column; font-size: 0.9rem; }
+.lb-opts select, .lb-opts input[type=number] { padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px; font: inherit; }
+

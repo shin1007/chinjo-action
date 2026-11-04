@@ -15,5 +15,13 @@ window.Places = (() => {
     ]);
   }
   const all = () => window.PREFS.flatMap(of);
-  return { of, all };
+
+  // 議会事務局の〒と住所。議会のページから読み取ったもの（data/councils.js）があればそれを、なければ本庁舎（data/offices.js）を使う
+  function office(pref, key) {
+    const c = ((window.COUNCILS || {})[pref] || {})[key];
+    if (c && c.office) return { zip: c.office[0] || '', address: c.office[1] || '', main: false };
+    const o = ((window.OFFICES || {})[pref] || {})[key];
+    return o ? { zip: o[0] || '', address: o[1] || '', main: true } : { zip: '', address: '', main: true };
+  }
+  return { of, all, office };
 })();

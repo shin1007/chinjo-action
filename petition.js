@@ -11,6 +11,7 @@ window.Petition = (() => {
   // 1つの議会に一度に多くの陳情を出すと、どれも重みが薄れるので、優先する項目に絞るよう促す
   const MANY = 3;
   const SEP = '━━━━━━━━━━ 次の陳情 ━━━━━━━━━━';
+  const KANSUJI = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
 
   const selectedKeys = (data) => data.getAll('items').filter((k) => ITEMS[k]);
 
@@ -85,5 +86,27 @@ window.Petition = (() => {
     return L.join('\n');
   }
 
-  return { build, buildPrompt, selectedKeys, ITEMS, MANY, SEP };
+  // 文面の住所・氏名・電話の行を、差出人（Common.sender の形）で書き換える。手で直した文面にも使えるよう、行ごと置き換える
+  function withSender(text, s) {
+    const addr = [s.zip && `〒${s.zip}`, s.address].filter(Boolean).join('　') || BLANK_TEXT;
+    const t = text
+      // 入力に「$」があっても置き換えの記号として読まれないよう、関数で返す
+      .replace(/^住所　.*$/m, () => `住所　${addr}`)
+      .replace(/^氏名　.*?(　+印)$/m, (_, seal) => `氏名　${s.name || BLANK_TEXT}${seal}`)
+      .replace(/^電話　.*\n/m, '');
+    return s.tel ? t.replace(/^(氏名　.*)$/m, (line) => `${line}\n電話　${s.tel}`) : t;
+  }
+
+  // 郵送で陳情書の上に重ねる鏡文（送付状）。docs はその議会に送る陳情書の文面（件名を一覧にする）
+  function cover(council, docs, s) {
+    const addr = [s.zip && `〒${s.zip}`, s.address].filter(Boolean).join('　') || BLANK_TEXT;
+    const from = [`住所　${addr}`, `氏名　${s.name || BLANK_TEXT}`, `連絡先（電話）　${s.tel || BLANK_TEXT}`];
+    const subjects = docs.map((d) => (d.match(/^件名　(.+)$/m) || [])[1]).filter(Boolean);
+    const list = subjects.length
+      ? subjects.map((t, i) => `${KANSUJI[i] || i + 1}　陳情書「${t}」　1通`).join('\n')
+      : `一　陳情書　${docs.length}通`;
+    return fill(T.cover, { 日付: reiwaToday(), 宛先: council, 差出人: from.join('\n'), 書類: list, 通数: String(docs.length) });
+  }
+
+  return { build, buildPrompt, withSender, cover, selectedKeys, ITEMS, MANY, SEP };
 })();
