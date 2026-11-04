@@ -6,3 +6,4 @@ Thumbs.db
 .vercel
 .env*
 supabase/.temp/
+scripts/.geocode-cache.json

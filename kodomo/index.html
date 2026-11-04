@@ -79,6 +79,11 @@
         <h3>どの都道府県の議会に出しますか？</h3>
         <p class="wz-picked" id="wzPrefPicked"></p>
         <div id="wzPrefs"></div>
+        <div class="wz-near">
+          <button type="button" id="wzNearBtn" class="btn btn-small">📍 現在地から近い議会を探す</button>
+          <span class="hint-sm">持参して出すときに。現在地はこの端末の中だけで使い、送信しません。</span>
+          <div id="wzNear" class="wz-grid" hidden></div>
+        </div>
       </div>
 
       <div class="wz-step" data-step="council" hidden>
@@ -489,7 +494,7 @@
     <p>子どもの権利を守る陳情アクション</p>
     <p class="small">本サイトは市民による政策提言のための情報提供サイトです。法的助言を行うものではありません。DV・虐待でお困りの方は <a href="https://www.gender.go.jp/policy/no_violence/dv_navi/" target="_blank" rel="noopener">DV相談ナビ #8008</a>、子どもの虐待は <a href="https://www.cfa.go.jp/policies/jidougyakutai/gyakutai-taiou/189" target="_blank" rel="noopener">児童相談所 189</a> へ。</p>
     <p class="small"><a href="/kodomo/guide">陳情の出し方ガイド</a>　｜　<a href="/kodomo/builder">陳情書ビルダー（複数の宛先・鏡文・宛名をまとめて印刷）</a></p>
-    <p class="small credit">市区町村の一覧：<a href="https://github.com/geolonia/japanese-addresses" target="_blank" rel="noopener">Geolonia 住所データ</a>（<a href="https://creativecommons.org/licenses/by/4.0/deed.ja" target="_blank" rel="noopener">CC BY 4.0</a>）を加工して作成</p>
+    <p class="small credit">市区町村の一覧：<a href="https://github.com/geolonia/japanese-addresses" target="_blank" rel="noopener">Geolonia 住所データ</a>（<a href="https://creativecommons.org/licenses/by/4.0/deed.ja" target="_blank" rel="noopener">CC BY 4.0</a>）を加工して作成。最寄り駅：<a href="https://nlftp.mlit.go.jp/ksj/" target="_blank" rel="noopener">国土数値情報</a>（鉄道データ）（国土交通省）を加工して作成。位置：<a href="https://maps.gsi.go.jp/" target="_blank" rel="noopener">地理院地図</a>の住所検索</p>
   <p class="small others">ほかの陳情：<a href="/dansei">男性の権利を守る陳情アクション</a>　｜　<a href="/nihonjin">日本人の権利を守る陳情アクション</a></p></div>
 </footer>
 <p id="toast" class="toast" hidden>コピーしました</p>
@@ -503,6 +508,7 @@
 <script src="/data/offices.js"></script>
 <script src="/data/sites.js"></script>
 <script src="/data/councils.js"></script>
+<script src="/data/access.js"></script>
 <script src="/data/kana.js"></script>
 <script src="/vendor/qrcode.js"></script>
 <script src="/yomi.js"></script>
