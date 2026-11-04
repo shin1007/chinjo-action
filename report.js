@@ -3,7 +3,9 @@
 window.Report = (() => {
   const URL = 'https://oquuysfeistgpgrpeswq.supabase.co';
   const KEY = 'sb_publishable_IAXFoFaXZ3bjk-49Z-pD9w_SQZEgzXE';
-  const enabled = !!(URL && KEY);
+  // 制作中は止めておく（いたずらで件数が増えないように）。公開するときに false にする
+  const PAUSED = true;
+  const enabled = !PAUSED && !!(URL && KEY);
   const headers = { apikey: KEY, 'Content-Type': 'application/json' };
 
   // 「都道府県/議会名」→ 件数。読めなかったときは空のまま（報告の数が出ないだけ）
@@ -20,6 +22,7 @@ window.Report = (() => {
   const reported = (id) => done().includes(id);
 
   async function report(id) {
+    if (!enabled) return false;
     if (reported(id)) return true;
     const i = id.indexOf('/');
     const r = await fetch(`${URL}/rest/v1/reports`, {
