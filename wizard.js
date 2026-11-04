@@ -85,6 +85,8 @@
   // 案内ページの一文から、郵送で出して審査してもらえるかを分ける。読み取れた議会だけで、書いていない議会は出さない
   // ok：郵送で出せる／jisan：審査してもらうには持参が必要／outside：住民以外の郵送は配付だけ／none：出し方に関わらず配付だけ
   function mailRule(info) {
+    const fixed = { ok: '📮 郵送でも審査されます', jisan: '🚶 審査してもらうには持参が必要です（郵送は配付だけ）', outside: '🚶 住民以外が審査してもらうには持参が必要です（郵送は配付だけ）', none: '持参でも郵送でも、陳情は審査されず配付だけです' };
+    if (info.mail) return { c: info.mail === 'outside' ? 'jisan' : info.mail, label: fixed[info.mail] };
     const t = [info.yusoNote, info.outsideNote].filter((x) => x && /郵送/.test(x)).join(' ');
     if (!t) return null;
     if (/関わらず|持参（または郵送）/.test(t)) return { c: 'none', label: '持参でも郵送でも、陳情は審査されず配付だけのようです' };
@@ -209,7 +211,13 @@
 
   // ---------- 陳情書の作成 ----------
   // 議会ごとの情報（事務局の住所・提出方法の注意）。data/councils.js にあるのは自動で読み取ったもの
-  const infoOf = (c) => { const [pref, key] = officeKeys[c] || []; return (window.COUNCILS[pref] || {})[key] || {}; };
+  // 公式サイトで確かめた郵送の扱い（data/mail.js）があれば、読み取った一文より優先する
+  const infoOf = (c) => {
+    const [pref, key] = officeKeys[c] || [];
+    const info = (window.COUNCILS[pref] || {})[key] || {};
+    const m = ((window.MAIL || {})[pref] || {})[key];
+    return m ? { ...info, mail: m[0], yusoNote: m[1] } : info;
+  };
 
   function formData() {
     const fd = new FormData();
