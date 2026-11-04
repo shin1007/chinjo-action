@@ -72,16 +72,16 @@ test('役所の住所の鍵が、自治体の一覧と食い違わない', () =>
   assert.ok(missing.length < w.Places.all().length * 0.05, `住所が見つからない自治体が多すぎる：${missing.length}`);
 });
 
-test('差出人を入れると住所・氏名・電話の行が書き換わり、消すと下線に戻る', () => {
+test('差出人を入れると住所・氏名の行が書き換わり、電話は陳情書に入らず、消すと下線に戻る', () => {
   const k = w.ASKS[0].id;
   const t = w.Petition.build(form('ikensho', [k]), '横浜市議会', [k]);
   const s = { zip: '123-4567', address: '横浜市中区1-1', name: '佐藤花子', tel: '090-0000-0000' };
   const filled = w.Petition.withSender(t, s);
-  assert.match(filled, /住所　〒123-4567　横浜市中区1-1\n氏名　佐藤花子　　　　印\n電話　090-0000-0000/);
-  const again = w.Petition.withSender(filled, { ...s, tel: '' });
-  assert.doesNotMatch(again, /電話/);
+  assert.match(filled, /住所　〒123-4567　横浜市中区1-1\n氏名　佐藤花子　　　　印\n/);
+  assert.doesNotMatch(filled, /090-0000-0000/);
   const cleared = w.Petition.withSender(filled, { zip: '', address: '', name: '', tel: '' });
   assert.strictEqual(cleared, t);
+  assert.match(w.Petition.cover('横浜市議会', [t], s), /電話　090-0000-0000/);
 });
 
 test('鏡文に議会事務局・差出人・同封する陳情書の件名が入る', () => {
