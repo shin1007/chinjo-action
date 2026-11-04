@@ -1,6 +1,7 @@
-// かんたん作成：選択肢を押していくだけで陳情書を作る。文面の組み立ては app.js の Petition.build を使う。
+// かんたん作成：選択肢を押していくだけで陳情書を作る。文面の組み立ては petition.js の Petition.build を使う。
 (() => {
-  const { copy, printTexts } = window.Common;
+  const { copy, esc, flash } = window.Common;
+  const { withSender } = window.Petition;
   const $ = (id) => document.getElementById(id);
   const STEPS = ['type', 'items', 'pref', 'council', 'role', 'done'];
 
@@ -24,7 +25,6 @@
       ${window.PREFS.slice(a, b).map((p) => `<button type="button" class="wz-chip" data-pref="${p}">${p}</button>`).join('')}
     </div></div>`).join('');
 
-  // 町村は郡名を外して議会名にする（小郡市のような市名は対象外）
   // 議会名 → data/offices.js の鍵（都道府県庁は "@"、町村は郡名つき）
   // 同じ名前の市が別の県にもある（府中市・伊達市など）ので、選んだ議会は「都道府県/議会名」で持つ
   const officeKeys = {};
@@ -34,21 +34,17 @@
   const prefOf = (id) => id.slice(0, id.indexOf('/'));
   const names = () => state.councils.map(nameOf);
   function councilsOf(pref) {
-    officeKeys[idOf(pref, pref + '議会')] = [pref, '@'];
-    kanaOf[pref + '議会'] = (window.KANA[pref] || {})['@'] || '';
-    return [pref + '議会', ...(window.MUNICIPALITIES[pref] || []).map((m) => {
-      const g = m.match(/^(.+?郡)(.+[町村])$/);
-      const name = (g ? g[2] : m) + '議会';
-      officeKeys[idOf(pref, name)] = [pref, m];
+    return window.Places.of(pref).map((pl) => {
+      officeKeys[idOf(pref, pl.council)] = [pref, pl.key];
       // 読みも郡名（「…グン」）を外して、議会名と同じ範囲にする
-      const kana = (window.KANA[pref] || {})[m] || '';
-      kanaOf[name] = g && kana.includes('グン') ? kana.slice(kana.indexOf('グン') + 2) : kana;
-      return name;
-    })];
+      const kana = (window.KANA[pref] || {})[pl.key] || '';
+      kanaOf[pl.council] = pl.gun && kana.includes('グン') ? kana.slice(kana.indexOf('グン') + 2) : kana;
+      return pl.council;
+    });
   }
 
-  // 1つの議会に一度に多くの陳情を出すと、1件ごとの重みが薄れる（app.js と同じ目安）
-  const MANY = 3;
+  // 1つの議会に一度に多くの陳情を出すと、1件ごとの重みが薄れる（詳しい版と同じ目安）
+  const { MANY } = window.Petition;
   function renderCount() {
     const s = STEPS[state.step];
     const el = $('wzCount');
@@ -229,16 +225,17 @@
       const it = window.ASKS.find((a) => a.id === k);
       const e = edits[k];
       // 前に別の議会あてに直した文面は、宛名と自治体名をいまの議会に差し替えて使う
-      const text = e ? swapCouncil(e.text, e.council, first) : window.Petition.build(fd, first, [k]);
+      const text = withSender(e ? swapCouncil(e.text, e.council, first) : window.Petition.build(fd, first, [k]), sender);
       const others = state.councils.slice(1).map(label);
       return `<details class="wz-doc" ${i === 0 ? 'open' : ''}>
         <summary><b>${i + 1}. ${esc(it.label)}</b><span>${e ? '直した文面・' : ''}${state.councils.length}通</span></summary>
         ${e && e.role !== state.role ? '<p class="hint-sm warn">立場を選び直す前に直した文面です。最後の一文があなたの立場に合っているか確かめてください。</p>' : ''}
         ${others.length ? `<p class="hint-sm">下は${esc(first)}あての文面です。${others.map(esc).join('・')}あてにも、同じ内容で1通ずつ作ります。ここで直すと、宛名と自治体名を差し替えてすべての議会に反映されます。</p>` : ''}
         <textarea rows="16" data-key="${esc(k)}">${esc(text)}</textarea>
-        <div class="out-toolbar"><button type="button" class="btn btn-small" data-doc-print="${i}">この内容だけ印刷（${state.councils.length}通）</button>${e ? `<button type="button" class="btn btn-small" data-doc-reset="${esc(k)}">元の文面に戻す</button>` : ''}</div>
+        <div class="out-toolbar"><button type="button" class="btn btn-small" data-doc-print="${i}">この内容だけPDFで保存（${state.councils.length}通）</button>${e ? `<button type="button" class="btn btn-small" data-doc-reset="${esc(k)}">元の文面に戻す</button>` : ''}</div>
       </details>`;
     }).join('');
+    $('wzLabels').href = `/labels?c=${encodeURIComponent(state.councils.join(','))}`;
     $('wzSummary').textContent = `${state.councils.length}つの議会 × ${state.items.length}つの内容 ＝ 陳情書 ${state.councils.length * state.items.length}通`;
     renderOffices();
   }
@@ -246,10 +243,61 @@
   // 内容ごとの文面を、議会の数だけ広げる
   // 直していない内容は議会ごとに組み立て直す（「東京都」のような名前を本文ごと置き換えないように）
   const areas = () => [...$('wzDocs').querySelectorAll('textarea')];
-  const docFor = (ta, c) => (edits[ta.dataset.key] ? forCouncil(ta.value, c)
-    : window.Petition.build(formData(), nameOf(c), [ta.dataset.key])).trim();
-  const expand = (ta) => state.councils.map((c) => docFor(ta, c));
+  const docFor = (ta, c) => withSender(edits[ta.dataset.key] ? forCouncil(ta.value, c)
+    : window.Petition.build(formData(), nameOf(c), [ta.dataset.key]), sender).trim();
+  // 印刷するときは、議会ごとに鏡文（送付状）を先頭に重ねる（郵送で出すとき用。持参なら外せる）
+  const withCover = (c, docs) => ($('wzCover').checked ? [window.Petition.cover(nameOf(c), docs, sender), ...docs] : docs);
+  const expand = (ta) => state.councils.map((c) => ({ c, texts: withCover(c, [docFor(ta, c)]) }));
   const allDocs = () => state.councils.flatMap((c) => areas().map((ta) => docFor(ta, c)));
+  // 議会ごとに、封筒に入れる文書（鏡文と陳情書）をまとめる
+  const envelopes = () => state.councils.map((c) => ({ c, texts: withCover(c, areas().map((ta) => docFor(ta, c))) }));
+
+  // ---------- PDF で保存 ----------
+  // 文書を1つずつ新しいページから書き、封筒の表に貼る宛名と裏に貼る差出人（普通紙に8枚・切って貼る）を最後につける
+  // 封筒ごとの枚数も返す（切手の目安に使う）
+  async function makePdf(envs) {
+    const doc = await window.PdfDoc.create();
+    const sheets = envs.map(({ c, texts }) => ({ c, n: texts.reduce((a, t) => a + doc.addDocument(t), 0) }));
+    if ($('wzWithLabels').checked) {
+      const rows = envs.map(({ c }) => {
+        const [pref, key] = officeKeys[c] || [];
+        return { council: nameOf(c), ...window.Places.office(pref, key) };
+      });
+      doc.addLabels(window.PdfDoc.SHEETS.plain, window.PdfDoc.labelItems(rows, sender, { zaichu: true, from: true, back: true }));
+    }
+    return { bytes: await doc.bytes(), sheets };
+  }
+
+  // 封筒ごとの重さの目安と、貼る切手
+  function showPostage(sheets) {
+    $('wzPostage').innerHTML = `<p><b>切手の目安（角2封筒・定形外郵便）</b></p><ul>${sheets.map(({ c, n }) => {
+      const p = window.Postage.estimate(n);
+      if (!p.yen) return `<li>${esc(label(c))}：${n}枚・約${p.g}g。郵便局の窓口で出してください。</li>`;
+      return `<li>${esc(label(c))}：${n}枚・約${p.g}g → <b>${p.yen}円</b>（${p.limit}gまで）${p.safe ? `。ぎりぎりなので、心配なら<b>${p.safe}円</b>分貼っておくと安心です` : ''}</li>`;
+    }).join('')}</ul><p class="hint-sm">クリアファイル1枚と、宛名・差出人のラベル、のりを含めた重さです。切手は多めに貼っても届きます（多い分は戻りません）。不安なときは郵便局の窓口で量ってもらうのが確実です。<a href="/guide#send">送り方を見る</a></p>`;
+    $('wzPostage').hidden = false;
+  }
+  const fileName = () => `陳情書_${nameOf(state.councils[0])}${state.councils.length > 1 ? `ほか${state.councils.length - 1}件` : ''}_${window.PdfDoc.today()}.pdf`;
+  // all：すべての内容を保存したとき（このときだけ切手の目安を出す）
+  async function savePdf(btn, envs, { share = false, all = false } = {}) {
+    const text = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'PDFを作っています…';
+    try {
+      const { bytes, sheets } = await makePdf(envs);
+      if (all) showPostage(sheets);
+      if (share) await window.PdfDoc.shareFile(bytes, fileName());
+      else {
+        window.PdfDoc.download(bytes, fileName());
+        flash('PDFを保存しました');
+      }
+    } catch (e) {
+      flash(`PDFを作れませんでした（${e.message}）。通信のよい所でもう一度試してください。`, 5000);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = text;
+    }
+  }
   $('wzDocs').addEventListener('input', (e) => {
     const k = e.target.dataset.key;
     if (!k) return;
@@ -258,7 +306,7 @@
   });
   $('wzDocs').addEventListener('click', (e) => {
     const i = e.target.dataset.docPrint;
-    if (i !== undefined) printTexts(expand(areas()[i]));
+    if (i !== undefined) savePdf(e.target, expand(areas()[i]));
     const k = e.target.dataset.docReset;
     if (k !== undefined) {
       delete edits[k];
@@ -271,7 +319,6 @@
   // 都道府県をまたいで選んだときは、どこの議会かわかるよう都道府県名を添える
   const label = (c) => (new Set(state.councils.map(prefOf)).size > 1 && !nameOf(c).startsWith(prefOf(c)) ? `${nameOf(c)}（${prefOf(c)}）` : nameOf(c));
   const search = (c) => (nameOf(c).startsWith(prefOf(c)) ? nameOf(c) : `${prefOf(c)} ${nameOf(c)}`);
-  const esc = (t) => t.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   // 案内ページから読み取った、提出のしかたで気をつけること
   // 自動で読み取ったので、サイトのメニューや書式一覧を拾ったものは出さず、長いものは切る
   const JUNK = /サイトマップ|文字サイズ|本文へ|メニュー|閉じる|ログイン|（PDF|（Word/;
@@ -312,7 +359,20 @@
     }).join('');
   }
 
-  $('wzPrint').addEventListener('click', () => printTexts(allDocs()));
+  $('wzPdf').addEventListener('click', (e) => savePdf(e.currentTarget, envelopes(), { all: true }));
+  $('wzShare').hidden = !window.PdfDoc.canShareFiles();
+  $('wzShare').addEventListener('click', (e) => savePdf(e.currentTarget, envelopes(), { share: true, all: true }));
+
+  // 差出人（あなた）の住所・氏名。入れるとすぐ、下の文面の住所・氏名の行に入る
+  const sender = window.Common.bindSender($('wzSender'), () => {
+    areas().forEach((ta) => { ta.value = withSender(ta.value, sender); });
+  });
+  $('wzSenderClear').addEventListener('click', () => {
+    window.Common.forgetSender();
+    $('wzSender').querySelectorAll('[data-sender]').forEach((el) => { el.value = ''; sender[el.dataset.sender] = ''; });
+    areas().forEach((ta) => { ta.value = withSender(ta.value, sender); });
+    window.Common.flash('この端末から住所・氏名を消しました');
+  });
 
   // 提出の報告：議会ごとの件数を集めて、まだ誰も出していない議会に人を向ける
   $('wzOffices').addEventListener('click', async (e) => {

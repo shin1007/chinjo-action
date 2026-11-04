@@ -17,9 +17,13 @@
     councilForm: 'chinjo',
     introducer: '',
     bodies: {},
-  }, JSON.parse(localStorage.getItem(STORE) || '{}'));
+  }, load());
 
-  const save = () => localStorage.setItem(STORE, JSON.stringify(state));
+  // 保存した内容が壊れていたり、保存できない環境でも、ビルダーは使えるようにする
+  function load() {
+    try { return JSON.parse(localStorage.getItem(STORE)) || {}; } catch { return {}; }
+  }
+  const save = () => { try { localStorage.setItem(STORE, JSON.stringify(state)); } catch { /* この画面の間だけ残す */ } };
 
   // ダイアログを使わず、ボタンの二度押しで消去を確認する
   let clearArmed = false;
@@ -30,13 +34,13 @@
       setTimeout(() => { clearArmed = false; e.target.textContent = '入力内容をすべて消去'; }, 4000);
       return;
     }
-    localStorage.removeItem(STORE);
+    try { localStorage.removeItem(STORE); } catch { /* 保存していなければ消すものもない */ }
     location.reload();
   });
   // 未入力の名前・住所は印刷時に下線の空欄にして、手書きで記入できるようにする
   const BLANK = '⁣';
   const escB = (s) => esc(s).replaceAll(BLANK, '<span class="blank"></span>');
-  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const { esc } = window.Common;
 
   // ---------- 差出人 ----------
   $$('[data-sender]').forEach((el) => {
@@ -130,14 +134,7 @@
   const PICK_LIMIT = 300;
 
   // 都道府県そのもの（都道府県議会・知事）と、その中の市区町村を1つの一覧にする
-  const PLACES = window.PREFS.flatMap((p) => [
-    { pref: p, name: p, gun: '', isPref: true },
-    ...(window.MUNICIPALITIES[p] || []).map((m) => {
-      // 町村は「○○郡」を外して議会名にする（小郡市のような市名は対象外）
-      const g = m.match(/^(.+?郡)(.+[町村])$/);
-      return { pref: p, name: g ? g[2] : m, gun: g ? g[1] : '', isPref: false };
-    }),
-  ]);
+  const PLACES = window.Places.all();
   const placeKey = (pl) => pl.isPref ? pl.pref : pl.pref + pl.gun + pl.name;
 
   function mayorTitle(pl) {
@@ -147,7 +144,7 @@
 
   // 本庁舎の郵便番号・住所を自動で入れる（議会事務局の多くは本庁舎にある）
   function officeOf(pl) {
-    const o = (window.OFFICES[pl.pref] || {})[pl.isPref ? '@' : pl.gun + pl.name];
+    const o = (window.OFFICES[pl.pref] || {})[pl.key];
     return o ? { zip: o[0], address: o[1], autoAddr: true } : {};
   }
 
