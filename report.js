@@ -1,10 +1,10 @@
 // 提出の報告と、議会ごとの報告件数。Supabase に直接つなぐ（個人情報は送らない：都道府県名と議会名だけ）。
-// URL とキーが空のあいだは、報告の機能は出さない。キーは公開してよい anon キー。
+// URL とキーが空のあいだは、報告の機能は出さない。キーは公開してよい publishable キー。
 window.Report = (() => {
-  const URL = '';
-  const KEY = '';
+  const URL = 'https://oquuysfeistgpgrpeswq.supabase.co';
+  const KEY = 'sb_publishable_IAXFoFaXZ3bjk-49Z-pD9w_SQZEgzXE';
   const enabled = !!(URL && KEY);
-  const headers = { apikey: KEY, Authorization: `Bearer ${KEY}`, 'Content-Type': 'application/json' };
+  const headers = { apikey: KEY, 'Content-Type': 'application/json' };
 
   // 「都道府県/議会名」→ 件数。読めなかったときは空のまま（報告の数が出ないだけ）
   let counts = new Map();
