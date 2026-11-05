@@ -275,7 +275,7 @@
           <span class="block-body">
             <b>${esc(b.title)}</b>
             <span class="block-text">${esc(b.text)}</span>
-            ${b.source ? `<span class="block-src">出典：${esc(b.source)}</span>` : ''}
+            ${b.source ? `<span class="block-src">出典：${esc(b.source)}${b.url ? ` <a href="${esc(b.url)}" target="_blank" rel="noopener">原文を開く</a>` : ''}</span>` : ''}
             ${b.caution ? `<span class="block-caution">⚠ ${esc(b.caution)}</span>` : ''}
           </span>
         </label>`).join('')}

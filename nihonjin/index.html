@@ -4,13 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>日本人の権利を守る陳情アクション｜外国人の生活保護・社会保険・土地のルール</title>
-<meta name="description" content="国民の生活と安全を守るため、外国人への生活保護の見直し、社会保険料の未納対策、重要な土地の取得規制などを求める陳情・請願を、誰でも簡単に作成・提出できるサイトです。">
+<meta name="description" content="国民の生活と安全を守るため、外国人への生活保護の見直し、社会保険料の未納対策、重要な土地の取得規制、学校の食文化・伝統行事を守ることなどを求める陳情・請願を、誰でも簡単に作成・提出できるサイトです。">
 <link rel="canonical" href="https://kenri-chinjo.vercel.app/nihonjin">
 <meta property="og:site_name" content="日本人の権利を守る陳情アクション">
 <meta property="og:title" content="日本人の権利を守る陳情アクション">
-<meta property="og:description" content="陳情書を3分で作成。税と社会保障のルールを、国民が納得できる形に。">
+<meta property="og:description" content="陳情書を3分で作成。税と社会保障のルール、土地の管理、学校の食文化・伝統行事を守ることを、地方議会へ。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kenri-chinjo.vercel.app/nihonjin">
+<meta property="og:image" content="https://kenri-chinjo.vercel.app/themes/nihonjin/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="日本人の権利を守る陳情アクション ― あなたの一通の陳情が、制度を動かす。">
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -21,9 +25,9 @@
   <div class="wrap header-inner">
     <a href="#" class="logo">日本人の権利を守る<span>陳情アクション</span></a>
     <nav>
-      <a href="#generator">陳情書をつくる</a>
-      <a href="/nihonjin/guide#tips">採択されるコツ</a>
-      <a href="#faq">よくある質問</a>
+      <a href="/nihonjin#generator" aria-current="page">つくる</a>
+      <a href="/nihonjin/guide">出し方</a>
+      <a href="/nihonjin/builder">ビルダー</a>
     </nav>
   </div>
 </header>
@@ -34,7 +38,10 @@
     <p class="eyebrow">税と社会保障のルールを、国民が納得できる形に。</p>
     <h1>あなたの一通の陳情が、<br>制度を動かす。</h1>
     <p class="lead">外国人への生活保護の見直し、社会保険料の未納対策、安全保障上重要な土地の取得規制。<br>地方議会への陳情書を、このページで3分で作成できます。</p>
-    <a href="#generator" class="btn btn-primary">陳情書をつくる</a>
+    <div class="hero-actions">
+      <a href="#generator" class="btn btn-primary">陳情書をつくる</a>
+      <a href="#faq" class="btn">よくある質問</a>
+    </div>
     <div class="cost">
       <p class="cost-title">陳情1通あたりの費用の目安</p>
       <table class="cost-table">
@@ -97,6 +104,7 @@
       <div class="wz-step" data-step="council" hidden>
         <h3>出す議会を選んでください <small>（いくつでも）</small></h3>
         <p class="hint-sm">住んでいる自治体の議会がいちばん確実です。<span id="wzCountHint" hidden>「出した人 ○人」はこのサイトで提出を報告した人の数です。まだ誰も出していない議会に出すと、全国に広がります。</span></p>
+        <div id="wzMailOk" class="wz-mailok" hidden></div>
         <input type="search" id="wzFilter" class="wz-filter" placeholder="名前で絞り込む（ひらがな・ローマ字でも）">
         <div id="wzCouncils" class="wz-grid wz-scroll"></div>
         <p class="wz-picked" id="wzPicked"></p>
@@ -327,6 +335,13 @@
   </div>
 </section>
 
+<section id="shop" class="section">
+  <div class="wrap">
+    <h2>関連する本・グッズ</h2>
+    <div data-shop></div>
+  </div>
+</section>
+
 <section id="faq" class="section">
   <div class="wrap">
     <h2>よくある質問</h2>
@@ -359,6 +374,7 @@
 <script src="/data/sites.js"></script>
 <script src="/data/councils.js"></script>
 <script src="/data/mail.js"></script>
+<script src="/data/tel.js"></script>
 <script src="/data/access.js"></script>
 <script src="/data/kana.js"></script>
 <script src="/vendor/qrcode.js"></script>
@@ -373,5 +389,7 @@
 <script src="/wizard.js"></script>
 <script src="/ai-launch.js"></script>
 <script src="/send-figs.js"></script>
+<script src="/themes/nihonjin/shop.js"></script>
+<script src="/shop.js"></script>
 </body>
 </html>

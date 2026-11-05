@@ -21,7 +21,8 @@ a { color: var(--main-dark); }
 .logo { font-weight: 700; text-decoration: none; color: var(--ink); }
 .logo span { color: var(--main); margin-left: 4px; }
 nav a { margin-left: 16px; text-decoration: none; color: var(--ink); font-size: 0.95rem; }
-nav a:hover { color: var(--main); }
+nav a:hover, nav a[aria-current] { color: var(--main); }
+nav a[aria-current] { font-weight: 700; }
 
 .hero { background: linear-gradient(135deg, #fff4e8, #ffe2cc); padding: 80px 0; text-align: center; }
 .eyebrow { color: var(--main-dark); font-weight: 700; }
@@ -31,6 +32,7 @@ nav a:hover { color: var(--main); }
 .btn { display: inline-block; padding: 12px 28px; border-radius: 999px; border: 2px solid var(--main); background: #fff; color: var(--main-dark); font-weight: 700; text-decoration: none; cursor: pointer; font-size: 1rem; margin: 4px; font-family: inherit; }
 .btn-primary { background: var(--main); color: #fff; }
 .btn-primary:hover { background: var(--main-dark); border-color: var(--main-dark); }
+.hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; }
 .btn-ghost:hover, .btn-small:hover { background: var(--bg-alt); }
 .btn-small { padding: 6px 16px; font-size: 0.9rem; }
 
@@ -141,8 +143,10 @@ summary { cursor: pointer; font-weight: 700; }
 .advanced > summary { cursor: pointer; color: var(--main-dark); font-weight: 700; padding: 10px 0; }
 
 @media (max-width: 800px) {
-  .header-inner { padding: 8px 16px; }
-  nav { width: 100%; display: flex; overflow-x: auto; white-space: nowrap; gap: 16px; scrollbar-width: none; }
+  .header-inner { padding: 8px 16px; flex-wrap: nowrap; }
+  .logo { font-size: 0.9rem; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .logo span { display: none; }
+  nav { display: flex; flex-shrink: 0; white-space: nowrap; gap: 14px; }
   nav a { margin: 0; font-size: 0.88rem; }
   .hero { padding: 48px 0; }
   .section { padding: 48px 0; }
@@ -226,3 +230,8 @@ summary { cursor: pointer; font-weight: 700; }
 .wz-mail.jisan { background: #fdecea; color: #a52714; }
 .wz-mail.none { background: #eee; color: #444; }
 .wz-chair { display: block; color: #a52714; font-weight: 700; }
+.shop-kind { margin: 0 0 4px; font-size: 0.8rem; color: var(--main-dark); font-weight: 700; }
+.wz-mailok { margin: 8px 0 12px; padding: 10px 12px; border-radius: 8px; background: #e6f4ea; }
+.wz-mailok p { margin: 0 0 8px; }
+.wz-mailok .btn { margin-top: 8px; }
+.wz-tel { display: block; font-weight: 700; }
