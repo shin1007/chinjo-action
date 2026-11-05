@@ -279,7 +279,7 @@
         ${others.length ? `<p class="hint-sm">下は${esc(first)}あての文面です。${others.map(esc).join('・')}あてにも、同じ内容で1通ずつ作ります。ここで直すと、宛名と自治体名を差し替えてすべての議会に反映されます。</p>` : ''}
         <textarea class="wz-paper" rows="4" spellcheck="false" data-key="${esc(k)}" aria-label="${esc(it.label)}の文面">${esc(text)}</textarea>
         <p class="wz-docstat hint-sm" aria-live="polite"></p>
-        <div class="out-toolbar"><button type="button" class="btn btn-small" data-doc-view="${i}">仕上がりを見る</button><button type="button" class="btn btn-small" data-doc-reset="${esc(k)}"${e ? '' : ' hidden'}>元の文面に戻す</button></div>
+        <div class="out-toolbar"><button type="button" class="btn btn-small" data-doc-view="${i}">仕上がりを見る</button><button type="button" class="btn btn-small" data-doc-ai="${i}">生成AIで自分の言葉に直す</button><button type="button" class="btn btn-small" data-doc-reset="${esc(k)}"${e ? '' : ' hidden'}>元の文面に戻す</button></div>
       </details>`;
     }).join('');
     areas().forEach((ta) => { fit(ta); docStat(ta); });
@@ -396,12 +396,48 @@
   $('wzDocs').addEventListener('click', (e) => {
     const v = e.target.dataset.docView;
     if (v !== undefined) viewPdf(e.target, areas()[v]);
+    const a = e.target.dataset.docAi;
+    if (a !== undefined) openRewrite(areas()[a]);
     const k = e.target.dataset.docReset;
     if (k !== undefined) {
       delete edits[k];
       saveEdits();
       build();
     }
+  });
+
+  // ---------- 生成AIで中身だけ直す ----------
+  // 選んだ文面の趣旨と理由だけを AI に渡し、返ってきた答えをその2か所に入れ替える（1つ目の議会あての文面を直す）
+  let rwArea = null;
+  const rwPrompt = () => {
+    $('wzRwPrompt').value = window.Petition.buildRewritePrompt(rwArea.value, nameOf(state.councils[0]), { local: $('wzRwLocal').value, story: $('wzRwStory').value });
+  };
+  function openRewrite(ta) {
+    rwArea = ta;
+    $('wzRwTitle').textContent = `「${ta.closest('.wz-doc').querySelector('summary b').textContent}」`;
+    $('wzRwAnswer').value = '';
+    $('wzRwPlans').hidden = true;
+    rwPrompt();
+    if (!$('wzRwPrompt').value) { flash('「陳情の趣旨」「陳情の理由」の見出しが見つからないので、AIに渡せません。元の文面に戻してから試してください。', 5000); return; }
+    $('wzRwBox').hidden = false;
+    $('wzRwBox').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  ['wzRwLocal', 'wzRwStory'].forEach((id) => $(id).addEventListener('input', () => rwArea && rwPrompt()));
+  $('wzRwClose').addEventListener('click', () => { $('wzRwBox').hidden = true; });
+  $('wzRwApply').addEventListener('click', () => {
+    const out = rwArea && window.Petition.applyRewrite(rwArea.value, $('wzRwAnswer').value);
+    if (!out) { flash('AIの答えに「【陳情の趣旨】」「【陳情の理由】」の目印が見つかりません。答えを丸ごと貼り付けるか、AIにもう一度頼んでください。', 6000); return; }
+    rwArea.value = out;
+    // AI が引いた計画は文面に入れず、原文で確かめてもらえるよう欄に残す
+    const plans = window.Petition.rewritePlans($('wzRwAnswer').value);
+    $('wzRwPlans').innerHTML = plans.length ? `<p><b>AIが引いた${esc(nameOf(state.councils[0]).replace(/議会$/, ''))}の計画</b>：文面に入った引用が、計画の原文と同じか確かめてください。</p><ul>${plans.map((pl) => `<li>${pl.url ? `<a href="${esc(pl.url)}" target="_blank" rel="noopener">${esc(pl.text)}</a>` : esc(pl.text)}</li>`).join('')}</ul>` : '';
+    $('wzRwPlans').hidden = !plans.length;
+    // 手で直したときと同じく、直した文面として端末に残す
+    rwArea.dispatchEvent(new Event('input', { bubbles: true }));
+    $('wzRwBox').hidden = !plans.length;
+    rwArea.closest('.wz-doc').open = true;
+    rwArea.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    flash(/【要確認/.test(out) ? '文面に入れました。「【要確認」の所を確かめて直してください。' : '文面に入れました。事実や数字を確かめてから印刷してください。', 5000);
   });
 
   // 提出先：議会事務局の多くは本庁舎にあるので、その住所を出し、締切は公式サイトで調べてもらう
@@ -559,6 +595,13 @@
   // 印刷するものを1つも選んでいなければ、PDF を作らずに知らせる
   const picked = () => ['wzBody', 'wzCover', 'wzWithLabels'].some((id) => $(id).checked) || (flash('印刷するものを選んでください'), false);
   $('wzPdf').addEventListener('click', (e) => picked() && savePdf(e.currentTarget, envelopes(), { all: true }));
+  // Word で保存：自分の言葉で直してから印刷できるよう、鏡文と陳情書を .docx にする（宛名・差出人用紙は入れない）
+  $('wzDocx').addEventListener('click', () => {
+    const texts = envelopes().flatMap((e) => e.texts);
+    if (!texts.length) { flash('鏡文か陳情書本体を選んでください'); return; }
+    window.DocxDoc.download(window.DocxDoc.build(texts), fileName().replace(/\.pdf$/, '.docx'));
+    flash('Word のファイルを保存しました。宛名・差出人用紙は入らないので、PDFで保存してください。', 5000);
+  });
 
   // 差出人（あなた）の住所・氏名。入れるとすぐ、下の文面の住所・氏名の行に入る
   const sender = window.Common.bindSender($('wzSender'), () => {

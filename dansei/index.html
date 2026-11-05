@@ -144,6 +144,26 @@
           <summary>文面を確かめる・直す</summary>
           <p class="hint-sm">内容ごとに下の欄で自由に直せます。直した文面はこの端末のブラウザの中だけに残ります。</p>
           <div id="wzDocs" class="wz-docs"></div>
+          <div id="wzRwBox" class="wz-rewrite" hidden>
+            <h4><span id="wzRwTitle"></span>を、生成AIで自分の言葉に直す</h4>
+            <p class="hint-sm">AIに渡すのは「趣旨」と「理由」の本文だけです。住所・氏名や書式はそのまま残ります。</p>
+            <ol class="wz-rw-steps">
+              <li><b>地域のことを書く（任意）</b>
+                <textarea id="wzRwLocal" rows="2" aria-label="この地域について知っていること" placeholder="この地域について知っていること（例：市の窓口に相談の案内が少ない）"></textarea>
+                <textarea id="wzRwStory" rows="2" aria-label="ご自身が見聞きしたこと" placeholder="ご自身が見聞きしたこと（日付・地名・相手方・裁判の経過は書かない）"></textarea></li>
+              <li><b>AIを開く</b><span class="hint-sm">　自治体の計画も探して結びつけるよう頼みます。検索できるPerplexityなどが向いています。</span>
+                <div class="ai-launch" data-source="wzRwPrompt" data-temporary data-compact></div>
+                <details class="wz-rw-prompt"><summary class="hint-sm">AIに渡す指示文を見る</summary><textarea id="wzRwPrompt" rows="8" readonly></textarea></details></li>
+              <li><b>AIの答えを貼って入れる</b>
+                <textarea id="wzRwAnswer" rows="5" aria-label="AIの答え" placeholder="AIの答えを、そのまま全部貼り付けます"></textarea></li>
+            </ol>
+            <div id="wzRwPlans" class="wz-rw-plans" hidden></div>
+            <div class="out-toolbar">
+              <button type="button" id="wzRwApply" class="btn btn-small btn-primary">文面に入れる</button>
+              <button type="button" id="wzRwClose" class="btn btn-small">閉じる</button>
+            </div>
+          </div>
+          </div>
         </details>
 
         <h4 class="wz-sub">あなたの住所・氏名を入れる（任意）</h4>
@@ -169,8 +189,10 @@
             </div>
             <div class="pdf-actions">
               <button type="button" id="wzPdf" class="btn btn-primary">印刷用のPDFを保存する</button>
+              <button type="button" id="wzDocx" class="btn">Wordで保存して直す</button>
             </div>
             <p class="hint-sm">家のプリンターなら、保存したPDFを開いて<b>A4・倍率100%</b>で印刷します。</p>
+            <p class="hint-sm">💡 同じ文面が多くの議会に届くと、審査されないことがあります。上の「生成AIで自分の言葉に直す」か、Wordで地域の事情を一言足すと安心です（<a href="/dansei/guide#tips">書き方のコツ</a>）。</p>
             <div class="netprint">
               <p><b>プリンターがなければ、コンビニで印刷できます。</b>保存したPDFをサイトかアプリで登録し、お店のマルチコピー機で表示される番号を入れて印刷します。</p>
               <ul class="netprint-links">
@@ -208,11 +230,11 @@
         </ol>
 
         <details class="wz-more">
-          <summary>ほかの操作（コピー・スマホに送る・生成AIで整える）</summary>
+          <summary>ほかの操作（コピー・スマホに送る・生成AIに一から書いてもらう）</summary>
           <div class="out-toolbar">
             <button type="button" id="wzCopy" class="btn btn-small">すべてコピー</button>
             <button type="button" id="wzSend" class="btn btn-small">スマホに送る・あとで開く</button>
-            <button type="button" id="wzAi" class="btn btn-small">生成AIで整える</button>
+            <button type="button" id="wzAi" class="btn btn-small">生成AIに一から書いてもらう</button>
           </div>
           <div id="wzSendBox" class="wz-send" hidden>
             <p class="hint-sm">QRコードかリンクで、同じ陳情書をスマホやあとで開けます。<b>手で直した文面は含まれません</b>。直した場合は「すべてコピー」で保存してください。</p>
@@ -440,6 +462,7 @@
 <script src="/places.js"></script>
 <script src="/petition.js"></script>
 <script src="/pdfdoc.js"></script>
+<script src="/docxdoc.js"></script>
 <script src="/postage.js"></script>
 <script src="/report.js"></script>
 <script src="/app.js"></script>

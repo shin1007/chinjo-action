@@ -81,6 +81,94 @@ window.Petition = (() => {
     return L.join('\n');
   }
 
+  // ---------- 生成AIで中身だけ書き直す ----------
+  // AI には【陳情の趣旨】と【陳情の理由】の本文だけを渡し、同じ目印をつけて返してもらう
+  // 日付・宛名・住所氏名・件名・記・以上はこちらで持ったままにするので、書式は崩れず、個人の情報も渡らない
+  const PURPOSE = '【陳情の趣旨】';
+  const REASONS = '【陳情の理由】';
+  // 理由のあとに、AI が参照した計画（名前・URL・引いた所）を書いてもらう。文面には入れず、確かめてもらうために出す
+  const PLANS = '【参照した計画】';
+  // 文面から、目印の行の次から終わりの行の手前までを取り出す（{ from, to }：行の番号）
+  function span(lines, mark, isEnd) {
+    const from = lines.findIndex((l) => l.trim() === mark);
+    if (from < 0) return null;
+    let to = lines.findIndex((l, i) => i > from && isEnd(l.trim()));
+    if (to < 0) to = lines.length;
+    while (to > from + 1 && !lines[to - 1].trim()) to -= 1;
+    return { from: from + 1, to };
+  }
+  const isPurposeEnd = (s) => s === '記' || s.startsWith('【');
+  const isReasonsEnd = (s) => s === '以上' || s.startsWith('【');
+  function sections(text) {
+    const lines = text.replace(/\r/g, '').split('\n');
+    const p = span(lines, PURPOSE, isPurposeEnd);
+    const r = span(lines, REASONS, isReasonsEnd);
+    if (!p || !r) return null;
+    return { purpose: lines.slice(p.from, p.to).join('\n'), reasons: lines.slice(r.from, r.to).join('\n') };
+  }
+
+  // text：いまの文面、info：{ local：地域で知っていること, story：自分が見聞きしたこと }
+  function buildRewritePrompt(text, council, info = {}) {
+    const s = sections(text);
+    if (!s) return '';
+    const asks = (text.replace(/\r/g, '').split('\n記\n')[1] || '').split(`\n${REASONS}`)[0].trim();
+    const L = [];
+    L.push(`あなたは地方議会への陳情書の作成に詳しい行政文書の専門家です。${council}に出す陳情書の「陳情の趣旨」と「陳情の理由」を、この議会あての文として書き直してください。`);
+    L.push('同じ文面がたくさんの議会に届くと、議会によっては審査されないことがあります。地元の住民が自分の言葉で書いた陳情として読まれるようにするのが目的です。', '');
+    L.push('## 求める事項（参考。ここは書き直さないでください）', asks || '（なし）', '');
+    L.push('## いまの陳情の趣旨', s.purpose, '', '## いまの陳情の理由', s.reasons, '');
+    if (info.local && info.local.trim()) L.push('## この地域について陳情者が知っていること', info.local.trim(), '');
+    if (info.story && info.story.trim()) L.push('## 陳情者が見聞きしたこと', info.story.trim(), '');
+    // 地域の計画と結びつけると、議会や担当課に「本市の方針に沿った陳情」として読んでもらいやすい
+    const place = council.replace(/議会$/, '');
+    L.push(`## ${place}の計画と結びつける`);
+    L.push(`ウェブを検索できる場合は、${place}の公式サイトで、次のような計画の最新版を探してください（名前は自治体によって違うので、近いものでかまいません）。`);
+    window.THEME.ai.plans.forEach((pl) => L.push(`- ${pl}`));
+    L.push(`見つかったら、陳情の理由の中で1〜2か所、「${place}の○○計画（令和○年度〜令和○年度）は『……』を掲げています」のように、計画の名前・期間と、求める事項につながる目標や施策を短く原文のまま引き、求める事項がその計画を進めるものだと示してください。`);
+    L.push('公式サイトで確かめられなかった計画・引用・期間は書かないでください。検索できない場合や見つからない場合は、作らずに「【要確認：○○計画の該当箇所】」と書いてください。', '');
+    L.push('## 書き直しのルール');
+    [
+      '言い回しと段落の組み立てを、いまの文から十分に変える。ただし、言っている中身と求める事項は変えない。',
+      '地域の事情は、上の「この地域について」に書かれたことだけを使う。それ以外で地域に触れたいときは「【要確認：○○】」と書き、数字・制度・出来事を作らない。',
+      '統計・判例・国会答弁などの事実は、いまの文にあるもの以外は書かない。',
+      '日付・地名・相手方・裁判や調停の経過など、個人や事件を特定できる内容は書かない。陳情者が見聞きしたことは、一般的な言葉で1〜2文にする。',
+      '陳情の理由は、いまと同じく「1．○○」の見出しで分け、全体の長さもいまと同じくらいにする。',
+      '丁寧な文体（です・ます、または である）は、いまの文に合わせる。',
+    ].forEach((r) => L.push(`- ${r}`));
+    L.push('', '## 出力の形式', '次の形だけで出力してください。目印の行（【陳情の趣旨】【陳情の理由】【参照した計画】）はそのまま書き、前後に説明や見出しを足さないでください。', '');
+    L.push(PURPOSE, '（書き直した趣旨）', REASONS, '（書き直した理由）', PLANS, '（引いた計画ごとに「計画の名前／URL／引いた所」を1行ずつ。引いていなければ「なし」）');
+    return L.join('\n');
+  }
+
+  // AI の答えから趣旨と理由を取り出し、文面の同じ所と入れ替える。目印が見つからなければ null
+  function applyRewrite(text, answer) {
+    const a = answer.replace(/\r/g, '').replace(/^```.*$/gm, '').split('\n');
+    const p = span(a, PURPOSE, (s) => s === REASONS);
+    const r = span(a, REASONS, (s) => s === PLANS);
+    if (!p || !r) return null;
+    const purpose = a.slice(p.from, p.to);
+    const reasons = a.slice(r.from, r.to);
+    if (!purpose.some((l) => l.trim()) || !reasons.some((l) => l.trim())) return null;
+    const lines = text.replace(/\r/g, '').split('\n');
+    const tp = span(lines, PURPOSE, isPurposeEnd);
+    const tr = span(lines, REASONS, isReasonsEnd);
+    if (!tp || !tr) return null;
+    // 後ろの理由から入れ替えると、前の趣旨の行の番号がずれない
+    lines.splice(tr.from, tr.to - tr.from, ...reasons);
+    lines.splice(tp.from, tp.to - tp.from, ...purpose);
+    return lines.join('\n');
+  }
+
+  // AI の答えの【参照した計画】から、確かめてもらう計画を取り出す（{ text, url }。URL は http(s) のものだけ）
+  function rewritePlans(answer) {
+    const a = answer.replace(/\r/g, '').replace(/^```.*$/gm, '').split('\n');
+    const r = span(a, PLANS, () => false);
+    if (!r) return [];
+    return a.slice(r.from, r.to).map((l) => l.replace(/^[-・*\s]+/, '').trim())
+      .filter((l) => l && l !== 'なし')
+      .map((l) => ({ text: l, url: (l.match(/https?:\/\/[^\s／）)」]+/) || [''])[0] }));
+  }
+
   // 文面の住所の行を、差出人（Common.sender の形）で書き換える。手で直した文面にも使えるよう、行ごと置き換える
   // 氏名は本人が手書きで署名するので、いつも下線のままにする（入力した氏名は鏡文と封筒にだけ使う）
   // 電話番号は陳情書には入れない（陳情書は公開されることがあるため）。議会事務局だけが読む鏡文に入れる
@@ -112,5 +200,5 @@ window.Petition = (() => {
     return fill(T.cover, { 日付: reiwaToday(), 宛先: council, 差出人: from.join('\n'), 書類: list, 通数: String(docs.length) });
   }
 
-  return { build, buildPrompt, withSender, swapCouncil, cover, selectedKeys, ITEMS, MANY, SEP };
+  return { build, buildPrompt, sections, buildRewritePrompt, applyRewrite, rewritePlans, withSender, swapCouncil, cover, selectedKeys, ITEMS, MANY, SEP };
 })();
