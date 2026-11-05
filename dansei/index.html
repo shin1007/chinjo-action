@@ -11,6 +11,10 @@
 <meta property="og:description" content="陳情書を3分で作成。男性の相談窓口とDV被害者の避難先を、地方議会へ求めましょう。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kenri-chinjo.vercel.app/dansei">
+<meta property="og:image" content="https://kenri-chinjo.vercel.app/themes/dansei/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="男性の権利を守る陳情アクション ― あなたの一通の陳情が、制度を動かす。">
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -21,9 +25,9 @@
   <div class="wrap header-inner">
     <a href="#" class="logo">男性の権利を守る<span>陳情アクション</span></a>
     <nav>
-      <a href="#generator">陳情書をつくる</a>
-      <a href="/dansei/guide#tips">採択されるコツ</a>
-      <a href="#faq">よくある質問</a>
+      <a href="/dansei#generator" aria-current="page">つくる</a>
+      <a href="/dansei/guide">出し方</a>
+      <a href="/dansei/builder">ビルダー</a>
     </nav>
   </div>
 </header>
@@ -34,7 +38,10 @@
     <p class="eyebrow">困っている男性にも、相談先と逃げ場を。</p>
     <h1>あなたの一通の陳情が、<br>制度を動かす。</h1>
     <p class="lead">男性向けの相談窓口、男性のDV被害者の避難先、性別で対象を限った施策の見直し。<br>地方議会への陳情書を、このページで3分で作成できます。</p>
-    <a href="#generator" class="btn btn-primary">陳情書をつくる</a>
+    <div class="hero-actions">
+      <a href="#generator" class="btn btn-primary">陳情書をつくる</a>
+      <a href="#faq" class="btn">よくある質問</a>
+    </div>
     <div class="cost">
       <p class="cost-title">陳情1通あたりの費用の目安</p>
       <table class="cost-table">
@@ -97,6 +104,7 @@
       <div class="wz-step" data-step="council" hidden>
         <h3>出す議会を選んでください <small>（いくつでも）</small></h3>
         <p class="hint-sm">住んでいる自治体の議会がいちばん確実です。<span id="wzCountHint" hidden>「出した人 ○人」はこのサイトで提出を報告した人の数です。まだ誰も出していない議会に出すと、全国に広がります。</span></p>
+        <div id="wzMailOk" class="wz-mailok" hidden></div>
         <input type="search" id="wzFilter" class="wz-filter" placeholder="名前で絞り込む（ひらがな・ローマ字でも）">
         <div id="wzCouncils" class="wz-grid wz-scroll"></div>
         <p class="wz-picked" id="wzPicked"></p>
@@ -327,6 +335,13 @@
   </div>
 </section>
 
+<section id="shop" class="section">
+  <div class="wrap">
+    <h2>関連する本・グッズ</h2>
+    <div data-shop></div>
+  </div>
+</section>
+
 <section id="faq" class="section">
   <div class="wrap">
     <h2>よくある質問</h2>
@@ -358,6 +373,8 @@
 <script src="/data/offices.js"></script>
 <script src="/data/sites.js"></script>
 <script src="/data/councils.js"></script>
+<script src="/data/mail.js"></script>
+<script src="/data/tel.js"></script>
 <script src="/data/access.js"></script>
 <script src="/data/kana.js"></script>
 <script src="/vendor/qrcode.js"></script>
@@ -372,5 +389,7 @@
 <script src="/wizard.js"></script>
 <script src="/ai-launch.js"></script>
 <script src="/send-figs.js"></script>
+<script src="/themes/dansei/shop.js"></script>
+<script src="/shop.js"></script>
 </body>
 </html>

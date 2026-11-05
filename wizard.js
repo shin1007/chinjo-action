@@ -63,8 +63,22 @@
       })
       .join('') || `<p class="hint-sm wz-wide">「${esc(q)}」に当てはまる議会が見つかりません。${esc(state.pref)}以外の議会なら、下の「ほかの都道府県の議会も選ぶ」から選んでください。</p>`;
     $('wzPicked').textContent = state.councils.length ? `選択中：${state.councils.map(label).join('、')}` : '';
+    renderMailOk();
     renderDeadline();
     renderCount();
+  }
+
+  // 郵送でも審査される議会は家から出せて行動しやすいので、都道府県ごとにまとめて勧める
+  const mailOk = (pref) => councilsOf(pref).map((c) => idOf(pref, c)).filter((id) => (mailRule(infoOf(id)) || {}).c === 'ok');
+  function renderMailOk() {
+    const ids = mailOk(state.pref);
+    const el = $('wzMailOk');
+    el.hidden = !ids.length;
+    if (el.hidden) return;
+    const rest = ids.filter((id) => !state.councils.includes(id));
+    el.innerHTML = `<p><b>📮 ${esc(state.pref)}で郵送でも審査される議会（${ids.length}）</b><br><span class="hint-sm">出向かなくても、家からまとめて送れます。</span></p>
+      <div class="wz-grid">${ids.map((id) => { const on = state.councils.includes(id); return `<button type="button" class="wz-chip ${on ? 'on' : ''}" data-council="${esc(id)}" aria-pressed="${on}">${esc(nameOf(id))}</button>`; }).join('')}</div>
+      ${rest.length ? `<button type="button" class="btn btn-small" data-mail-all="1">この${ids.length}つをまとめて選ぶ</button>` : ''}`;
   }
 
   // 締切は作り終えてから気づくと間に合わないので、議会を選んだ時点で知らせる
@@ -85,6 +99,8 @@
   // 案内ページの一文から、郵送で出して審査してもらえるかを分ける。読み取れた議会だけで、書いていない議会は出さない
   // ok：郵送で出せる／jisan：審査してもらうには持参が必要／outside：住民以外の郵送は配付だけ／none：出し方に関わらず配付だけ
   function mailRule(info) {
+    const fixed = { ok: '📮 郵送でも審査されます', jisan: '🚶 審査してもらうには持参が必要です（郵送は配付だけ）', outside: '🚶 住民以外が審査してもらうには持参が必要です（郵送は配付だけ）', none: '持参でも郵送でも、陳情は審査されず配付だけです' };
+    if (info.mail) return { c: info.mail === 'outside' ? 'jisan' : info.mail, label: fixed[info.mail] };
     const t = [info.yusoNote, info.outsideNote].filter((x) => x && /郵送/.test(x)).join(' ');
     if (!t) return null;
     if (/関わらず|持参（または郵送）/.test(t)) return { c: 'none', label: '持参でも郵送でも、陳情は審査されず配付だけのようです' };
@@ -175,6 +191,10 @@
       if (!state.councils.includes(d.near)) state.councils.push(d.near);
       $('wzFilter').value = '';
       go(1);
+    } else if (d.mailAll) {
+      mailOk(state.pref).forEach((id) => { if (!state.councils.includes(id)) state.councils.push(id); });
+      renderCouncils();
+      $('wzNext').disabled = !canNext();
     } else if (d.council) {
       const i = state.councils.indexOf(d.council);
       i < 0 ? state.councils.push(d.council) : state.councils.splice(i, 1);
@@ -209,7 +229,13 @@
 
   // ---------- 陳情書の作成 ----------
   // 議会ごとの情報（事務局の住所・提出方法の注意）。data/councils.js にあるのは自動で読み取ったもの
-  const infoOf = (c) => { const [pref, key] = officeKeys[c] || []; return (window.COUNCILS[pref] || {})[key] || {}; };
+  // 公式サイトで確かめた郵送の扱い（data/mail.js）があれば、読み取った一文より優先する
+  const infoOf = (c) => {
+    const [pref, key] = officeKeys[c] || [];
+    const info = (window.COUNCILS[pref] || {})[key] || {};
+    const m = ((window.MAIL || {})[pref] || {})[key];
+    return m ? { ...info, mail: m[0], yusoNote: m[1] } : info;
+  };
 
   function formData() {
     const fd = new FormData();
@@ -397,6 +423,17 @@
     }, { timeout: 10000, maximumAge: 600000 });
   });
 
+  // 電話：data/tel.js → [gikai：議会事務局の番号／main：公式サイトのトップにあった役所の番号, 番号, 載っていたページ]
+  // 案内ページがない議会では、出し方・締切・郵送の扱いを電話で聞いてもらう
+  function telHtml(pref, key, ask) {
+    const t = ((window.TEL || {})[pref] || {})[key];
+    if (!t) return '';
+    const [kind, no, src] = t;
+    const who = kind === 'gikai' ? '議会事務局' : '役所（「議会事務局につないでください」と伝える）';
+    return `<span class="wz-tel">📞 ${who}：<a href="tel:${esc(no.replace(/-/g, ''))}">${esc(no)}</a>（<a href="${esc(src)}" target="_blank" rel="noopener">載っていたページ</a>）</span>
+        ${ask ? '<span class="hint-sm">電話では「陳情を出したいので、出し方と次の締切、郵送でも審査されるか教えてください」と聞けば足ります。平日の昼間につながります。</span>' : ''}`;
+  }
+
   function renderOffices() {
     $('wzOffices').innerHTML = state.councils.map((c) => {
       const [pref, key] = officeKeys[c] || [];
@@ -420,6 +457,7 @@
         <span class="wz-chair">⚠ 宛名の「議長」のあとに、議長の氏名を必ず書き入れてください（下の「議長名を調べる」で確認）。</span>
         ${accessHtml(pref, key)}
         ${notes(info)}
+        ${telHtml(pref, key, !page)}
         ${page ? '' : '<span>陳情の出し方のページが見つかりませんでした。小さな議会では案内ページを置いていないことも多いので、議会事務局に電話で出し方と締切を聞くのが確実です。</span>'}
         <span class="wz-links">${links}</span>
         ${window.Report.enabled ? `<button type="button" class="btn btn-small wz-report" data-report="${esc(c)}" ${window.Report.reported(c) ? 'disabled' : ''}>${window.Report.reported(c) ? '✓ 提出を報告しました' : '出したら押す：この議会に提出した'}</button>` : ''}</li>`;
