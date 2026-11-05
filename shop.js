@@ -36,7 +36,7 @@
   if (box && window.SHOP) {
     box.innerHTML = `<div class="cards">${window.SHOP.map((it) => `
     <article class="card">
-      ${it.asin ? `<a class="shop-img" href="${it.direct ? dp(it.asin) : link(it.q)}" target="_blank" rel="noopener sponsored"><img src="${img(it.asin)}" alt="${esc(it.title)}" loading="lazy"></a>` : ''}
+      ${it.asin ? `<a class="shop-img" href="${it.direct ? dp(it.asin) : link(it.q)}" target="_blank" rel="noopener sponsored"><img src="${it.image || img(it.asin)}" alt="${esc(it.title)}" loading="lazy"></a>` : ''}
       <p class="shop-kind">${esc(it.kind)}</p>
       <h3>${esc(it.title)}</h3>
       ${it.by ? `<p class="hint-sm">${esc(it.by)}</p>` : ''}
