@@ -81,10 +81,19 @@ a { color: var(--main-dark); }
 nav a { margin-left: 16px; text-decoration: none; color: var(--ink); font-size: 0.95rem; }
 nav a:hover, nav a[aria-current] { color: var(--main); }
 nav a[aria-current] { font-weight: 700; }
-/* テーマの切り替え。ヘッダーの2段目に、つくる・出し方などと分けて並べる */
-.theme-nav { flex-basis: 100%; display: flex; gap: 6px; border-top: 1px solid var(--line); padding-top: 8px; }
-.theme-nav a { margin: 0; padding: 2px 14px; border: 1px solid var(--line); border-radius: 999px; font-size: 0.85rem; }
-.theme-nav a[aria-current] { background: var(--main); border-color: var(--main); color: var(--on-main); }
+/* テーマのドロップダウン（1段目の左上）と、そのテーマのページの中の案内（2段目） */
+.theme-menu + .logo { margin-right: auto; }
+.theme-menu { position: relative; }
+.theme-menu > summary { cursor: pointer; list-style: none; padding: 2px 12px; border: 1px solid var(--main); border-radius: 999px; background: var(--main); color: var(--on-main); font-size: 0.85rem; font-weight: 700; }
+.theme-menu > summary::-webkit-details-marker { display: none; }
+.theme-menu > summary::after { content: " ▾"; }
+.theme-menu .theme-nav { position: absolute; top: calc(100% + 4px); left: 0; display: flex; flex-direction: column; min-width: 10em; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 4px 0; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12); }
+.theme-menu .theme-nav a { margin: 0; padding: 6px 14px; font-size: 0.9rem; white-space: nowrap; }
+.page-nav { flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 4px 18px; border-top: 1px solid var(--line); padding-top: 8px; }
+.page-nav a { margin: 0; font-size: 0.9rem; }
+/* トップのページはテーマを選ぶ前なので、テーマを丸い札で横に並べる */
+.header-inner > .theme-nav { flex-basis: 100%; display: flex; gap: 6px; border-top: 1px solid var(--line); padding-top: 8px; }
+.header-inner > .theme-nav a { margin: 0; padding: 2px 14px; border: 1px solid var(--line); border-radius: 999px; font-size: 0.85rem; }
 
 .hero { background: linear-gradient(135deg, var(--hero-from), var(--hero-to)); padding: 80px 0; text-align: center; }
 .eyebrow { color: var(--main-dark); font-weight: 700; }
@@ -217,8 +226,10 @@ summary { cursor: pointer; font-weight: 700; }
   .logo { flex: 1; font-size: 0.9rem; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   nav { display: flex; flex-shrink: 0; white-space: nowrap; gap: 14px; }
   nav a { margin: 0; font-size: 0.88rem; }
-  .theme-nav { gap: 4px; padding-top: 6px; }
-  .theme-nav a { padding: 1px 10px; font-size: 0.8rem; }
+  .header-inner > .theme-nav { gap: 4px; padding-top: 6px; }
+  .header-inner > .theme-nav a { padding: 1px 10px; font-size: 0.8rem; }
+  .page-nav { flex-wrap: nowrap; overflow-x: auto; gap: 14px; padding-top: 6px; }
+  .page-nav a { font-size: 0.85rem; }
   .hero { padding: 48px 0; }
   .section { padding: 48px 0; }
   .section h2 { font-size: 1.5rem; margin-bottom: 24px; }
