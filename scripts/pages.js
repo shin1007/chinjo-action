@@ -11,6 +11,7 @@ const THEMES = [
   { id: 'dansei', label: '男性の権利' },
   { id: 'nihonjin', label: '日本人の権利' },
   { id: 'shiho', label: '司法への参加' },
+  { id: 'sonota', label: 'その他の陳情' },
 ];
 const PAGES = ['builder', 'labels'];
 
