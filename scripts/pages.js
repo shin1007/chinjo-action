@@ -10,6 +10,7 @@ const THEMES = [
   { id: 'kodomo', label: '子どもの権利' },
   { id: 'dansei', label: '男性の権利' },
   { id: 'nihonjin', label: '日本人の権利' },
+  { id: 'shiho', label: '司法への参加' },
 ];
 const PAGES = ['builder', 'labels'];
 
