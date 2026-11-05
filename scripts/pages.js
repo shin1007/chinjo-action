@@ -13,10 +13,14 @@ const THEMES = [
 ];
 const PAGES = ['builder', 'labels'];
 
+// ヘッダーの左上に出す、テーマを切り替えるドロップダウン
 const themeNav = (current) => [
-  '    <nav class="theme-nav" aria-label="陳情のテーマ">',
-  ...THEMES.map((t) => `      <a href="/${t.id}"${t.id === current ? ' aria-current="true"' : ''}>${t.label}</a>`),
-  '    </nav>',
+  '    <details class="theme-menu">',
+  `      <summary>${THEMES.find((t) => t.id === current).label}</summary>`,
+  '      <nav class="theme-nav" aria-label="陳情のテーマ">',
+  ...THEMES.map((t) => `        <a href="/${t.id}"${t.id === current ? ' aria-current="true"' : ''}>${t.label}</a>`),
+  '      </nav>',
+  '    </details>',
 ].join('\n');
 
 // Windows で取り出すと改行が CRLF になるので、LF にそろえてから比べる
@@ -26,6 +30,8 @@ function render(page, theme) {
   const src = read(path.join(ROOT, 'templates', `${page}.html`));
   return src.replace('{{themeNav}}', themeNav(theme.id))
     .replaceAll('{{id}}', theme.id)
+    // 参考資料の節は、いまは子どもの権利の出し方のページにしかない
+    .replaceAll('{{refs}}', theme.id === 'kodomo' ? '#refs' : '')
     .replaceAll('{{label}}', theme.label);
 }
 

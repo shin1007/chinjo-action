@@ -1,27 +1,35 @@
 // 「関連する本・グッズ」の欄を、themes/<テーマ>/shop.js の window.SHOP から作ります。
 // AMAZON_TAG にアソシエイトのトラッキングID（例：xxxx-22）を入れると、全てのリンクに付きます。
-// 商品は ASIN を作らず、Amazon の検索リンク（q の言葉で検索）にしているので、品切れや版の違いでリンク切れになりません。
+// 本は ASIN を作らず、Amazon の検索リンク（q の言葉で検索）にしているので、品切れや版の違いでリンク切れになりません。
 // 画像は、商品に asin（Amazon の商品ページの URL の /dp/ の後ろの10文字）を書いたときだけ、Amazon の画像を出します。
 // COMMON は、陳情書を作って出すのに使う文房具で、提出・郵送の案内のそば（[data-stationery]）に並べます。
+// 文房具はおすすめを1つずつ選んでいるので、検索ではなく商品のページ（/dp/ASIN）にリンクします。
 (() => {
   const COMMON = [
-    { kind: '文房具', title: '透けない封筒 角形2号', by: 'ハート', q: 'ハート 透けない封筒 角2',
-      note: 'A4 を折らずに送る封筒。署名や資料を付けて送るときに。' },
-    { kind: '文房具', title: '高白色のコピー用紙 A4', by: 'キヤノン', q: 'キヤノン 高白色用紙 A4',
-      note: '白くて裏写りしにくい用紙。議員に配られる陳情書が読みやすくなります。' },
-    { kind: '文房具', title: 'ゲルインクボールペン 黒', by: 'ゼブラ サラサクリップ 0.5', q: 'ゼブラ サラサクリップ 0.5 黒',
-      note: '署名や宛名に。にじまず、くっきり書けます。' },
-    { kind: '文房具', title: 'クリアファイル A4', by: 'キングジム', q: 'キングジム クリアーファイル A4',
+    { title: '透けない封筒 角形2号 100枚', by: 'ハート KR4290（テープ付き）', asin: 'B0F53W8816',
+      note: 'A4 を折らずに入れられ、中身が透けません。テープ付きで、のりなしで封ができます。' },
+    { title: 'コピー用紙 A4 500枚', by: '伊藤忠紙パルプ ブランコ（高白色）', asin: 'B00HLTXQ0Y',
+      note: '白くて読みやすい用紙。500枚あれば、陳情書と宛名を何度も刷り直せます。' },
+    { title: 'ゲルインクボールペン 黒 10本', by: 'ゼブラ サラサクリップ 0.5', asin: 'B00P0PT7BS',
+      note: '署名や宛名に。にじまず、くっきり書けます。署名を集めるときに配れる本数です。' },
+    { title: 'クリアホルダー A4 10枚', by: 'コクヨ K2フ-C750TX10', asin: 'B00RJKA824',
       note: '議会事務局に持参するとき、陳情書を折らずに運べます。' },
-    { kind: '文房具', title: 'ラベル用紙 A4 8面', by: 'エーワン', q: 'エーワン ラベルシール A4 8面 105×74.25',
-      note: '宛名ラベルの印刷に。このサイトの「A4 8面」にそのまま合います。' },
-    { kind: '文房具', title: 'テープのり', by: 'トンボ ピットエアー', q: 'トンボ テープのり ピットエアー',
-      note: '普通紙に印刷した宛名を封筒に貼るときや、封をするときに。乾かす手間がありません。' },
+    { title: 'ラベル用紙 A4 8面 余白なし 22シート', by: 'エレコム EDT-ECNL8S22（105×74.25mm）', asin: 'B0DM18K2W7',
+      note: '宛名ラベルのページの「A4 8面（余白なし）」にそのまま合う大きさです。' },
+    { title: 'テープのり', by: 'コクヨ ドットライナー（本体と詰め替え）', asin: 'B0FR88W4TR',
+      note: '普通紙に印刷した宛名を封筒に貼るときに。乾かす手間がなく、紙が波打ちません。' },
+    { title: 'はさみ', by: 'プラス フィットカットカーブ', asin: 'B0079WLDLW',
+      note: '宛名を切り取り線に沿って切るときに。刃にのりが付きにくく、軽い力で切れます。' },
+    { title: '小型カッター', by: 'オルファ リミテッドSA', asin: 'B001ADUMO0',
+      note: '宛名を定規に当ててまっすぐ切るときに。刃が勝手に出ないオートロック付きです。' },
+    { title: 'カッターマット A4', by: 'オルファ 134B', asin: 'B000CEF5R2',
+      note: 'カッターを使うときの下敷きに。A4 の用紙がちょうど乗る大きさです。' },
   ];
   const AMAZON_TAG = '7nrr25mb-22';
   const { esc } = window.Common;
   const link = (q) => 'https://www.amazon.co.jp/s?k=' + encodeURIComponent(q) + (AMAZON_TAG ? '&tag=' + encodeURIComponent(AMAZON_TAG) : '');
   const img = (asin) => 'https://images-na.ssl-images-amazon.com/images/P/' + encodeURIComponent(asin) + '.09.MZZZZZZZ.jpg';
+  const dp = (asin) => 'https://www.amazon.co.jp/dp/' + encodeURIComponent(asin) + (AMAZON_TAG ? '?tag=' + encodeURIComponent(AMAZON_TAG) : '');
   const NOTE = '※ このサイトは Amazon アソシエイト・プログラムに参加しています。リンクから購入されると、サイトの運営者に紹介料が入ります（広告）。';
 
   const box = document.querySelector('[data-shop]');
@@ -42,7 +50,7 @@
   document.querySelectorAll('[data-stationery]').forEach((el) => {
     el.innerHTML = `<p class="stationery-head">あわせて買いそろえるもの</p>
     <ul class="stationery">${COMMON.map((it) => `
-      <li><a href="${link(it.q)}" target="_blank" rel="noopener sponsored">${esc(it.title)}</a><span class="hint-sm">（${esc(it.by)}）${esc(it.note)}</span></li>`).join('')}
+      <li><a href="${dp(it.asin)}" target="_blank" rel="noopener sponsored">${esc(it.title)}</a><span class="hint-sm">（${esc(it.by)}）${esc(it.note)}</span></li>`).join('')}
     </ul>
     <p class="hint-sm">${NOTE}</p>`;
   });
