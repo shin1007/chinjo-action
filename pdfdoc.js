@@ -103,115 +103,172 @@ window.PdfDoc = (() => {
     const SENDER = /^(住所|氏名|電話)　/;
 
     // 1つの文書（改行区切りの文面）を、新しいページから書く。ページ番号は文書ごとに振る
+    // 行の間を少し詰めれば1枚に収まるときは詰める。2枚以上になるときは、見出しを次の文と離さず、
+    // 段落を1行だけ残して分けず、「以上」だけが次の紙に行かないように区切る
     function addDocument(text) {
-      const pages = [];
-      let page;
-      let y;
-      const newPage = () => {
-        page = pdf.addPage([A4.w, A4.h]);
-        pages.push(page);
-        y = A4.h - M.top;
-      };
-      const need = (h) => { if (y - h < M.bottom) newPage(); };
-      newPage();
-
       const lines = text.replace(/\r/g, '').split('\n');
-      lines.forEach((raw, i) => {
-        const s = raw.replace(/\s+$/, '');
-        if (!s) { y -= LH * 0.55; return; }
 
-        // 日付：右に寄せる
-        if (/^令和.+日$/.test(s) && i < 3) {
-          need(LH);
-          const [l] = wrap(s, BODY, textW);
-          drawLine(page, l, A4.w - M.right - l.w, y, BODY);
-          y -= LH;
-          return;
-        }
-        // 宛名（○○議会議長 様／○○事務局 御中）：少し大きく
-        if (/(様|御中)$/.test(s) && i < 6) {
-          const size = 12.5;
-          need(LH * 1.3);
-          wrap(s, size, textW).forEach((l) => { drawLine(page, l, M.left, y, size); y -= size * 1.8; });
-          return;
-        }
-        // 差出人の住所・氏名：右寄りに、項目名をそろえて書く
-        const sm = s.match(SENDER);
-        if (sm) {
-          const x = M.left + textW * 0.3;
-          const labelW = BODY * 3.5;
-          const label = sm[1];
-          const value = s.slice(sm[0].length);
-          // 空欄なら、手書きで書けるよう右端まで下線を引き、行の間も広げる（氏名は右端に「印」を残す）
-          if (value.startsWith(BLANK)) {
-            const seal = value.slice(BLANK.length).trim();
-            const end = A4.w - M.right - (seal ? BODY * 2 : 0);
-            y -= LH * 0.4;
-            need(LH);
-            page.drawText(label, { x, y, size: BODY, font: R, color: gray });
-            page.drawLine({ start: { x: x + labelW, y: y - 3 }, end: { x: end, y: y - 3 }, thickness: 0.5, color: black });
-            if (seal) page.drawText(safe(seal), { x: end + BODY * 0.6, y, size: BODY, font: R, color: black });
-            y -= LH * 1.2;
+      // 文面を、ページをまたいでよいかの決まりを持った塊（行の並び）に分ける。k は行の間の詰め具合
+      function layout(k) {
+        const lh = LH * k;
+        const blocks = [];
+        const block = (o = {}) => { const b = { rows: [], ...o }; blocks.push(b); return b; };
+        const gap = (b, h) => b.rows.push({ h });
+        const row = (b, h, draw) => b.rows.push({ h, draw });
+
+        lines.forEach((raw, i) => {
+          const s = raw.replace(/\s+$/, '');
+          if (!s) { gap(block({ spacer: true }), lh * 0.55); return; }
+
+          // 日付：右に寄せる
+          if (/^令和.+日$/.test(s) && i < 3) {
+            const [l] = wrap(s, BODY, textW);
+            row(block(), lh, (p, y) => drawLine(p, l, A4.w - M.right - l.w, y, BODY));
             return;
           }
-          wrap(value, BODY, A4.w - M.right - x - labelW).forEach((l, j) => {
-            need(LH);
-            if (!j) page.drawText(label, { x, y, size: BODY, font: R, color: gray });
-            drawLine(page, l, x + labelW, y, BODY);
-            y -= LH;
-          });
-          return;
-        }
-        // 件名・鏡文の題：中央に太字で
-        const title = s.match(/^件名　(.+)$/) || (/^　{4,}\S/.test(s) && !/(敬具|以上)$/.test(s) ? [s, s.trim()] : null);
-        if (title) {
-          const size = 13.5;
-          const font = fontFor(title[1], true);
-          const ls = wrap(title[1], size, textW * 0.86, font);
-          y -= LH * 0.4;
-          need(ls.length * size * 1.7);
-          ls.forEach((l) => { drawLine(page, l, (A4.w - l.w) / 2, y, size, font); y -= size * 1.7; });
-          y -= LH * 0.3;
-          return;
-        }
-        // 敬具・以上：右に寄せる
-        if (/^　*(敬具|以上)$/.test(s)) {
-          need(LH);
-          const t = s.trim();
-          page.drawText(t, { x: A4.w - M.right - width(t, BODY), y, size: BODY, font: R, color: black });
-          y -= LH;
-          return;
-        }
-        // 記：中央に
-        if (s === '記') {
-          need(LH);
-          page.drawText('記', { x: (A4.w - BODY) / 2, y, size: BODY, font: R, color: black });
-          y -= LH;
-          return;
-        }
-        // 【陳情の趣旨】などの見出し：太字にして、下に細い線を引く
-        const h = s.match(/^【(.+)】$/);
-        if (h) {
-          const size = 11.5;
-          const font = fontFor(h[1], true);
-          need(LH * 2.2);
-          y -= LH * 0.35;
-          page.drawText(safe(h[1]), { x: M.left, y, size, font, color: black });
-          page.drawLine({ start: { x: M.left, y: y - 4 }, end: { x: A4.w - M.right, y: y - 4 }, thickness: 0.4, color: gray });
-          y -= LH * 1.1;
-          return;
-        }
-        // 一　…／1．… の箇条：2行目からは番号のぶん下げる
-        const im = s.match(ITEM);
-        const indent = im ? width(im[1], BODY) : 0;
-        const ls = wrap(s.slice(im ? im[1].length : 0), BODY, textW - indent);
-        ls.forEach((l, j) => {
-          need(LH);
-          if (im && !j) page.drawText(safe(im[1]), { x: M.left, y, size: BODY, font: R, color: black });
-          drawLine(page, l, M.left + indent, y, BODY);
-          y -= LH;
+          // 宛名（○○議会議長 様／○○事務局 御中）：少し大きく
+          if (/(様|御中)$/.test(s) && i < 6) {
+            const size = 12.5;
+            const b = block();
+            wrap(s, size, textW).forEach((l) => row(b, size * 1.8 * k, (p, y) => drawLine(p, l, M.left, y, size)));
+            return;
+          }
+          // 差出人の住所・氏名：右寄りに、項目名をそろえて書く（続く欄は1つの塊にして分けない）
+          const sm = s.match(SENDER);
+          if (sm) {
+            const last = blocks[blocks.length - 1];
+            const b = last && last.sender ? last : block({ sender: true });
+            const x = M.left + textW * 0.3;
+            const labelW = BODY * 3.5;
+            const label = sm[1];
+            const value = s.slice(sm[0].length);
+            // 空欄なら、手書きで書けるよう右端まで下線を引き、行の間も広げる（氏名は右端に「印」を残す）
+            if (value.startsWith(BLANK)) {
+              const seal = value.slice(BLANK.length).trim();
+              const end = A4.w - M.right - (seal ? BODY * 2 : 0);
+              gap(b, lh * 0.4);
+              row(b, lh * 1.2, (p, y) => {
+                p.drawText(label, { x, y, size: BODY, font: R, color: gray });
+                p.drawLine({ start: { x: x + labelW, y: y - 3 }, end: { x: end, y: y - 3 }, thickness: 0.5, color: black });
+                if (seal) p.drawText(safe(seal), { x: end + BODY * 0.6, y, size: BODY, font: R, color: black });
+              });
+              return;
+            }
+            wrap(value, BODY, A4.w - M.right - x - labelW).forEach((l, j) => row(b, lh, (p, y) => {
+              if (!j) p.drawText(label, { x, y, size: BODY, font: R, color: gray });
+              drawLine(p, l, x + labelW, y, BODY);
+            }));
+            return;
+          }
+          // 件名・鏡文の題：中央に太字で
+          const title = s.match(/^件名　(.+)$/) || (/^　{4,}\S/.test(s) && !/(敬具|以上)$/.test(s) ? [s, s.trim()] : null);
+          if (title) {
+            const size = 13.5;
+            const font = fontFor(title[1], true);
+            const b = block({ keepNext: true });
+            gap(b, lh * 0.4);
+            wrap(title[1], size, textW * 0.86, font).forEach((l) => row(b, size * 1.7 * k, (p, y) => drawLine(p, l, (A4.w - l.w) / 2, y, size, font)));
+            gap(b, lh * 0.3);
+            return;
+          }
+          // 敬具・以上：右に寄せる。前の段落の終わりと同じ紙に置く
+          if (/^　*(敬具|以上)$/.test(s)) {
+            const t = s.trim();
+            const draw = (p, y) => p.drawText(t, { x: A4.w - M.right - width(t, BODY), y, size: BODY, font: R, color: black });
+            let j = blocks.length - 1;
+            while (j >= 0 && blocks[j].spacer) j -= 1;
+            const prev = blocks[j];
+            if (prev && prev.split) {
+              const gaps = blocks.splice(j + 1).flatMap((b) => b.rows);
+              prev.rows.push(...gaps, { h: lh, draw });
+              prev.tail = gaps.length + 1;
+            } else row(block(), lh, draw);
+            return;
+          }
+          // 記：中央に
+          if (s === '記') {
+            row(block({ keepNext: true }), lh, (p, y) => p.drawText('記', { x: (A4.w - BODY) / 2, y, size: BODY, font: R, color: black }));
+            return;
+          }
+          // 【陳情の趣旨】などの見出し：太字にして、下に細い線を引く
+          const h = s.match(/^【(.+)】$/);
+          if (h) {
+            const size = 11.5;
+            const font = fontFor(h[1], true);
+            const b = block({ keepNext: true });
+            gap(b, lh * 0.35);
+            row(b, lh * 1.1, (p, y) => {
+              p.drawText(safe(h[1]), { x: M.left, y, size, font, color: black });
+              p.drawLine({ start: { x: M.left, y: y - 4 }, end: { x: A4.w - M.right, y: y - 4 }, thickness: 0.4, color: gray });
+            });
+            return;
+          }
+          // 一　…／1．… の箇条：2行目からは番号のぶん下げる
+          const im = s.match(ITEM);
+          const indent = im ? width(im[1], BODY) : 0;
+          const b = block({ split: true });
+          wrap(s.slice(im ? im[1].length : 0), BODY, textW - indent).forEach((l, j) => row(b, lh, (p, y) => {
+            if (im && !j) p.drawText(safe(im[1]), { x: M.left, y, size: BODY, font: R, color: black });
+            drawLine(p, l, M.left + indent, y, BODY);
+          }));
         });
-      });
+        return blocks;
+      }
+
+      // 塊をページに割り付ける。返すのは、行ごとの { page：何枚目か, y, draw } と枚数
+      function paginate(blocks) {
+        const top = A4.h - M.top;
+        const out = [];
+        let pg = 0;
+        let y = top;
+        const newPage = () => { pg += 1; y = top; };
+        const sum = (rows) => rows.reduce((a, r) => a + r.h, 0);
+        const put = (r) => {
+          if (y - r.h < M.bottom && y !== top) newPage();
+          if (!r.draw && y === top) return; // 紙の頭の空きは捨てる
+          if (r.draw) out.push({ page: pg, y, draw: r.draw });
+          y -= r.h;
+        };
+        // 見出しのあとに同じ紙へ続けて置く高さ（次の段落の2行目まで）
+        const lead = (i) => {
+          let h = 0;
+          for (let j = i; j < blocks.length; j += 1) {
+            const b = blocks[j];
+            if (!b.spacer && !b.keepNext) return h + sum(b.split ? b.rows.slice(0, 2) : b.rows);
+            h += sum(b.rows);
+          }
+          return h;
+        };
+        blocks.forEach((b, i) => {
+          const avail = y - M.bottom;
+          const H = sum(b.rows);
+          if (b.spacer) { if (H > avail) newPage(); else b.rows.forEach(put); return; }
+          if (b.keepNext) { if (H + lead(i + 1) > avail && y !== top) newPage(); b.rows.forEach(put); return; }
+          if (H <= avail || y === top) { b.rows.forEach(put); return; }
+          if (b.split) {
+            // 前に2行以上・後ろに2行以上（＋「以上」）が残るときだけ、段落の途中で分ける
+            let n = 0;
+            let used = 0;
+            while (n < b.rows.length && used + b.rows[n].h <= avail) { used += b.rows[n].h; n += 1; }
+            if (n >= 2 && b.rows.length - n >= 2 + (b.tail || 0)) {
+              b.rows.slice(0, n).forEach(put);
+              newPage();
+              b.rows.slice(n).forEach(put);
+              return;
+            }
+          }
+          newPage();
+          b.rows.forEach(put);
+        });
+        return { out, count: pg + 1 };
+      }
+
+      // 2枚になるとき、行の間を最大15%まで詰めて1枚に収まるなら、そうする
+      let plan = paginate(layout(1));
+      if (plan.count === 2) plan = [0.95, 0.9, 0.85].map((k) => paginate(layout(k))).find((p) => p.count === 1) || plan;
+
+      const pages = Array.from({ length: plan.count }, () => pdf.addPage([A4.w, A4.h]));
+      plan.out.forEach(({ page, y, draw }) => draw(pages[page], y));
 
       // ページが2枚以上になった文書には「1 / 2」と入れる（書いたページ数を返す）
       if (pages.length > 1) {
