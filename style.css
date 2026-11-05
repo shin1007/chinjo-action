@@ -229,7 +229,7 @@ summary { cursor: pointer; font-weight: 700; }
   nav a { margin: 0; font-size: 0.88rem; }
   .header-inner > .theme-nav { gap: 4px; padding-top: 6px; }
   .header-inner > .theme-nav a { padding: 1px 10px; font-size: 0.8rem; }
-  .page-nav { flex-wrap: nowrap; overflow-x: auto; gap: 14px; padding-top: 6px; }
+  .page-nav { gap: 2px 12px; padding-top: 6px; }
   .page-nav a { font-size: 0.85rem; }
   .hero { padding: 48px 0; }
   .section { padding: 48px 0; }
