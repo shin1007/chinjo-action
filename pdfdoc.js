@@ -302,7 +302,7 @@ window.PdfDoc = (() => {
     const items = rows.map((r) => ({
       zip: r.zip,
       address: r.address,
-      to: opts.to === 'chair' ? `${r.council}議長　様` : `${r.council}事務局　御中`,
+      to: opts.to === 'chair' ? `${r.council}議長　　　　　様` : `${r.council}事務局　御中`,
       zaichu: opts.zaichu,
       from: opts.from && from ? `差出人：${from}` : '',
     }));
