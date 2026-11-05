@@ -26,7 +26,11 @@ alter table public.report_guard enable row level security;
 create or replace function public.check_report() returns trigger
 language plpgsql security definer set search_path = public as $$
 declare
-  ip text := split_part(coalesce(current_setting('request.headers', true)::json ->> 'x-forwarded-for', ''), ',', 1);
+  -- x-forwarded-for の先頭は送る側が書き換えられるので使わない。
+  -- Supabase の前にいる Cloudflare が付ける cf-connecting-ip を使い、なければ x-forwarded-for の末尾（いちばん近い中継が付けた値）を使う
+  hdrs json := coalesce(current_setting('request.headers', true), '{}')::json;
+  ip text := coalesce(nullif(trim(hdrs ->> 'cf-connecting-ip'), ''),
+    trim(reverse(split_part(reverse(coalesce(hdrs ->> 'x-forwarded-for', '')), ',', 1))));
   base text := ip || '|' || current_date;
   hash text := encode(sha256(convert_to(base || '|' || new.pref || '/' || new.council, 'utf8')), 'hex');
   n int;
@@ -50,9 +54,14 @@ create trigger check_report before insert on public.reports for each row execute
 alter table public.reports enable row level security;
 drop policy if exists "anyone can report" on public.reports;
 create policy "anyone can report" on public.reports for insert to anon with check (true);
+-- 書き込めるのは都道府県と議会名だけ（created_at を偽って「最後の報告日」を変えられないように）
+-- Supabase は public のテーブルに anon・authenticated の全権限を最初から付けるので、使うものだけを残す
+revoke all on public.reports, public.councils, public.report_guard from anon, authenticated;
+grant insert (pref, council) on public.reports to anon;
 
 -- 読めるのは議会ごとの件数だけ
 create or replace view public.council_counts as
   select pref, council, count(*)::int as n, max(created_at)::date as last
   from public.reports group by pref, council;
+revoke all on public.council_counts from anon, authenticated;
 grant select on public.council_counts to anon;

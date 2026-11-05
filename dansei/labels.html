@@ -11,6 +11,10 @@
 <meta property="og:description" content="陳情書を郵送するための議会あて宛名ラベルを印刷できます。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://kenri-chinjo.vercel.app/dansei/labels">
+<meta property="og:image" content="https://kenri-chinjo.vercel.app/themes/dansei/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="男性の権利を守る陳情アクション ― あなたの一通の陳情が、制度を動かす。">
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -20,11 +24,10 @@
 <body>
 <header class="site-header">
   <div class="wrap header-inner">
-    <a href="/dansei" class="logo">男性の権利を守る<span>陳情アクション</span></a>
+    <a href="/" class="logo">陳情アクション</a>
     <nav>
       <a href="/dansei#generator">つくる</a>
       <a href="/dansei/guide">出し方</a>
-      <a href="/dansei/builder" aria-current="page">ビルダー</a>
     </nav>
     <nav class="theme-nav" aria-label="陳情のテーマ">
       <a href="/kodomo">子どもの権利</a>
@@ -37,7 +40,7 @@
 <main class="wrap labels">
   <h1>郵送用の宛名ラベル</h1>
   <p class="lead-sm">封筒に貼る宛名ラベルを、A4のラベル用紙にまとめて印刷します。宛先が多いときは複数ページになります。陳情書はA4を折らずに入れられる<b>角2封筒</b>で送るのがおすすめです（<a href="/dansei/guide#send">印象のよい送り方</a>）。</p>
-  <div class="privacy">🔒 入力した内容はサーバーには送られません。次に開いたときのために、<b>この端末のブラウザの中にだけ</b>残ります。</div>
+  <div class="privacy">🔒 入力した内容はサーバーには送られません。次に開いたときのために、<b>この端末のブラウザの中にだけ</b>残ります。共用のパソコンでは、終わったら差出人の「この端末から消す」を押してください。</div>
 
   <section class="lb-box">
     <h2>1. 差出人（あなた）</h2>
@@ -97,6 +100,7 @@
       <summary>郵送するときの送り方（図解）と切手の目安</summary>
       <div data-send-figs></div>
       <p class="hint-sm">切手は重さで決まります。A4を折らずに角2封筒へ入れるとき、紙3枚までなら<b>140円</b>、16枚までなら<b>180円</b>が目安です。境目に近いときは1つ上の料金分を貼っておけば安心です。<a href="/dansei/guide#send">送り方をくわしく見る</a></p>
+      <div data-stationery></div>
     </details>
     <div class="netprint">
       <p><b>プリンターがないときは、コンビニで印刷できます。</b>コンビニにはラベル用紙がないので、「普通紙（切って貼る）」を選んで保存し、切り取り線で切ってのりで貼ります。</p>
@@ -128,5 +132,6 @@
 <script src="/pdfdoc.js"></script>
 <script src="/labels.js"></script>
 <script src="/send-figs.js"></script>
+<script src="/shop.js"></script>
 </body>
 </html>

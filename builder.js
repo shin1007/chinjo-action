@@ -41,6 +41,8 @@
   const BLANK = '⁣';
   const escB = (s) => esc(s).replaceAll(BLANK, '<span class="blank"></span>');
   const { esc } = window.Common;
+  const T = window.TEMPLATE;
+  const fillTemplate = window.fillTemplate;
 
   // ---------- 差出人 ----------
   $$('[data-sender]').forEach((el) => {
@@ -324,20 +326,20 @@
     const national = ask.scope === 'national';
     // {宛先} は印刷時に宛先ごとに置き換えるので、ここでは残す
     const vars = { 内容: ask.title, 種類: kind };
-    const L = [`件名　${fillTemplate(national ? TEMPLATE.subjectNational : TEMPLATE.subjectLocal, vars)}`, ''];
+    const L = [`件名　${fillTemplate(national ? T.subjectNational : T.subjectLocal, vars)}`, ''];
     L.push(`【${kind}の趣旨】`);
-    L.push(`　${fillTemplate(national ? TEMPLATE.purposeNational : TEMPLATE.purposeLocal, vars)}`);
+    L.push(`　${fillTemplate(national ? T.purposeNational : T.purposeLocal, vars)}`);
     L.push('', '記', '', `一　${ask.text}`, '', `【${kind}の理由】`, ...reasons(ask, sel));
-    L.push(`　${TEMPLATE.closing}`);
-    if (national) L.push('', '【意見書の提出先（案）】', TEMPLATE.ikenshoTo);
+    L.push(`　${T.closing}`);
+    if (national) L.push('', '【意見書の提出先（案）】', T.ikenshoTo);
     L.push('', '以上');
     return L.join('\n');
   }
 
   // 首長への要望は、その自治体が自ら取り組めることに限る
   function buildMayorOne(ask, sel) {
-    const L = [`件名　${fillTemplate(TEMPLATE.mayorSubject, { 内容: ask.title })}`, ''];
-    L.push(`　${TEMPLATE.mayorPurpose}`, '', '記', '', `一　${ask.text}`);
+    const L = [`件名　${fillTemplate(T.mayorSubject, { 内容: ask.title })}`, ''];
+    L.push(`　${T.mayorPurpose}`, '', '記', '', `一　${ask.text}`);
     L.push('', '【要望の理由】', ...reasons(ask, sel), '以上');
     return L.join('\n');
   }
