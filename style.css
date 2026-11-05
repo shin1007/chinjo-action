@@ -108,6 +108,8 @@ html { scroll-padding-top: 104px; }
 .lead { max-width: 720px; margin: 0 auto 28px; }
 
 .btn { display: inline-block; padding: 12px 28px; border-radius: 999px; border: 2px solid var(--main); background: var(--surface); color: var(--main-dark); font-weight: 700; text-decoration: none; cursor: pointer; font-size: 1rem; margin: 4px; font-family: inherit; }
+/* display を決めているので、hidden を付けたボタンが見えてしまわないように */
+.btn[hidden] { display: none; }
 .btn-primary { background: var(--main); color: var(--on-main); }
 .btn-primary:hover { background: var(--main-dark); border-color: var(--main-dark); }
 .hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; }
@@ -407,3 +409,9 @@ summary { cursor: pointer; font-weight: 700; }
   .about-flow li:not(:last-child)::after { content: "▼"; right: auto; left: 50%; top: auto; bottom: -24px; transform: translateX(-50%); }
   .about-vs { grid-template-columns: 1fr; }
 }
+.wz-rewrite { border-top: 1px solid var(--line); padding: 12px 0 0; margin: 12px 0; }
+.wz-rewrite h4 { margin: 0 0 4px; }
+.wz-rewrite textarea { width: 100%; margin-top: 6px; }
+.wz-rw-steps { margin: 8px 0; padding-left: 1.4em; display: grid; gap: 12px; }
+.wz-rw-prompt { margin-top: 4px; }
+.wz-rw-plans { border-left: 3px solid var(--accent-line); padding: 4px 10px; margin: 8px 0; font-size: 0.9rem; }
