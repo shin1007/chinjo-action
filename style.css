@@ -1,7 +1,7 @@
 :root {
   color-scheme: light dark;
   --main: #e8743b;
-  --main-dark: #c95a24;
+  --main-dark: #b04a17;
   --on-main: #fff;       /* --main の上に載せる文字 */
   --ink: #2b2b2b;
   --muted: #666;
@@ -79,17 +79,20 @@ a { color: var(--main-dark); }
 .header-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; padding: 10px 20px; }
 .logo { font-weight: 700; text-decoration: none; color: var(--ink); }
 nav a { margin-left: 16px; text-decoration: none; color: var(--ink); font-size: 0.95rem; }
-nav a:hover, nav a[aria-current] { color: var(--main); }
+nav a:hover, nav a[aria-current] { color: var(--main-dark); }
 nav a[aria-current] { font-weight: 700; }
 /* テーマのドロップダウン（1段目の左上）と、そのテーマのページの中の案内（2段目） */
 .theme-menu + .logo { margin-right: auto; }
 /* よくある質問などの details の枠と余白を打ち消し、1段目の高さを前と同じにする */
 .theme-menu { position: relative; margin: 0; padding: 0; border: 0; border-radius: 0; background: none; max-width: none; line-height: 1.6; }
-.theme-menu > summary { cursor: pointer; list-style: none; padding: 2px 12px; border: 1px solid var(--main); border-radius: 999px; background: var(--main); color: var(--on-main); font-size: 0.85rem; font-weight: 700; }
+.theme-menu > summary { cursor: pointer; list-style: none; padding: 2px 12px; border: 1px solid var(--main-dark); border-radius: 999px; background: var(--main-dark); color: var(--on-main); font-size: 0.85rem; font-weight: 700; }
 .theme-menu > summary::-webkit-details-marker { display: none; }
 .theme-menu > summary::after { content: " ▾"; }
 .theme-menu .theme-nav { position: absolute; top: calc(100% + 4px); left: 0; display: flex; flex-direction: column; min-width: 10em; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 4px 0; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12); }
 .theme-menu .theme-nav a { margin: 0; padding: 6px 14px; font-size: 0.9rem; white-space: nowrap; }
+.theme-menu .theme-nav a[aria-current] { color: var(--main-dark); }
+/* 目次から飛んだ先の見出しが、上に貼りついたヘッダーに隠れないようにする */
+html { scroll-padding-top: 104px; }
 .page-nav { flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 4px 18px; border-top: 1px solid var(--line); padding-top: 8px; }
 .page-nav a { margin: 0; font-size: 0.9rem; }
 /* トップのページはテーマを選ぶ前なので、テーマを丸い札で横に並べる */
@@ -223,6 +226,7 @@ summary { cursor: pointer; font-weight: 700; }
 .advanced > summary { cursor: pointer; color: var(--main-dark); font-weight: 700; padding: 10px 0; }
 
 @media (max-width: 800px) {
+  html { scroll-padding-top: 128px; }
   .header-inner { padding: 8px 16px; row-gap: 6px; }
   .logo { flex: 1; font-size: 0.9rem; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   nav { display: flex; flex-shrink: 0; white-space: nowrap; gap: 14px; }
@@ -272,7 +276,8 @@ summary { cursor: pointer; font-weight: 700; }
 .wz-paper:focus { outline: 2px solid var(--main); outline-offset: 1px; }
 .wz-docstat { text-align: right; margin-top: 4px; }
 .wz-edited { font-style: normal; }
-@media (max-width: 800px) { .wz-paper { padding: 12px 14px; font-size: 0.95rem; } }
+@media (max-width: 800px) {
+.wz-paper { padding: 12px 14px; font-size: 0.95rem; } }
 .wz-send { border: 1px dashed var(--line); border-radius: 8px; padding: 10px 12px; margin: 8px 0; }
 .wz-qr { width: 180px; margin: 8px 0; }
 .wz-qr svg { width: 100%; height: auto; display: block; }
