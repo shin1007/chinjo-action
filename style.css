@@ -298,7 +298,9 @@ summary { cursor: pointer; font-weight: 700; }
 .send-figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 16px 0; }
 .send-figs figure { margin: 0; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
 .send-figs svg { display: block; width: 100%; max-width: 220px; margin: 0 auto 8px; font-family: serif; }
-.send-figs figcaption { font-size: 0.9rem; line-height: 1.6; }
+.send-figs figcaption { font-size: 0.9rem; line-height: 1.6; color: #222; }
+/* 図解の面は暗い表示でも白なので、文字とリンクも明るい表示の色のままにする */
+.send-figs figcaption a { color: #222; }
 .stamp-table { border-collapse: collapse; width: 100%; margin: 8px 0; background: var(--surface); }
 .stamp-table th, .stamp-table td { border: 1px solid var(--line); padding: 6px 10px; text-align: left; }
 .stamp-table th { background: var(--bg-alt); }
