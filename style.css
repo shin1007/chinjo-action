@@ -83,7 +83,8 @@ nav a:hover, nav a[aria-current] { color: var(--main); }
 nav a[aria-current] { font-weight: 700; }
 /* テーマのドロップダウン（1段目の左上）と、そのテーマのページの中の案内（2段目） */
 .theme-menu + .logo { margin-right: auto; }
-.theme-menu { position: relative; }
+/* よくある質問などの details の枠と余白を打ち消し、1段目の高さを前と同じにする */
+.theme-menu { position: relative; margin: 0; padding: 0; border: 0; border-radius: 0; background: none; max-width: none; line-height: 1.6; }
 .theme-menu > summary { cursor: pointer; list-style: none; padding: 2px 12px; border: 1px solid var(--main); border-radius: 999px; background: var(--main); color: var(--on-main); font-size: 0.85rem; font-weight: 700; }
 .theme-menu > summary::-webkit-details-marker { display: none; }
 .theme-menu > summary::after { content: " ▾"; }
