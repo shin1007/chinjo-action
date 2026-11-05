@@ -1,5 +1,5 @@
 // templates/ のページから、テーマごとのページ（kodomo/builder.html など）を作る。
-// テーマの間で名前と URL しか違わないページだけをここで作る。index.html と guide.html は中身がテーマごとに違うので、直接直す。
+// テーマの間で名前と URL しか違わないページだけをここで作る。index.html・guide.html・refs.html は中身がテーマごとに違うので、直接直す。
 //   node scripts/pages.js         … 作り直して書き出す
 //   node scripts/pages.js --check … 書き出さずに、templates/ と食い違うページがあれば知らせる（npm test でも確かめる）
 const fs = require('fs');
@@ -30,8 +30,6 @@ function render(page, theme) {
   const src = read(path.join(ROOT, 'templates', `${page}.html`));
   return src.replace('{{themeNav}}', themeNav(theme.id))
     .replaceAll('{{id}}', theme.id)
-    // 参考資料の節は、いまは子どもの権利の出し方のページにしかない
-    .replaceAll('{{refs}}', theme.id === 'kodomo' ? '#refs' : '')
     .replaceAll('{{label}}', theme.label);
 }
 

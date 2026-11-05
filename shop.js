@@ -36,12 +36,12 @@
   if (box && window.SHOP) {
     box.innerHTML = `<div class="cards">${window.SHOP.map((it) => `
     <article class="card">
-      ${it.asin ? `<a class="shop-img" href="${link(it.q)}" target="_blank" rel="noopener sponsored"><img src="${img(it.asin)}" alt="${esc(it.title)}" loading="lazy"></a>` : ''}
+      ${it.asin ? `<a class="shop-img" href="${it.direct ? dp(it.asin) : link(it.q)}" target="_blank" rel="noopener sponsored"><img src="${img(it.asin)}" alt="${esc(it.title)}" loading="lazy"></a>` : ''}
       <p class="shop-kind">${esc(it.kind)}</p>
       <h3>${esc(it.title)}</h3>
       ${it.by ? `<p class="hint-sm">${esc(it.by)}</p>` : ''}
       <p>${esc(it.note)}</p>
-      <a class="btn btn-small" href="${link(it.q)}" target="_blank" rel="noopener sponsored">Amazonで見る</a>
+      <a class="btn btn-small" href="${it.direct ? dp(it.asin) : link(it.q)}" target="_blank" rel="noopener sponsored">Amazonで見る</a>
     </article>`).join('')}</div>
     <p class="hint-sm">${NOTE}紹介した本の主張が、このサイトの陳情の内容と全て同じとは限りません。</p>`;
   }
