@@ -47,18 +47,7 @@
       <a href="#generator" class="btn btn-primary">陳情書をつくる</a>
       <a href="#faq" class="btn">よくある質問</a>
     </div>
-    <div class="cost">
-      <p class="cost-title">陳情1通あたりの費用の目安</p>
-      <table class="cost-table">
-        <tr><th></th><th>郵送</th><th>持参</th></tr>
-        <tr><td>印刷（A4・3枚、コンビニの白黒）</td><td>約30円</td><td>約30円</td></tr>
-        <tr><td>クリアファイル</td><td>約11円</td><td>約11円</td></tr>
-        <tr><td>封筒（角2）</td><td>約10円</td><td>－</td></tr>
-        <tr><td>切手（定形外・50gまで）</td><td>140円</td><td>－</td></tr>
-        <tr class="cost-sum"><td>合計</td><td><b>約190円</b></td><td><b>約40円</b>＋交通費</td></tr>
-      </table>
-      <p class="hint-sm">家庭のプリンターなら印刷は1枚数円です。クリアファイル・封筒は100円ショップのまとめ買いの値段、切手は2024年10月からの料金です。紙が4枚以上になると切手が上がります（<a href="/nihonjin/guide#stamp">切手の目安</a>）。議会によっては郵送だと審査されず配付だけになるので、近くなら持参がおすすめです（<a href="/nihonjin/guide#mail">郵送の注意点</a>）。</p>
-    </div>
+    <p class="cost-line">1通あたりの費用は、郵送で<b>約190円</b>、持参なら<b>約40円</b>＋交通費が目安です（<a href="#cost">内訳</a>）。</p>
   </div>
 </section>
 
@@ -142,11 +131,11 @@
         <p id="wzSummary" class="wz-summary"></p>
 
         <h4 class="wz-sub">文面を確かめる</h4>
-        <p class="hint-sm">内容ごとに下の欄で自由に直せます。直した文面はこの端末のブラウザの中だけに残ります。サーバーには送られません。</p>
+        <p class="hint-sm">内容ごとに下の欄で自由に直せます。直した文面はこの端末のブラウザの中だけに残ります。</p>
         <div id="wzDocs" class="wz-docs"></div>
 
         <h4 class="wz-sub">あなたの住所・氏名を入れる（任意）</h4>
-        <p class="hint-sm">住所は陳情書に、氏名は鏡文（送付状）と封筒の差出人に入ります。<b>陳情書の氏名は、印刷してから手書きで署名</b>します。空欄のままなら下線になり、手書きで記入できます。🔒 サーバーには送られず、次に開いたときのために<b>この端末のブラウザの中にだけ</b>残ります。共用のパソコンでは、終わったら「この端末から消す」を押してください。</p>
+        <p class="hint-sm">住所は陳情書に、氏名は鏡文（送付状）と封筒の差出人に入ります。<b>陳情書の氏名は、印刷してから手書きで署名</b>します。空欄のままなら下線になり、手書きで記入できます。次に開いたときのために<b>この端末のブラウザの中にだけ</b>残ります。共用のパソコンでは、終わったら「この端末から消す」を押してください。</p>
         <div id="wzSender" class="sender-form">
           <label>郵便番号<input data-sender="zip" inputmode="numeric" autocomplete="postal-code" placeholder="例：123-4567"></label>
           <label class="wide">住所<input data-sender="address" autocomplete="street-address" placeholder="例：東京都○○市△△1-2-3"></label>
@@ -164,12 +153,6 @@
               <button type="button" id="wzPdf" class="btn btn-primary">PDFで保存する</button>
               <button type="button" id="wzShare" class="btn" hidden>アプリに送る（ネットプリントなど）</button>
             </div>
-            <div id="wzPostage" class="postage" hidden></div>
-            <details class="send-howto">
-              <summary>郵送するときの送り方（図解）と切手の目安</summary>
-              <div data-send-figs></div>
-              <p class="hint-sm">切手は重さで決まります。A4を折らずに角2封筒へ入れるとき、紙3枚までなら<b>140円</b>、16枚までなら<b>180円</b>が目安です。境目に近いときは1つ上の料金分を貼っておけば安心です。<a href="/nihonjin/guide#send">送り方をくわしく見る</a></p>
-            </details>
             <p class="hint-sm">陳情書・鏡文・宛名が、そのまま提出できる体裁の1つのPDFになります。家のプリンターなら、保存したPDFを開いて<b>A4・倍率100%</b>で印刷します。</p>
             <div class="netprint">
               <p><b>プリンターがなければ、コンビニで印刷できます。</b>保存したPDFをサイトかアプリで登録し、お店のマルチコピー機で表示される番号を入れて印刷します。</p>
@@ -185,7 +168,13 @@
           </li>
           <li>
             <h4>③ 締切までに議会事務局へ出す</h4>
-            <p class="hint-sm">出し方は議会ごとに下に書いてあります。<b>電子申請</b>ができる議会はそれがいちばん手軽です。郵送で出せる議会もありますが、郵送だと審査されず配布だけになる議会もあるので、遠い議会には先に電話で「郵送でも審査されますか」と聞くのが確実です（<a href="/nihonjin/guide#mail">詳しく</a>）。締切は定例会の1〜2週間前が多いです。郵送するときは<a href="/nihonjin/guide#send">印象のよい送り方</a>も見てください。</p>
+            <p class="hint-sm">出し方は議会ごとに下に書いてあります。<b>電子申請</b>ができる議会はそれがいちばん手軽です。郵送で出せる議会もありますが、郵送だと審査されず配布だけになる議会もあるので、遠い議会には先に電話で「郵送でも審査されますか」と聞くのが確実です（<a href="/nihonjin/guide#mail">詳しく</a>）。締切は定例会の1〜2週間前が多いです。</p>
+            <div id="wzPostage" class="postage" hidden></div>
+            <details class="send-howto">
+              <summary>郵送するときの送り方（図解）と切手の目安</summary>
+              <div data-send-figs></div>
+              <p class="hint-sm">切手は重さで決まります。A4を折らずに角2封筒へ入れるとき、紙3枚までなら<b>140円</b>、16枚までなら<b>180円</b>が目安です。境目に近いときは1つ上の料金分を貼っておけば安心です。<a href="/nihonjin/guide#send">送り方をくわしく見る</a></p>
+            </details>
             <ul id="wzOffices" class="wz-offices"></ul>
             <p><a id="wzLabels" class="btn btn-small" href="/nihonjin/labels">ラベル用紙に宛名を印刷する（角2封筒用）</a></p>
             <p class="hint-sm">住所は本庁舎のものです。案内ページは自動で見つけたもので、違うこともあります。</p>
@@ -357,6 +346,17 @@
 <section id="faq" class="section">
   <div class="wrap">
     <h2>よくある質問</h2>
+    <details id="cost"><summary>費用はいくらかかりますか？</summary>
+      <table class="cost-table">
+        <tr><th></th><th>郵送</th><th>持参</th></tr>
+        <tr><td>印刷（A4・3枚、コンビニの白黒）</td><td>約30円</td><td>約30円</td></tr>
+        <tr><td>クリアファイル</td><td>約11円</td><td>約11円</td></tr>
+        <tr><td>封筒（角2）</td><td>約10円</td><td>－</td></tr>
+        <tr><td>切手（定形外・50gまで）</td><td>140円</td><td>－</td></tr>
+        <tr class="cost-sum"><td>合計</td><td><b>約190円</b></td><td><b>約40円</b>＋交通費</td></tr>
+      </table>
+      <p class="hint-sm">家庭のプリンターなら印刷は1枚数円です。クリアファイル・封筒は100円ショップのまとめ買いの値段、切手は2024年10月からの料金です。紙が4枚以上になると切手が上がります。</p>
+    </details>
     <details><summary>陳情と請願の違いは？</summary><p>請願は紹介議員が必要で、法律（請願法・地方自治法）に基づき審査されます。陳情は紹介議員なしで誰でも提出でき、扱いは議会ごとに異なります（審査・配布のみ等）。</p></details>
     <details><summary>住んでいない自治体の議会にも出せますか？</summary><p>多くの議会で可能ですが、「市内在住者に限る」「郵送は配布のみ」など運用が異なります。事前に議会事務局へ確認してください。</p></details>
     <details><summary>外国人差別ではないのですか？</summary><p>このサイトの陳情は、外国人そのものではなく、制度・財源・ルールの公平さを問うものです。国籍や民族をおとしめる表現は使いません。そうした表現は、ヘイトスピーチ解消法の趣旨に反し、議会に受理されない理由にもなります。</p></details>

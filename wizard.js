@@ -271,17 +271,27 @@
       const text = withSender(e ? swapCouncil(e.text, e.council, first) : window.Petition.build(fd, first, [k]), sender);
       const others = state.councils.slice(1).map(label);
       return `<details class="wz-doc" ${i === 0 ? 'open' : ''}>
-        <summary><b>${i + 1}. ${esc(it.label)}</b><span>${e ? '直した文面・' : ''}${state.councils.length}通</span></summary>
+        <summary><b>${i + 1}. ${esc(it.label)}</b><span><i class="wz-edited"${e ? '' : ' hidden'}>直した文面・</i>${state.councils.length}通</span></summary>
         ${e && e.role !== state.role ? '<p class="hint-sm warn">立場を選び直す前に直した文面です。最後の一文があなたの立場に合っているか確かめてください。</p>' : ''}
         ${others.length ? `<p class="hint-sm">下は${esc(first)}あての文面です。${others.map(esc).join('・')}あてにも、同じ内容で1通ずつ作ります。ここで直すと、宛名と自治体名を差し替えてすべての議会に反映されます。</p>` : ''}
-        <textarea rows="16" data-key="${esc(k)}">${esc(text)}</textarea>
-        <div class="out-toolbar"><button type="button" class="btn btn-small" data-doc-print="${i}">この内容だけPDFで保存（${state.councils.length}通）</button>${e ? `<button type="button" class="btn btn-small" data-doc-reset="${esc(k)}">元の文面に戻す</button>` : ''}</div>
+        <textarea class="wz-paper" rows="4" spellcheck="false" data-key="${esc(k)}" aria-label="${esc(it.label)}の文面">${esc(text)}</textarea>
+        <p class="wz-docstat hint-sm" aria-live="polite"></p>
+        <div class="out-toolbar"><button type="button" class="btn btn-small" data-doc-view="${i}">仕上がりを見る</button><button type="button" class="btn btn-small" data-doc-print="${i}">この内容だけPDFで保存（${state.councils.length}通）</button><button type="button" class="btn btn-small" data-doc-reset="${esc(k)}"${e ? '' : ' hidden'}>元の文面に戻す</button></div>
       </details>`;
     }).join('');
+    areas().forEach((ta) => { fit(ta); docStat(ta); });
     $('wzLabels').href = `labels?c=${encodeURIComponent(state.councils.join(','))}`;
     $('wzSummary').textContent = `${state.councils.length}つの議会 × ${state.items.length}つの内容 ＝ 陳情書 ${state.councils.length * state.items.length}通`;
     renderOffices();
   }
+
+  // 文面の欄は中身の長さに合わせて伸ばし、欄の中でスクロールしなくても全体を読めるようにする
+  const fit = (ta) => { ta.style.height = 'auto'; ta.style.height = `${ta.scrollHeight + 2}px`; };
+  // 文字数と、直した文面が保存されたかを欄の下に出す
+  const docStat = (ta, saved) => {
+    const n = ta.value.replace(/\s/g, '').length;
+    ta.closest('.wz-doc').querySelector('.wz-docstat').textContent = `${n.toLocaleString()}文字${saved ? '　✓ この端末に保存しました' : ''}`;
+  };
 
   // 内容ごとの文面を、議会の数だけ広げる
   // 直していない内容は議会ごとに組み立て直す（「東京都」のような名前を本文ごと置き換えないように）
@@ -341,15 +351,45 @@
       btn.textContent = text;
     }
   }
+  // 1通目の議会あての1通だけをPDFにして、新しいタブで開く（鏡文・宛名はつけない）
+  // 開くのを待つとポップアップとして止められるので、タブは先に開いておく
+  async function viewPdf(btn, ta) {
+    const win = window.open('', '_blank');
+    const text = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'PDFを作っています…';
+    try {
+      const doc = await window.PdfDoc.create();
+      doc.addDocument(docFor(ta, state.councils[0]));
+      const url = URL.createObjectURL(new Blob([await doc.bytes()], { type: 'application/pdf' }));
+      if (win) win.location.href = url;
+      else window.location.href = url;
+    } catch (e) {
+      if (win) win.close();
+      flash(`PDFを作れませんでした（${e.message}）。通信のよい所でもう一度試してください。`, 5000);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = text;
+    }
+  }
   $('wzDocs').addEventListener('input', (e) => {
     const k = e.target.dataset.key;
     if (!k) return;
     edits[k] = { text: e.target.value, council: nameOf(state.councils[0]), role: state.role };
     saveEdits();
+    fit(e.target);
+    docStat(e.target, true);
+    const d = e.target.closest('.wz-doc');
+    d.querySelector('.wz-edited').hidden = false;
+    d.querySelector('[data-doc-reset]').hidden = false;
   });
+  // 閉じていた欄は高さを測れないので、開いたときに合わせ直す
+  $('wzDocs').addEventListener('toggle', (e) => { if (e.target.open) fit(e.target.querySelector('textarea')); }, true);
   $('wzDocs').addEventListener('click', (e) => {
     const i = e.target.dataset.docPrint;
     if (i !== undefined) savePdf(e.target, expand(areas()[i]));
+    const v = e.target.dataset.docView;
+    if (v !== undefined) viewPdf(e.target, areas()[v]);
     const k = e.target.dataset.docReset;
     if (k !== undefined) {
       delete edits[k];

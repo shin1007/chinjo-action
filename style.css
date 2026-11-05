@@ -257,6 +257,12 @@ summary { cursor: pointer; font-weight: 700; }
 .wz-doc summary { cursor: pointer; display: flex; justify-content: space-between; gap: 8px; }
 .wz-doc summary span { color: var(--muted); font-size: 0.85rem; white-space: nowrap; }
 .wz-doc textarea { width: 100%; margin-top: 8px; }
+/* 文面の欄は、印刷する紙に近い見た目にする（明朝体・ゆったりした行間・中身に合わせた高さ） */
+.wz-paper { display: block; box-sizing: border-box; min-height: 12em; resize: vertical; overflow: hidden; padding: 20px 24px; border: 1px solid var(--field-line); border-radius: 4px; background: var(--paper); color: #222; font-family: "BIZ UDMincho", "Yu Mincho", "Hiragino Mincho ProN", serif; font-size: 1rem; line-height: 1.9; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12); }
+.wz-paper:focus { outline: 2px solid var(--main); outline-offset: 1px; }
+.wz-docstat { text-align: right; margin-top: 4px; }
+.wz-edited { font-style: normal; }
+@media (max-width: 800px) { .wz-paper { padding: 12px 14px; font-size: 0.95rem; } }
 .wz-send { border: 1px dashed var(--line); border-radius: 8px; padding: 10px 12px; margin: 8px 0; }
 .wz-qr { width: 180px; margin: 8px 0; }
 .wz-qr svg { width: 100%; height: auto; display: block; }
@@ -291,8 +297,8 @@ summary { cursor: pointer; font-weight: 700; }
 .wz-offices .wz-access { color: inherit; }
 
 /* 陳情1通あたりの費用 */
-.cost { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px 24px; margin: 28px auto 0; max-width: 560px; text-align: left; color: var(--ink); }
-.cost-title { font-weight: 700; margin: 0 0 8px; }
+.cost-line { margin: 20px 0 0; font-size: .95rem; }
+#cost .cost-table { max-width: 560px; margin: 8px 0; }
 .cost-table { width: 100%; border-collapse: collapse; font-size: .95em; }
 .cost-table th, .cost-table td { padding: 4px 6px; border-bottom: 1px solid var(--line); }
 .cost-table td + td, .cost-table th + th { text-align: right; white-space: nowrap; }
