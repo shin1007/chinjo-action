@@ -2,7 +2,7 @@
 // AMAZON_TAG にアソシエイトのトラッキングID（例：xxxx-22）を入れると、全てのリンクに付きます。
 // 商品は ASIN を作らず、Amazon の検索リンク（q の言葉で検索）にしているので、品切れや版の違いでリンク切れになりません。
 // 画像は、商品に asin（Amazon の商品ページの URL の /dp/ の後ろの10文字）を書いたときだけ、Amazon の画像を出します。
-// COMMON は、陳情書を作って出すのに使う文房具で、全てのテーマの商品の後ろに並べます。
+// COMMON は、陳情書を作って出すのに使う文房具で、提出・郵送の案内のそば（[data-stationery]）に並べます。
 (() => {
   const COMMON = [
     { kind: '文房具', title: '透けない封筒 角形2号', by: 'ハート', q: 'ハート 透けない封筒 角2',
@@ -13,14 +13,20 @@
       note: '署名や宛名に。にじまず、くっきり書けます。' },
     { kind: '文房具', title: 'クリアファイル A4', by: 'キングジム', q: 'キングジム クリアーファイル A4',
       note: '議会事務局に持参するとき、陳情書を折らずに運べます。' },
+    { kind: '文房具', title: 'ラベル用紙 A4 8面', by: 'エーワン', q: 'エーワン ラベルシール A4 8面 105×74.25',
+      note: '宛名ラベルの印刷に。このサイトの「A4 8面」にそのまま合います。' },
+    { kind: '文房具', title: 'テープのり', by: 'トンボ ピットエアー', q: 'トンボ テープのり ピットエアー',
+      note: '普通紙に印刷した宛名を封筒に貼るときや、封をするときに。乾かす手間がありません。' },
   ];
   const AMAZON_TAG = '7nrr25mb-22';
-  const box = document.querySelector('[data-shop]');
-  if (!box || !window.SHOP) return;
-  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const { esc } = window.Common;
   const link = (q) => 'https://www.amazon.co.jp/s?k=' + encodeURIComponent(q) + (AMAZON_TAG ? '&tag=' + encodeURIComponent(AMAZON_TAG) : '');
-  const img = (asin) => 'https://ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=' + encodeURIComponent(asin) + '&Format=_SL250_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1' + (AMAZON_TAG ? '&tag=' + encodeURIComponent(AMAZON_TAG) : '');
-  box.innerHTML = `<div class="cards">${[...window.SHOP, ...COMMON].map((it) => `
+  const img = (asin) => 'https://images-na.ssl-images-amazon.com/images/P/' + encodeURIComponent(asin) + '.09.MZZZZZZZ.jpg';
+  const NOTE = '※ このサイトは Amazon アソシエイト・プログラムに参加しています。リンクから購入されると、サイトの運営者に紹介料が入ります（広告）。';
+
+  const box = document.querySelector('[data-shop]');
+  if (box && window.SHOP) {
+    box.innerHTML = `<div class="cards">${window.SHOP.map((it) => `
     <article class="card">
       ${it.asin ? `<a class="shop-img" href="${link(it.q)}" target="_blank" rel="noopener sponsored"><img src="${img(it.asin)}" alt="${esc(it.title)}" loading="lazy"></a>` : ''}
       <p class="shop-kind">${esc(it.kind)}</p>
@@ -29,5 +35,15 @@
       <p>${esc(it.note)}</p>
       <a class="btn btn-small" href="${link(it.q)}" target="_blank" rel="noopener sponsored">Amazonで見る</a>
     </article>`).join('')}</div>
-    <p class="hint-sm">※ このサイトは Amazon アソシエイト・プログラムに参加しています。リンクから購入されると、サイトの運営者に紹介料が入ります（広告）。紹介した本の主張が、このサイトの陳情の内容と全て同じとは限りません。</p>`;
+    <p class="hint-sm">${NOTE}紹介した本の主張が、このサイトの陳情の内容と全て同じとは限りません。</p>`;
+  }
+
+  // 提出・郵送の案内のそばに、文房具を短い一覧で出す
+  document.querySelectorAll('[data-stationery]').forEach((el) => {
+    el.innerHTML = `<p class="stationery-head">あわせて買いそろえるもの</p>
+    <ul class="stationery">${COMMON.map((it) => `
+      <li><a href="${link(it.q)}" target="_blank" rel="noopener sponsored">${esc(it.title)}</a><span class="hint-sm">（${esc(it.by)}）${esc(it.note)}</span></li>`).join('')}
+    </ul>
+    <p class="hint-sm">${NOTE}</p>`;
+  });
 })();

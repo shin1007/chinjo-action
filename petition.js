@@ -94,6 +94,13 @@ window.Petition = (() => {
     return t;
   }
 
+  // ある議会あての文面を、別の議会あてに書き換える（宛名の「○○市議会」と、本文の「○○市」を差し替える）
+  function swapCouncil(text, from, to) {
+    if (from === to) return text;
+    const place = (c) => c.replace(/議会$/, '');
+    return text.split(from).join(to).split(place(from)).join(place(to));
+  }
+
   // 郵送で陳情書の上に重ねる鏡文（送付状）。docs はその議会に送る陳情書の文面（件名を一覧にする）
   function cover(council, docs, s) {
     const addr = [s.zip && `〒${s.zip}`, s.address].filter(Boolean).join('　') || BLANK_TEXT;
@@ -105,5 +112,5 @@ window.Petition = (() => {
     return fill(T.cover, { 日付: reiwaToday(), 宛先: council, 差出人: from.join('\n'), 書類: list, 通数: String(docs.length) });
   }
 
-  return { build, buildPrompt, withSender, cover, selectedKeys, ITEMS, MANY, SEP };
+  return { build, buildPrompt, withSender, swapCouncil, cover, selectedKeys, ITEMS, MANY, SEP };
 })();

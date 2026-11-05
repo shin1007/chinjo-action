@@ -3,6 +3,11 @@
   "private": true,
   "description": "陳情書作成サイト（ビルド不要の静的サイト）",
   "scripts": {
-    "test": "node --test test/*.test.js"
+    "test": "node --test test/*.test.js",
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "eslint": "^9.39.5",
+    "globals": "^15.15.0"
   }
 }

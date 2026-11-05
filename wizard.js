@@ -256,9 +256,7 @@
   let edits = {};
   try { edits = JSON.parse(localStorage.getItem(EDITS_KEY)) || {}; } catch { edits = {}; }
   const saveEdits = () => { try { localStorage.setItem(EDITS_KEY, JSON.stringify(edits)); } catch { /* 保存できない環境では、この画面の間だけ残す */ } };
-  const placeOf = (c) => c.replace(/議会$/, '');
-  const swapCouncil = (text, from, to) => (from === to ? text
-    : text.split(from).join(to).split(placeOf(from)).join(placeOf(to)));
+  const { swapCouncil } = window.Petition;
   const forCouncil = (text, c) => swapCouncil(text, nameOf(state.councils[0]), nameOf(c));
 
   function build() {
