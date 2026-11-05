@@ -288,6 +288,8 @@ summary { cursor: pointer; font-weight: 700; }
 .sender-form .wide { grid-column: 1 / -1; }
 .sender-form input { padding: 8px; border: 1px solid var(--line); border-radius: 6px; font: inherit; }
 .sender-form .btn { justify-self: start; }
+.print-picks .check { display: block; }
+.print-picks .hint-sm.warn { margin: 0 0 8px 24px; }
 .pdf-actions { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
 .netprint { background: var(--bg-alt); border-radius: 10px; padding: 4px 16px 8px; margin-top: 12px; }
 .netprint-links { display: flex; flex-wrap: wrap; gap: 4px 20px; padding-left: 1.2em; margin: 6px 0; }

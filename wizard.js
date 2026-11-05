@@ -274,7 +274,7 @@
         ${others.length ? `<p class="hint-sm">下は${esc(first)}あての文面です。${others.map(esc).join('・')}あてにも、同じ内容で1通ずつ作ります。ここで直すと、宛名と自治体名を差し替えてすべての議会に反映されます。</p>` : ''}
         <textarea class="wz-paper" rows="4" spellcheck="false" data-key="${esc(k)}" aria-label="${esc(it.label)}の文面">${esc(text)}</textarea>
         <p class="wz-docstat hint-sm" aria-live="polite"></p>
-        <div class="out-toolbar"><button type="button" class="btn btn-small" data-doc-view="${i}">仕上がりを見る</button><button type="button" class="btn btn-small" data-doc-print="${i}">この内容だけPDFで保存（${state.councils.length}通）</button><button type="button" class="btn btn-small" data-doc-reset="${esc(k)}"${e ? '' : ' hidden'}>元の文面に戻す</button></div>
+        <div class="out-toolbar"><button type="button" class="btn btn-small" data-doc-view="${i}">仕上がりを見る</button><button type="button" class="btn btn-small" data-doc-reset="${esc(k)}"${e ? '' : ' hidden'}>元の文面に戻す</button></div>
       </details>`;
     }).join('');
     areas().forEach((ta) => { fit(ta); docStat(ta); });
@@ -297,8 +297,11 @@
   const docFor = (ta, c) => withSender(edits[ta.dataset.key] ? forCouncil(ta.value, c)
     : window.Petition.build(formData(), nameOf(c), [ta.dataset.key]), sender).trim();
   // 印刷するときは、議会ごとに鏡文（送付状）を先頭に重ねる（郵送で出すとき用。持参なら外せる）
-  const withCover = (c, docs) => ($('wzCover').checked ? [window.Petition.cover(nameOf(c), docs, sender), ...docs] : docs);
-  const expand = (ta) => state.councils.map((c) => ({ c, texts: withCover(c, [docFor(ta, c)]) }));
+  // 陳情書本体を外すと、鏡文だけ・宛名だけも印刷できる
+  const withCover = (c, docs) => [
+    ...($('wzCover').checked ? [window.Petition.cover(nameOf(c), docs, sender)] : []),
+    ...($('wzBody').checked ? docs : []),
+  ];
   const allDocs = () => state.councils.flatMap((c) => areas().map((ta) => docFor(ta, c)));
   // 議会ごとに、封筒に入れる文書（鏡文と陳情書）をまとめる
   const envelopes = () => state.councils.map((c) => ({ c, texts: withCover(c, areas().map((ta) => docFor(ta, c))) }));
@@ -314,7 +317,7 @@
         const [pref, key] = officeKeys[c] || [];
         return { council: nameOf(c), ...window.Places.office(pref, key) };
       });
-      doc.addLabels(window.PdfDoc.SHEETS.plain, window.PdfDoc.labelItems(rows, sender, { zaichu: true, from: true, back: true }));
+      doc.addLabels(window.PdfDoc.SHEETS.plain, window.PdfDoc.labelItems(rows, sender, { to: 'chair', zaichu: true, from: true, back: true }));
     }
     return { bytes: await doc.bytes(), sheets };
   }
@@ -384,8 +387,6 @@
   // 閉じていた欄は高さを測れないので、開いたときに合わせ直す
   $('wzDocs').addEventListener('toggle', (e) => { if (e.target.open) fit(e.target.querySelector('textarea')); }, true);
   $('wzDocs').addEventListener('click', (e) => {
-    const i = e.target.dataset.docPrint;
-    if (i !== undefined) savePdf(e.target, expand(areas()[i]));
     const v = e.target.dataset.docView;
     if (v !== undefined) viewPdf(e.target, areas()[v]);
     const k = e.target.dataset.docReset;
@@ -506,9 +507,9 @@
     }).join('');
   }
 
-  $('wzPdf').addEventListener('click', (e) => savePdf(e.currentTarget, envelopes(), { all: true }));
-  $('wzShare').hidden = !window.PdfDoc.canShareFiles();
-  $('wzShare').addEventListener('click', (e) => savePdf(e.currentTarget, envelopes(), { share: true, all: true }));
+  // 印刷するものを1つも選んでいなければ、PDF を作らずに知らせる
+  const picked = () => ['wzBody', 'wzCover', 'wzWithLabels'].some((id) => $(id).checked) || (flash('印刷するものを選んでください'), false);
+  $('wzPdf').addEventListener('click', (e) => picked() && savePdf(e.currentTarget, envelopes(), { all: true }));
 
   // 差出人（あなた）の住所・氏名。入れるとすぐ、下の文面の住所・氏名の行に入る
   const sender = window.Common.bindSender($('wzSender'), () => {

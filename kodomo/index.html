@@ -173,14 +173,19 @@
 
         <ol class="wz-flow">
           <li>
-            <h4>① PDFで保存して、印刷する</h4>
-            <label class="check"><input type="checkbox" id="wzCover" checked> 郵送用に、議会ごとの鏡文（送付状）を1枚目につける</label>
-            <label class="check"><input type="checkbox" id="wzWithLabels" checked> 封筒（角2）の表に貼る宛名と、裏に貼る差出人を、最後のページにつける（普通紙に印刷して切って貼る）</label>
-            <div class="pdf-actions">
-              <button type="button" id="wzPdf" class="btn btn-primary">PDFで保存する</button>
-              <button type="button" id="wzShare" class="btn" hidden>アプリに送る（ネットプリントなど）</button>
+            <h4>① 印刷する</h4>
+            <p class="hint-sm">印刷するものを選んでください。選んだものが1つのPDFになります。</p>
+            <div class="print-picks">
+              <label class="check"><input type="checkbox" id="wzBody" checked> 陳情書本体</label>
+              <p class="hint-sm warn">印刷したら、陳情書の氏名欄に<b>手書きで署名し、押印</b>してください。</p>
+              <label class="check"><input type="checkbox" id="wzCover" checked> 各自治体への鏡文（送付状。郵送するときに1枚目につける）</label>
+              <label class="check"><input type="checkbox" id="wzWithLabels" checked> 宛名・差出人用紙（封筒の表と裏に、切って貼る）</label>
+              <p class="hint-sm warn">宛名の「議長　　様」のあいだに、<b>議長の氏名を手書きで</b>書き入れてください。ラベル用紙に印刷するときは<a id="wzLabels" href="/kodomo/labels">宛名ラベルのページ</a>を使います。</p>
             </div>
-            <p class="hint-sm">陳情書・鏡文・宛名が、そのまま提出できる体裁の1つのPDFになります。家のプリンターなら、保存したPDFを開いて<b>A4・倍率100%</b>で印刷します。</p>
+            <div class="pdf-actions">
+              <button type="button" id="wzPdf" class="btn btn-primary">印刷用のPDFを保存する</button>
+            </div>
+            <p class="hint-sm">家のプリンターなら、保存したPDFを開いて<b>A4・倍率100%</b>で印刷します。</p>
             <div class="netprint">
               <p><b>プリンターがなければ、コンビニで印刷できます。</b>保存したPDFをサイトかアプリで登録し、お店のマルチコピー機で表示される番号を入れて印刷します。</p>
               <ul class="netprint-links">
@@ -204,7 +209,6 @@
               <div data-stationery></div>
             </details>
             <ul id="wzOffices" class="wz-offices"></ul>
-            <p><a id="wzLabels" class="btn btn-small" href="/kodomo/labels">ラベル用紙に宛名を印刷する（角2封筒用）</a></p>
             <p class="hint-sm">住所は本庁舎のものです。案内ページは自動で見つけたもので、違うこともあります。</p>
           </li>
         </ol>
