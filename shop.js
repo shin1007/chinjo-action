@@ -2,7 +2,7 @@
 // AMAZON_TAG にアソシエイトのトラッキングID（例：xxxx-22）を入れると、全てのリンクに付きます。
 // 商品は ASIN を作らず、Amazon の検索リンク（q の言葉で検索）にしているので、品切れや版の違いでリンク切れになりません。
 (() => {
-  const AMAZON_TAG = '';
+  const AMAZON_TAG = '7nrr25mb-22';
   const box = document.querySelector('[data-shop]');
   if (!box || !window.SHOP) return;
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
