@@ -16,6 +16,8 @@
       note: '議会事務局に持参するとき、陳情書を折らずに運べます。' },
     { title: 'ラベル用紙 A4 8面 余白なし 22シート', by: 'エレコム EDT-ECNL8S22（105×74.25mm）', asin: 'B0DM18K2W7',
       note: '宛名ラベルのページの「A4 8面（余白なし）」にそのまま合う大きさです。' },
+    { title: 'ホッチキス', by: 'マックス バイモ11 HD-11SFLK（40枚とじ）', asin: 'B01AOZSI7M',
+      note: '陳情書を1件ずつ左上で留めるときに。軽い力で留められ、ページの多い陳情書もとじられます。' },
     { title: 'テープのり', by: 'コクヨ ドットライナー（本体と詰め替え）', asin: 'B0FR88W4TR',
       note: '普通紙に印刷した宛名を封筒に貼るときに。乾かす手間がなく、紙が波打ちません。' },
     { title: 'はさみ', by: 'プラス フィットカットカーブ', asin: 'B0079WLDLW',
@@ -48,7 +50,7 @@
 
   // 提出・郵送の案内のそばに、文房具を短い一覧で出す
   document.querySelectorAll('[data-stationery]').forEach((el) => {
-    el.innerHTML = `<p class="stationery-head">あわせて買いそろえるもの</p>
+    el.innerHTML = `<p class="stationery-head">おすすめ文具</p>
     <ul class="stationery">${COMMON.map((it) => `
       <li><a href="${dp(it.asin)}" target="_blank" rel="noopener sponsored">${esc(it.title)}</a><span class="hint-sm">（${esc(it.by)}）${esc(it.note)}</span></li>`).join('')}
     </ul>
