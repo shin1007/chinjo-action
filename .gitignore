@@ -7,3 +7,4 @@ Thumbs.db
 .env*
 supabase/.temp/
 scripts/.geocode-cache.json
+scripts/.opinion-cache.json

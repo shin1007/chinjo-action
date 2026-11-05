@@ -117,3 +117,52 @@ for (const theme of ['dansei', 'nihonjin', 'shiho']) {
     }
   });
 }
+
+test('AIへの書き直しの指示文には、趣旨と理由だけが入り、住所・氏名・電話は入らない', () => {
+  const k = w.ASKS.find((a) => a.scope === 'local').id;
+  const t = w.Petition.build(form('local', [k], { name: '山田太郎', address: '横浜市中区', tel: '090-1111-2222' }), '横浜市議会', [k]);
+  const p = w.Petition.buildRewritePrompt(t, '横浜市議会', { local: '市の窓口で案内が少ない' });
+  assert.ok(p.includes(w.Petition.sections(t).reasons));
+  assert.match(p, /市の窓口で案内が少ない/);
+  assert.doesNotMatch(p, /山田太郎|中区|090-1111/);
+});
+
+test('AIの答えで趣旨と理由だけを入れ替え、書式と求める事項はそのまま残す', () => {
+  const k = w.ASKS.find((a) => a.scope === 'national').id;
+  const t = w.Petition.build(form('ikensho', [k]), '横浜市議会', [k]);
+  const answer = '```\n【陳情の趣旨】\n　新しい趣旨です。\n\n【陳情の理由】\n1．見出し\n　新しい理由です。\n```';
+  const out = w.Petition.applyRewrite(t, answer);
+  assert.match(out, /【陳情の趣旨】\n　新しい趣旨です。\n\n記\n/);
+  assert.match(out, /【陳情の理由】\n1．見出し\n　新しい理由です。\n\n【意見書の提出先（案）】/);
+  assert.strictEqual(out.split('\n記\n')[1].split('【陳情の理由】')[0], t.split('\n記\n')[1].split('【陳情の理由】')[0]);
+  assert.match(out, /件名　/);
+  assert.match(out, /以上$/);
+});
+
+test('AIの答えに目印がなければ入れ替えない', () => {
+  const k = w.ASKS.find((a) => a.scope === 'local').id;
+  const t = w.Petition.build(form('local', [k]), '横浜市議会', [k]);
+  assert.strictEqual(w.Petition.applyRewrite(t, '書き直しました。'), null);
+  assert.strictEqual(w.Petition.applyRewrite(t, '【陳情の趣旨】\n\n【陳情の理由】\n'), null);
+});
+
+test('書き直しの指示文に、その自治体の計画を探して結びつける頼みが入る', () => {
+  const k = w.ASKS.find((a) => a.scope === 'local').id;
+  const t = w.Petition.build(form('local', [k]), '横浜市議会', [k]);
+  const p = w.Petition.buildRewritePrompt(t, '横浜市議会');
+  assert.match(p, /横浜市の公式サイト/);
+  w.THEME.ai.plans.forEach((pl) => assert.ok(p.includes(pl), pl));
+  assert.match(p, /【参照した計画】/);
+});
+
+test('参照した計画は文面に入れず、別に取り出す', () => {
+  const k = w.ASKS.find((a) => a.scope === 'local').id;
+  const t = w.Petition.build(form('local', [k]), '横浜市議会', [k]);
+  const answer = '【陳情の趣旨】\n　趣旨です。\n【陳情の理由】\n1．見出し\n　理由です。\n【参照した計画】\n- 横浜市こども計画／https://www.city.yokohama.lg.jp/kosodate/plan.html／基本目標1';
+  const out = w.Petition.applyRewrite(t, answer);
+  assert.doesNotMatch(out, /参照した計画|city\.yokohama/);
+  const plans = w.Petition.rewritePlans(answer);
+  assert.strictEqual(plans.length, 1);
+  assert.strictEqual(plans[0].url, 'https://www.city.yokohama.lg.jp/kosodate/plan.html');
+  assert.strictEqual(w.Petition.rewritePlans('【陳情の理由】\nx\n【参照した計画】\nなし').length, 0);
+});
