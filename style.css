@@ -230,6 +230,8 @@ summary { cursor: pointer; font-weight: 700; }
 .wz-mail.jisan { background: #fdecea; color: #a52714; }
 .wz-mail.none { background: #eee; color: #444; }
 .wz-chair { display: block; color: #a52714; font-weight: 700; }
+.shop-img { display: block; margin: 0 0 8px; text-align: center; }
+.shop-img img { max-width: 100%; height: 160px; object-fit: contain; }
 .shop-kind { margin: 0 0 4px; font-size: 0.8rem; color: var(--main-dark); font-weight: 700; }
 .wz-mailok { margin: 8px 0 12px; padding: 10px 12px; border-radius: 8px; background: #e6f4ea; }
 .wz-mailok p { margin: 0 0 8px; }
