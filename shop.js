@@ -3,7 +3,7 @@
 // 本は ASIN を作らず、Amazon の検索リンク（q の言葉で検索）にしているので、品切れや版の違いでリンク切れになりません。
 // 画像は、商品に asin（Amazon の商品ページの URL の /dp/ の後ろの10文字）を書いたときだけ、Amazon の画像を出します。
 // COMMON は、陳情書を作って出すのに使う文房具で、提出・郵送の案内のそば（[data-stationery]）に並べます。
-// 文房具はおすすめを1つずつ選んでいるので、検索ではなく商品のページ（/dp/ASIN）にリンクします。
+// 文房具はおすすめを1つずつ選んでいるので、検索ではなく商品のページ（/dp/ASIN）にリンクします（asin がまだないものは q で検索）。
 (() => {
   const COMMON = [
     { title: '透けない封筒 角形2号 100枚', by: 'ハート KR4290（テープ付き）', asin: 'B0F53W8816',
@@ -26,6 +26,8 @@
       note: '宛名を定規に当ててまっすぐ切るときに。刃が勝手に出ないオートロック付きです。' },
     { title: 'カッターマット A4', by: 'オルファ 134B', asin: 'B000CEF5R2',
       note: 'カッターを使うときの下敷きに。A4 の用紙がちょうど乗る大きさです。' },
+    { title: 'USBメモリ 64GB（USB-A と USB-C の両方）', by: 'サンディスク ウルトラ デュアルドライブ Go SDDDC3-064G', asin: 'B07YYK13LF',
+      note: '陳情書のファイルをコンビニで印刷するときや、パソコンとスマホの間で移すときに。差し込み口が A と C の両方あり、国内正規品は保証付きです。' },
   ];
   const AMAZON_TAG = '7nrr25mb-22';
   const { esc } = window.Common;
@@ -34,9 +36,15 @@
   const dp = (asin) => 'https://www.amazon.co.jp/dp/' + encodeURIComponent(asin) + (AMAZON_TAG ? '?tag=' + encodeURIComponent(AMAZON_TAG) : '');
   const NOTE = '※ このサイトは Amazon アソシエイト・プログラムに参加しています。リンクから購入されると、サイトの運営者に紹介料が入ります（広告）。';
 
+  const stationery = () => `<p class="stationery-head">おすすめ文具</p>
+    <ul class="stationery">${COMMON.map((it) => `
+      <li><a href="${it.asin ? dp(it.asin) : link(it.q)}" target="_blank" rel="noopener sponsored">${esc(it.title)}</a><span class="hint-sm">（${esc(it.by)}）${esc(it.note)}</span></li>`).join('')}
+    </ul>`;
+
+  // 関連グッズの欄は、おすすめ文具を先に出し、その下にテーマの本・グッズを並べる
   const box = document.querySelector('[data-shop]');
   if (box && window.SHOP) {
-    box.innerHTML = `<div class="cards">${window.SHOP.map((it) => `
+    box.innerHTML = `${stationery()}<div class="cards">${window.SHOP.map((it) => `
     <article class="card">
       ${it.asin ? `<a class="shop-img" href="${it.direct ? dp(it.asin) : link(it.q)}" target="_blank" rel="noopener sponsored"><img src="${it.image || img(it.asin)}" alt="${esc(it.title)}" loading="lazy"></a>` : ''}
       <p class="shop-kind">${esc(it.kind)}</p>
@@ -50,10 +58,7 @@
 
   // 提出・郵送の案内のそばに、文房具を短い一覧で出す
   document.querySelectorAll('[data-stationery]').forEach((el) => {
-    el.innerHTML = `<p class="stationery-head">おすすめ文具</p>
-    <ul class="stationery">${COMMON.map((it) => `
-      <li><a href="${dp(it.asin)}" target="_blank" rel="noopener sponsored">${esc(it.title)}</a><span class="hint-sm">（${esc(it.by)}）${esc(it.note)}</span></li>`).join('')}
-    </ul>
+    el.innerHTML = `${stationery()}
     <p class="hint-sm">${NOTE}</p>`;
   });
 })();

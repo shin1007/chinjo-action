@@ -192,6 +192,10 @@
       if (!state.councils.includes(d.near)) state.councils.push(d.near);
       $('wzFilter').value = '';
       go(1);
+    } else if (d.addNear) {
+      // ④の近くの議会を宛先に加えて、陳情書を作り直す
+      if (!state.councils.includes(d.addNear)) state.councils.push(d.addNear);
+      show();
     } else if (d.mailAll) {
       mailOk(state.pref).forEach((id) => { if (!state.councils.includes(id)) state.councils.push(id); });
       renderCouncils();
@@ -223,6 +227,7 @@
   $('wzNext').addEventListener('click', () => canNext() && go(1));
   $('wzBack').addEventListener('click', () => go(-1));
   $('wzRestart').addEventListener('click', () => {
+    if (!confirm('選んだ議会と内容、直した文面が消えます。最初からやり直しますか？')) return;
     Object.assign(state, { step: 0, pref: '', councils: [], type: '', items: [], role: '' });
     $('wzAiBox').hidden = true;
     $('wzSendBox').hidden = true;
@@ -386,6 +391,8 @@
   });
   // 閉じていた欄は高さを測れないので、開いたときに合わせ直す
   $('wzDocs').addEventListener('toggle', (e) => { if (e.target.open) fit(e.target.querySelector('textarea')); }, true);
+  // 閉じた中では高さが測れないので、開いたときに合わせ直す
+  $('wzCheck').addEventListener('toggle', (e) => { if (e.target.open) areas().forEach(fit); });
   $('wzDocs').addEventListener('click', (e) => {
     const v = e.target.dataset.docView;
     if (v !== undefined) viewPdf(e.target, areas()[v]);
@@ -484,26 +491,69 @@
       const q = encodeURIComponent(`${search(c)} 陳情 提出 締切`);
       const [site, page, council] = (window.SITES[pref] || {})[key] || [];
       const links = [
-        page && `<a href="${esc(page)}" target="_blank" rel="noopener">陳情・請願の案内ページ</a>`,
+        mailBadge(info) && page && `<a href="${esc(page)}" target="_blank" rel="noopener">陳情・請願の案内ページ</a>`,
         // 案内ページを持たない議会も多い。そのときは議会のページから事務局に問い合わせてもらう
         !page && council && `<a href="${esc(council)}" target="_blank" rel="noopener">議会のページ</a>`,
-        // 案内ページが見つからなかった議会は、公式サイトの中だけを「陳情」で検索してもらう
-        !page && site && `<a href="https://www.google.com/search?q=${encodeURIComponent(`site:${new URL(site).hostname} 陳情 OR 請願 議会`)}" target="_blank" rel="noopener">公式サイト内で「陳情」を検索</a>`,
-        site && `<a href="${esc(site)}" target="_blank" rel="noopener">公式サイト</a>`,
+        // 案内ページが見つからなかった議会は、公式サイトの中だけを「陳情」で検索してもらう（確認方法の欄を出す議会では、案内ページ・公式サイトはそちらに載せる）
+        mailBadge(info) && !page && site && `<a href="https://www.google.com/search?q=${encodeURIComponent(`site:${new URL(site).hostname} 陳情 OR 請願 議会`)}" target="_blank" rel="noopener">公式サイト内で「陳情」を検索</a>`,
+        mailBadge(info) && site && `<a href="${esc(site)}" target="_blank" rel="noopener">公式サイト</a>`,
         `<a href="https://www.google.com/search?q=${q}" target="_blank" rel="noopener">${page ? '締切を検索' : '提出方法・締切を調べる'}</a>`,
       ].filter(Boolean).join('');
+      // 郵送で審査されるかが分からない議会は、確かめる先（電話・案内ページ・公式サイト）をその下にまとめる
+      const guide = page
+        ? `<a href="${esc(page)}" target="_blank" rel="noopener">陳情・請願の案内ページ</a>`
+        : site && `<a href="https://www.google.com/search?q=${encodeURIComponent(`site:${new URL(site).hostname} 陳情 OR 請願 議会`)}" target="_blank" rel="noopener">陳情・請願の案内ページを検索</a>`;
+      const badge = mailBadge(info);
+      const check = [
+        telHtml(pref, key, false).replace(/^\s*<span class="wz-tel">|<\/span>\s*$/g, ''),
+        guide,
+        site && `<a href="${esc(site)}" target="_blank" rel="noopener">${esc(label(c).replace(/議会$/, ''))}の公式サイト</a>`,
+      ].filter(Boolean).map((x) => `<li>${x}</li>`).join('');
       // 所在地は宛名の用紙・ラベルに入るので、ここには出さない
       return `<li><b>${esc(label(c))}事務局</b>
-        ${mailBadge(info) || '<span class="wz-mail none">郵送で審査してもらえるかは載っていませんでした（事務局に確認を）</span>'}
-        ${accessHtml(pref, key)}
+        <span class="wz-row"><b>郵送</b>（<a href="guide#send">送り方</a>）${badge || '<span class="wz-mail none">郵送で審査してもらえるかは載っていませんでした（事務局に確認を）</span>'}</span>
+        ${badge ? '' : `<span class="wz-check-how">確認方法</span><ul class="wz-check-list">${check}</ul>`}
+        ${accessHtml(pref, key) && `<span class="wz-row"><b>持参</b></span>${accessHtml(pref, key)}`}
         ${notes(info)}
-        ${telHtml(pref, key, !page)}
+        ${badge ? telHtml(pref, key, !page) : ''}
         ${page ? '' : '<span>陳情の出し方のページが見つかりませんでした。小さな議会では案内ページを置いていないことも多いので、議会事務局に電話で出し方と締切を聞くのが確実です。</span>'}
         <span class="wz-links">${links}</span>
         ${window.Report.enabled ? `<button type="button" class="btn btn-small wz-report" data-report="${esc(c)}" ${window.Report.reported(c) ? 'disabled' : ''}>${window.Report.reported(c) ? '✓ 提出を報告しました' : '出したら押す：この議会に提出した'}</button>` : ''}</li>`;
     }).join('');
     // ②の「議長の氏名を書き入れる」に、議会ごとの議長を調べるリンクを並べる
     $('wzChairLinks').innerHTML = state.councils.map((c) => `<a href="https://www.google.com/search?q=${encodeURIComponent(`${search(c)} 議長`)}" target="_blank" rel="noopener">${esc(label(c))}の議長を調べる</a>`).join('　');
+    renderNearby();
+  }
+
+  // ④ 選んだ議会の近くの議会。選んだ議会の真ん中から直線距離の近い順に、地図（点の位置）と一緒に出す
+  function renderNearby() {
+    const picked = state.councils.map((c) => accessOf(...(officeKeys[c] || []))).filter(Boolean);
+    const box = $('wzNearby');
+    if (!picked.length || !window.Places) { box.innerHTML = '<p class="hint-sm">位置の分かる議会を選ぶと、近くの議会を出します。</p>'; return; }
+    const me = { lat: picked.reduce((t, a) => t + a[0], 0) / picked.length, lng: picked.reduce((t, a) => t + a[1], 0) / picked.length };
+    const rad = Math.PI / 180;
+    const dist = (a) => Math.hypot((a[1] - me.lng) * rad * Math.cos(me.lat * rad), (a[0] - me.lat) * rad) * 6371000;
+    const near = window.Places.all()
+      .map((pl) => ({ pl, id: idOf(pl.pref, pl.council), a: accessOf(pl.pref, pl.key) }))
+      .filter((x) => x.a && !state.councils.includes(x.id))
+      .map((x) => ({ ...x, d: dist(x.a) }))
+      .sort((a, b) => a.d - b.d)
+      .slice(0, 8);
+    // 緯度・経度をそのまま平面に置く簡単な地図。経度は緯度に合わせて縮める
+    const pts = [...state.councils.map((c) => ({ name: label(c), a: accessOf(...(officeKeys[c] || [])), on: true })).filter((p) => p.a),
+      ...near.map((n) => ({ name: n.pl.council, a: n.a, on: false }))];
+    const kx = Math.cos(me.lat * rad);
+    const xs = pts.map((p) => p.a[1] * kx), ys = pts.map((p) => -p.a[0]);
+    const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
+    const W = 320, H = 220, pad = 30, sc = Math.min((W - pad * 2) / ((x1 - x0) || 1e-3), (H - pad * 2) / ((y1 - y0) || 1e-3));
+    const ox = (W - (x1 - x0) * sc) / 2, oy = (H - (y1 - y0) * sc) / 2;
+    const map = `<svg class="wz-map" viewBox="0 0 ${W} ${H}" role="img" aria-label="選んだ議会と近くの議会の位置">${pts.map((p, i) => {
+      const x = ox + (xs[i] - x0) * sc, y = oy + (ys[i] - y0) * sc;
+      return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${p.on ? 6 : 4}" class="${p.on ? 'on' : ''}"/><text x="${(x + 8).toFixed(1)}" y="${(y + 4).toFixed(1)}">${esc(p.name.replace(/議会$/, ''))}</text>`;
+    }).join('')}</svg>`;
+    box.innerHTML = `${map}<p class="hint-sm">●大きい点が選んだ議会です。押すと宛先に加わり、陳情書が1通ずつ増えます。</p>
+      <div class="wz-grid">${near.map((n) => `<button type="button" class="wz-chip" data-add-near="${esc(n.id)}" title="${esc(n.a[2])}駅（${esc(n.a[3])}）">${esc(n.pl.council)}<small class="wz-n">約${km(n.d)}・${esc(n.a[2])}駅</small></button>`).join('')}</div>`;
+    near.forEach((n) => councilsOf(n.pl.pref));
   }
 
   // 印刷するものを1つも選んでいなければ、PDF を作らずに知らせる
