@@ -4,6 +4,7 @@
   const { withSender } = window.Petition;
   const $ = (id) => document.getElementById(id);
   const STEPS = ['type', 'items', 'pref', 'council', 'role', 'done'];
+  const STEP_NAMES = { type: '何を求めるか', items: '求める内容', pref: '都道府県', council: '議会', role: 'あなたの立場' };
 
   const REGIONS = [
     ['北海道・東北', 0, 7], ['関東', 7, 14], ['中部', 14, 23], ['近畿', 23, 30],
@@ -145,7 +146,7 @@
     const s = STEPS[state.step];
     document.querySelectorAll('.wz-step').forEach((el) => (el.hidden = el.dataset.step !== s));
     $('wzBar').style.width = `${(state.step / (STEPS.length - 1)) * 100}%`;
-    $('wzStepNo').textContent = s === 'done' ? '' : `${state.step + 1} / ${STEPS.length - 1}`;
+    $('wzStepNo').textContent = s === 'done' ? '' : `${state.step + 1} / ${STEPS.length - 1}　${STEP_NAMES[s]}`;
     $('wzBack').hidden = state.step === 0;
     $('wzNext').hidden = s === 'done';
     $('wzNext').disabled = !canNext();
@@ -216,6 +217,9 @@
   });
   $('wzFilter').addEventListener('input', renderCouncils);
   $('wzMorePref').addEventListener('click', () => go(STEPS.indexOf('pref') - state.step));
+  $('wzOther').addEventListener('click', () => go(STEPS.indexOf('pref') - state.step));
+  // 手紙の欄は閉じてあるので、開いてから移る
+  $('wzToLetter')?.addEventListener('click', () => { $('letterFold').open = true; });
   $('wzNext').addEventListener('click', () => canNext() && go(1));
   $('wzBack').addEventListener('click', () => go(-1));
   $('wzRestart').addEventListener('click', () => {

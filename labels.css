@@ -1,5 +1,5 @@
 .labels h1 { text-align: center; }
-.lb-box { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 8px 24px 20px; margin: 20px 0; }
+.lb-box { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 8px 24px 20px; margin: 20px 0; }
 .lb-box h2 { font-size: 1.1rem; }
 .lb-rows { list-style: none; padding: 0; margin: 0 0 12px; }
 .lb-rows li { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); }
