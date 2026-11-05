@@ -481,7 +481,6 @@
     $('wzOffices').innerHTML = state.councils.map((c) => {
       const [pref, key] = officeKeys[c] || [];
       const info = infoOf(c);
-      const [zip, addr] = info.office || (window.OFFICES[pref] || {})[key] || [];
       const q = encodeURIComponent(`${search(c)} 陳情 提出 締切`);
       const [site, page, council] = (window.SITES[pref] || {})[key] || [];
       const links = [
@@ -492,12 +491,10 @@
         !page && site && `<a href="https://www.google.com/search?q=${encodeURIComponent(`site:${new URL(site).hostname} 陳情 OR 請願 議会`)}" target="_blank" rel="noopener">公式サイト内で「陳情」を検索</a>`,
         site && `<a href="${esc(site)}" target="_blank" rel="noopener">公式サイト</a>`,
         `<a href="https://www.google.com/search?q=${q}" target="_blank" rel="noopener">${page ? '締切を検索' : '提出方法・締切を調べる'}</a>`,
-        `<a href="https://www.google.com/search?q=${encodeURIComponent(`${search(c)} 議長`)}" target="_blank" rel="noopener">議長名を調べる</a>`,
       ].filter(Boolean).join('');
+      // 所在地は宛名の用紙・ラベルに入るので、ここには出さない
       return `<li><b>${esc(label(c))}事務局</b>
-        <span>${addr ? `${zip ? '〒' + esc(zip) + '　' : ''}${esc(addr)}${info.office ? '' : '（本庁舎）'}` : '住所は公式サイトで確認してください'}</span>
         ${mailBadge(info) || '<span class="wz-mail none">郵送で審査してもらえるかは載っていませんでした（事務局に確認を）</span>'}
-        <span class="wz-chair">⚠ 宛名の「議長」のあとに、議長の氏名を必ず書き入れてください（下の「議長名を調べる」で確認）。</span>
         ${accessHtml(pref, key)}
         ${notes(info)}
         ${telHtml(pref, key, !page)}
@@ -505,6 +502,8 @@
         <span class="wz-links">${links}</span>
         ${window.Report.enabled ? `<button type="button" class="btn btn-small wz-report" data-report="${esc(c)}" ${window.Report.reported(c) ? 'disabled' : ''}>${window.Report.reported(c) ? '✓ 提出を報告しました' : '出したら押す：この議会に提出した'}</button>` : ''}</li>`;
     }).join('');
+    // ②の「議長の氏名を書き入れる」に、議会ごとの議長を調べるリンクを並べる
+    $('wzChairLinks').innerHTML = state.councils.map((c) => `<a href="https://www.google.com/search?q=${encodeURIComponent(`${search(c)} 議長`)}" target="_blank" rel="noopener">${esc(label(c))}の議長を調べる</a>`).join('　');
   }
 
   // 印刷するものを1つも選んでいなければ、PDF を作らずに知らせる
