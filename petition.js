@@ -40,6 +40,12 @@ window.Petition = (() => {
     sel.forEach((it, i) => lines.push(`${i + 1}．${it.title}`, `　${it.reason}`, ''));
     if (story) lines.push('（陳情者として）', `　${story.replace(/\n/g, '\n　')}`, '');
     lines.push(`　${T.closing}`);
+    // 選んだ項目の一次資料。添付できる議会では、この一覧の資料を印刷して添える
+    const refs = sel.flatMap((it) => it.refs || []);
+    if (refs.length) {
+      lines.push('', '【参考資料】');
+      refs.forEach((r, i) => lines.push(`${i + 1}　${r.t}${r.url ? `\n　　${r.url}` : ''}`));
+    }
     if (isIkensho) lines.push('', '【意見書の提出先（案）】', T.ikenshoTo);
     lines.push('', '以上');
     return lines.join('\n');

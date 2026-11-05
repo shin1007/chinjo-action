@@ -133,7 +133,8 @@ test('AIの答えで趣旨と理由だけを入れ替え、書式と求める事
   const answer = '```\n【陳情の趣旨】\n　新しい趣旨です。\n\n【陳情の理由】\n1．見出し\n　新しい理由です。\n```';
   const out = w.Petition.applyRewrite(t, answer);
   assert.match(out, /【陳情の趣旨】\n　新しい趣旨です。\n\n記\n/);
-  assert.match(out, /【陳情の理由】\n1．見出し\n　新しい理由です。\n\n【意見書の提出先（案）】/);
+  assert.match(out, /【陳情の理由】\n1．見出し\n　新しい理由です。\n\n【参考資料】\n1　/);
+  assert.match(out, /【意見書の提出先（案）】/);
   assert.strictEqual(out.split('\n記\n')[1].split('【陳情の理由】')[0], t.split('\n記\n')[1].split('【陳情の理由】')[0]);
   assert.match(out, /件名　/);
   assert.match(out, /以上$/);

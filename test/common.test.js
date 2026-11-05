@@ -51,3 +51,10 @@ test('テーマごとのページが templates/ と食い違わない（直し�
     assert.ok(read(file) === html, `${path.relative(ROOT, file)} が templates/ と違います`);
   }
 });
+
+test('関連資料のページの項目ごとの資料が asks-*.js の refs と食い違わない（直したら node scripts/refs.js）', () => {
+  const read = (f) => fs.readFileSync(f, 'utf8').replace(/\r\n/g, '\n');
+  for (const { file, html } of require('../scripts/refs.js').pages()) {
+    assert.ok(read(file) === html, `${path.relative(ROOT, file)} が asks-*.js の refs と違います`);
+  }
+});
