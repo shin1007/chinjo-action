@@ -157,9 +157,11 @@
         <h3>できあがりました</h3>
         <p id="wzSummary" class="wz-summary"></p>
 
-        <h4 class="wz-sub">文面を確かめる</h4>
-        <p class="hint-sm">内容ごとに下の欄で自由に直せます。直した文面はこの端末のブラウザの中だけに残ります。</p>
-        <div id="wzDocs" class="wz-docs"></div>
+        <details id="wzCheck" class="wz-check">
+          <summary>文面を確かめる・直す</summary>
+          <p class="hint-sm">内容ごとに下の欄で自由に直せます。直した文面はこの端末のブラウザの中だけに残ります。</p>
+          <div id="wzDocs" class="wz-docs"></div>
+        </details>
 
         <h4 class="wz-sub">あなたの住所・氏名を入れる（任意）</h4>
         <p class="hint-sm">住所は陳情書に、氏名は鏡文（送付状）と封筒の差出人に入ります。<b>陳情書の氏名は、印刷してから手書きで署名</b>します。空欄のままなら下線になり、手書きで記入できます。次に開いたときのために<b>この端末のブラウザの中にだけ</b>残ります。共用のパソコンでは、終わったら「この端末から消す」を押してください。</p>
@@ -214,6 +216,11 @@
             </details>
             <ul id="wzOffices" class="wz-offices"></ul>
             <p class="hint-sm">案内ページは自動で見つけたもので、違うこともあります。</p>
+          </li>
+          <li>
+            <h4>④ 近くの自治体の議会にも出す</h4>
+            <p class="hint-sm">同じ陳情を近くの議会にも出すと、地域で取り上げられやすくなります。</p>
+            <div id="wzNearby" class="wz-nearby"></div>
           </li>
         </ol>
 
