@@ -1,4 +1,4 @@
-// templates/ のページから、テーマごとのページ（kodomo/builder.html など）を作る。
+// templates/ のページから、テーマごとのページ（kodomo/labels.html など）を作る。
 // テーマの間で名前と URL しか違わないページだけをここで作る。index.html・guide.html・refs.html は中身がテーマごとに違うので、直接直す。
 //   node scripts/pages.js         … 作り直して書き出す
 //   node scripts/pages.js --check … 書き出さずに、templates/ と食い違うページがあれば知らせる（npm test でも確かめる）
@@ -13,7 +13,7 @@ const THEMES = [
   { id: 'shiho', label: '司法への参加' },
   { id: 'sonota', label: 'その他の陳情' },
 ];
-const PAGES = ['builder', 'labels'];
+const PAGES = ['labels'];
 
 // ヘッダーの左上に出す、テーマを切り替えるドロップダウン
 const themeNav = (current) => [

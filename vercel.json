@@ -35,7 +35,12 @@
     },
     {
       "source": "/builder",
-      "destination": "/kodomo/builder",
+      "destination": "/kodomo",
+      "permanent": true
+    },
+    {
+      "source": "/:theme/builder",
+      "destination": "/:theme",
       "permanent": true
     },
     {
