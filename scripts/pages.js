@@ -7,13 +7,14 @@ const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
 const THEMES = [
-  { id: 'kodomo', label: '子どもの権利' },
+  // letter：かんたん作成のできあがりの画面に出す、議員への手紙（トップページにある）への案内
+  { id: 'kodomo', label: '子どもの権利', letter: true },
   { id: 'dansei', label: '男女平等', site: '男女平等を求める陳情アクション' },
   { id: 'nihonjin', label: '日本人の権利' },
   { id: 'shiho', label: '司法への参加' },
   { id: 'sonota', label: 'その他の陳情' },
 ];
-const PAGES = ['labels'];
+const PAGES = ['labels', 'make'];
 
 // ヘッダーの左上に出す、テーマを切り替えるドロップダウン
 const themeNav = (current) => [
@@ -33,7 +34,9 @@ function render(page, theme) {
   return src.replace('{{themeNav}}', themeNav(theme.id))
     .replaceAll('{{id}}', theme.id)
     .replaceAll('{{site}}', theme.site ?? `${theme.label}を守る陳情アクション`)
-    .replaceAll('{{label}}', theme.label);
+    .replaceAll('{{label}}', theme.label)
+    .replace('{{letterLink}}', theme.letter ? `          <li><b>議員に手紙を出す：</b>陳情書に書けない事情は、公開されない手紙で伝えます。紹介議員のお願いにもなります。<a href="/${theme.id}#letter">議員への手紙をつくる</a></li>
+` : '');
 }
 
 function pages() {
