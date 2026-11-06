@@ -8,7 +8,7 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const THEMES = [
   { id: 'kodomo', label: '子どもの権利' },
-  { id: 'dansei', label: '男性の権利' },
+  { id: 'dansei', label: '男女平等' },
   { id: 'nihonjin', label: '日本人の権利' },
   { id: 'shiho', label: '司法への参加' },
   { id: 'sonota', label: 'その他の陳情' },
