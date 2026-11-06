@@ -13,7 +13,7 @@
   const ROLES = [...window.THEME.roles, ['none', '書かない', '']];
 
   // 最初は、おすすめ（★）で初めから選んである項目を選んでおく
-  const firstItems = () => window.ASKS.filter((a) => a.defaultOn && a.recommended).map((a) => a.id);
+  const firstItems = () => [];
   const state = { step: 0, pref: '', councils: [], items: firstItems(), role: '' };
 
   // ---------- 選択肢の描画 ----------
