@@ -62,13 +62,22 @@
         const id = idOf(state.pref, c);
         const on = state.councils.includes(id);
         const n = window.Report.count(id);
-        return `<button type="button" class="wz-chip ${on ? 'on' : ''} ${i === 0 && !q ? 'wz-wide' : ''}" data-council="${id}" aria-pressed="${on}">${c}${window.Report.enabled ? `<small class="wz-n">${n ? `出した人 ${n}人` : 'まだ0人'}</small>` : ''}</button>`;
+        return `<button type="button" class="wz-chip ${on ? 'on' : ''} ${i === 0 && !q ? 'wz-wide' : ''}" data-council="${id}" aria-pressed="${on}">${c}${chipMail(id)}${window.Report.enabled ? `<small class="wz-n">${n ? `出した人 ${n}人` : 'まだ0人'}</small>` : ''}</button>`;
       })
       .join('') || `<p class="hint-sm wz-wide">「${esc(q)}」に当てはまる議会が見つかりません。${esc(state.pref)}以外の議会なら、下の「ほかの都道府県の議会も選ぶ」から選んでください。</p>`;
     $('wzPicked').textContent = state.councils.length ? `選択中：${state.councils.map(label).join('、')}` : '';
     renderMailOk();
     renderDeadline();
     renderCount();
+  }
+
+  // 審査されなくても議員に配付されるだけで読んでもらえるので、選ぶときに郵送の扱いを議会ごとに短く出す
+  function chipMail(id) {
+    const info = infoOf(id);
+    const r = mailRule(info);
+    if (!r) return '';
+    const t = r.c === 'ok' ? '📮 郵送で審査' : /住民以外/.test(r.label) ? '📮 住民以外の郵送は配付' : r.c === 'none' ? '📮 郵送で配付（審査なし）' : '📮 郵送は配付（審査は持参）';
+    return `<small class="wz-mk ${r.c}">${t}</small>`;
   }
 
   // 郵送でも審査される議会は家から出せて行動しやすいので、都道府県ごとにまとめて勧める
