@@ -3,7 +3,7 @@
   const { copy, esc, flash } = window.Common;
   const { withSender } = window.Petition;
   const $ = (id) => document.getElementById(id);
-  // 最初の3つが選ぶ画面。そのあとに、できあがった文面の画面と、印刷して出す画面が続く
+  // 最初の3つが選ぶ画面。そのあとに、できあがった文面の画面と、署名して出す画面が続く
   const STEPS = ['items', 'council', 'you', 'done', 'send'];
   const ASK_STEPS = 3;
   const STEP_NAMES = { items: '求める内容', council: '出す議会', you: 'あなたのこと' };
@@ -188,7 +188,7 @@
     $('wzStepNo').textContent = state.step < ASK_STEPS ? `${state.step + 1} / ${ASK_STEPS}　${STEP_NAMES[s]}` : '';
     $('wzBack').hidden = state.step === 0;
     $('wzNext').hidden = s === 'send';
-    $('wzNext').textContent = s === 'done' ? '印刷して出す →' : '次へ →';
+    $('wzNext').textContent = s === 'done' ? '署名して出す →' : '次へ →';
     $('wzNext').disabled = !canNext();
     $('wzRestart').hidden = state.step < ASK_STEPS;
     document.querySelectorAll('[data-pref]').forEach((b) => b.classList.toggle('on', b.dataset.pref === state.pref));

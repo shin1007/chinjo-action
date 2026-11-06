@@ -135,39 +135,37 @@
           </div>
         </details>
 
-        <p class="hint-sm">文面を確かめたら、「印刷して出す」へ進みます。</p>
+        <h4>印刷する</h4>
+        <p class="hint-sm">印刷するものを選んでください。選んだものが1つのPDFになります。</p>
+        <div class="print-picks">
+          <label class="check"><input type="checkbox" id="wzBody" checked> 陳情書本体</label>
+          <p class="hint-sm warn">印刷したら、陳情書の氏名欄に<b>手書きで署名し、押印</b>してください。</p>
+          <label class="check"><input type="checkbox" id="wzCover" checked> 各自治体への鏡文（送付状。郵送するときに1枚目につける）</label>
+          <label class="check"><input type="checkbox" id="wzWithLabels" checked> 宛名・差出人用紙（封筒の表と裏に、切って貼る）</label>
+          <label class="check"><input type="checkbox" id="wzWithMemo" checked> 送り方メモ（手順・議会事務局の電話と住所・切手の目安。コンビニで印刷しているあいだにこのページを閉じても、手元に残ります）</label>
+          <p class="hint-sm warn">宛名の「議長　　様」のあいだに、<b>議長の氏名を手書きで</b>書き入れてください。ラベル用紙に印刷するときは<a id="wzLabels" href="/shiho/labels">宛名ラベルのページ</a>を使います。</p>
+        </div>
+        <div class="pdf-actions">
+          <button type="button" id="wzPdf" class="btn btn-primary">印刷用のPDFを保存する</button>
+          <button type="button" id="wzDocx" class="btn">Wordで保存して直す</button>
+        </div>
+        <p class="hint-sm">家のプリンターなら、保存したPDFを開いて<b>A4・倍率100%</b>で印刷します。</p>
+        <p class="hint-sm">💡 同じ文面が多くの議会に届くと、審査されないことがあります。上の「文面を確かめる・直す」の「生成AIで自分の言葉に直す」か、Wordで地域の事情を一言足すと安心です（<a href="/shiho/guide#tips">書き方のコツ</a>）。</p>
+        <div class="netprint">
+          <p><b>プリンターがなければ、コンビニで印刷できます。</b>保存したPDFをサイトかアプリで登録し、お店のマルチコピー機で表示される番号を入れて印刷します。</p>
+          <ul class="netprint-links">
+            <li><a href="https://www.printing.ne.jp/" target="_blank" rel="noopener">セブン‐イレブン：ネットプリント</a></li>
+            <li><a href="https://networkprint.ne.jp/" target="_blank" rel="noopener">ファミリーマート・ローソンなど：ネットワークプリント</a></li>
+          </ul>
+        </div>
+        <p class="hint-sm">印刷したら、「署名して出す」へ進みます。</p>
       </div>
 
       <div class="wz-step" data-step="send" hidden>
-        <h3>印刷して出す</h3>
+        <h3>署名して出す</h3>
         <ol class="wz-flow">
           <li>
-            <h4>① 印刷する</h4>
-            <p class="hint-sm">印刷するものを選んでください。選んだものが1つのPDFになります。</p>
-            <div class="print-picks">
-              <label class="check"><input type="checkbox" id="wzBody" checked> 陳情書本体</label>
-              <p class="hint-sm warn">印刷したら、陳情書の氏名欄に<b>手書きで署名し、押印</b>してください。</p>
-              <label class="check"><input type="checkbox" id="wzCover" checked> 各自治体への鏡文（送付状。郵送するときに1枚目につける）</label>
-              <label class="check"><input type="checkbox" id="wzWithLabels" checked> 宛名・差出人用紙（封筒の表と裏に、切って貼る）</label>
-              <label class="check"><input type="checkbox" id="wzWithMemo" checked> 送り方メモ（手順・議会事務局の電話と住所・切手の目安。コンビニで印刷しているあいだにこのページを閉じても、手元に残ります）</label>
-              <p class="hint-sm warn">宛名の「議長　　様」のあいだに、<b>議長の氏名を手書きで</b>書き入れてください。ラベル用紙に印刷するときは<a id="wzLabels" href="/shiho/labels">宛名ラベルのページ</a>を使います。</p>
-            </div>
-            <div class="pdf-actions">
-              <button type="button" id="wzPdf" class="btn btn-primary">印刷用のPDFを保存する</button>
-              <button type="button" id="wzDocx" class="btn">Wordで保存して直す</button>
-            </div>
-            <p class="hint-sm">家のプリンターなら、保存したPDFを開いて<b>A4・倍率100%</b>で印刷します。</p>
-            <p class="hint-sm">💡 同じ文面が多くの議会に届くと、審査されないことがあります。前の画面の「生成AIで自分の言葉に直す」か、Wordで地域の事情を一言足すと安心です（<a href="/shiho/guide#tips">書き方のコツ</a>）。</p>
-            <div class="netprint">
-              <p><b>プリンターがなければ、コンビニで印刷できます。</b>保存したPDFをサイトかアプリで登録し、お店のマルチコピー機で表示される番号を入れて印刷します。</p>
-              <ul class="netprint-links">
-                <li><a href="https://www.printing.ne.jp/" target="_blank" rel="noopener">セブン‐イレブン：ネットプリント</a></li>
-                <li><a href="https://networkprint.ne.jp/" target="_blank" rel="noopener">ファミリーマート・ローソンなど：ネットワークプリント</a></li>
-              </ul>
-            </div>
-          </li>
-          <li>
-            <h4>② 手書きで記入し、署名する</h4>
+            <h4>① 手書きで記入し、署名する</h4>
             <ul class="wz-todo">
               <li>陳情書の<b>氏名欄に手書きで署名し、押印</b>する（印がなくても受け付ける議会が多いですが、押すとより丁寧です）。</li>
               <li>空欄にした住所を手書きで記入する。</li>
@@ -175,7 +173,7 @@
             </ul>
           </li>
           <li>
-            <h4>③ 締切までに議会事務局へ出す</h4>
+            <h4>② 締切までに議会事務局へ出す</h4>
             <p class="hint-sm">出し方は議会ごとに下に書いてあります。<b>電子申請</b>ができる議会はそれがいちばん手軽です。郵送で出せる議会もありますが、郵送だと審査されず配布だけになる議会もあるので、遠い議会には先に電話で「郵送でも審査されますか」と聞くのが確実です（<a href="/shiho/guide#mail">詳しく</a>）。締切は定例会の1〜2週間前が多いです。</p>
             <div id="wzPostage" class="postage" hidden></div>
             <details class="send-howto">
@@ -188,7 +186,7 @@
             <p class="hint-sm">案内ページは自動で見つけたもので、違うこともあります。</p>
           </li>
           <li>
-            <h4>④ 近くの自治体の議会にも出す</h4>
+            <h4>③ 近くの自治体の議会にも出す</h4>
             <p class="hint-sm">同じ陳情を近くの議会にも出すと、地域で取り上げられやすくなります。</p>
             <div id="wzNearby" class="wz-nearby"></div>
           </li>
