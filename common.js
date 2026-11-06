@@ -97,5 +97,8 @@ window.Common = (() => {
     return [...groups].map(([k, list]) => (k ? `<h4 class="ask-cat">${esc(k)}</h4>` : '') + list.map(render).join('')).join('');
   }
 
-  return { BLANK_TEXT, esc, sender, bindSender, forgetSender, flash, copy, printTexts, reiwaToday, askGroups };
+  // 項目の名前の横に付ける、だれに求めるかの小さな印
+  const scopeTag = (a) => `<small class="ask-scope">${a.scope === 'local' ? '自治体の取り組み' : '国へ意見書'}</small>`;
+
+  return { BLANK_TEXT, esc, sender, bindSender, forgetSender, flash, copy, printTexts, reiwaToday, askGroups, scopeTag };
 })();

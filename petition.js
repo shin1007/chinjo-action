@@ -1,5 +1,5 @@
 // 陳情書の文面と、生成AIへの指示文を組み立てる。詳しい版（app.js）とかんたん作成（wizard.js）の両方が使う。
-// data には FormData（type・items・story・address・name・tel）を渡す。
+// data には FormData（items・story・address・name・tel）を渡す。国あてか自治体あてかは、項目の scope で決まる。
 window.Petition = (() => {
   const { BLANK_TEXT, reiwaToday } = window.Common;
 
@@ -14,11 +14,15 @@ window.Petition = (() => {
   const KANSUJI = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
 
   const selectedKeys = (data) => data.getAll('items').filter((k) => ITEMS[k]);
+  // 国に意見書を出してもらう項目か（自治体が自分でできる項目は scope: 'local'）
+  const isNational = (it) => it.scope !== 'local';
+  // 選ぶ画面に並べる順。採択されやすい自治体あての項目を先にする
+  const ordered = () => [...window.ASKS].sort((a, b) => isNational(a) - isNational(b));
 
   function build(data, council, keys) {
-    const isIkensho = data.get('type') === 'ikensho';
     const story = data.get('story').trim();
     const sel = keys.map((k) => ITEMS[k]);
+    const isIkensho = isNational(sel[0]);
     const kansuji = ['一', '二', '三', '四', '五'];
 
     const place = council.replace(/議会$/, '');
@@ -54,8 +58,11 @@ window.Petition = (() => {
   // ---------- 生成AIへの指示文 ----------
   // 採択されやすい陳情の方針（docs/陳情の基本方針.md）を指示文に織り込む。個人情報は入れない。
   function buildPrompt(data, councils) {
-    const isIkensho = data.get('type') === 'ikensho';
     const sel = selectedKeys(data).map((k) => ITEMS[k]);
+    // 国あてと自治体あての項目が混ざっていたら、項目ごとに種類を書き分けてもらう
+    const nat = sel.some(isNational);
+    const loc = sel.some((it) => !isNational(it));
+    const mixed = nat && loc;
     const story = data.get('story').trim();
     const L = [];
     L.push('あなたは地方議会への陳情書の作成に詳しい行政文書の専門家です。以下の条件で、議会に提出する陳情書の文案を作成してください。', '');
@@ -63,26 +70,26 @@ window.Petition = (() => {
     L.push(councils.length ? councils.map((c) => `- ${c}（議長あて）`).join('\n') : '- （議会名は後で入れます。「○○議会」としてください）');
     if (councils.length > 1) L.push('※文面は1通だけ作り、宛名と自治体名の部分を「○○議会」「○○市」のように差し替えやすくしてください。');
     L.push('', '## 陳情の種類');
-    L.push(isIkensho
-      ? `議会から国（${window.THEME.ai.ikenshoTo}）へ意見書を提出するよう求める陳情。`
-      : 'その自治体が自ら実施できる施策を求める陳情（国の法改正は求めない）。');
+    const KIND_NAT = `議会から国（${window.THEME.ai.ikenshoTo}）へ意見書を提出するよう求める陳情。`;
+    const KIND_LOC = 'その自治体が自ら実施できる施策を求める陳情（国の法改正は求めない）。';
+    if (mixed) L.push('求める事項ごとに、次のどちらかです（下の「求める事項」に書いてあります）。', `- 国：${KIND_NAT}`, `- 自治体：${KIND_LOC}`);
+    else L.push(nat ? KIND_NAT : KIND_LOC);
     L.push('', '## 求める事項');
-    sel.forEach((it, i) => L.push(`${i + 1}. ${it.title}`, `   要望の例：${it.text.replaceAll('{宛先}', 'その自治体')}`, `   背景：${it.reason}`));
+    sel.forEach((it, i) => L.push(`${i + 1}. ${it.title}${mixed ? `（種類：${isNational(it) ? '国' : '自治体'}）` : ''}`, `   要望の例：${it.text.replaceAll('{宛先}', 'その自治体')}`, `   背景：${it.reason}`));
     if (sel.length > 1) L.push('', `※求める事項ごとに、別々の陳情書を${sel.length}通作成してください。1通には1つの事項だけを書き、それぞれ件名・趣旨・理由をその事項に合わせてください。`);
     if (story) L.push('', '## 陳情者としての一言（陳情の理由の最後に、1〜2文で一般的な表現にして添えてください。日付・地名・相手方・裁判や調停の経過など、個人や事件を特定できる内容は書かないでください）', story);
     L.push('', '## 書き方のルール（採択されやすくするため、必ず守ってください）');
     [
       '求める事項は上記の項目だけに絞り、勝手に増やさない。',
       ...window.THEME.ai.rules,
-      isIkensho
-        ? window.THEME.ai.nationalRule
-        : 'その自治体が自分の判断で、少ない予算で実施できる内容にする。',
+      ...(nat ? [`${mixed ? '国の事項は、' : ''}${window.THEME.ai.nationalRule}`] : []),
+      ...(loc ? [`${mixed ? '自治体の事項は、' : ''}その自治体が自分の判断で、少ない予算で実施できる内容にする。`] : []),
       '統計・判例・国会答弁などの事実は、上記の背景に書いたもの以外は書かない。どうしても必要な場合は「【要確認：○○の出典】」と書き、数字や引用を作らない。',
       'A4で2枚程度に収め、1枚目に趣旨と求める事項が収まるようにする。',
     ].forEach((r) => L.push(`- ${r}`));
     L.push('', '## 出力の形式');
     L.push('次の順に、そのまま印刷できる文面で出力してください。陳情者の住所・氏名の欄は空欄（＿＿＿＿）にしてください。');
-    L.push('1. 日付（令和　年　月　日）', '2. 宛名（○○議会議長　様）', '3. 陳情者の住所・氏名の欄', '4. 件名', '5. 陳情の趣旨', '6. 記（求める事項を漢数字の箇条書きで）', '7. 陳情の理由', isIkensho ? '8. 意見書の提出先' : '8. 以上');
+    L.push('1. 日付（令和　年　月　日）', '2. 宛名（○○議会議長　様）', '3. 陳情者の住所・氏名の欄', '4. 件名', '5. 陳情の趣旨', '6. 記（求める事項を漢数字の箇条書きで）', '7. 陳情の理由', nat ? `8. 意見書の提出先${mixed ? '（国の事項のみ）' : ''}` : '8. 以上');
     L.push('', '最後に、文面とは別に「提出前に確認すべき点」を3つ以内で箇条書きにしてください。');
     return L.join('\n');
   }
@@ -206,5 +213,5 @@ window.Petition = (() => {
     return fill(T.cover, { 日付: reiwaToday(), 宛先: council, 差出人: from.join('\n'), 書類: list, 通数: String(docs.length) });
   }
 
-  return { build, buildPrompt, sections, buildRewritePrompt, applyRewrite, rewritePlans, withSender, swapCouncil, cover, selectedKeys, ITEMS, MANY, SEP };
+  return { build, buildPrompt, sections, buildRewritePrompt, applyRewrite, rewritePlans, withSender, swapCouncil, cover, selectedKeys, isNational, ordered, ITEMS, MANY, SEP };
 })();

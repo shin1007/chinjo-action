@@ -20,9 +20,8 @@ function load() {
 }
 const w = load();
 
-function form(type, items, extra = {}) {
+function form(items, extra = {}) {
   const fd = new FormData();
-  fd.append('type', type);
   items.forEach((k) => fd.append('items', k));
   for (const k of ['story', 'address', 'name', 'tel']) fd.append(k, extra[k] || '');
   return fd;
@@ -35,7 +34,7 @@ test('データの id が重ならない', () => {
 
 test('意見書を求める陳情に、宛名・件名・記・提出先が入る', () => {
   const k = w.ASKS.find((a) => a.scope === 'national').id;
-  const t = w.Petition.build(form('ikensho', [k]), '横浜市議会', [k]);
+  const t = w.Petition.build(form([k]), '横浜市議会', [k]);
   assert.match(t, /^令和/);
   assert.match(t, /横浜市議会議長　＿＿＿＿＿＿　様/);
   assert.match(t, /件名　/);
@@ -46,7 +45,7 @@ test('意見書を求める陳情に、宛名・件名・記・提出先が入�
 
 test('自治体あての陳情に意見書の提出先は入らず、住所・氏名が入る', () => {
   const k = w.ASKS.find((a) => a.scope === 'local').id;
-  const t = w.Petition.build(form('local', [k], { name: '山田太郎', address: '横浜市中区' }), '横浜市議会', [k]);
+  const t = w.Petition.build(form([k], { name: '山田太郎', address: '横浜市中区' }), '横浜市議会', [k]);
   assert.doesNotMatch(t, /意見書の提出先/);
   assert.match(t, /氏名　山田太郎/);
   assert.match(t, /住所　横浜市中区/);
@@ -54,7 +53,7 @@ test('自治体あての陳情に意見書の提出先は入らず、住所・�
 
 test('すべての求める事項で文面ができる', () => {
   for (const a of w.ASKS) {
-    const t = w.Petition.build(form(a.scope === 'local' ? 'local' : 'ikensho', [a.id]), '札幌市議会', [a.id]);
+    const t = w.Petition.build(form([a.id]), '札幌市議会', [a.id]);
     assert.doesNotMatch(t, /undefined|\{[^}]+\}/, a.id);
   }
 });
@@ -74,7 +73,7 @@ test('役所の住所の鍵が、自治体の一覧と食い違わない', () =>
 
 test('差出人を入れると住所が入り、氏名は手書き用の下線のまま、電話は陳情書に入らない', () => {
   const k = w.ASKS[0].id;
-  const t = w.Petition.build(form('ikensho', [k]), '横浜市議会', [k]);
+  const t = w.Petition.build(form([k]), '横浜市議会', [k]);
   const s = { zip: '123-4567', address: '横浜市中区1-1', name: '佐藤花子', tel: '090-0000-0000' };
   const filled = w.Petition.withSender(t, s);
   assert.match(filled, /住所　〒123-4567　横浜市中区1-1\n氏名　＿＿＿＿＿＿　　　　印\n/);
@@ -86,7 +85,7 @@ test('差出人を入れると住所が入り、氏名は手書き用の下線�
 
 test('鏡文に議会事務局・差出人・同封する陳情書の件名が入る', () => {
   const ks = w.ASKS.filter((a) => a.scope === 'national').slice(0, 2).map((a) => a.id);
-  const docs = ks.map((k) => w.Petition.build(form('ikensho', [k]), '伊達市議会', [k]));
+  const docs = ks.map((k) => w.Petition.build(form([k]), '伊達市議会', [k]));
   const blank = { zip: '', address: '', name: '', tel: '' };
   const c = w.Petition.cover('伊達市議会', docs, { ...blank, name: '佐藤花子' });
   assert.match(c, /伊達市議会事務局　御中/);
@@ -109,7 +108,7 @@ for (const theme of ['dansei', 'nihonjin', 'shiho', 'sonota']) {
     const ids = ctx.ASKS.map((a) => a.id);
     assert.strictEqual(new Set(ids).size, ids.length);
     for (const a of ctx.ASKS) {
-      const fd = form(a.scope === 'local' ? 'local' : 'ikensho', [a.id]);
+      const fd = form([a.id]);
       const t = ctx.Petition.build(fd, '札幌市議会', [a.id]);
       assert.doesNotMatch(t, /undefined|\{[^}]+\}/, a.id);
       assert.doesNotMatch(t, /子ども/, a.id);
@@ -120,7 +119,7 @@ for (const theme of ['dansei', 'nihonjin', 'shiho', 'sonota']) {
 
 test('AIへの書き直しの指示文には、趣旨と理由だけが入り、住所・氏名・電話は入らない', () => {
   const k = w.ASKS.find((a) => a.scope === 'local').id;
-  const t = w.Petition.build(form('local', [k], { name: '山田太郎', address: '横浜市中区', tel: '090-1111-2222' }), '横浜市議会', [k]);
+  const t = w.Petition.build(form([k], { name: '山田太郎', address: '横浜市中区', tel: '090-1111-2222' }), '横浜市議会', [k]);
   const p = w.Petition.buildRewritePrompt(t, '横浜市議会', { local: '市の窓口で案内が少ない' });
   assert.ok(p.includes(w.Petition.sections(t).reasons));
   assert.match(p, /市の窓口で案内が少ない/);
@@ -129,7 +128,7 @@ test('AIへの書き直しの指示文には、趣旨と理由だけが入り、
 
 test('AIの答えで趣旨と理由だけを入れ替え、書式と求める事項はそのまま残す', () => {
   const k = w.ASKS.find((a) => a.scope === 'national').id;
-  const t = w.Petition.build(form('ikensho', [k]), '横浜市議会', [k]);
+  const t = w.Petition.build(form([k]), '横浜市議会', [k]);
   const answer = '```\n【陳情の趣旨】\n　新しい趣旨です。\n\n【陳情の理由】\n1．見出し\n　新しい理由です。\n```';
   const out = w.Petition.applyRewrite(t, answer);
   assert.match(out, /【陳情の趣旨】\n　新しい趣旨です。\n\n記\n/);
@@ -142,14 +141,14 @@ test('AIの答えで趣旨と理由だけを入れ替え、書式と求める事
 
 test('AIの答えに目印がなければ入れ替えない', () => {
   const k = w.ASKS.find((a) => a.scope === 'local').id;
-  const t = w.Petition.build(form('local', [k]), '横浜市議会', [k]);
+  const t = w.Petition.build(form([k]), '横浜市議会', [k]);
   assert.strictEqual(w.Petition.applyRewrite(t, '書き直しました。'), null);
   assert.strictEqual(w.Petition.applyRewrite(t, '【陳情の趣旨】\n\n【陳情の理由】\n'), null);
 });
 
 test('書き直しの指示文に、その自治体の計画を探して結びつける頼みが入る', () => {
   const k = w.ASKS.find((a) => a.scope === 'local').id;
-  const t = w.Petition.build(form('local', [k]), '横浜市議会', [k]);
+  const t = w.Petition.build(form([k]), '横浜市議会', [k]);
   const p = w.Petition.buildRewritePrompt(t, '横浜市議会');
   assert.match(p, /横浜市の公式サイト/);
   w.THEME.ai.plans.forEach((pl) => assert.ok(p.includes(pl), pl));
@@ -158,7 +157,7 @@ test('書き直しの指示文に、その自治体の計画を探して結び�
 
 test('参照した計画は文面に入れず、別に取り出す', () => {
   const k = w.ASKS.find((a) => a.scope === 'local').id;
-  const t = w.Petition.build(form('local', [k]), '横浜市議会', [k]);
+  const t = w.Petition.build(form([k]), '横浜市議会', [k]);
   const answer = '【陳情の趣旨】\n　趣旨です。\n【陳情の理由】\n1．見出し\n　理由です。\n【参照した計画】\n- 横浜市こども計画／https://www.city.yokohama.lg.jp/kosodate/plan.html／基本目標1';
   const out = w.Petition.applyRewrite(t, answer);
   assert.doesNotMatch(out, /参照した計画|city\.yokohama/);
@@ -166,4 +165,13 @@ test('参照した計画は文面に入れず、別に取り出す', () => {
   assert.strictEqual(plans.length, 1);
   assert.strictEqual(plans[0].url, 'https://www.city.yokohama.lg.jp/kosodate/plan.html');
   assert.strictEqual(w.Petition.rewritePlans('【陳情の理由】\nx\n【参照した計画】\nなし').length, 0);
+});
+
+test('国あてと自治体あてを一緒に選ぶと、指示文で項目ごとに種類を書き分ける', () => {
+  const n = w.ASKS.find((a) => a.scope === 'national').id;
+  const l = w.ASKS.find((a) => a.scope === 'local').id;
+  const p = w.Petition.buildPrompt(form([n, l]), ['横浜市議会']);
+  assert.match(p, /（種類：国）/);
+  assert.match(p, /（種類：自治体）/);
+  assert.match(p, /意見書の提出先（国の事項のみ）/);
 });

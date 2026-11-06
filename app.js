@@ -38,31 +38,22 @@
 
   const itemList = document.getElementById('itemList');
   const itemHint = document.getElementById('itemHint');
-  const currentType = () => form.querySelector('[name=type]:checked').value;
-
   function renderItems() {
-    const local = currentType() === 'local';
-    document.getElementById('itemsLegend').textContent = local
-      ? '求める施策（選んだ数だけ陳情書ができます）'
-      : '国に求める事項（選んだ数だけ陳情書ができます）';
-    itemList.innerHTML = window.Common.askGroups(Object.values(ITEMS).filter((it) => it.scope === (local ? 'local' : 'national')),
-      (it) => `<label class="check"><input type="checkbox" name="items" value="${it.id}" ${it.defaultOn ? 'checked' : ''}> ${it.label}</label>`);
+    document.getElementById('itemsLegend').textContent = '求める内容（選んだ数だけ陳情書ができます）';
+    itemList.innerHTML = window.Common.askGroups(window.Petition.ordered(),
+      (it) => `<label class="check"><input type="checkbox" name="items" value="${it.id}" ${it.defaultOn ? 'checked' : ''}> ${it.label}${window.Common.scopeTag(it)}</label>`);
     updateItemHint();
   }
 
   function updateItemHint() {
     const n = itemList.querySelectorAll('input:checked').length;
     document.getElementById('splitNote').hidden = n < 2;
-    const local = currentType() === 'local';
     itemHint.classList.toggle('warn', n > MANY);
     itemHint.textContent = n > MANY
       ? `⚠ ${n}項目を選んでいます。1つの議会に一度に多くの陳情を出すと、1件ごとの重みが薄れます。優先したい項目から、定例会ごとに分けて出すことも考えましょう。`
-      : local
-        ? '自治体あての陳情は、その自治体が自分でできることに絞るのがコツです。法律の改正は「国に意見書を出してもらう」で求めましょう。'
-        : '法律の改正など、自治体だけでは決められないことは、議会から国へ意見書を出してもらう形で求めます。';
+      : '「自治体の取り組み」はその自治体が自分でできること、「国へ意見書」は法律の改正など自治体だけでは決められないことを、議会から国へ意見書を出してもらう形で求めます。';
   }
 
-  form.querySelectorAll('[name=type]').forEach((r) => r.addEventListener('change', renderItems));
   itemList.addEventListener('change', updateItemHint);
   renderItems();
 
