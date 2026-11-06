@@ -42,10 +42,14 @@
   const dp = (asin) => 'https://www.amazon.co.jp/dp/' + encodeURIComponent(asin) + (AMAZON_TAG ? '?tag=' + encodeURIComponent(AMAZON_TAG) : '');
   const NOTE = '※ このサイトは Amazon アソシエイト・プログラムに参加しています。リンクから購入されると、サイトの運営者に紹介料が入ります（広告）。';
 
-  const stationery = () => `<p class="stationery-head">おすすめ文具</p>
+  // 長い一覧なので折りたたみにし、開くと商品名（太字のリンクと型番）の下に選んだ理由を出す
+  const stationery = () => `<details class="stationery-box">
+    <summary>陳情書提出に使える おすすめ文具</summary>
     <ul class="stationery">${COMMON.map((it) => `
-      <li><a href="${it.asin ? dp(it.asin) : link(it.q)}" target="_blank" rel="noopener sponsored">${esc(it.title)}</a><span class="hint-sm">（${esc(it.by)}）${esc(it.note)}</span></li>`).join('')}
-    </ul>`;
+      <li><a class="stationery-name" href="${it.asin ? dp(it.asin) : link(it.q)}" target="_blank" rel="noopener sponsored">${esc(it.title)}</a><span class="stationery-by">${esc(it.by)}</span>
+        <span class="stationery-note">${esc(it.note)}</span></li>`).join('')}
+    </ul>
+    </details>`;
 
   // 関連グッズの欄は、おすすめ文具を先に出し、その下にテーマの本・グッズを並べる
   const box = document.querySelector('[data-shop]');
