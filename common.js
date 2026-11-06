@@ -86,5 +86,16 @@ window.Common = (() => {
     document.body.prepend(p);
   }
 
-  return { BLANK_TEXT, esc, sender, bindSender, forgetSender, flash, copy, printTexts, reiwaToday };
+  // 陳情の項目を category ごとにまとめ、見出しを付けた HTML にする（category が無ければ見出しなしで並べる）
+  function askGroups(asks, render) {
+    const groups = new Map();
+    asks.forEach((a) => {
+      const k = a.category || '';
+      if (!groups.has(k)) groups.set(k, []);
+      groups.get(k).push(a);
+    });
+    return [...groups].map(([k, list]) => (k ? `<h4 class="ask-cat">${esc(k)}</h4>` : '') + list.map(render).join('')).join('');
+  }
+
+  return { BLANK_TEXT, esc, sender, bindSender, forgetSender, flash, copy, printTexts, reiwaToday, askGroups };
 })();

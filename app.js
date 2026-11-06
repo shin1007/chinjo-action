@@ -45,10 +45,8 @@
     document.getElementById('itemsLegend').textContent = local
       ? '求める施策（選んだ数だけ陳情書ができます）'
       : '国に求める事項（選んだ数だけ陳情書ができます）';
-    itemList.innerHTML = Object.entries(ITEMS)
-      .filter(([, it]) => it.scope === (local ? 'local' : 'national'))
-      .map(([k, it]) => `<label class="check"><input type="checkbox" name="items" value="${k}" ${it.defaultOn ? 'checked' : ''}> ${it.label}</label>`)
-      .join('');
+    itemList.innerHTML = window.Common.askGroups(Object.values(ITEMS).filter((it) => it.scope === (local ? 'local' : 'national')),
+      (it) => `<label class="check"><input type="checkbox" name="items" value="${it.id}" ${it.defaultOn ? 'checked' : ''}> ${it.label}</label>`);
     updateItemHint();
   }
 
