@@ -8,7 +8,7 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const THEMES = [
   { id: 'kodomo', label: '子どもの権利' },
-  { id: 'dansei', label: '男女平等' },
+  { id: 'dansei', label: '男女平等', site: '男女平等を求める陳情アクション' },
   { id: 'nihonjin', label: '日本人の権利' },
   { id: 'shiho', label: '司法への参加' },
   { id: 'sonota', label: 'その他の陳情' },
@@ -32,6 +32,7 @@ function render(page, theme) {
   const src = read(path.join(ROOT, 'templates', `${page}.html`));
   return src.replace('{{themeNav}}', themeNav(theme.id))
     .replaceAll('{{id}}', theme.id)
+    .replaceAll('{{site}}', theme.site ?? `${theme.label}を守る陳情アクション`)
     .replaceAll('{{label}}', theme.label);
 }
 
