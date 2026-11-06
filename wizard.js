@@ -71,22 +71,27 @@
     renderCount();
   }
 
-  // 郵送でも審査される議会は、都道府県を選ぶ前に全国分を見せる（家から出せる議会を先に知ってもらう）
+  // 郵送でも審査される議会と、郵送だと議員に配付される議会は、都道府県を選ぶ前に全国分を見せる
+  // （家から出せる議会を先に知ってもらう。配付だけでも議員に読んでもらえる）
   // 一覧は長いので、都道府県のボタンの上に折りたたんで置く
-  const mailBox = document.createElement('details');
-  mailBox.className = 'wz-mailok';
-  $('wzPrefs').before(mailBox);
+  const mailHandout = (pref) => councilsOf(pref).map((c) => idOf(pref, c)).filter((id) => { const r = mailRule(infoOf(id)); return r && r.c !== 'ok'; });
+  const MAIL_BOXES = [
+    [(p) => mailOk(p), 'ok', '📮 郵送で審査', '📮 郵送でも審査されるとわかっている議会', '家から送るだけで審査してもらえます。'],
+    [mailHandout, 'jisan', '📮 郵送で配付', '📮 郵送すると議員に配付される議会', '審査はされなくても、陳情書の写しが議員に配られて読んでもらえます。持参すれば審査される議会や、住民なら審査される議会もあります（議会を選ぶ画面で議会ごとに出ます）。'],
+  ].map((x) => { const el = document.createElement('details'); el.className = `wz-mailok ${x[1]}`; $('wzPrefs').before(el); return [el, ...x]; });
   function renderMailAll() {
-    const groups = window.PREFS.map((p) => [p, mailOk(p)]).filter(([, ids]) => ids.length);
-    const n = groups.reduce((a, [, ids]) => a + ids.length, 0);
-    document.querySelectorAll('[data-pref]').forEach((b) => {
-      const k = (groups.find(([p]) => p === b.dataset.pref) || [])[1];
-      if (k && !b.querySelector('.wz-mk')) b.insertAdjacentHTML('beforeend', `<small class="wz-mk ok">📮 郵送で審査 ${k.length}</small>`);
+    MAIL_BOXES.forEach(([box, list, c, badge, title, note]) => {
+      const groups = window.PREFS.map((p) => [p, list(p)]).filter(([, ids]) => ids.length);
+      const n = groups.reduce((a, [, ids]) => a + ids.length, 0);
+      document.querySelectorAll('[data-pref]').forEach((b) => {
+        const k = (groups.find(([p]) => p === b.dataset.pref) || [])[1];
+        if (k && !b.querySelector(`.wz-mk.${c}`)) b.insertAdjacentHTML('beforeend', `<small class="wz-mk ${c}">${badge} ${k.length}</small>`);
+      });
+      const open = box.open;
+      box.innerHTML = `<summary><b>${title}（全国${n}）</b></summary><p class="hint-sm">${note}押すと選ばれ、「次へ」でその都道府県の議会の一覧に進みます。まだ調べきれていない議会も多いので、ここにない議会のほうが多くあります。</p>
+        ${groups.map(([p, ids]) => `<div class="wz-region"><span>${esc(p)}</span><div class="wz-grid">${ids.map((id) => { const on = state.councils.includes(id); return `<button type="button" class="wz-chip ${on ? 'on' : ''}" data-mail-pick="${esc(id)}" aria-pressed="${on}">${esc(nameOf(id))}${c === 'ok' ? '' : chipMail(id)}</button>`; }).join('')}</div></div>`).join('')}`;
+      box.open = open;
     });
-    const open = mailBox.open;
-    mailBox.innerHTML = `<summary><b>📮 郵送でも審査されるとわかっている議会（全国${n}）</b></summary><p class="hint-sm">家から送るだけで審査してもらえます。押すと選ばれ、「次へ」でその都道府県の議会の一覧に進みます。まだ調べきれていない議会も多いので、ここにない議会も郵送で審査されることがあります。</p>
-      ${groups.map(([p, ids]) => `<div class="wz-region"><span>${esc(p)}</span><div class="wz-grid">${ids.map((id) => { const on = state.councils.includes(id); return `<button type="button" class="wz-chip ${on ? 'on' : ''}" data-mail-pick="${esc(id)}" aria-pressed="${on}">${esc(nameOf(id))}</button>`; }).join('')}</div></div>`).join('')}`;
-    mailBox.open = open;
   }
 
   // 審査されなくても議員に配付されるだけで読んでもらえるので、選ぶときに郵送の扱いを議会ごとに短く出す

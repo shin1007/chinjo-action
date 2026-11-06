@@ -417,3 +417,4 @@ summary { cursor: pointer; font-weight: 700; }
 .wz-rw-prompt { margin-top: 4px; }
 .wz-rw-plans { border-left: 3px solid var(--accent-line); padding: 4px 10px; margin: 8px 0; font-size: 0.9rem; }
 .wz-mailok summary { cursor: pointer; }
+.wz-mailok.jisan { background: var(--neutral-bg); }
