@@ -29,7 +29,11 @@
   const idOf = (pref, name) => `${pref}/${name}`;
   const nameOf = (id) => id.slice(id.indexOf('/') + 1);
   const prefOf = (id) => id.slice(0, id.indexOf('/'));
-  const names = () => state.councils.map(nameOf);
+  // 議会を選ばずに作るときは、議会名を空けた宛先を1つだけ置く（議会名と議長名は手書きで入れる）
+  const NONE = '/　　　　　　議会';
+  const isNone = (c) => c === NONE;
+  const real = () => state.councils.filter((c) => !isNone(c));
+  const names = () => real().map(nameOf);
   function councilsOf(pref) {
     return window.Places.of(pref).map((pl) => {
       officeKeys[idOf(pref, pl.council)] = [pref, pl.key];
@@ -177,6 +181,7 @@
 
   function show() {
     const s = STEPS[state.step];
+    if (state.councils.length > 1) state.councils = real();
     document.querySelectorAll('.wz-step').forEach((el) => (el.hidden = el.dataset.step !== s));
     $('wzBar').style.width = `${(state.step / (STEPS.length - 1)) * 100}%`;
     $('wzStepNo').textContent = s === 'done' ? '' : `${state.step + 1} / ${STEPS.length - 1}　${STEP_NAMES[s]}`;
@@ -204,6 +209,7 @@
 
   function go(delta) {
     state.step = Math.max(0, Math.min(STEPS.length - 1, state.step + delta));
+    history.pushState({ step: state.step }, '', location.pathname + location.search);
     show();
     focusStep();
     $('wizard').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -253,13 +259,24 @@
       go(1);
     }
   });
+  window.addEventListener('popstate', (e) => {
+    state.step = e.state && Number.isInteger(e.state.step) ? e.state.step : 0;
+    show();
+    focusStep();
+    $('wizard').scrollIntoView({ block: 'start' });
+  });
+  $('wzSkip').addEventListener('click', () => {
+    state.councils = [NONE];
+    go(STEPS.indexOf('role') - state.step);
+  });
   $('wzFilter').addEventListener('input', renderCouncils);
   $('wzMorePref').addEventListener('click', () => go(STEPS.indexOf('pref') - state.step));
   $('wzOther').addEventListener('click', () => go(STEPS.indexOf('pref') - state.step));
   // 手紙の欄は閉じてあるので、開いてから移る
   $('wzToLetter')?.addEventListener('click', () => { $('letterFold').open = true; });
   $('wzNext').addEventListener('click', () => canNext() && go(1));
-  $('wzBack').addEventListener('click', () => go(-1));
+  // 議会を選ばずに進んだときは、議会の一覧を飛ばして都道府県の画面に戻る
+  $('wzBack').addEventListener('click', () => go(STEPS[state.step] === 'role' && state.councils.some(isNone) ? STEPS.indexOf('pref') - state.step : -1));
   $('wzRestart').addEventListener('click', () => {
     if (!confirm('選んだ議会と内容、直した文面が消えます。最初からやり直しますか？')) return;
     Object.assign(state, { step: 0, pref: '', councils: [], items: firstItems(), role: '' });
@@ -316,8 +333,10 @@
       </details>`;
     }).join('');
     areas().forEach((ta) => { fit(ta); docStat(ta); });
-    $('wzLabels').href = `labels?c=${encodeURIComponent(state.councils.join(','))}`;
-    $('wzSummary').textContent = `${state.councils.length}つの議会 × ${state.items.length}つの内容 ＝ 陳情書 ${state.councils.length * state.items.length}通`;
+    $('wzLabels').href = `labels?c=${encodeURIComponent(real().join(','))}`;
+    $('wzSummary').textContent = real().length
+      ? `${state.councils.length}つの議会 × ${state.items.length}つの内容 ＝ 陳情書 ${state.councils.length * state.items.length}通`
+      : `議会名を空けた陳情書 ${state.items.length}通（議会名と議長名は、出す先が決まったら手書きで入れてください）`;
     renderOffices();
   }
 
@@ -350,8 +369,8 @@
   async function makePdf(envs) {
     const doc = await window.PdfDoc.create();
     const sheets = envs.map(({ c, texts }) => ({ c, n: texts.reduce((a, t) => a + doc.addDocument(t), 0) }));
-    if ($('wzWithLabels').checked) {
-      const rows = envs.map(({ c }) => {
+    if ($('wzWithLabels').checked && real().length) {
+      const rows = envs.filter(({ c }) => !isNone(c)).map(({ c }) => {
         const [pref, key] = officeKeys[c] || [];
         return { council: nameOf(c), ...window.Places.office(pref, key) };
       });
@@ -404,7 +423,7 @@
       '',
       '【議会ごとの出し方】',
     ];
-    state.councils.forEach((c) => {
+    real().forEach((c) => {
       const [pref, key] = officeKeys[c] || [];
       const info = infoOf(c);
       const o = window.Places.office(pref, key);
@@ -439,7 +458,7 @@
     }).join('')}</ul><p class="hint-sm">クリアファイル1枚と、宛名・差出人のラベル、のりを含めた重さです。切手は多めに貼っても届きます（多い分は戻りません）。不安なときは郵便局の窓口で量ってもらうのが確実です。<a href="guide#send">送り方を見る</a></p>`;
     $('wzPostage').hidden = false;
   }
-  const fileName = () => `陳情書_${nameOf(state.councils[0])}${state.councils.length > 1 ? `ほか${state.councils.length - 1}件` : ''}_${window.PdfDoc.today()}.pdf`;
+  const fileName = () => `陳情書_${real().length ? nameOf(state.councils[0]) : '宛先なし'}${state.councils.length > 1 ? `ほか${state.councils.length - 1}件` : ''}_${window.PdfDoc.today()}.pdf`;
   // all：すべての内容を保存したとき（このときだけ切手の目安を出す）
   async function savePdf(btn, envs, { share = false, all = false } = {}) {
     const text = btn.textContent;
@@ -624,7 +643,7 @@
   }
 
   function renderOffices() {
-    $('wzOffices').innerHTML = state.councils.map((c) => {
+    $('wzOffices').innerHTML = real().map((c) => {
       const [pref, key] = officeKeys[c] || [];
       const info = infoOf(c);
       const q = encodeURIComponent(`${search(c)} 陳情 提出 締切`);
@@ -660,7 +679,7 @@
         ${window.Report.enabled ? `<button type="button" class="btn btn-small wz-report" data-report="${esc(c)}" ${window.Report.reported(c) ? 'disabled' : ''}>${window.Report.reported(c) ? '✓ 提出を報告しました' : '出したら押す：この議会に提出した'}</button>` : ''}</li>`;
     }).join('');
     // ②の「議長の氏名を書き入れる」に、議会ごとの議長を調べるリンクを並べる
-    $('wzChairLinks').innerHTML = state.councils.map((c) => `<a href="https://www.google.com/search?q=${encodeURIComponent(`${search(c)} 議長`)}" target="_blank" rel="noopener">${esc(label(c))}の議長を調べる</a>`).join('　');
+    $('wzChairLinks').innerHTML = real().map((c) => `<a href="https://www.google.com/search?q=${encodeURIComponent(`${search(c)} 議長`)}" target="_blank" rel="noopener">${esc(label(c))}の議長を調べる</a>`).join('　');
     renderNearby();
   }
 
@@ -744,7 +763,7 @@
   }
   function saveLink(done) {
     const url = done ? linkOf() : location.pathname + location.search;
-    if (location.href !== url) history.replaceState(null, '', url);
+    history.replaceState({ step: state.step }, '', url);
   }
   function restore() {
     const m = location.hash.match(/^#w\?(.*)$/);
@@ -753,10 +772,10 @@
     // 前の形式のリンクに付いている t（国か自治体か）は、項目から分かるので読まない
     const items = (q.get('i') || '').split(',').filter((k) => window.ASKS.some((a) => a.id === k));
     const pref = q.get('p');
-    if (!items.length || !window.PREFS.includes(pref)) return false;
+    if (!items.length || !(window.PREFS.includes(pref) || q.get('c') === NONE)) return false;
     // 前の形式のリンク（議会名だけ）は、p の都道府県の議会として読む
     const councils = (q.get('c') || '').split(',').map((c) => (c.includes('/') ? c : idOf(pref, c)))
-      .filter((c) => window.PREFS.includes(prefOf(c)) && councilsOf(prefOf(c)).includes(nameOf(c)));
+      .filter((c) => isNone(c) || (window.PREFS.includes(prefOf(c)) && councilsOf(prefOf(c)).includes(nameOf(c))));
     const role = q.get('r');
     if (!councils.length || !ROLES.some(([k]) => k === role)) return false;
     Object.assign(state, { items, pref, councils, role, step: STEPS.indexOf('done') });
