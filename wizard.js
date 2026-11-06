@@ -3,8 +3,8 @@
   const { copy, esc, flash } = window.Common;
   const { withSender } = window.Petition;
   const $ = (id) => document.getElementById(id);
-  const STEPS = ['items', 'pref', 'council', 'role', 'done'];
-  const STEP_NAMES = { items: '求める内容', pref: '都道府県', council: '議会', role: 'あなたの立場' };
+  const STEPS = ['items', 'council', 'you', 'done'];
+  const STEP_NAMES = { items: '求める内容', council: '出す議会', you: 'あなたのこと' };
 
   const REGIONS = [
     ['北海道・東北', 0, 7], ['関東', 7, 14], ['中部', 14, 23], ['近畿', 23, 30],
@@ -68,7 +68,7 @@
         const n = window.Report.count(id);
         return `<button type="button" class="wz-chip ${on ? 'on' : ''} ${i === 0 && !q ? 'wz-wide' : ''}" data-council="${id}" aria-pressed="${on}">${c}${chipMail(id)}${window.Report.enabled ? `<small class="wz-n">${n ? `出した人 ${n}人` : 'まだ0人'}</small>` : ''}</button>`;
       })
-      .join('') || `<p class="hint-sm wz-wide">「${esc(q)}」に当てはまる議会が見つかりません。${esc(state.pref)}以外の議会なら、下の「ほかの都道府県の議会も選ぶ」から選んでください。</p>`;
+      .join('') || `<p class="hint-sm wz-wide">「${esc(q)}」に当てはまる議会が見つかりません。${esc(state.pref)}以外の議会なら、上の都道府県から選んでください。</p>`;
     $('wzPicked').textContent = state.councils.length ? `選択中：${state.councils.map(label).join('、')}` : '';
     renderMailOk();
     renderDeadline();
@@ -92,7 +92,7 @@
         if (k && !b.querySelector(`.wz-mk.${c}`)) b.insertAdjacentHTML('beforeend', `<small class="wz-mk ${c}">${badge} ${k.length}</small>`);
       });
       const open = box.open;
-      box.innerHTML = `<summary><b>${title}（全国${n}）</b></summary><p class="hint-sm">${note}押すと選ばれ、「次へ」でその都道府県の議会の一覧に進みます。まだ調べきれていない議会も多いので、ここにない議会のほうが多くあります。</p>
+      box.innerHTML = `<summary><b>${title}（全国${n}）</b></summary><p class="hint-sm">${note}押すと選ばれ、下にその都道府県の議会の一覧が出ます。まだ調べきれていない議会も多いので、ここにない議会のほうが多くあります。</p>
         ${groups.map(([p, ids]) => `<div class="wz-region"><span>${esc(p)}</span><div class="wz-grid">${ids.map((id) => { const on = state.councils.includes(id); return `<button type="button" class="wz-chip ${on ? 'on' : ''}" data-mail-pick="${esc(id)}" aria-pressed="${on}">${esc(nameOf(id))}${c === 'ok' ? '' : chipMail(id)}</button>`; }).join('')}</div></div>`).join('')}`;
       box.open = open;
     });
@@ -175,8 +175,7 @@
   // ---------- 画面の切り替え ----------
   function canNext() {
     const s = STEPS[state.step];
-    return (s === 'pref' && state.pref) || (s === 'council' && state.councils.length)
-      || (s === 'items' && state.items.length) || (s === 'role' && state.role);
+    return (s === 'council' && state.councils.length) || (s === 'items' && state.items.length) || (s === 'you' && state.role);
   }
 
   function show() {
@@ -191,9 +190,16 @@
     $('wzRestart').hidden = s !== 'done';
     document.querySelectorAll('[data-pref]').forEach((b) => b.classList.toggle('on', b.dataset.pref === state.pref));
     document.querySelectorAll('[data-role]').forEach((b) => b.classList.toggle('on', b.dataset.role === state.role));
-    $('wzPrefPicked').textContent = s === 'pref' && state.councils.length ? `選択中：${state.councils.map(label).join('、')}（ここで選んだ都道府県の議会を書き足せます）` : '';
-    if (s === 'pref') renderMailAll();
-    if (s === 'council') renderCouncils();
+    $('wzPrefPicked').textContent = s === 'council' && real().length ? `選択中：${real().map(label).join('、')}（ほかの都道府県を選ぶと、その議会も書き足せます）` : '';
+    // 都道府県を選ぶと、同じ画面の下にその都道府県の議会の一覧を出す
+    $('wzCouncilBox').hidden = !state.pref;
+    if (s === 'council') {
+      renderMailAll();
+      if (state.pref) {
+        $('wzCouncilTitle').textContent = `${state.pref}の議会`;
+        renderCouncils();
+      }
+    }
     if (s === 'items') renderItems();
     if (s === 'done') build();
     renderCount();
@@ -224,13 +230,13 @@
       // 前に選んだ議会は残す（都道府県をまたいで選べるように）
       state.pref = d.pref;
       $('wzFilter').value = '';
-      go(1);
+      showCouncils();
     } else if (d.near) {
       // 近い議会を選んだら、その都道府県の議会の一覧へ進む（選んだ議会には印が付いている）
       state.pref = prefOf(d.near);
       if (!state.councils.includes(d.near)) state.councils.push(d.near);
       $('wzFilter').value = '';
-      go(1);
+      showCouncils();
     } else if (d.addNear) {
       // ④の近くの議会を宛先に加えて、陳情書を作り直す
       if (!state.councils.includes(d.addNear)) state.councils.push(d.addNear);
@@ -256,9 +262,13 @@
       $('wzNext').disabled = !canNext();
     } else if (d.role) {
       state.role = d.role;
-      go(1);
+      show();
     }
   });
+  function showCouncils() {
+    show();
+    $('wzCouncilBox').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
   window.addEventListener('popstate', (e) => {
     state.step = e.state && Number.isInteger(e.state.step) ? e.state.step : 0;
     show();
@@ -267,16 +277,13 @@
   });
   $('wzSkip').addEventListener('click', () => {
     state.councils = [NONE];
-    go(STEPS.indexOf('role') - state.step);
+    go(STEPS.indexOf('you') - state.step);
   });
   $('wzFilter').addEventListener('input', renderCouncils);
-  $('wzMorePref').addEventListener('click', () => go(STEPS.indexOf('pref') - state.step));
-  $('wzOther').addEventListener('click', () => go(STEPS.indexOf('pref') - state.step));
-  // 手紙の欄は閉じてあるので、開いてから移る
-  $('wzToLetter')?.addEventListener('click', () => { $('letterFold').open = true; });
+  $('wzMorePref').addEventListener('click', () => $('wzPrefs').scrollIntoView({ behavior: 'smooth', block: 'start' }));
+  $('wzOther').addEventListener('click', () => go(STEPS.indexOf('council') - state.step));
   $('wzNext').addEventListener('click', () => canNext() && go(1));
-  // 議会を選ばずに進んだときは、議会の一覧を飛ばして都道府県の画面に戻る
-  $('wzBack').addEventListener('click', () => go(STEPS[state.step] === 'role' && state.councils.some(isNone) ? STEPS.indexOf('pref') - state.step : -1));
+  $('wzBack').addEventListener('click', () => go(-1));
   $('wzRestart').addEventListener('click', () => {
     if (!confirm('選んだ議会と内容、直した文面が消えます。最初からやり直しますか？')) return;
     Object.assign(state, { step: 0, pref: '', councils: [], items: firstItems(), role: '' });
@@ -801,8 +808,12 @@
     $('wzAiBox').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
+  const top = encodeURIComponent(location.href.split('#')[0].replace(/\/make(\.html)?$/, ''));
+  $('wzShareX').href = `https://x.com/intent/post?text=${encodeURIComponent(window.THEME.shareText)}&url=${top}`;
+  $('wzShareLine').href = `https://social-plugins.line.me/lineit/share?url=${top}`;
+
   if (restore()) {
     show();
-    $('generator').scrollIntoView();
+    $('wizard').scrollIntoView();
   } else show();
 })();

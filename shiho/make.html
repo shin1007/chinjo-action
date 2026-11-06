@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>陳情書をつくる｜司法への参加を守る陳情アクション</title>
+<meta name="description" content="選択肢を押していくだけで、議会に出せる陳情書ができます。">
+<link rel="canonical" href="https://chinjo-action.vercel.app/shiho/make">
+<meta property="og:site_name" content="司法への参加を守る陳情アクション">
+<meta property="og:title" content="陳情書をつくる">
+<meta property="og:description" content="選択肢を押していくだけで、議会に出せる陳情書ができます。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://chinjo-action.vercel.app/shiho/make">
+<meta property="og:image" content="https://chinjo-action.vercel.app/themes/shiho/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="司法への参加を守る陳情アクション ― あなたの一通の陳情が、制度を動かす。">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <details class="theme-menu">
+      <summary>司法への参加</summary>
+      <nav class="theme-nav" aria-label="陳情のテーマ">
+        <a href="/kodomo">子どもの権利</a>
+        <a href="/dansei">男女平等</a>
+        <a href="/nihonjin">日本人の権利</a>
+        <a href="/shiho" aria-current="true">司法への参加</a>
+        <a href="/sonota">その他の陳情</a>
+      </nav>
+    </details>
+    <a href="/" class="logo">陳情アクション</a>
+    <nav>
+      <a href="/shiho/make">つくる</a>
+      <a href="/shiho/guide">出し方</a>
+    </nav>
+    <nav class="page-nav">
+      <a href="/shiho/make">陳情書を作る</a>
+      <a href="/shiho#faq">よくある質問</a>
+      <a href="/about">陳情って何？</a>
+      <a href="/shiho#actions">ほかにできること</a>
+      <a href="/shiho#shop">関連グッズ</a>
+      <a href="/shiho/refs">関連資料</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section id="generator" class="section alt">
+  <div class="wrap">
+    <p class="hero-crumb"><a href="/">陳情アクション</a> ＞ <a href="/shiho">司法への参加</a> ＞ <b>陳情書をつくる</b></p>
+    <h1>陳情書をつくる</h1>
+    <p class="lead-sm">選択肢を押していくだけで、議会に出せる陳情書ができます。<br>選んだ内容や直した文面は、このサイトのサーバーに送信されません。</p>
+
+    <div id="wizard" class="wizard">
+      <div class="wz-progress"><div class="wz-bar" id="wzBar"></div></div>
+      <p class="wz-stepno" id="wzStepNo"></p>
+
+      <div class="wz-step" data-step="items">
+        <h3>求める内容を選んでください <small>（いくつでも）</small></h3>
+        <p class="hint-sm">1つの内容につき1通の陳情書ができます。迷ったら、★の付いたものがおすすめです。</p>
+        <div id="wzItems" class="wz-cards"></div>
+      </div>
+
+      <div class="wz-step" data-step="council" hidden>
+        <h3>どの議会に出しますか？ <small>（いくつでも）</small></h3>
+        <p class="hint-sm">まず都道府県を選ぶと、その都道府県の議会が下に出ます。</p>
+        <p class="wz-picked" id="wzPrefPicked"></p>
+        <p class="wz-skip"><button type="button" id="wzSkip" class="btn btn-small">議会を選ばずに作る</button> <span class="hint-sm">議会名と議長名を空けた陳情書ができます。出す先が決まったら手書きで入れてください。</span></p>
+        <div id="wzPrefs"></div>
+        <div class="wz-near">
+          <button type="button" id="wzNearBtn" class="btn btn-small">📍 現在地から近い議会を探す</button>
+          <span class="hint-sm">持参して出すときに。現在地はこの端末の中だけで使い、送信しません。</span>
+          <div id="wzNear" class="wz-grid" hidden></div>
+        </div>
+        <div id="wzCouncilBox" class="wz-council-box" hidden>
+          <h4 id="wzCouncilTitle" class="wz-sub"></h4>
+          <p class="hint-sm">住んでいる自治体の議会がいちばん確実です。<span id="wzCountHint" hidden>「出した人 ○人」はこのサイトで提出を報告した人の数です。まだ誰も出していない議会に出すと、全国に広がります。</span></p>
+          <div id="wzMailOk" class="wz-mailok" hidden></div>
+          <input type="search" id="wzFilter" class="wz-filter" placeholder="名前で絞り込む（ひらがな・ローマ字でも）">
+          <div id="wzCouncils" class="wz-grid wz-scroll"></div>
+          <p class="wz-picked" id="wzPicked"></p>
+          <button type="button" id="wzMorePref" class="btn btn-small">＋ ほかの都道府県の議会も選ぶ</button>
+          <div id="wzDeadline" class="wz-deadline" hidden></div>
+        </div>
+      </div>
+
+      <div class="wz-step" data-step="you" hidden>
+        <h3>あなたのことを教えてください</h3>
+        <h4 class="wz-sub">あなたの立場に近いものは？</h4>
+        <p class="hint-sm">陳情書の最後に、立場に合った一文を添えます。個人の事情は書きません。</p>
+        <div id="wzRoles" class="wz-cards"></div>
+        <h4 class="wz-sub">あなたの住所・氏名を入れる（任意）</h4>
+        <p class="hint-sm">住所は陳情書に、氏名は鏡文（送付状）と封筒の差出人に入ります。<b>陳情書の氏名は、印刷してから手書きで署名</b>します。空欄のままなら下線になり、手書きで記入できます。次に開いたときのために<b>この端末のブラウザの中にだけ</b>残ります。共用のパソコンでは、終わったら「この端末から消す」を押してください。</p>
+        <div id="wzSender" class="sender-form">
+          <label>郵便番号<input data-sender="zip" inputmode="numeric" autocomplete="postal-code" placeholder="例：123-4567"></label>
+          <label class="wide">住所<input data-sender="address" autocomplete="street-address" placeholder="例：東京都○○市△△1-2-3"></label>
+          <label>氏名（鏡文と封筒用）<input data-sender="name" autocomplete="name" placeholder="例：佐藤 花子"></label>
+          <label>電話番号（任意・鏡文にだけ入ります）<input data-sender="tel" autocomplete="tel" inputmode="tel" placeholder="例：090-0000-0000"></label>
+          <button type="button" id="wzSenderClear" class="btn btn-small">この端末から消す</button>
+        </div>
+      </div>
+
+      <div class="wz-step" data-step="done" hidden>
+        <h3>できあがりました</h3>
+        <p id="wzSummary" class="wz-summary"></p>
+
+        <details id="wzCheck" class="wz-check">
+          <summary>文面を確かめる・直す</summary>
+          <p class="hint-sm">内容ごとに下の欄で自由に直せます。直した文面はこの端末のブラウザの中だけに残ります。</p>
+          <div id="wzDocs" class="wz-docs"></div>
+          <div id="wzRwBox" class="wz-rewrite" hidden>
+            <h4><span id="wzRwTitle"></span>を、生成AIで自分の言葉に直す</h4>
+            <p class="hint-sm">AIに渡すのは「趣旨」と「理由」の本文だけです。住所・氏名や書式はそのまま残ります。</p>
+            <ol class="wz-rw-steps">
+              <li><b>地域のことを書く（任意）</b>
+                <textarea id="wzRwLocal" rows="2" aria-label="この地域について知っていること" placeholder="この地域について知っていること（例：市の窓口に相談の案内が少ない）"></textarea>
+                <textarea id="wzRwStory" rows="2" aria-label="ご自身が見聞きしたこと" placeholder="ご自身が見聞きしたこと（日付・地名・相手方・裁判の経過は書かない）"></textarea></li>
+              <li><b>AIを開く</b><span class="hint-sm">　自治体の計画も探して結びつけるよう頼みます。検索できるPerplexityなどが向いています。</span>
+                <div class="ai-launch" data-source="wzRwPrompt" data-temporary data-compact></div>
+                <details class="wz-rw-prompt"><summary class="hint-sm">AIに渡す指示文を見る</summary><textarea id="wzRwPrompt" rows="8" readonly></textarea></details></li>
+              <li><b>AIの答えを貼って入れる</b>
+                <textarea id="wzRwAnswer" rows="5" aria-label="AIの答え" placeholder="AIの答えを、そのまま全部貼り付けます"></textarea></li>
+            </ol>
+            <div id="wzRwPlans" class="wz-rw-plans" hidden></div>
+            <div class="out-toolbar">
+              <button type="button" id="wzRwApply" class="btn btn-small btn-primary">文面に入れる</button>
+              <button type="button" id="wzRwClose" class="btn btn-small">閉じる</button>
+            </div>
+          </div>
+          </div>
+        </details>
+
+        <ol class="wz-flow">
+          <li>
+            <h4>① 印刷する</h4>
+            <p class="hint-sm">印刷するものを選んでください。選んだものが1つのPDFになります。</p>
+            <div class="print-picks">
+              <label class="check"><input type="checkbox" id="wzBody" checked> 陳情書本体</label>
+              <p class="hint-sm warn">印刷したら、陳情書の氏名欄に<b>手書きで署名し、押印</b>してください。</p>
+              <label class="check"><input type="checkbox" id="wzCover" checked> 各自治体への鏡文（送付状。郵送するときに1枚目につける）</label>
+              <label class="check"><input type="checkbox" id="wzWithLabels" checked> 宛名・差出人用紙（封筒の表と裏に、切って貼る）</label>
+              <label class="check"><input type="checkbox" id="wzWithMemo" checked> 送り方メモ（手順・議会事務局の電話と住所・切手の目安。コンビニで印刷しているあいだにこのページを閉じても、手元に残ります）</label>
+              <p class="hint-sm warn">宛名の「議長　　様」のあいだに、<b>議長の氏名を手書きで</b>書き入れてください。ラベル用紙に印刷するときは<a id="wzLabels" href="/shiho/labels">宛名ラベルのページ</a>を使います。</p>
+            </div>
+            <div class="pdf-actions">
+              <button type="button" id="wzPdf" class="btn btn-primary">印刷用のPDFを保存する</button>
+              <button type="button" id="wzDocx" class="btn">Wordで保存して直す</button>
+            </div>
+            <p class="hint-sm">家のプリンターなら、保存したPDFを開いて<b>A4・倍率100%</b>で印刷します。</p>
+            <p class="hint-sm">💡 同じ文面が多くの議会に届くと、審査されないことがあります。上の「生成AIで自分の言葉に直す」か、Wordで地域の事情を一言足すと安心です（<a href="/shiho/guide#tips">書き方のコツ</a>）。</p>
+            <div class="netprint">
+              <p><b>プリンターがなければ、コンビニで印刷できます。</b>保存したPDFをサイトかアプリで登録し、お店のマルチコピー機で表示される番号を入れて印刷します。</p>
+              <ul class="netprint-links">
+                <li><a href="https://www.printing.ne.jp/" target="_blank" rel="noopener">セブン‐イレブン：ネットプリント</a></li>
+                <li><a href="https://networkprint.ne.jp/" target="_blank" rel="noopener">ファミリーマート・ローソンなど：ネットワークプリント</a></li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <h4>② 手書きで記入し、署名する</h4>
+            <ul class="wz-todo">
+              <li>陳情書の<b>氏名欄に手書きで署名し、押印</b>する（印がなくても受け付ける議会が多いですが、押すとより丁寧です）。</li>
+              <li>空欄にした住所を手書きで記入する。</li>
+              <li>陳情書と宛名の「議長」と「様」のあいだに、<b>議長の氏名を書き入れる</b>。議長は選挙や交代で変わるので、出す直前に議会の公式サイトで確かめます：<span id="wzChairLinks"></span></li>
+            </ul>
+          </li>
+          <li>
+            <h4>③ 締切までに議会事務局へ出す</h4>
+            <p class="hint-sm">出し方は議会ごとに下に書いてあります。<b>電子申請</b>ができる議会はそれがいちばん手軽です。郵送で出せる議会もありますが、郵送だと審査されず配布だけになる議会もあるので、遠い議会には先に電話で「郵送でも審査されますか」と聞くのが確実です（<a href="/shiho/guide#mail">詳しく</a>）。締切は定例会の1〜2週間前が多いです。</p>
+            <div id="wzPostage" class="postage" hidden></div>
+            <details class="send-howto">
+              <summary>郵送するときの送り方（図解）と切手の目安</summary>
+              <div data-send-figs></div>
+              <p class="hint-sm">切手は重さで決まります。A4を折らずに角2封筒へ入れるとき、紙3枚までなら<b>140円</b>、16枚までなら<b>180円</b>が目安です。境目に近いときは1つ上の料金分を貼っておけば安心です。<a href="/shiho/guide#send">送り方をくわしく見る</a></p>
+              <div data-stationery></div>
+            </details>
+            <ul id="wzOffices" class="wz-offices"></ul>
+            <p class="hint-sm">案内ページは自動で見つけたもので、違うこともあります。</p>
+          </li>
+          <li>
+            <h4>④ 近くの自治体の議会にも出す</h4>
+            <p class="hint-sm">同じ陳情を近くの議会にも出すと、地域で取り上げられやすくなります。</p>
+            <div id="wzNearby" class="wz-nearby"></div>
+          </li>
+        </ol>
+
+        <details class="wz-more">
+          <summary>ほかの操作（コピー・スマホに送る・生成AIに一から書いてもらう）</summary>
+          <div class="out-toolbar">
+            <button type="button" id="wzCopy" class="btn btn-small">すべてコピー</button>
+            <button type="button" id="wzSend" class="btn btn-small">スマホに送る・あとで開く</button>
+            <button type="button" id="wzAi" class="btn btn-small">生成AIに一から書いてもらう</button>
+          </div>
+          <div id="wzSendBox" class="wz-send" hidden>
+            <p class="hint-sm">QRコードかリンクで、同じ陳情書をスマホやあとで開けます。<b>手で直した文面は含まれません</b>。直した場合は「すべてコピー」で保存してください。</p>
+            <div id="wzQr" class="wz-qr"></div>
+            <div class="out-toolbar">
+              <button type="button" id="wzLinkCopy" class="btn btn-small">リンクをコピー</button>
+              <a id="wzMail" class="btn btn-small">メールで自分に送る</a>
+              <button type="button" id="wzShare" class="btn btn-small" hidden>共有…</button>
+            </div>
+          </div>
+          <div id="wzAiBox" hidden>
+            <div class="ai-launch" data-source="wzPrompt"></div>
+            <textarea id="wzPrompt" rows="8" readonly></textarea>
+          </div>
+        </details>
+
+        <div class="wz-after">
+          <h4>提出したあとにできること</h4>
+          <ul>
+          <li><b>ほかの議会にも出す：</b>同じ内容のまま、近くの議会や別の都道府県の議会を書き足せます。同じ地域でまとめて出すと、採択につながりやすくなります。<button type="button" id="wzOther" class="btn btn-small">ほかの議会を選ぶ</button></li>
+          <li><b>審査を見届ける：</b>1週間ほどしたら議会事務局に受理と審査の日程を確かめ、できれば委員会を傍聴します。<a href="/shiho/guide#flow">提出までの流れ</a></li>
+          <li><b>広める：</b>結果が出たら、ほかの地域の人の後押しになるよう共有してください。<a id="wzShareX" target="_blank" rel="noopener">Xで共有</a>／<a id="wzShareLine" target="_blank" rel="noopener">LINEで共有</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <p id="wzCount" class="hint-sm wz-count" hidden></p>
+      <div class="wz-nav">
+        <button type="button" id="wzBack" class="btn btn-small">← もどる</button>
+        <button type="button" id="wzNext" class="btn btn-primary">次へ →</button>
+        <button type="button" id="wzRestart" class="btn btn-small" hidden>最初からやり直す</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>司法への参加を守る陳情アクション</p>
+    <p class="small"><a href="/shiho">トップページ</a>　｜　<a href="/shiho/guide">陳情の出し方ガイド</a></p>
+    <p class="small credit">市区町村の一覧：<a href="https://github.com/geolonia/japanese-addresses" target="_blank" rel="noopener">Geolonia 住所データ</a>（<a href="https://creativecommons.org/licenses/by/4.0/deed.ja" target="_blank" rel="noopener">CC BY 4.0</a>）を加工して作成。最寄り駅：<a href="https://nlftp.mlit.go.jp/ksj/" target="_blank" rel="noopener">国土数値情報</a>（鉄道データ）（国土交通省）を加工して作成。位置：<a href="https://maps.gsi.go.jp/" target="_blank" rel="noopener">地理院地図</a>の住所検索</p></div>
+</footer>
+<p id="toast" class="toast" hidden>コピーしました</p>
+
+<script src="/themes/shiho/theme.js"></script>
+<script src="/data/prefs.js"></script>
+<script src="/themes/shiho/asks-national.js"></script>
+<script src="/themes/shiho/asks-local.js"></script>
+<script src="/themes/shiho/template.js"></script>
+<script src="/data/municipalities.js"></script>
+<script src="/data/offices.js"></script>
+<script src="/data/sites.js"></script>
+<script src="/data/councils.js"></script>
+<script src="/data/mail.js"></script>
+<script src="/data/tel.js"></script>
+<script src="/data/access.js"></script>
+<script src="/data/kana.js"></script>
+<script src="/vendor/qrcode.js"></script>
+<script src="/yomi.js"></script>
+<script src="/common.js"></script>
+<script src="/places.js"></script>
+<script src="/petition.js"></script>
+<script src="/pdfdoc.js"></script>
+<script src="/docxdoc.js"></script>
+<script src="/postage.js"></script>
+<script src="/report.js"></script>
+<script src="/wizard.js"></script>
+<script src="/ai-launch.js"></script>
+<script src="/send-figs.js"></script>
+</body>
+</html>
