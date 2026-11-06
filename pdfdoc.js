@@ -22,9 +22,10 @@ window.PdfDoc = (() => {
     assets = assets || Promise.all([
       window.PDFLib ? null : loadScript('/vendor/pdf-lib.min.js'),
       window.fontkit ? null : loadScript('/vendor/fontkit.umd.min.js'),
+      window.qrcode ? null : loadScript('/vendor/qrcode.js'),
       loadFont('/fonts/BIZUDMincho-Regular.subset.ttf'),
       loadFont('/fonts/BIZUDMincho-Bold.subset.ttf'),
-    ]).then(([, , regular, bold]) => ({ regular, bold }))
+    ]).then(([, , , regular, bold]) => ({ regular, bold }))
       .catch((e) => { assets = null; throw e; });
     return assets;
   }
@@ -99,13 +100,29 @@ window.PdfDoc = (() => {
     const BODY = 10.5;
     const LH = BODY * 1.85;
     const textW = A4.w - M.left - M.right;
-    const ITEM = /^([一二三四五六七八九十]+　|\d+．)/;
+    const ITEM = /^([一二三四五六七八九十]+　|\d+．|[・①-⑳])/;
+    // 文面の URL には、スマホで読み取れる QR コードを添える
+    const URL_RE = /https?:\/\/[^\s」）、。]+/g;
+    const QR = 22 * MM;
+    function drawQr(page, url, x, top) {
+      const qr = window.qrcode(0, 'M');
+      qr.addData(url);
+      qr.make();
+      const n = qr.getModuleCount();
+      const c = QR / n;
+      for (let r = 0; r < n; r += 1) {
+        for (let k = 0; k < n; k += 1) {
+          if (qr.isDark(r, k)) page.drawRectangle({ x: x + k * c, y: top - (r + 1) * c, width: c, height: c, color: black });
+        }
+      }
+    }
     const SENDER = /^(住所|氏名|電話)　/;
 
     // 1つの文書（改行区切りの文面）を、新しいページから書く。ページ番号は文書ごとに振る
     // 行の間を少し詰めれば1枚に収まるときは詰める。2枚以上になるときは、見出しを次の文と離さず、
     // 段落を1行だけ残して分けず、「以上」だけが次の紙に行かないように区切る
-    function addDocument(text) {
+    // images：「[[図:名前]]」の行に置く絵（embedImage で埋め込んだもの）。文の幅いっぱいに置く
+    function addDocument(text, images = {}) {
       const lines = text.replace(/\r/g, '').split('\n');
 
       // 文面を、ページをまたいでよいかの決まりを持った塊（行の並び）に分ける。k は行の間の詰め具合
@@ -203,14 +220,26 @@ window.PdfDoc = (() => {
             });
             return;
           }
-          // 一　…／1．… の箇条：2行目からは番号のぶん下げる
+          // 絵：文の幅に合わせて縮める
+          const fig = s.match(/^\[\[図:(.+)\]\]$/);
+          if (fig && images[fig[1]]) {
+            const img = images[fig[1]];
+            const h = (img.height * textW) / img.width;
+            const b = block();
+            gap(b, lh * 0.3);
+            row(b, h + lh * 0.3, (p, y) => p.drawImage(img, { x: M.left, y: y + BODY - h, width: textW, height: h }));
+            return;
+          }
+          // 一　…／1．…／・… の箇条：2行目からは番号のぶん下げる
           const im = s.match(ITEM);
           const indent = im ? width(im[1], BODY) : 0;
-          const b = block({ split: true });
+          const urls = s.match(URL_RE) || [];
+          const b = block({ split: !urls.length });
           wrap(s.slice(im ? im[1].length : 0), BODY, textW - indent).forEach((l, j) => row(b, lh, (p, y) => {
             if (im && !j) p.drawText(safe(im[1]), { x: M.left, y, size: BODY, font: R, color: black });
             drawLine(p, l, M.left + indent, y, BODY);
           }));
+          urls.forEach((u) => row(b, QR + lh * 0.3, (p, y) => drawQr(p, u, M.left + indent, y + BODY * 0.8)));
         });
         return blocks;
       }
@@ -337,6 +366,7 @@ window.PdfDoc = (() => {
     return {
       addDocument,
       addLabels,
+      embedImage: (png) => pdf.embedPng(png),
       bytes: () => pdf.save(),
     };
   }
