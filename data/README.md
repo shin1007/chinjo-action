@@ -1,13 +1,13 @@
 # 陳情書の文面を直すには
 
-陳情書の文面はこのフォルダのファイルにまとめてあります。直すと、かんたん作成・詳しい版・陳情書ビルダーのすべてに反映されます。
+陳情書の文面はこのフォルダのファイルにまとめてあります。直すと、かんたん作成・詳しい版の両方に反映されます。
 
 | 直したいもの | ファイル |
 |---|---|
 | 国に意見書を求める陳情の内容（件名の言葉・求めること・理由） | [../themes/kodomo/asks-national.js](../themes/kodomo/asks-national.js) |
 | 自治体に取り組んでもらう陳情の内容 | [../themes/kodomo/asks-local.js](../themes/kodomo/asks-local.js) |
 | 件名・趣旨・結びの決まった文章、意見書の提出先 | [../themes/kodomo/template.js](../themes/kodomo/template.js) |
-| 陳情書ビルダーで追加できる理由の例文（出典つき） | [../themes/kodomo/reasons.js](../themes/kodomo/reasons.js) |
+| 理由の例文（出典つき。廃止した陳情書ビルダー用で、今は使っていない） | [../themes/kodomo/reasons.js](../themes/kodomo/reasons.js) |
 | 都道府県の一覧 | [prefs.js](prefs.js) |
 
 以下のファイルは自動で作ったデータなので、手で直す必要はありません。
