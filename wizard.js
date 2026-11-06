@@ -319,12 +319,35 @@
       });
       doc.addLabels(window.PdfDoc.SHEETS.plain, window.PdfDoc.labelItems(rows, sender, { to: 'chair', zaichu: true, from: true, back: true }));
     }
-    if ($('wzWithMemo').checked) doc.addDocument(sendMemo(sheets));
+    if ($('wzWithMemo').checked) doc.addDocument(sendMemo(sheets), { send: await doc.embedImage(await figsPng()) });
     return { bytes: await doc.bytes(), sheets };
   }
 
   // 送り方のメモ：コンビニで印刷しているあいだにこのページを閉じても、出し方が手元に残るよう、PDFの最後に1枚つける
-  // PDFのフォントに絵文字はないので外す
+  // PDFのフォントに絵文字はないので外す。送り方の図（send-figs.js）は、画面の SVG を3枚横に並べた PNG にして入れる
+  async function figsPng() {
+    const svgs = [...document.querySelectorAll('[data-send-figs] svg')].slice(0, 3);
+    const W = 600;
+    const H = 750;
+    const canvas = document.createElement('canvas');
+    canvas.width = W * svgs.length;
+    canvas.height = H;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    await Promise.all(svgs.map((svg, i) => new Promise((ok, ng) => {
+      const c = svg.cloneNode(true);
+      c.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+      c.setAttribute('width', W);
+      c.setAttribute('height', H);
+      const img = new Image();
+      img.onload = () => { ctx.drawImage(img, i * W, 0, W, H); ok(); };
+      img.onerror = () => ng(new Error('送り方の図を描けませんでした'));
+      img.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(new XMLSerializer().serializeToString(c))}`;
+    })));
+    const blob = await new Promise((ok) => canvas.toBlob(ok, 'image/png'));
+    return new Uint8Array(await blob.arrayBuffer());
+  }
   const plain = (t) => t.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]\uFE0F?\s*/gu, '');
   function sendMemo(sheets) {
     const lines = [
@@ -334,9 +357,12 @@
       '【出すまでの手順】',
       '1．陳情書の氏名欄に手書きで署名し、押印する。空欄にした住所も手書きで記入する。',
       '2．陳情書と宛名の「議長」と「様」のあいだに、議長の氏名を書き入れる。議長は選挙や交代で変わるので、出す直前に議会の公式サイトで確かめる。',
-      '3．ホチキスは陳情書1件ごとに、その陳情書のページだけを左上で1か所留める。全部をまとめて留めない。鏡文は留めずにいちばん上に置き、全部をクリアファイルに入れる。',
-      '4．郵送するときは、A4を折らずに角2封筒へ入れ、表に宛名、裏に差出人の紙を貼り、切手を貼る。',
-      '5．締切までに議会事務局へ出す。郵送だと審査されず配布だけになる議会もあるので、遠い議会には先に電話で「郵送でも審査されますか」と聞くのが確実。締切は定例会の1〜2週間前が多い。',
+      '3．郵送するときは、下の図のように中身をまとめ、A4を折らずに角2封筒へ入れる。',
+      '[[図:send]]',
+      '①中身：ホチキスは陳情書1件ごとに、その陳情書のページだけを左上で1か所留める。全部をまとめて留めない（件名ごとに別の委員会へ回ることがある）。鏡文は留めずにいちばん上に置き、全部をクリアファイルに入れる。',
+      '②封筒の表：切手は左上に（金額は下の「切手の目安」）。宛名の紙は真ん中に。宛名に「陳情書在中」が入っていなければ、左下に赤で書く。',
+      '③封筒の裏：のりで封をし、「〆」を書く。差出人の紙は下の方に。',
+      '4．締切までに議会事務局へ出す。郵送だと審査されず配布だけになる議会もあるので、遠い議会には先に電話で「郵送でも審査されますか」と聞くのが確実。締切は定例会の1〜2週間前が多い。',
       '',
       '【議会ごとの出し方】',
     ];
