@@ -11,7 +11,7 @@
   const state = Object.assign({
     sender: { era: 'reiwa' },
     recipients: [],
-    asks: ['n_restore', 'n_joint', 'n_lawyer', 'l_visit', 'l_guidance'],
+    asks: [],
     blocks: ['crc', 'reform2024', 'supreme', 'no_prosecution', 'conflict', 'poverty', 'support_rate'],
     story: '',
     councilForm: 'chinjo',

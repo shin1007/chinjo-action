@@ -41,7 +41,7 @@
   function renderItems() {
     document.getElementById('itemsLegend').textContent = '求める内容（選んだ数だけ陳情書ができます）';
     itemList.innerHTML = window.Common.askGroups(window.Petition.ordered(),
-      (it) => `<label class="check"><input type="checkbox" name="items" value="${it.id}" ${it.defaultOn ? 'checked' : ''}> ${it.label}${window.Common.scopeTag(it)}</label>`);
+      (it) => `<label class="check"><input type="checkbox" name="items" value="${it.id}"> ${it.label}${window.Common.scopeTag(it)}</label>`);
     updateItemHint();
   }
 
