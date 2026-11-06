@@ -69,51 +69,7 @@
 
   <!-- STEP 2 -->
   <section class="step">
-    <h2><span class="step-no">2</span>求める事項</h2>
-    <div class="grid2">
-      <fieldset><legend>国への意見書で求めること</legend><div id="asksNational"></div></fieldset>
-      <fieldset><legend>自治体の施策として求めること</legend><div id="asksLocal"></div></fieldset>
-    </div>
-    <label class="inline">議会あての書式
-      <select id="councilForm">
-        <option value="chinjo">陳情書</option>
-        <option value="seigan">請願書（紹介議員が必要）</option>
-      </select>
-    </label>
-    <label class="inline">紹介議員（請願書のみ）<input id="introducer" placeholder="○○ ○○"></label>
-  </section>
-
-  <!-- STEP 3 -->
-  <section class="step">
-    <h2><span class="step-no">3</span>理由を組み立てる</h2>
-    <p class="hint">使いたい段落を選んでください。出典と注意点は文面には入りません。事実は提出前に必ず出典で確認してください。</p>
-    <div id="blockList"></div>
-    <label>陳情者としての一言（任意・2〜3文まで）
-      <textarea id="story" rows="4" maxlength="300" placeholder="一般的な表現で短く。日付・地名・相手方・裁判の経過は書かず、詳しい事情は議員への手紙で伝えましょう（陳情の出し方ガイド参照）。"></textarea>
-    </label>
-    <button type="button" class="btn btn-primary" id="generate">本文をつくる</button>
-  </section>
-
-  <!-- STEP 4 -->
-  <section class="step">
-    <h2><span class="step-no">4</span>本文を仕上げる</h2>
-    <p class="hint">求める事項ごとに1件ずつ作り、「━━ 次の陳情 ━━」で区切って並べます（多くの議会が1件1趣旨での提出を求めているため）。区切り線は消さないでください。印刷時にそれぞれ別の文書になります。<code>{宛先}</code> は各宛先の自治体名に置き換わります。もう一度「本文をつくる」を押すと上書きされます。</p>
-    <div class="tabs">
-      <button type="button" class="tab active" data-tab="council">議会あて</button>
-      <button type="button" class="tab" data-tab="mayor">首長あて</button>
-      <button type="button" class="tab" data-tab="member">議員あて</button>
-      <button type="button" class="tab" data-tab="cover">鏡文</button>
-    </div>
-    <textarea id="body-council" class="body-text" rows="30"></textarea>
-    <textarea id="body-mayor" class="body-text" rows="30" hidden></textarea>
-    <textarea id="body-member" class="body-text" rows="30" hidden></textarea>
-    <textarea id="body-cover" class="body-text" rows="20" hidden></textarea>
-  </section>
-
-  <!-- STEP 5 -->
-  <section class="step">
-    <h2><span class="step-no">5</span>宛先リスト</h2>
-    <p class="hint">宛先を入れないで印刷すると、議会名・議長名を空けた陳情書が1部ずつできます（手書きで入れます）。宛名の切り取り紙は宛先を入れたときだけできます。</p>
+    <h2><span class="step-no">2</span>宛先リスト</h2>
     <p class="hint">議会への陳情・請願、首長への要望、議員への手紙を宛先ごとに登録します。<b>一覧から選ぶと、役所の本庁舎の郵便番号と住所が自動で入ります</b>（議会事務局の多くは本庁舎にあります。念のため確認してください）。<b>議長・首長の氏名は必ず入れてください。</b>「○○市議会議長　○○○○様」と氏名まで入っていると、きちんと調べて出した陳情として丁寧に受け取られます。氏名は公式サイトの「議長・副議長」のページで、出す直前に確かめます（選挙や交代で変わります）。住所・郵送の扱いは各議会事務局のサイトで確認してください。<a href="/{{id}}/guide#mail">郵送の注意点</a></p>
     <div class="picker">
       <div class="picker-filters">
@@ -149,6 +105,49 @@
       </table>
     </div>
     <p class="hint">種別：<b>議会</b>＝議長あての陳情書（または請願書）／<b>首長</b>＝知事・市区町村長あての要望書／<b>議員</b>＝議員個人あての手紙。</p>
+  </section>
+
+  <!-- STEP 3 -->
+  <section class="step">
+    <h2><span class="step-no">3</span>求める事項</h2>
+    <div class="grid2">
+      <fieldset><legend>国への意見書で求めること</legend><div id="asksNational"></div></fieldset>
+      <fieldset><legend>自治体の施策として求めること</legend><div id="asksLocal"></div></fieldset>
+    </div>
+    <label class="inline">議会あての書式
+      <select id="councilForm">
+        <option value="chinjo">陳情書</option>
+        <option value="seigan">請願書（紹介議員が必要）</option>
+      </select>
+    </label>
+    <label class="inline">紹介議員（請願書のみ）<input id="introducer" placeholder="○○ ○○"></label>
+  </section>
+
+  <!-- STEP 4 -->
+  <section class="step">
+    <h2><span class="step-no">4</span>理由を組み立てる</h2>
+    <p class="hint">使いたい段落を選んでください。出典と注意点は文面には入りません。事実は提出前に必ず出典で確認してください。</p>
+    <div id="blockList"></div>
+    <label>陳情者としての一言（任意・2〜3文まで）
+      <textarea id="story" rows="4" maxlength="300" placeholder="一般的な表現で短く。日付・地名・相手方・裁判の経過は書かず、詳しい事情は議員への手紙で伝えましょう（陳情の出し方ガイド参照）。"></textarea>
+    </label>
+    <button type="button" class="btn btn-primary" id="generate">本文をつくる</button>
+  </section>
+
+  <!-- STEP 5 -->
+  <section class="step">
+    <h2><span class="step-no">5</span>本文を仕上げる</h2>
+    <p class="hint">求める事項ごとに1件ずつ作り、「━━ 次の陳情 ━━」で区切って並べます（多くの議会が1件1趣旨での提出を求めているため）。区切り線は消さないでください。印刷時にそれぞれ別の文書になります。<code>{宛先}</code> は各宛先の自治体名に置き換わります。もう一度「本文をつくる」を押すと上書きされます。</p>
+    <div class="tabs">
+      <button type="button" class="tab active" data-tab="council">議会あて</button>
+      <button type="button" class="tab" data-tab="mayor">首長あて</button>
+      <button type="button" class="tab" data-tab="member">議員あて</button>
+      <button type="button" class="tab" data-tab="cover">鏡文</button>
+    </div>
+    <textarea id="body-council" class="body-text" rows="30"></textarea>
+    <textarea id="body-mayor" class="body-text" rows="30" hidden></textarea>
+    <textarea id="body-member" class="body-text" rows="30" hidden></textarea>
+    <textarea id="body-cover" class="body-text" rows="20" hidden></textarea>
   </section>
 
   <!-- STEP 6 -->
