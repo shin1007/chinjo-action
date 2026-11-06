@@ -319,7 +319,51 @@
       });
       doc.addLabels(window.PdfDoc.SHEETS.plain, window.PdfDoc.labelItems(rows, sender, { to: 'chair', zaichu: true, from: true, back: true }));
     }
+    if ($('wzWithMemo').checked) doc.addDocument(sendMemo(sheets));
     return { bytes: await doc.bytes(), sheets };
+  }
+
+  // 送り方のメモ：コンビニで印刷しているあいだにこのページを閉じても、出し方が手元に残るよう、PDFの最後に1枚つける
+  // PDFのフォントに絵文字はないので外す
+  const plain = (t) => t.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]\uFE0F?\s*/gu, '');
+  function sendMemo(sheets) {
+    const lines = [
+      '　　　　陳情書の送り方メモ',
+      '（このメモは議会に送らず、手元に残してください）',
+      '',
+      '【出すまでの手順】',
+      '1．陳情書の氏名欄に手書きで署名し、押印する。空欄にした住所も手書きで記入する。',
+      '2．陳情書と宛名の「議長」と「様」のあいだに、議長の氏名を書き入れる。議長は選挙や交代で変わるので、出す直前に議会の公式サイトで確かめる。',
+      '3．ホチキスは陳情書1件ごとに、その陳情書のページだけを左上で1か所留める。全部をまとめて留めない。鏡文は留めずにいちばん上に置き、全部をクリアファイルに入れる。',
+      '4．郵送するときは、A4を折らずに角2封筒へ入れ、表に宛名、裏に差出人の紙を貼り、切手を貼る。',
+      '5．締切までに議会事務局へ出す。郵送だと審査されず配布だけになる議会もあるので、遠い議会には先に電話で「郵送でも審査されますか」と聞くのが確実。締切は定例会の1〜2週間前が多い。',
+      '',
+      '【議会ごとの出し方】',
+    ];
+    state.councils.forEach((c) => {
+      const [pref, key] = officeKeys[c] || [];
+      const info = infoOf(c);
+      const o = window.Places.office(pref, key);
+      const t = ((window.TEL || {})[pref] || {})[key];
+      const a = accessOf(pref, key);
+      const page = ((window.SITES[pref] || {})[key] || [])[1];
+      const rule = mailRule(info);
+      const s = sheets.find((x) => x.c === c);
+      const p = s && s.n && window.Postage.estimate(s.n);
+      lines.push('', `■ ${label(c)}事務局`);
+      lines.push(`・郵送：${rule ? plain(rule.label) : '郵送で審査してもらえるかは載っていませんでした（事務局に確認を）'}`);
+      if (info.denshi) lines.push('・電子申請でも出せるようです。');
+      [['郵送について', info.yusoNote], ['住民以外の陳情について', info.outsideNote], ['締切', info.deadline]].forEach(([k, v]) => {
+        const x = v && clip(v);
+        if (x) lines.push(`・${k}：「${x}」`);
+      });
+      if (t) lines.push(`・電話：${t[1]}（${t[0] === 'gikai' ? '議会事務局' : '役所。「議会事務局につないでください」と伝える'}）`);
+      if (o.address) lines.push(`・住所：〒${o.zip}　${o.address}${o.main ? '（役所の本庁舎。議会事務局が別の建物のこともある）' : ''}`);
+      if (a) lines.push(`・持参：${a[2]}駅（${a[3]}）から${a[4] <= 2500 ? `徒歩約${Math.ceil((a[4] * 1.3) / 80)}分` : `約${km(a[4])}。バスかタクシーが便利`}`);
+      if (p) lines.push(`・切手の目安（角2封筒・定形外郵便）：${s.n}枚・約${p.g}g → ${p.yen ? `${p.yen}円${p.safe ? `（心配なら${p.safe}円）` : ''}` : '郵便局の窓口で出す'}`);
+      if (page) lines.push(`・案内ページ：${page}`);
+    });
+    return lines.join('\n');
   }
 
   // 封筒ごとの重さの目安と、貼る切手
@@ -588,7 +632,7 @@
   }
 
   // 印刷するものを1つも選んでいなければ、PDF を作らずに知らせる
-  const picked = () => ['wzBody', 'wzCover', 'wzWithLabels'].some((id) => $(id).checked) || (flash('印刷するものを選んでください'), false);
+  const picked = () => ['wzBody', 'wzCover', 'wzWithLabels', 'wzWithMemo'].some((id) => $(id).checked) || (flash('印刷するものを選んでください'), false);
   $('wzPdf').addEventListener('click', (e) => picked() && savePdf(e.currentTarget, envelopes(), { all: true }));
   // Word で保存：自分の言葉で直してから印刷できるよう、鏡文と陳情書を .docx にする（宛名・差出人用紙は入れない）
   $('wzDocx').addEventListener('click', () => {
