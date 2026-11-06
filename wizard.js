@@ -3,7 +3,9 @@
   const { copy, esc, flash } = window.Common;
   const { withSender } = window.Petition;
   const $ = (id) => document.getElementById(id);
-  const STEPS = ['items', 'council', 'you', 'done'];
+  // 最初の3つが選ぶ画面。そのあとに、できあがった文面の画面と、印刷して出す画面が続く
+  const STEPS = ['items', 'council', 'you', 'done', 'send'];
+  const ASK_STEPS = 3;
   const STEP_NAMES = { items: '求める内容', council: '出す議会', you: 'あなたのこと' };
 
   const REGIONS = [
@@ -175,19 +177,20 @@
   // ---------- 画面の切り替え ----------
   function canNext() {
     const s = STEPS[state.step];
-    return (s === 'council' && state.councils.length) || (s === 'items' && state.items.length) || (s === 'you' && state.role);
+    return (s === 'council' && state.councils.length) || (s === 'items' && state.items.length) || (s === 'you' && state.role) || s === 'done';
   }
 
   function show() {
     const s = STEPS[state.step];
     if (state.councils.length > 1) state.councils = real();
     document.querySelectorAll('.wz-step').forEach((el) => (el.hidden = el.dataset.step !== s));
-    $('wzBar').style.width = `${(state.step / (STEPS.length - 1)) * 100}%`;
-    $('wzStepNo').textContent = s === 'done' ? '' : `${state.step + 1} / ${STEPS.length - 1}　${STEP_NAMES[s]}`;
+    $('wzBar').style.width = `${Math.min(1, state.step / ASK_STEPS) * 100}%`;
+    $('wzStepNo').textContent = state.step < ASK_STEPS ? `${state.step + 1} / ${ASK_STEPS}　${STEP_NAMES[s]}` : '';
     $('wzBack').hidden = state.step === 0;
-    $('wzNext').hidden = s === 'done';
+    $('wzNext').hidden = s === 'send';
+    $('wzNext').textContent = s === 'done' ? '印刷して出す →' : '次へ →';
     $('wzNext').disabled = !canNext();
-    $('wzRestart').hidden = s !== 'done';
+    $('wzRestart').hidden = state.step < ASK_STEPS;
     document.querySelectorAll('[data-pref]').forEach((b) => b.classList.toggle('on', b.dataset.pref === state.pref));
     document.querySelectorAll('[data-role]').forEach((b) => b.classList.toggle('on', b.dataset.role === state.role));
     $('wzPrefPicked').textContent = s === 'council' && real().length ? `選択中：${real().map(label).join('、')}（ほかの都道府県を選ぶと、その議会も書き足せます）` : '';
@@ -201,9 +204,9 @@
       }
     }
     if (s === 'items') renderItems();
-    if (s === 'done') build();
+    if (state.step >= ASK_STEPS) build();
     renderCount();
-    saveLink(s === 'done');
+    saveLink(state.step >= ASK_STEPS);
   }
 
   // 画面が切り替わったら、新しい質問の見出しに読み上げ・キーボードの位置を移す
