@@ -377,6 +377,7 @@
       const s = sheets.find((x) => x.c === c);
       const p = s && s.n && window.Postage.estimate(s.n);
       lines.push('', `■ ${label(c)}事務局`);
+      if (page) lines.push(`・案内ページ：${page}`);
       lines.push(`・郵送：${rule ? plain(rule.label) : '郵送で審査してもらえるかは載っていませんでした（事務局に確認を）'}`);
       if (info.denshi) lines.push('・電子申請でも出せるようです。');
       [['郵送について', info.yusoNote], ['住民以外の陳情について', info.outsideNote], ['締切', info.deadline]].forEach(([k, v]) => {
@@ -387,7 +388,6 @@
       if (o.address) lines.push(`・住所：〒${o.zip}　${o.address}${o.main ? '（役所の本庁舎。議会事務局が別の建物のこともある）' : ''}`);
       if (a) lines.push(`・持参：${a[2]}駅（${a[3]}）から${a[4] <= 2500 ? `徒歩約${Math.ceil((a[4] * 1.3) / 80)}分` : `約${km(a[4])}。バスかタクシーが便利`}`);
       if (p) lines.push(`・切手の目安（角2封筒・定形外郵便）：${s.n}枚・約${p.g}g → ${p.yen ? `${p.yen}円${p.safe ? `（心配なら${p.safe}円）` : ''}` : '郵便局の窓口で出す'}`);
-      if (page) lines.push(`・案内ページ：${page}`);
     });
     return lines.join('\n');
   }
