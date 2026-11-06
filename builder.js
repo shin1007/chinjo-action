@@ -261,8 +261,8 @@
 
   // ---------- 求める事項・理由 ----------
   const askHtml = (a) => `<label class="check"><input type="checkbox" data-ask="${a.id}" ${state.asks.includes(a.id) ? 'checked' : ''}> ${esc(a.label)}</label>`;
-  $('#asksNational').innerHTML = window.ASKS.filter((a) => a.scope === 'national').map(askHtml).join('');
-  $('#asksLocal').innerHTML = window.ASKS.filter((a) => a.scope === 'local').map(askHtml).join('');
+  $('#asksNational').innerHTML = window.Common.askGroups(window.ASKS.filter((a) => a.scope === 'national'), askHtml);
+  $('#asksLocal').innerHTML = window.Common.askGroups(window.ASKS.filter((a) => a.scope === 'local'), askHtml);
   $$('[data-ask]').forEach((el) => el.addEventListener('change', () => {
     state.asks = $$('[data-ask]:checked').map((x) => x.dataset.ask);
     save();

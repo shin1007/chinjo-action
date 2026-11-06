@@ -79,3 +79,5 @@ fieldset label.check { display: block; }
 .pick.added { color: var(--muted); cursor: default; }
 @media (max-width: 800px) { .picker-filters { grid-template-columns: 1fr; } }
 #recipientTable td:nth-child(2) select, #recipientTable td:nth-child(9) select { min-width: 5.5em; }
+.ask-cat { margin: 14px 0 6px; font-size: 1rem; }
+.ask-cat:first-child { margin-top: 0; }

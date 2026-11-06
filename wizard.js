@@ -125,11 +125,11 @@
 
   function renderItems() {
     const scope = state.type === 'local' ? 'local' : 'national';
-    $('wzItems').innerHTML = window.ASKS.filter((a) => a.scope === scope).map((a) => {
+    $('wzItems').innerHTML = window.Common.askGroups(window.ASKS.filter((a) => a.scope === scope), (a) => {
       const on = state.items.includes(a.id);
       const star = a.recommended ? '★ ' : '';
       return `<button type="button" class="wz-card ${on ? 'on' : ''}" data-item="${a.id}" aria-pressed="${on}"><b>${star}${a.label}</b><span>${a.reason.split('。')[0]}。</span></button>`;
-    }).join('');
+    });
     renderCount();
   }
 
