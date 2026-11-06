@@ -71,6 +71,24 @@
     renderCount();
   }
 
+  // 郵送でも審査される議会は、都道府県を選ぶ前に全国分を見せる（家から出せる議会を先に知ってもらう）
+  // 一覧は長いので、都道府県のボタンの上に折りたたんで置く
+  const mailBox = document.createElement('details');
+  mailBox.className = 'wz-mailok';
+  $('wzPrefs').before(mailBox);
+  function renderMailAll() {
+    const groups = window.PREFS.map((p) => [p, mailOk(p)]).filter(([, ids]) => ids.length);
+    const n = groups.reduce((a, [, ids]) => a + ids.length, 0);
+    document.querySelectorAll('[data-pref]').forEach((b) => {
+      const k = (groups.find(([p]) => p === b.dataset.pref) || [])[1];
+      if (k && !b.querySelector('.wz-mk')) b.insertAdjacentHTML('beforeend', `<small class="wz-mk ok">📮 郵送で審査 ${k.length}</small>`);
+    });
+    const open = mailBox.open;
+    mailBox.innerHTML = `<summary><b>📮 郵送でも審査されるとわかっている議会（全国${n}）</b></summary><p class="hint-sm">家から送るだけで審査してもらえます。押すと選ばれ、「次へ」でその都道府県の議会の一覧に進みます。まだ調べきれていない議会も多いので、ここにない議会も郵送で審査されることがあります。</p>
+      ${groups.map(([p, ids]) => `<div class="wz-region"><span>${esc(p)}</span><div class="wz-grid">${ids.map((id) => { const on = state.councils.includes(id); return `<button type="button" class="wz-chip ${on ? 'on' : ''}" data-mail-pick="${esc(id)}" aria-pressed="${on}">${esc(nameOf(id))}</button>`; }).join('')}</div></div>`).join('')}`;
+    mailBox.open = open;
+  }
+
   // 審査されなくても議員に配付されるだけで読んでもらえるので、選ぶときに郵送の扱いを議会ごとに短く出す
   function chipMail(id) {
     const info = infoOf(id);
@@ -164,6 +182,7 @@
     document.querySelectorAll('[data-pref]').forEach((b) => b.classList.toggle('on', b.dataset.pref === state.pref));
     document.querySelectorAll('[data-role]').forEach((b) => b.classList.toggle('on', b.dataset.role === state.role));
     $('wzPrefPicked').textContent = s === 'pref' && state.councils.length ? `選択中：${state.councils.map(label).join('、')}（ここで選んだ都道府県の議会を書き足せます）` : '';
+    if (s === 'pref') renderMailAll();
     if (s === 'council') renderCouncils();
     if (s === 'items') renderItems();
     if (s === 'done') build();
@@ -204,6 +223,11 @@
     } else if (d.addNear) {
       // ④の近くの議会を宛先に加えて、陳情書を作り直す
       if (!state.councils.includes(d.addNear)) state.councils.push(d.addNear);
+      show();
+    } else if (d.mailPick) {
+      const i = state.councils.indexOf(d.mailPick);
+      i < 0 ? state.councils.push(d.mailPick) : state.councils.splice(i, 1);
+      if (i < 0) state.pref = prefOf(d.mailPick);
       show();
     } else if (d.mailAll) {
       mailOk(state.pref).forEach((id) => { if (!state.councils.includes(id)) state.councils.push(id); });
