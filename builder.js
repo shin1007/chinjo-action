@@ -521,7 +521,7 @@
     const unknown = t.filter((r) => r.mail === 'unknown').length;
     const noAddr = t.filter((r) => !r.address).length;
     const auto = t.filter((r) => r.autoAddr).length;
-    $('#printSummary').innerHTML = `印刷対象：${t.length}件（封筒 ${envTargets().length}件）`
+    $('#printSummary').innerHTML = (t.length ? `印刷対象：${t.length}件（封筒 ${envTargets().length}件）` : '宛先がないので、議会名・議長名を空けた陳情書を1部印刷します。')
       + (unknown ? `<br>⚠ 郵送の扱いが「未確認」の宛先が${unknown}件あります。郵送分は審査されず配布のみになる議会もあります。` : '')
       + (noAddr ? `<br>⚠ 住所が未入力の宛先が${noAddr}件あります。` : '')
       + (auto ? `<br>⚠ 住所を自動で入れた宛先が${auto}件あります（役所の本庁舎の住所。国の2014年のデータ）。庁舎の移転や、議会事務局が別の建物にある場合があるので、各議会のサイトで確認してください。` : '');
@@ -530,14 +530,14 @@
   $('#optMailOnly').addEventListener('change', updateSummary);
 
   $('#printAll').addEventListener('click', () => {
-    const list = targets();
-    if (!list.length) { $('#printSummary').textContent = '印刷する宛先がありません。宛先リストの「印刷」にチェックを入れてください。'; return; }
+    // 宛先がなければ、議会名・議長名を空けた陳情書を1部だけ作る（手書きで入れる）
+    const list = targets().length ? targets() : [{ kind: 'council', org: '', title: '議会議長' }];
     const html = [];
     list.forEach((r) => {
       if ($('#optCover').checked && r.kind !== 'member') html.push(`<section class="doc">${escB(fill(textareas.cover.value, r))}</section>`);
       if ($('#optBody').checked) documentsFor(r).forEach((d) => html.push(`<section class="doc">${escB(d)}</section>`));
     });
-    if ($('#optEnvelope').checked) {
+    if ($('#optEnvelope').checked && targets().length) {
       const type = $('#envType').value;
       const envList = envTargets();
       html.push(cutSheets(envList, type));
