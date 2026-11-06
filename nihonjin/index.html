@@ -93,15 +93,7 @@
         <div id="wzDeadline" class="wz-deadline" hidden></div>
       </div>
 
-      <div class="wz-step" data-step="type">
-        <h3>何を求めますか？</h3>
-        <div class="wz-cards">
-          <button type="button" class="wz-card" data-type="local"><b>この自治体に取り組んでほしい</b><span>生活保護の状況の公表や、国民健康保険料の徴収など、自治体が自分でできること。採択されやすいのはこちらです。</span></button>
-          <button type="button" class="wz-card" data-type="ikensho"><b>国に意見書を出してほしい</b><span>生活保護の在り方や、土地取得の規制など、国の制度のこと。議会から国へ意見書を出してもらいます。</span></button>
-        </div>
-      </div>
-
-      <div class="wz-step" data-step="items" hidden>
+      <div class="wz-step" data-step="items">
         <h3>求める内容を選んでください <small>（いくつでも）</small></h3>
         <p class="hint-sm">1つの内容につき1通の陳情書ができます。迷ったら、★の付いたものがおすすめです。</p>
         <div id="wzItems" class="wz-cards"></div>
@@ -260,12 +252,6 @@
 
       <div class="gen-step">
         <h3><span class="step-badge">2</span>何を求めますか</h3>
-        <div class="type-switch" role="radiogroup">
-          <label class="type-card"><input type="radio" name="type" value="ikensho" checked>
-            <b>国に意見書を出してもらう</b><span>議会から国へ、法制度の見直しを求める意見書を出してもらいます。</span></label>
-          <label class="type-card"><input type="radio" name="type" value="local">
-            <b>その自治体の施策を求める</b><span>その市区町村・都道府県が自分でできる取り組みを求めます。</span></label>
-        </div>
         <fieldset>
           <legend id="itemsLegend"></legend>
           <div id="itemList"></div>

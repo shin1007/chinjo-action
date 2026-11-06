@@ -144,12 +144,6 @@ legend { font-weight: 700; font-size: 0.95rem; padding: 0 4px; }
 .gen-form .check input { display: inline; width: auto; margin-right: 6px; }
 .ask-cat { margin: 14px 0 6px; font-size: 1rem; }
 .ask-cat:first-child { margin-top: 0; }
-.type-switch { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
-.gen-form .type-card { display: flex; flex-direction: column; gap: 2px; border: 2px solid var(--line); border-radius: 10px; padding: 12px 14px; cursor: pointer; margin: 0; }
-.gen-form .type-card input { position: absolute; opacity: 0; width: 1px; }
-.type-card span { font-weight: 400; font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
-.type-card:has(input:checked) { border-color: var(--main); background: var(--accent-soft); }
-.type-card:has(input:focus-visible) { outline: 2px solid var(--main-dark); outline-offset: 2px; }
 .hint-sm.warn { color: var(--warn); background: var(--accent-soft); padding: 6px 10px; border-radius: 6px; }
 .btn-block { display: block; width: 100%; margin: 24px 0 0; padding: 14px; font-size: 1.1rem; }
 .btn-ai { margin-top: 10px; }
@@ -204,6 +198,7 @@ summary { cursor: pointer; font-weight: 700; }
 .wz-chip { border: 2px solid var(--line); background: var(--surface); border-radius: 8px; padding: 10px 6px; font: inherit; font-size: 0.95rem; cursor: pointer; }
 .wz-chip:hover, .wz-card:hover { border-color: var(--main); }
 .wz-n { display: block; font-size: 0.72rem; font-weight: 400; color: var(--muted); }
+.ask-scope { display: inline-block; margin-left: 6px; padding: 0 6px; border: 1px solid var(--line); border-radius: 4px; font-size: 0.72rem; font-weight: 400; color: var(--muted); vertical-align: 1px; }
 .wz-report { margin-top: 6px; }
 .wz-chip.on, .wz-card.on { border-color: var(--main); background: var(--accent-soft); font-weight: 700; }
 .wz-chip.on::before, .wz-card.on b::before { content: "✓ "; color: var(--main-dark); }
@@ -246,7 +241,7 @@ summary { cursor: pointer; font-weight: 700; }
   .section { padding: 48px 0; }
   .section h2 { font-size: 1.5rem; margin-bottom: 24px; }
   .gen-form, .gen-output { padding-left: 16px; padding-right: 16px; }
-  .type-switch, .gen-grid { grid-template-columns: 1fr; }
+  .gen-grid { grid-template-columns: 1fr; }
   .wizard { padding: 16px; }
   .wz-grid { grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); }
   .howto { padding: 20px; }

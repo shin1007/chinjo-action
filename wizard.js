@@ -3,8 +3,8 @@
   const { copy, esc, flash } = window.Common;
   const { withSender } = window.Petition;
   const $ = (id) => document.getElementById(id);
-  const STEPS = ['type', 'items', 'pref', 'council', 'role', 'done'];
-  const STEP_NAMES = { type: '何を求めるか', items: '求める内容', pref: '都道府県', council: '議会', role: 'あなたの立場' };
+  const STEPS = ['items', 'pref', 'council', 'role', 'done'];
+  const STEP_NAMES = { items: '求める内容', pref: '都道府県', council: '議会', role: 'あなたの立場' };
 
   const REGIONS = [
     ['北海道・東北', 0, 7], ['関東', 7, 14], ['中部', 14, 23], ['近畿', 23, 30],
@@ -12,7 +12,9 @@
   ];
   const ROLES = [...window.THEME.roles, ['none', '書かない', '']];
 
-  const state = { step: 0, pref: '', councils: [], type: '', items: [], role: '' };
+  // 最初は、おすすめ（★）で初めから選んである項目を選んでおく
+  const firstItems = () => window.ASKS.filter((a) => a.defaultOn && a.recommended).map((a) => a.id);
+  const state = { step: 0, pref: '', councils: [], items: firstItems(), role: '' };
 
   // ---------- 選択肢の描画 ----------
   $('wzPrefs').innerHTML = REGIONS.map(([name, a, b]) => `
@@ -124,11 +126,10 @@
   }
 
   function renderItems() {
-    const scope = state.type === 'local' ? 'local' : 'national';
-    $('wzItems').innerHTML = window.Common.askGroups(window.ASKS.filter((a) => a.scope === scope), (a) => {
+    $('wzItems').innerHTML = window.Common.askGroups(window.Petition.ordered(), (a) => {
       const on = state.items.includes(a.id);
       const star = a.recommended ? '★ ' : '';
-      return `<button type="button" class="wz-card ${on ? 'on' : ''}" data-item="${a.id}" aria-pressed="${on}"><b>${star}${a.label}</b><span>${a.reason.split('。')[0]}。</span></button>`;
+      return `<button type="button" class="wz-card ${on ? 'on' : ''}" data-item="${a.id}" aria-pressed="${on}"><b>${star}${a.label}${window.Common.scopeTag(a)}</b><span>${a.reason.split('。')[0]}。</span></button>`;
     });
     renderCount();
   }
@@ -139,7 +140,7 @@
   function canNext() {
     const s = STEPS[state.step];
     return (s === 'pref' && state.pref) || (s === 'council' && state.councils.length)
-      || (s === 'type' && state.type) || (s === 'items' && state.items.length) || (s === 'role' && state.role);
+      || (s === 'items' && state.items.length) || (s === 'role' && state.role);
   }
 
   function show() {
@@ -152,7 +153,6 @@
     $('wzNext').disabled = !canNext();
     $('wzRestart').hidden = s !== 'done';
     document.querySelectorAll('[data-pref]').forEach((b) => b.classList.toggle('on', b.dataset.pref === state.pref));
-    document.querySelectorAll('[data-type]').forEach((b) => b.classList.toggle('on', b.dataset.type === state.type));
     document.querySelectorAll('[data-role]').forEach((b) => b.classList.toggle('on', b.dataset.role === state.role));
     $('wzPrefPicked').textContent = s === 'pref' && state.councils.length ? `選択中：${state.councils.map(label).join('、')}（ここで選んだ都道府県の議会を書き足せます）` : '';
     if (s === 'council') renderCouncils();
@@ -205,10 +205,6 @@
       i < 0 ? state.councils.push(d.council) : state.councils.splice(i, 1);
       renderCouncils();
       $('wzNext').disabled = !canNext();
-    } else if (d.type) {
-      if (state.type !== d.type) state.items = window.ASKS.filter((a) => a.scope === (d.type === 'local' ? 'local' : 'national') && a.defaultOn && a.recommended).map((a) => a.id);
-      state.type = d.type;
-      go(1);
     } else if (d.item) {
       const i = state.items.indexOf(d.item);
       i < 0 ? state.items.push(d.item) : state.items.splice(i, 1);
@@ -228,7 +224,7 @@
   $('wzBack').addEventListener('click', () => go(-1));
   $('wzRestart').addEventListener('click', () => {
     if (!confirm('選んだ議会と内容、直した文面が消えます。最初からやり直しますか？')) return;
-    Object.assign(state, { step: 0, pref: '', councils: [], type: '', items: [], role: '' });
+    Object.assign(state, { step: 0, pref: '', councils: [], items: firstItems(), role: '' });
     $('wzAiBox').hidden = true;
     $('wzSendBox').hidden = true;
     edits = {};
@@ -248,7 +244,6 @@
 
   function formData() {
     const fd = new FormData();
-    fd.append('type', state.type);
     state.items.forEach((k) => fd.append('items', k));
     fd.append('story', (ROLES.find(([k]) => k === state.role) || [])[2] || '');
     ['address', 'name', 'tel'].forEach((k) => fd.append(k, ''));
@@ -636,7 +631,7 @@
 
   // ---------- 選んだ内容をリンクに残す（再読み込み・スマホへの受け渡し用。個人情報は入れない） ----------
   function linkOf() {
-    const q = new URLSearchParams({ t: state.type, i: state.items.join(','), p: state.pref, c: state.councils.join(','), r: state.role });
+    const q = new URLSearchParams({ i: state.items.join(','), p: state.pref, c: state.councils.join(','), r: state.role });
     return `${location.origin}${location.pathname}#w?${q}`;
   }
   function saveLink(done) {
@@ -647,17 +642,16 @@
     const m = location.hash.match(/^#w\?(.*)$/);
     if (!m) return false;
     const q = new URLSearchParams(m[1]);
-    const t = q.get('t');
-    const scope = t === 'local' ? 'local' : 'national';
-    const items = (q.get('i') || '').split(',').filter((k) => window.ASKS.some((a) => a.id === k && a.scope === scope));
+    // 前の形式のリンクに付いている t（国か自治体か）は、項目から分かるので読まない
+    const items = (q.get('i') || '').split(',').filter((k) => window.ASKS.some((a) => a.id === k));
     const pref = q.get('p');
-    if (!['local', 'ikensho'].includes(t) || !items.length || !window.PREFS.includes(pref)) return false;
+    if (!items.length || !window.PREFS.includes(pref)) return false;
     // 前の形式のリンク（議会名だけ）は、p の都道府県の議会として読む
     const councils = (q.get('c') || '').split(',').map((c) => (c.includes('/') ? c : idOf(pref, c)))
       .filter((c) => window.PREFS.includes(prefOf(c)) && councilsOf(prefOf(c)).includes(nameOf(c)));
     const role = q.get('r');
     if (!councils.length || !ROLES.some(([k]) => k === role)) return false;
-    Object.assign(state, { type: t, items, pref, councils, role, step: STEPS.indexOf('done') });
+    Object.assign(state, { items, pref, councils, role, step: STEPS.indexOf('done') });
     return true;
   }
 
