@@ -130,8 +130,12 @@ window.PdfDoc = (() => {
         const lh = LH * k;
         const blocks = [];
         const block = (o = {}) => { const b = { rows: [], ...o }; blocks.push(b); return b; };
-        const gap = (b, h) => b.rows.push({ h });
-        const row = (b, h, draw) => b.rows.push({ h, draw });
+        // side：右に置いた QR コードの横に、まだ残っている高さ。そのあいだの文は QR の幅だけ狭くして折り返す
+        let side = 0;
+        const gap = (b, h) => { b.rows.push({ h }); side -= h; };
+        const row = (b, h, draw) => { b.rows.push({ h, draw }); side -= h; };
+        // 幅いっぱいに書くもの（見出し・題・絵）の前では、QR コードの下まで空ける
+        const clear = (b) => { if (side > 0) gap(b, side); };
 
         lines.forEach((raw, i) => {
           const s = raw.replace(/\s+$/, '');
@@ -183,6 +187,7 @@ window.PdfDoc = (() => {
             const size = 13.5;
             const font = fontFor(title[1], true);
             const b = block({ keepNext: true });
+            clear(b);
             gap(b, lh * 0.4);
             wrap(title[1], size, textW * 0.86, font).forEach((l) => row(b, size * 1.7 * k, (p, y) => drawLine(p, l, (A4.w - l.w) / 2, y, size, font)));
             gap(b, lh * 0.3);
@@ -213,6 +218,7 @@ window.PdfDoc = (() => {
             const size = 11.5;
             const font = fontFor(h[1], true);
             const b = block({ keepNext: true });
+            clear(b);
             gap(b, lh * 0.35);
             row(b, lh * 1.1, (p, y) => {
               p.drawText(safe(h[1]), { x: M.left, y, size, font, color: black });
@@ -226,6 +232,7 @@ window.PdfDoc = (() => {
             const img = images[fig[1]];
             const h = (img.height * textW) / img.width;
             const b = block();
+            clear(b);
             gap(b, lh * 0.3);
             row(b, h + lh * 0.3, (p, y) => p.drawImage(img, { x: M.left, y: y + BODY - h, width: textW, height: h }));
             return;
@@ -233,13 +240,19 @@ window.PdfDoc = (() => {
           // 一　…／1．…／・… の箇条：2行目からは番号のぶん下げる
           const im = s.match(ITEM);
           const indent = im ? width(im[1], BODY) : 0;
+          // URL があれば、その行の右端に QR コードを置き、続く行は QR の横に回り込ませる
+          // QR コードが紙の下にはみ出さないよう、その高さが残っていなければ次の紙から書く
           const urls = s.match(URL_RE) || [];
-          const b = block({ split: !urls.length });
-          wrap(s.slice(im ? im[1].length : 0), BODY, textW - indent).forEach((l, j) => row(b, lh, (p, y) => {
+          const sideW = (n) => n * (QR + BODY);
+          if (urls.length) clear(blocks[blocks.length - 1] || block());
+          const narrow = urls.length ? sideW(urls.length) : side > 0 ? sideW(1) : 0;
+          const b = block(urls.length ? { room: QR + BODY } : { split: true });
+          wrap(s.slice(im ? im[1].length : 0), BODY, textW - indent - narrow).forEach((l, j) => row(b, lh, (p, y) => {
             if (im && !j) p.drawText(safe(im[1]), { x: M.left, y, size: BODY, font: R, color: black });
             drawLine(p, l, M.left + indent, y, BODY);
+            if (!j) urls.forEach((u, k) => drawQr(p, u, A4.w - M.right - QR - k * (QR + BODY), y + BODY * 0.8));
           }));
-          urls.forEach((u) => row(b, QR + lh * 0.3, (p, y) => drawQr(p, u, M.left + indent, y + BODY * 0.8)));
+          if (urls.length) side = QR + BODY * 0.5 - lh * b.rows.length;
         });
         return blocks;
       }
@@ -272,6 +285,7 @@ window.PdfDoc = (() => {
           const avail = y - M.bottom;
           const H = sum(b.rows);
           if (b.spacer) { if (H > avail) newPage(); else b.rows.forEach(put); return; }
+          if (b.room && b.room > avail && y !== top) newPage();
           if (b.keepNext) { if (H + lead(i + 1) > avail && y !== top) newPage(); b.rows.forEach(put); return; }
           if (H <= avail || y === top) { b.rows.forEach(put); return; }
           if (b.split) {
