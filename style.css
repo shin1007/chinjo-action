@@ -125,6 +125,8 @@ h1, h2, h3, h4 { line-height: 1.45; }
 .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
 .card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 24px; position: relative; }
 .card h3 { margin-top: 0; }
+.pubcom-links { margin: 0; padding-left: 1.2em; }
+.pubcom-links li { margin: 6px 0; }
 .num { width: 40px; height: 40px; border-radius: 50%; background: var(--main); color: var(--on-main); display: grid; place-items: center; font-weight: 700; margin-bottom: 8px; }
 .note { font-size: 0.9rem; color: var(--muted); margin-top: 24px; }
 
