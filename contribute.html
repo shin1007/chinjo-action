@@ -26,6 +26,7 @@
   </div>
   <form id="contributionForm">
     <p class="form-label">自治体（人口順）</p>
+    <p class="hint-sm">人口は総務省「住民基本台帳に基づく人口」（2026年1月1日現在）を使っています。</p>
     <label>自治体を検索
       <input id="councilSearch" type="search" placeholder="例：杉並区、東京都">
     </label>
@@ -37,16 +38,19 @@
       <legend>その自治体の住民が、郵送で出した場合は？</legend>
       <label><input type="radio" name="mailResident" value="ok" required> 審査される</label>
       <label><input type="radio" name="mailResident" value="distribute"> 写しの配付だけ</label>
+      <label><input type="radio" name="mailResident" value="conditional"> 場合による</label>
     </fieldset>
     <fieldset>
       <legend>その自治体の住民以外が、郵送で出した場合は？</legend>
       <label><input type="radio" name="mailNonresident" value="ok" required> 審査される</label>
       <label><input type="radio" name="mailNonresident" value="distribute"> 写しの配付だけ</label>
+      <label><input type="radio" name="mailNonresident" value="conditional"> 場合による</label>
     </fieldset>
     <fieldset>
       <legend>その自治体の住民以外が、持参で出した場合は？</legend>
       <label><input type="radio" name="handNonresident" value="ok" required> 審査される</label>
       <label><input type="radio" name="handNonresident" value="distribute"> 写しの配付だけ</label>
+      <label><input type="radio" name="handNonresident" value="conditional"> 場合による</label>
     </fieldset>
     <fieldset>
       <legend>参考資料を添付できるか？</legend>

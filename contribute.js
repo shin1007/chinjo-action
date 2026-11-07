@@ -24,20 +24,28 @@
     const query = $('councilSearch').value.trim();
     const councils = allCouncils
       .filter(([pref, name]) => !query || `${pref}${name}`.includes(query))
-      .sort(([prefA, nameA], [prefB, nameB]) =>
-        (populations.get(`${prefB}|${nameB}`) ?? -1) - (populations.get(`${prefA}|${nameA}`) ?? -1)
-        || `${prefA}${nameA}`.localeCompare(`${prefB}${nameB}`, 'ja'),
-      );
+      .sort(([prefA, nameA], [prefB, nameB]) => {
+        const populationA = populations.get(`${prefA}|${nameA}`);
+        const populationB = populations.get(`${prefB}|${nameB}`);
+        if (populationA == null && populationB == null) return 0;
+        if (populationA == null) return 1;
+        if (populationB == null) return -1;
+        return populationB - populationA;
+      });
     $('council').innerHTML = `<option value="">選んでください</option>${councils.map(([pref, name]) =>
-      `<option value="${esc(`${pref}|${name}`)}">${esc(`${pref}${name}`)}</option>`,
+      `<option value="${esc(`${pref}|${name}`)}">${esc(`${pref}${name}`)}${populations.has(`${pref}|${name}`) ? `（人口 約${populations.get(`${pref}|${name}`).toLocaleString()}人）` : '（人口データ未登録）'}</option>`,
     ).join('')}`;
   };
   renderCouncils();
   $('councilSearch').addEventListener('input', renderCouncils);
-  fetch('/data/municipalities-index.json')
-    .then((response) => response.ok ? response.json() : [])
+  fetch('/data/municipality-populations.json')
+    .then((response) => {
+      if (!response.ok) throw new Error(`人口データの取得に失敗しました: ${response.status}`);
+      return response.json();
+    })
     .then((items) => {
-      populations = new Map(items.map((item) => [`${item.pref}|${item.name}`, item.population || 0]));
+      if (!items || typeof items.populations !== 'object') throw new Error('人口データの形式が不正です');
+      populations = new Map(Object.entries(items.populations));
       renderCouncils();
     })
     .catch((error) => console.error('人口データを読み込めませんでした', error));
