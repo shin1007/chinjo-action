@@ -147,6 +147,14 @@
   // ok：郵送で出せる／jisan：審査してもらうには持参が必要／outside：住民以外の郵送は配付だけ／none：出し方に関わらず配付だけ
   function mailRule(info) {
     const fixed = { ok: '📮 郵送でも審査されます', jisan: '🚶 審査してもらうには持参が必要です（郵送は配付だけ）', outside: '🚶 住民以外が審査してもらうには持参が必要です（郵送は配付だけ）', none: '持参でも郵送でも、陳情は審査されず配付だけです' };
+    if (info.policy) {
+      const { mail_resident: resident, mail_nonresident: nonresident } = info.policy;
+      if (resident === 'distribute' && nonresident === 'distribute') return { c: 'none', label: fixed.none };
+      if (resident === 'distribute') return { c: 'jisan', label: fixed.jisan };
+      if (resident === 'ok' && nonresident === 'distribute') return { c: 'outside', label: fixed.outside };
+      if (resident === 'ok' && nonresident === 'ok') return { c: 'ok', label: fixed.ok };
+      return { c: 'unknown', label: '郵送時の扱いは未確認です（公式案内を確認してください）' };
+    }
     if (info.mail) return { c: info.mail === 'outside' ? 'jisan' : info.mail, label: fixed[info.mail] };
     const t = [info.yusoNote, info.outsideNote].filter((x) => x && /郵送/.test(x)).join(' ');
     if (!t) return null;
@@ -156,16 +164,25 @@
     if (/配布|配付|参考|審議[はを]?行わ|審査[はを]?行わ|報告はありません|持参してください/.test(t)) return { c: 'jisan', label: '🚶 審査してもらうには持参が必要です（郵送は配付だけ）' };
     return { c: 'ok', label: '📮 郵送でも受け付けます' };
   }
-  const mailBadge = (info) => { const r = mailRule(info); return r ? `<span class="wz-mail ${r.c === 'ok' ? 'ok' : r.c === 'none' ? 'none' : 'jisan'}">${esc(r.label)}</span>` : ''; };
+  const mailBadge = (info) => { const r = mailRule(info); return r ? `<span class="wz-mail ${r.c === 'ok' ? 'ok' : r.c === 'none' ? 'none' : r.c === 'unknown' ? 'unknown' : 'jisan'}">${esc(r.label)}</span>` : ''; };
   const ONLY_HANDOUT = /配布|配付|参考資料/;
   function howTo(info) {
     const n = [];
     if (mailRule(info)) n.push(mailBadge(info));
     if (info.denshi) n.push('✅ 電子申請でも出せるようです。');
-    const y = info.yusoNote && clip(info.yusoNote);
-    if (y) n.push(`${ONLY_HANDOUT.test(y) ? '⚠ 郵送だと審査されないようです' : '郵送について'}：「${esc(y)}」`);
-    const o = info.outsideNote && clip(info.outsideNote);
-    if (o) n.push(`⚠ 住民以外の陳情について：「${esc(o)}」`);
+    if (info.policy) {
+      const q = clip(info.policy.source_quote);
+      if (q) n.push(`公式案内：「${esc(q)}」`);
+      const note = clip(info.policy.note);
+      if (note) n.push(`補足：「${esc(note)}」`);
+      if (info.policy.source_url) n.push(`<a href="${esc(info.policy.source_url)}" target="_blank" rel="noopener">公式案内の根拠を見る</a>`);
+      if (info.policy.confidence !== 'confirmed') n.push('⚠ この情報は確定情報ではありません。提出前に議会事務局へ確認してください。');
+    } else {
+      const y = info.yusoNote && clip(info.yusoNote);
+      if (y) n.push(`${ONLY_HANDOUT.test(y) ? '⚠ 郵送だと審査されないようです' : '郵送について'}：「${esc(y)}」`);
+      const o = info.outsideNote && clip(info.outsideNote);
+      if (o) n.push(`⚠ 住民以外の陳情について：「${esc(o)}」`);
+    }
     return n.length ? `<ul class="wz-notes">${n.map((t) => `<li>${t}</li>`).join('')}</ul>` : '';
   }
 
@@ -317,7 +334,8 @@
     const [pref, key] = officeKeys[c] || [];
     const info = (window.COUNCILS[pref] || {})[key] || {};
     const m = ((window.MAIL || {})[pref] || {})[key];
-    return m ? { ...info, mail: m[0], yusoNote: m[1] } : info;
+    const policy = window.MailPolicy && window.MailPolicy.get(pref, key);
+    return m ? { ...info, mail: m[0], yusoNote: m[1], policy } : { ...info, policy };
   };
 
   function formData() {
@@ -460,7 +478,10 @@
       if (page) lines.push(`・案内ページ：${page}`);
       lines.push(`・郵送：${rule ? plain(rule.label) : '郵送で審査してもらえるかは載っていませんでした（事務局に確認を）'}`);
       if (info.denshi) lines.push('・電子申請でも出せるようです。');
-      [['郵送について', info.yusoNote], ['住民以外の陳情について', info.outsideNote], ['締切', info.deadline]].forEach(([k, v]) => {
+      const notes = info.policy
+        ? [['公式案内', info.policy.source_quote], ['補足', info.policy.note], ['根拠URL', info.policy.source_url]]
+        : [['郵送について', info.yusoNote], ['住民以外の陳情について', info.outsideNote]];
+      [...notes, ['締切', info.deadline]].forEach(([k, v]) => {
         const x = v && clip(v);
         if (x) lines.push(`・${k}：「${x}」`);
       });

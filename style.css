@@ -133,6 +133,13 @@ h1, h2, h3, h4 { line-height: 1.45; }
   display: block; width: 100%; margin-top: 4px; padding: 10px; border: 1px solid var(--field-line); border-radius: 6px; font: inherit; font-weight: 400;
 }
 .gen-form input:focus, .gen-form select:focus, .gen-form textarea:focus, #output:focus, .wz-filter:focus, #wzOutput:focus, #wzPrompt:focus { outline: 2px solid var(--main); outline-offset: 1px; }
+.contribution { max-width: 760px; padding-top: 28px; padding-bottom: 48px; }
+.contribution form { display: grid; gap: 18px; margin-top: 24px; }
+.contribution label { display: block; font-weight: 700; }
+.contribution input[type="url"], .contribution input[type="date"], .contribution select, .contribution textarea { display: block; width: 100%; margin-top: 4px; padding: 10px; border: 1px solid var(--field-line); border-radius: 6px; font: inherit; font-weight: 400; }
+.contribution fieldset label { display: block; font-weight: 400; margin: 4px 0; }
+.contribution fieldset input { margin-right: 6px; }
+.contribution #output { width: 100%; max-width: none; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
 .gen-step { padding: 20px 0; border-bottom: 1px solid var(--line); }
 .gen-step h3 { margin: 0 0 12px; font-size: 1.1rem; display: flex; align-items: center; gap: 10px; }
 .step-badge { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--main); color: var(--on-main); font-size: 0.95rem; flex: none; }

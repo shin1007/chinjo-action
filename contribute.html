@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>郵送・持参の扱いを確認する｜陳情アクション</title>
+<meta name="description" content="地方議会の公式案内を確認し、郵送・持参による陳情の扱いを根拠付きで報告します。">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="site-header"><div class="wrap header-inner">
+  <a href="/" class="logo">陳情アクション</a>
+  <nav class="primary-nav" aria-label="主要メニュー"><a href="/about">陳情って何？</a></nav>
+</div></header>
+<main class="wrap guide contribution">
+  <p class="hero-crumb"><a href="/">陳情アクション</a> ＞ <b>郵送・持参の扱いを確認</b></p>
+  <h1>議会の出し方を、根拠付きで確認する</h1>
+  <p>公式の「陳情・請願の提出案内」を見ながら、1議会ずつ答えてください。あいまいなときは「案内に書いていない・わからない」を選び、推測で埋めないでください。</p>
+  <div class="box">
+    <b>公開前の確認</b>
+    <ul>
+      <li>公式ページのURLは必須です。原文のコピーがあると検証しやすくなります。</li>
+      <li>回答はすぐにサイトへ反映されません。Issue本文またはJSONを確認してから、管理者が公開します。</li>
+      <li>個人の体験談だけで公式根拠がない場合は、公開データの根拠に使いません。</li>
+    </ul>
+  </div>
+  <form id="contributionForm">
+    <label>都道府県
+      <select id="pref" required><option value="">選んでください</option></select>
+    </label>
+    <label>市区町村（都道府県議会は「都道府県議会」）
+      <select id="council" required disabled><option value="">先に都道府県を選んでください</option></select>
+    </label>
+    <label>公式の案内ページURL
+      <input id="sourceUrl" type="url" required placeholder="https://...">
+    </label>
+    <label>公式ページの原文（任意だが推奨）
+      <textarea id="sourceQuote" rows="4" placeholder="郵送・持参の扱いが書かれた一文をコピー"></textarea>
+    </label>
+    <fieldset>
+      <legend>その自治体の住民が、郵送で出した場合は？</legend>
+      <label><input type="radio" name="mailResident" value="ok" required> 審査される</label>
+      <label><input type="radio" name="mailResident" value="distribute"> 写しの配付だけ</label>
+      <label><input type="radio" name="mailResident" value="unknown"> 案内に書いていない・わからない</label>
+    </fieldset>
+    <fieldset>
+      <legend>その自治体の住民以外が、郵送で出した場合は？</legend>
+      <label><input type="radio" name="mailNonresident" value="ok" required> 審査される</label>
+      <label><input type="radio" name="mailNonresident" value="distribute"> 写しの配付だけ</label>
+      <label><input type="radio" name="mailNonresident" value="unknown"> 案内に書いていない・わからない</label>
+    </fieldset>
+    <fieldset>
+      <legend>その自治体の住民以外が、持参で出した場合は？</legend>
+      <label><input type="radio" name="handNonresident" value="ok" required> 審査される</label>
+      <label><input type="radio" name="handNonresident" value="distribute"> 写しの配付だけ</label>
+      <label><input type="radio" name="handNonresident" value="unknown"> 案内に書いていない・わからない</label>
+    </fieldset>
+    <label>例外や気になった点（任意）
+      <textarea id="note" rows="4" placeholder="在勤・在学、FAX、議長判断など"></textarea>
+    </label>
+    <label>確認した日付
+      <input id="verifiedAt" type="date" required>
+    </label>
+    <button class="btn btn-primary" type="submit">回答データを作る</button>
+  </form>
+  <section id="result" hidden>
+    <h2>確認用の回答データ</h2>
+    <p class="hint-sm">内容を確認してから、Issue本文をコピーするかJSONを保存してください。管理者が原文・URLを確認して公開します。</p>
+    <textarea id="output" rows="16" readonly></textarea>
+    <p><button id="copyIssue" class="btn btn-small" type="button">Issue本文をコピー</button> <button id="downloadJson" class="btn btn-small" type="button">JSONを保存</button></p>
+  </section>
+</main>
+<footer class="site-footer"><div class="wrap"><p><a href="/">陳情アクション</a>　｜　<a href="/about">陳情って何？</a></p></div></footer>
+<p id="toast" class="toast" hidden>コピーしました</p>
+<script src="/data/municipalities.js"></script>
+<script src="/contribute.js"></script>
+</body>
+</html>
