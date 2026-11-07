@@ -26,7 +26,12 @@ export function MunicipalitySelector({ onSelect }: Props) {
     () =>
       [...index]
         .filter((item) => `${item.pref}${item.name}`.includes(query.trim()))
-        .sort((a, b) => (b.population ?? 0) - (a.population ?? 0)),
+        .sort((a, b) => {
+          if (a.population == null && b.population == null) return 0;
+          if (a.population == null) return 1;
+          if (b.population == null) return -1;
+          return b.population - a.population;
+        }),
     [index, query],
   );
 
