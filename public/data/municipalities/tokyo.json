@@ -1,0 +1,29 @@
+{
+  "id": "tokyo",
+  "pref": "東京都",
+  "name": "東京都",
+  "type": "prefecture",
+  "population": 14000000,
+  "updatedAt": "2026-01-15",
+  "assembly": {
+    "name": "東京都議会",
+    "secretariatUrl": "https://www.gikai.metro.tokyo.lg.jp/",
+    "submitMethods": ["online_form", "mail"],
+    "onlineFormUrl": "https://www.gikai.metro.tokyo.lg.jp/form/",
+    "postalAddress": "〒163-8001 東京都新宿区西新宿2-8-1",
+    "acceptsOutsideResident": true
+  },
+  "executive": {
+    "department": "東京都政策企画局",
+    "submitMethods": ["online_form", "email", "mail"],
+    "onlineFormUrl": "https://www.metro.tokyo.lg.jp/form/opinion.html",
+    "email": "koe@metro.tokyo.lg.jp",
+    "postalAddress": "〒163-8001 東京都新宿区西新宿2-8-1",
+    "responseExpected": false
+  },
+  "common": {
+    "website": "https://www.metro.tokyo.lg.jp/",
+    "phone": "03-5321-1111",
+    "tags": ["サンプル", "要確認"]
+  }
+}

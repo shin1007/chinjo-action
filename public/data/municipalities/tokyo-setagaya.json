@@ -1,0 +1,29 @@
+{
+  "id": "tokyo-setagaya",
+  "pref": "東京都",
+  "name": "世田谷区",
+  "type": "ward",
+  "population": 944000,
+  "updatedAt": "2026-01-15",
+  "assembly": {
+    "name": "世田谷区議会",
+    "secretariatUrl": "https://www.city.setagaya.lg.jp/kugikai/",
+    "submitMethods": ["online_form", "email", "mail"],
+    "onlineFormUrl": "https://www.city.setagaya.lg.jp/form/gikai.html",
+    "email": "gikaijimukyoku@city.setagaya.lg.jp",
+    "postalAddress": "〒154-8504 東京都世田谷区世田谷4-21-27",
+    "acceptsOutsideResident": true
+  },
+  "executive": {
+    "department": "世田谷区役所 区政情報課",
+    "submitMethods": ["online_form", "email", "in_person"],
+    "onlineFormUrl": "https://www.city.setagaya.lg.jp/form/opinion.html",
+    "email": "kusei@city.setagaya.lg.jp",
+    "responseExpected": false
+  },
+  "common": {
+    "website": "https://www.city.setagaya.lg.jp/",
+    "phone": "03-5432-1111",
+    "tags": ["サンプル", "要確認"]
+  }
+}

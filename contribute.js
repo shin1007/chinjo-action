@@ -12,34 +12,47 @@
       $('output').select();
     }
   };
-  const prefs = Object.keys(window.MUNICIPALITIES);
-  $('pref').insertAdjacentHTML('beforeend', prefs.map((p) => `<option value="${esc(p)}">${esc(p)}</option>`).join(''));
   $('verifiedAt').value = new Date().toISOString().slice(0, 10);
 
-  $('pref').addEventListener('change', () => {
-    const pref = $('pref').value;
-    const names = pref ? ['都道府県議会', ...window.MUNICIPALITIES[pref]] : [];
-    $('council').innerHTML = names.length
-      ? `<option value="">選んでください</option>${names.map((n) => `<option>${esc(n)}</option>`).join('')}`
-      : '<option value="">先に都道府県を選んでください</option>';
-    $('council').disabled = !names.length;
+  const councils = Object.entries(window.MUNICIPALITIES)
+    .flatMap(([pref, names]) => [
+      [pref, '都道府県議会'],
+      ...names.map((name) => [pref, name]),
+    ])
+    .sort(([prefA, nameA], [prefB, nameB]) =>
+      `${prefA}${nameA}`.localeCompare(`${prefB}${nameB}`, 'ja'),
+    );
+  $('council').insertAdjacentHTML(
+    'beforeend',
+    councils.map(([pref, name]) =>
+      `<option value="${esc(`${pref}|${name}`)}">${esc(`${pref}${name}`)}</option>`,
+    ).join(''),
+  );
+
+  $('council').addEventListener('change', () => {
+    const [pref, council] = $('council').value.split('|');
+    const record = window.TEL?.[pref]?.[council]
+      || (council === '都道府県議会' ? window.TEL?.[pref]?.['@'] : null);
+    const phone = $('councilPhone');
+    if (record) {
+      phone.innerHTML = `確認先：<a href="tel:${esc(record[1])}">${esc(record[1])}</a>（${record[0] === 'gikai' ? '議会事務局' : '代表番号'}）`;
+    } else {
+      phone.textContent = '電話番号は未登録です。自治体の代表番号から議会事務局をお尋ねください。';
+    }
+    phone.hidden = false;
   });
 
-  const value = (name) => document.querySelector(`input[name="${name}"]:checked`)?.value || 'unknown';
+  const value = (name) => document.querySelector(`input[name="${name}"]:checked`)?.value || '';
   const reportText = (r) => [
     `## ${r.pref}/${r.council}`,
     '',
     `- mail_resident: ${r.mail_resident}`,
     `- mail_nonresident: ${r.mail_nonresident}`,
     `- hand_nonresident: ${r.hand_nonresident}`,
-    `- source_url: ${r.source_url}`,
+    `- reference_materials: ${r.reference_materials}`,
     `- verified_at: ${r.verified_at}`,
-    `- confidence: ${r.confidence}`,
     '',
-    '### source_quote',
-    r.source_quote || '(なし)',
-    '',
-    '### note',
+    '### 注意事項',
     r.note || '(なし)',
     '',
     '### 詳細データ',
@@ -50,19 +63,16 @@
 
   $('contributionForm').addEventListener('submit', (event) => {
     event.preventDefault();
-    const quote = $('sourceQuote').value.trim();
-    const url = $('sourceUrl').value.trim();
+    const [pref, council] = $('council').value.split('|');
     const result = {
-      pref: $('pref').value,
-      council: $('council').value,
+      pref,
+      council,
       mail_resident: value('mailResident'),
       mail_nonresident: value('mailNonresident'),
       hand_nonresident: value('handNonresident'),
-      source_quote: quote,
-      source_url: url,
+      reference_materials: value('referenceMaterials'),
       note: $('note').value.trim(),
       verified_at: $('verifiedAt').value,
-      confidence: quote && url ? 'confirmed' : url ? 'likely' : 'unknown',
     };
     $('output').value = reportText(result);
     $('result').hidden = false;

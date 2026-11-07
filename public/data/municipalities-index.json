@@ -1,0 +1,47 @@
+[
+  {
+    "id": "chiba-chiba",
+    "pref": "千葉県",
+    "name": "千葉市",
+    "type": "city",
+    "population": 979000,
+    "hasOnlineForm": true,
+    "updatedAt": "2026-01-15"
+  },
+  {
+    "id": "tokyo-setagaya",
+    "pref": "東京都",
+    "name": "世田谷区",
+    "type": "ward",
+    "population": 944000,
+    "hasOnlineForm": true,
+    "updatedAt": "2026-01-15"
+  },
+  {
+    "id": "chiba-funabashi",
+    "pref": "千葉県",
+    "name": "船橋市",
+    "type": "city",
+    "population": 647000,
+    "hasOnlineForm": true,
+    "updatedAt": "2026-01-15"
+  },
+  {
+    "id": "chiba-kamagaya",
+    "pref": "千葉県",
+    "name": "鎌ケ谷市",
+    "type": "city",
+    "population": 109000,
+    "hasOnlineForm": true,
+    "updatedAt": "2026-01-15"
+  },
+  {
+    "id": "tokyo",
+    "pref": "東京都",
+    "name": "東京都",
+    "type": "prefecture",
+    "population": 14000000,
+    "hasOnlineForm": true,
+    "updatedAt": "2026-01-15"
+  }
+]
