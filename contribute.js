@@ -14,20 +14,33 @@
   };
   $('verifiedAt').value = new Date().toISOString().slice(0, 10);
 
-  const councils = Object.entries(window.MUNICIPALITIES)
+  const allCouncils = Object.entries(window.MUNICIPALITIES)
     .flatMap(([pref, names]) => [
       [pref, '都道府県議会'],
       ...names.map((name) => [pref, name]),
-    ])
-    .sort(([prefA, nameA], [prefB, nameB]) =>
-      `${prefA}${nameA}`.localeCompare(`${prefB}${nameB}`, 'ja'),
-    );
-  $('council').insertAdjacentHTML(
-    'beforeend',
-    councils.map(([pref, name]) =>
+    ]);
+  let populations = new Map();
+  const renderCouncils = () => {
+    const query = $('councilSearch').value.trim();
+    const councils = allCouncils
+      .filter(([pref, name]) => !query || `${pref}${name}`.includes(query))
+      .sort(([prefA, nameA], [prefB, nameB]) =>
+        (populations.get(`${prefB}|${nameB}`) ?? -1) - (populations.get(`${prefA}|${nameA}`) ?? -1)
+        || `${prefA}${nameA}`.localeCompare(`${prefB}${nameB}`, 'ja'),
+      );
+    $('council').innerHTML = `<option value="">選んでください</option>${councils.map(([pref, name]) =>
       `<option value="${esc(`${pref}|${name}`)}">${esc(`${pref}${name}`)}</option>`,
-    ).join(''),
-  );
+    ).join('')}`;
+  };
+  renderCouncils();
+  $('councilSearch').addEventListener('input', renderCouncils);
+  fetch('/data/municipalities-index.json')
+    .then((response) => response.ok ? response.json() : [])
+    .then((items) => {
+      populations = new Map(items.map((item) => [`${item.pref}|${item.name}`, item.population || 0]));
+      renderCouncils();
+    })
+    .catch((error) => console.error('人口データを読み込めませんでした', error));
 
   $('council').addEventListener('change', () => {
     const [pref, council] = $('council').value.split('|');

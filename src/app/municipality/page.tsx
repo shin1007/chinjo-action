@@ -37,9 +37,9 @@ export default function MunicipalityPage() {
         <>
           <h2 className="text-xl font-semibold">{municipality.pref} {municipality.name}</h2>
           {municipality.common?.phone && (
-            <p className="text-gray-700">
-              議会・自治体への確認先：
-              <a className="ml-1 text-blue-700 underline" href={`tel:${municipality.common.phone}`}>
+            <p className="rounded border-2 border-blue-600 bg-blue-50 p-4 text-lg font-semibold text-gray-900">
+              電話で確認する：
+              <a className="ml-2 text-2xl text-blue-800 underline" href={`tel:${municipality.common.phone}`}>
                 {municipality.common.phone}
               </a>
             </p>

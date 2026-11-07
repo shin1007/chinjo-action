@@ -25,10 +25,14 @@
     </ul>
   </div>
   <form id="contributionForm">
-    <label>自治体
+    <p class="form-label">自治体（人口順）</p>
+    <label>自治体を検索
+      <input id="councilSearch" type="search" placeholder="例：杉並区、東京都">
+    </label>
+    <label>検索結果から自治体を選択
       <select id="council" required><option value="">選んでください</option></select>
     </label>
-    <p id="councilPhone" class="hint-sm" hidden></p>
+    <p id="councilPhone" class="phone-callout" hidden></p>
     <fieldset>
       <legend>その自治体の住民が、郵送で出した場合は？</legend>
       <label><input type="radio" name="mailResident" value="ok" required> 審査される</label>
@@ -56,7 +60,7 @@
     <label>確認した日付
       <input id="verifiedAt" type="date" required>
     </label>
-    <button class="btn btn-primary" type="submit">送る内容を作る</button>
+    <button class="btn btn-primary" type="submit">送る</button>
   </form>
   <section id="result" hidden>
     <h2>送る内容を確認する</h2>
