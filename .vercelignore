@@ -1,0 +1,6 @@
+.git
+.vercel
+node_modules
+.env*
+scripts/.opinion-cache.json
+scripts/.geocode-cache.json
