@@ -38,7 +38,7 @@
   };
   renderCouncils();
   $('councilSearch').addEventListener('input', renderCouncils);
-  fetch('/data/municipality-populations.json')
+  fetch('/data/municipality-populations.json?v=20261107')
     .then((response) => {
       if (!response.ok) throw new Error(`人口データの取得に失敗しました: ${response.status}`);
       return response.json();
