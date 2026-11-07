@@ -79,7 +79,7 @@ window.Common = (() => {
   // data/ のファイルを手で直して書き間違えると、そのファイルが読み込めず画面が空になる。どこが悪いかを画面に出す
   const DATA = { PREFS: 'prefs.js', ASKS: 'asks-national.js または asks-local.js', TEMPLATE: 'template.js', MUNICIPALITIES: 'municipalities.js' };
   const broken = Object.keys(DATA).filter((k) => !window[k] || (k === 'ASKS' && !window.ASKS.length));
-  if (broken.length && typeof document !== 'undefined') {
+  if (broken.length && typeof document !== 'undefined' && !document.body?.dataset.skipDataCheck) {
     const p = document.createElement('p');
     p.className = 'data-error';
     p.textContent = `文面のデータを読み込めませんでした（data/${broken.map((k) => DATA[k]).join('、data/')}）。直したところに「,」や「'」の抜けがないか見直してください。`;

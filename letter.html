@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>議員への手紙をつくる｜権利を守る陳情アクション</title>
+<meta name="description" content="地方議員へ制度や運用の課題を伝える手紙を、入力内容を送信せずに作成できます。">
+<link rel="canonical" href="https://chinjo-action.vercel.app/letter">
+<meta property="og:site_name" content="権利を守る陳情アクション">
+<meta property="og:title" content="議員への手紙をつくる">
+<meta property="og:description" content="地方議員へ制度や運用の課題を伝える手紙を、入力内容を送信せずに作成できます。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://chinjo-action.vercel.app/letter">
+<meta property="og:locale" content="ja_JP">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body data-skip-data-check="true">
+<header class="site-header">
+  <div class="wrap header-inner">
+    <details class="theme-menu">
+      <summary>テーマを選ぶ</summary>
+      <nav class="theme-nav" aria-label="陳情のテーマ">
+        <a href="/kodomo">子どもの権利</a>
+        <a href="/dansei">男女平等</a>
+        <a href="/nihonjin">日本人の権利</a>
+        <a href="/shiho">司法への参加</a>
+        <a href="/sonota">その他の陳情</a>
+      </nav>
+    </details>
+    <a href="/" class="logo">陳情アクション</a>
+    <nav class="primary-nav" aria-label="主要メニュー">
+      <a href="/letter" aria-current="page">議員への手紙</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="section alt letter-page">
+  <div class="wrap">
+    <p class="hero-crumb"><a href="/">陳情アクション</a> ＞ <b>議員への手紙</b></p>
+    <h1>議員への手紙をつくる</h1>
+    <p class="lead-sm">制度や運用の課題を、地域の議員へ丁寧に伝える手紙です。陳情書とは別に、かんたんに作成できます。</p>
+    <p class="privacy">🔒 入力内容はこのサイトのサーバーに送信・保存されません。</p>
+
+    <div class="letter-layout">
+      <form id="letterForm" class="gen-form letter-form">
+        <div class="gen-step">
+          <h2><span class="step-badge">1</span>テーマ</h2>
+          <label>テーマ<select id="letterTheme" name="theme"></select></label>
+        </div>
+        <div class="gen-step">
+          <h2><span class="step-badge">2</span>伝えたいこと <small>（いくつでも）</small></h2>
+          <div id="letterIssues" class="letter-checks"></div>
+        </div>
+        <div class="gen-step">
+          <h2><span class="step-badge">3</span>お願いしたいこと <small>（いくつでも）</small></h2>
+          <div id="letterPurposes" class="letter-checks"></div>
+        </div>
+        <div class="gen-step">
+          <h2><span class="step-badge">4</span>宛先・差出人 <small>（すべて任意）</small></h2>
+          <div class="letter-fields">
+            <label>議会名<input name="council" placeholder="例：○○市議会" autocomplete="organization"></label>
+            <label>議員名<input name="member" placeholder="空欄なら下線になります" autocomplete="name"></label>
+            <label>氏名<input name="name" placeholder="空欄なら下線になります" autocomplete="name"></label>
+            <label>連絡先<input name="contact" placeholder="電話番号・メールアドレスなど" autocomplete="tel"></label>
+          </div>
+        </div>
+      </form>
+
+      <section class="letter-preview" aria-labelledby="letterPreviewTitle">
+        <h2 id="letterPreviewTitle">完成文面</h2>
+        <textarea id="letterText" class="letter-paper" aria-label="完成した手紙。自由に編集できます。"></textarea>
+        <div class="letter-toolbar" aria-label="手紙の操作">
+          <button type="button" class="btn btn-primary btn-small" id="letterCopy">コピー</button>
+          <button type="button" class="btn btn-small" id="letterPrint">印刷</button>
+          <button type="button" class="btn btn-small" id="letterMail">メールで自分に送る</button>
+          <button type="button" class="btn btn-small" id="letterX">Xで投稿</button>
+        </div>
+        <p class="hint-sm">文面は自由に編集できます。個別の事案ではなく、制度や運用の課題としてお伝えください。</p>
+      </section>
+    </div>
+  </div>
+</section>
+</main>
+<p id="toast" class="toast" role="status" aria-live="polite" hidden></p>
+<script src="/common.js"></script>
+<script src="/letter.js"></script>
+</body>
+</html>
