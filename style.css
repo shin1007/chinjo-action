@@ -293,12 +293,31 @@ summary { cursor: pointer; font-weight: 700; }
 .letter-paper:focus { outline: 2px solid var(--main); outline-offset: 1px; }
 .letter-toolbar { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 10px; }
 .letter-toolbar .btn { margin: 0; }
+.letter-find { max-width: 1080px; margin: 48px auto 0; padding-top: 32px; border-top: 1px solid var(--line); }
+.letter-find > h2 { text-align: left; margin-bottom: 8px; }
+.find-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 24px; }
+.find-card { padding: 20px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+.find-card h3 { margin: 0 0 12px; font-size: 1.15rem; }
+.find-card label { display: block; margin: 8px 0; font-weight: 700; font-size: 0.9rem; }
+.find-card input, .find-card select { display: block; width: 100%; margin-top: 4px; padding: 9px; border: 1px solid var(--field-line); border-radius: 6px; background: var(--surface); color: inherit; font: inherit; font-weight: 400; }
+.find-filters { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.find-results { margin-top: 12px; }
+.find-result { padding: 10px 0; border-top: 1px solid var(--line); }
+.find-result h4 { margin: 0; font-size: 1rem; }
+.find-result p { margin: 2px 0; font-size: 0.9rem; }
+.find-result .btn, .find-actions .btn { margin: 4px 4px 4px 0; }
+.find-links { margin: 12px 0 0; font-size: 0.9rem; }
+.find-notice { margin: 12px 0 0; padding-left: 1.4em; color: var(--muted); font-size: 0.85rem; }
+.find-guide { margin-top: 16px; padding: 16px 20px; border-left: 4px solid var(--main); background: var(--accent-soft); }
+.find-guide h3 { margin: 0; font-size: 1rem; }
+.find-guide p { margin: 4px 0 0; }
 .privacy { max-width: 760px; margin: 12px auto; padding: 8px 12px; border-radius: 6px; background: var(--ok-bg); color: var(--ok); text-align: center; font-size: 0.9rem; }
 @media (max-width: 800px) {
   .letter-layout { grid-template-columns: 1fr; }
   .letter-preview { position: static; }
   .letter-fields { grid-template-columns: 1fr; }
   .letter-paper { min-height: 560px; padding: 16px; }
+  .find-grid, .find-filters { grid-template-columns: 1fr; }
 }
 
 .wz-count { margin-top: 12px; }
