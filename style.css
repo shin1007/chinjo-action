@@ -127,6 +127,16 @@ h1, h2, h3, h4 { line-height: 1.45; }
 .card h3 { margin-top: 0; }
 .pubcom-links { margin: 0; padding-left: 1.2em; }
 .pubcom-links li { margin: 6px 0; }
+.pubcom-feed { margin: 16px 0; padding: 14px 16px; border: 1px solid var(--accent-line); border-radius: 8px; background: var(--accent-soft); }
+.pubcom-feed[hidden] { display: none; }
+.pubcom-label { margin: 0 0 6px; font-weight: 700; color: var(--main-dark); }
+.pubcom-results { margin: 0; padding-left: 1.2em; }
+.pubcom-results li { margin: 7px 0; }
+.pubcom-results small { display: block; color: var(--muted); font-size: 0.82rem; line-height: 1.5; }
+.pubcom-empty { margin: 0; color: var(--muted); font-size: 0.92rem; }
+.pubcom-howto { margin: 12px 0; padding-left: 1.4em; font-size: 0.92rem; }
+.pubcom-howto li { margin: 3px 0; }
+.pubcom-reference { margin: 16px 0 0; color: var(--muted); font-size: 0.88rem; }
 .num { width: 40px; height: 40px; border-radius: 50%; background: var(--main); color: var(--on-main); display: grid; place-items: center; font-weight: 700; margin-bottom: 8px; }
 .note { font-size: 0.9rem; color: var(--muted); margin-top: 24px; }
 
