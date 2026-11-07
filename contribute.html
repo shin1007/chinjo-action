@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>郵送・持参の扱いを確認する｜陳情アクション</title>
-<meta name="description" content="地方議会の公式案内を確認し、郵送・持参による陳情の扱いを根拠付きで報告します。">
+<title>郵送や持参の扱いを教える｜陳情アクション</title>
+<meta name="description" content="地方議会の公式案内を確認し、郵送や持参による陳情の扱いを教えてください。">
 <link rel="stylesheet" href="/style.css">
 </head>
 <body>
@@ -13,14 +13,14 @@
   <nav class="primary-nav" aria-label="主要メニュー"><a href="/about">陳情って何？</a></nav>
 </div></header>
 <main class="wrap guide contribution">
-  <p class="hero-crumb"><a href="/">陳情アクション</a> ＞ <b>郵送・持参の扱いを確認</b></p>
-  <h1>議会の出し方を、根拠付きで確認する</h1>
-  <p>公式の「陳情・請願の提出案内」を見ながら、1議会ずつ答えてください。あいまいなときは「案内に書いていない・わからない」を選び、推測で埋めないでください。</p>
+  <p class="hero-crumb"><a href="/">陳情アクション</a> ＞ <b>郵送や持参の扱いを教える</b></p>
+  <h1>議会への出し方を、みんなで確かめる</h1>
+  <p>公式の「陳情・請願の提出案内」を見ながら、1議会ずつ教えてください。あいまいなときは「案内に書いていない・わからない」を選び、推測で埋めないでください。</p>
   <div class="box">
     <b>公開前の確認</b>
     <ul>
       <li>公式ページのURLは必須です。原文のコピーがあると検証しやすくなります。</li>
-      <li>回答はすぐにサイトへ反映されません。Issue本文またはJSONを確認してから、管理者が公開します。</li>
+      <li>教えていただいた内容は、原文とURLを確認してから管理者が公開します。</li>
       <li>個人の体験談だけで公式根拠がない場合は、公開データの根拠に使いません。</li>
     </ul>
   </div>
@@ -61,13 +61,13 @@
     <label>確認した日付
       <input id="verifiedAt" type="date" required>
     </label>
-    <button class="btn btn-primary" type="submit">回答データを作る</button>
+    <button class="btn btn-primary" type="submit">送る内容を作る</button>
   </form>
   <section id="result" hidden>
-    <h2>確認用の回答データ</h2>
-    <p class="hint-sm">内容を確認してから、Issue本文をコピーするかJSONを保存してください。管理者が原文・URLを確認して公開します。</p>
+    <h2>送る内容を確認する</h2>
+    <p class="hint-sm">内容を確認してから、確認内容をコピーするかデータを保存してください。管理者が原文・URLを確認して公開します。</p>
     <textarea id="output" rows="16" readonly></textarea>
-    <p><button id="copyIssue" class="btn btn-small" type="button">Issue本文をコピー</button> <button id="downloadJson" class="btn btn-small" type="button">JSONを保存</button></p>
+    <p><button id="copyReport" class="btn btn-small" type="button">確認内容をコピー</button> <button id="downloadJson" class="btn btn-small" type="button">確認内容を保存</button></p>
   </section>
 </main>
 <footer class="site-footer"><div class="wrap"><p><a href="/">陳情アクション</a>　｜　<a href="/about">陳情って何？</a></p></div></footer>

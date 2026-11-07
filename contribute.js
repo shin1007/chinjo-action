@@ -5,7 +5,7 @@
   const copy = async (text) => {
     try {
       await navigator.clipboard.writeText(text);
-      $('toast').textContent = 'Issue本文をコピーしました';
+      $('toast').textContent = '確認内容をコピーしました';
       $('toast').hidden = false;
     } catch {
       $('output').focus();
@@ -26,7 +26,7 @@
   });
 
   const value = (name) => document.querySelector(`input[name="${name}"]:checked`)?.value || 'unknown';
-  const issueText = (r) => [
+  const reportText = (r) => [
     `## ${r.pref}/${r.council}`,
     '',
     `- mail_resident: ${r.mail_resident}`,
@@ -42,7 +42,7 @@
     '### note',
     r.note || '(なし)',
     '',
-    '### machine-readable',
+    '### 詳細データ',
     '```json',
     JSON.stringify(r, null, 2),
     '```',
@@ -64,10 +64,10 @@
       verified_at: $('verifiedAt').value,
       confidence: quote && url ? 'confirmed' : url ? 'likely' : 'unknown',
     };
-    $('output').value = issueText(result);
+    $('output').value = reportText(result);
     $('result').hidden = false;
     $('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    $('copyIssue').onclick = () => copy($('output').value);
+    $('copyReport').onclick = () => copy($('output').value);
     $('downloadJson').onclick = () => {
       const blob = new Blob([JSON.stringify(result, null, 2)], { type: 'application/json' });
       const a = document.createElement('a');
