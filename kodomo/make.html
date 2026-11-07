@@ -34,17 +34,9 @@
       </nav>
     </details>
     <a href="/" class="logo">陳情アクション</a>
-    <nav>
-      <a href="/kodomo/make">つくる</a>
+    <nav class="primary-nav" aria-label="主要メニュー">
+      <a href="/kodomo/make" aria-current="page">つくる</a>
       <a href="/kodomo/guide">出し方</a>
-    </nav>
-    <nav class="page-nav">
-      <a href="/kodomo/make">陳情書を作る</a>
-      <a href="/kodomo#faq">よくある質問</a>
-      <a href="/about">陳情って何？</a>
-      <a href="/kodomo#actions">ほかにできること</a>
-      <a href="/kodomo#shop">関連グッズ</a>
-      <a href="/kodomo/refs">関連資料</a>
     </nav>
   </div>
 </header>
@@ -57,7 +49,16 @@
     <p class="lead-sm">選択肢を押していくだけで、議会に出せる陳情書ができます。<br>選んだ内容や直した文面は、このサイトのサーバーに送信されません。</p>
 
     <div id="wizard" class="wizard">
-      <div class="wz-progress"><div class="wz-bar" id="wzBar"></div></div>
+      <div class="wz-progress" id="wzProgress" role="progressbar" aria-label="陳情書作成の進捗">
+        <div class="wz-bar" id="wzBar"></div>
+      </div>
+      <ol class="wz-steps" aria-label="作成ステップ">
+        <li data-progress-step="items">求める内容</li>
+        <li data-progress-step="council">議会</li>
+        <li data-progress-step="you">あなた</li>
+        <li data-progress-step="done">文面確認</li>
+        <li data-progress-step="send">印刷・提出</li>
+      </ol>
       <p class="wz-stepno" id="wzStepNo"></p>
 
       <div class="wz-step" data-step="items">
@@ -158,7 +159,12 @@
             <li><a href="https://networkprint.ne.jp/" target="_blank" rel="noopener">ファミリーマート・ローソンなど：ネットワークプリント</a></li>
           </ul>
         </div>
-        <p class="hint-sm">印刷したら、「署名して出す」へ進みます。</p>
+        <section class="wz-next-action">
+          <h4>印刷できたら、次は提出です</h4>
+          <p class="hint-sm">署名・議長名・提出方法を確認して、提出手順へ進みます。</p>
+          <button type="button" id="wzNextSend" class="btn btn-primary">印刷・提出の手順を見る →</button>
+          <a href="/kodomo/guide" class="btn">出し方ガイドを開く</a>
+        </section>
       </div>
 
       <div class="wz-step" data-step="send" hidden>

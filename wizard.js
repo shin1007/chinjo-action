@@ -6,7 +6,13 @@
   // 最初の3つが選ぶ画面。そのあとに、できあがった文面の画面と、署名して出す画面が続く
   const STEPS = ['items', 'council', 'you', 'done', 'send'];
   const ASK_STEPS = 3;
-  const STEP_NAMES = { items: '求める内容', council: '出す議会', you: 'あなたのこと' };
+  const STEP_NAMES = {
+    items: '求める内容',
+    council: '議会',
+    you: 'あなた',
+    done: '文面確認',
+    send: '印刷・提出',
+  };
 
   const REGIONS = [
     ['北海道・東北', 0, 7], ['関東', 7, 14], ['中部', 14, 23], ['近畿', 23, 30],
@@ -184,8 +190,14 @@
     const s = STEPS[state.step];
     if (state.councils.length > 1) state.councils = real();
     document.querySelectorAll('.wz-step').forEach((el) => (el.hidden = el.dataset.step !== s));
-    $('wzBar').style.width = `${Math.min(1, state.step / ASK_STEPS) * 100}%`;
-    $('wzStepNo').textContent = state.step < ASK_STEPS ? `${state.step + 1} / ${ASK_STEPS}　${STEP_NAMES[s]}` : '';
+    const progress = state.step / (STEPS.length - 1);
+    $('wzBar').style.width = `${progress * 100}%`;
+    $('wzProgress').setAttribute('aria-valuenow', String(state.step + 1));
+    $('wzStepNo').textContent = `${state.step + 1} / ${STEPS.length}　${STEP_NAMES[s]}`;
+    document.querySelectorAll('[data-progress-step]').forEach((el, i) => {
+      el.classList.toggle('is-current', i === state.step);
+      el.classList.toggle('is-done', i < state.step);
+    });
     $('wzBack').hidden = state.step === 0;
     $('wzNext').hidden = s === 'send';
     $('wzNext').textContent = s === 'done' ? '署名して出す →' : '次へ →';
@@ -286,6 +298,7 @@
   $('wzMorePref').addEventListener('click', () => $('wzPrefs').scrollIntoView({ behavior: 'smooth', block: 'start' }));
   $('wzOther').addEventListener('click', () => go(STEPS.indexOf('council') - state.step));
   $('wzNext').addEventListener('click', () => canNext() && go(1));
+  $('wzNextSend').addEventListener('click', () => go(STEPS.indexOf('send') - state.step));
   $('wzBack').addEventListener('click', () => go(-1));
   $('wzRestart').addEventListener('click', () => {
     if (!confirm('選んだ議会と内容、直した文面が消えます。最初からやり直しますか？')) return;

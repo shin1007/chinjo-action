@@ -76,7 +76,7 @@ a { color: var(--main-dark); }
 .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
 
 .site-header { position: sticky; top: 0; background: var(--surface); border-bottom: 1px solid var(--line); z-index: 10; }
-.header-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px 20px; padding: 12px 20px; min-height: 64px; }
+.header-inner { display: flex; justify-content: space-between; align-items: center; gap: 12px 20px; padding: 10px 20px; min-height: 64px; }
 .logo { font-weight: 700; text-decoration: none; color: var(--ink); }
 nav a { margin-left: 16px; text-decoration: none; color: var(--ink); font-size: 0.95rem; }
 nav a:hover, nav a[aria-current] { color: var(--main-dark); }
@@ -93,8 +93,9 @@ nav a[aria-current] { font-weight: 700; }
 .theme-menu .theme-nav a[aria-current] { color: var(--main-dark); }
 /* 目次から飛んだ先の見出しが、上に貼りついたヘッダーに隠れないようにする */
 html { scroll-padding-top: 96px; }
-.page-nav { flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 4px 18px; border-top: 1px solid var(--line); padding-top: 8px; }
-.page-nav a { margin: 0; font-size: 0.9rem; }
+.page-nav { display: none; }
+.primary-nav { margin-left: auto; }
+.primary-nav a { margin-left: 16px; }
 .hero { background: linear-gradient(135deg, var(--hero-from), var(--hero-to)); padding: 72px 0; text-align: center; border-bottom: 1px solid var(--line); }
 .eyebrow { color: var(--main-dark); font-weight: 700; }
 .hero-crumb { color: var(--muted); font-size: 0.9rem; }
@@ -187,6 +188,11 @@ summary { cursor: pointer; font-weight: 700; }
 .wizard { max-width: 760px; margin: 24px auto 0; background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--main); border-radius: 8px; padding: 24px; }
 .wz-progress { height: 6px; background: var(--bg-alt); border-radius: 3px; overflow: hidden; }
 .wz-bar { height: 100%; background: var(--main); transition: width 0.3s; }
+.wz-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; list-style: none; padding: 0; margin: 10px 0 0; color: var(--muted); font-size: 0.72rem; text-align: center; }
+.wz-steps li { position: relative; }
+.wz-steps li::before { content: "○"; display: block; font-size: 1.1rem; line-height: 1; }
+.wz-steps li.is-current { color: var(--main-dark); font-weight: 700; }
+.wz-steps li.is-current::before, .wz-steps li.is-done::before { content: "●"; color: var(--main); }
 .wz-stepno { text-align: right; color: var(--muted); font-size: 0.85rem; margin: 4px 0 0; }
 .wz-step h3 { font-size: 1.25rem; margin: 4px 0 12px; }
 .wz-step h3 small { font-size: 0.85rem; color: var(--muted); font-weight: 400; }
@@ -213,6 +219,8 @@ summary { cursor: pointer; font-weight: 700; }
 .wz-picked { font-size: 0.85rem; color: var(--main-dark); margin: 8px 0 0; }
 .wz-summary { font-weight: 700; font-size: 1.05rem; }
 .wz-after { margin-top: 20px; padding: 14px 18px; background: var(--bg-alt); border-radius: 10px; }
+.wz-next-action { margin-top: 20px; padding: 14px 18px; border: 1px solid var(--accent-line); border-radius: 10px; background: var(--accent-soft); }
+.wz-next-action h4 { margin: 0 0 4px; }
 .wz-after h4 { margin: 0 0 6px; }
 .wz-after ul { margin: 0; padding-left: 1.2em; font-size: 0.92rem; }
 .wz-after li { margin-bottom: 6px; }
@@ -229,12 +237,12 @@ summary { cursor: pointer; font-weight: 700; }
 
 @media (max-width: 800px) {
   html { scroll-padding-top: 128px; }
-  .header-inner { padding: 8px 16px; row-gap: 6px; }
+  .header-inner { padding: 8px 16px; gap: 8px; min-height: 56px; }
   .logo { flex: 1; font-size: 0.9rem; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   nav { display: flex; flex-shrink: 0; white-space: nowrap; gap: 14px; }
   nav a { margin: 0; font-size: 0.88rem; }
-  .page-nav { gap: 2px 12px; padding-top: 6px; }
-  .page-nav a { font-size: 0.85rem; }
+  .primary-nav { gap: 10px; }
+  .primary-nav a { margin: 0; font-size: 0.85rem; }
   .hero { padding: 48px 0; }
   .section { padding: 48px 0; }
   .section h2 { font-size: 1.5rem; margin-bottom: 24px; }
@@ -242,6 +250,7 @@ summary { cursor: pointer; font-weight: 700; }
   .gen-grid { grid-template-columns: 1fr; }
   .wizard { padding: 16px; }
   .wz-grid { grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); }
+  .wz-steps { font-size: 0.65rem; }
   .howto { padding: 20px; }
   .out-toolbar { top: 76px; }
 }

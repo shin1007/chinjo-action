@@ -1,0 +1,1158 @@
+{
+  "schemaVersion": 1,
+  "description": "陳情の参考資料として登録した一次資料の索引。本文は必要なときだけ scripts/source.js で保存する。",
+  "sources": [
+    {
+      "id": "src-02ef0683c6",
+      "title": "内閣府「第6次男女共同参画基本計画」（令和8年3月13日閣議決定）",
+      "url": "https://www.gender.go.jp/about_danjo/basic_plans/6th/pdf/print.pdf",
+      "note": "改正法の施行状況を踏まえた調査研究",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-041c2458e0",
+      "title": "参議院法務委員会（2026年4月14日）嘉田由紀子委員の質問",
+      "url": "https://kokkai.ndl.go.jp/txt/122115206X00420260414/75",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-0535672268",
+      "title": "困難な問題を抱える女性への支援に関する法律（令和4年法律第52号）",
+      "url": "https://laws.e-gov.go.jp/law/504AC0100000052",
+      "note": "第1条：女性であることにより困難に直面することが多いことに鑑み",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-06ea7d644a",
+      "title": "出入国在留管理庁「技能実習生の失踪者数の推移（令和3年〜令和7年）」（令和8年7月）",
+      "url": "https://www.moj.go.jp/isa/content/001425159.pdf",
+      "note": "令和5年9,753人、令和7年3,950人",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-117583ef31",
+      "title": "厚生労働省保険局国民健康保険課 説明会資料（在留外国人の医療保険適用の課題と対応）",
+      "url": "https://www.mhlw.go.jp/content/12401000/001616165.pdf",
+      "note": "外国人の収納率63%、全体93%",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-13aeb9f08b",
+      "title": "法務省「養育費に関する法務省令の概要」（令和7年12月）",
+      "url": "https://www.moj.go.jp/content/001452582.pdf",
+      "note": "法定養育費は子1人あたり月2万円",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-16e9a65511",
+      "title": "財務省「酒税に関する資料」",
+      "url": "https://www.mof.go.jp/tax_policy/summary/consumption/d08.htm",
+      "note": null,
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-1b7ba1f1ab",
+      "title": "明石市「離婚等のこども養育支援」",
+      "url": "https://www.city.akashi.lg.jp/seisaku/soudan_shitsu/kodomo-kyoiku/youikushien/youikushien.html",
+      "note": "2014年4月から",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-1b88219884",
+      "title": "内閣官房 検討会「安全保障上重要な土地等の取得等に関するルールの在り方について 提言」（令和8年10月）",
+      "url": "https://www.cas.go.jp/jp/seisaku/symbiotic_society/gaikokujin_tochishutoku/kaisai-jokyo/dai5/teigen.pdf",
+      "note": "許可制の導入、対象となる者",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-1cf09c7fd1",
+      "title": "検察庁法 第14条（法務大臣の一般的指揮監督）",
+      "url": "https://laws.e-gov.go.jp/law/322AC0000000061",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-2138b0be22",
+      "title": "最高裁判所「下級裁判所裁判官指名諮問委員会」",
+      "url": "https://www.courts.go.jp/saikosai/iinkai/kakyusaibansyo/index.html",
+      "note": null,
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-21be73aa3c",
+      "title": "学校給食法 第2条第6号（伝統的な食文化への理解）",
+      "url": "https://laws.e-gov.go.jp/law/329AC0000000160",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-21e5d52d10",
+      "title": "出入国管理及び難民認定法 第5条（上陸の拒否）",
+      "url": "https://laws.e-gov.go.jp/law/326CO0000000319",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-263a72d47b",
+      "title": "民法 第766条・第766条の3（離婚後の子の監護に関する事項の定め等、法定養育費）",
+      "url": "https://laws.e-gov.go.jp/law/129AC0000000089",
+      "note": "交流と監護費用の分担を、ともに子の監護について必要な事項として定める",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-274684b6c9",
+      "title": "厚生省社会局長通知「生活に困窮する外国人に対する生活保護の措置について」（昭和29年5月8日）",
+      "url": "https://www.mhlw.go.jp/web/t_doc?dataId=00ta1609&dataType=1&pageNo=1",
+      "note": null,
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-27e11b2cb0",
+      "title": "日本国憲法 第6条第2項・第79条第1項",
+      "url": "https://laws.e-gov.go.jp/law/321CONSTITUTION",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-2a304b2167",
+      "title": "ドイツ 家事事件・非訟事件手続法 第158c条（報酬は常に国庫から）",
+      "url": "https://www.gesetze-im-internet.de/famfg/__158c.html",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-2a8e6e0162",
+      "title": "文部科学省「令和9年度大学入学者選抜実施要項」（令和8年5月27日）",
+      "url": "https://www.mext.go.jp/content/20260529-mxt_daigakuc02-000005144_1.pdf",
+      "note": "属性を理由に一律に取扱いの差異を設けること、理工系分野における女子等",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-2e7a5edfc1",
+      "title": "文部科学省 事務連絡「新年度の学校給食における食物アレルギー等を有する児童生徒等への対応等について」（平成25年3月22日）",
+      "url": "https://www.mext.go.jp/a_menu/sports/syokuiku/1332720.htm",
+      "note": "対応が困難な料理では弁当を持参させる",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-2ff23b880c",
+      "title": "財務省「たばこ税等に関する資料」",
+      "url": "https://www.mof.go.jp/tax_policy/summary/consumption/d09.htm",
+      "note": "令和9年4月から3段階の引上げ、税収はおおむね2兆円",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-2ff6d3c962",
+      "title": "公職選挙法施行令 第88条",
+      "url": "https://laws.e-gov.go.jp/law/325CO0000000089",
+      "note": "届出に戸籍の謄本又は抄本を添える",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-30b6143ab4",
+      "title": "HM Revenue & Customs「Check if your drink is liable for the Soft Drinks Industry Levy」（英国）",
+      "url": "https://www.gov.uk/guidance/check-if-your-drink-is-liable-for-the-soft-drinks-industry-levy",
+      "note": "2018年4月6日から。100mlあたり糖分5g以上と8g以上の2段階",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-327815282f",
+      "title": "国家公務員法 第38条（欠格条項）",
+      "url": "https://laws.e-gov.go.jp/law/322AC0000000120",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-32b621602f",
+      "title": "出入国在留管理庁「令和5年改正入管法の運用状況について」（令和7年3月14日）",
+      "url": "https://www.moj.go.jp/isa/content/001434961.pdf",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-362bf9e8d5",
+      "title": "内閣官房「孤独・孤立に関連する各種調査について」",
+      "url": "https://www.cas.go.jp/jp/seisaku/juten_keikaku/dai5/siryou2.pdf",
+      "note": "相談できる友人が「いない」男性は女性の約3倍",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-36467d4650",
+      "title": "国籍法 第14条（国籍の選択）・第16条",
+      "url": "https://laws.e-gov.go.jp/law/325AC0000000147",
+      "note": "選択の宣言の後の外国籍の離脱は努力義務",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-367d6e4e96",
+      "title": "内閣府「第6次男女共同参画基本計画」成果目標等一覧",
+      "url": "https://www.gender.go.jp/about_danjo/basic_plans/6th/pdf/seika_mokuhyo.pdf",
+      "note": "都道府県・市町村の審議会等委員：40%以上、60%以下",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-3bbadcfcba",
+      "title": "厚生労働省「外国人の生活保護に関するよくあるご意見・ご質問」",
+      "url": "https://www.mhlw.go.jp/content/001684938.pdf",
+      "note": "令和6年度の外国人世帯主の被保護世帯は4万7,332世帯",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-3ff15932f8",
+      "title": "刑法 第224条（未成年者略取及び誘拐）",
+      "url": "https://laws.e-gov.go.jp/law/140AC0000000045",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-4483ba9758",
+      "title": "Takehara ほか (2020) Scientific Reports 10:13770",
+      "url": "https://doi.org/10.1038/s41598-020-70727-2",
+      "note": "論文",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-46050a4ae7",
+      "title": "アルコール健康障害対策基本法 第16条",
+      "url": "https://laws.e-gov.go.jp/law/425AC1000000109",
+      "note": "酒類の表示について、不適切な飲酒を誘引しないための施策を国に求める",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-465c143b6b",
+      "title": "総務省「令和6年10月27日執行 最高裁判所裁判官国民審査結果調」",
+      "url": "https://www.soumu.go.jp/main_content/000979139.pdf",
+      "note": null,
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-4c8f00bd22",
+      "title": "スウェーデン社会保険庁「養育費補助」",
+      "url": "https://www.forsakringskassan.se/privatperson/foralder/for-foraldrar-som-inte-lever-ihop/barnet-bor-hos-dig/underhallsstod-fran-forsakringskassan",
+      "note": null,
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-4ea7ee54b6",
+      "title": "国立成育医療研究センター プレスリリース（2020年8月27日）",
+      "url": "https://www.ncchd.go.jp/press/2020/pr_20200827.html",
+      "note": "父親のメンタルヘルスの不調",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-500f1224fb",
+      "title": "厚生労働省「令和6年度 医療機関における外国人患者の受入に係る実態調査」概要版",
+      "url": "https://www.mhlw.go.jp/content/10800000/001566020.pdf",
+      "note": "16.3%の病院が外国人患者の未収金を経験",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-50ab28c2f6",
+      "title": "地方税法 第348条第2項第9号（固定資産税の非課税）",
+      "url": "https://laws.e-gov.go.jp/law/325AC0000000226",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-5824c99b30",
+      "title": "厚生労働省「令和6年 労働災害発生状況について」（令和7年5月30日）",
+      "url": "https://www.mhlw.go.jp/content/11302000/001543320.pdf",
+      "note": "死亡災害は男性が9割超",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-588ed49116",
+      "title": "厚生労働省「ホームレスの実態に関する全国調査（概数調査）結果について」（令和8年4月27日）",
+      "url": "https://www.mhlw.go.jp/stf/newpage_72779.html",
+      "note": "2,481人のうち男性2,190人",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-59f23b5be8",
+      "title": "重要土地等調査法（令和3年法律第84号）第13条（特別注視区域の届出）",
+      "url": "https://laws.e-gov.go.jp/law/503AC0000000084",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-5d2359d3e3",
+      "title": "法人税法 第4条第1項・第66条・別表第二",
+      "url": "https://laws.e-gov.go.jp/law/340AC0000000034",
+      "note": "公益法人等は収益事業を行う場合に限り納税義務。税率は普通法人23.2％、公益法人等19％",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-5edb1eb63a",
+      "title": "明石市「参考書式など」（こども養育プラン・合意書）",
+      "url": "https://www.city.akashi.lg.jp/seisaku/soudan_shitsu/kodomo-kyoiku/youikushien/sannkousyosiki.html",
+      "note": null,
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-5fc559d5d0",
+      "title": "酒税の保全及び酒類業組合等に関する法律施行令 第8条の3第1項",
+      "url": "https://laws.e-gov.go.jp/law/328CO0000000028",
+      "note": "容器に表示する義務があるのは内容量・品目・アルコール分など。純アルコール量は含まれない",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-665b833e44",
+      "title": "WHO「Fiscal policies to promote healthy diets: policy brief」（2022年6月13日）",
+      "url": "https://www.who.int/publications/i/item/9789240049543",
+      "note": "健康によくない食品と飲料への課税を呼びかけ",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-6736595c02",
+      "title": "出入国在留管理庁「不法滞在者ゼロプラン」",
+      "url": "https://www.moj.go.jp/isa/09_00048.html",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-67d6c6e1c0",
+      "title": "東京都青少年の健全な育成に関する条例施行規則",
+      "url": "https://www.reiki.metro.tokyo.lg.jp/reiki/reiki_honbun/g101RG00003367.html",
+      "note": "区分陳列の方法",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-68832b2245",
+      "title": "厚生労働省年金局「公的年金加入状況等調査」参考3 外国人に係る公的年金加入状況等",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/nenkin/nenkin/toukei/dl/k_r07.pdf",
+      "note": "令和7年度の最終納付率（令和5年度分保険料）55.0%",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-6bf34e5e04",
+      "title": "衆議院法務委員会（2024年4月9日）法務省刑事局長の答弁",
+      "url": "https://kokkai.ndl.go.jp/txt/121305206X00920240409/117",
+      "note": "有罪となった事案の数は「網羅的、統計的に把握をしていない」",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-6dc21d5775",
+      "title": "配偶者からの暴力の防止及び被害者の保護等に関する法律 第3条第4項（一時保護）",
+      "url": "https://laws.e-gov.go.jp/law/413AC0100000031",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-6ea083b8dd",
+      "title": "ドイツ 養育費前払法 第1条・第7条",
+      "url": "https://www.gesetze-im-internet.de/uhvorschg/__7.html",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-720026ec33",
+      "title": "国連子どもの権利委員会 一般的意見第12号（2009年）意見を聴かれる子どもの権利",
+      "url": "https://www2.ohchr.org/english/bodies/crc/docs/AdvanceVersions/CRC-C-GC-12.pdf",
+      "note": "英文",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-72717fbaca",
+      "title": "公職選挙法 第10条（被選挙権）・第86条の4（立候補の届出）",
+      "url": "https://laws.e-gov.go.jp/law/325AC1000000100",
+      "note": "届出書の記載事項は氏名・本籍・住所・生年月日・職業・所属政党など",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-7333ece7d7",
+      "title": "法務省「Ｑ＆Ａ形式の解説資料（民法編）」（令和8年9月11日改訂）",
+      "url": "https://www.moj.go.jp/MINJI/minji07_00377.html",
+      "note": "Q2-1：正当な理由なく無断で子の居所を変更することと協力義務",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-76980b470a",
+      "title": "女性の職業生活における活躍の推進に関する法律（平成27年法律第64号）",
+      "url": "https://laws.e-gov.go.jp/law/427AC0000000064",
+      "note": "第8条第3項・第19条第3項（女性の割合などの数値目標）、第24条（認定事業主の受注機会の増大）",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-78aedba99c",
+      "title": "出入国在留管理庁「令和8年入管法等改正法について」",
+      "url": "https://www.moj.go.jp/isa/01_00643.html",
+      "note": "JESTAの創設。施行は令和11年3月31日までの政令で定める日",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-7b71d9a249",
+      "title": "内閣府男女共同参画局「配偶者から逃げたい」（被害者の要望別支援方法）",
+      "url": "https://www.gender.go.jp/policy/no_violence/e-vaw/siensya/03.html",
+      "note": "避難の手順の案内。別居後の親子関係には触れていない",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-7dbb21a266",
+      "title": "厚生労働省・警察庁「令和6年中における自殺の状況」",
+      "url": "https://www.mhlw.go.jp/content/001464717.pdf",
+      "note": "自殺者20,320人のうち男性13,801人",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-8122e6ca73",
+      "title": "私立学校振興助成法 第14条第2項（公認会計士の監査）",
+      "url": "https://laws.e-gov.go.jp/law/350AC1000000061",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-81cedc271a",
+      "title": "法務省「民法等の一部を改正する法律（父母の離婚後等の子の養育に関する見直し）について」",
+      "url": "https://www.moj.go.jp/MINJI/minji07_00357.html",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-8375bc0678",
+      "title": "裁判所「夫婦関係調整調停（円満）」",
+      "url": "https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_07_02/index.html",
+      "note": "円満な夫婦関係を回復するための話合いの場",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-847c538a85",
+      "title": "文部科学省「令和5年度 私立大学等改革総合支援事業調査票」タイプ1",
+      "url": "https://www.mext.go.jp/content/20240207-mxt_sigakujo-100001428_9.pdf",
+      "note": "設問⑳：女子学生の占める割合の少ない学部等における女子学生選抜などを行うと3点",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-850179d2ff",
+      "title": "児童福祉法 第33条（一時保護と一時保護状）",
+      "url": "https://laws.e-gov.go.jp/law/322AC0000000164",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-871622948a",
+      "title": "孤独・孤立対策推進法 第4条（地方公共団体の責務）",
+      "url": "https://laws.e-gov.go.jp/law/505AC0000000045",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-8e0011ced7",
+      "title": "特定非営利活動促進法 第18条・第27条〜第30条・第43条・第45条",
+      "url": "https://laws.e-gov.go.jp/law/410AC1000000007",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-8e8b9c1482",
+      "title": "法務省・厚生労働省 タスクフォース「公的機関による養育費の立替払い制度・取立て制度に関する論点整理」（2020年12月24日）",
+      "url": "https://www.moj.go.jp/content/001341513.pdf",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-8eb7c2df64",
+      "title": "内閣府男女共同参画局「配偶者暴力相談支援センターにおける相談件数等（令和6年度分）」",
+      "url": "https://www.gender.go.jp/policy/no_violence/e-vaw/data/pdf/2024soudan.pdf",
+      "note": null,
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-8fa2601d12",
+      "title": "厚生労働省「健康に配慮した飲酒に関するガイドライン」（令和6年2月19日）",
+      "url": "https://www.mhlw.go.jp/content/12200000/001211974.pdf",
+      "note": "4（1）純アルコール量の算出式、4（2）男性40g・女性20gの量と「個々人の許容量を示したものではありません」の注",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-948fcce9e1",
+      "title": "Courts and Tribunals Judiciary「Open reporting provisions extended to all family courts」（2025年1月27日、英国）",
+      "url": "https://www.judiciary.uk/open-reporting-provisions-extended-to-all-family-courts-in-watershed-moment-for-family-justice/",
+      "note": null,
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-94ac94c510",
+      "title": "東京都青少年の健全な育成に関する条例 第8条・第9条・第9条の2・第17条",
+      "url": "https://www.reiki.metro.tokyo.lg.jp/reiki/reiki_honbun/g101RG00002150.html",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-94b4f1527d",
+      "title": "WHO「WHO urges global action to curtail consumption and health impacts of sugary drinks」（2016年10月11日）",
+      "url": "https://www.who.int/news/item/11-10-2016-who-urges-global-action-to-curtail-consumption-and-health-impacts-of-sugary-drinks",
+      "note": "小売価格を20％以上上げる課税で、消費が比例して減る",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-94c50f0ffe",
+      "title": "こども家庭庁「一時保護時の司法審査に関する児童相談所の対応マニュアル」の通知（2024年12月26日）",
+      "url": "https://www.cfa.go.jp/assets/contents/node/basic_page/field_ref_resources/fdf4848a-9194-4b7c-b228-1b7ed4847d58/5a312ba7/20251208_policies_jidougyakutai_hourei-tsuuchi_208.pdf",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-9628c4ddac",
+      "title": "最高裁判所裁判官国民審査法 第15条（投票の方法）",
+      "url": "https://laws.e-gov.go.jp/law/322AC1000000136",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-98a500c532",
+      "title": "韓国政府「養育費先払い制度」（2025年7月開始）",
+      "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148945174",
+      "note": "国税強制徴収の例により取り立てる",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-9c1142e6fe",
+      "title": "日本弁護士連合会「子どもが国費・公費で弁護士による法的支援を受けられる制度構築を求める意見書」（2024年1月18日）",
+      "url": "https://www.nichibenren.or.jp/library/pdf/document/opinion/2024/240118_4.pdf",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-9e837aad78",
+      "title": "厚生労働省「年金制度の仕組みと考え方 第13 遺族年金」",
+      "url": "https://www.mhlw.go.jp/stf/nenkin_shikumi_013.html",
+      "note": "夫は妻の死亡当時55歳以上に限る。見直しは令和10年4月施行予定",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-a0168cc7fc",
+      "title": "WHO「Tobacco」（ファクトシート）",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/tobacco",
+      "note": "小売価格の少なくとも75％を税とする水準を勧めている",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-a0299738d6",
+      "title": "総務省自治行政局住民制度課長通知「DV等支援措置に関する取扱いについて」（令和5年3月17日 総行住第21号）",
+      "url": "https://www.soumu.go.jp/main_content/000929817.pdf",
+      "note": "措置期間は1年。延長時に支援の必要性を確認",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-a175c8e017",
+      "title": "Cafcass（イングランド）",
+      "url": "https://www.cafcass.gov.uk/about-cafcass",
+      "note": null,
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-a1b52f67c4",
+      "title": "こども家庭庁「児童の権利条約」",
+      "url": "https://www.cfa.go.jp/policies/international/convention",
+      "note": "条約の和文と、国連子どもの権利委員会の総括所見の仮訳",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-a8b1206c3b",
+      "title": "地方公務員法 第16条（欠格条項）",
+      "url": "https://laws.e-gov.go.jp/law/325AC0000000261",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-a9e7a7084d",
+      "title": "内閣府「男女間における暴力に関する調査（令和5年度）」調査結果のポイント",
+      "url": "https://www.gender.go.jp/kaigi/senmon/boryoku/siryo/pdf/bo124-1.pdf",
+      "note": "被害を受けた男性の57.2%がどこにも相談していない",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-aac68ed129",
+      "title": "日本年金機構「遺族年金の受給要件」",
+      "url": "https://www.nenkin.go.jp/service/jukyu/seido/izokunenkin/jukyu-yoken/20150424.html",
+      "note": null,
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-aeb772d14d",
+      "title": "人事院規則八―一八（採用試験）第9条",
+      "url": "https://laws.e-gov.go.jp/law/423RJNJ08018023",
+      "note": "日本の国籍を有しない者は採用試験を受けることができない",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-b2846cc38c",
+      "title": "民事調停委員及び家事調停委員規則",
+      "url": "https://www.courts.go.jp/vc-files/courts/2022/R4.02.21-minjityouteiiinn-oyobi-kajityouteiiinn-kisoku.pdf",
+      "note": "第1条：任命の要件",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-b38f16b879",
+      "title": "厚生労働省「2022（令和4）年 国民生活基礎調査の概況」各種世帯の所得等の状況",
+      "url": "https://www.mhlw.go.jp/toukei/saikin/hw/k-tyosa/k-tyosa22/dl/03.pdf",
+      "note": "大人が一人の世帯員の相対的貧困率44.5%",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-b39492b90a",
+      "title": "民法等の一部を改正する法律（令和6年法律第33号）",
+      "url": "https://www.shugiin.go.jp/Internet/itdb_housei.nsf/html/housei/21320240524033.htm",
+      "note": "第817条の12（父母の協力義務）、附則第19条（施行後の検討）",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-b46392ebe6",
+      "title": "ドイツ 行政裁判所法 第19条（名誉職裁判官）",
+      "url": "https://www.gesetze-im-internet.de/vwgo/__19.html",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-b8251bed90",
+      "title": "同 三谷法務副大臣の答弁",
+      "url": "https://kokkai.ndl.go.jp/txt/122115206X00420260414/76",
+      "note": "親権者でも未成年者略取誘拐罪に該当し得る。検察庁に適切な対処を周知",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-b9aacd852d",
+      "title": "WHO「Healthy diet」（ファクトシート）",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/healthy-diet",
+      "note": "遊離糖類は総エネルギー摂取量の10％未満に",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-bbb3457df1",
+      "title": "明石市「こどもの養育費立替支援事業」",
+      "url": "https://www.city.akashi.lg.jp/seisaku/soudan_shitsu/kodomo-kyoiku/youikushien/tatekaesien.html",
+      "note": "最大3か月分、上限月5万円を立て替え、市が督促",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-bc5ca45306",
+      "title": "公益社団法人及び公益財団法人の認定等に関する法律 第5条第13号（会計監査人）",
+      "url": "https://laws.e-gov.go.jp/law/418AC0000000049",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-bc8eacfcdb",
+      "title": "教育基本法 第4条（教育の機会均等）",
+      "url": "https://laws.e-gov.go.jp/law/418AC0000000120",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-bd64384ffb",
+      "title": "WHO「The SAFER initiative」",
+      "url": "https://www.who.int/initiatives/SAFER",
+      "note": "酒税と価格政策は、最も効果的で費用対効果の高い対策の一つ",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-beffcc49b3",
+      "title": "文部科学省「令和8年度学校基本調査の公表について（速報）」",
+      "url": "https://www.mext.go.jp/content/20260826-mxt_chousa01-000050842_01.pdf",
+      "note": "表1 高等学校の学校数",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-bf4669fac1",
+      "title": "出入国在留管理庁「本邦における不法残留者数について（令和8年1月1日現在）」",
+      "url": "https://www.moj.go.jp/isa/publications/press/13_00061.html",
+      "note": "6万8,488人",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-bfe71791af",
+      "title": "住民基本台帳法施行令 第30条の16（通称の記載）・第30条の17（通称の記載及び削除に関する事項）",
+      "url": "https://laws.e-gov.go.jp/law/342CO0000000292",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-c007cf7a2a",
+      "title": "こども家庭庁「児童の権利に関する条約 全文」",
+      "url": "https://www.cfa.go.jp/policies/international/convention/text",
+      "note": "第9条3：父母のいずれとも人的な関係及び直接の接触を維持する権利",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-c0ba915bee",
+      "title": "厚生労働省「令和3年度 全国ひとり親世帯等調査」結果の公表",
+      "url": "https://www.cfa.go.jp/assets/contents/node/basic_page/field_ref_resources/f1dc19f2-79dc-49bf-a774-21607026a21d/9ff012a5/20230725_councils_shingikai_hinkon_hitorioya_6TseCaln_05.pdf",
+      "note": "母子世帯で養育費を現在も受けているのは28.1%",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-c1e7e44925",
+      "title": "家事事件手続法 第152条の3（親子交流の試行的実施）",
+      "url": "https://laws.e-gov.go.jp/law/423AC0000000052",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-c237fb79d9",
+      "title": "法務省「ハーグ条約実施法の概要について」",
+      "url": "https://www.moj.go.jp/MINJI/minji07_00148.html",
+      "note": "国境を越えた連れ去りでは、子を元の居住国に迅速に返還する",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-c26d11f18b",
+      "title": "こども基本法 第3条・第11条",
+      "url": "https://laws.e-gov.go.jp/law/504AC1000000077",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-c2ecd9dabf",
+      "title": "法務省「法教育」",
+      "url": "https://www.moj.go.jp/housei/shihouhousei/index2.html",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-c558bcf616",
+      "title": "英国 2005年憲法改革法 第61条（裁判官任命委員会）",
+      "url": "https://www.legislation.gov.uk/ukpga/2005/4/section/61",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-c577cc6390",
+      "title": "男女共同参画社会基本法 第6条（家庭生活における活動と他の活動の両立）",
+      "url": "https://laws.e-gov.go.jp/law/411AC0000000078",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-c908124bd4",
+      "title": "内閣府「男女間における暴力に関する調査（令和5年度）」第5章 不同意性交等をされた経験",
+      "url": "https://www.gender.go.jp/policy/no_violence/e-vaw/chousa/pdf/r05/r05danjokan-7.pdf",
+      "note": "被害経験は男性0.7%、相談したのは男性20.0%",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-ca97842008",
+      "title": "総務省・文部科学省 高校生向け副教材「私たちが拓く日本の未来」",
+      "url": "https://www.soumu.go.jp/main_content/000378818.pdf",
+      "note": null,
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-cbc1200a77",
+      "title": "総務省「第51回衆議院議員総選挙・最高裁判所裁判官国民審査結果調」（令和8年2月13日）",
+      "url": "https://www.soumu.go.jp/main_content/001061492.pdf",
+      "note": null,
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-ccfb4bcc3b",
+      "title": "Judicial Conduct Investigations Office Annual Report 2024-25（英国）",
+      "url": "https://www.complaints.judicialconduct.gov.uk/JCIOAnnualReport24-25",
+      "note": "3,279件の苦情",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-cd5bb15e76",
+      "title": "北海道「水資源保全地域内の土地取引行為に係る事前届出」",
+      "url": "https://www.pref.hokkaido.lg.jp/ss/stt/mizusigen/mizusigen_todokede.html",
+      "note": "3か月前までに届出。面積の基準なし",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-d2655c7a43",
+      "title": "Amato (2000) The Consequences of Divorce for Adults and Children, Journal of Marriage and Family",
+      "url": "https://doi.org/10.1111/j.1741-3737.2000.01269.x",
+      "note": "論文",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-d4c642568a",
+      "title": "母子保健法 第12条（乳幼児健康診査）",
+      "url": "https://laws.e-gov.go.jp/law/340AC0000000141",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-d574704e5d",
+      "title": "最高裁判所事務総局「裁判の迅速化に係る検証に関する報告書（第10回）家事事件」（令和5年7月）",
+      "url": "https://www.courts.go.jp/vc-files/courts/2023/10_houkoku_5_kaji.pdf",
+      "note": "子の監護事件の平均審理期間の長期化",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-d59cd233c9",
+      "title": "総務省「国民審査 制度のポイントを知ろう！」",
+      "url": "https://www.soumu.go.jp/senkyo/kokuminshinsa/seido_point.html",
+      "note": null,
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-d81d82c73c",
+      "title": "自殺対策基本法 第13条（都道府県・市町村の自殺対策計画）",
+      "url": "https://laws.e-gov.go.jp/law/418AC0100000085",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-d83f866a46",
+      "title": "警察庁「令和6年におけるストーカー事案、配偶者からの暴力事案等…への対応状況について」",
+      "url": "https://www.npa.go.jp/bureau/safetylife/stalker/R6_STDVRP_CA_kouhoushiryou.pdf",
+      "note": "配偶者からの暴力事案の被害者のうち男性は29.7%",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-dbf14b7c6c",
+      "title": "出入国在留管理庁「令和7年末現在における在留外国人数について」（令和8年3月27日）",
+      "url": "https://www.moj.go.jp/isa/publications/press/13_00062.html",
+      "note": "412万5,395人",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-de9b4a7a67",
+      "title": "文部科学省「大学入学者選抜に関する最新動向」（2025年8月28日）",
+      "url": "https://www.mext.go.jp/content/20250828-mxt_daigakuc02-000044252_01.pdf",
+      "note": "理工系女子枠を設ける国公立大学は30大学（令和7年度入試）",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-df39d6de30",
+      "title": "文部科学大臣記者会見録（令和8年3月31日）",
+      "url": "https://www.mext.go.jp/b_menu/daijin/detail/mext_00680.html",
+      "note": "親権者の意思が分かれたときの学校の対応",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-e17dcad4be",
+      "title": "裁判官弾劾法 第2条・第15条",
+      "url": "https://laws.e-gov.go.jp/law/322AC1000000137",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-e5f98b3d59",
+      "title": "生活保護法 第1条・第2条",
+      "url": "https://laws.e-gov.go.jp/law/325AC0000000144",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-ec3d87c158",
+      "title": "宗教法人法 第6条（公益事業その他の事業）",
+      "url": "https://laws.e-gov.go.jp/law/326AC0000000126",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-eeca0437fe",
+      "title": "厚生労働省「人口動態統計月報（概数）（令和8年4月分）」（2026年9月公表）",
+      "url": "https://www.mhlw.go.jp/toukei/saikin/hw/jinkou/geppo/m2026/04.html",
+      "note": "親権の種類別にみた親が離婚した未成年の子の数",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-efe7b9527e",
+      "title": "最高裁判所「裁判員制度の概要」",
+      "url": "https://www.courts.go.jp/saibanin/introduction/index.html",
+      "note": null,
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-fa6d36015c",
+      "title": "WHO「SAFER: Pricing policies」",
+      "url": "https://www.who.int/initiatives/SAFER/pricing-policies",
+      "note": "物価に合わせて定期的に見直し、引き上げるべき",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-fa86e934cb",
+      "title": "総務省「DV等被害者の方への支援措置」",
+      "url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/daityo/dv_shien.html",
+      "note": null,
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-fabce085da",
+      "title": "刑事訴訟法 第205条・第208条（逮捕後の時間の制限、勾留の期間と延長）",
+      "url": "https://laws.e-gov.go.jp/law/323AC0000000131",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-fd83adcd5a",
+      "title": "文部科学省「高等学校等就学支援金・新制度の概要」",
+      "url": "https://www.mext.go.jp/content/20260616-mxt_shuukyo03-100002595_7.pdf",
+      "note": "支給上限額 公立11万8800円、私立45万7200円",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-fef77de3b1",
+      "title": "参議院法務委員会（2021年4月13日）上川法務大臣の答弁",
+      "url": "https://kokkai.ndl.go.jp/txt/120415206X00720210413/231",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-ff97a23567",
+      "title": "文部科学省「高校生等への修学支援」",
+      "url": "https://www.mext.go.jp/a_menu/shotou/mushouka/index.htm",
+      "note": "令和8年度から所得制限を撤廃",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    }
+  ]
+}
