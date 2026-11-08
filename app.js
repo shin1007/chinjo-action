@@ -16,6 +16,8 @@
 
   const url = encodeURIComponent(location.href.split('#')[0]);
   const text = encodeURIComponent(window.THEME.shareText);
-  document.getElementById('shareX').href = `https://x.com/intent/post?text=${text}&url=${url}`;
-  document.getElementById('shareLine').href = `https://social-plugins.line.me/lineit/share?url=${url}`;
+  const shareX = document.getElementById('shareX');
+  const shareLine = document.getElementById('shareLine');
+  if (shareX) shareX.href = `https://x.com/intent/post?text=${text}&url=${url}`;
+  if (shareLine) shareLine.href = `https://social-plugins.line.me/lineit/share?url=${url}`;
 })();
