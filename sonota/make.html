@@ -144,35 +144,6 @@
           </div>
         </details>
 
-        <h4>印刷する</h4>
-        <p class="hint-sm">印刷するものを選んでください。選んだものが1つのPDFになります。</p>
-        <div class="print-picks">
-          <label class="check"><input type="checkbox" id="wzBody" checked> 陳情書本体</label>
-          <p class="hint-sm warn">印刷したら、陳情書の氏名欄に<b>手書きで署名し、押印</b>してください。</p>
-          <label class="check"><input type="checkbox" id="wzCover" checked> 各自治体への鏡文（送付状。郵送するときに1枚目につける）</label>
-          <label class="check"><input type="checkbox" id="wzWithLabels" checked> 宛名・差出人用紙（封筒の表と裏に、切って貼る）</label>
-          <label class="check"><input type="checkbox" id="wzWithMemo" checked> 送り方メモ（手順・議会事務局の電話と住所・切手の目安。コンビニで印刷しているあいだにこのページを閉じても、手元に残ります）</label>
-          <p class="hint-sm warn">宛名の「議長　　様」のあいだに、<b>議長の氏名を手書きで</b>書き入れてください。ラベル用紙に印刷するときは<a id="wzLabels" href="/sonota/labels">宛名ラベルのページ</a>を使います。</p>
-        </div>
-        <div class="pdf-actions">
-          <button type="button" id="wzPdf" class="btn btn-primary">印刷用のPDFを保存する</button>
-          <button type="button" id="wzDocx" class="btn">Wordで保存して直す</button>
-        </div>
-        <p class="hint-sm">家のプリンターなら、保存したPDFを開いて<b>A4・倍率100%</b>で印刷します。</p>
-        <p class="hint-sm">💡 同じ文面が多くの議会に届くと、審査されないことがあります。上の「文面を確かめる・直す」の「生成AIで自分の言葉に直す」か、Wordで地域の事情を一言足すと安心です（<a href="/sonota/guide#tips">書き方のコツ</a>）。</p>
-        <div class="netprint">
-          <p><b>プリンターがなければ、コンビニで印刷できます。</b>保存したPDFをサイトかアプリで登録し、お店のマルチコピー機で表示される番号を入れて印刷します。</p>
-          <ul class="netprint-links">
-            <li><a href="https://www.printing.ne.jp/" target="_blank" rel="noopener">セブン‐イレブン：ネットプリント</a></li>
-            <li><a href="https://networkprint.ne.jp/" target="_blank" rel="noopener">ファミリーマート・ローソンなど：ネットワークプリント</a></li>
-          </ul>
-        </div>
-        <section class="wz-next-action">
-          <h4>印刷できたら、次は提出です</h4>
-          <p class="hint-sm">署名・議長名・提出方法を確認して、提出手順へ進みます。</p>
-          <button type="button" id="wzNextSend" class="btn btn-primary">印刷・提出の手順を見る →</button>
-          <a href="/sonota/guide" class="btn">出し方ガイドを開く</a>
-        </section>
       </div>
 
       <div class="wz-step" data-step="send" hidden>
