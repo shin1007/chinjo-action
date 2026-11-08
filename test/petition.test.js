@@ -51,6 +51,17 @@ test('自治体あての陳情に意見書の提出先は入らず、住所・�
   assert.match(t, /住所　横浜市中区/);
 });
 
+test('自治体あては要望書に切り替えられる', () => {
+  const k = w.ASKS.find((a) => a.scope === 'local').id;
+  const fd = form([k]);
+  fd.append('kind', 'request');
+  const t = w.Petition.build(fd, '横浜市議会', [k]);
+  assert.match(t, /件名　.*要望$/m);
+  assert.match(t, /【要望の趣旨】/);
+  assert.match(t, /【要望の理由】/);
+  assert.doesNotMatch(t, /陳情の趣旨|陳情の理由/);
+});
+
 test('すべての求める事項で文面ができる', () => {
   for (const a of w.ASKS) {
     const t = w.Petition.build(form([a.id]), '札幌市議会', [a.id]);

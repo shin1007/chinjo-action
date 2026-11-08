@@ -22,7 +22,7 @@
 
   // 最初は、おすすめ（★）で初めから選んである項目を選んでおく
   const firstItems = () => [];
-  const state = { step: 0, pref: '', councils: [], items: firstItems(), role: '' };
+  const state = { step: 0, pref: '', councils: [], items: firstItems(), role: '', kind: 'petition' };
 
   // ---------- 選択肢の描画 ----------
   $('wzPrefs').innerHTML = REGIONS.map(([name, a, b]) => `
@@ -196,6 +196,10 @@
   }
 
   $('wzRoles').innerHTML = ROLES.map(([k, label]) => `<button type="button" class="wz-card wz-small" data-role="${k}"><b>${label}</b></button>`).join('');
+  $('wzKind').addEventListener('change', () => {
+    state.kind = $('wzKind').value;
+    if (state.step >= ASK_STEPS) build();
+  });
 
   // ---------- 画面の切り替え ----------
   function canNext() {
@@ -319,7 +323,8 @@
   $('wzBack').addEventListener('click', () => go(-1));
   $('wzRestart').addEventListener('click', () => {
     if (!confirm('選んだ議会と内容、直した文面が消えます。最初からやり直しますか？')) return;
-    Object.assign(state, { step: 0, pref: '', councils: [], items: firstItems(), role: '' });
+    Object.assign(state, { step: 0, pref: '', councils: [], items: firstItems(), role: '', kind: 'petition' });
+    $('wzKind').value = 'petition';
     $('wzAiBox').hidden = true;
     $('wzSendBox').hidden = true;
     edits = {};
@@ -341,6 +346,7 @@
   function formData() {
     const fd = new FormData();
     state.items.forEach((k) => fd.append('items', k));
+    fd.append('kind', state.kind);
     fd.append('story', (ROLES.find(([k]) => k === state.role) || [])[2] || '');
     ['address', 'name', 'tel'].forEach((k) => fd.append(k, ''));
     return fd;

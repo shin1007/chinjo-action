@@ -64,6 +64,13 @@
       <div class="wz-step" data-step="items">
         <h3>求める内容を選んでください <small>（いくつでも）</small></h3>
         <p class="hint-sm">1つの内容につき1通の陳情書ができます。迷ったら、★の付いたものがおすすめです。</p>
+        <label class="wz-kind">自治体向けの文書
+          <select id="wzKind">
+            <option value="petition">陳情書</option>
+            <option value="request">要望書</option>
+          </select>
+        </label>
+        <p class="hint-sm">「要望書」は自治体向けの項目で使えます。国への意見書を求める項目は陳情書になります。</p>
         <div id="wzItems" class="wz-cards"></div>
       </div>
 
