@@ -120,6 +120,7 @@ html { scroll-padding-top: 96px; }
 .section h2 { text-align: center; font-size: 1.8rem; line-height: 1.4; margin: 0 0 32px; }
 .section-title-row { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 32px; }
 .section-title-row h2 { margin: 0; }
+.section-title-row .btn { align-self: stretch; display: inline-flex; align-items: center; }
 h1, h2, h3 { letter-spacing: 0.01em; }
 h1, h2, h3, h4 { line-height: 1.45; }
 .lead-sm { text-align: center; color: var(--muted); }
