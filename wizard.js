@@ -319,7 +319,6 @@
   $('wzMorePref').addEventListener('click', () => $('wzPrefs').scrollIntoView({ behavior: 'smooth', block: 'start' }));
   $('wzOther').addEventListener('click', () => go(STEPS.indexOf('council') - state.step));
   $('wzNext').addEventListener('click', () => canNext() && go(1));
-  $('wzNextSend').addEventListener('click', () => go(STEPS.indexOf('send') - state.step));
   $('wzBack').addEventListener('click', () => go(-1));
   $('wzRestart').addEventListener('click', () => {
     if (!confirm('選んだ議会と内容、直した文面が消えます。最初からやり直しますか？')) return;
@@ -400,135 +399,7 @@
   const areas = () => [...$('wzDocs').querySelectorAll('textarea')];
   const docFor = (ta, c) => withSender(edits[ta.dataset.key] ? forCouncil(ta.value, c)
     : window.Petition.build(formData(), nameOf(c), [ta.dataset.key]), sender).trim();
-  // 印刷するときは、議会ごとに鏡文（送付状）を先頭に重ねる（郵送で出すとき用。持参なら外せる）
-  // 陳情書本体を外すと、鏡文だけ・宛名だけも印刷できる
-  const withCover = (c, docs) => [
-    ...($('wzCover').checked ? [window.Petition.cover(nameOf(c), docs, sender)] : []),
-    ...($('wzBody').checked ? docs : []),
-  ];
   const allDocs = () => state.councils.flatMap((c) => areas().map((ta) => docFor(ta, c)));
-  // 議会ごとに、封筒に入れる文書（鏡文と陳情書）をまとめる
-  const envelopes = () => state.councils.map((c) => ({ c, texts: withCover(c, areas().map((ta) => docFor(ta, c))) }));
-
-  // ---------- PDF で保存 ----------
-  // 文書を1つずつ新しいページから書き、封筒の表に貼る宛名と裏に貼る差出人（普通紙に8枚・切って貼る）を最後につける
-  // 封筒ごとの枚数も返す（切手の目安に使う）
-  async function makePdf(envs) {
-    const doc = await window.PdfDoc.create();
-    const sheets = envs.map(({ c, texts }) => ({ c, n: texts.reduce((a, t) => a + doc.addDocument(t), 0) }));
-    if ($('wzWithLabels').checked && real().length) {
-      const rows = envs.filter(({ c }) => !isNone(c)).map(({ c }) => {
-        const [pref, key] = officeKeys[c] || [];
-        return { council: nameOf(c), ...window.Places.office(pref, key) };
-      });
-      doc.addLabels(window.PdfDoc.SHEETS.plain, window.PdfDoc.labelItems(rows, sender, { to: 'chair', zaichu: true, from: true, back: true }));
-    }
-    if ($('wzWithMemo').checked) doc.addDocument(sendMemo(sheets), { send: await doc.embedImage(await figsPng()) });
-    return { bytes: await doc.bytes(), sheets };
-  }
-
-  // 送り方のメモ：コンビニで印刷しているあいだにこのページを閉じても、出し方が手元に残るよう、PDFの最後に1枚つける
-  // PDFのフォントに絵文字はないので外す。送り方の図（send-figs.js）は、画面の SVG を3枚横に並べた PNG にして入れる
-  async function figsPng() {
-    const svgs = [...document.querySelectorAll('[data-send-figs] svg')].slice(0, 3);
-    const W = 600;
-    const H = 750;
-    const canvas = document.createElement('canvas');
-    canvas.width = W * svgs.length;
-    canvas.height = H;
-    const ctx = canvas.getContext('2d');
-    ctx.fillStyle = '#fff';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    await Promise.all(svgs.map((svg, i) => new Promise((ok, ng) => {
-      const c = svg.cloneNode(true);
-      c.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-      c.setAttribute('width', W);
-      c.setAttribute('height', H);
-      const img = new Image();
-      img.onload = () => { ctx.drawImage(img, i * W, 0, W, H); ok(); };
-      img.onerror = () => ng(new Error('送り方の図を描けませんでした'));
-      img.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(new XMLSerializer().serializeToString(c))}`;
-    })));
-    const blob = await new Promise((ok) => canvas.toBlob(ok, 'image/png'));
-    return new Uint8Array(await blob.arrayBuffer());
-  }
-  const plain = (t) => t.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]\uFE0F?\s*/gu, '');
-  function sendMemo(sheets) {
-    const lines = [
-      '　　　　陳情書の送り方メモ',
-      '（このメモは議会に送らず、手元に残してください）',
-      '',
-      '【出すまでの手順】',
-      '1．陳情書の氏名欄に手書きで署名し、押印する。空欄にした住所も手書きで記入する。',
-      '2．陳情書と宛名の「議長」と「様」のあいだに、議長の氏名を書き入れる。議長は選挙や交代で変わるので、出す直前に議会の公式サイトで確かめる。',
-      '3．郵送するときは、下の図のように中身をまとめ、A4を折らずに角2封筒へ入れる。',
-      '[[図:send]]',
-      '①中身：ホチキスは陳情書1件ごとに、その陳情書のページだけを左上で1か所留める。全部をまとめて留めない（件名ごとに別の委員会へ回ることがある）。鏡文は留めずにいちばん上に置き、全部をクリアファイルに入れる。',
-      '②封筒の表：切手は左上に（金額は下の「切手の目安」）。宛名の紙は真ん中に。宛名に「陳情書在中」が入っていなければ、左下に赤で書く。',
-      '③封筒の裏：のりで封をし、「〆」を書く。差出人の紙は下の方に。',
-      '4．締切までに議会事務局へ出す。郵送だと審査されず配布だけになる議会もあるので、遠い議会には先に電話で「郵送でも審査されますか」と聞くのが確実。締切は定例会の1〜2週間前が多い。',
-      '',
-      '【議会ごとの出し方】',
-    ];
-    real().forEach((c) => {
-      const [pref, key] = officeKeys[c] || [];
-      const info = infoOf(c);
-      const o = window.Places.office(pref, key);
-      const t = ((window.TEL || {})[pref] || {})[key];
-      const a = accessOf(pref, key);
-      const page = ((window.SITES[pref] || {})[key] || [])[1];
-      const rule = mailRule(info);
-      const s = sheets.find((x) => x.c === c);
-      const p = s && s.n && window.Postage.estimate(s.n);
-      lines.push('', `■ ${label(c)}事務局`);
-      if (page) lines.push(`・案内ページ：${page}`);
-      lines.push(`・郵送：${rule ? plain(rule.label) : '郵送で審査してもらえるかは載っていませんでした（事務局に確認を）'}`);
-      if (info.denshi) lines.push('・電子申請でも出せるようです。');
-      const notes = info.policy
-        ? [['公式案内', info.policy.source_quote], ['補足', info.policy.note], ['根拠URL', info.policy.source_url]]
-        : [['郵送について', info.yusoNote], ['住民以外の陳情について', info.outsideNote]];
-      [...notes, ['締切', info.deadline]].forEach(([k, v]) => {
-        const x = v && clip(v);
-        if (x) lines.push(`・${k}：「${x}」`);
-      });
-      if (t) lines.push(`・電話：${t[1]}（${t[0] === 'gikai' ? '議会事務局' : '役所。「議会事務局につないでください」と伝える'}）`);
-      if (o.address) lines.push(`・住所：〒${o.zip}　${o.address}${o.main ? '（役所の本庁舎。議会事務局が別の建物のこともある）' : ''}`);
-      if (a) lines.push(`・持参：${a[2]}駅（${a[3]}）から${a[4] <= 2500 ? `徒歩約${Math.ceil((a[4] * 1.3) / 80)}分` : `約${km(a[4])}。バスかタクシーが便利`}`);
-      if (p) lines.push(`・切手の目安（角2封筒・定形外郵便）：${s.n}枚・約${p.g}g → ${p.yen ? `${p.yen}円${p.safe ? `（心配なら${p.safe}円）` : ''}` : '郵便局の窓口で出す'}`);
-    });
-    return lines.join('\n');
-  }
-
-  // 封筒ごとの重さの目安と、貼る切手
-  function showPostage(sheets) {
-    $('wzPostage').innerHTML = `<p><b>切手の目安（角2封筒・定形外郵便）</b></p><ul>${sheets.map(({ c, n }) => {
-      const p = window.Postage.estimate(n);
-      if (!p.yen) return `<li>${esc(label(c))}：${n}枚・約${p.g}g。郵便局の窓口で出してください。</li>`;
-      return `<li>${esc(label(c))}：${n}枚・約${p.g}g → <b>${p.yen}円</b>（${p.limit}gまで）${p.safe ? `。ぎりぎりなので、心配なら<b>${p.safe}円</b>分貼っておくと安心です` : ''}</li>`;
-    }).join('')}</ul><p class="hint-sm">クリアファイル1枚と、宛名・差出人のラベル、のりを含めた重さです。切手は多めに貼っても届きます（多い分は戻りません）。不安なときは郵便局の窓口で量ってもらうのが確実です。<a href="guide#send">送り方を見る</a></p>`;
-    $('wzPostage').hidden = false;
-  }
-  const fileName = () => `陳情書_${real().length ? nameOf(state.councils[0]) : '宛先なし'}${state.councils.length > 1 ? `ほか${state.councils.length - 1}件` : ''}_${window.PdfDoc.today()}.pdf`;
-  // all：すべての内容を保存したとき（このときだけ切手の目安を出す）
-  async function savePdf(btn, envs, { share = false, all = false } = {}) {
-    const text = btn.textContent;
-    btn.disabled = true;
-    btn.textContent = 'PDFを作っています…';
-    try {
-      const { bytes, sheets } = await makePdf(envs);
-      if (all) showPostage(sheets);
-      if (share) await window.PdfDoc.shareFile(bytes, fileName());
-      else {
-        window.PdfDoc.download(bytes, fileName());
-        flash('PDFを保存しました');
-      }
-    } catch (e) {
-      flash(`PDFを作れませんでした（${e.message}）。通信のよい所でもう一度試してください。`, 5000);
-    } finally {
-      btn.disabled = false;
-      btn.textContent = text;
-    }
-  }
   // 1通目の議会あての1通だけをPDFにして、新しいタブで開く（鏡文・宛名はつけない）
   // 開くのを待つとポップアップとして止められるので、タブは先に開いておく
   async function viewPdf(btn, ta) {
@@ -763,17 +634,6 @@
       <div class="wz-grid">${near.map((n) => `<button type="button" class="wz-chip" data-add-near="${esc(n.id)}" title="${esc(n.a[2])}駅（${esc(n.a[3])}）">${esc(n.pl.council)}<small class="wz-n">約${km(n.d)}・${esc(n.a[2])}駅</small></button>`).join('')}</div>`;
     near.forEach((n) => councilsOf(n.pl.pref));
   }
-
-  // 印刷するものを1つも選んでいなければ、PDF を作らずに知らせる
-  const picked = () => ['wzBody', 'wzCover', 'wzWithLabels', 'wzWithMemo'].some((id) => $(id).checked) || (flash('印刷するものを選んでください'), false);
-  $('wzPdf').addEventListener('click', (e) => picked() && savePdf(e.currentTarget, envelopes(), { all: true }));
-  // Word で保存：自分の言葉で直してから印刷できるよう、鏡文と陳情書を .docx にする（宛名・差出人用紙は入れない）
-  $('wzDocx').addEventListener('click', () => {
-    const texts = envelopes().flatMap((e) => e.texts);
-    if (!texts.length) { flash('鏡文か陳情書本体を選んでください'); return; }
-    window.DocxDoc.download(window.DocxDoc.build(texts), fileName().replace(/\.pdf$/, '.docx'));
-    flash('Word のファイルを保存しました。宛名・差出人用紙は入らないので、PDFで保存してください。', 5000);
-  });
 
   // 差出人（あなた）の住所・氏名。入れるとすぐ、下の文面の住所・氏名の行に入る
   const sender = window.Common.bindSender($('wzSender'), () => {
