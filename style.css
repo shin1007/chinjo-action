@@ -271,6 +271,7 @@ summary { cursor: pointer; font-weight: 700; }
   .section { padding: 48px 0; }
   .section h2 { font-size: 1.5rem; margin-bottom: 24px; }
   .section-title-row { flex-wrap: wrap; margin-bottom: 24px; }
+  .guide-menu { top: 56px; }
   .gen-form, .gen-output { padding-left: 16px; padding-right: 16px; }
   .gen-grid { grid-template-columns: 1fr; }
   .wizard { padding: 16px; }
@@ -422,6 +423,9 @@ summary { cursor: pointer; font-weight: 700; }
 
 /* 陳情の手引き（guide.html） */
 .guide { max-width: 860px; padding-top: 32px; padding-bottom: 64px; }
+.guide-menu { position: sticky; top: 64px; z-index: 3; display: flex; flex-wrap: wrap; gap: 6px; margin: 24px 0 32px; padding: 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); box-shadow: 0 2px 8px rgba(30, 40, 48, 0.08); }
+.guide-menu a { margin: 0; padding: 5px 10px; border-radius: 5px; background: var(--bg-alt); color: var(--main-dark); font-size: 0.9rem; text-decoration: none; }
+.guide-menu a:hover { background: var(--accent-soft); }
 .guide h2 { text-align: left; font-size: 1.4rem; border-left: 6px solid var(--main); padding-left: 10px; margin-top: 48px; }
 .guide table { border-collapse: collapse; width: 100%; font-size: 0.92rem; }
 .guide th, .guide td { border: 1px solid var(--line); padding: 8px; vertical-align: top; }
