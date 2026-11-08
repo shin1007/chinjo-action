@@ -27,12 +27,13 @@ window.Petition = (() => {
 
     const place = council.replace(/議会$/, '');
     const isRequest = requestedKind === 'request' && !isIkensho;
+    const destination = isRequest ? `${place}役所` : `${council}議長`;
     const vars = { 内容: sel.map((it) => it.title).join('および'), 種類: isRequest ? '要望' : '陳情', 宛先: place };
     const subject = fill(isIkensho ? T.subjectNational : T.subjectLocal, vars);
 
     const lines = [];
     lines.push(reiwaToday(), '');
-    lines.push(`${council}議長　${BLANK_TEXT}　様`, '');
+    lines.push(`${destination}　${BLANK_TEXT}　様`, '');
     lines.push(`住所　${data.get('address').trim() || BLANK_TEXT}`);
     lines.push(`氏名　${data.get('name').trim() || BLANK_TEXT}　　　　印`);
     if (data.get('tel').trim()) lines.push(`電話　${data.get('tel').trim()}`);
@@ -67,9 +68,9 @@ window.Petition = (() => {
     const request = data.get('kind') === 'request' && !nat;
     const story = data.get('story').trim();
     const L = [];
-    L.push(`あなたは地方議会への${request ? '要望書' : '陳情書'}の作成に詳しい行政文書の専門家です。以下の条件で、議会に提出する文案を作成してください。`, '');
+    L.push(`あなたは${request ? '自治体への要望書' : '地方議会への陳情書'}の作成に詳しい行政文書の専門家です。以下の条件で、${request ? '役所' : '議会'}に提出する文案を作成してください。`, '');
     L.push('## 提出先');
-    L.push(councils.length ? councils.map((c) => `- ${c}（議長あて）`).join('\n') : '- （議会名は後で入れます。「○○議会」としてください）');
+    L.push(councils.length ? councils.map((c) => request ? `- ${c.replace(/議会$/, '')}役所あて` : `- ${c}（議長あて）`).join('\n') : request ? '- （自治体名は後で入れます。「○○市役所」などとしてください）' : '- （議会名は後で入れます。「○○議会」としてください）');
     if (councils.length > 1) L.push('※文面は1通だけ作り、宛名と自治体名の部分を「○○議会」「○○市」のように差し替えやすくしてください。');
     L.push('', '## 陳情の種類');
     const KIND_NAT = `議会から国（${window.THEME.ai.ikenshoTo}）へ意見書を提出するよう求める陳情。`;
@@ -92,7 +93,7 @@ window.Petition = (() => {
     L.push('', '## 出力の形式');
     L.push(`次の順に、そのまま印刷できる文面で出力してください。${request ? '要望者' : '陳情者'}の住所・氏名の欄は空欄（＿＿＿＿）にしてください。`);
     const heading = request ? '要望' : '陳情';
-    L.push('1. 日付（令和　年　月　日）', '2. 宛名（○○議会議長　様）', `3. ${request ? '要望者' : '陳情者'}の住所・氏名の欄`, '4. 件名', `5. ${heading}の趣旨`, '6. 記（求める事項を漢数字の箇条書きで）', `7. ${heading}の理由`, nat ? `8. 意見書の提出先${mixed ? '（国の事項のみ）' : ''}` : '8. 以上');
+    L.push('1. 日付（令和　年　月　日）', `2. 宛名（${request ? '○○市役所　担当部署' : '○○議会議長'}　様）`, `3. ${request ? '要望者' : '陳情者'}の住所・氏名の欄`, '4. 件名', `5. ${heading}の趣旨`, '6. 記（求める事項を漢数字の箇条書きで）', `7. ${heading}の理由`, nat ? `8. 意見書の提出先${mixed ? '（国の事項のみ）' : ''}` : '8. 以上');
     L.push('', '最後に、文面とは別に「提出前に確認すべき点」を3つ以内で箇条書きにしてください。');
     return L.join('\n');
   }

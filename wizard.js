@@ -8,7 +8,7 @@
   const ASK_STEPS = 3;
   const STEP_NAMES = {
     items: '求める内容',
-    council: '議会',
+    council: '自治体',
     you: 'あなた',
     done: '文面確認',
     send: '印刷・提出',
@@ -37,6 +37,8 @@
   const idOf = (pref, name) => `${pref}/${name}`;
   const nameOf = (id) => id.slice(id.indexOf('/') + 1);
   const prefOf = (id) => id.slice(0, id.indexOf('/'));
+  const placeOf = (id) => (window.Places.of(prefOf(id)).find((p) => p.council === nameOf(id)) || {});
+  const municipalityName = (id) => placeOf(id).name || nameOf(id).replace(/議会$/, '');
   // 議会を選ばずに作るときは、議会名を空けた宛先を1つだけ置く（議会名と議長名は手書きで入れる）
   const NONE = '/　　　　　　議会';
   const isNone = (c) => c === NONE;
@@ -62,9 +64,11 @@
     if (el.hidden) return;
     const total = n * Math.max(1, state.councils.length);
     el.classList.toggle('warn', n > MANY);
+    const destination = state.kind === 'request' ? '自治体' : '議会';
+    const document = state.kind === 'request' ? '要望書' : '陳情書';
     el.textContent = n > MANY
-      ? `⚠ 1つの議会に${n}通を一度に出すと、1件ごとの重みが薄れます。優先したい内容を${MANY}つ以内に絞り、残りは次の定例会に回すのがおすすめです。（いまの選び方で ${total}通）`
-      : state.councils.length ? `いまの選び方で、陳情書は ${total}通 になります。` : `内容1つにつき1通、陳情書ができます（いま${n}通）。`;
+      ? `⚠ 1つの${destination}に${n}通を一度に出すと、1件ごとの重みが薄れます。優先したい内容を${MANY}つ以内に絞るのがおすすめです。（いまの選び方で ${total}通）`
+      : state.councils.length ? `いまの選び方で、${document}は ${total}通 になります。` : `内容1つにつき1通、${document}ができます（いま${n}通）。`;
   }
 
   function renderCouncils() {
@@ -74,7 +78,8 @@
         const id = idOf(state.pref, c);
         const on = state.councils.includes(id);
         const n = window.Report.count(id);
-        return `<button type="button" class="wz-chip ${on ? 'on' : ''} ${i === 0 && !q ? 'wz-wide' : ''}" data-council="${id}" aria-pressed="${on}">${c}${chipMail(id)}${window.Report.enabled ? `<small class="wz-n">${n ? `出した人 ${n}人` : 'まだ0人'}</small>` : ''}</button>`;
+        const name = municipalityName(id);
+        return `<button type="button" class="wz-chip ${on ? 'on' : ''} ${i === 0 && !q ? 'wz-wide' : ''}" data-council="${id}" aria-pressed="${on}">${esc(name)}${state.kind === 'petition' ? chipMail(id) : ''}${state.kind === 'petition' && window.Report.enabled ? `<small class="wz-n">${n ? `提出報告 ${n}件` : 'まだ報告なし'}</small>` : ''}</button>`;
       })
       .join('') || `<p class="hint-sm wz-wide">「${esc(q)}」に当てはまる議会が見つかりません。${esc(state.pref)}以外の議会なら、上の都道府県から選んでください。</p>`;
     $('wzPicked').textContent = state.councils.length ? `選択中：${state.councils.map(label).join('、')}` : '';
@@ -93,6 +98,7 @@
   ].map((x) => { const el = document.createElement('details'); el.className = `wz-mailok ${x[1]}`; $('wzPrefs').before(el); return [el, ...x]; });
   function renderMailAll() {
     MAIL_BOXES.forEach(([box, list, c, badge, title, note]) => {
+      box.hidden = state.kind === 'request';
       const groups = window.PREFS.map((p) => [p, list(p)]).filter(([, ids]) => ids.length);
       const n = groups.reduce((a, [, ids]) => a + ids.length, 0);
       document.querySelectorAll('[data-pref]').forEach((b) => {
@@ -119,6 +125,7 @@
   const mailOk = (pref) => councilsOf(pref).map((c) => idOf(pref, c)).filter((id) => (mailRule(infoOf(id)) || {}).c === 'ok');
   function renderMailOk() {
     const ids = mailOk(state.pref);
+    if (state.kind === 'request') { $('wzMailOk').hidden = true; return; }
     const el = $('wzMailOk');
     el.hidden = !ids.length;
     if (el.hidden) return;
@@ -131,6 +138,7 @@
   // 締切は作り終えてから気づくと間に合わないので、議会を選んだ時点で知らせる
   function renderDeadline() {
     const el = $('wzDeadline');
+    if (state.kind === 'request') { el.hidden = true; return; }
     el.hidden = !state.councils.length;
     if (el.hidden) return;
     el.innerHTML = `<p><b>⏰ 先に締切と出し方を確かめましょう。</b>締切は定例会（多くは2〜3月・6月・9月・12月）の1〜2週間前が多く、過ぎると次の定例会に回ります。住んでいない自治体の議会や郵送の陳情は、審査されず配布だけになることがあります。</p>
@@ -199,6 +207,7 @@
   $('wzKind').addEventListener('change', () => {
     state.kind = $('wzKind').value;
     if (state.step >= ASK_STEPS) build();
+    else if (state.step === 1) show();
   });
 
   // ---------- 画面の切り替え ----------
@@ -229,10 +238,12 @@
     $('wzPrefPicked').textContent = s === 'council' && real().length ? `選択中：${real().map(label).join('、')}（ほかの都道府県を選ぶと、その議会も書き足せます）` : '';
     // 都道府県を選ぶと、同じ画面の下にその都道府県の議会の一覧を出す
     $('wzCouncilBox').hidden = !state.pref;
+    $('wzNearBtn').hidden = state.kind === 'request' || !navigator.geolocation || !window.ACCESS;
+    $('wzNear').hidden = state.kind === 'request';
     if (s === 'council') {
       renderMailAll();
       if (state.pref) {
-        $('wzCouncilTitle').textContent = `${state.pref}の議会`;
+        $('wzCouncilTitle').textContent = `${state.pref}の自治体`;
         renderCouncils();
       }
     }
@@ -379,10 +390,10 @@
       </details>`;
     }).join('');
     areas().forEach((ta) => { fit(ta); docStat(ta); });
-    $('wzLabels').href = `labels?c=${encodeURIComponent(real().join(','))}`;
+    const document = state.kind === 'request' ? '要望書' : '陳情書';
     $('wzSummary').textContent = real().length
-      ? `${state.councils.length}つの議会 × ${state.items.length}つの内容 ＝ 陳情書 ${state.councils.length * state.items.length}通`
-      : `議会名を空けた陳情書 ${state.items.length}通（議会名と議長名は、出す先が決まったら手書きで入れてください）`;
+      ? `${state.councils.length}つの自治体 × ${state.items.length}つの内容 ＝ ${document} ${state.councils.length * state.items.length}通`
+      : `自治体名を空けた${document} ${state.items.length}通（提出先が決まったら手書きで入れてください）`;
     renderOffices();
   }
 
@@ -485,7 +496,7 @@
 
   // 提出先：議会事務局の多くは本庁舎にあるので、その住所を出し、締切は公式サイトで調べてもらう
   // 都道府県をまたいで選んだときは、どこの議会かわかるよう都道府県名を添える
-  const label = (c) => (new Set(state.councils.map(prefOf)).size > 1 && !nameOf(c).startsWith(prefOf(c)) ? `${nameOf(c)}（${prefOf(c)}）` : nameOf(c));
+  const label = (c) => (new Set(state.councils.map(prefOf)).size > 1 && !municipalityName(c).startsWith(prefOf(c)) ? `${municipalityName(c)}（${prefOf(c)}）` : municipalityName(c));
   const search = (c) => (nameOf(c).startsWith(prefOf(c)) ? nameOf(c) : `${prefOf(c)} ${nameOf(c)}`);
   // 案内ページから読み取った、提出のしかたで気をつけること
   // 自動で読み取ったので、サイトのメニューや書式一覧を拾ったものは出さず、長いものは切る
@@ -564,6 +575,22 @@
   }
 
   function renderOffices() {
+    if (state.kind === 'request') {
+      $('wzOffices').innerHTML = real().map((c) => {
+        const [pref, key] = officeKeys[c] || [];
+        const [site] = (window.SITES[pref] || {})[key] || [];
+        const name = municipalityName(c);
+        const query = encodeURIComponent(`site:${site ? new URL(site).hostname : `${name} 公式`} 要望 OR ご意見 OR 提案`);
+        const links = [
+          site && `<a href="${esc(site)}" target="_blank" rel="noopener">${esc(name)}の公式ホームページ</a>`,
+          `<a href="https://www.google.com/search?q=${query}" target="_blank" rel="noopener">公式ホームページで「要望・ご意見」を探す</a>`,
+        ].filter(Boolean).join('');
+        return `<li><b>${esc(name)}役所</b><span>要望書の提出先は自治体ごとに異なります。公式ホームページで担当部署や提出方法を確認してください。</span><span class="wz-links">${links}</span></li>`;
+      }).join('');
+      $('wzChairLinks').innerHTML = '';
+      $('wzNearby').innerHTML = '';
+      return;
+    }
     $('wzOffices').innerHTML = real().map((c) => {
       const [pref, key] = officeKeys[c] || [];
       const info = infoOf(c);

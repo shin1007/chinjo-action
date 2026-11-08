@@ -54,7 +54,7 @@
       </div>
       <ol class="wz-steps" aria-label="作成ステップ">
         <li data-progress-step="items">求める内容</li>
-        <li data-progress-step="council">議会</li>
+        <li data-progress-step="council">自治体</li>
         <li data-progress-step="you">あなた</li>
         <li data-progress-step="done">文面確認</li>
         <li data-progress-step="send">印刷・提出</li>
@@ -75,14 +75,14 @@
       </div>
 
       <div class="wz-step" data-step="council" hidden>
-        <h3>どの議会に出しますか？ <small>（いくつでも）</small></h3>
-        <p class="hint-sm">まず都道府県を選ぶと、その都道府県の議会が下に出ます。</p>
+        <h3>どの自治体にしますか？ <small>（いくつでも）</small></h3>
+        <p class="hint-sm">まず都道府県を選ぶと、その都道府県の自治体が下に出ます。</p>
         <p class="center"><a href="/contribute.html" class="btn btn-small">送りたい議会の郵送・持参の扱いがわからない</a></p>
         <p class="wz-picked" id="wzPrefPicked"></p>
-        <p class="wz-skip"><button type="button" id="wzSkip" class="btn btn-small">議会を選ばずに作る</button> <span class="hint-sm">議会名と議長名を空けた陳情書ができます。出す先が決まったら手書きで入れてください。</span></p>
+        <p class="wz-skip"><button type="button" id="wzSkip" class="btn btn-small">自治体を選ばずに作る</button> <span class="hint-sm">提出先を空けた文書ができます。出す先が決まったら手書きで入れてください。</span></p>
         <div id="wzPrefs"></div>
         <div class="wz-near">
-          <button type="button" id="wzNearBtn" class="btn btn-small">📍 現在地から近い議会を探す</button>
+          <button type="button" id="wzNearBtn" class="btn btn-small">📍 現在地から近い自治体を探す</button>
           <span class="hint-sm">持参して出すときに。現在地はこの端末の中だけで使い、送信しません。</span>
           <div id="wzNear" class="wz-grid" hidden></div>
         </div>
@@ -90,7 +90,7 @@
           <h4 id="wzCouncilTitle" class="wz-sub"></h4>
           <p class="hint-sm">住んでいる自治体の議会がいちばん確実です。<span id="wzCountHint" hidden>「出した人 ○人」はこのサイトで提出を報告した人の数です。まだ誰も出していない議会に出すと、全国に広がります。</span></p>
           <div id="wzMailOk" class="wz-mailok" hidden></div>
-          <input type="search" id="wzFilter" class="wz-filter" placeholder="名前で絞り込む（ひらがな・ローマ字でも）">
+          <input type="search" id="wzFilter" class="wz-filter" placeholder="自治体名で絞り込む（ひらがな・ローマ字でも）">
           <div id="wzCouncils" class="wz-grid wz-scroll"></div>
           <p class="wz-picked" id="wzPicked"></p>
           <button type="button" id="wzMorePref" class="btn btn-small">＋ ほかの都道府県の議会も選ぶ</button>

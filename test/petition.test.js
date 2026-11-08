@@ -57,6 +57,7 @@ test('自治体あては要望書に切り替えられる', () => {
   fd.append('kind', 'request');
   const t = w.Petition.build(fd, '横浜市議会', [k]);
   assert.match(t, /件名　.*要望$/m);
+  assert.match(t, /横浜市役所　＿＿＿＿＿＿　様/);
   assert.match(t, /【要望の趣旨】/);
   assert.match(t, /【要望の理由】/);
   assert.doesNotMatch(t, /陳情の趣旨|陳情の理由/);
