@@ -12,6 +12,7 @@ const THEMES = [
   { id: 'dansei', label: '男女平等', site: '男女平等を求める陳情アクション' },
   { id: 'nihonjin', label: '日本人の権利' },
   { id: 'shiho', label: '司法への参加' },
+  { id: 'kenko', label: '国民の健康' },
   { id: 'sonota', label: 'その他の陳情' },
 ];
 const PAGES = ['labels', 'make'];

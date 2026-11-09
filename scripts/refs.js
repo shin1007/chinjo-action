@@ -6,7 +6,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
-const THEMES = ['kodomo', 'dansei', 'nihonjin', 'shiho', 'sonota'];
+const THEMES = ['kodomo', 'dansei', 'nihonjin', 'shiho', 'kenko', 'sonota'];
 const START = '<!-- asks-refs:start -->';
 const END = '<!-- asks-refs:end -->';
 

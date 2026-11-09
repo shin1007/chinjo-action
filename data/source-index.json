@@ -66,6 +66,15 @@
       "localPath": null
     },
     {
+      "id": "src-183addcea0",
+      "title": "高齢者の医療の確保に関する法律 第19条・第20条・第24条",
+      "url": "https://laws.e-gov.go.jp/law/357AC0000000080",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-1b7ba1f1ab",
       "title": "明石市「離婚等のこども養育支援」",
       "url": "https://www.city.akashi.lg.jp/seisaku/soudan_shitsu/kodomo-kyoiku/youikushien/youikushien.html",
@@ -228,6 +237,15 @@
       "localPath": null
     },
     {
+      "id": "src-358c9f8409",
+      "title": "厚生労働省「がん対策推進基本計画」（令和5年3月28日閣議決定）",
+      "url": "https://www.mhlw.go.jp/content/10900000/001522768.pdf",
+      "note": "「がん検診受診率の向上」の個別目標（受診率60％・精密検査受診率90％）と注20",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-362bf9e8d5",
       "title": "内閣官房「孤独・孤立に関連する各種調査について」",
       "url": "https://www.cas.go.jp/jp/seisaku/juten_keikaku/dai5/siryou2.pdf",
@@ -323,6 +341,15 @@
       "url": "https://www.ncchd.go.jp/press/2020/pr_20200827.html",
       "note": "父親のメンタルヘルスの不調",
       "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-4ed0c0397b",
+      "title": "厚生労働省「2024年度 特定健康診査・特定保健指導の実施状況の訂正について」（令和8年10月29日）",
+      "url": "https://www.mhlw.go.jp/content/12400000/001764398.pdf",
+      "note": "特定保健指導の実施率の訂正（全国28.9％、市町村国保30.2％）",
+      "kind": "official",
       "fetchedAt": null,
       "localPath": null
     },
@@ -1155,10 +1182,28 @@
       "localPath": null
     },
     {
+      "id": "src-fc1419bd97",
+      "title": "健康増進法 第19条の2",
+      "url": "https://laws.e-gov.go.jp/law/414AC0000000103",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-fd83adcd5a",
       "title": "文部科学省「高等学校等就学支援金・新制度の概要」",
       "url": "https://www.mext.go.jp/content/20260616-mxt_shuukyo03-100002595_7.pdf",
       "note": "支給上限額 公立11万8800円、私立45万7200円",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-feaad35961",
+      "title": "厚生労働省「2024年度 特定健康診査・特定保健指導の実施状況（概要）」",
+      "url": "https://www.mhlw.go.jp/content/12400000/001764145.pdf",
+      "note": "保険者の種類別の実施率と、国の目標（2029年度までに70％以上・45％以上）",
       "kind": "official",
       "fetchedAt": null,
       "localPath": null
