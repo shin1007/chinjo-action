@@ -640,3 +640,4 @@ summary { cursor: pointer; font-weight: 700; }
 .guide-must { border: 2px solid var(--main); border-radius: 10px; background: var(--accent-soft); padding: 10px 16px; margin: 12px 0; }
 .guide-must h2 { font-size: 1.05rem; margin: 0 0 4px; }
 .guide-must ul { margin: 0; padding-left: 1.2em; }
+.wz-checked { color: var(--muted); font-weight: 400; margin-left: 2px; }
