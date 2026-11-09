@@ -22,16 +22,16 @@ function asks(theme) {
   return window.ASKS;
 }
 
-// 1件の資料：{ t: 題名（発行元・日付）, url?, note?: どこを読むか }
+// 1件の資料：{ t: 題名（発行元・日付）, url?, note?: どこを読むか, secondary?: true（信頼のおける二次資料） }
 const item = (r) => {
   const title = r.url ? `<a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.t)}</a>` : esc(r.t);
-  return `      <li>${title}${r.note ? `（${esc(r.note)}）` : ''}</li>`;
+  return `      <li>${r.secondary ? '<span class="hint-sm">［解説・研究］</span>' : ''}${title}${r.note ? `（${esc(r.note)}）` : ''}</li>`;
 };
 
 function block(theme) {
   const groups = [['national', '国への意見書を求める陳情'], ['local', '自治体の施策を求める陳情']];
   const L = [START, '  <h2 id="asks">求める事項ごとの資料</h2>',
-    '  <p>陳情書で選べる項目ごとに、問題をつかむための一次資料（法令・国や自治体の公式資料・国会の会議録・論文）をまとめました。陳情書の【参考資料】の欄にも、選んだ項目の資料が入ります。</p>',
+    '  <p>陳情書で選べる項目ごとに、問題をつかむための一次資料（法令・国や自治体の公式資料・国会の会議録・論文）と、それを補う信頼のおける二次資料（［解説・研究］の印。国会の調査室や公的機関の委託調査の解説、系統的レビュー、国際機関・専門機関の報告など）をまとめました。陳情書の【参考資料】の欄にも、選んだ項目の資料が入ります。</p>',
     '  <p class="hint-sm">参考資料を添付できるかは議会によって違います。柏崎市議会や日野町議会は他の自治体の事例などの添付を認めていますが、立川市議会は資料の添付を受け付けていません。習志野市議会では、参考資料は議員に配られますが、ホームページには本文だけが載ります。出す前に議会事務局に確かめてください。</p>'];
   for (const [scope, label] of groups) {
     const list = asks(theme).filter((a) => a.scope === scope && a.refs && a.refs.length);
