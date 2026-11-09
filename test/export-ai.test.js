@@ -30,3 +30,9 @@ test('トップの検索用の一覧が最新', () => {
   const actual = fs.readFileSync(path.join(ROOT, 'search-index.js'), 'utf8').replace(/\r\n/g, '\n');
   assert.strictEqual(actual, searchIndex(collect()));
 });
+
+test('検索の言い換えの語が、ある項目を指している', () => {
+  const words = require('../scripts/search-words');
+  const ids = new Set(collect().themes.flatMap((t) => t.items.map((a) => `${t.id}/${a.id}`)));
+  for (const k of Object.keys(words)) assert.ok(ids.has(k), k);
+});
