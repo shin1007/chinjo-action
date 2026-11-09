@@ -22,7 +22,11 @@
 
   // 最初は、おすすめ（★）で初めから選んである項目を選んでおく
   const firstItems = () => [];
-  const state = { step: 0, pref: '', councils: [], items: firstItems(), role: '', kind: 'petition' };
+  // テーマのページで「要望書」を選んで来たときは ?kind=request が付いている
+  const startKind = () => (new URLSearchParams(location.search).get('kind') === 'request' ? 'request' : 'petition');
+  const state = { step: 0, pref: '', councils: [], items: firstItems(), role: '', kind: startKind() };
+  const kindInputs = () => document.querySelectorAll('input[name="wzKind"]');
+  const setKindInputs = () => kindInputs().forEach((r) => { r.checked = r.value === state.kind; });
 
   // ---------- 選択肢の描画 ----------
   $('wzPrefs').innerHTML = REGIONS.map(([name, a, b]) => `
@@ -67,8 +71,8 @@
     const destination = state.kind === 'request' ? '自治体' : '議会';
     const document = state.kind === 'request' ? '要望書' : '陳情書';
     el.textContent = n > MANY
-      ? `⚠ 1つの${destination}に${n}通を一度に出すと、1件ごとの重みが薄れます。優先したい内容を${MANY}つ以内に絞るのがおすすめです。（いまの選び方で ${total}通）`
-      : state.councils.length ? `いまの選び方で、${document}は ${total}通 になります。` : `内容1つにつき1通、${document}ができます（いま${n}通）。`;
+      ? `⚠ ${document} ${total}通。1つの${destination}に${n}通では1件ごとの重みが薄れます。${MANY}つ以内に絞るのがおすすめです`
+      : `${document} ${total}通ができます（内容${n} × ${destination}${Math.max(1, real().length)}）`;
   }
 
   function renderCouncils() {
@@ -194,21 +198,58 @@
     return n.length ? `<ul class="wz-notes">${n.map((t) => `<li>${t}</li>`).join('')}</ul>` : '';
   }
 
+  // 項目は見出しごとに折りたたむ。選んだ項目がある見出しと、最初の見出しは開いておく
+  const openCats = new Set();
+  // 要望書は自治体あての文書なので、国への意見書を求める項目は選べない
+  const usable = (a) => state.kind !== 'request' || !window.Petition.isNational(a);
+  const catCount = (cat) => {
+    const n = cat.querySelectorAll('[data-item].on').length;
+    return `${cat.querySelectorAll('[data-item]').length}件${n ? `・<b>${n}件選択中</b>` : ''}`;
+  };
   function renderItems() {
-    $('wzItems').innerHTML = window.Common.askGroups(window.Petition.ordered(), (a) => {
-      const on = state.items.includes(a.id);
-      const star = a.recommended ? '★ ' : '';
-      return `<button type="button" class="wz-card ${on ? 'on' : ''}" data-item="${a.id}" aria-pressed="${on}"><b>${star}${a.label}${window.Common.scopeTag(a)}</b><span>${a.reason.split('。')[0]}。</span></button>`;
+    state.items = state.items.filter((k) => window.Petition.ITEMS[k] && usable(window.Petition.ITEMS[k]));
+    const groups = new Map();
+    window.Petition.ordered().filter(usable).forEach((a) => {
+      const k = a.category || 'そのほか';
+      if (!groups.has(k)) groups.set(k, []);
+      groups.get(k).push(a);
     });
+    $('wzItems').innerHTML = [...groups].map(([cat, list], gi) => {
+      const open = openCats.has(cat) || list.some((a) => state.items.includes(a.id)) || (gi === 0 && !openCats.size);
+      return `<details class="wz-cat" data-cat="${esc(cat)}"${open ? ' open' : ''}><summary><span>${esc(cat)}</span><small class="wz-cat-n"></small></summary><div class="wz-cards">${list.map((a) => {
+        const on = state.items.includes(a.id);
+        return `<button type="button" class="wz-card ${on ? 'on' : ''}" data-item="${a.id}" aria-pressed="${on}" data-text="${esc(a.label + a.reason)}"><b>${a.label}${window.Common.scopeTag(a)}</b><span>${a.reason.split('。')[0]}。</span></button>`;
+      }).join('')}</div></details>`;
+    }).join('');
+    document.querySelectorAll('#wzItems .wz-cat').forEach((cat) => { cat.querySelector('.wz-cat-n').innerHTML = catCount(cat); });
+    filterItems();
     renderCount();
   }
+  function filterItems() {
+    const q = $('wzItemFilter').value.trim();
+    document.querySelectorAll('#wzItems .wz-cat').forEach((d) => {
+      let hit = 0;
+      d.querySelectorAll('[data-item]').forEach((el) => { const ok = !q || el.dataset.text.includes(q); el.hidden = !ok; hit += ok; });
+      d.hidden = !hit;
+      if (q && hit) d.open = true;
+    });
+  }
+  $('wzItemFilter').addEventListener('input', filterItems);
+  $('wzItems').addEventListener('toggle', (e) => {
+    const c = e.target.dataset && e.target.dataset.cat;
+    if (c && !$('wzItemFilter').value) (e.target.open ? openCats.add(c) : openCats.delete(c));
+  }, true);
 
   $('wzRoles').innerHTML = ROLES.map(([k, label]) => `<button type="button" class="wz-card wz-small" data-role="${k}"><b>${label}</b></button>`).join('');
-  $('wzKind').addEventListener('change', () => {
-    state.kind = $('wzKind').value;
+  setKindInputs();
+  kindInputs().forEach((r) => r.addEventListener('change', () => {
+    state.kind = r.value;
+    if (state.step === 0) renderItems();
+    $('wzNext').disabled = !canNext();
     if (state.step >= ASK_STEPS) build();
     else if (state.step === 1) show();
-  });
+    saveDraft();
+  }));
 
   // ---------- 画面の切り替え ----------
   function canNext() {
@@ -227,6 +268,12 @@
     document.querySelectorAll('[data-progress-step]').forEach((el, i) => {
       el.classList.toggle('is-current', i === state.step);
       el.classList.toggle('is-done', i < state.step);
+      // 済んだステップは押すと戻れる
+      if (i < state.step) {
+        el.tabIndex = 0;
+        el.setAttribute('role', 'button');
+        el.setAttribute('aria-label', `${el.textContent}にもどる`);
+      } else ['tabindex', 'role', 'aria-label'].forEach((k) => el.removeAttribute(k));
     });
     $('wzBack').hidden = state.step === 0;
     $('wzNext').hidden = s === 'send';
@@ -251,6 +298,7 @@
     if (state.step >= ASK_STEPS) build();
     renderCount();
     saveLink(state.step >= ASK_STEPS);
+    saveDraft();
   }
 
   // 画面が切り替わったら、新しい質問の見出しに読み上げ・キーボードの位置を移す
@@ -297,6 +345,14 @@
       mailOk(state.pref).forEach((id) => { if (!state.councils.includes(id)) state.councils.push(id); });
       renderCouncils();
       $('wzNext').disabled = !canNext();
+    } else if (d.global) {
+      // 全国から探した議会・前に選んだ議会を選ぶと、その都道府県の一覧を開く
+      if (!state.councils.includes(d.global)) state.councils.push(d.global);
+      state.pref = prefOf(d.global);
+      $('wzGlobal').value = '';
+      $('wzGlobalHits').innerHTML = '';
+      $('wzFilter').value = '';
+      showCouncils();
     } else if (d.council) {
       const i = state.councils.indexOf(d.council);
       i < 0 ? state.councils.push(d.council) : state.councils.splice(i, 1);
@@ -305,7 +361,13 @@
     } else if (d.item) {
       const i = state.items.indexOf(d.item);
       i < 0 ? state.items.push(d.item) : state.items.splice(i, 1);
-      renderItems();
+      // 描き直すと開いた見出しや位置が動くので、押したボタンと件数だけを直す
+      b.classList.toggle('on', i < 0);
+      b.setAttribute('aria-pressed', String(i < 0));
+      const cat = b.closest('.wz-cat');
+      cat.querySelector('.wz-cat-n').innerHTML = catCount(cat);
+      renderCount();
+      saveDraft();
       $('wzNext').disabled = !canNext();
     } else if (d.role) {
       state.role = d.role;
@@ -333,8 +395,10 @@
   $('wzBack').addEventListener('click', () => go(-1));
   $('wzRestart').addEventListener('click', () => {
     if (!confirm('選んだ議会と内容、直した文面が消えます。最初からやり直しますか？')) return;
-    Object.assign(state, { step: 0, pref: '', councils: [], items: firstItems(), role: '', kind: 'petition' });
-    $('wzKind').value = 'petition';
+    Object.assign(state, { step: 0, pref: '', councils: [], items: firstItems(), role: '', kind: startKind() });
+    setKindInputs();
+    $('wzItemFilter').value = '';
+    clearDraft();
     $('wzAiBox').hidden = true;
     $('wzSendBox').hidden = true;
     edits = {};
@@ -666,6 +730,11 @@
   const sender = window.Common.bindSender($('wzSender'), () => {
     areas().forEach((ta) => { ta.value = withSender(ta.value, sender); });
   });
+  $('wzRemember').checked = window.Common.remembers();
+  $('wzRemember').addEventListener('change', (e) => {
+    window.Common.setRemember(e.target.checked, sender);
+    flash(e.target.checked ? '住所・氏名をこの端末に覚えておきます' : '住所・氏名をこの端末に残さないようにしました');
+  });
   $('wzSenderClear').addEventListener('click', () => {
     window.Common.forgetSender();
     $('wzSender').querySelectorAll('[data-sender]').forEach((el) => { el.value = ''; sender[el.dataset.sender] = ''; });
@@ -742,8 +811,85 @@
   $('wzShareX').href = `https://x.com/intent/post?text=${encodeURIComponent(window.THEME.shareText)}&url=${top}`;
   $('wzShareLine').href = `https://social-plugins.line.me/lineit/share?url=${top}`;
 
+  // ---------- 済んだステップへ戻る ----------
+  document.querySelectorAll('[data-progress-step]').forEach((el, i) => {
+    const back = () => { if (i < state.step) go(i - state.step); };
+    el.addEventListener('click', back);
+    el.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); back(); }
+    });
+  });
+
+  // ---------- 全国の自治体から名前で探す ----------
+  let allCouncils = null;
+  const globalList = () => (allCouncils ||= window.PREFS.flatMap((p) => councilsOf(p).map((c) => idOf(p, c))));
+  $('wzGlobal').addEventListener('input', () => {
+    const q = $('wzGlobal').value.trim();
+    if (!q) { $('wzGlobalHits').innerHTML = ''; return; }
+    const hits = window.Yomi.filter(globalList(), q, (id) => kanaOf[nameOf(id)]).slice(0, 30);
+    $('wzGlobalHits').innerHTML = hits.map((id) => `<button type="button" class="wz-chip" data-global="${esc(id)}">${esc(municipalityName(id))}<small class="wz-n">${esc(prefOf(id))}</small>${state.kind === 'petition' ? chipMail(id) : ''}</button>`).join('')
+      || `<p class="hint-sm wz-wide">「${esc(q)}」に当てはまる自治体が見つかりません。</p>`;
+  });
+
+  // ---------- 前に選んだ議会（議会名だけを残す） ----------
+  const RECENT_KEY = 'chinjo-recent-councils';
+  const recent = () => {
+    try { return (JSON.parse(localStorage.getItem(RECENT_KEY)) || []).filter((c) => window.PREFS.includes(prefOf(c)) && councilsOf(prefOf(c)).includes(nameOf(c))); } catch { return []; }
+  };
+  function rememberCouncils() {
+    if (!real().length) return;
+    try { localStorage.setItem(RECENT_KEY, JSON.stringify([...new Set([...real(), ...recent()])].slice(0, 8))); } catch { /* 覚えられなくても作れる */ }
+  }
+  function renderRecent() {
+    const list = recent();
+    $('wzRecent').hidden = !list.length;
+    $('wzRecent').innerHTML = list.length ? `<p class="hint-sm">前に選んだ自治体</p><div class="wz-grid">${list.map((id) => `<button type="button" class="wz-chip" data-global="${esc(id)}">${esc(municipalityName(id))}<small class="wz-n">${esc(prefOf(id))}</small></button>`).join('')}</div>` : '';
+  }
+
+  // ---------- 下書き（選んだ内容・議会・立場だけ。住所・氏名は差出人として別に扱う） ----------
+  const DRAFT_KEY = `chinjo-draft-${window.THEME.id}`;
+  function saveDraft() {
+    if (state.step >= ASK_STEPS) rememberCouncils();
+    if (STEPS[state.step] === 'council') renderRecent();
+    if (!state.items.length) return;
+    const { step, pref, councils, items, role, kind } = state;
+    try { localStorage.setItem(DRAFT_KEY, JSON.stringify({ step, pref, councils, items, role, kind })); } catch { /* 残せなくても作れる */ }
+  }
+  function clearDraft() {
+    try { localStorage.removeItem(DRAFT_KEY); } catch { /* 残していない */ }
+  }
+  function loadDraft() {
+    try {
+      const d = JSON.parse(localStorage.getItem(DRAFT_KEY));
+      if (!d || !Array.isArray(d.items)) return null;
+      const items = d.items.filter((k) => window.Petition.ITEMS[k]);
+      if (!items.length) return null;
+      const councils = (d.councils || []).filter((c) => isNone(c) || (window.PREFS.includes(prefOf(c)) && councilsOf(prefOf(c)).includes(nameOf(c))));
+      const role = ROLES.some(([k]) => k === d.role) ? d.role : '';
+      // 条件がそろっていない画面には進めない
+      let step = Math.max(0, Math.min(Number(d.step) || 0, STEPS.length - 1));
+      if (!councils.length) step = Math.min(step, 1);
+      else if (!role) step = Math.min(step, 2);
+      return { items, councils, role, step, pref: window.PREFS.includes(d.pref) ? d.pref : '', kind: d.kind === 'request' ? 'request' : 'petition' };
+    } catch { return null; }
+  }
+
   if (restore()) {
     show();
     $('wizard').scrollIntoView();
-  } else show();
+  } else {
+    const draft = loadDraft();
+    show();
+    if (draft) {
+      $('wzResume').hidden = false;
+      $('wzResumeYes').addEventListener('click', () => {
+        Object.assign(state, draft);
+        setKindInputs();
+        $('wzResume').hidden = true;
+        show();
+        focusStep();
+      });
+      $('wzResumeNo').addEventListener('click', () => { clearDraft(); $('wzResume').hidden = true; });
+    }
+  }
 })();
