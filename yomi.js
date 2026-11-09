@@ -76,6 +76,10 @@ window.Yomi = (() => {
     return (cache[kana] = [...new Set([kana, alt])].map((k) => normalize(kanaToRoma(k))));
   }
 
+  // 漢字の名前の書き方の違いをそろえる：鎌ケ谷／鎌ヶ谷／鎌が谷、全角・半角、空白、末尾の「議会」「市」など
+  const plain = (t) => t.normalize('NFKC').replace(/\s+/g, '').replace(/[ヶヵケが]/g, 'ケ').replace(/[ノの之]/g, 'ノ').replace(/[竜龍]/g, '竜');
+  const plainQuery = (q) => plain(q).replace(/(議会)$/, '').replace(/(都|道|府|県|市|区|町|村)$/, '') || plain(q);
+
   // 入力 q が、名前 name または読み kana にどれだけ当てはまるか：2＝そのまま含む、1＝打ち間違いを許せば当たる、0＝当たらない
   function matcher(q) {
     q = q.trim();
@@ -96,8 +100,9 @@ window.Yomi = (() => {
     const isKana = /^[ァ-ヶー]+$/.test(kq);
     const rq = isKana ? normalize(kanaToRoma(kq)) : '';
     const k = !isKana ? 0 : rq.length >= 7 ? 2 : rq.length >= 4 ? 1 : 0;
+    const pq = plainQuery(q);
     return (name, kana) => {
-      if (name.includes(q) || (!!kana && kana.includes(kq))) return 2;
+      if (name.includes(q) || plain(name).includes(pq) || (!!kana && kana.includes(kq))) return 2;
       return k > 0 && !!kana && romasOf(kana).some((r) => fuzzyPrefix(r, rq, k)) ? 1 : 0;
     };
   }
@@ -110,5 +115,5 @@ window.Yomi = (() => {
     return top ? scored.filter(([, s]) => s === top).map(([x]) => x) : [];
   }
 
-  return { matcher, filter, toKata, kanaToRoma, normalize };
+  return { matcher, filter, toKata, kanaToRoma, normalize, plain };
 })();
