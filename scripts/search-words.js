@@ -84,6 +84,7 @@ module.exports = {
   'nihonjin/l_tsusho': '通名 通称 外国人 住民票',
   'shiho/n_family_open': '家裁 家庭裁判所 公開 取材 裁判',
   'shiho/n_family_stats': '家裁 家庭裁判所 統計 親権',
+  'shiho/n_sentence_sex': '女割 量刑 男女 性別 刑事裁判 判決 統計',
   'shiho/n_appointment': '最高裁 裁判官 任命 人事',
   'shiho/n_review': '最高裁 裁判官 国民審査 選挙',
   'shiho/n_lay': '裁判員 国民参加 家事 行政訴訟',
