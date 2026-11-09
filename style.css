@@ -579,3 +579,13 @@ summary { cursor: pointer; font-weight: 700; }
 .wz-ask { margin: 4px 0 6px; padding-left: 1.4em; list-style: circle; }
 .wz-check-left { font-weight: 700; color: var(--warn); }
 .wz-check-left.done { color: var(--main-dark); }
+
+/* 最終画面の「今やること」 */
+.wz-now { border: 2px solid var(--main); border-radius: 10px; padding: 10px 16px 12px; margin: 8px 0 16px; background: var(--accent-soft); }
+.wz-now h4 { margin: 0 0 6px; }
+.wz-now ol { margin: 0; padding-left: 1.4em; }
+.wz-now li { margin: 4px 0; }
+.wz-now .out-toolbar { margin: 6px 0 2px; }
+.wz-now .bump { font-weight: 700; font-size: 1.1rem; color: var(--main-dark); }
+.wz-check-left:not(.done) { border-left: 4px solid var(--warn); padding-left: 8px; }
+.wz-now .out-toolbar { background: transparent; padding: 0; border: 0; }

@@ -296,7 +296,7 @@
       }
     }
     if (s === 'items') renderItems();
-    if (s === 'send') { renderCheckMail(); renderCheckLeft(); }
+    if (s === 'send') { renderCheckMail(); renderCheckLeft(); renderNow(); }
     if (state.step >= ASK_STEPS) build();
     renderCount();
     saveLink(state.step >= ASK_STEPS);
@@ -338,6 +338,10 @@
       // ④の近くの議会を宛先に加えて、陳情書を作り直す
       if (!state.councils.includes(d.addNear)) state.councils.push(d.addNear);
       show();
+      // 増えたことが分かるように、いまの通数を知らせる
+      const n = state.items.length * state.councils.length;
+      flash(`${label(d.addNear)}を加えました。いま${state.kind === 'request' ? '要望書' : '陳情書'}は全部で${n}通です`);
+      renderNow(true);
     } else if (d.mailPick) {
       const i = state.councils.indexOf(d.mailPick);
       i < 0 ? state.councils.push(d.mailPick) : state.councils.splice(i, 1);
@@ -856,11 +860,23 @@
       }).join('');
   }
 
+  // 最終画面の「今やること」。印刷・コピーをいちばん上に置く
+  function renderNow(bump) {
+    const n = state.items.length * Math.max(1, state.councils.length);
+    const docName = state.kind === 'request' ? '要望書' : '陳情書';
+    $('wzNowCount').textContent = `${docName}は全部で${n}通です（1通ずつ別の紙・署名が要ります）。`;
+    $('wzNowCount').classList.toggle('bump', !!bump);
+    $('wzNowPdf').textContent = n > 1 ? `${n}通を印刷用のPDFで開く` : '印刷用のPDFを開く';
+    $('wzNowDate').textContent = window.Common.reiwaToday();
+  }
+  $('wzNowPdf').addEventListener('click', (e) => viewPdf(e.currentTarget, null, allDocs()));
+  $('wzNowCopy').addEventListener('click', () => $('wzCopy').click());
+
   // 確かめた項目の数を出す。進むのは止めないが、残りがあれば知らせる
   const checks = () => [...document.querySelectorAll('.wz-checklist > ul > li > label > input')];
   function renderCheckLeft() {
     const left = checks().filter((c) => !c.checked).length;
-    $('wzCheckLeft').textContent = left ? `まだ確かめていない項目が ${left}つ あります。出す前に、もう一度見てください。` : '✓ すべて確かめました。';
+    $('wzCheckLeft').textContent = left ? `⚠ まだ確かめていない項目が ${left}つ あります。チェックがないまま出すと、受け付けられなかったり審査されなかったりすることがあります。` : '✓ すべて確かめました。印刷して出せます。';
     $('wzCheckLeft').classList.toggle('done', !left);
   }
   checks().forEach((c) => c.addEventListener('change', renderCheckLeft));

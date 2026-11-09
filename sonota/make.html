@@ -158,13 +158,23 @@
               <button type="button" id="wzRwClose" class="btn btn-small">閉じる</button>
             </div>
           </div>
-          </div>
         </details>
 
       </div>
 
       <div class="wz-step" data-step="send" hidden>
         <h3>署名して出す</h3>
+        <section class="wz-now" aria-labelledby="wzNowH">
+          <h4 id="wzNowH">今やること</h4>
+          <ol>
+            <li><b>印刷する</b>：<span id="wzNowCount"></span>
+              <div class="out-toolbar"><button type="button" id="wzNowPdf" class="btn btn-primary">印刷用のPDFを開く</button> <button type="button" id="wzNowCopy" class="btn btn-small">文面をすべてコピー</button></div></li>
+            <li><b>日付を確かめる</b>：文面の日付は<b id="wzNowDate"></b>（今日）です。出す日が違うときは、前の画面の「文面を確かめる・直す」で直すか、印刷後に手書きで直してください。</li>
+            <li><b>手書きで書き入れる</b>：議長の氏名・あなたの署名（住所を空けたなら住所も）。</li>
+            <li><b>締切までに出す</b>：持参・郵送・電子申請。議会ごとの出し方は下の②にあります。</li>
+          </ol>
+          <p class="hint-sm">下は、出す前に確かめることと、くわしい手順です。</p>
+        </section>
         <div class="wz-checklist">
           <h4>出す前に確かめること</h4>
           <ul>
