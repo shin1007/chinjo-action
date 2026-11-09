@@ -968,6 +968,32 @@
     $('wzNowCount').classList.toggle('bump', !!bump);
     $('wzNowPdf').textContent = n > 1 ? `${n}通を印刷用のPDFで開く` : '印刷用のPDFを開く';
     $('wzNowDate').textContent = window.Common.reiwaToday();
+    renderNowAsk();
+  }
+  // 「今やること」の1つ目：議会ごとに、分かっている扱いか、電話で聞くことを出す
+  function renderNowAsk() {
+    const list = real();
+    let html;
+    if (state.kind === 'request') {
+      html = '<li>要望書の受付窓口（秘書課・担当課など）と、郵送・メールで出せるかを、自治体の公式サイトで確かめます。下の「くわしい手順」の②に、探すためのリンクがあります。</li>';
+    } else if (!list.length) {
+      html = '<li>出す先を決めたら、その議会事務局に「郵送でも審査されるか」「次の締切」「いまの議長の名前」を聞きます（電話で1分ほど）。</li>';
+    } else {
+      html = list.map((id) => {
+        const info = infoOf(id);
+        const r = mailRule(info);
+        const name = `<b>${esc(municipalityName(id))}</b>`;
+        if (r && r.c !== 'unknown') {
+          const sure = !info.policy || info.policy.confidence === 'confirmed';
+          const what = { none: '審査を求めるときは、紹介議員のいる請願にする方法があります。', jisan: '審査してもらうなら持参で出します。', outside: '住民でなければ、審査してもらうには持参で出します。' }[r.c] || '';
+          return `<li>${name}：${esc(r.label)}。${what}${sure ? 'このサイトで議会の公式の案内から調べてあるので、電話は要りません。締切だけ公式サイトで確かめてください。' : 'ただし、まだ確定していない情報です。電話で一度確かめると確実です。'}</li>`;
+        }
+        const [pref, key] = officeKeys[id] || [];
+        return `<li>${name}：扱いがまだ分かっていません。電話で「郵送でも審査されますか」「次の締切はいつですか」「いまの議長のお名前は」の3つを聞けば足ります（1分ほど）。${telHtml(pref, key, false)}</li>`;
+      }).join('');
+    }
+    $('wzNowAsk').innerHTML = html;
+    $('wzNowReport').hidden = !window.Report.enabled;
   }
   $('wzNowPdf').addEventListener('click', (e) => viewPdf(e.currentTarget, null, allDocs()));
   $('wzNowCopy').addEventListener('click', () => $('wzCopy').click());

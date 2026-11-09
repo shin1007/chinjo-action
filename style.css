@@ -629,3 +629,4 @@ summary { cursor: pointer; font-weight: 700; }
 .shindan-result p { margin: 0 0 8px; }
 .shindan-name { font-size: 1.1rem; }
 @media (max-width: 600px) { .shindan-q { grid-template-columns: 1fr; } }
+.wz-now-ask { margin: 4px 0 0; padding-left: 1.2em; font-size: 0.95rem; }
