@@ -296,7 +296,8 @@
       }
     }
     if (s === 'items') renderItems();
-    if (s === 'send') { renderCheckMail(); renderCheckLeft(); renderNow(); }
+    if (s === 'done') $('wzCheck').open = true;
+    if (s === 'send') { renderCheckMail(); renderCheckLeft(); renderNow(); renderChairs(); }
     if (state.step >= ASK_STEPS) build();
     renderCount();
     saveLink(state.step >= ASK_STEPS);
@@ -447,10 +448,16 @@
     $('wzDocs').innerHTML = state.items.map((k, i) => {
       const it = window.ASKS.find((a) => a.id === k);
       const e = edits[k];
+      // 前の日に直した文面は、日付だけを今日にする（出す日に合わせて直すのは、この欄でできる）
+      if (e && e.day !== window.Common.reiwaToday()) {
+        e.text = e.text.replace(/^(\s*)令和.{1,3}年\d{1,2}月\d{1,2}日/, `$1${window.Common.reiwaToday()}`);
+        e.day = window.Common.reiwaToday();
+        saveEdits();
+      }
       // 前に別の議会あてに直した文面は、宛名と自治体名をいまの議会に差し替えて使う
       const text = withSender(e ? swapCouncil(e.text, e.council, first) : window.Petition.build(fd, first, [k]), sender);
       const others = state.councils.slice(1).map(label);
-      return `<details class="wz-doc" ${i === 0 ? 'open' : ''}>
+      return `<details class="wz-doc" ${i === 0 || state.items.length <= 3 ? 'open' : ''}>
         <summary><b>${i + 1}. ${esc(it.label)}</b><span><i class="wz-edited"${e ? '' : ' hidden'}>直した文面・</i>${state.councils.length}通</span></summary>
         ${e && e.role !== state.role ? '<p class="hint-sm warn">立場を選び直す前に直した文面です。最後の一文があなたの立場に合っているか確かめてください。</p>' : ''}
         ${others.length ? `<p class="hint-sm">下は${esc(first)}あての文面です。${others.map(esc).join('・')}あてにも、同じ内容で1通ずつ作ります。ここで直すと、宛名と自治体名を差し替えてすべての議会に反映されます。</p>` : ''}
@@ -498,8 +505,8 @@
   // 内容ごとの文面を、議会の数だけ広げる
   // 直していない内容は議会ごとに組み立て直す（「東京都」のような名前を本文ごと置き換えないように）
   const areas = () => [...$('wzDocs').querySelectorAll('textarea')];
-  const docFor = (ta, c) => withSender(edits[ta.dataset.key] ? forCouncil(ta.value, c)
-    : window.Petition.build(formData(), nameOf(c), [ta.dataset.key]), sender).trim();
+  const docFor = (ta, c) => withChair(withSender(edits[ta.dataset.key] ? forCouncil(ta.value, c)
+    : window.Petition.build(formData(), nameOf(c), [ta.dataset.key]), sender), c).trim();
   const allDocs = () => state.councils.flatMap((c) => areas().map((ta) => docFor(ta, c)));
   // 1通目の議会あての1通だけをPDFにして、新しいタブで開く（鏡文・宛名はつけない）
   // 開くのを待つとポップアップとして止められるので、タブは先に開いておく
@@ -526,7 +533,7 @@
   $('wzDocs').addEventListener('input', (e) => {
     const k = e.target.dataset.key;
     if (!k) return;
-    edits[k] = { text: e.target.value, council: nameOf(state.councils[0]), role: state.role };
+    edits[k] = { text: e.target.value, council: nameOf(state.councils[0]), role: state.role, day: window.Common.reiwaToday() };
     saveEdits();
     fit(e.target);
     docStat(e.target, true);
@@ -865,7 +872,7 @@
     if (!window.Report.tipsEnabled) return '';
     const name = esc(municipalityName(id));
     const radio = (k, opts) => opts.map(([v, t]) => `<label><input type="radio" name="${k}" value="${v}"> ${t}</label>`).join('');
-    return `<details class="wz-tip"><summary>${known ? `${name}の情報が古い・違うときは、修正を送る（任意）` : `分かったことを共有する（任意）`}</summary>
+    return `${known ? '' : '<p class="wz-tip-lead">📝 聞いて分かったら、下の欄から共有できます。次に同じ議会に出す人の助けになります。</p>'}<details class="wz-tip"${known ? '' : ' open'}><summary>${known ? `${name}の情報が古い・違うときは、修正を送る（任意）` : `分かったことを共有する（任意）`}</summary>
       <form data-tip="${esc(id)}">
         <p class="hint-sm">電話や公式サイトで分かった<b>${name}の扱い</b>を送ると、確かめてこのサイトに反映します。次に同じ議会に出す人の助けになります。<b>送るのは下の欄の内容だけ</b>で、陳情書の文面・住所・氏名は送りません。分かったところだけで構いません。</p>
         <fieldset><legend>郵送した陳情は</legend>${radio('mail', [['review', '審査される'], ['distribute', '議員への配付だけ'], ['unknown', '分からない']])}</fieldset>
@@ -895,8 +902,34 @@
     btn.disabled = true;
     msg.textContent = '送っています…';
     const ok = bot || await window.Report.tip(f.dataset.tip, fields);
-    msg.textContent = ok ? 'ありがとうございます。確かめてから反映します。' : '送れませんでした。時間をおいてもう一度押してください。';
+    msg.textContent = ok ? '✓ 送信しました。ありがとうございます。運営が確かめてから、このサイトに反映します。' : '送れませんでした。時間をおいてもう一度押してください。';
+    msg.classList.toggle('done', ok);
     btn.disabled = ok;
+    if (ok) f.querySelectorAll('input, textarea').forEach((el) => { el.disabled = true; });
+  });
+
+  // 議長の氏名。入れると、その議会あてのすべての通の宛名に入る（この画面の間だけ。端末にも残さない）
+  const chairs = {};
+  const chairRe = /^(.*議長)　.*　様$/m;
+  function withChair(text, c) {
+    const name = chairs[c];
+    return name ? text.replace(chairRe, `$1　${name}　様`) : text;
+  }
+  function renderChairs() {
+    const list = real();
+    $('wzChairs').innerHTML = list.map((c, i) => `<label>${esc(label(c))}の議長の氏名
+      <input data-chair="${esc(c)}" value="${esc(chairs[c] || '')}" maxlength="20" autocomplete="off" placeholder="例：山田 太郎">
+      <a href="https://www.google.com/search?q=${encodeURIComponent(`${label(c)} 議長`)}" target="_blank" rel="noopener">議長を調べる</a></label>`).join('');
+    $('wzChairBox').hidden = !list.length || state.kind === 'request';
+  }
+  $('wzChairs').addEventListener('input', (e) => {
+    const c = e.target.dataset.chair;
+    if (!c) return;
+    chairs[c] = e.target.value.trim();
+    // 文面の欄（1つ目の議会あて）にも入れる
+    if (c === state.councils[0]) areas().forEach((ta) => {
+      ta.value = ta.value.replace(chairRe, `$1　${chairs[c] || window.Common.BLANK_TEXT}　様`);
+    });
   });
 
   // 最終画面の「今やること」。印刷・コピーをいちばん上に置く
@@ -917,6 +950,8 @@
     const left = checks().filter((c) => !c.checked).length;
     $('wzCheckLeft').textContent = left ? `⚠ まだ確かめていない項目が ${left}つ あります。チェックがないまま出すと、受け付けられなかったり審査されなかったりすることがあります。` : '✓ すべて確かめました。印刷して出せます。';
     $('wzCheckLeft').classList.toggle('done', !left);
+    $('wzNowLeft').hidden = !left;
+    $('wzNowLeft').textContent = `⚠ 下の「出す前に確かめること」が、まだ${left}つ残っています。印刷はできますが、出す前に確かめてください。`;
   }
   checks().forEach((c) => c.addEventListener('change', renderCheckLeft));
 

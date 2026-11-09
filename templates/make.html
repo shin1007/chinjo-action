@@ -159,9 +159,12 @@
           <h4 id="wzNowH">今やること</h4>
           <ol>
             <li><b>印刷する</b>：<span id="wzNowCount"></span>
+              <p id="wzNowLeft" class="wz-now-left" role="status" hidden></p>
               <div class="out-toolbar"><button type="button" id="wzNowPdf" class="btn btn-primary">印刷用のPDFを開く</button> <button type="button" id="wzNowCopy" class="btn btn-small">文面をすべてコピー</button></div></li>
             <li><b>日付を確かめる</b>：文面の日付は<b id="wzNowDate"></b>（今日）です。出す日が違うときは、前の画面の「文面を確かめる・直す」で直すか、印刷後に手書きで直してください。</li>
-            <li><b>手書きで書き入れる</b>：議長の氏名・あなたの署名（住所を空けたなら住所も）。</li>
+            <li><b>議長の氏名を入れる</b>：調べて入れると、印刷する文面の宛名に入ります。空けておけば手書きでも構いません。
+              <div id="wzChairBox" class="wz-chairs" hidden><div id="wzChairs"></div><p class="hint-sm">議長は選挙や交代で変わります。出す直前に議会の公式サイトで確かめてください。</p></div></li>
+            <li><b>手書きで書き入れる</b>：あなたの署名（住所を空けたなら住所も）。</li>
             <li><b>締切までに出す</b>：持参・郵送・電子申請。議会ごとの出し方は下の②にあります。</li>
           </ol>
           <p class="hint-sm">下は、出す前に確かめることと、くわしい手順です。</p>
