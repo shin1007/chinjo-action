@@ -20,8 +20,9 @@
   ];
   const ROLES = [...window.THEME.roles, ['none', '書かない', '']];
 
-  // 最初は、おすすめ（★）で初めから選んである項目を選んでおく
-  const firstItems = () => [];
+  // トップページの検索から来たときは ?item= の項目を初めから選んでおく
+  const linkedItem = new URLSearchParams(location.search).get('item');
+  const firstItems = () => (window.ASKS.some((a) => a.id === linkedItem) ? [linkedItem] : []);
   // テーマのページで「要望書」を選んで来たときは ?kind=request が付いている
   const startKind = () => (new URLSearchParams(location.search).get('kind') === 'request' ? 'request' : 'petition');
   const state = { step: 0, pref: '', councils: [], items: firstItems(), role: '', kind: startKind(), merge: false };
@@ -1193,6 +1194,7 @@
   } else {
     const draft = loadDraft();
     show();
+    if (state.items.length) $('wizard').scrollIntoView();
     if (draft) {
       $('wzResume').hidden = false;
       $('wzResumeYes').addEventListener('click', () => {

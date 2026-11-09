@@ -643,3 +643,12 @@ summary { cursor: pointer; font-weight: 700; }
 .guide-must h2 { font-size: 1.05rem; margin: 0 0 4px; }
 .guide-must ul { margin: 0; padding-left: 1.2em; }
 .wz-checked { color: var(--muted); font-weight: 400; margin-left: 2px; }
+
+/* トップページの「言葉でさがす」 */
+.item-search { max-width: 760px; margin: 16px auto 0; }
+.item-search label { display: block; font-weight: bold; margin-bottom: 6px; }
+.item-search-results { list-style: none; padding: 0; margin: 0; }
+.item-search-results li { border-bottom: 1px solid var(--line); }
+.item-search-results a { display: block; padding: 10px 4px; text-decoration: none; color: inherit; }
+.item-search-results a:hover, .item-search-results a:focus { background: var(--bg-alt); }
+.item-search-results small { display: block; color: var(--muted); }
