@@ -174,29 +174,37 @@
             <li><b>議長の氏名を入れる</b>：調べて入れると、印刷する文面の宛名に入ります。空けておけば手書きでも構いません。
               <div id="wzChairBox" class="wz-chairs" hidden><div id="wzChairs"></div><p class="hint-sm">議長は選挙や交代で変わります。出す直前に議会の公式サイトで確かめてください。</p></div></li>
             <li><b>手書きで書き入れる</b>：あなたの署名（住所を空けたなら住所も）。</li>
-            <li><b>締切までに出す</b>：持参・郵送・電子申請。議会ごとの出し方は下の②にあります。</li>
+            <li><b>締切までに出す</b>：持参・郵送・電子申請。議会ごとの出し方は、下の「くわしい手順」の②にあります。</li>
           </ol>
           <p class="hint-sm">下は、出す前に確かめることと、くわしい手順です。</p>
         </section>
         <div class="wz-checklist">
           <h4>出す前に確かめること</h4>
+          <p class="wz-when">印刷する前に</p>
           <ul>
-            <li><label><input type="checkbox"> 議長の氏名を書き入れた（出す直前に議会の公式サイトで確かめる）</label></li>
-            <li><label><input type="checkbox"> 氏名を手書きで署名した（押印は議会によって任意）</label></li>
+            <li><label><input type="checkbox" id="wzChkChair"> 議長の氏名を確かめた（上の欄に入れれば自動でチェックが付きます。空けて手書きにしてもかまいません）</label></li>
             <li><label><input type="checkbox"> 次の会議に間に合う締切を確かめた</label></li>
             <li><label><input type="checkbox"> 郵送するなら、その議会で郵送の陳情が審査されるか、配付だけかを確かめた</label>
               <ul id="wzCheckMail" class="wz-checkmail"></ul></li>
             <li><label><input type="checkbox"> 陳情書は公開されることがあると知ったうえで、個人や事件を特定できることを書いていない</label></li>
           </ul>
+          <p class="wz-when">印刷したあとに</p>
+          <ul>
+            <li><label><input type="checkbox"> 氏名を手書きで署名した（押印は議会によって任意）。議長の氏名を空けたなら、それも書き入れた</label></li>
+          </ul>
           <p id="wzCheckLeft" class="wz-check-left" aria-live="polite"></p>
-          <h4>知っておくこと</h4>
+          <details class="wz-fold">
+          <summary>知っておくこと（扱いは議会ごとに違う・強制力はない・電子申請）</summary>
           <ul class="wz-know">
             <li>陳情の扱い（審査される／議員に配るだけ）は議会ごとに違います。</li>
             <li>採択されても強制力はありません。それでも議会の記録に残り、議員や行政が課題を知るきっかけになります。</li>
             <li>このサイトは、印刷して出す紙の文書を前提にしています。電子申請ができる議会もあります。できるかどうかと方法は、下の議会ごとの案内か、議会の公式サイトで確かめてください。</li>
           </ul>
+          </details>
           <p class="hint-sm">扱いがはっきりしないときは、議会事務局に電話で聞くのが確実です。本サイトは法的助言をするものではありません。詳しくは<a href="/kodomo/guide">陳情の出し方ガイド</a>へ。</p>
         </div>
+        <details class="wz-fold wz-flow-box">
+        <summary>くわしい手順を開く（議会ごとの出し方・郵送のしかたと切手・近くの議会にも出す）</summary>
         <ol class="wz-flow">
           <li>
             <h4>① 手書きで記入し、署名する</h4>
@@ -225,6 +233,7 @@
             <div id="wzNearby" class="wz-nearby"></div>
           </li>
         </ol>
+        </details>
 
         <details class="wz-more">
           <summary>ほかの操作（コピー・スマホに送る・生成AIに一から書いてもらう）</summary>

@@ -607,3 +607,11 @@ summary { cursor: pointer; font-weight: 700; }
 .wz-now-left { margin: 4px 0; color: var(--warn); font-weight: 700; }
 .wz-tip-lead { margin: 6px 0 0; font-weight: 700; }
 .wz-tip-msg.done { color: var(--main-dark); font-weight: 700; }
+
+/* 最終画面の段階表示 */
+.wz-when { margin: 10px 0 2px; font-weight: 700; font-size: 0.9rem; color: var(--main-dark); }
+.wz-fold { margin: 10px 0; }
+.wz-fold > summary { cursor: pointer; font-weight: 700; color: var(--main-dark); padding: 6px 0; }
+.wz-flow-box { border: 1px solid var(--line); border-radius: 10px; padding: 4px 14px; }
+.wz-tip > summary { display: inline-block; border: 1px solid var(--main); border-radius: 999px; padding: 4px 14px; background: #fff; }
+.wz-tip[open] > summary { margin-bottom: 4px; }
