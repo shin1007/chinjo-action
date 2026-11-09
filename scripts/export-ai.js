@@ -55,7 +55,7 @@ function collect() {
             title: r.t,
             url: r.url,
             note: r.note || null,
-            kind: sourceKind(r.t, r.url),
+            kind: r.secondary ? 'secondary' : sourceKind(r.t, r.url),
           });
         }
         return { sourceId: id, title: r.t, note: r.note || null };
@@ -114,7 +114,7 @@ if (require.main === module) {
   const saved = new Map(previous.map((s) => [s.id, { fetchedAt: s.fetchedAt || null, localPath: s.localPath || null }]));
   writeJson(SOURCE_INDEX, {
     schemaVersion: 1,
-    description: '陳情の参考資料として登録した一次資料の索引。本文は必要なときだけ scripts/source.js で保存する。',
+    description: '陳情の参考資料として登録した一次資料と信頼のおける二次資料（kind: secondary）の索引。本文は必要なときだけ scripts/source.js で保存する。',
     sources: data.sources.map((s) => ({ ...s, ...(saved.get(s.id) || { fetchedAt: null, localPath: null }) })),
   });
   writeJson(path.join(OUT, 'petitions.json'), data);

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "description": "陳情の参考資料として登録した一次資料の索引。本文は必要なときだけ scripts/source.js で保存する。",
+  "description": "陳情の参考資料として登録した一次資料と信頼のおける二次資料（kind: secondary）の索引。本文は必要なときだけ scripts/source.js で保存する。",
   "sources": [
     {
       "id": "src-02ef0683c6",
@@ -354,6 +354,15 @@
       "localPath": null
     },
     {
+      "id": "src-47e533f0a6",
+      "title": "Amnesty International「Policy on state obligations to respect, protect and fulfil the human rights of sex workers」（2016年5月26日）",
+      "url": "https://www.amnesty.org/en/documents/pol30/4062/2016/en/",
+      "note": "買う側を罰する法も含め、成人の合意による性労働の犯罪化が性労働者の人権の実現を妨げるとする方針",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-4c8f00bd22",
       "title": "スウェーデン社会保険庁「養育費補助」",
       "url": "https://www.forsakringskassan.se/privatperson/foralder/for-foraldrar-som-inte-lever-ihop/barnet-bor-hos-dig/underhallsstod-fran-forsakringskassan",
@@ -449,6 +458,15 @@
       "url": "https://laws.e-gov.go.jp/law/328CO0000000028",
       "note": "容器に表示する義務があるのは内容量・品目・アルコール分など。純アルコール量は含まれない",
       "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-60b4d331a7",
+      "title": "Andreyeva T, et al.「Outcomes Following Taxation of Sugar-Sweetened Beverages: A Systematic Review and Meta-analysis」JAMA Network Open 2022;5(6):e2215276",
+      "url": "https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2792842",
+      "note": "系統的レビュー。税の82％が価格に転嫁され、課税された飲料の販売は平均15％減",
+      "kind": "secondary",
       "fetchedAt": null,
       "localPath": null
     },
@@ -813,6 +831,15 @@
       "localPath": null
     },
     {
+      "id": "src-a8c25efbb1",
+      "title": "皆川健一「最高裁判所裁判官国民審査法の改正－在外邦人にも国民審査が可能に－」『立法と調査』第452号（参議院、2022年12月）",
+      "url": "https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2022pdf/20221216017-1.pdf",
+      "note": "国民審査の制度の概要と国会審議の論点",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-a931040da0",
       "title": "最高裁判所事務総局「令和7年 司法統計年報 2 刑事編」",
       "url": "https://www.courts.go.jp/saikosai/vc-files/saikosai/toukei/toukei-pdf-16676.pdf",
@@ -1092,6 +1119,15 @@
       "localPath": null
     },
     {
+      "id": "src-d13f248de6",
+      "title": "Sir Andrew McFarlane（家事部長官）「Confidence and Confidentiality: Transparency in the Family Courts」（2021年10月、英国）",
+      "url": "https://www.judiciary.uk/wp-content/uploads/2021/10/Confidence-and-Confidentiality-Transparency-in-the-Family-Courts-final.pdf",
+      "note": "家庭裁判所への信頼と当事者の秘密の両立を検討した報告",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-d2655c7a43",
       "title": "Amato (2000) The Consequences of Divorce for Adults and Children, Journal of Marriage and Family",
       "url": "https://doi.org/10.1111/j.1741-3737.2000.01269.x",
@@ -1151,6 +1187,15 @@
       "url": "https://www.moj.go.jp/isa/publications/press/13_00062.html",
       "note": "412万5,395人",
       "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-de92d0f160",
+      "title": "比較法研究センター「各国の離婚後の親権制度に関する調査研究業務報告書」（平成26年12月、法務省の委託調査）",
+      "url": "https://www.moj.go.jp/content/001130860.pdf",
+      "note": "欧米とアジアの各国の離婚後の親権制度",
+      "kind": "secondary",
       "fetchedAt": null,
       "localPath": null
     },
@@ -1295,6 +1340,15 @@
       "url": "https://www.mext.go.jp/a_menu/shotou/mushouka/index.htm",
       "note": "令和8年度から所得制限を撤廃",
       "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-ffe0bf6ee2",
+      "title": "IARC Handbooks of Cancer Prevention Vol.14「Effectiveness of Tax and Price Policies for Tobacco Control」（2011年、WHO国際がん研究機関）",
+      "url": "https://publications.iarc.who.int/384",
+      "note": "25人の専門家による、たばこの税・価格の政策の効果の評価",
+      "kind": "secondary",
       "fetchedAt": null,
       "localPath": null
     }

@@ -5,7 +5,7 @@
 //   title       … 件名に入る言葉（「司法への国民の信頼を高めるため、○○を求める陳情」の○○）
 //   text        … 「記」の下に書く、求める内容。1つの文で、最後は「こと。」で終える
 //   reason      … 【陳情の理由】に書く説明
-//   refs        … 参考資料（{ t: 題名, url, note: どこを読むか }）。陳情書の【参考資料】と関連資料のページに出る（直したら node scripts/refs.js）
+//   refs        … 参考資料（{ t: 題名, url, note: どこを読むか, secondary: true（信頼のおける二次資料のとき） }）。陳情書の【参考資料】と関連資料のページに出る（直したら node scripts/refs.js）
 //   recommended … true にすると、かんたん作成で★が付く
 // 文中の {宛先} は、提出先の自治体名（例：横浜市）に置き換わります。
 // 1件で1通の陳情書になるので、ほかの項目に頼らず1件だけで意味が通るように書きます。
@@ -15,7 +15,8 @@
 window.ASKS = (window.ASKS || []).concat([
   { id: 'n_family_open', scope: 'national', recommended: true, defaultOn: true, label: '家庭裁判所の審理の取材と、匿名にした公開',
     refs: [{ t: '家事事件手続法 第33条（手続の非公開）', url: 'https://laws.e-gov.go.jp/law/423AC0000000052' },
-      { t: 'Courts and Tribunals Judiciary「Open reporting provisions extended to all family courts」（2025年1月27日、英国）', url: 'https://www.judiciary.uk/open-reporting-provisions-extended-to-all-family-courts-in-watershed-moment-for-family-justice/' }],
+      { t: 'Courts and Tribunals Judiciary「Open reporting provisions extended to all family courts」（2025年1月27日、英国）', url: 'https://www.judiciary.uk/open-reporting-provisions-extended-to-all-family-courts-in-watershed-moment-for-family-justice/' },
+      { t: 'Sir Andrew McFarlane（家事部長官）「Confidence and Confidentiality: Transparency in the Family Courts」（2021年10月、英国）', url: 'https://www.judiciary.uk/wp-content/uploads/2021/10/Confidence-and-Confidentiality-Transparency-in-the-Family-Courts-final.pdf', note: '家庭裁判所への信頼と当事者の秘密の両立を検討した報告', secondary: true }],
     title: '家庭裁判所の手続の透明化',
     reason: '家事事件手続法第33条は、家事事件の手続を公開しないと定めています。当事者と子のプライバシーを守るための定めですが、その結果、離婚に伴う親権・監護者の指定、面会交流、養育費、子の引渡しなど、多くの家庭の暮らしを左右する判断が、どのような審理と基準で行われているのかを、国民が知る手段はほとんどありません。審判書の多くは公表されず、判断の当否を社会が検証することもできません。イギリス（イングランド・ウェールズ）では、2023年に3つの地域で始めた試行を経て、2025年1月から全ての家庭裁判所で、認められた記者や法律ブロガーが審理を傍聴し、子と家族を匿名にすることを条件に報道できるようになりました。試行の間、子の匿名が破られた例は知られていないとされています。日本でも、子と当事者のプライバシーを確実に守りながら、家庭裁判所の手続を国民が検証できる仕組みを整えることが、司法への信頼を高めることにつながります。',
     text: '家庭裁判所の家事事件の手続について、子と当事者を匿名にすることを条件に、報道機関等による審理の傍聴と報道を認める仕組みや、審判書を匿名にして公表する仕組みを、諸外国の例も踏まえて検討し、必要な法整備を行うこと。' },
@@ -41,7 +42,8 @@ window.ASKS = (window.ASKS || []).concat([
   { id: 'n_review', scope: 'national', recommended: true, defaultOn: true, label: '国民審査の判断材料の充実と、制度の見直し',
     refs: [{ t: '最高裁判所裁判官国民審査法 第15条（投票の方法）', url: 'https://laws.e-gov.go.jp/law/322AC1000000136' },
       { t: '総務省「令和6年10月27日執行 最高裁判所裁判官国民審査結果調」', url: 'https://www.soumu.go.jp/main_content/000979139.pdf' },
-      { t: '総務省「第51回衆議院議員総選挙・最高裁判所裁判官国民審査結果調」（令和8年2月13日）', url: 'https://www.soumu.go.jp/main_content/001061492.pdf' }],
+      { t: '総務省「第51回衆議院議員総選挙・最高裁判所裁判官国民審査結果調」（令和8年2月13日）', url: 'https://www.soumu.go.jp/main_content/001061492.pdf' },
+      { t: '皆川健一「最高裁判所裁判官国民審査法の改正－在外邦人にも国民審査が可能に－」『立法と調査』第452号（参議院、2022年12月）', url: 'https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2022pdf/20221216017-1.pdf', note: '国民審査の制度の概要と国会審議の論点', secondary: true }],
     title: '最高裁判所裁判官の国民審査の実効性の向上',
     reason: '憲法第79条は、最高裁判所の裁判官を、任命後最初の衆議院議員総選挙の際に国民の審査に付すと定めています。国民が裁判官について直接意思を示せる、ほぼ唯一の制度です。しかし、1949年の第1回から現在まで、罷免された裁判官は一人もいません。投票所では罷免を可とする裁判官に×を書くだけで、何も書かなければ罷免を可としない票として数えられます。審査公報に載る情報も、経歴と主な関与判決の短い説明に限られ、有権者が判断する材料は十分ではありません。2024年の国民審査では、罷免を可とする票の割合が、最も高い裁判官で11.46％となり、2026年2月の国民審査では14％を超えた裁判官もいて（総務省の結果調）、国民の関心は高まっています。アメリカの多くの州では、州の裁判官について、一定の任期ごとに続けて務めさせるかを住民が投票で決める仕組みがあります。審査公報で、裁判官ごとの関与した判決と個別意見を詳しく示し、投票の方法を含めて、国民の意思が正しく反映される制度に見直すことが求められます。',
     text: '最高裁判所裁判官の国民審査について、審査公報等で裁判官ごとの関与した判決と個別意見を詳しく示して判断の材料を充実させるとともに、信任・不信任を明確に示せる投票の方法の導入を含め、国民の意思が正しく反映される制度への見直しを検討すること。' },
