@@ -2,7 +2,7 @@ const { test } = require('node:test');
 const assert = require('node:assert');
 const fs = require('node:fs');
 const path = require('node:path');
-const { collect } = require('../scripts/export-ai');
+const { collect, searchIndex } = require('../scripts/export-ai');
 
 const ROOT = path.join(__dirname, '..');
 
@@ -23,4 +23,9 @@ test('項目の参考資料IDが一次資料索引に存在する', () => {
       }
     }
   }
+});
+
+test('トップの検索用の一覧が最新', () => {
+  const actual = fs.readFileSync(path.join(ROOT, 'search-index.js'), 'utf8');
+  assert.strictEqual(actual, searchIndex(collect()));
 });

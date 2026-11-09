@@ -73,6 +73,12 @@
   <div class="wrap">
     <h2>1. テーマを選ぶ</h2>
     <p class="lead-sm">テーマを1つに決めて、その中でとくに伝えたい内容に絞って出すのがおすすめです。</p>
+    <div class="item-search">
+      <label for="itemSearch">どのテーマか分からないときは、言葉でさがす</label>
+      <input type="search" id="itemSearch" class="wz-filter" placeholder="例：受動喫煙、養育費、授業料" autocomplete="off">
+      <p id="itemSearchCount" class="hint-sm" aria-live="polite"></p>
+      <ul id="itemSearchResults" class="item-search-results"></ul>
+    </div>
     <ul class="theme-list">
       <li><a href="/kodomo"><b>子どもの権利</b></a> ― 子の連れ去り防止、共同親権の運用改善 など</li>
       <li><a href="/dansei"><b>男女平等</b></a> ― 男性も使える相談窓口、男性のDV被害者の避難先 など</li>
@@ -135,5 +141,7 @@
   </div>
 </footer>
 <script src="/shindan.js" defer></script>
+<script src="/search-index.js" defer></script>
+<script src="/search.js" defer></script>
 </body>
 </html>

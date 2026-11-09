@@ -82,6 +82,24 @@ function collect() {
   };
 }
 
+// トップページの「陳情の内容をさがす」で使う、テーマを横断した項目の一覧（search.js が読む）
+const SHORT = { kodomo: '子どもの権利', dansei: '男女平等', nihonjin: '日本人の権利', shiho: '司法への参加', kenko: '国民の健康', sonota: 'その他' };
+function searchIndex(data) {
+  const list = data.themes.flatMap((t) => t.items.map((a) => ({
+    theme: t.id,
+    themeName: SHORT[t.id] || t.name,
+    id: a.id,
+    scope: a.scope,
+    category: a.category,
+    label: a.label,
+    text: `${a.title}
+${a.wording}`,
+  })));
+  return `// node scripts/export-ai.js で作るファイル。手で書き換えないでください
+window.SEARCH_INDEX = ${JSON.stringify(list)};
+`;
+}
+
 function writeJson(file, value) {
   fs.writeFileSync(file, `${JSON.stringify(value, null, 2)}\n`);
 }
@@ -99,7 +117,8 @@ if (require.main === module) {
     sources: data.sources.map((s) => ({ ...s, ...(saved.get(s.id) || { fetchedAt: null, localPath: null }) })),
   });
   writeJson(path.join(OUT, 'petitions.json'), data);
+  fs.writeFileSync(path.join(ROOT, 'search-index.js'), searchIndex(data));
   console.log(`${data.themes.length}テーマ、${data.sources.length}資料を書き出しました`);
 }
 
-module.exports = { collect, sourceId };
+module.exports = { collect, sourceId, searchIndex };
