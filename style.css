@@ -623,3 +623,9 @@ summary { cursor: pointer; font-weight: 700; }
 .wz-preview { margin-top: 12px; }
 .wz-preview summary { cursor: pointer; font-weight: 700; color: var(--main-dark); }
 .wz-preview pre.wz-paper { white-space: pre-wrap; overflow: auto; max-height: 28em; margin: 8px 0 0; }
+.shindan-q { border: 0; padding: 0; margin: 16px 0 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.shindan-q legend { font-weight: 700; margin-bottom: 8px; padding: 0; }
+.shindan-result { margin-top: 16px; padding: 16px 18px; border: 2px solid var(--main); border-radius: 10px; background: var(--accent-soft); }
+.shindan-result p { margin: 0 0 8px; }
+.shindan-name { font-size: 1.1rem; }
+@media (max-width: 600px) { .shindan-q { grid-template-columns: 1fr; } }
