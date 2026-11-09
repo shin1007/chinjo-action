@@ -296,7 +296,7 @@
       }
     }
     if (s === 'items') renderItems();
-    if (s === 'send') renderCheckMail();
+    if (s === 'send') { renderCheckMail(); renderCheckLeft(); }
     if (state.step >= ASK_STEPS) build();
     renderCount();
     saveLink(state.step >= ASK_STEPS);
@@ -460,8 +460,28 @@
     $('wzSummary').textContent = real().length
       ? `${state.councils.length}つの自治体 × ${state.items.length}つの内容 ＝ ${document} ${state.councils.length * state.items.length}通`
       : `自治体名を空けた${document} ${state.items.length}通（提出先が決まったら手書きで入れてください）`;
+    renderMatrix();
     renderOffices();
   }
+
+  // 何通できるかを、宛先 × 内容の表で見せる。1通ずつでも、まとめて1つのPDFでも開ける
+  function renderMatrix() {
+    const docName = state.kind === 'request' ? '要望書' : '陳情書';
+    const items = state.items.map((k) => window.Petition.ITEMS[k]);
+    const total = items.length * state.councils.length;
+    const head = `<tr><th scope="col">内容 ＼ 宛先</th>${state.councils.map((c) => `<th scope="col">${esc(isNone(c) ? '（宛先を空ける）' : municipalityName(c))}</th>`).join('')}</tr>`;
+    const rows = items.map((it, i) => `<tr><th scope="row">${i + 1}. ${esc(it.label)}</th>${state.councils.map((c, j) => `<td><button type="button" class="btn btn-small" data-cell="${i}:${j}" aria-label="${esc(it.label)}・${esc(isNone(c) ? '宛先なし' : municipalityName(c))}あてを開く">1通を開く</button></td>`).join('')}</tr>`).join('');
+    $('wzMatrix').innerHTML = `<div class="table-scroll"><table class="compare">${head}${rows}</table></div>
+      ${total > 1 ? `<p class="hint-sm"><b>${docName}は1通ずつ別の紙になります</b>（1通ごとに署名が要ります）。上のボタンで1通ずつ開くか、下のボタンで${total}通を1つのPDFにまとめて開いて印刷できます。同じ議会に出す分は、1つの封筒にまとめて送れます。</p>
+      <p><button type="button" id="wzAllPdf" class="btn btn-primary">${total}通をまとめてPDFで開く</button></p>` : ''}`;
+  }
+  $('wzMatrix').addEventListener('click', (e) => {
+    const b = e.target.closest('button');
+    if (!b) return;
+    if (b.id === 'wzAllPdf') { viewPdf(b, null, allDocs()); return; }
+    const [i, j] = b.dataset.cell.split(':').map(Number);
+    viewPdf(b, null, [docFor(areas()[i], state.councils[j])]);
+  });
 
   // 文面の欄は中身の長さに合わせて伸ばし、欄の中でスクロールしなくても全体を読めるようにする
   const fit = (ta) => { ta.style.height = 'auto'; ta.style.height = `${ta.scrollHeight + 2}px`; };
@@ -479,14 +499,15 @@
   const allDocs = () => state.councils.flatMap((c) => areas().map((ta) => docFor(ta, c)));
   // 1通目の議会あての1通だけをPDFにして、新しいタブで開く（鏡文・宛名はつけない）
   // 開くのを待つとポップアップとして止められるので、タブは先に開いておく
-  async function viewPdf(btn, ta) {
+  // texts を渡すと、その文面（何通でも）を1つのPDFにする。1通ずつ新しいページから始まる
+  async function viewPdf(btn, ta, texts) {
     const win = window.open('', '_blank');
     const text = btn.textContent;
     btn.disabled = true;
     btn.textContent = 'PDFを作っています…';
     try {
       const doc = await window.PdfDoc.create();
-      doc.addDocument(docFor(ta, state.councils[0]));
+      (texts || [docFor(ta, state.councils[0])]).forEach((t) => doc.addDocument(t));
       const url = URL.createObjectURL(new Blob([await doc.bytes()], { type: 'application/pdf' }));
       if (win) win.location.href = url;
       else window.location.href = url;
@@ -821,10 +842,28 @@
       : list.map((id) => {
         const r = state.kind === 'petition' ? mailRule(infoOf(id)) : null;
         const label = state.kind === 'request' ? '要望書の受付窓口（秘書課・担当課など）を自治体の公式サイトで確かめてください'
-          : r ? r.label : '郵送・持参の扱いはまだ調べられていません。出す前に議会事務局へ確かめてください';
-        return `<li><b>${esc(municipalityName(id))}</b>：${esc(label)}</li>`;
+          : r ? r.label : '';
+        if (label) return `<li><b>${esc(municipalityName(id))}</b>：${esc(label)}</li>`;
+        const [pref, key] = officeKeys[id] || [];
+        return `<li><b>${esc(municipalityName(id))}</b>：このサイトではまだ扱いを調べられていません。議会事務局に電話で次のことを聞くと確実です。${telHtml(pref, key, false)}
+          <ul class="wz-ask">
+            <li>陳情は郵送でも受け付けますか。郵送だと審査されますか、議員への配付だけですか（住民以外が出す場合も）</li>
+            <li>次の定例会に間に合う提出の締切はいつですか</li>
+            <li>必要な部数（正本・写し）と、決まった書式があるか</li>
+            <li>いまの議長のお名前（宛名に書き入れるため）</li>
+            <li>電子申請やメールで出せるか</li>
+          </ul></li>`;
       }).join('');
   }
+
+  // 確かめた項目の数を出す。進むのは止めないが、残りがあれば知らせる
+  const checks = () => [...document.querySelectorAll('.wz-checklist > ul > li > label > input')];
+  function renderCheckLeft() {
+    const left = checks().filter((c) => !c.checked).length;
+    $('wzCheckLeft').textContent = left ? `まだ確かめていない項目が ${left}つ あります。出す前に、もう一度見てください。` : '✓ すべて確かめました。';
+    $('wzCheckLeft').classList.toggle('done', !left);
+  }
+  checks().forEach((c) => c.addEventListener('change', renderCheckLeft));
 
   // ---------- 済んだステップへ戻る ----------
   document.querySelectorAll('[data-progress-step]').forEach((el, i) => {

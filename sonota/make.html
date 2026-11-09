@@ -110,27 +110,33 @@
 
       <div class="wz-step" data-step="you" hidden>
         <h3>あなたのことを教えてください</h3>
-        <h4 class="wz-sub">あなたの立場に近いものは？</h4>
+        <p class="hint-sm">聞くことは2つです。①を選ぶと［次へ］を押せます。②は任意で、あとで手書きにもできます。</p>
+        <fieldset class="wz-part">
+        <legend>① あなたの立場（必須）</legend>
         <p class="hint-sm">陳情書の最後に、立場に合った一文を添えます。個人の事情は書きません。</p>
         <div id="wzRoles" class="wz-cards"></div>
-        <h4 class="wz-sub">あなたの住所・氏名を入れる（任意）</h4>
+        </fieldset>
+        <fieldset class="wz-part">
+        <legend>② 差出人の住所・氏名（任意）</legend>
         <p class="hint-sm">住所は陳情書に、氏名は鏡文（送付状）と封筒の差出人に入ります。<b>陳情書の氏名は、印刷してから手書きで署名</b>します。空欄のままなら下線になり、手書きで記入できます。次に開いたときのために<b>この端末のブラウザの中にだけ</b>残ります。共用のパソコンでは、終わったら「この端末から消す」を押してください。</p>
         <div id="wzSender" class="sender-form">
           <label>郵便番号<input data-sender="zip" inputmode="numeric" autocomplete="postal-code" placeholder="例：123-4567"></label>
           <label class="wide">住所<input data-sender="address" autocomplete="street-address" placeholder="例：東京都○○市△△1-2-3"></label>
           <label>氏名（鏡文と封筒用）<input data-sender="name" autocomplete="name" placeholder="例：佐藤 花子"></label>
           <label>電話番号（任意・鏡文にだけ入ります）<input data-sender="tel" autocomplete="tel" inputmode="tel" placeholder="例：090-0000-0000"></label>
-          <label class="wide wz-remember"><input type="checkbox" id="wzRemember" checked> この端末のブラウザに覚えておく（次に作るとき入力を省けます。サーバーには送りません。共用の端末ではチェックを外してください）</label>
+          <label class="wide wz-remember"><input type="checkbox" id="wzRemember" checked> この端末のブラウザに覚えておく（次に作るとき入力を省けます。サーバーには送りません）<b class="wz-shared">⚠ 図書館・ネットカフェ・家族と共用の端末では、チェックを外してください。</b></label>
           <button type="button" id="wzSenderClear" class="btn btn-small">この端末から消す</button>
         </div>
+        </fieldset>
       </div>
 
       <div class="wz-step" data-step="done" hidden>
         <h3>できあがりました</h3>
         <p id="wzSummary" class="wz-summary"></p>
+        <div id="wzMatrix" class="wz-matrix"></div>
 
-        <details id="wzCheck" class="wz-check">
-          <summary>文面を確かめる・直す</summary>
+        <details id="wzCheck" class="wz-check" open>
+          <summary>文面を確かめる・直す（出す前に一度は読んでください）</summary>
           <p class="hint-sm">内容ごとに下の欄で自由に直せます。直した文面はこの端末のブラウザの中だけに残ります。</p>
           <div id="wzDocs" class="wz-docs"></div>
           <div id="wzRwBox" class="wz-rewrite" hidden>
@@ -169,6 +175,7 @@
               <ul id="wzCheckMail" class="wz-checkmail"></ul></li>
             <li><label><input type="checkbox"> 陳情書は公開されることがあると知ったうえで、個人や事件を特定できることを書いていない</label></li>
           </ul>
+          <p id="wzCheckLeft" class="wz-check-left" aria-live="polite"></p>
           <h4>知っておくこと</h4>
           <ul class="wz-know">
             <li>陳情の扱い（審査される／議員に配るだけ）は議会ごとに違います。</li>
