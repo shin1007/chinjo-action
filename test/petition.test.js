@@ -108,7 +108,7 @@ test('鏡文に議会事務局・差出人・同封する陳情書の件名が�
 });
 
 // ほかの分野も、同じ仕組みで文面ができることを確かめる
-for (const theme of ['dansei', 'nihonjin', 'shiho', 'sonota']) {
+for (const theme of ['dansei', 'nihonjin', 'shiho', 'kenko', 'sonota']) {
   test(`${theme}：すべての求める事項で文面と指示文ができる`, () => {
     const ctx = { FormData };
     ctx.window = ctx;

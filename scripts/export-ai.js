@@ -7,7 +7,7 @@ const vm = require('node:vm');
 const crypto = require('node:crypto');
 
 const ROOT = path.join(__dirname, '..');
-const THEMES = ['kodomo', 'dansei', 'nihonjin', 'shiho', 'sonota'];
+const THEMES = ['kodomo', 'dansei', 'nihonjin', 'shiho', 'kenko', 'sonota'];
 const OUT = path.join(ROOT, 'ai');
 const SOURCE_INDEX = path.join(ROOT, 'data', 'source-index.json');
 
