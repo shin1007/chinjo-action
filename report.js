@@ -35,5 +35,18 @@ window.Report = (() => {
     return true;
   }
 
-  return { enabled, loaded, count: (id) => counts.get(id) || 0, prefCount: (pref) => [...counts].filter(([k]) => k.startsWith(`${pref}/`)).length, reported, report };
+  // 議会の扱いを教えてもらう（議会の手続きの情報だけ。陳情の文面・氏名・住所は送らない）。
+  // 提出の報告と違って件数を見せないので、制作中の止めとは別に動かす
+  const tipsEnabled = !!(URL && KEY);
+  async function tip(id, fields) {
+    if (!tipsEnabled) return false;
+    const i = id.indexOf('/');
+    const r = await fetch(`${URL}/rest/v1/council_tips`, {
+      method: 'POST', headers: { ...headers, Prefer: 'return=minimal' },
+      body: JSON.stringify({ pref: id.slice(0, i), council: id.slice(i + 1), ...fields }),
+    }).catch(() => null);
+    return !!(r && r.ok);
+  }
+
+  return { enabled, tipsEnabled, tip, loaded, count: (id) => counts.get(id) || 0, prefCount: (pref) => [...counts].filter(([k]) => k.startsWith(`${pref}/`)).length, reported, report };
 })();

@@ -589,3 +589,14 @@ summary { cursor: pointer; font-weight: 700; }
 .wz-now .bump { font-weight: 700; font-size: 1.1rem; color: var(--main-dark); }
 .wz-check-left:not(.done) { border-left: 4px solid var(--warn); padding-left: 8px; }
 .wz-now .out-toolbar { background: transparent; padding: 0; border: 0; }
+
+/* 議会の扱いを共有する */
+.wz-tip { margin: 6px 0 10px; }
+.wz-tip summary { cursor: pointer; color: var(--main-dark); font-weight: 700; }
+.wz-tip form { padding: 8px 12px; border: 1px dashed var(--line); border-radius: 8px; margin-top: 6px; }
+.wz-tip fieldset { border: 0; padding: 0; margin: 6px 0; }
+.wz-tip legend { font-weight: 700; padding: 0; }
+.wz-tip fieldset label { display: inline-block; margin-right: 12px; }
+.wz-tip form > label { display: block; margin: 6px 0; }
+.wz-tip input:not([type="radio"]), .wz-tip textarea { display: block; width: 100%; box-sizing: border-box; }
+.wz-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
