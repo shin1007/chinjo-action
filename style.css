@@ -368,6 +368,8 @@ summary { cursor: pointer; font-weight: 700; }
 .wz-offices .wz-links { color: inherit; display: flex; flex-wrap: wrap; gap: 4px 14px; }
 .wz-notes { margin: 4px 0 0; padding-left: 1.2em; font-size: 0.85rem; color: var(--ink); }
 .wz-deadline { margin-top: 10px; border: 1px solid var(--accent-line); background: var(--accent-soft); border-radius: 8px; padding: 8px 12px; font-size: 0.88rem; }
+.wz-also { margin: 12px 0; padding: 10px 12px; border: 1px solid var(--accent-line); border-radius: 8px; background: var(--accent-soft); }
+.wz-also p { margin: 0 0 6px; }
 .wz-deadline p { margin: 0 0 4px; }
 .wz-deadline ul { margin: 0; padding-left: 1.2em; }
 .wz-deadline a { margin-left: 6px; }

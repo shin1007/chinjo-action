@@ -188,9 +188,10 @@
               <p id="wzNowLeft" class="wz-now-left" role="status" hidden></p>
               <div class="out-toolbar"><button type="button" id="wzNowPdf" class="btn btn-primary">印刷用のPDFを開く</button> <button type="button" id="wzNowCopy" class="btn btn-small">文面をすべてコピー</button></div></li>
             <li><b>手書きで署名する</b>：1通ごとに氏名を署名します（住所を空けたなら住所も）。</li>
-            <li id="wzNowHow"><b>締切までに出す</b>：持参・郵送・電子申請。議会ごとの出し方は、下の「くわしい手順」の②にあります。</li>
+            <li id="wzNowHow"></li>
             <li id="wzNowReport"><b>出したら知らせる（任意）</b>：「くわしい手順」の②にある「この議会に提出した」を押すと、出した人の数に加わります。電話で聞いて分かった扱いは、「出す前に確かめること」の「分かったことを共有する」から送れます。</li>
           </ol>
+          <div id="wzAlso" class="wz-also" hidden></div>
           <p class="hint-sm">下は、出す前に確かめることと、くわしい手順です。このサイトは法的助言をするものではありません。扱いは議会ごとに変わることがあります。</p>
         </section>
         <div class="wz-checklist">
@@ -198,8 +199,7 @@
           <p class="wz-when">印刷する前に</p>
           <ul>
             <li data-petition-only><label><input type="checkbox" id="wzChkChair"> 議長の氏名を確かめた（上の欄に入れれば自動でチェックが付きます。空けて手書きにしてもかまいません）</label></li>
-            <li data-petition-only><label><input type="checkbox"> 次の会議に間に合う締切を確かめた</label></li>
-            <li data-petition-only><label><input type="checkbox"> 郵送するなら、その議会で郵送の陳情が審査されるか、配付だけかを確かめた</label>
+                        <li data-petition-only><label><input type="checkbox"> 郵送するなら、その議会で郵送の陳情が審査されるか、配付だけかを確かめた</label>
               <ul id="wzCheckMail" class="wz-checkmail"></ul></li>
             <li><label><input type="checkbox"> 陳情書は公開されることがあると知ったうえで、個人や事件を特定できることを書いていない</label></li>
           </ul>
@@ -230,7 +230,7 @@
             </ul>
           </li>
           <li>
-            <h4>② 締切までに議会事務局へ出す</h4>
+            <h4>② 議会事務局へ出す</h4>
             <p class="hint-sm">出し方は議会ごとに下に書いてあります。<b>電子申請</b>ができる議会はそれがいちばん手軽です。郵送で出せる議会もありますが、郵送だと審査されず配布だけになる議会もあるので、遠い議会には先に電話で「郵送でも審査されますか」と聞くのが確実です（<a href="/sonota/guide#mail">詳しく</a>）。締切は定例会の1〜2週間前が多いです。</p>
             <div id="wzPostage" class="postage" hidden></div>
             <details class="send-howto">
