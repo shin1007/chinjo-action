@@ -81,9 +81,11 @@
     el.classList.toggle('multi', total > 1);
     const destination = state.kind === 'request' ? '自治体' : '議会';
     const document = state.kind === 'request' ? '要望書' : '陳情書';
+    // 分野（見出し）がばらばらだと1通にまとめにくく、伝わり方も散るので知らせる
+    const cats = new Set(state.items.map((k) => (window.Petition.ITEMS[k] || {}).category || 'そのほか')).size;
     el.textContent = n > MANY
       ? `⚠ ${document} ${total}通。1つの${destination}に${n}通では1件ごとの重みが薄れます。${MANY}つ以内に絞るのがおすすめです`
-      : `${document} ${total}通ができます（内容${n} × ${destination}${Math.max(1, real().length)}）`;
+      : `${document} ${total}通ができます（内容${n} × ${destination}${Math.max(1, real().length)}）${cats > 1 ? `。選んだ内容が${cats}つの分野に分かれています。同じ分野にまとめると、1通にまとめて出しやすくなります` : ''}`;
   }
 
   function renderCouncils() {
