@@ -82,7 +82,7 @@
         <div id="wzGlobalHits" class="wz-grid" aria-live="polite"></div>
         <div id="wzRecent" class="wz-recent" hidden></div>
         <p class="hint-sm">都道府県から選ぶこともできます。都道府県を選ぶと、その都道府県の自治体が下に出ます。</p>
-        <p class="center"><a href="/contribute.html" class="btn btn-small">送りたい議会の郵送・持参の扱いがわからない</a></p>
+        <p class="center"><a href="/kakunin" class="btn btn-small">送りたい議会の郵送・持参の扱いがわからない</a></p>
         <p class="wz-picked" id="wzPrefPicked"></p>
         <p class="wz-skip"><button type="button" id="wzSkip" class="btn btn-small">自治体を選ばずに作る</button> <span class="hint-sm">提出先を空けた文書ができます。出す先が決まったら手書きで入れてください。</span></p>
         <div id="wzPrefs"></div>
@@ -127,6 +127,10 @@
 
       <div class="wz-step" data-step="done" hidden>
         <h3>できあがりました</h3>
+        <div id="wzMerge" class="wz-merge" hidden>
+          <label><input type="checkbox" id="wzMergeOn"> <b id="wzMergeLabel"></b></label>
+          <p id="wzMergeWhy" class="hint-sm"></p>
+        </div>
         <p id="wzSummary" class="wz-summary"></p>
         <div id="wzMatrix" class="wz-matrix"></div>
 

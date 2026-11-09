@@ -24,7 +24,7 @@
   const firstItems = () => [];
   // テーマのページで「要望書」を選んで来たときは ?kind=request が付いている
   const startKind = () => (new URLSearchParams(location.search).get('kind') === 'request' ? 'request' : 'petition');
-  const state = { step: 0, pref: '', councils: [], items: firstItems(), role: '', kind: startKind() };
+  const state = { step: 0, pref: '', councils: [], items: firstItems(), role: '', kind: startKind(), merge: false };
   const kindInputs = () => document.querySelectorAll('input[name="wzKind"]');
   const setKindInputs = () => kindInputs().forEach((r) => { r.checked = r.value === state.kind; });
 
@@ -60,13 +60,23 @@
 
   // 1つの議会に一度に多くの陳情を出すと、1件ごとの重みが薄れる（詳しい版と同じ目安）
   const { MANY } = window.Petition;
+  // 選んだ内容をまとめて1通にできるか。国あて（意見書）と自治体あてが混ざると文書の種類が決められないので、
+  // どちらかにそろっていて、記の項目が五までのときだけ
+  const MERGE_MAX = 5;
+  const isNat = (k) => window.Petition.ITEMS[k].scope !== 'local';
+  const canMerge = () => state.items.length >= 2 && state.items.length <= MERGE_MAX
+    && new Set(state.items.map(isNat)).size === 1;
+  // 1通ごとの内容のキー。まとめるときは「a+b+c」の1つ
+  const docKeys = () => (state.merge && canMerge() ? [state.items.join('+')] : [...state.items]);
+  const keysOf = (k) => k.split('+');
+  const docLabel = (k) => keysOf(k).map((x) => window.Petition.ITEMS[x].label).join('・');
   function renderCount() {
     const s = STEPS[state.step];
     const el = $('wzCount');
     const n = state.items.length;
     el.hidden = !((s === 'items' || s === 'council') && n);
     if (el.hidden) return;
-    const total = n * Math.max(1, state.councils.length);
+    const total = docKeys().length * Math.max(1, state.councils.length);
     el.classList.toggle('warn', n > MANY);
     el.classList.toggle('multi', total > 1);
     const destination = state.kind === 'request' ? '自治体' : '議会';
@@ -364,7 +374,7 @@
       if (!state.councils.includes(d.addNear)) state.councils.push(d.addNear);
       show();
       // 増えたことが分かるように、いまの通数を知らせる
-      const n = state.items.length * state.councils.length;
+      const n = docKeys().length * state.councils.length;
       flash(`${label(d.addNear)}を加えました。いま${state.kind === 'request' ? '要望書' : '陳情書'}は全部で${n}通です`);
       renderNow(true);
     } else if (d.mailPick) {
@@ -426,7 +436,7 @@
   $('wzBack').addEventListener('click', () => go(-1));
   $('wzRestart').addEventListener('click', () => {
     if (!confirm('選んだ議会と内容、直した文面が消えます。最初からやり直しますか？')) return;
-    Object.assign(state, { step: 0, pref: '', councils: [], items: firstItems(), role: '', kind: startKind() });
+    Object.assign(state, { step: 0, pref: '', councils: [], items: firstItems(), role: '', kind: startKind(), merge: false });
     setKindInputs();
     $('wzItemFilter').value = '';
     clearDraft();
@@ -469,8 +479,10 @@
   function build() {
     const first = nameOf(state.councils[0]);
     const fd = formData();
-    $('wzDocs').innerHTML = state.items.map((k, i) => {
-      const it = window.ASKS.find((a) => a.id === k);
+    renderMerge();
+    const keys = docKeys();
+    $('wzDocs').innerHTML = keys.map((k, i) => {
+      const it = { label: docLabel(k) };
       const e = edits[k];
       // 前の日に直した文面は、日付だけを今日にする（出す日に合わせて直すのは、この欄でできる）
       if (e && e.day !== window.Common.reiwaToday()) {
@@ -479,9 +491,9 @@
         saveEdits();
       }
       // 前に別の議会あてに直した文面は、宛名と自治体名をいまの議会に差し替えて使う
-      const text = withSender(e ? swapCouncil(e.text, e.council, first) : window.Petition.build(fd, first, [k]), sender);
+      const text = withSender(e ? swapCouncil(e.text, e.council, first) : window.Petition.build(fd, first, keysOf(k)), sender);
       const others = state.councils.slice(1).map(label);
-      return `<details class="wz-doc" ${i === 0 || state.items.length <= 3 ? 'open' : ''}>
+      return `<details class="wz-doc" ${i === 0 || keys.length <= 3 ? 'open' : ''}>
         <summary><b>${i + 1}. ${esc(it.label)}</b><span><i class="wz-edited"${e ? '' : ' hidden'}>直した文面・</i>${state.councils.length}通</span></summary>
         ${e && e.role !== state.role ? '<p class="hint-sm warn">立場を選び直す前に直した文面です。最後の一文があなたの立場に合っているか確かめてください。</p>' : ''}
         ${others.length ? `<p class="hint-sm">下は${esc(first)}あての文面です。${others.map(esc).join('・')}あてにも、同じ内容で1通ずつ作ります。ここで直すと、宛名と自治体名を差し替えてすべての議会に反映されます。</p>` : ''}
@@ -493,16 +505,33 @@
     areas().forEach((ta) => { fit(ta); docStat(ta); });
     const document = state.kind === 'request' ? '要望書' : '陳情書';
     $('wzSummary').textContent = real().length
-      ? `${state.councils.length}つの自治体 × ${state.items.length}つの内容 ＝ ${document} ${state.councils.length * state.items.length}通`
-      : `自治体名を空けた${document} ${state.items.length}通（提出先が決まったら手書きで入れてください）`;
+      ? `${state.councils.length}つの自治体 × ${keys.length === 1 && state.items.length > 1 ? `${state.items.length}つの内容をまとめた1通` : `${keys.length}つの内容`} ＝ ${document} ${state.councils.length * keys.length}通`
+      : `自治体名を空けた${document} ${keys.length}通（提出先が決まったら手書きで入れてください）`;
     renderMatrix();
     renderOffices();
   }
 
+  // まとめて1通にするかの切り替え。まとめられないときは理由を出す
+  function renderMerge() {
+    const n = state.items.length;
+    const box = $('wzMerge');
+    box.hidden = n < 2;
+    if (box.hidden) return;
+    const ok = canMerge();
+    $('wzMergeOn').disabled = !ok;
+    $('wzMergeOn').checked = ok && !!state.merge;
+    $('wzMergeLabel').textContent = `選んだ${n}つの内容を、まとめて1通にする`;
+    $('wzMergeWhy').textContent = ok
+      ? 'まとめると、記の一・二…に内容が並ぶ1通になり、署名も1回で済みます。1つずつ分けると、議会が内容ごとに採否を決めやすくなります。'
+      : n > MERGE_MAX ? `まとめられるのは${MERGE_MAX}つまでです。`
+        : '国に意見書を出すよう求める内容と、自治体の取り組みを求める内容が混ざっているため、まとめられません（文書の種類が違います）。';
+  }
+  $('wzMergeOn').addEventListener('change', (e) => { state.merge = e.target.checked; build(); renderNow(); saveDraft(); });
+
   // 何通できるかを、宛先 × 内容の表で見せる。1通ずつでも、まとめて1つのPDFでも開ける
   function renderMatrix() {
     const docName = state.kind === 'request' ? '要望書' : '陳情書';
-    const items = state.items.map((k) => window.Petition.ITEMS[k]);
+    const items = docKeys().map((k) => ({ label: docLabel(k) }));
     const total = items.length * state.councils.length;
     const head = `<tr><th scope="col">内容 ＼ 宛先</th>${state.councils.map((c) => `<th scope="col">${esc(isNone(c) ? '（宛先を空ける）' : municipalityName(c))}</th>`).join('')}</tr>`;
     const rows = items.map((it, i) => `<tr><th scope="row">${i + 1}. ${esc(it.label)}</th>${state.councils.map((c, j) => `<td><button type="button" class="btn btn-small" data-cell="${i}:${j}" aria-label="${esc(it.label)}・${esc(isNone(c) ? '宛先なし' : municipalityName(c))}あてを開く">1通を開く</button></td>`).join('')}</tr>`).join('');
@@ -530,7 +559,7 @@
   // 直していない内容は議会ごとに組み立て直す（「東京都」のような名前を本文ごと置き換えないように）
   const areas = () => [...$('wzDocs').querySelectorAll('textarea')];
   const docFor = (ta, c) => withChair(withSender(edits[ta.dataset.key] ? forCouncil(ta.value, c)
-    : window.Petition.build(formData(), nameOf(c), [ta.dataset.key]), sender), c).trim();
+    : window.Petition.build(formData(), nameOf(c), keysOf(ta.dataset.key)), sender), c).trim();
   const allDocs = () => state.councils.flatMap((c) => areas().map((ta) => docFor(ta, c)));
   // 1通目の議会あての1通だけをPDFにして、新しいタブで開く（鏡文・宛名はつけない）
   // 開くのを待つとポップアップとして止められるので、タブは先に開いておく
@@ -960,7 +989,7 @@
 
   // 最終画面の「今やること」。印刷・コピーをいちばん上に置く
   function renderNow(bump) {
-    const n = state.items.length * Math.max(1, state.councils.length);
+    const n = docKeys().length * Math.max(1, state.councils.length);
     const docName = state.kind === 'request' ? '要望書' : '陳情書';
     $('wzNowCount').textContent = n > 1
       ? `${docName}は全部で${n}通です。下のボタンで、${n}通を1つのPDFファイルにまとめて開きます（1通ごとに新しいページから始まります）。1通ずつ別の紙として出し、それぞれに署名が要ります。`
@@ -1054,8 +1083,8 @@
     if (state.step >= ASK_STEPS) rememberCouncils();
     if (STEPS[state.step] === 'council') renderRecent();
     if (!state.items.length) return;
-    const { step, pref, councils, items, role, kind } = state;
-    try { localStorage.setItem(DRAFT_KEY, JSON.stringify({ step, pref, councils, items, role, kind })); } catch { /* 残せなくても作れる */ }
+    const { step, pref, councils, items, role, kind, merge } = state;
+    try { localStorage.setItem(DRAFT_KEY, JSON.stringify({ step, pref, councils, items, role, kind, merge })); } catch { /* 残せなくても作れる */ }
   }
   function clearDraft() {
     try { localStorage.removeItem(DRAFT_KEY); } catch { /* 残していない */ }
@@ -1072,7 +1101,7 @@
       let step = Math.max(0, Math.min(Number(d.step) || 0, STEPS.length - 1));
       if (!councils.length) step = Math.min(step, 1);
       else if (!role) step = Math.min(step, 2);
-      return { items, councils, role, step, pref: window.PREFS.includes(d.pref) ? d.pref : '', kind: d.kind === 'request' ? 'request' : 'petition' };
+      return { items, councils, role, step, pref: window.PREFS.includes(d.pref) ? d.pref : '', kind: d.kind === 'request' ? 'request' : 'petition', merge: !!d.merge };
     } catch { return null; }
   }
 
