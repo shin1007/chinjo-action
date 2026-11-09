@@ -632,3 +632,11 @@ summary { cursor: pointer; font-weight: 700; }
 .wz-now-ask { margin: 4px 0 0; padding-left: 1.2em; font-size: 0.95rem; }
 .wz-merge { border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; margin: 8px 0; background: var(--surface); }
 .wz-merge .hint-sm { margin: 4px 0 0; }
+.wz-privacy { margin: 4px 0 8px; }
+.wz-privacy summary { cursor: pointer; }
+.wz-privacy dl { margin: 6px 0 0; }
+.wz-privacy dt { font-weight: 700; margin-top: 4px; }
+.wz-privacy dd { margin: 0 0 0 1em; }
+.guide-must { border: 2px solid var(--main); border-radius: 10px; background: var(--accent-soft); padding: 10px 16px; margin: 12px 0; }
+.guide-must h2 { font-size: 1.05rem; margin: 0 0 4px; }
+.guide-must ul { margin: 0; padding-left: 1.2em; }

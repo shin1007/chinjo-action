@@ -1053,7 +1053,10 @@
   $('wzGlobal').addEventListener('input', () => {
     const q = $('wzGlobal').value.trim();
     if (!q) { $('wzGlobalHits').innerHTML = ''; return; }
-    const hits = window.Yomi.filter(globalList(), q, (id) => kanaOf[nameOf(id)]).slice(0, 30);
+    // 名前がそのまま一致する自治体を先に（「大分市」で大分県議会が先に出ないように）
+    const rank = (id) => { const n = municipalityName(id); return n === q ? 0 : n.startsWith(q) ? 1 : 2; };
+    const hits = window.Yomi.filter(globalList(), q, (id) => kanaOf[nameOf(id)])
+      .map((id, i) => [id, rank(id), i]).sort((a, b) => a[1] - b[1] || a[2] - b[2]).map(([id]) => id).slice(0, 30);
     $('wzGlobalHits').innerHTML = hits.map((id) => `<button type="button" class="wz-chip" data-global="${esc(id)}">${esc(municipalityName(id))}<small class="wz-n">${esc(prefOf(id))}</small>${state.kind === 'petition' ? chipMail(id) : ''}</button>`).join('')
       || `<div class="wz-wide wz-nohit"><p>「${esc(q)}」に当てはまる自治体が見つかりません。</p><ul class="hint-sm"><li>「市」「町」を外す、ひらがなで読みを入れる（例：かまがや）と見つかることがあります。</li><li><button type="button" class="btn btn-small" data-to-prefs>都道府県から選ぶ</button>　<button type="button" class="btn btn-small" data-skip-council>自治体を選ばずに作る（提出先は手書き）</button></li></ul></div>`;
   });
