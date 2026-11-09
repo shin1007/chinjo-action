@@ -539,7 +539,7 @@ summary { cursor: pointer; font-weight: 700; }
 .wz-checklist li { margin: 4px 0; }
 .wz-global { display: block; font-weight: 700; }
 .wz-recent { margin: 8px 0; }
-.wz-remember { font-size: 0.85rem; }
+.wz-remember { display: block !important; font-size: 0.85rem; }
 @media (max-width: 800px) {
   .wz-kind { grid-template-columns: 1fr; }
   .wz-nav { flex-wrap: wrap; }
@@ -569,3 +569,13 @@ summary { cursor: pointer; font-weight: 700; }
 .wz-saved { margin: 4px 0 8px; }
 .wz-count.multi:not(.warn) { background: var(--accent-soft); border: 1px solid var(--main); border-radius: 999px; padding: 4px 12px; }
 .wz-count.warn { background: var(--accent-soft); border: 2px solid var(--warn); border-radius: 8px; padding: 4px 10px; }
+
+/* 通数の表・「あなた」の区切り・確認の残り */
+.wz-matrix { margin: 10px 0 16px; }
+.wz-matrix td { text-align: center; }
+.wz-part { border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px 14px; margin: 12px 0; }
+.wz-part legend { font-weight: 700; padding: 0 6px; }
+.wz-shared { display: block; color: var(--warn); margin-top: 2px; }
+.wz-ask { margin: 4px 0 6px; padding-left: 1.4em; list-style: circle; }
+.wz-check-left { font-weight: 700; color: var(--warn); }
+.wz-check-left.done { color: var(--main-dark); }
