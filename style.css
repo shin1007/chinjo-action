@@ -504,3 +504,16 @@ summary { cursor: pointer; font-weight: 700; }
 .theme-list { list-style: none; padding: 0; margin: 16px auto 0; max-width: 760px; }
 .theme-list li { padding: 12px 4px; border-bottom: 1px solid var(--line); }
 .theme-list li:last-child { border-bottom: 0; }
+
+/* トップページの「届け方」・注意点 */
+#choose .cards { grid-template-columns: repeat(3, 1fr); }
+.card-pick { border: 1px solid var(--main); box-shadow: inset 3px 0 0 var(--main); }
+#choose .cards + .hint-sm, #next .cards + .hint-sm { margin-top: 16px; }
+#before .howto { padding-left: 2.5em; }
+#before .howto li + li { margin-top: 6px; }
+#before .howto .closing { list-style: none; margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--line); }
+.hero h1 { word-break: keep-all; overflow-wrap: anywhere; }
+@media (max-width: 800px) {
+  #choose .cards { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 1.6rem; }
+}
