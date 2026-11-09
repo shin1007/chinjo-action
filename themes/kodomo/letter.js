@@ -32,6 +32,12 @@
   document.getElementById('troubleList').innerHTML = checks(TROUBLES, 'trouble');
   document.getElementById('worryList').innerHTML = checks(WORRIES, 'worry');
 
+  // お願いを一つの文にまとめるための言い回し
+  const ASKS = {
+    intro: '陳情（請願）の紹介議員をお引き受けいただくこと',
+    question: '議会の一般質問などでこの問題を取り上げていただくこと',
+    meet: '一度、直接お話をお聞きいただく機会をいただくこと',
+  };
   const PURPOSES = {
     intro: '陳情（請願）の紹介議員をお引き受けいただけないでしょうか',
     question: '議会の一般質問などで、この問題を取り上げていただけないでしょうか',
@@ -129,8 +135,15 @@
 
     L.push('■ お願い');
     L.push('　議員の先生に個別の家庭の問題へ介入していただくことはできないと承知しております。そのうえで、私の経験は決して特別なものではなく、同じ制度や運用のもとで、多くの子どもと親が同じ状況に置かれていると考えています。');
-    const purposes = d.getAll('purpose').map((p) => PURPOSES[p]);
-    purposes.forEach((p) => L.push(`　${p}。`));
+    const chosen = d.getAll('purpose');
+    const asks = chosen.filter((p) => ASKS[p]).map((p) => ASKS[p]);
+    const req = [];
+    if (asks.length) {
+      const joined = asks.length === 1 ? asks[0] : `${asks.slice(0, -1).join('、')}、あるいは${asks[asks.length - 1]}`;
+      req.push(`そこで、${joined}をご検討いただけないでしょうか。`);
+    }
+    if (chosen.includes('know')) req.push(`${asks.length ? 'あわせて、' : ''}私が提出した陳情の背景として、こうした実情があることを知っておいていただければ幸いです。`);
+    if (req.length) L.push(indent(req.join('')));
     if (val(d, 'message')) L.push('', indent(val(d, 'message')));
     L.push('', '　ご多忙のところ、長い手紙をお読みいただき、ありがとうございました。', '　　　　　　　　　　　　　　　　　　　　　　　　　　　　　敬具', '');
     L.push(`　　　　　　　　　　　　氏名　${val(d, 'name') || BLANK_TEXT}`);
