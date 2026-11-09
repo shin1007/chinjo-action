@@ -872,7 +872,7 @@
     if (!window.Report.tipsEnabled) return '';
     const name = esc(municipalityName(id));
     const radio = (k, opts) => opts.map(([v, t]) => `<label><input type="radio" name="${k}" value="${v}"> ${t}</label>`).join('');
-    return `${known ? '' : '<p class="wz-tip-lead">📝 聞いて分かったら、下の欄から共有できます。次に同じ議会に出す人の助けになります。</p>'}<details class="wz-tip"${known ? '' : ' open'}><summary>${known ? `${name}の情報が古い・違うときは、修正を送る（任意）` : `分かったことを共有する（任意）`}</summary>
+    return `${known ? '' : '<p class="wz-tip-lead">📝 聞いて分かったら、下の「分かったことを共有する」を押して送れます（1分ほど・任意）。次に同じ議会に出す人の助けになります。</p>'}<details class="wz-tip"><summary>${known ? `${name}の情報が古い・違うときは、修正を送る（任意）` : `分かったことを共有する（任意）`}</summary>
       <form data-tip="${esc(id)}">
         <p class="hint-sm">電話や公式サイトで分かった<b>${name}の扱い</b>を送ると、確かめてこのサイトに反映します。次に同じ議会に出す人の助けになります。<b>送るのは下の欄の内容だけ</b>で、陳情書の文面・住所・氏名は送りません。分かったところだけで構いません。</p>
         <fieldset><legend>郵送した陳情は</legend>${radio('mail', [['review', '審査される'], ['distribute', '議員への配付だけ'], ['unknown', '分からない']])}</fieldset>
@@ -926,6 +926,8 @@
     const c = e.target.dataset.chair;
     if (!c) return;
     chairs[c] = e.target.value.trim();
+    const all = real().every((id) => chairs[id]);
+    if ($('wzChkChair').checked !== all) { $('wzChkChair').checked = all; renderCheckLeft(); }
     // 文面の欄（1つ目の議会あて）にも入れる
     if (c === state.councils[0]) areas().forEach((ta) => {
       ta.value = ta.value.replace(chairRe, `$1　${chairs[c] || window.Common.BLANK_TEXT}　様`);
@@ -936,7 +938,9 @@
   function renderNow(bump) {
     const n = state.items.length * Math.max(1, state.councils.length);
     const docName = state.kind === 'request' ? '要望書' : '陳情書';
-    $('wzNowCount').textContent = `${docName}は全部で${n}通です（1通ずつ別の紙・署名が要ります）。`;
+    $('wzNowCount').textContent = n > 1
+      ? `${docName}は全部で${n}通です。下のボタンで、${n}通を1つのPDFファイルにまとめて開きます（1通ごとに新しいページから始まります）。1通ずつ別の紙として出し、それぞれに署名が要ります。`
+      : `${docName}は1通です。`;
     $('wzNowCount').classList.toggle('bump', !!bump);
     $('wzNowPdf').textContent = n > 1 ? `${n}通を印刷用のPDFで開く` : '印刷用のPDFを開く';
     $('wzNowDate').textContent = window.Common.reiwaToday();
