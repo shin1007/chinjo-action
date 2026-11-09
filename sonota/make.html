@@ -96,7 +96,7 @@
         <div id="wzGlobalHits" class="wz-grid" aria-live="polite"></div>
         <div id="wzRecent" class="wz-recent" hidden></div>
         <p class="hint-sm">都道府県から選ぶこともできます。都道府県を選ぶと、その都道府県の自治体が下に出ます。</p>
-        <p class="center"><a href="/kakunin" class="btn btn-small">送りたい議会の郵送・持参の扱いがわからない</a></p>
+        <p class="center" data-petition-only><a href="/kakunin" class="btn btn-small">送りたい議会の郵送・持参の扱いがわからない</a></p>
         <p class="wz-picked" id="wzPrefPicked"></p>
         <p class="wz-skip"><button type="button" id="wzSkip" class="btn btn-small">自治体を選ばずに作る</button> <span class="hint-sm">提出先を空けた文書ができます。出す先が決まったら手書きで入れてください。</span></p>
         <div id="wzPrefs"></div>
@@ -180,15 +180,15 @@
         <section class="wz-now" aria-labelledby="wzNowH">
           <h4 id="wzNowH">今やること</h4>
           <ol class="wz-now-steps">
-            <li id="wzNowAskItem"><b>扱いを確かめる</b>（印刷する前に）
+            <li id="wzNowAskItem"><b id="wzNowAskH">扱いを確かめる</b>（印刷する前に）
               <ul id="wzNowAsk" class="wz-now-ask"></ul></li>
-            <li><b>日付と議長の氏名</b>：文面の日付は<b id="wzNowDate"></b>（今日）です。出す日が違うときは、前の画面の「文面を確かめる・直す」で直すか、印刷後に手書きで直してください。議長の氏名は、調べて入れると宛名に入ります。空けておけば手書きでも構いません。
+            <li id="wzNowChairItem"><b>日付と議長の氏名</b>：文面の日付は<b id="wzNowDate"></b>（今日）です。出す日が違うときは、前の画面の「文面を確かめる・直す」で直すか、印刷後に手書きで直してください。議長の氏名は、調べて入れると宛名に入ります。空けておけば手書きでも構いません。
               <div id="wzChairBox" class="wz-chairs" hidden><div id="wzChairs"></div><p class="hint-sm">議長は選挙や交代で変わります。出す直前に議会の公式サイトで確かめてください。</p></div></li>
             <li><b>印刷する</b>：<span id="wzNowCount"></span>
               <p id="wzNowLeft" class="wz-now-left" role="status" hidden></p>
               <div class="out-toolbar"><button type="button" id="wzNowPdf" class="btn btn-primary">印刷用のPDFを開く</button> <button type="button" id="wzNowCopy" class="btn btn-small">文面をすべてコピー</button></div></li>
             <li><b>手書きで署名する</b>：1通ごとに氏名を署名します（住所を空けたなら住所も）。</li>
-            <li><b>締切までに出す</b>：持参・郵送・電子申請。議会ごとの出し方は、下の「くわしい手順」の②にあります。</li>
+            <li id="wzNowHow"><b>締切までに出す</b>：持参・郵送・電子申請。議会ごとの出し方は、下の「くわしい手順」の②にあります。</li>
             <li id="wzNowReport"><b>出したら知らせる（任意）</b>：「くわしい手順」の②にある「この議会に提出した」を押すと、出した人の数に加わります。電話で聞いて分かった扱いは、「出す前に確かめること」の「分かったことを共有する」から送れます。</li>
           </ol>
           <p class="hint-sm">下は、出す前に確かめることと、くわしい手順です。このサイトは法的助言をするものではありません。扱いは議会ごとに変わることがあります。</p>
@@ -197,9 +197,9 @@
           <h4>出す前に確かめること</h4>
           <p class="wz-when">印刷する前に</p>
           <ul>
-            <li><label><input type="checkbox" id="wzChkChair"> 議長の氏名を確かめた（上の欄に入れれば自動でチェックが付きます。空けて手書きにしてもかまいません）</label></li>
-            <li><label><input type="checkbox"> 次の会議に間に合う締切を確かめた</label></li>
-            <li><label><input type="checkbox"> 郵送するなら、その議会で郵送の陳情が審査されるか、配付だけかを確かめた</label>
+            <li data-petition-only><label><input type="checkbox" id="wzChkChair"> 議長の氏名を確かめた（上の欄に入れれば自動でチェックが付きます。空けて手書きにしてもかまいません）</label></li>
+            <li data-petition-only><label><input type="checkbox"> 次の会議に間に合う締切を確かめた</label></li>
+            <li data-petition-only><label><input type="checkbox"> 郵送するなら、その議会で郵送の陳情が審査されるか、配付だけかを確かめた</label>
               <ul id="wzCheckMail" class="wz-checkmail"></ul></li>
             <li><label><input type="checkbox"> 陳情書は公開されることがあると知ったうえで、個人や事件を特定できることを書いていない</label></li>
           </ul>
@@ -208,7 +208,7 @@
             <li><label><input type="checkbox"> 氏名を手書きで署名した（押印は議会によって任意）。議長の氏名を空けたなら、それも書き入れた</label></li>
           </ul>
           <p id="wzCheckLeft" class="wz-check-left" aria-live="polite"></p>
-          <details class="wz-fold">
+          <details class="wz-fold" data-petition-only>
           <summary>知っておくこと（扱いは議会ごとに違う・採択されたら・電子申請）</summary>
           <ul class="wz-know">
             <li>陳情の扱い（審査される／議員に配るだけ）は議会ごとに違います。</li>
@@ -216,9 +216,9 @@
             <li>このサイトは、印刷して出す紙の文書を前提にしています。電子申請ができる議会もあります。できるかどうかと方法は、下の議会ごとの案内か、議会の公式サイトで確かめてください。</li>
           </ul>
           </details>
-          <p class="hint-sm">扱いがはっきりしないときは、議会事務局に電話で聞くのが確実です。本サイトは法的助言をするものではありません。詳しくは<a href="/sonota/guide">陳情の出し方ガイド</a>へ。</p>
+          <p class="hint-sm" data-petition-only>扱いがはっきりしないときは、議会事務局に電話で聞くのが確実です。本サイトは法的助言をするものではありません。詳しくは<a href="/sonota/guide">陳情の出し方ガイド</a>へ。</p>
         </div>
-        <details class="wz-fold wz-flow-box">
+        <details class="wz-fold wz-flow-box" data-petition-only>
         <summary>くわしい手順を開く（議会ごとの出し方・郵送のしかたと切手・近くの議会にも出す）</summary>
         <ol class="wz-flow">
           <li>

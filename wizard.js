@@ -342,7 +342,7 @@
     }
     if (s === 'items') renderItems();
     if (s === 'done') $('wzCheck').open = true;
-    if (s === 'send') { renderCheckMail(); renderCheckLeft(); renderNow(); renderChairs(); }
+    if (s === 'send') { renderCheckMail(); renderNow(); renderCheckLeft(); renderChairs(); }
     if (state.step >= ASK_STEPS) build();
     renderCount();
     saveLink(state.step >= ASK_STEPS);
@@ -1010,12 +1010,42 @@
     $('wzNowDate').textContent = window.Common.reiwaToday();
     renderNowAsk();
   }
+  // 要望書の出し方のページ。いちばん上の検索結果を直接開くリンク（Google の「I'm Feeling Lucky」）と、検索結果そのもの
+  function requestLinks(id) {
+    const [pref, key] = officeKeys[id] || [];
+    const [site] = (window.SITES[pref] || {})[key] || [];
+    const name = municipalityName(id);
+    const head = /都$|道$|府$|県$/.test(name) ? '知事' : /区$/.test(name) ? '区長' : /町$/.test(name) ? '町長' : /村$/.test(name) ? '村長' : '市長';
+    const q = `${site ? `site:${new URL(site).hostname}` : name} ${head}への手紙 OR 市民の声 OR ご意見 OR 要望`;
+    const url = `https://www.google.com/search?q=${encodeURIComponent(q)}`;
+    return { lucky: `${url}&btnI=1`, results: url };
+  }
+
+  // 要望書は議会に出すものではないので、議長・締切・郵送の審査・提出報告など議会の手続の欄は出さない
+  function renderKindParts() {
+    const request = state.kind === 'request';
+    $('wzNowChairItem').hidden = request;
+    $('wzNowAskH').textContent = request ? '出し方のページを開く' : '扱いを確かめる';
+    $('wzNowReport').hidden = request || !window.Report.enabled;
+    $('wzNowHow').innerHTML = request
+      ? '<b>出す</b>：上で開いたページに書かれた方法（窓口・郵送・メール・フォームなど）で出します。'
+      : '<b>締切までに出す</b>：持参・郵送・電子申請。議会ごとの出し方は、下の「くわしい手順」の②にあります。';
+    document.querySelectorAll('[data-petition-only]').forEach((el) => { el.hidden = request; });
+  }
+
   // 「今やること」の1つ目：議会ごとに、分かっている扱いか、電話で聞くことを出す
   function renderNowAsk() {
     const list = real();
     let html;
     if (state.kind === 'request') {
-      html = '<li>要望書の受付窓口（秘書課・担当課など）と、郵送・メールで出せるかを、自治体の公式サイトで確かめます。下の「くわしい手順」の②に、探すためのリンクがあります。</li>';
+      // 要望書は議会の手続ではなく、受け付け方（窓口・郵送・メール・フォーム）は自治体ごとに違う。
+      // このサイトでは調べていないので、扱いは出さず、その自治体の出し方のページへ直接案内する
+      html = list.length
+        ? list.map((id) => {
+          const { lucky, results } = requestLinks(id);
+          return `<li><b>${esc(municipalityName(id))}</b>：<a href="${esc(lucky)}" target="_blank" rel="noopener" class="btn btn-small">要望・意見の出し方のページを開く</a> <a href="${esc(results)}" target="_blank" rel="noopener">違うページが開いたら、検索結果から選ぶ</a></li>`;
+        }).join('')
+        : '<li>出す先を決めたら、その自治体の公式サイトで、要望・意見の受け付け方（窓口・郵送・メール・フォーム）を確かめます。</li>';
     } else if (!list.length) {
       html = '<li>出す先を決めたら、その議会事務局に「郵送でも審査されるか」「次の締切」「いまの議長の名前」を聞きます（電話で1分ほど）。</li>';
     } else {
@@ -1034,13 +1064,13 @@
       }).join('');
     }
     $('wzNowAsk').innerHTML = html;
-    $('wzNowReport').hidden = !window.Report.enabled;
+    renderKindParts();
   }
   $('wzNowPdf').addEventListener('click', (e) => viewPdf(e.currentTarget, null, allDocs()));
   $('wzNowCopy').addEventListener('click', () => $('wzCopy').click());
 
   // 確かめた項目の数を出す。進むのは止めないが、残りがあれば知らせる
-  const checks = () => [...document.querySelectorAll('.wz-checklist > ul > li > label > input')];
+  const checks = () => [...document.querySelectorAll('.wz-checklist > ul > li > label > input')].filter((c) => !c.closest('li').hidden);
   function renderCheckLeft() {
     const left = checks().filter((c) => !c.checked).length;
     $('wzCheckLeft').textContent = left ? `⚠ まだ確かめていない項目が ${left}つ あります。チェックがないまま出すと、受け付けられなかったり審査されなかったりすることがあります。` : '✓ すべて確かめました。印刷して出せます。';
