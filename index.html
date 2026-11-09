@@ -40,13 +40,32 @@
 <main>
 <section class="hero">
   <div class="wrap">
-    <p class="eyebrow">陳情書・要望書・議員への手紙を、選んで印刷まで。</p>
+    <p class="eyebrow">陳情書・要望書・議員への手紙の文面づくりと、出し方の案内まで。署名と提出はご自身で。</p>
     <h1>地方議会に、<br>意見を正式な手続きで届ける。</h1>
     <p class="lead">テーマを選び、届け方を選び、文面を整えて、出し方を確かめる。その順にお手伝いします。入力した内容はサーバーに送られません。</p>
     <div class="hero-actions">
-      <a class="btn btn-primary" href="#themes">テーマを選んでつくる</a>
-      <a class="btn btn-ghost" href="/about">はじめての方：陳情のしくみ</a>
+      <a class="btn btn-primary" href="#shindan">はじめての方：どれで出すか選ぶ（質問2つ）</a>
+      <a class="btn btn-ghost" href="#themes">決まっている方：テーマを選んでつくる</a>
     </div>
+  </div>
+</section>
+<section id="shindan" class="section shindan">
+  <div class="wrap">
+    <h2>どれで出すか、2つの質問で選ぶ</h2>
+    <p class="lead-sm">陳情書・要望書・請願・議員への手紙は、だれに動いてほしいかで選びます。どれがいちばん効く、というものではありません。</p>
+    <fieldset class="shindan-q" data-q="who">
+      <legend>Q1. だれに動いてほしいですか</legend>
+      <button type="button" class="wz-card" data-a="council"><b>議会</b><span>議会で話し合ってほしい・国に意見書を出してほしい</span></button>
+      <button type="button" class="wz-card" data-a="exec"><b>市区町村長・知事</b><span>役所に取り組みや説明をしてほしい</span></button>
+      <button type="button" class="wz-card" data-a="member"><b>地元の特定の議員</b><span>議員に知ってほしい・議会で取り上げてほしい</span></button>
+      <button type="button" class="wz-card" data-a="unknown"><b>まだわからない</b><span>まずしくみを知りたい</span></button>
+    </fieldset>
+    <fieldset class="shindan-q" data-q="intro" hidden>
+      <legend>Q2. 請願の「紹介議員」になってくれる議員はいますか</legend>
+      <button type="button" class="wz-card" data-a="yes"><b>いる</b><span>相談できる議員がいる</span></button>
+      <button type="button" class="wz-card" data-a="no"><b>いない・わからない</b><span>紹介議員なしで出したい</span></button>
+    </fieldset>
+    <div id="shindanResult" class="shindan-result" aria-live="polite" hidden></div>
   </div>
 </section>
 <section id="themes" class="section">
@@ -113,5 +132,6 @@
     <p class="small">本サイトは市民による政策提言のための情報提供サイトです。法的助言を行うものではありません。</p>
   </div>
 </footer>
+<script src="/shindan.js" defer></script>
 </body>
 </html>
