@@ -100,7 +100,7 @@ window.PdfDoc = (() => {
     const BODY = 10.5;
     const LH = BODY * 1.85;
     const textW = A4.w - M.left - M.right;
-    const ITEM = /^([一二三四五六七八九十]+　|\d+．|[・①-⑳])/;
+    const ITEM = /^([一二三四五六七八九十]+　|\d+[．　]|[・①-⑳])/;
     // 文面の URL には、スマホで読み取れる QR コードを添える
     const URL_RE = /https?:\/\/[^\s」）、。]+/g;
     const QR = 22 * MM;
@@ -132,6 +132,8 @@ window.PdfDoc = (() => {
         const block = (o = {}) => { const b = { rows: [], ...o }; blocks.push(b); return b; };
         // side：右に置いた QR コードの横に、まだ残っている高さ。そのあいだの文は QR の幅だけ狭くして折り返す
         let side = 0;
+        // QR コードを前の行（題名）に置いた URL の行
+        const qrDone = new Set();
         const gap = (b, h) => { b.rows.push({ h }); side -= h; };
         const row = (b, h, draw) => { b.rows.push({ h, draw }); side -= h; };
         // 幅いっぱいに書くもの（見出し・題・絵）の前では、QR コードの下まで空ける
@@ -242,12 +244,17 @@ window.PdfDoc = (() => {
           const indent = im ? width(im[1], BODY) : 0;
           // URL があれば、その行の右端に QR コードを置き、続く行は QR の横に回り込ませる
           // QR コードが紙の下にはみ出さないよう、その高さが残っていなければ次の紙から書く
-          const urls = s.match(URL_RE) || [];
+          // 参考資料のように、題名の次の行に URL だけがあるときは、QR コードを題名の行の右に置く（URL の行には置かない）
+          const nextUrl = (lines[i + 1] || '').trim();
+          const urlOnly = (t) => /^https?:\/\/\S+$/.test(t);
+          const urls = qrDone.has(i) ? [] : !URL_RE.test(s) && urlOnly(nextUrl) ? [nextUrl] : s.match(URL_RE) || [];
+          URL_RE.lastIndex = 0;
+          if (!s.match(URL_RE) && urls.length) qrDone.add(i + 1);
           const sideW = (n) => n * (QR + BODY);
           if (urls.length) clear(blocks[blocks.length - 1] || block());
           const narrow = urls.length ? sideW(urls.length) : side > 0 ? sideW(1) : 0;
           const b = block(urls.length ? { room: QR + BODY } : { split: true });
-          wrap(s.slice(im ? im[1].length : 0), BODY, textW - indent - narrow).forEach((l, j) => row(b, lh, (p, y) => {
+          wrap(s.slice(im ? im[1].length : 0), BODY, textW - indent - narrow - (narrow ? BODY : 0)).forEach((l, j) => row(b, lh, (p, y) => {
             if (im && !j) p.drawText(safe(im[1]), { x: M.left, y, size: BODY, font: R, color: black });
             drawLine(p, l, M.left + indent, y, BODY);
             if (!j) urls.forEach((u, k) => drawQr(p, u, A4.w - M.right - QR - k * (QR + BODY), y + BODY * 0.8));
