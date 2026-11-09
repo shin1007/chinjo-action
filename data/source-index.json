@@ -129,6 +129,15 @@
       "localPath": null
     },
     {
+      "id": "src-23b1fc113a",
+      "title": "売春防止法 第3条・第5条",
+      "url": "https://laws.e-gov.go.jp/law/331AC0000000118",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-263a72d47b",
       "title": "民法 第766条・第766条の3（離婚後の子の監護に関する事項の定め等、法定養育費）",
       "url": "https://laws.e-gov.go.jp/law/129AC0000000089",
@@ -777,6 +786,15 @@
       "localPath": null
     },
     {
+      "id": "src-a47d2b15fd",
+      "title": "Platt L, et al. Associations between sex work laws and sex workers’ health: A systematic review and meta-analysis of quantitative and qualitative studies. PLoS Medicine 15(12): e1002680 (2018)",
+      "url": "https://doi.org/10.1371/journal.pmed.1002680",
+      "note": null,
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-a5d3413c15",
       "title": "Betsey Stevenson・Justin Wolfers「The Paradox of Declining Female Happiness」NBER Working Paper 14969（2009年）",
       "url": "https://www.nber.org/papers/w14969",
@@ -853,6 +871,15 @@
       "title": "ドイツ 行政裁判所法 第19条（名誉職裁判官）",
       "url": "https://www.gesetze-im-internet.de/vwgo/__19.html",
       "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-b4c7c7c53d",
+      "title": "法務省「売買春に係る規制の在り方検討会」取りまとめ報告書（令和8年）",
+      "url": "https://www.moj.go.jp/content/001471143.pdf",
+      "note": "第3の2「売春及びその相手方となる行為に対する規制の在り方」",
       "kind": "law",
       "fetchedAt": null,
       "localPath": null
@@ -1142,6 +1169,15 @@
       "url": "https://laws.e-gov.go.jp/law/322AC1000000137",
       "note": null,
       "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-e58324b029",
+      "title": "欧州人権裁判所 M.A. and Others v. France 判決（2024年7月25日、申立番号63664/19ほか）",
+      "url": "https://hudoc.echr.coe.int/eng?i=001-235426",
+      "note": "第40段（フランス政府の評価報告書）、第154段・第155段・第165段〜第167段",
+      "kind": "official",
       "fetchedAt": null,
       "localPath": null
     },
