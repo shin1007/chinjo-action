@@ -68,6 +68,7 @@
     if (el.hidden) return;
     const total = n * Math.max(1, state.councils.length);
     el.classList.toggle('warn', n > MANY);
+    el.classList.toggle('multi', total > 1);
     const destination = state.kind === 'request' ? '自治体' : '議会';
     const document = state.kind === 'request' ? '要望書' : '陳情書';
     el.textContent = n > MANY
@@ -295,6 +296,7 @@
       }
     }
     if (s === 'items') renderItems();
+    if (s === 'send') renderCheckMail();
     if (state.step >= ASK_STEPS) build();
     renderCount();
     saveLink(state.step >= ASK_STEPS);
@@ -811,6 +813,19 @@
   $('wzShareX').href = `https://x.com/intent/post?text=${encodeURIComponent(window.THEME.shareText)}&url=${top}`;
   $('wzShareLine').href = `https://social-plugins.line.me/lineit/share?url=${top}`;
 
+  // ---------- 提出前の確認：選んだ議会ごとの郵送の扱い ----------
+  function renderCheckMail() {
+    const list = real();
+    $('wzCheckMail').innerHTML = !list.length
+      ? '<li>提出先を空けて作りました。出す先の議会名と議長名を書き入れ、その議会の郵送・持参の扱いを議会事務局で確かめてください。</li>'
+      : list.map((id) => {
+        const r = state.kind === 'petition' ? mailRule(infoOf(id)) : null;
+        const label = state.kind === 'request' ? '要望書の受付窓口（秘書課・担当課など）を自治体の公式サイトで確かめてください'
+          : r ? r.label : '郵送・持参の扱いはまだ調べられていません。出す前に議会事務局へ確かめてください';
+        return `<li><b>${esc(municipalityName(id))}</b>：${esc(label)}</li>`;
+      }).join('');
+  }
+
   // ---------- 済んだステップへ戻る ----------
   document.querySelectorAll('[data-progress-step]').forEach((el, i) => {
     const back = () => { if (i < state.step) go(i - state.step); };
@@ -828,7 +843,11 @@
     if (!q) { $('wzGlobalHits').innerHTML = ''; return; }
     const hits = window.Yomi.filter(globalList(), q, (id) => kanaOf[nameOf(id)]).slice(0, 30);
     $('wzGlobalHits').innerHTML = hits.map((id) => `<button type="button" class="wz-chip" data-global="${esc(id)}">${esc(municipalityName(id))}<small class="wz-n">${esc(prefOf(id))}</small>${state.kind === 'petition' ? chipMail(id) : ''}</button>`).join('')
-      || `<p class="hint-sm wz-wide">「${esc(q)}」に当てはまる自治体が見つかりません。</p>`;
+      || `<div class="wz-wide wz-nohit"><p>「${esc(q)}」に当てはまる自治体が見つかりません。</p><ul class="hint-sm"><li>「市」「町」を外す、ひらがなで読みを入れる（例：かまがや）と見つかることがあります。</li><li><button type="button" class="btn btn-small" data-to-prefs>都道府県から選ぶ</button>　<button type="button" class="btn btn-small" data-skip-council>自治体を選ばずに作る（提出先は手書き）</button></li></ul></div>`;
+  });
+  $('wzGlobalHits').addEventListener('click', (e) => {
+    if (e.target.closest('[data-to-prefs]')) $('wzPrefs').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (e.target.closest('[data-skip-council]')) $('wzSkip').click();
   });
 
   // ---------- 前に選んだ議会（議会名だけを残す） ----------

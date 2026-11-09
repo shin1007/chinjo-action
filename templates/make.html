@@ -51,6 +51,7 @@
         <li data-progress-step="send">印刷・提出</li>
       </ol>
       <p class="wz-stepno" id="wzStepNo"></p>
+      <p class="hint-sm wz-saved">選んだ内容・自治体は、このブラウザに一時保存されます（サーバーには送りません）。「最初からやり直す」で消えます。</p>
       <div id="wzResume" class="wz-resume" hidden>
         <p>前に選んだ内容が、この端末に残っています。</p>
         <button type="button" id="wzResumeYes" class="btn btn-small btn-primary">続きから再開する</button>
@@ -155,8 +156,15 @@
             <li><label><input type="checkbox"> 議長の氏名を書き入れた（出す直前に議会の公式サイトで確かめる）</label></li>
             <li><label><input type="checkbox"> 氏名を手書きで署名した（押印は議会によって任意）</label></li>
             <li><label><input type="checkbox"> 次の会議に間に合う締切を確かめた</label></li>
-            <li><label><input type="checkbox"> 郵送するなら、その議会で郵送の陳情が審査されるか、配付だけかを下の案内で確かめた</label></li>
+            <li><label><input type="checkbox"> 郵送するなら、その議会で郵送の陳情が審査されるか、配付だけかを確かめた</label>
+              <ul id="wzCheckMail" class="wz-checkmail"></ul></li>
             <li><label><input type="checkbox"> 陳情書は公開されることがあると知ったうえで、個人や事件を特定できることを書いていない</label></li>
+          </ul>
+          <h4>知っておくこと</h4>
+          <ul class="wz-know">
+            <li>陳情の扱い（審査される／議員に配るだけ）は議会ごとに違います。</li>
+            <li>採択されても強制力はありません。それでも議会の記録に残り、議員や行政が課題を知るきっかけになります。</li>
+            <li>このサイトは、印刷して出す紙の文書を前提にしています。電子申請ができる議会もあります。できるかどうかと方法は、下の議会ごとの案内か、議会の公式サイトで確かめてください。</li>
           </ul>
           <p class="hint-sm">扱いがはっきりしないときは、議会事務局に電話で聞くのが確実です。本サイトは法的助言をするものではありません。詳しくは<a href="/{{id}}/guide">陳情の出し方ガイド</a>へ。</p>
         </div>

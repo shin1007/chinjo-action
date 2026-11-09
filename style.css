@@ -559,3 +559,13 @@ summary { cursor: pointer; font-weight: 700; }
 .compare thead th { background: var(--accent-soft); }
 .table-scroll { overflow-x: auto; }
 @media (max-width: 800px) { .pick-ways { grid-template-columns: 1fr; } }
+
+/* 自治体が見つからないとき・提出前の確認・一時保存の表示 */
+.wz-nohit { padding: 10px 12px; border: 1px dashed var(--line); border-radius: 8px; }
+.wz-nohit p { margin: 0 0 6px; }
+.wz-nohit ul { margin: 0; padding-left: 1.2em; }
+.wz-checkmail { margin: 4px 0 0; padding-left: 1.6em !important; list-style: disc !important; font-size: 0.85rem; }
+.wz-know { margin: 0 0 8px; padding-left: 1.2em; font-size: 0.9rem; }
+.wz-saved { margin: 4px 0 8px; }
+.wz-count.multi:not(.warn) { background: var(--accent-soft); border: 1px solid var(--main); border-radius: 999px; padding: 4px 12px; }
+.wz-count.warn { background: var(--accent-soft); border: 2px solid var(--warn); border-radius: 8px; padding: 4px 10px; }
