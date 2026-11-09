@@ -615,3 +615,6 @@ summary { cursor: pointer; font-weight: 700; }
 .wz-flow-box { border: 1px solid var(--line); border-radius: 10px; padding: 4px 14px; }
 .wz-tip > summary { display: inline-block; border: 1px solid var(--main); border-radius: 999px; padding: 4px 14px; background: #fff; }
 .wz-tip[open] > summary { margin-bottom: 4px; }
+
+/* 見出しを文節で折り返す（対応しないブラウザではふつうに折り返す） */
+.hero h1 { word-break: auto-phrase; text-wrap: balance; }
