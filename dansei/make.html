@@ -60,23 +60,32 @@
         <li data-progress-step="send">印刷・提出</li>
       </ol>
       <p class="wz-stepno" id="wzStepNo"></p>
+      <div id="wzResume" class="wz-resume" hidden>
+        <p>前に選んだ内容が、この端末に残っています。</p>
+        <button type="button" id="wzResumeYes" class="btn btn-small btn-primary">続きから再開する</button>
+        <button type="button" id="wzResumeNo" class="btn btn-small">新しく始める</button>
+      </div>
 
       <div class="wz-step" data-step="items">
-        <h3>求める内容を選んでください <small>（いくつでも）</small></h3>
-        <p class="hint-sm">1つの内容につき1通の陳情書ができます。迷ったら、★の付いたものがおすすめです。</p>
-        <label class="wz-kind">自治体向けの文書
-          <select id="wzKind">
-            <option value="petition">陳情書</option>
-            <option value="request">要望書</option>
-          </select>
-        </label>
-        <p class="hint-sm">「要望書」は自治体向けの項目で使えます。国への意見書を求める項目は陳情書になります。</p>
+        <h3>出し方と、求める内容を選んでください</h3>
+        <fieldset class="wz-kind">
+          <legend>どこに出しますか</legend>
+          <label><input type="radio" name="wzKind" value="petition" checked> <b>議会に出す（陳情書）</b><span class="hint-sm">議会で審査・配付されます。国へ意見書を出すよう求める内容も選べます。</span></label>
+          <label><input type="radio" name="wzKind" value="request"> <b>市区町村長・知事に出す（要望書）</b><span class="hint-sm">行政に直接、検討や説明を求めます。自治体の取り組みを求める内容だけ選べます。</span></label>
+        </fieldset>
+        <p class="hint-sm">1つの内容につき1通できます。いくつも出すより、このテーマの中でとくに伝えたい内容に絞るほうが伝わります。<a href="/#compare">陳情書・要望書・請願・手紙の違い</a></p>
+        <input type="search" id="wzItemFilter" class="wz-filter" placeholder="キーワードで内容を絞り込む" aria-label="キーワードで内容を絞り込む">
         <div id="wzItems" class="wz-cards"></div>
       </div>
 
       <div class="wz-step" data-step="council" hidden>
         <h3>どの自治体にしますか？ <small>（いくつでも）</small></h3>
-        <p class="hint-sm">まず都道府県を選ぶと、その都道府県の自治体が下に出ます。</p>
+        <label class="wz-global">自治体名で探す
+          <input type="search" id="wzGlobal" class="wz-filter" placeholder="例：せたがや、船橋、sapporo" autocomplete="off">
+        </label>
+        <div id="wzGlobalHits" class="wz-grid" aria-live="polite"></div>
+        <div id="wzRecent" class="wz-recent" hidden></div>
+        <p class="hint-sm">都道府県から選ぶこともできます。都道府県を選ぶと、その都道府県の自治体が下に出ます。</p>
         <p class="center"><a href="/contribute.html" class="btn btn-small">送りたい議会の郵送・持参の扱いがわからない</a></p>
         <p class="wz-picked" id="wzPrefPicked"></p>
         <p class="wz-skip"><button type="button" id="wzSkip" class="btn btn-small">自治体を選ばずに作る</button> <span class="hint-sm">提出先を空けた文書ができます。出す先が決まったら手書きで入れてください。</span></p>
@@ -110,6 +119,7 @@
           <label class="wide">住所<input data-sender="address" autocomplete="street-address" placeholder="例：東京都○○市△△1-2-3"></label>
           <label>氏名（鏡文と封筒用）<input data-sender="name" autocomplete="name" placeholder="例：佐藤 花子"></label>
           <label>電話番号（任意・鏡文にだけ入ります）<input data-sender="tel" autocomplete="tel" inputmode="tel" placeholder="例：090-0000-0000"></label>
+          <label class="wide wz-remember"><input type="checkbox" id="wzRemember" checked> この端末のブラウザに覚えておく（次に作るとき入力を省けます。サーバーには送りません。共用の端末ではチェックを外してください）</label>
           <button type="button" id="wzSenderClear" class="btn btn-small">この端末から消す</button>
         </div>
       </div>
@@ -148,6 +158,17 @@
 
       <div class="wz-step" data-step="send" hidden>
         <h3>署名して出す</h3>
+        <div class="wz-checklist">
+          <h4>出す前に確かめること</h4>
+          <ul>
+            <li><label><input type="checkbox"> 議長の氏名を書き入れた（出す直前に議会の公式サイトで確かめる）</label></li>
+            <li><label><input type="checkbox"> 氏名を手書きで署名した（押印は議会によって任意）</label></li>
+            <li><label><input type="checkbox"> 次の会議に間に合う締切を確かめた</label></li>
+            <li><label><input type="checkbox"> 郵送するなら、その議会で郵送の陳情が審査されるか、配付だけかを下の案内で確かめた</label></li>
+            <li><label><input type="checkbox"> 陳情書は公開されることがあると知ったうえで、個人や事件を特定できることを書いていない</label></li>
+          </ul>
+          <p class="hint-sm">扱いがはっきりしないときは、議会事務局に電話で聞くのが確実です。本サイトは法的助言をするものではありません。詳しくは<a href="/dansei/guide">陳情の出し方ガイド</a>へ。</p>
+        </div>
         <ol class="wz-flow">
           <li>
             <h4>① 手書きで記入し、署名する</h4>
@@ -209,9 +230,9 @@
         </div>
       </div>
 
-      <p id="wzCount" class="hint-sm wz-count" hidden></p>
       <div class="wz-nav">
         <button type="button" id="wzBack" class="btn btn-small">← もどる</button>
+        <p id="wzCount" class="wz-count" aria-live="polite" hidden></p>
         <button type="button" id="wzNext" class="btn btn-primary">次へ →</button>
         <button type="button" id="wzRestart" class="btn btn-small" hidden>最初からやり直す</button>
       </div>

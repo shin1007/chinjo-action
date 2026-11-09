@@ -56,7 +56,18 @@ window.Common = (() => {
     try { v = JSON.parse(localStorage.getItem(SENDER_KEY)) || {}; } catch { /* 読めなければ空 */ }
     return Object.fromEntries(SENDER_FIELDS.map((k) => [k, String(v[k] || '')]));
   }
+  // 覚えておくかどうかは利用者が選べる（初めは覚える）。断ったことだけを残し、住所・氏名は残さない
+  const SENDER_OFF_KEY = 'chinjo-sender-off';
+  function remembers() {
+    try { return localStorage.getItem(SENDER_OFF_KEY) !== '1'; } catch { return false; }
+  }
+  function setRemember(on, v) {
+    try {
+      if (on) { localStorage.removeItem(SENDER_OFF_KEY); saveSender(v || {}); } else { localStorage.setItem(SENDER_OFF_KEY, '1'); forgetSender(); }
+    } catch { /* 覚えられない環境では、この画面の間だけ使う */ }
+  }
   function saveSender(v) {
+    if (!remembers()) return;
     try { localStorage.setItem(SENDER_KEY, JSON.stringify(v)); } catch { /* この画面の間だけ使う */ }
   }
   function forgetSender() {
@@ -100,5 +111,5 @@ window.Common = (() => {
   // 項目の名前の横に付ける、だれに求めるかの小さな印
   const scopeTag = (a) => `<small class="ask-scope">${a.scope === 'local' ? '自治体の取り組み' : '国へ意見書'}</small>`;
 
-  return { BLANK_TEXT, esc, sender, bindSender, forgetSender, flash, copy, printTexts, reiwaToday, askGroups, scopeTag };
+  return { BLANK_TEXT, esc, sender, bindSender, forgetSender, remembers, setRemember, flash, copy, printTexts, reiwaToday, askGroups, scopeTag };
 })();
