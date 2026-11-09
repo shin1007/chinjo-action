@@ -84,6 +84,7 @@ function collect() {
 
 // トップページの「陳情の内容をさがす」で使う、テーマを横断した項目の一覧（search.js が読む）
 const SHORT = { kodomo: '子どもの権利', dansei: '男女平等', nihonjin: '日本人の権利', shiho: '司法への参加', kenko: '国民の健康', sonota: 'その他' };
+const WORDS = require('./search-words');
 function searchIndex(data) {
   const list = data.themes.flatMap((t) => t.items.map((a) => ({
     theme: t.id,
@@ -92,8 +93,8 @@ function searchIndex(data) {
     scope: a.scope,
     category: a.category,
     label: a.label,
-    text: `${a.title}
-${a.wording}`,
+    words: WORDS[`${t.id}/${a.id}`] || '',
+    text: `${a.title}\n${a.wording}`,
   })));
   return `// node scripts/export-ai.js で作るファイル。手で書き換えないでください
 window.SEARCH_INDEX = ${JSON.stringify(list)};
