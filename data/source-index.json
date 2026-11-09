@@ -219,6 +219,15 @@
       "localPath": null
     },
     {
+      "id": "src-312abbdd51",
+      "title": "ギャンブル等依存症対策基本法 第2条・第6条・第13条〜第15条・第17条",
+      "url": "https://laws.e-gov.go.jp/law/430AC1000000074",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-327815282f",
       "title": "国家公務員法 第38条（欠格条項）",
       "url": "https://laws.e-gov.go.jp/law/322AC0000000120",
@@ -322,6 +331,15 @@
       "title": "総務省「令和6年10月27日執行 最高裁判所裁判官国民審査結果調」",
       "url": "https://www.soumu.go.jp/main_content/000979139.pdf",
       "note": null,
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-47df007173",
+      "title": "久里浜医療センター「令和5年度 ギャンブル障害およびギャンブル関連問題の実態調査 報告書概要」（厚生労働省の依存症に関する調査研究事業）",
+      "url": "https://ncasa-japan.jp/pdf/document97.pdf",
+      "note": "(2)PGSI8点以上の割合と最もお金を使ったギャンブル、(7)対策の認知度",
       "kind": "official",
       "fetchedAt": null,
       "localPath": null
