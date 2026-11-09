@@ -42,10 +42,15 @@ window.Common = (() => {
   }
 
   // 議会に出す文書は令和で書く
+  // 端末の時計の設定（海外の時間帯など）によらず、日本時間の今日にする
+  function jstToday() {
+    const p = Object.fromEntries(new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Tokyo', year: 'numeric', month: 'numeric', day: 'numeric' })
+      .formatToParts(new Date()).map((x) => [x.type, Number(x.value)]));
+    return { y: p.year, m: p.month, d: p.day };
+  }
   function reiwaToday() {
-    const d = new Date();
-    const y = d.getFullYear() - 2018;
-    return `令和${y === 1 ? '元' : y}年${d.getMonth() + 1}月${d.getDate()}日`;
+    const { y, m, d } = jstToday();
+    return `令和${y - 2018 === 1 ? '元' : y - 2018}年${m}月${d}日`;
   }
 
   // 差出人（陳情者）の住所・氏名。陳情書と郵送用ラベルで共通に使い、この端末のブラウザの中にだけ残す
@@ -111,5 +116,5 @@ window.Common = (() => {
   // 項目の名前の横に付ける、だれに求めるかの小さな印
   const scopeTag = (a) => `<small class="ask-scope">${a.scope === 'local' ? '自治体の取り組み' : '国へ意見書'}</small>`;
 
-  return { BLANK_TEXT, esc, sender, bindSender, forgetSender, remembers, setRemember, flash, copy, printTexts, reiwaToday, askGroups, scopeTag };
+  return { jstToday, BLANK_TEXT, esc, sender, bindSender, forgetSender, remembers, setRemember, flash, copy, printTexts, reiwaToday, askGroups, scopeTag };
 })();

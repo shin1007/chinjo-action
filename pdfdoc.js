@@ -434,8 +434,8 @@ window.PdfDoc = (() => {
 
   // 今日の日付をファイル名に入れる（例：2026-11-05）
   const today = () => {
-    const d = new Date();
-    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    const { y, m, d } = window.Common.jstToday();
+    return `${y}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
   };
 
   return { SHEETS, labelItems, create, preload, download, shareFile, canShareFiles, today };

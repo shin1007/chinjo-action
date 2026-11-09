@@ -600,3 +600,10 @@ summary { cursor: pointer; font-weight: 700; }
 .wz-tip form > label { display: block; margin: 6px 0; }
 .wz-tip input:not([type="radio"]), .wz-tip textarea { display: block; width: 100%; box-sizing: border-box; }
 .wz-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+/* 議長の氏名・未確認の注意・共有の誘導 */
+.wz-chairs label { display: block; margin: 6px 0; font-weight: 700; }
+.wz-chairs input { display: inline-block; width: 12em; margin: 0 8px; font-weight: 400; }
+.wz-now-left { margin: 4px 0; color: var(--warn); font-weight: 700; }
+.wz-tip-lead { margin: 6px 0 0; font-weight: 700; }
+.wz-tip-msg.done { color: var(--main-dark); font-weight: 700; }
