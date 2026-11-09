@@ -847,7 +847,7 @@
         const r = state.kind === 'petition' ? mailRule(infoOf(id)) : null;
         const label = state.kind === 'request' ? '要望書の受付窓口（秘書課・担当課など）を自治体の公式サイトで確かめてください'
           : r ? r.label : '';
-        if (label) return `<li><b>${esc(municipalityName(id))}</b>：${esc(label)}</li>`;
+        if (label) return `<li><b>${esc(municipalityName(id))}</b>：${esc(label)}${state.kind === 'petition' ? tipForm(id, true) : ''}</li>`;
         const [pref, key] = officeKeys[id] || [];
         return `<li><b>${esc(municipalityName(id))}</b>：このサイトではまだ扱いを調べられていません。議会事務局に電話で次のことを聞くと確実です。${telHtml(pref, key, false)}
           <ul class="wz-ask">
@@ -856,9 +856,48 @@
             <li>必要な部数（正本・写し）と、決まった書式があるか</li>
             <li>いまの議長のお名前（宛名に書き入れるため）</li>
             <li>電子申請やメールで出せるか</li>
-          </ul></li>`;
+          </ul>${tipForm(id, false)}</li>`;
       }).join('');
   }
+
+  // 分かった議会の扱いを運営に送る（任意）。送るのは議会の手続きの情報だけ
+  function tipForm(id, known) {
+    if (!window.Report.tipsEnabled) return '';
+    const name = esc(municipalityName(id));
+    const radio = (k, opts) => opts.map(([v, t]) => `<label><input type="radio" name="${k}" value="${v}"> ${t}</label>`).join('');
+    return `<details class="wz-tip"><summary>${known ? `${name}の情報が古い・違うときは、修正を送る（任意）` : `分かったことを共有する（任意）`}</summary>
+      <form data-tip="${esc(id)}">
+        <p class="hint-sm">電話や公式サイトで分かった<b>${name}の扱い</b>を送ると、確かめてこのサイトに反映します。次に同じ議会に出す人の助けになります。<b>送るのは下の欄の内容だけ</b>で、陳情書の文面・住所・氏名は送りません。分かったところだけで構いません。</p>
+        <fieldset><legend>郵送した陳情は</legend>${radio('mail', [['review', '審査される'], ['distribute', '議員への配付だけ'], ['unknown', '分からない']])}</fieldset>
+        <fieldset><legend>持参での提出</legend>${radio('bring', [['yes', 'できる'], ['no', 'できない'], ['unknown', '分からない']])}</fieldset>
+        <fieldset><legend>電子申請・メールでの提出</legend>${radio('online', [['yes', 'できる'], ['no', 'できない'], ['unknown', '分からない']])}</fieldset>
+        <label>電子申請のページのURL<input type="url" name="online_url" maxlength="300" placeholder="https://"></label>
+        <label>締切の目安<input name="deadline" maxlength="100" placeholder="例：定例会の告示日の前日まで"></label>
+        <label>部数・決まった書式<input name="copies" maxlength="100" placeholder="例：正本1部。書式は自由"></label>
+        <label>情報のもと（案内ページのURL）<input type="url" name="source_url" maxlength="300" placeholder="https://"></label>
+        <label>そのほか気をつけること<textarea name="note" rows="2" maxlength="300" placeholder="個人のことや陳情の中身は書かないでください"></textarea></label>
+        <label class="wz-hp" aria-hidden="true">空けておく<input name="website" tabindex="-1" autocomplete="off"></label>
+        <p><button type="submit" class="btn btn-small btn-primary">運営に送る</button> <span class="wz-tip-msg" role="status"></span></p>
+      </form></details>`;
+  }
+  $('wzCheckMail').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const f = e.target;
+    const msg = f.querySelector('.wz-tip-msg');
+    const btn = f.querySelector('button[type="submit"]');
+    const data = new FormData(f);
+    // 人には見えない欄に何か入っていたら機械の送信とみなし、送ったふりだけする
+    const bot = !!data.get('website');
+    data.delete('website');
+    const fields = {};
+    for (const [k, v] of data) if (String(v).trim()) fields[k] = String(v).trim();
+    if (!Object.keys(fields).length) { msg.textContent = '分かったことを1つ以上入れてください。'; return; }
+    btn.disabled = true;
+    msg.textContent = '送っています…';
+    const ok = bot || await window.Report.tip(f.dataset.tip, fields);
+    msg.textContent = ok ? 'ありがとうございます。確かめてから反映します。' : '送れませんでした。時間をおいてもう一度押してください。';
+    btn.disabled = ok;
+  });
 
   // 最終画面の「今やること」。印刷・コピーをいちばん上に置く
   function renderNow(bump) {
