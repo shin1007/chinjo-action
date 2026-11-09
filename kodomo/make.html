@@ -75,9 +75,12 @@
           <label><input type="radio" name="wzKind" value="request"> <b>市区町村長・知事に出す（要望書）</b><span class="hint-sm">行政に直接、検討や説明を求めます。自治体の取り組みを求める内容だけ選べます。</span></label>
         </fieldset>
         <p class="hint-sm wz-seigan"><b>請願書は、このサイトでは作れません。</b>請願は紹介してくれる議員が要るためです。請願にしたいときは、ここで陳情書を作り、その文面を持って議員に紹介をお願いしてください（<a href="/letter">議員への手紙</a>も使えます）。</p>
-        <p class="hint-sm">1つの内容につき1通できます。いくつも出すより、このテーマの中でとくに伝えたい内容に絞るほうが伝わります。<a href="/#compare">陳情書・要望書・請願・手紙の違い</a></p>
+        <p class="hint-sm"><b>内容はいくつでも選べます。</b>選んだ内容1つにつき1通ずつできあがります。ただ、いくつも出すより、とくに伝えたい内容に絞るほうが伝わります。<a href="/#compare">陳情書・要望書・請願・手紙の違い</a></p>
         <input type="search" id="wzItemFilter" class="wz-filter" placeholder="キーワードで内容を絞り込む" aria-label="キーワードで内容を絞り込む">
         <div id="wzItems" class="wz-cards"></div>
+        <details id="wzPreview" class="wz-preview" hidden><summary id="wzPreviewTitle">文面の見本を見る</summary>
+          <p class="hint-sm">「〇〇市」と住所・氏名は、このあと選ぶ自治体と入力で入ります。最後の一文は、あなたの立場に合わせて変わります。</p>
+          <pre id="wzPreviewText" class="wz-paper"></pre></details>
       </div>
 
       <div class="wz-step" data-step="council" hidden>
@@ -272,6 +275,7 @@
       <div class="wz-nav">
         <button type="button" id="wzBack" class="btn btn-small">← もどる</button>
         <p id="wzCount" class="wz-count" aria-live="polite" hidden></p>
+        <p id="wzNextWhy" class="hint-sm wz-why" aria-live="polite"></p>
         <button type="button" id="wzNext" class="btn btn-primary">次へ →</button>
         <button type="button" id="wzRestart" class="btn btn-small" hidden>最初からやり直す</button>
       </div>

@@ -618,3 +618,8 @@ summary { cursor: pointer; font-weight: 700; }
 
 /* 見出しを文節で折り返す（対応しないブラウザではふつうに折り返す） */
 .hero h1 { word-break: auto-phrase; text-wrap: balance; }
+.wz-why { margin: 0; flex: 1; text-align: right; color: var(--main-dark); }
+.wz-why:empty { display: none; }
+.wz-preview { margin-top: 12px; }
+.wz-preview summary { cursor: pointer; font-weight: 700; color: var(--main-dark); }
+.wz-preview pre.wz-paper { white-space: pre-wrap; overflow: auto; max-height: 28em; margin: 8px 0 0; }

@@ -246,7 +246,7 @@
   kindInputs().forEach((r) => r.addEventListener('change', () => {
     state.kind = r.value;
     if (state.step === 0) renderItems();
-    $('wzNext').disabled = !canNext();
+    updateNav();
     if (state.step >= ASK_STEPS) build();
     else if (state.step === 1) show();
     saveDraft();
@@ -256,6 +256,30 @@
   function canNext() {
     const s = STEPS[state.step];
     return (s === 'council' && state.councils.length) || (s === 'items' && state.items.length) || (s === 'you' && state.role) || s === 'done';
+  }
+
+  // 押せない理由を［次へ］のそばに出す
+  function whyNotNext() {
+    const s = STEPS[state.step];
+    if (s === 'items' && !state.items.length) return '求める内容を1つ以上選んでください（いくつでも選べます）。';
+    if (s === 'council' && !state.councils.length) return '自治体を選ぶか、「自治体を選ばずに作る」を押してください。';
+    if (s === 'you' && !state.role) return '①あなたの立場を選んでください（住所・氏名は空のままでもかまいません）。';
+    return '';
+  }
+  // 内容を選んだ段階で、できあがる文面の見本を見せる（住所・氏名と提出先は空けたまま）
+  function renderPreview() {
+    const box = $('wzPreview');
+    const k = state.items[state.items.length - 1];
+    box.hidden = STEPS[state.step] !== 'items' || !k;
+    if (box.hidden) return;
+    const it = window.Petition.ITEMS[k];
+    $('wzPreviewTitle').textContent = `「${it.label}」の文面の見本を見る`;
+    $('wzPreviewText').textContent = window.Petition.build(formData(), '〇〇市', [k]);
+  }
+  function updateNav() {
+    $('wzNext').disabled = !canNext();
+    $('wzNextWhy').textContent = whyNotNext();
+    renderPreview();
   }
 
   function show() {
@@ -279,7 +303,7 @@
     $('wzBack').hidden = state.step === 0;
     $('wzNext').hidden = s === 'send';
     $('wzNext').textContent = s === 'done' ? '署名して出す →' : '次へ →';
-    $('wzNext').disabled = !canNext();
+    updateNav();
     $('wzRestart').hidden = state.step < ASK_STEPS;
     document.querySelectorAll('[data-pref]').forEach((b) => b.classList.toggle('on', b.dataset.pref === state.pref));
     document.querySelectorAll('[data-role]').forEach((b) => b.classList.toggle('on', b.dataset.role === state.role));
@@ -351,7 +375,7 @@
     } else if (d.mailAll) {
       mailOk(state.pref).forEach((id) => { if (!state.councils.includes(id)) state.councils.push(id); });
       renderCouncils();
-      $('wzNext').disabled = !canNext();
+      updateNav();
     } else if (d.global) {
       // 全国から探した議会・前に選んだ議会を選ぶと、その都道府県の一覧を開く
       if (!state.councils.includes(d.global)) state.councils.push(d.global);
@@ -364,7 +388,7 @@
       const i = state.councils.indexOf(d.council);
       i < 0 ? state.councils.push(d.council) : state.councils.splice(i, 1);
       renderCouncils();
-      $('wzNext').disabled = !canNext();
+      updateNav();
     } else if (d.item) {
       const i = state.items.indexOf(d.item);
       i < 0 ? state.items.push(d.item) : state.items.splice(i, 1);
@@ -375,7 +399,7 @@
       cat.querySelector('.wz-cat-n').innerHTML = catCount(cat);
       renderCount();
       saveDraft();
-      $('wzNext').disabled = !canNext();
+      updateNav();
     } else if (d.role) {
       state.role = d.role;
       show();
