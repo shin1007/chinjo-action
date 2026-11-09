@@ -187,7 +187,18 @@
     if (/配布|配付|参考|審議[はを]?行わ|審査[はを]?行わ|報告はありません|持参してください/.test(t)) return { c: 'jisan', label: '🚶 審査してもらうには持参が必要です（郵送は配付だけ）' };
     return { c: 'ok', label: '📮 郵送でも受け付けます' };
   }
-  const mailBadge = (info) => { const r = mailRule(info); return r ? `<span class="wz-mail ${r.c === 'ok' ? 'ok' : r.c === 'none' ? 'none' : r.c === 'unknown' ? 'unknown' : 'jisan'}">${esc(r.label)}</span>` : ''; };
+  // 扱いを最後に確かめた日。data/mail-policy.js は1件ごとの確認日、旧 data/mail.js から移した分はファイルの確認日（11/5・11/6）、
+  // data/councils.js の一文から読み取った分は機械的に読み取った日
+  const ymd = (d) => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(d || ''); return m ? `${m[1]}年${+m[2]}月${+m[3]}日` : ''; };
+  function checkedOn(info) {
+    const p = info.policy;
+    if ((p && /^旧 mail\.js/.test(p.note)) || (!p && info.mail)) return '2026年11月5〜6日に議会の公式案内で確認';
+    if (p && ymd(p.verified_at)) return `${ymd(p.verified_at)}に議会の公式案内で確認`;
+    if (info.yusoNote || info.outsideNote) return '2026年11月4日に議会の公式ページから自動で読み取り';
+    return '';
+  }
+  const checkedTag = (info) => { const t = checkedOn(info); return t ? `<small class="wz-checked">（${esc(t)}）</small>` : ''; };
+  const mailBadge = (info) => { const r = mailRule(info); return r ? `<span class="wz-mail ${r.c === 'ok' ? 'ok' : r.c === 'none' ? 'none' : r.c === 'unknown' ? 'unknown' : 'jisan'}">${esc(r.label)}</span>${r.c === 'unknown' ? '' : checkedTag(info)}` : ''; };
   const ONLY_HANDOUT = /配布|配付|参考資料/;
   function howTo(info) {
     const n = [];
@@ -907,7 +918,7 @@
         const r = state.kind === 'petition' ? mailRule(infoOf(id)) : null;
         const label = state.kind === 'request' ? '要望書の受付窓口（秘書課・担当課など）を自治体の公式サイトで確かめてください'
           : r ? r.label : '';
-        if (label) return `<li><b>${esc(municipalityName(id))}</b>：${esc(label)}${state.kind === 'petition' ? tipForm(id, true) : ''}</li>`;
+        if (label) return `<li><b>${esc(municipalityName(id))}</b>：${esc(label)}${r ? checkedTag(infoOf(id)) : ''}${state.kind === 'petition' ? tipForm(id, true) : ''}</li>`;
         const [pref, key] = officeKeys[id] || [];
         return `<li><b>${esc(municipalityName(id))}</b>：このサイトではまだ扱いを調べられていません。議会事務局に電話で次のことを聞くと確実です。${telHtml(pref, key, false)}
           <ul class="wz-ask">
@@ -1013,9 +1024,10 @@
         const r = mailRule(info);
         const name = `<b>${esc(municipalityName(id))}</b>`;
         if (r && r.c !== 'unknown') {
-          const sure = !info.policy || info.policy.confidence === 'confirmed';
+          // 公式案内で確かめた扱いだけを「電話は要らない」とする。自動で読み取っただけの扱いは確かめてもらう
+          const sure = /公式案内で確認/.test(checkedOn(info)) && (!info.policy || info.policy.confidence === 'confirmed');
           const what = { none: '審査を求めるときは、紹介議員のいる請願にする方法があります。', jisan: '審査してもらうなら持参で出します。', outside: '住民でなければ、審査してもらうには持参で出します。' }[r.c] || '';
-          return `<li>${name}：${esc(r.label)}。${what}${sure ? 'このサイトで議会の公式の案内から調べてあるので、電話は要りません。締切だけ公式サイトで確かめてください。' : 'ただし、まだ確定していない情報です。電話で一度確かめると確実です。'}</li>`;
+          return `<li>${name}：${esc(r.label)}${checkedTag(info)}。${what}${sure ? '議会の公式の案内で確かめてあります。そのあと変わることもあるので、締切を公式サイトで確かめるときに、あわせて見ておくと安心です。' : (/自動で読み取り/.test(checkedOn(info)) ? 'ただし、公式ページから自動で読み取ったもので、人の目では確かめていません。電話で一度確かめると確実です。' : 'ただし、まだ確定していない情報です。電話で一度確かめると確実です。')}</li>`;
         }
         const [pref, key] = officeKeys[id] || [];
         return `<li>${name}：扱いがまだ分かっていません。電話で「郵送でも審査されますか」「次の締切はいつですか」「いまの議長のお名前は」の3つを聞けば足ります（1分ほど）。${telHtml(pref, key, false)}</li>`;
