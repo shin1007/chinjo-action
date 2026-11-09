@@ -48,6 +48,16 @@
       "source": "/labels",
       "destination": "/kodomo/labels",
       "permanent": true
+    },
+    {
+      "source": "/contribute.html",
+      "destination": "/kakunin",
+      "permanent": true
+    },
+    {
+      "source": "/contribute",
+      "destination": "/kakunin",
+      "permanent": true
     }
   ]
 }
