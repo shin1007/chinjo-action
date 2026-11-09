@@ -150,13 +150,13 @@
       ${rest.length ? `<button type="button" class="btn btn-small" data-mail-all="1">この${ids.length}つをまとめて選ぶ</button>` : ''}`;
   }
 
-  // 締切は作り終えてから気づくと間に合わないので、議会を選んだ時点で知らせる
+  // 出し方と締切の目安を、議会を選んだ時点で出す（締切を過ぎても次の定例会に回るだけなので、強くは求めない）
   function renderDeadline() {
     const el = $('wzDeadline');
     if (state.kind === 'request') { el.hidden = true; return; }
     el.hidden = !state.councils.length;
     if (el.hidden) return;
-    el.innerHTML = `<p><b>⏰ 先に締切と出し方を確かめましょう。</b>締切は定例会（多くは2〜3月・6月・9月・12月）の1〜2週間前が多く、過ぎると次の定例会に回ります。住んでいない自治体の議会や郵送の陳情は、審査されず配布だけになることがあります。</p>
+    el.innerHTML = `<p><b>出し方と締切の目安</b>：締切は定例会（多くは2〜3月・6月・9月・12月）の1〜2週間前が多く、過ぎると次の定例会に回ります。住んでいない自治体の議会や郵送の陳情は、審査されず配布だけになることがあります。</p>
       <ul>${state.councils.map((c) => {
         const d = infoOf(c).deadline && clip(infoOf(c).deadline);
         const q = encodeURIComponent(`${search(c)} 陳情 提出 締切`);
@@ -484,6 +484,8 @@
   let edits = {};
   try { edits = JSON.parse(localStorage.getItem(EDITS_KEY)) || {}; } catch { edits = {}; }
   const saveEdits = () => { try { localStorage.setItem(EDITS_KEY, JSON.stringify(edits)); } catch { /* 保存できない環境では、この画面の間だけ残す */ } };
+  // 陳情書と要望書は文面が違うので、直した文面は別々に残す（陳情書は前からのキーのまま）
+  const ek = (k) => (state.kind === 'request' ? `request:${k}` : k);
   const { swapCouncil } = window.Petition;
   const forCouncil = (text, c) => swapCouncil(text, nameOf(state.councils[0]), nameOf(c));
 
@@ -494,7 +496,7 @@
     const keys = docKeys();
     $('wzDocs').innerHTML = keys.map((k, i) => {
       const it = { label: docLabel(k) };
-      const e = edits[k];
+      const e = edits[ek(k)];
       // 前の日に直した文面は、日付だけを今日にする（出す日に合わせて直すのは、この欄でできる）
       if (e && e.day !== window.Common.reiwaToday()) {
         e.text = e.text.replace(/^(\s*)令和.{1,3}年\d{1,2}月\d{1,2}日/, `$1${window.Common.reiwaToday()}`);
@@ -569,7 +571,7 @@
   // 内容ごとの文面を、議会の数だけ広げる
   // 直していない内容は議会ごとに組み立て直す（「東京都」のような名前を本文ごと置き換えないように）
   const areas = () => [...$('wzDocs').querySelectorAll('textarea')];
-  const docFor = (ta, c) => withChair(withSender(edits[ta.dataset.key] ? forCouncil(ta.value, c)
+  const docFor = (ta, c) => withChair(withSender(edits[ek(ta.dataset.key)] ? forCouncil(ta.value, c)
     : window.Petition.build(formData(), nameOf(c), keysOf(ta.dataset.key)), sender), c).trim();
   const allDocs = () => state.councils.flatMap((c) => areas().map((ta) => docFor(ta, c)));
   // 1通目の議会あての1通だけをPDFにして、新しいタブで開く（鏡文・宛名はつけない）
@@ -597,7 +599,7 @@
   $('wzDocs').addEventListener('input', (e) => {
     const k = e.target.dataset.key;
     if (!k) return;
-    edits[k] = { text: e.target.value, council: nameOf(state.councils[0]), role: state.role, day: window.Common.reiwaToday() };
+    edits[ek(k)] = { text: e.target.value, council: nameOf(state.councils[0]), role: state.role, day: window.Common.reiwaToday() };
     saveEdits();
     fit(e.target);
     docStat(e.target, true);
@@ -616,7 +618,7 @@
     if (a !== undefined) openRewrite(areas()[a]);
     const k = e.target.dataset.docReset;
     if (k !== undefined) {
-      delete edits[k];
+      delete edits[ek(k)];
       saveEdits();
       build();
     }
@@ -1029,9 +1031,42 @@
     $('wzNowReport').hidden = request || !window.Report.enabled;
     $('wzNowHow').innerHTML = request
       ? '<b>出す</b>：上で開いたページに書かれた方法（窓口・郵送・メール・フォームなど）で出します。'
-      : '<b>締切までに出す</b>：持参・郵送・電子申請。議会ごとの出し方は、下の「くわしい手順」の②にあります。';
+      : '<b>出す</b>：持参・郵送・電子申請。議会ごとの出し方は、下の「くわしい手順」の②にあります。締切を過ぎても、次の定例会で扱われます。';
+    renderAlso();
     document.querySelectorAll('[data-petition-only]').forEach((el) => { el.hidden = request; });
   }
+
+  // 陳情書を作ったついでに、同じ内容・同じ自治体あてで要望書も作る（議会と役所の両方に届く）
+  // 国への意見書を求める内容は要望書にできないので外す。陳情書に戻るときは、選んでいた内容を戻す
+  let petitionItems = null;
+  function renderAlso() {
+    const box = $('wzAlso');
+    if (state.kind === 'request') {
+      box.hidden = !petitionItems;
+      box.innerHTML = '<p>陳情書に戻るときは、下のボタンを押します。陳情書の文面と直したところは残っています。</p><button type="button" class="btn btn-small" data-also="petition">陳情書に戻る</button>';
+      return;
+    }
+    const ok = state.items.filter((k) => !window.Petition.isNational(window.Petition.ITEMS[k] || {}));
+    box.hidden = false;
+    box.innerHTML = `<p><b>同じ内容を、要望書として市区町村長・知事にも出せます。</b>陳情書は議会に、要望書は役所に届きます。両方出すと、議会と行政の両方に検討してもらえます。</p>
+      ${ok.length ? `${ok.length < state.items.length ? `<p class="hint-sm">国に意見書を求める内容（${state.items.length - ok.length}つ）は要望書にできないので、残りの${ok.length}つで作ります。</p>` : ''}<p class="hint-sm">先に陳情書を印刷しておくと安心です。あとで陳情書に戻ることもできます。</p><button type="button" class="btn btn-small" data-also="request">同じ内容で要望書も作る</button>`
+    : '<p class="hint-sm">いま選んでいる内容は、どれも国に意見書を求めるものなので、要望書にはできません。</p>'}`;
+  }
+  $('wzAlso').addEventListener('click', (e) => {
+    const to = e.target.dataset && e.target.dataset.also;
+    if (!to) return;
+    if (to === 'request') {
+      petitionItems = [...state.items];
+      state.items = state.items.filter((k) => !window.Petition.isNational(window.Petition.ITEMS[k] || {}));
+    } else {
+      state.items = petitionItems || state.items;
+      petitionItems = null;
+    }
+    state.kind = to;
+    setKindInputs();
+    go(STEPS.indexOf('done') - state.step);
+    saveDraft();
+  });
 
   // 「今やること」の1つ目：議会ごとに、分かっている扱いか、電話で聞くことを出す
   function renderNowAsk() {
