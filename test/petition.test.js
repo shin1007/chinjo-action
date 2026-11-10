@@ -57,10 +57,60 @@ test('自治体あては要望書に切り替えられる', () => {
   fd.append('kind', 'request');
   const t = w.Petition.build(fd, '横浜市議会', [k]);
   assert.match(t, /件名　.*要望$/m);
-  assert.match(t, /横浜市役所　＿＿＿＿＿＿　様/);
+  assert.match(t, /^横浜市長　＿＿＿＿＿＿　様$/m);
   assert.match(t, /【要望の趣旨】/);
   assert.match(t, /【要望の理由】/);
   assert.doesNotMatch(t, /陳情の趣旨|陳情の理由/);
+});
+
+test('要望書の宛名は知事・市区町村長になり、宛先を替えると呼び方も替わる', () => {
+  const k = w.ASKS.find((a) => a.scope === 'local').id;
+  const fd = form([k], { story: '見聞きしたこと' });
+  fd.append('kind', 'request');
+  const t = w.Petition.build(fd, '宮城県議会', [k]);
+  assert.match(t, /^宮城県知事　＿＿＿＿＿＿　様$/m);
+  assert.match(t, /（要望者として）/);
+  assert.doesNotMatch(t, /陳情者/);
+  const s = w.Petition.swapCouncil(t, '宮城県議会', '仙台市議会');
+  assert.match(s, /^仙台市長　＿＿＿＿＿＿　様$/m);
+  assert.doesNotMatch(s, /仙台市知事|宮城県/);
+  assert.match(w.Petition.build(fd, '世田谷区議会', [k]), /^世田谷区長　/m);
+});
+
+test('要望書も生成AIで趣旨と理由を書き直せる', () => {
+  const k = w.ASKS.find((a) => a.scope === 'local').id;
+  const fd = form([k]);
+  fd.append('kind', 'request');
+  const t = w.Petition.build(fd, '横浜市議会', [k]);
+  const prompt = w.Petition.buildRewritePrompt(t, '横浜市議会');
+  assert.match(prompt, /横浜市長に出す要望書/);
+  assert.match(prompt, /【要望の趣旨】/);
+  assert.doesNotMatch(prompt, /陳情/);
+  // AI が陳情の目印で返しても、要望書の目印の所に入る
+  const answer = ['【陳情の趣旨】', '新しい趣旨', '【陳情の理由】', '新しい理由', '【参照した計画】', 'なし'].join('\n');
+  const out = w.Petition.applyRewrite(t, answer);
+  assert.match(out, /【要望の趣旨】\n新しい趣旨/);
+  assert.match(out, /【要望の理由】\n新しい理由/);
+});
+
+test('要望書の出し方のページは、公式サイトのある自治体の https のページで、47都道府県と政令指定都市がそろっている', () => {
+  const ctx = { window: {} };
+  vm.createContext(ctx);
+  vm.runInContext(fs.readFileSync(path.join(ROOT, 'data/request-pages.js'), 'utf8'), ctx);
+  const pages = ctx.window.REQUEST_PAGES;
+  for (const [id, [url, title]] of Object.entries(pages)) {
+    const [pref, key] = id.split('/');
+    assert.ok((w.SITES[pref] || {})[key], id);
+    assert.match(url, /^https?:\/\//, id);
+    assert.ok(title, id);
+    assert.doesNotMatch(title, /要望活動|パブリック/, id);
+  }
+  // 熊本県は見つからなかった（docs/要望書の出し方のページが見つからない自治体.md）
+  const missing = w.PREFS.filter((p) => !pages[`${p}/@`]);
+  assert.deepStrictEqual([...missing], ['熊本県']);
+  for (const c of ['札幌市', '仙台市', 'さいたま市', '千葉市', '横浜市', '川崎市', '相模原市', '新潟市', '静岡市', '浜松市', '名古屋市', '京都市', '大阪市', '堺市', '神戸市', '岡山市', '広島市', '北九州市', '福岡市', '熊本市']) {
+    assert.ok(Object.keys(pages).some((id) => id.endsWith(`/${c}`)), c);
+  }
 });
 
 test('すべての求める事項で文面ができる', () => {

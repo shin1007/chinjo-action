@@ -44,6 +44,7 @@
   const prefOf = (id) => id.slice(0, id.indexOf('/'));
   const placeOf = (id) => (window.Places.of(prefOf(id)).find((p) => p.council === nameOf(id)) || {});
   const municipalityName = (id) => placeOf(id).name || nameOf(id).replace(/議会$/, '');
+  const headOf = (name) => window.Petition.headOf(name);
   // 議会を選ばずに作るときは、議会名を空けた宛先を1つだけ置く（議会名と議長名は手書きで入れる）
   const NONE = '/　　　　　　議会';
   const isNone = (c) => c === NONE;
@@ -303,12 +304,22 @@
     $('wzPreviewTitle').textContent = `「${it.label}」の文面の見本を見る`;
     $('wzPreviewText').textContent = window.Petition.build(formData(), '〇〇市', [k]);
   }
+  // 陳情書と要望書で言い方が違う所。data-doc-name は文書の名前、data-request-html は要望書のときの中身
+  function renderKindText() {
+    const request = state.kind === 'request';
+    document.querySelectorAll('[data-doc-name]').forEach((el) => { el.textContent = request ? '要望書' : '陳情書'; });
+    document.querySelectorAll('[data-request-html]').forEach((el) => {
+      if (el.dataset.petitionHtml === undefined) el.dataset.petitionHtml = el.innerHTML;
+      el.innerHTML = request ? esc(el.dataset.requestHtml) : el.dataset.petitionHtml;
+    });
+  }
   function updateNav() {
     // 見出しとタブの題を、作る文書（陳情書・要望書）に合わせる
     const heading = `${state.kind === 'request' ? '要望書' : '陳情書'}をつくる`;
     document.querySelectorAll('#generator h1, .hero-crumb b').forEach((h) => { if (/をつくる$/.test(h.textContent)) h.textContent = heading; });
     document.title = document.title.replace(/^[^｜]*をつくる/, heading);
     document.querySelectorAll('[data-petition-only]').forEach((el) => { el.hidden = state.kind === 'request'; });
+    renderKindText();
     const lead = document.querySelector('#generator .lead-sm');
     if (lead) lead.textContent = state.kind === 'request' ? '選択肢を押していくだけで、市区町村長・知事に出せる要望書ができます。' : '選択肢を押していくだけで、議会に出せる陳情書ができます。';
     $('wzNext').disabled = !canNext();
@@ -640,6 +651,7 @@
   // ---------- 生成AIで中身だけ直す ----------
   // 選んだ文面の趣旨と理由だけを AI に渡し、返ってきた答えをその2か所に入れ替える（1つ目の議会あての文面を直す）
   let rwArea = null;
+  const kindWord = () => (state.kind === 'request' ? '要望' : '陳情');
   const rwPrompt = () => {
     $('wzRwPrompt').value = window.Petition.buildRewritePrompt(rwArea.value, nameOf(state.councils[0]), { local: $('wzRwLocal').value, story: $('wzRwStory').value });
   };
@@ -649,7 +661,7 @@
     $('wzRwAnswer').value = '';
     $('wzRwPlans').hidden = true;
     rwPrompt();
-    if (!$('wzRwPrompt').value) { flash('「陳情の趣旨」「陳情の理由」の見出しが見つからないので、AIに渡せません。元の文面に戻してから試してください。', 5000); return; }
+    if (!$('wzRwPrompt').value) { flash(`「${kindWord()}の趣旨」「${kindWord()}の理由」の見出しが見つからないので、AIに渡せません。元の文面に戻してから試してください。`, 5000); return; }
     $('wzRwBox').hidden = false;
     $('wzRwBox').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
@@ -657,7 +669,7 @@
   $('wzRwClose').addEventListener('click', () => { $('wzRwBox').hidden = true; });
   $('wzRwApply').addEventListener('click', () => {
     const out = rwArea && window.Petition.applyRewrite(rwArea.value, $('wzRwAnswer').value);
-    if (!out) { flash('AIの答えに「【陳情の趣旨】」「【陳情の理由】」の目印が見つかりません。答えを丸ごと貼り付けるか、AIにもう一度頼んでください。', 6000); return; }
+    if (!out) { flash(`AIの答えに「【${kindWord()}の趣旨】」「【${kindWord()}の理由】」の目印が見つかりません。答えを丸ごと貼り付けるか、AIにもう一度頼んでください。`, 6000); return; }
     rwArea.value = out;
     // AI が引いた計画は文面に入れず、原文で確かめてもらえるよう欄に残す
     const plans = window.Petition.rewritePlans($('wzRwAnswer').value);
@@ -907,8 +919,9 @@
     qr.addData(url);
     qr.make();
     $('wzQr').innerHTML = qr.createSvgTag({ cellSize: 4, margin: 4, scalable: true });
-    const subject = `陳情書（${window.THEME.name}）`;
-    $('wzMail').href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`あとで開く陳情書のリンク：\n${url}`)}`;
+    const docName = state.kind === 'request' ? '要望書' : '陳情書';
+    const subject = `${docName}（${window.THEME.name}）`;
+    $('wzMail').href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`あとで開く${docName}のリンク：\n${url}`)}`;
     $('wzShare').hidden = !navigator.share;
     $('wzShare').onclick = () => navigator.share({ title: subject, url }).catch(() => {});
     $('wzSendBox').hidden = false;
@@ -1025,16 +1038,18 @@
     $('wzNowDate').textContent = window.Common.reiwaToday();
     renderNowAsk();
   }
-  // 要望書の出し方のページ。いちばん上の検索結果を直接開くリンク（Google の「I'm Feeling Lucky」）と、検索結果そのもの
+  // 要望書の出し方のページ。都道府県・政令指定都市・人口の多い市区町村は、公式サイトで確かめたページ（data/request-pages.js）へ直接案内する。
+  // ないところは公式サイトの中を検索する。「要望」で探すと、県や市が国へ出した要望書の一覧が出てくるので、言葉に入れない
   function requestLinks(id) {
     const [pref, key] = officeKeys[id] || [];
     const [site] = (window.SITES[pref] || {})[key] || [];
+    const page = (window.REQUEST_PAGES || {})[`${pref}/${key}`];
     const name = municipalityName(id);
-    const head = /都$|道$|府$|県$/.test(name) ? '知事' : /区$/.test(name) ? '区長' : /町$/.test(name) ? '町長' : /村$/.test(name) ? '村長' : '市長';
-    const q = `${site ? `site:${new URL(site).hostname}` : name} ${head}への手紙 OR 市民の声 OR ご意見 OR 要望`;
-    const url = `https://www.google.com/search?q=${encodeURIComponent(q)}`;
-    return { lucky: `${url}&btnI=1`, results: url };
+    const head = headOf(name);
+    const q = `${site ? `site:${new URL(site).hostname}` : name} ${head}への手紙 OR 市民の声 OR 県民の声 OR ご意見 OR ご提案 -パブリックコメント`;
+    return { page: page && page[0], title: page && page[1], results: `https://www.google.com/search?q=${encodeURIComponent(q)}` };
   }
+
 
   // 要望書は議会に出すものではないので、議長・締切・郵送の審査・提出報告など議会の手続の欄は出さない
   function renderKindParts() {
@@ -1043,7 +1058,7 @@
     $('wzNowAskH').textContent = request ? '出し方のページを開く' : '扱いを確かめる';
     $('wzNowReport').hidden = request || !window.Report.enabled;
     $('wzNowHow').innerHTML = request
-      ? '<b>出す</b>：上で開いたページに書かれた方法（窓口・郵送・メール・フォームなど）で出します。'
+      ? '<b>出す</b>：上で開いたページに書かれた方法（窓口・郵送・メール・フォームなど）で出します。宛名の知事・市区町村長と「様」のあいだは、氏名を書き入れても空けたままでも構いません。メールやフォームで出すときは、「文面をすべてコピー」した文を貼り付けます。'
       : '<b>出す</b>：持参・郵送・電子申請。議会ごとの出し方は、下の「くわしい手順」の②にあります。締切を過ぎても、次の定例会で扱われます。';
     renderAlso();
     document.querySelectorAll('[data-petition-only]').forEach((el) => { el.hidden = request; });
@@ -1090,8 +1105,10 @@
       // このサイトでは調べていないので、扱いは出さず、その自治体の出し方のページへ直接案内する
       html = list.length
         ? list.map((id) => {
-          const { lucky, results } = requestLinks(id);
-          return `<li><b>${esc(municipalityName(id))}</b>：<a href="${esc(lucky)}" target="_blank" rel="noopener" class="btn btn-small">要望・意見の出し方のページを開く</a> <a href="${esc(results)}" target="_blank" rel="noopener">違うページが開いたら、検索結果から選ぶ</a></li>`;
+          const { page, title, results } = requestLinks(id);
+          return page
+            ? `<li><b>${esc(municipalityName(id))}</b>：<a href="${esc(page)}" target="_blank" rel="noopener" class="btn btn-small">要望・意見の出し方のページを開く</a><span class="hint-sm">（${esc(title)}。公式サイトで確かめたページです）</span></li>`
+            : `<li><b>${esc(municipalityName(id))}</b>：<a href="${esc(results)}" target="_blank" rel="noopener" class="btn btn-small">公式サイトで出し方のページを探す</a><span class="hint-sm">（「${esc(headOf(municipalityName(id)))}への手紙」「市民の声」「ご意見・ご提案」などの名前のページです。見つからなければ、代表電話で要望書の受付窓口を聞きます）</span></li>`;
         }).join('')
         : '<li>出す先を決めたら、その自治体の公式サイトで、要望・意見の受け付け方（窓口・郵送・メール・フォーム）を確かめます。</li>';
     } else if (!list.length) {
@@ -1121,7 +1138,7 @@
   const checks = () => [...document.querySelectorAll('.wz-checklist > ul > li > label > input')].filter((c) => !c.closest('li').hidden);
   function renderCheckLeft() {
     const left = checks().filter((c) => !c.checked).length;
-    $('wzCheckLeft').textContent = left ? `⚠ まだ確かめていない項目が ${left}つ あります。チェックがないまま出すと、受け付けられなかったり審査されなかったりすることがあります。` : '✓ すべて確かめました。印刷して出せます。';
+    $('wzCheckLeft').textContent = left ? `⚠ まだ確かめていない項目が ${left}つ あります。チェックがないまま出すと、${state.kind === 'request' ? '受け付けられなかったり、思わぬ形で公開されたりすることがあります' : '受け付けられなかったり審査されなかったりすることがあります'}。` : '✓ すべて確かめました。印刷して出せます。';
     $('wzCheckLeft').classList.toggle('done', !left);
     $('wzNowLeft').hidden = !left;
     $('wzNowLeft').textContent = `⚠ 下の「出す前に確かめること」が、まだ${left}つ残っています。印刷はできますが、出す前に確かめてください。`;
