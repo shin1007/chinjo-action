@@ -408,6 +408,15 @@
       "localPath": null
     },
     {
+      "id": "src-53ff0a7d99",
+      "title": "新井賢治「重要土地等調査法の運用状況と課題」『立法と調査』第462号（参議院、2023年12月）",
+      "url": "https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2023pdf/20231218006.pdf",
+      "note": "2. 外国人等による土地所有規制の限界",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-5824c99b30",
       "title": "厚生労働省「令和6年 労働災害発生状況について」（令和7年5月30日）",
       "url": "https://www.mhlw.go.jp/content/11302000/001543320.pdf",
@@ -656,6 +665,15 @@
       "url": "https://laws.e-gov.go.jp/law/505AC0000000045",
       "note": null,
       "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-8a1b879cbd",
+      "title": "澤田康幸・崔允禎・菅野早紀「不況・失業と自殺の関係についての一考察」『日本労働研究雑誌』No.598（2010年5月）",
+      "url": "https://www.jil.go.jp/institute/zassi/backnumber/2010/05/pdf/058-066.pdf",
+      "note": "日本では失業率と自殺率、特に男性の自殺率の相関が強い",
+      "kind": "secondary",
       "fetchedAt": null,
       "localPath": null
     },
@@ -1223,6 +1241,15 @@
       "url": "https://laws.e-gov.go.jp/law/322AC1000000137",
       "note": null,
       "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-e54333b571",
+      "title": "安藤結香子「外国人政策と政府の対応策」『立法と調査』第483号（参議院、2026年4月）",
+      "url": "https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2026pdf/20260430125.pdf",
+      "note": "関係閣僚会議での指示（国民健康保険料・医療費等の制度の適正化、不法滞在者ゼロプランなど）と総合的対応策",
+      "kind": "secondary",
       "fetchedAt": null,
       "localPath": null
     },
