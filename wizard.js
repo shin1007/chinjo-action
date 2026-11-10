@@ -115,8 +115,11 @@
     [mailHandout, 'jisan', '📮 郵送で配付', '📮 郵送すると議員に配付される議会', '審査はされなくても、陳情書の写しが議員に配られて読んでもらえます。持参すれば審査される議会や、住民なら審査される議会もあります（議会を選ぶ画面で議会ごとに出ます）。'],
   ].map((x) => { const el = document.createElement('details'); el.className = `wz-mailok ${x[1]}`; $('wzPrefs').before(el); return [el, ...x]; });
   function renderMailAll() {
+    // 要望書は議会に出さないので、郵送の扱いの一覧も都道府県のボタンの印も出さない
+    document.querySelectorAll('[data-pref] .wz-mk').forEach((m) => { m.hidden = state.kind === 'request'; });
+    if (state.kind === 'request') { MAIL_BOXES.forEach(([box]) => { box.hidden = true; }); return; }
     MAIL_BOXES.forEach(([box, list, c, badge, title, note]) => {
-      box.hidden = state.kind === 'request';
+      box.hidden = false;
       const groups = window.PREFS.map((p) => [p, list(p)]).filter(([, ids]) => ids.length);
       const n = groups.reduce((a, [, ids]) => a + ids.length, 0);
       document.querySelectorAll('[data-pref]').forEach((b) => {
@@ -301,6 +304,13 @@
     $('wzPreviewText').textContent = window.Petition.build(formData(), '〇〇市', [k]);
   }
   function updateNav() {
+    // 見出しとタブの題を、作る文書（陳情書・要望書）に合わせる
+    const heading = `${state.kind === 'request' ? '要望書' : '陳情書'}をつくる`;
+    document.querySelectorAll('#generator h1, .hero-crumb b').forEach((h) => { if (/をつくる$/.test(h.textContent)) h.textContent = heading; });
+    document.title = document.title.replace(/^[^｜]*をつくる/, heading);
+    document.querySelectorAll('[data-petition-only]').forEach((el) => { el.hidden = state.kind === 'request'; });
+    const lead = document.querySelector('#generator .lead-sm');
+    if (lead) lead.textContent = state.kind === 'request' ? '選択肢を押していくだけで、市区町村長・知事に出せる要望書ができます。' : '選択肢を押していくだけで、議会に出せる陳情書ができます。';
     $('wzNext').disabled = !canNext();
     $('wzNextWhy').textContent = whyNotNext();
     renderPreview();
