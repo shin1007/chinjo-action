@@ -21,6 +21,15 @@
       "localPath": null
     },
     {
+      "id": "src-043ab14d4c",
+      "title": "文部科学省「令和7年度『教師不足』に関する実態調査」（令和8年3月5日公表）",
+      "url": "https://www.mext.go.jp/content/20260302-mxt_kyoikujinzai01-000047773_1_1.pdf",
+      "note": "2〜4ページ。5月1日の不足3,827人（0.45％）、令和3年度の2,065人と比べ43自治体で悪化。小学校の学級担任の代替1,086人。要因の回答",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-0535672268",
       "title": "困難な問題を抱える女性への支援に関する法律（令和4年法律第52号）",
       "url": "https://laws.e-gov.go.jp/law/504AC0100000052",
