@@ -408,6 +408,15 @@
       "localPath": null
     },
     {
+      "id": "src-4745e9281b",
+      "title": "前澤貴子「離婚後面会交流及び養育費に係る法制度－米・英・仏・独・韓－」『調査と情報』第882号（国立国会図書館、2015年11月）。法務省 法制審議会家族法制部会の委員提出資料として掲載",
+      "url": "https://www.moj.go.jp/content/001374742.pdf",
+      "note": "Ⅲ：フランスでは、居所の変更を1か月以内に通知しないことが6か月以下の拘禁刑又は7,500ユーロ以下の罰金の対象",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-477fa7ad84",
       "title": "文部科学省「教員勤務実態調査（令和4年度）の集計（速報値）について」（令和5年4月28日）",
       "url": "https://www.mext.go.jp/content/20230428-mxt_zaimu01-000029160_2.pdf",
@@ -498,6 +507,15 @@
       "localPath": null
     },
     {
+      "id": "src-511dbc09af",
+      "title": "高澤美有紀「女性国会議員比率の動向」『調査と情報』第883号（国立国会図書館、2015年11月）",
+      "url": "https://dl.ndl.go.jp/view/download/digidepo_9535004_po_0883.pdf?contentNo=1",
+      "note": "おわりに：法令で一定の議席を確保する「法律型クオータ制」は、平等原則等との関係から憲法上の疑義が生じ得るため慎重な検討が求められるとの指摘",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-53ff0a7d99",
       "title": "新井賢治「重要土地等調査法の運用状況と課題」『立法と調査』第462号（参議院、2023年12月）",
       "url": "https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2023pdf/20231218006.pdf",
@@ -557,6 +575,15 @@
       "url": "https://www.city.akashi.lg.jp/seisaku/soudan_shitsu/kodomo-kyoiku/youikushien/sannkousyosiki.html",
       "note": null,
       "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-5f0a906a9a",
+      "title": "藤原夏人「韓国のギャンブル依存症対策」『外国の立法』第269号（国立国会図書館、2016年9月）",
+      "url": "https://dl.ndl.go.jp/view/download/digidepo_10193088_po_02690004.pdf?contentNo=1",
+      "note": "Ⅲ3・表4：江原ランド（カジノ）の本人・家族の要請による入場制限と、解除の際の義務カウンセリング",
+      "kind": "secondary",
       "fetchedAt": null,
       "localPath": null
     },
@@ -692,6 +719,15 @@
       "url": "https://www.moj.go.jp/isa/01_00643.html",
       "note": "JESTAの創設。施行は令和11年3月31日までの政令で定める日",
       "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-7a5aca0e02",
+      "title": "内田亜也子「被害の実態に即した性犯罪施策の課題（２）－刑法の一部を改正する法律案に対する附帯決議の対応状況－」『立法と調査』第425号（参議院、2020年7月）",
+      "url": "https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2020pdf/20200708051.pdf",
+      "note": "2(4)：男性の性被害の経験（男性1.5％）と、男性や性的マイノリティの被害に対応する相談窓口が少ないとの指摘",
+      "kind": "secondary",
       "fetchedAt": null,
       "localPath": null
     },
