@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "description": "証拠として保存したページの一覧。本文は sources/archive/ にあり Git には入れていない。",
+  "pages": [
+    {
+      "url": "https://www.j-cast.com/2020/09/23395016.html?p=all",
+      "title": "J-CASTニュース「番組内のグラフに『印象操作』 SNS物議で福島テレビが謝罪『体制の不備でした』」（2020年9月23日）",
+      "note": "福島テレビ『テレポートプラス』2020年9月17日放送の横棒グラフ（目盛り80〜100%）",
+      "fetchedAt": "2026-11-10T01:34:10.355Z",
+      "sha256": "f4c7e8f1beeba6950eeff100f21ff0d8ae4fa68e114e98a4fdee01cda67cd822",
+      "localPath": "sources/archive/2026-11-10-f4c7e8f1beeb.html"
+    },
+    {
+      "url": "https://news.yahoo.co.jp/expert/articles/df92be8276b0dd8b58ad3647296156b9105ecf53",
+      "title": "楊井人文「日テレが内閣支持率グラフの誤りを陳謝 筆者も事実誤認の記事を一時掲載したことをお詫びします」Yahoo!ニュース エキスパート（2025年10月23日）",
+      "note": "日本テレビの内閣支持率グラフ",
+      "fetchedAt": "2026-11-10T01:34:11.255Z",
+      "sha256": "7dcf20ff5bf21b140d26ce395dc4cf937f5ec88ff9c7ac392457647709fa3964",
+      "localPath": "sources/archive/2026-11-10-7dcf20ff5bf2.html"
+    },
+    {
+      "url": "https://note.com/q_owl/n/n2d99f3aa7f80",
+      "title": "高橋将「陳情・請願のリアルな扱い方」note（2025年5月）",
+      "note": "docs/陳情の基本方針.md で引用",
+      "fetchedAt": "2026-11-10T01:34:11.655Z",
+      "sha256": "6ccd8cf878e14a65411743170021f1a22d26fba7e6a9df1889b5c37ef474f834",
+      "localPath": "sources/archive/2026-11-10-6ccd8cf878e1.html"
+    },
+    {
+      "url": "https://s-newscommons.com/article/2091",
+      "title": "生活ニュースコモンズ編集部「離婚後の共同親権導入で22万筆超の反対署名提出 DV被害当事者らの声を聴いて」（2024年4月25日）",
+      "note": "docs/陳情の基本方針.md で引用",
+      "fetchedAt": "2026-11-10T01:34:12.272Z",
+      "sha256": "6cf6fab3fa162a191cfb0e53fc3a20871a6ecaaa09751e16cf9998a2375b771a",
+      "localPath": "sources/archive/2026-11-10-6cf6fab3fa16.html"
+    }
+  ]
+}
