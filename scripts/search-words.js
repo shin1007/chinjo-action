@@ -28,6 +28,7 @@ module.exports = {
   'kodomo/l_guidance': '離婚 講座 親ガイダンス 共同養育',
   'kodomo/l_dvmeasure': 'DV 住民票 支援措置 居場所',
   'kodomo/l_consult': '相談 窓口 共同養育 離婚',
+  'kodomo/l_divorce_seminar': '離婚講座 セミナー 男女共同参画センター 連れ去り 子連れ別居 世田谷',
   'kodomo/l_dvcrime': 'DV 連れ去り 誘拐 相談',
   'kodomo/l_childcare': 'カウンセリング 子供 子ども 離婚後 心のケア',
   'kodomo/l_counsel': '夫婦 カウンセリング 助成 補助 修復',

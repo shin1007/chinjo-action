@@ -948,6 +948,15 @@
       "localPath": null
     },
     {
+      "id": "src-90b0f71bf3",
+      "title": "衆議院予算委員会第一分科会（2024年2月27日）市村浩一郎委員の質問と、法務省大臣官房審議官の答弁",
+      "url": "https://kokkai.ndl.go.jp/txt/121305266X00120240227/226",
+      "note": "当事者の一方を有利にする目的でDVを受けたかのように偽装して主張することを弁護士が促している場合もあるとして、批判する意見があることは承知している（個別の当否へのコメントは差し控え）",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-948fcce9e1",
       "title": "Courts and Tribunals Judiciary「Open reporting provisions extended to all family courts」（2025年1月27日、英国）",
       "url": "https://www.judiciary.uk/open-reporting-provisions-extended-to-all-family-courts-in-watershed-moment-for-family-justice/",
@@ -1596,6 +1605,15 @@
       "localPath": null
     },
     {
+      "id": "src-eca9c0199c",
+      "title": "青森県「令和6年度 青森県男女共同参画推進条例の規定に基づく苦情等申出処理状況年次報告書」",
+      "url": "https://www.pref.aomori.lg.jp/soshiki/kodomo/kenmin/files/R6_kujyoshorinennjihokoku.pdf",
+      "note": "令和5年6月29日の離婚講座への申出。発言は認定できなかったが、講座内容の公表の手順の不備を認め、チェック体制の改善と男性側のニーズを拾う講座の検討を指示",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-eeca0437fe",
       "title": "厚生労働省「人口動態統計月報（概数）（令和8年4月分）」（2026年9月公表）",
       "url": "https://www.mhlw.go.jp/toukei/saikin/hw/jinkou/geppo/m2026/04.html",
@@ -1646,6 +1664,15 @@
       "url": "https://dl.ndl.go.jp/view/download/digidepo_8748100_po_0831.pdf?contentNo=1",
       "note": "Ⅲ2：英国の最低単位価格の検討と、酒税と付加価値税の合計を下回る価格での販売の禁止（2014年5月から）",
       "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-fa61f1279e",
+      "title": "世田谷区監査委員「世田谷区職員措置請求監査結果〔世田谷区立男女共同参画センター運営委託の支出に関する件〕」（令和6年7月）",
+      "url": "https://www.city.setagaya.lg.jp/documents/15970/r6juuminkansa_1.pdf",
+      "note": "令和5年9月9日の講座。区が講師の声と確認した音声に「いざというときは子どもも連れて家を出てください」という趣旨の内容。講座全体を確認しないまま委託料を支出したのは不当とし、検証と再発防止策を勧告",
+      "kind": "research",
       "fetchedAt": null,
       "localPath": null
     },
