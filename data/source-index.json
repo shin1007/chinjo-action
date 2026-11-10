@@ -1254,6 +1254,15 @@
       "localPath": null
     },
     {
+      "id": "src-d7920ba608",
+      "title": "文部科学省「令和7年度 学校教員統計調査（中間報告）」表3・表4 年齢別 職名別 本務教員数（小学校・中学校）",
+      "url": "https://www.e-stat.go.jp/stat-search/files?page=1&toukei=00400003&tstat=000001016172&cycle=0&tclass1=000001245116&tclass2=000001245117&tclass3=000001245118&layout=datalist&tclass4val=0",
+      "note": "「２．うち公立」の講師の欄",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-d81d82c73c",
       "title": "自殺対策基本法 第13条（都道府県・市町村の自殺対策計画）",
       "url": "https://laws.e-gov.go.jp/law/418AC0100000085",
