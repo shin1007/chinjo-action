@@ -41,6 +41,22 @@
       "fetchedAt": "2026-11-10T01:58:10.922Z",
       "sha256": "0f5fe3287a1b7ceee64f31434e5a441ca17d8daa4270ddfec9a594814f399627",
       "localPath": "sources/archive/2026-11-10-0f5fe3287a1b.html"
+    },
+    {
+      "url": "https://www.nichibenren.or.jp/document/statement/year/2024/240216.html",
+      "title": "日本弁護士連合会「家族法制の見直しに関する要綱についての会長声明」（2024年2月16日）",
+      "note": "要綱の規律を高く評価する点と、残る問題点",
+      "fetchedAt": "2026-11-10T02:53:49.734Z",
+      "sha256": "39cfd3dca34acdb2da26f3e47af3f71a2e6cf6ec500baec0e64146b79abd6beb",
+      "localPath": "sources/archive/2026-11-10-39cfd3dca34a.html"
+    },
+    {
+      "url": "https://www.nichibenren.or.jp/document/newspaper/year/2023/589.html",
+      "title": "日弁連新聞 第589号（2023年）「家族法制の見直しに関する中間試案に対する意見書」の紹介",
+      "note": "共同親権の導入について一致した意見の表明を見送った",
+      "fetchedAt": "2026-11-10T02:53:49.920Z",
+      "sha256": "2fe5e6c4523d2132efddb76e5db0fc5c6c0747f256fb76f4d5d15b6b16fa6201",
+      "localPath": "sources/archive/2026-11-10-2fe5e6c4523d.html"
     }
   ]
 }

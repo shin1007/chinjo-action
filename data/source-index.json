@@ -651,6 +651,15 @@
       "localPath": null
     },
     {
+      "id": "src-6651385e84",
+      "title": "日弁連新聞 第589号（2023年）",
+      "url": "https://www.nichibenren.or.jp/document/newspaper/year/2023/589.html",
+      "note": "家族法制の中間試案への意見書：会員の間で賛否が分かれたため、共同親権の導入について一致した意見の表明を見送った",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-665b833e44",
       "title": "WHO「Fiscal policies to promote healthy diets: policy brief」（2022年6月13日）",
       "url": "https://www.who.int/publications/i/item/9789240049543",
@@ -710,6 +719,15 @@
       "url": "https://www.gesetze-im-internet.de/uhvorschg/__7.html",
       "note": null,
       "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-7122608066",
+      "title": "最高裁判所「裁判所データブック2026」2 裁判所の職員 §3・§4",
+      "url": "https://www.courts.go.jp/assets/db2026_all.pdf",
+      "note": "家事調停官89人（令和7年12月1日現在）。家事調停委員11,742人のうち弁護士1,731人・14.7％（令和8年4月1日現在）",
+      "kind": "official",
       "fetchedAt": null,
       "localPath": null
     },
@@ -1119,15 +1137,6 @@
       "localPath": null
     },
     {
-      "id": "src-b2846cc38c",
-      "title": "民事調停委員及び家事調停委員規則",
-      "url": "https://www.courts.go.jp/vc-files/courts/2022/R4.02.21-minjityouteiiinn-oyobi-kajityouteiiinn-kisoku.pdf",
-      "note": "第1条：任命の要件",
-      "kind": "law",
-      "fetchedAt": null,
-      "localPath": null
-    },
-    {
       "id": "src-b38f16b879",
       "title": "厚生労働省「2022（令和4）年 国民生活基礎調査の概況」各種世帯の所得等の状況",
       "url": "https://www.mhlw.go.jp/toukei/saikin/hw/k-tyosa/k-tyosa22/dl/03.pdf",
@@ -1272,6 +1281,15 @@
       "localPath": null
     },
     {
+      "id": "src-c1e58a69d5",
+      "title": "日本弁護士連合会「家族法制の見直しに関する要綱についての会長声明」（2024年2月16日）",
+      "url": "https://www.nichibenren.or.jp/document/statement/year/2024/240216.html",
+      "note": "親権者の定めについて共同・単独のどちらも原則としない規律を高く評価し、政府に一般の市民に分かりやすいガイドラインの作成を求める",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-c1e7e44925",
       "title": "家事事件手続法 第152条の3（親子交流の試行的実施）",
       "url": "https://laws.e-gov.go.jp/law/423AC0000000052",
@@ -1326,6 +1344,15 @@
       "localPath": null
     },
     {
+      "id": "src-c84e7196db",
+      "title": "民事調停委員及び家事調停委員規則",
+      "url": "https://www.courts.go.jp/vc-files/courts/2025/20250401minjityouteiiinn-oyobi-kajityouteiiinn-kisoku.pdf",
+      "note": "第1条：任命の要件",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-c908124bd4",
       "title": "内閣府「男女間における暴力に関する調査（令和5年度）」第5章 不同意性交等をされた経験",
       "url": "https://www.gender.go.jp/policy/no_violence/e-vaw/chousa/pdf/r05/r05danjokan-7.pdf",
@@ -1367,6 +1394,15 @@
       "url": "https://www.pref.hokkaido.lg.jp/ss/stt/mizusigen/mizusigen_todokede.html",
       "note": "3か月前までに届出。面積の基準なし",
       "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-ce7f4c1218",
+      "title": "最高裁判所第三小法廷 平成8年3月19日判決（平成4(オ)1796、民集50巻3号615頁、南九州税理士会事件）",
+      "url": "https://www.courts.go.jp/hanrei/55864/detail2/index.html",
+      "note": "税理士会が政治団体に寄付することは目的の範囲外で、そのための特別会費の決議は無効（参照法条に憲法第19条）",
+      "kind": "law",
       "fetchedAt": null,
       "localPath": null
     },
@@ -1582,6 +1618,15 @@
       "title": "教育公務員特例法 第21条第2項・第23条第1項・第24条第1項",
       "url": "https://laws.e-gov.go.jp/law/324AC0000000001",
       "note": "研修の計画・初任者研修・中堅教諭等資質向上研修。臨時的に任用された者などを除く",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-f5257b161c",
+      "title": "弁護士法 第47条（会員）",
+      "url": "https://laws.e-gov.go.jp/law/324AC1000000205",
+      "note": null,
       "kind": "law",
       "fetchedAt": null,
       "localPath": null
