@@ -93,6 +93,15 @@
       "localPath": null
     },
     {
+      "id": "src-1ade58b30e",
+      "title": "高野涼子「高等学校等就学支援金法改正案をめぐる国会論議」『立法と調査』第486号（参議院、2026年8月）",
+      "url": "https://www.sangiin.go.jp/jpn/shiryo/chousa/rippou_chousa/backnumber/2026pdf/20260806077.pdf",
+      "note": "4(4)：私立への支援の拡充で公立高校離れが加速するとの懸念と文部科学省の答弁。4(11)：公立高校の志願者数の減少などの懸念",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-1b7ba1f1ab",
       "title": "明石市「離婚等のこども養育支援」",
       "url": "https://www.city.akashi.lg.jp/seisaku/soudan_shitsu/kodomo-kyoiku/youikushien/youikushien.html",
@@ -183,6 +192,15 @@
       "localPath": null
     },
     {
+      "id": "src-294671fbb1",
+      "title": "竹内健太「教員不足とその対応－公教育の担い手確保に向けて－」『立法と調査』第467号（参議院、2024年6月）",
+      "url": "https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2024pdf/20240627003.pdf",
+      "note": "2・3：臨時的任用教員の配置割合が過度に大きくなると、年度をまたいだ継続的な関わりが難しくなるおそれ。非常勤講師は原則、担任や部活動顧問を担わない。臨時的任用教員のなり手不足と採用倍率の低下",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-2a304b2167",
       "title": "ドイツ 家事事件・非訟事件手続法 第158c条（報酬は常に国庫から）",
       "url": "https://www.gesetze-im-internet.de/famfg/__158c.html",
@@ -197,6 +215,15 @@
       "url": "https://www.mext.go.jp/content/20260529-mxt_daigakuc02-000005144_1.pdf",
       "note": "属性を理由に一律に取扱いの差異を設けること、理工系分野における女子等",
       "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-2b30a26662",
+      "title": "国立国会図書館調査及び立法考査局「違憲審査制の論点（改訂版）」基本情報シリーズ㉓（調査資料2016-1-a、2016年12月）",
+      "url": "https://dl.ndl.go.jp/view/download/digidepo_10229412_po_201601a.pdf?contentNo=1",
+      "note": "日本の最高裁裁判官の選任手続には法令の規定がなく、内閣による選任過程も非公開で実情が明らかでないこと、廃止された裁判官任命諮問委員会、英米独などの選任の仕組み",
+      "kind": "secondary",
       "fetchedAt": null,
       "localPath": null
     },
@@ -408,6 +435,15 @@
       "localPath": null
     },
     {
+      "id": "src-4aaa795968",
+      "title": "上田倫徳「こども家庭庁の創設とこども基本法の成立」『立法と調査』第450号（参議院、2022年10月）",
+      "url": "https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2022pdf/20221003026.pdf",
+      "note": "基本法案の概要：こども施策に対するこども等の意見の反映（第11条）。国会での議論：こどもの意見を年齢や発達の程度に応じて政策に反映させる方針",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-4c8f00bd22",
       "title": "スウェーデン社会保険庁「養育費補助」",
       "url": "https://www.forsakringskassan.se/privatperson/foralder/for-foraldrar-som-inte-lever-ihop/barnet-bor-hos-dig/underhallsstod-fran-forsakringskassan",
@@ -466,6 +502,15 @@
       "title": "新井賢治「重要土地等調査法の運用状況と課題」『立法と調査』第462号（参議院、2023年12月）",
       "url": "https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2023pdf/20231218006.pdf",
       "note": "2. 外国人等による土地所有規制の限界",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-54e47965e8",
+      "title": "上田倫徳「受動喫煙防止対策の推進と課題－健康増進法の一部を改正する法律案－」『立法と調査』第400号（参議院、2018年5月）",
+      "url": "https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2018pdf/20180508016s.pdf",
+      "note": "2・4・5：受動喫煙の状況、学校・児童福祉施設等の第一種施設の規制と特定屋外喫煙場所をめぐる論点",
       "kind": "secondary",
       "fetchedAt": null,
       "localPath": null
@@ -656,6 +701,15 @@
       "url": "https://www.gender.go.jp/policy/no_violence/e-vaw/siensya/03.html",
       "note": "避難の手順の案内。別居後の親子関係には触れていない",
       "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-7d674ad27b",
+      "title": "高野涼子「第217回国会における『高校無償化』をめぐる国会論議」『立法と調査』第477号（参議院、2025年7月）",
+      "url": "https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2025pdf/20250725118.pdf",
+      "note": "2：大阪府・東京都の独自の無償化と、3党合意に至る経緯",
+      "kind": "secondary",
       "fetchedAt": null,
       "localPath": null
     },
