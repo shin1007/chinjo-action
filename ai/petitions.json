@@ -2396,6 +2396,11 @@
               "sourceId": "src-36abf6a56d",
               "title": "Wagenaar AC, Salois MJ, Komro KA「Effects of beverage alcohol price and tax levels on drinking: a meta-analysis of 1003 estimates from 112 studies」Addiction 2009;104(2):179-190",
               "note": "112件の研究のメタ分析。酒類の価格・税と飲酒量は負の関係にあり、その効果はほかの予防策と比べて大きい"
+            },
+            {
+              "sourceId": "src-f9bab748a8",
+              "title": "近藤倫子「米英仏のアルコール対策－飲酒に関する法規制と健康対策－」『調査と情報』第831号（国立国会図書館、2014年9月）",
+              "note": "Ⅲ2：英国の最低単位価格の検討と、酒税と付加価値税の合計を下回る価格での販売の禁止（2014年5月から）"
             }
           ]
         },
@@ -2427,6 +2432,11 @@
               "sourceId": "src-d3f8b5854f",
               "title": "Zuckermann AME, et al.「The effects of alcohol container labels on consumption behaviour, knowledge, and support for labelling: a systematic review」Lancet Public Health 2024;9(7):e481-e494",
               "note": "容器の表示（健康警告・純アルコール量・低リスク飲酒の目安）の効果の系統的レビュー。証拠の確実性は項目により低〜高"
+            },
+            {
+              "sourceId": "src-f9bab748a8",
+              "title": "近藤倫子「米英仏のアルコール対策－飲酒に関する法規制と健康対策－」『調査と情報』第831号（国立国会図書館、2014年9月）",
+              "note": "Ⅱ2：米国の容器の健康警告表示。Ⅲ2(ⅲ)：英国で業界が容器にアルコールのユニット数と推奨の飲酒量を表示する約束。Ⅳ2：フランスの妊娠中の飲酒についての表示"
             }
           ]
         },
@@ -4138,6 +4148,13 @@
       "url": "https://laws.e-gov.go.jp/law/324CO0000000006",
       "note": "除かれる者：臨時的に任用された者、会計年度任用職員など",
       "kind": "law"
+    },
+    {
+      "id": "src-f9bab748a8",
+      "title": "近藤倫子「米英仏のアルコール対策－飲酒に関する法規制と健康対策－」『調査と情報』第831号（国立国会図書館、2014年9月）",
+      "url": "https://dl.ndl.go.jp/view/download/digidepo_8748100_po_0831.pdf?contentNo=1",
+      "note": "Ⅲ2：英国の最低単位価格の検討と、酒税と付加価値税の合計を下回る価格での販売の禁止（2014年5月から）",
+      "kind": "secondary"
     },
     {
       "id": "src-fa6d36015c",
