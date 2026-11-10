@@ -8,3 +8,6 @@ Thumbs.db
 supabase/.temp/
 scripts/.geocode-cache.json
 scripts/.opinion-cache.json
+
+# 証拠として保存したページの本文（著作物なので公開しない）
+sources/archive/
