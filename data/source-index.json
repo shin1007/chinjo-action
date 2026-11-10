@@ -39,6 +39,15 @@
       "localPath": null
     },
     {
+      "id": "src-0dfdcbb71c",
+      "title": "欧州議会「日本におけるEUの子の国際的・国内的な親による連れ去りに関する決議」（2020年7月8日、P9_TA(2020)0182）",
+      "url": "https://www.europarl.europa.eu/doceo/document/TA-9-2020-0182_EN.html",
+      "note": "第2項（ハーグ条約の返還決定の執行）、第12項（刑法・民法の適用）、第17項（共同親権の導入）",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-117583ef31",
       "title": "厚生労働省保険局国民健康保険課 説明会資料（在留外国人の医療保険適用の課題と対応）",
       "url": "https://www.mhlw.go.jp/content/12401000/001616165.pdf",
@@ -1331,6 +1340,15 @@
       "url": "https://laws.e-gov.go.jp/law/414AC0000000103",
       "note": null,
       "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-fc7eb9a82b",
+      "title": "越智啓太「男性DV被害者の認知行動パターンとその支援の社会的実装に関する研究」科研費 2022年度実績報告書（法政大学）",
+      "url": "https://kaken.nii.ac.jp/report/KAKENHI-PROJECT-20K03421/20K034212022jisseki/",
+      "note": "行動に即して聞くと被害の男女差は非常に小さくなり、男性の被害は矮小化・暗数化されやすい",
+      "kind": "secondary",
       "fetchedAt": null,
       "localPath": null
     },
