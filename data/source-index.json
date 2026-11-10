@@ -120,6 +120,15 @@
       "localPath": null
     },
     {
+      "id": "src-1ca15e90b9",
+      "title": "小室敬「子育て世帯に対する包括的な支援体制等の強化－児童福祉法等の一部を改正する法律案－」『立法と調査』第445号（参議院、2022年4月）",
+      "url": "https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2022pdf/20220428030.pdf",
+      "note": "（５）一時保護開始時の要件及び手続の整備：判断の適正性と手続の透明性の確保を求める国連児童の権利委員会の要請と、一時保護状の司法審査の導入",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-1cf09c7fd1",
       "title": "検察庁法 第14条（法務大臣の一般的指揮監督）",
       "url": "https://laws.e-gov.go.jp/law/322AC0000000061",
@@ -152,6 +161,15 @@
       "url": "https://laws.e-gov.go.jp/law/326CO0000000319",
       "note": null,
       "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-21f792c886",
+      "title": "内田亜也子「施行後６年を迎えた裁判員制度の評価と課題－裁判員法の一部を改正する法律の成立－」『立法と調査』第368号（参議院、2015年9月）",
+      "url": "https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2015pdf/20150904016.pdf",
+      "note": "刑事裁判への国民の参加（裁判員制度）の6年の評価と、裁判員候補者の辞退率の上昇・出席率の低下などの課題",
+      "kind": "secondary",
       "fetchedAt": null,
       "localPath": null
     },
@@ -350,6 +368,15 @@
       "url": "https://www.gender.go.jp/about_danjo/basic_plans/6th/pdf/seika_mokuhyo.pdf",
       "note": "都道府県・市町村の審議会等委員：40%以上、60%以下",
       "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-36abf6a56d",
+      "title": "Wagenaar AC, Salois MJ, Komro KA「Effects of beverage alcohol price and tax levels on drinking: a meta-analysis of 1003 estimates from 112 studies」Addiction 2009;104(2):179-190",
+      "url": "https://doi.org/10.1111/j.1360-0443.2008.02438.x",
+      "note": "112件の研究のメタ分析。酒類の価格・税と飲酒量は負の関係にあり、その効果はほかの予防策と比べて大きい",
+      "kind": "secondary",
       "fetchedAt": null,
       "localPath": null
     },
@@ -1357,6 +1384,15 @@
       "title": "高見富二男「令和６年民法（家族法制）改正に関する国会論議－離婚後共同親権及び法定養育費制度の導入等－」『立法と調査』第470号（参議院、2024年11月）",
       "url": "https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2024pdf/20241101117.pdf",
       "note": "2：父母相互の人格尊重・協力義務。無断で子の居所を変更する行為などが義務違反と評価され得るとの答弁",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-d3f8b5854f",
+      "title": "Zuckermann AME, et al.「The effects of alcohol container labels on consumption behaviour, knowledge, and support for labelling: a systematic review」Lancet Public Health 2024;9(7):e481-e494",
+      "url": "https://doi.org/10.1016/S2468-2667(24)00097-5",
+      "note": "容器の表示（健康警告・純アルコール量・低リスク飲酒の目安）の効果の系統的レビュー。証拠の確実性は項目により低〜高",
       "kind": "secondary",
       "fetchedAt": null,
       "localPath": null
