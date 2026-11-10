@@ -1371,6 +1371,24 @@
       "localPath": null
     },
     {
+      "id": "src-f24ec39a2b",
+      "title": "教育公務員特例法 第21条第2項・第23条第1項・第24条第1項",
+      "url": "https://laws.e-gov.go.jp/law/324AC0000000001",
+      "note": "研修の計画・初任者研修・中堅教諭等資質向上研修。臨時的に任用された者などを除く",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-f861aa1791",
+      "title": "教育公務員特例法施行令 第2条〜第4条",
+      "url": "https://laws.e-gov.go.jp/law/324CO0000000006",
+      "note": "除かれる者：臨時的に任用された者、会計年度任用職員など",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-fa6d36015c",
       "title": "WHO「SAFER: Pricing policies」",
       "url": "https://www.who.int/initiatives/SAFER/pricing-policies",
