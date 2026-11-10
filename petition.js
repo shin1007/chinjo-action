@@ -4,7 +4,7 @@ window.Petition = (() => {
   const { BLANK_TEXT, reiwaToday } = window.Common;
 
   // 求める事項は data/asks-*.js、決まった文章は data/template.js にある
-  const T = window.TEMPLATE;
+  const TEMPLATE = window.TEMPLATE;
   const fill = window.fillTemplate;
   const ITEMS = Object.fromEntries(window.ASKS.map((a) => [a.id, a]));
 
@@ -23,6 +23,8 @@ window.Petition = (() => {
     const story = data.get('story').trim();
     const sel = keys.map((k) => ITEMS[k]);
     const isIkensho = isNational(sel[0]);
+    // テーマの決まった文章が合わない項目は、項目の template で件名・趣旨・結び・提出先を差し替える
+    const T = { ...TEMPLATE, ...(sel[0].template || {}) };
     const kansuji = ['一', '二', '三', '四', '五'];
 
     const place = council.replace(/議会$/, '');
@@ -215,7 +217,7 @@ window.Petition = (() => {
     const list = subjects.length
       ? subjects.map((t, i) => `${KANSUJI[i] || i + 1}　${documentLabel}「${t}」　1通`).join('\n')
       : `一　${documentLabel}　${docs.length}通`;
-    return fill(T.cover, { 日付: reiwaToday(), 宛先: council, 差出人: from.join('\n'), 書類: list, 通数: String(docs.length) }).replaceAll('陳情書', documentLabel);
+    return fill(TEMPLATE.cover, { 日付: reiwaToday(), 宛先: council, 差出人: from.join('\n'), 書類: list, 通数: String(docs.length) }).replaceAll('陳情書', documentLabel);
   }
 
   return { build, buildPrompt, sections, buildRewritePrompt, applyRewrite, rewritePlans, withSender, swapCouncil, cover, selectedKeys, isNational, ordered, ITEMS, MANY, SEP };

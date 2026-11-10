@@ -381,6 +381,15 @@
       "localPath": null
     },
     {
+      "id": "src-4df9b9b1b6",
+      "title": "文部科学省「教師不足について」",
+      "url": "https://www.mext.go.jp/a_menu/shotou/kyoin/mext_00004.html",
+      "note": null,
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-4ea7ee54b6",
       "title": "国立成育医療研究センター プレスリリース（2020年8月27日）",
       "url": "https://www.ncchd.go.jp/press/2020/pr_20200827.html",
@@ -647,6 +656,15 @@
       "url": "https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_07_02/index.html",
       "note": "円満な夫婦関係を回復するための話合いの場",
       "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-8414ee9375",
+      "title": "日本新聞協会「新聞倫理綱領」（2000年6月21日制定）",
+      "url": "https://www.pressnet.or.jp/outline/ethics/",
+      "note": "「正確と公正」",
+      "kind": "research",
       "fetchedAt": null,
       "localPath": null
     },
@@ -1047,6 +1065,15 @@
       "localPath": null
     },
     {
+      "id": "src-c0cb8b991d",
+      "title": "放送法 第4条第1項",
+      "url": "https://laws.e-gov.go.jp/law/325AC0000000132",
+      "note": "第3号「報道は事実をまげないですること。」",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-c1e7e44925",
       "title": "家事事件手続法 第152条の3（親子交流の試行的実施）",
       "url": "https://laws.e-gov.go.jp/law/423AC0000000052",
@@ -1186,6 +1213,15 @@
       "title": "総務省「国民審査 制度のポイントを知ろう！」",
       "url": "https://www.soumu.go.jp/senkyo/kokuminshinsa/seido_point.html",
       "note": null,
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-d5f2f73ff2",
+      "title": "文部科学省「『教師不足』に関する実態調査」（令和4年1月）",
+      "url": "https://www.mext.go.jp/content/20220128-mxt_kyoikujinzai01-000020293-1.pdf",
+      "note": "3〜4ページ。令和3年度始業日の不足2,558人、5月1日の不足2,065人。要因として臨時的任用教員の需要増と講師名簿登録者の減少",
       "kind": "official",
       "fetchedAt": null,
       "localPath": null

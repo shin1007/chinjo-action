@@ -46,6 +46,7 @@ function collect() {
       title: a.title,
       wording: a.text,
       reason: a.reason,
+      ...(a.template ? { templates: a.template } : {}),
       references: (a.refs || []).map((r) => {
         if (!r.url) return { title: r.t, note: r.note || null };
         const id = sourceId(r.url);
