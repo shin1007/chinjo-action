@@ -1,0 +1,32 @@
+// 自動で見つけたページが違っていた・見つからなかったときに、手で確かめたページ（2026-11-11 に開いて題を確かめた）。
+// キー：都道府県/市区町村（"@" は都道府県）→ [URL, 題]
+module.exports = {
+  '東京都/@': ['https://www.metro.tokyo.lg.jp/tosei/iken-sodan/sodan/koe', '都民の声窓口'],
+  '神奈川県/@': ['https://www.pref.kanagawa.jp/docs/h3e/cnt/f3492/', 'わたしの提案（神奈川県への提言）'],
+  '千葉県/@': ['https://www.pref.chiba.lg.jp/kouhou/goiken/chiji.html', 'わたしの提言'],
+  '長野県/@': ['https://www.pref.nagano.lg.jp/koho/kensei/koho/hotline/index.html', '県民ホットライン'],
+  '京都府/@': ['https://www.pref.kyoto.jp/teian/', '知事へのさわやか提案'],
+  '和歌山県/@': ['https://www.pref.wakayama.lg.jp/prefg/000200/kenseipost.html', '県政ポスト'],
+  '岩手県/@': ['https://www.pref.iwate.jp/kensei/kouchoukouhou/teigen/1000810.html', '県への御意見・御提言の受付'],
+  '島根県/@': ['https://www.pref.shimane.lg.jp/admin/seisaku/koho/teian/', '知事への提案箱'],
+  '長崎県/@': ['https://www.pref.nagasaki.jp/bunrui/kenseijoho/kocho-iken-koe/teian-iken/teian/', '知事への提案'],
+  '茨城県/@': ['https://www.pref.ibaraki.jp/bugai/koho/kocho/personal/index.html', '私の提案・陳情・要望など'],
+  '青森県/@': ['https://www.pref.aomori.lg.jp/kenminno-koe/teian.html', '県政・わたしの提案'],
+  '山形県/@': ['https://www.pref.yamagata.jp/020026/kensei/joho/kocho/opinion.html', '県へのご意見'],
+  '栃木県/@': ['https://www.pref.tochigi.lg.jp/c05/pref/kouhou/iken/chijiakusesu.html', '知事への提案（知事にアクセス）'],
+  '北海道/@': ['https://www.pref.hokkaido.lg.jp/ss/tkk/a0003/b0001/', '道民の声'],
+  '福井県/@': ['https://www.pref.fukui.lg.jp/doc/kouho/teianbin.html', '知事への提案便'],
+  '富山県/@': ['https://www.pref.toyama.jp/1021/kensei/kenseisanka/kenseisanka/form.html', '富山県へのご意見・ご質問'],
+  '愛媛県/@': ['https://www.pref.ehime.jp/site/chiji/10584.html', '知事への政策提言'],
+  '群馬県/@': ['https://www.pref.gunma.jp/page/15285.html', 'ご意見・ご質問など'],
+  '三重県/@': ['https://www.pref.mie.lg.jp/NAVI/SAWAYAKA/index.htm', '県民の声・さわやか提案箱'],
+  '静岡県/@': ['https://www.pref.shizuoka.jp/kensei/pr/hiroba/index.html', '県民の広場（ご意見・ご要望）'],
+  '福島県/@': ['http://www.pref.fukushima.lg.jp/sec/01010e/kenmin-koucho7-039-1.html', '県民提案コーナー'],
+  // 宮城県は県政への意見・要望の受付ページがなく、相談窓口の案内（県庁県政相談室）が出し方の案内になっている
+  '宮城県/@': ['https://www.pref.miyagi.jp/site/gyoseisabisu/soudan-index.html#ken', '相談窓口のごあんない（県への意見・相談）'],
+  '埼玉県/さいたま市': ['https://www.city.saitama.lg.jp/006/002/001/index.html', '市長への提案制度（わたしの提案）'],
+  '神奈川県/横浜市': ['https://www.city.yokohama.lg.jp/kocho/teian.html', '市民からの提案'],
+  '神奈川県/川崎市': ['https://www.city.kawasaki.jp/170/page/0000016761.html', '市長への御意見・御提案'],
+  '神奈川県/相模原市': ['https://www.city.sagamihara.kanagawa.jp/shisei/1026875/shisei_opinion/1026888/1011097.html', 'わたしの提案'],
+  '兵庫県/神戸市': ['https://www.city.kobe.lg.jp/a84159/shise/shichoshitsu/letter/indexteian.html', 'わたしから神戸市への提案'],
+};
