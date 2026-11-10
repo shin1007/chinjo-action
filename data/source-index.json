@@ -309,6 +309,15 @@
       "localPath": null
     },
     {
+      "id": "src-38d1c1cf5a",
+      "title": "文部科学省「『教師不足』への対応等について（アンケート結果の共有と留意点）」（令和5年6月20日、5教教人第13号）",
+      "url": "https://www.mext.go.jp/content/20230626-mxt_kyoikujinzai01-000022259-3.pdf",
+      "note": "2ページ。正規教員の割合の目標設定、非正規教員の枠の正規教員への置き換え",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-3bbadcfcba",
       "title": "厚生労働省「外国人の生活保護に関するよくあるご意見・ご質問」",
       "url": "https://www.mhlw.go.jp/content/001684938.pdf",
@@ -358,6 +367,15 @@
       "title": "総務省「令和6年10月27日執行 最高裁判所裁判官国民審査結果調」",
       "url": "https://www.soumu.go.jp/main_content/000979139.pdf",
       "note": null,
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-477fa7ad84",
+      "title": "文部科学省「教員勤務実態調査（令和4年度）の集計（速報値）について」（令和5年4月28日）",
+      "url": "https://www.mext.go.jp/content/20230428-mxt_zaimu01-000029160_2.pdf",
+      "note": "6ページ。職種別の1日当たりの在校等時間（講師・教諭）",
       "kind": "official",
       "fetchedAt": null,
       "localPath": null
