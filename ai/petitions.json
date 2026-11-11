@@ -1593,6 +1593,11 @@
               "sourceId": "src-4483ba9758",
               "title": "Takehara ほか (2020) Scientific Reports 10:13770",
               "note": "論文"
+            },
+            {
+              "sourceId": "src-d54c11138a",
+              "title": "竹原健二（研究代表者）「わが国における父親の子育て支援を推進するための科学的根拠の提示と支援プログラムの提案に関する研究」令和2～4年度 厚生労働科学研究 総合研究報告書",
+              "note": "父親の産後うつや父親支援の議論が進む一方「まだ国内のエビデンスは大幅に不足している」。自治体の父親支援事業の好事例集を作成"
             }
           ]
         },
@@ -3016,6 +3021,11 @@
               "sourceId": "src-8414ee9375",
               "title": "日本新聞協会「新聞倫理綱領」（2000年6月21日制定）",
               "note": "「正確と公正」"
+            },
+            {
+              "sourceId": "src-a4e7f212fd",
+              "title": "和歌山県調査統計課（和歌山県統計情報館）「統計グラフを作ってみよう」",
+              "note": "棒グラフの決まりとして「目盛りの出発点は、必ずゼロにします」。公的な統計部局が子ども向けにも示す基本"
             }
           ]
         },
@@ -3131,6 +3141,11 @@
               "sourceId": "src-67d6c6e1c0",
               "title": "東京都青少年の健全な育成に関する条例施行規則",
               "note": "区分陳列の方法"
+            },
+            {
+              "sourceId": "src-0f4c564591",
+              "title": "埼玉県「有害図書・深夜外出の規制等」（埼玉県青少年健全育成条例による規制の案内）",
+              "note": "他の自治体の例：10cm以上張り出した仕切り板、他の図書の棚と60cm以上離す、床から150cm以上の高さに背表紙のみ等、6つの区分陳列の方法を示す"
             }
           ]
         }
@@ -3186,6 +3201,13 @@
       "url": "https://www.europarl.europa.eu/doceo/document/TA-9-2020-0182_EN.html",
       "note": "第2項（ハーグ条約の返還決定の執行）、第12項（刑法・民法の適用）、第17項（共同親権の導入）",
       "kind": "official"
+    },
+    {
+      "id": "src-0f4c564591",
+      "title": "埼玉県「有害図書・深夜外出の規制等」（埼玉県青少年健全育成条例による規制の案内）",
+      "url": "https://www.pref.saitama.lg.jp/b0102/nanbukenmin/kisei.html",
+      "note": "他の自治体の例：10cm以上張り出した仕切り板、他の図書の棚と60cm以上離す、床から150cm以上の高さに背表紙のみ等、6つの区分陳列の方法を示す",
+      "kind": "law"
     },
     {
       "id": "src-10ed6ab24a",
@@ -4105,6 +4127,13 @@
       "kind": "research"
     },
     {
+      "id": "src-a4e7f212fd",
+      "title": "和歌山県調査統計課（和歌山県統計情報館）「統計グラフを作ってみよう」",
+      "url": "https://www.pref.wakayama.lg.jp/prefg/020300/kids/graph.html",
+      "note": "棒グラフの決まりとして「目盛りの出発点は、必ずゼロにします」。公的な統計部局が子ども向けにも示す基本",
+      "kind": "official"
+    },
+    {
       "id": "src-a5d3413c15",
       "title": "Betsey Stevenson・Justin Wolfers「The Paradox of Declining Female Happiness」NBER Working Paper 14969（2009年）",
       "url": "https://www.nber.org/papers/w14969",
@@ -4432,6 +4461,13 @@
       "url": "https://laws.e-gov.go.jp/law/340AC0000000141",
       "note": null,
       "kind": "law"
+    },
+    {
+      "id": "src-d54c11138a",
+      "title": "竹原健二（研究代表者）「わが国における父親の子育て支援を推進するための科学的根拠の提示と支援プログラムの提案に関する研究」令和2～4年度 厚生労働科学研究 総合研究報告書",
+      "url": "https://mhlw-grants.niph.go.jp/system/files/report_pdf/202207001B-sogou.pdf",
+      "note": "父親の産後うつや父親支援の議論が進む一方「まだ国内のエビデンスは大幅に不足している」。自治体の父親支援事業の好事例集を作成",
+      "kind": "research"
     },
     {
       "id": "src-d574704e5d",
