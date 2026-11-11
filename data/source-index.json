@@ -723,6 +723,24 @@
       "localPath": null
     },
     {
+      "id": "src-534c042e3b",
+      "title": "Markman HJ, Hawkins AJ, Stanley SM ほか (2022) Helping couples achieve relationship success: A decade of progress in couple relationship education research and practice, 2010-2019. Journal of Marital and Family Therapy 48(1): 251-282（査読のある系統的レビュー）",
+      "url": "https://doi.org/10.1111/jmft.12565",
+      "note": "厳密な評価研究34件を検討。夫婦関係教育は関係の質だけでなく、心身の健康・共同養育・子どもの健やかさにも効果があり、リスクの高い夫婦ほど効果が大きいことが多い",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-53ec7fc40f",
+      "title": "Sandler I, Wolchik S ほか (2020) Randomized Effectiveness Trial of the New Beginnings Program for Divorced Families with Children and Adolescents. Journal of Clinical Child & Adolescent Psychology 49(1): 60-78（査読論文）",
+      "url": "https://doi.org/10.1080/15374416.2018.1540008",
+      "note": "家庭裁判所を通じて募った離婚・別居中の親830人の無作為化比較試験。地域の機関が行う10回の親向けプログラムで、子育てが改善し、子の心の問題が10か月後まで減った（効果は家庭により差がある）",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-53ff0a7d99",
       "title": "新井賢治「重要土地等調査法の運用状況と課題」『立法と調査』第462号（参議院、2023年12月）",
       "url": "https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2023pdf/20231218006.pdf",
@@ -1128,6 +1146,15 @@
       "localPath": null
     },
     {
+      "id": "src-874804d057",
+      "title": "Hjern A ほか (2021) Mental Health in Schoolchildren in Joint Physical Custody: A Longitudinal Study. Children 8(6): 473（査読論文）",
+      "url": "https://doi.org/10.3390/children8060473",
+      "note": "デンマークの出生コホート31,519人を11歳まで追跡。父母の別居後、両方の家で暮らす子は、一方の親とだけ暮らす子より心の問題の割合が低かった（核家族と比べた調整オッズ比：共同 1.25、単独 1.63〜1.72）",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-8a1b879cbd",
       "title": "澤田康幸・崔允禎・菅野早紀「不況・失業と自殺の関係についての一考察」『日本労働研究雑誌』No.598（2010年5月）",
       "url": "https://www.jil.go.jp/institute/zassi/backnumber/2010/05/pdf/058-066.pdf",
@@ -1529,6 +1556,15 @@
       "url": "https://www.who.int/news-room/fact-sheets/detail/healthy-diet",
       "note": "遊離糖類は総エネルギー摂取量の10％未満に",
       "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-bb1ba3a0f8",
+      "title": "Peterson C ほか (2018) Lifetime Economic Burden of Intimate Partner Violence Among U.S. Adults. American Journal of Preventive Medicine 55(4): 433-444（査読論文）",
+      "url": "https://doi.org/10.1016/j.amepre.2018.04.049",
+      "note": "米国で、パートナー間暴力の生涯の費用は被害者1人あたり女性103,767ドル・男性23,414ドル、全体で約3.6兆ドル（2014年ドル）。うち37％を政府が負担。男性の被害も経済的な損失を生む",
+      "kind": "secondary",
       "fetchedAt": null,
       "localPath": null
     },
@@ -2051,6 +2087,15 @@
       "url": "https://laws.e-gov.go.jp/law/324CO0000000006",
       "note": "除かれる者：臨時的に任用された者、会計年度任用職員など",
       "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-f8e023d237",
+      "title": "Wolchik SA ほか (2021) Developmental cascade effects of a parenting-focused program for divorced families on competence in emerging adulthood. Development and Psychopathology 33(1): 201-215（査読論文）",
+      "url": "https://doi.org/10.1017/s095457941900169x",
+      "note": "離婚家庭240組の無作為化比較試験を15年追跡。親へのプログラムによる子育ての改善が、成人後の仕事の成果や学業の成果につながった。リスクの高い子ほど効果が大きい",
+      "kind": "secondary",
       "fetchedAt": null,
       "localPath": null
     },
