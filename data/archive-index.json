@@ -156,6 +156,35 @@
       "fetchedAt": "2026-11-11T06:30:56.997Z",
       "sha256": "6a9aadf4ae486ce1c9b8472c560face5458de767632400f29e242a88ef23b98e",
       "localPath": "sources/archive/2026-11-11-6a9aadf4ae48.md"
+    },
+    {
+      "url": "https://www.sangiin.go.jp/japanese/joho1/kousei/syuisyo/213/touh/t213226.htm",
+      "title": "参議院 答弁書（内閣参質二一三第二二六号、令和6年7月2日）",
+      "note": "DV等支援措置の期間の根拠・継続時の確認",
+      "fetchedAt": "2026-11-11T09:20:20.505Z",
+      "sha256": "b3d4e14df682fc0a976de0997924d86d10c7d42fb738512eea6ff6a4efb38cd9",
+      "localPath": "sources/archive/2026-11-11-b3d4e14df682.html"
+    },
+    {
+      "url": "https://www.sangiin.go.jp/japanese/joho1/kousei/syuisyo/213/syuh/s213226.htm",
+      "title": "参議院 質問主意書 第213回国会 質問第226号（牧山ひろえ）",
+      "fetchedAt": "2026-11-11T09:20:20.935Z",
+      "sha256": "65043d9c4ef1a47b44ae90ed9e4fb97bac22444c55c12099c7cf463d70a14444",
+      "localPath": "sources/archive/2026-11-11-65043d9c4ef1.html"
+    },
+    {
+      "url": "https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Accidents_at_work_statistics",
+      "title": "Eurostat: Accidents at work statistics",
+      "fetchedAt": "2026-11-11T09:20:22.247Z",
+      "sha256": "927135371d139feaf56a54a4db841247f9b8e0ea20b2b0e383d4b2bbcac9562e",
+      "localPath": "sources/archive/2026-11-11-927135371d13.html"
+    },
+    {
+      "url": "https://www.soumu.go.jp/main_content/000142508.pdf",
+      "title": "総務省 住民基本台帳法施行令改正案等への意見と考え方（通称関係）",
+      "fetchedAt": "2026-11-11T09:20:22.926Z",
+      "sha256": "83ce5d6ce4e2ddf63cc3395d91cb5960a99584b38818654011304cf99c282229",
+      "localPath": "sources/archive/2026-11-11-83ce5d6ce4e2.pdf"
     }
   ]
 }
