@@ -1108,7 +1108,7 @@
           const { page, title, results } = requestLinks(id);
           return page
             ? `<li><b>${esc(municipalityName(id))}</b>：<a href="${esc(page)}" target="_blank" rel="noopener" class="btn btn-small">要望・意見の出し方のページを開く</a><span class="hint-sm">（${esc(title)}。公式サイトで確かめたページです）</span></li>`
-            : `<li><b>${esc(municipalityName(id))}</b>：<a href="${esc(results)}" target="_blank" rel="noopener" class="btn btn-small">公式サイトで出し方のページを探す</a><span class="hint-sm">（「${esc(headOf(municipalityName(id)))}への手紙」「市民の声」「ご意見・ご提案」などの名前のページです。見つからなければ、代表電話で要望書の受付窓口を聞きます）</span></li>`;
+            : `<li><b>${esc(municipalityName(id))}</b>：<span class="wz-notfound">⚠ このサイトでは、${esc(municipalityName(id))}の要望書の出し方のページを見つけられていません。</span>下のボタンで公式サイトの中を検索して、ご自身で探してください。<br><a href="${esc(results)}" target="_blank" rel="noopener" class="btn btn-small">公式サイトで出し方のページを探す</a><span class="hint-sm">（「${esc(headOf(municipalityName(id)))}への手紙」「市民の声」「ご意見・ご提案」などの名前のページです。見つからなければ、代表電話で要望書の受付窓口を聞きます）</span></li>`;
         }).join('')
         : '<li>出す先を決めたら、その自治体の公式サイトで、要望・意見の受け付け方（窓口・郵送・メール・フォーム）を確かめます。</li>';
     } else if (!list.length) {
