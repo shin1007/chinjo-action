@@ -62,6 +62,7 @@ window.ASKS = (window.ASKS || []).concat([
   { id: 'n_complaint', scope: 'national', label: '裁判所の運営への意見・苦情を受ける第三者の窓口',
     refs: [{ t: '裁判官弾劾法 第2条・第15条', url: 'https://laws.e-gov.go.jp/law/322AC1000000137' },
       { t: 'Judicial Conduct Investigations Office Annual Report 2024-25（英国）', url: 'https://www.complaints.judicialconduct.gov.uk/JCIOAnnualReport24-25', note: '3,279件の苦情' },
+      { t: 'Judicial Conduct Investigations Office Annual Report 2025-26（英国）', url: 'https://www.complaints.judicialconduct.gov.uk/JCIOAnnualReport2025-2026', note: '2025-26年度の苦情は3,910件（前年度3,279件）、懲戒処分は95件（前年度89件）。訳は docs/英語の参考資料の訳.md' },
       { t: 'Judicial Commission of New South Wales「Annual Information Statement 2024–25」（豪州ニューサウスウェールズ州）', url: 'https://files.parliament.nsw.gov.au/fileapi/ParlFiles/GetArtifact/AGO_GSF_E%20Judicial%20Commission%20Annual%20Information%20Statement%2024-25.pdf?serverRelativeUrl=%2Ftp%2Ffiles%2F192189%2FAGO_GSF_E+Judicial+Commission+Annual+Information+Statement+24-25.pdf', note: '裁判官の「能力または行状」についての苦情を独立の委員会が調べる例。2024-25年度は35件の苦情を受け、調べた44件の95％を略式に却下。訳は docs/英語の参考資料の訳.md' }],
     title: '裁判所の手続の運営に関する意見・苦情を受け付ける第三者機関の設置',
     reason: '裁判官の職務について国民が声を上げる仕組みとしては、国会の裁判官訴追委員会に、誰でも裁判官の罷免の訴追を求めることができます。しかし、訴追は職務上の義務への著しい違反などに限られ、手続の進め方や当事者への対応についての意見や苦情を受け付けて、改善につなげる窓口ではありません。また、裁判所の内部で処理される苦情は、どれだけ寄せられ、どう対応されたのかが公表されていません。イギリスでは、裁判官の行状に関する苦情を受け付ける独立の機関（司法行状調査局）が置かれ、受け付けた件数や処分の結果が毎年公表されています。アメリカの各州にも、裁判官の行状を調べる委員会があります。裁判の独立を守りながら、手続の運営への国民の意見を受け止め、その状況を公表する第三者の仕組みを設けることが、司法への信頼を高めることにつながります。',

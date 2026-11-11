@@ -238,6 +238,7 @@ summary { cursor: pointer; font-weight: 700; }
 .wz-cards { display: grid; gap: 8px; }
 .wz-card { display: flex; flex-direction: column; gap: 2px; text-align: left; border: 2px solid var(--line); background: var(--surface); border-radius: 10px; padding: 12px 14px; font: inherit; cursor: pointer; }
 .wz-card span { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+.wz-card .wz-pair { margin-top: 4px; font-size: 0.8rem; color: var(--main-dark); }
 .wz-small { padding: 12px 14px; }
 .wz-filter { width: 100%; padding: 8px 10px; border: 1px solid var(--field-line); border-radius: 6px; font: inherit; margin-bottom: 8px; }
 .wz-picked { font-size: 0.85rem; color: var(--main-dark); margin: 8px 0 0; }

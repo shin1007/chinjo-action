@@ -342,6 +342,14 @@
       "fetchedAt": "2026-11-11T12:01:02.834Z",
       "sha256": "6b139e610a09fe3c492984269526feb038c26e9c03c7ded05b97847644474ca8",
       "localPath": "sources/archive/2026-11-11-6b139e610a09.pdf"
+    },
+    {
+      "url": "https://www.complaints.judicialconduct.gov.uk/JCIOAnnualReport2025-2026",
+      "title": "Judicial Conduct Investigations Office Annual Report 2025-26",
+      "note": "苦情3,910件・懲戒95件",
+      "fetchedAt": "2026-11-11T13:31:37.345Z",
+      "sha256": "df705625a368a282febfba1f2589e93a64b69340410edf63c407472ae6272c30",
+      "localPath": "sources/archive/2026-11-11-df705625a368.pdf"
     }
   ]
 }
