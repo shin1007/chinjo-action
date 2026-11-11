@@ -41,7 +41,7 @@ function petitionText(t, it, request = false) {
   const L = ['令和　年　月　日', '', `${request ? '○○市長' : '○○市議会議長'}　　　　様`, '', '住所　　　　　', '氏名　　　　　　　　印', ''];
   L.push(`件名　${fill(nat ? T.subjectNational : T.subjectLocal, v)}`, '');
   L.push(`【${w}の趣旨】`, `　${fill(nat ? T.purposeNational : T.purposeLocal, v)}`, '', '記', '');
-  L.push(`一　${fill(it.text, v)}`, '', `【${w}の理由】`, `1．${it.title}`, `　${it.reason}`, '', `　${T.closing}`);
+  L.push(`一　${fill(it.text, v)}`, '', `【${w}の理由】`, `1．${it.title}`, `　${it.reason}`, ...(request && it.forStaff ? [`　${it.forStaff}`] : []), '', `　${T.closing}`);
   if ((it.refs || []).length) {
     L.push('', '【参考資料】');
     it.refs.forEach((r, i) => L.push(`${i + 1}　${r.t}${r.url ? `\n　　${r.url}` : ''}`));
@@ -54,7 +54,7 @@ function petitionText(t, it, request = false) {
 const scopeName = { national: '国（議会から国へ意見書の提出を求める陳情）', local: '自治体（その自治体が自ら行う施策を求める陳情）' };
 const today = new Date().toISOString().slice(0, 10);
 
-fs.rmSync(outDir, { recursive: true, force: true });
+// 生成するファイルだけを作り直す。Grok などからの返信（grokからの返信.md など）は消さない
 fs.mkdirSync(outDir, { recursive: true });
 
 const summary = [];
@@ -71,7 +71,9 @@ for (const t of themes) {
   for (const it of t.asks) {
     A.push(`## ${it.id}：${it.title}`, '', `- 宛先：${scopeName[it.scope] || it.scope}`, `- 分類：${it.category || ''}`);
     if (it.label && it.label !== it.title) A.push(`- 見出し：${it.label}`);
-    A.push('', `**求めること**：${fill(it.text, { 宛先: '（宛先の自治体）' })}`, '', `**理由**：${it.reason}`, '', '**参考資料**：');
+    A.push('', `**求めること**：${fill(it.text, { 宛先: '（宛先の自治体）' })}`, '', `**理由**：${it.reason}`, '');
+    if (it.forStaff) A.push(`**実施のイメージ（要望書だけに入る）**：${it.forStaff}`, '');
+    A.push('**参考資料**：');
     if (!(it.refs || []).length) A.push('- （なし）');
     for (const r of it.refs || []) A.push(`- ${r.secondary ? '【二次資料】' : ''}${r.t}${r.url ? ` ${r.url}` : ''}${r.note ? `　— ${r.note}` : ''}`);
     A.push('');
@@ -82,7 +84,7 @@ for (const t of themes) {
     'サイトが利用者に出す文面です。サイトの方針で、1通に1つの事項だけを書きます。宛先・氏名は「○○」や空欄にしています。', '',
     '- 陳情書：議会の議長あて。読むのは議員（委員会で審査し、採択・不採択を決める）。国あての項目は、議会から国へ意見書を出すよう求める。',
     '- 要望書：市長あて。役所（担当課の職員）に出し、施策として取り組むよう求める。自治体あての項目だけ作れる。',
-    '- いまのサイトでは、陳情書と要望書で、件名・趣旨・理由の本文は同じで、宛名と「陳情」「要望」の言葉だけが違う。', ''];
+    '- 陳情書と要望書で、件名・趣旨・理由の本文は同じ。宛名と「陳情」「要望」の言葉が違い、一部の項目では要望書の理由の最後に、職員向けの「実施のイメージ」が入る。', ''];
   for (const it of t.asks) {
     B.push(`## ${it.id}：${it.title}`, '', '### 陳情書（議会あて）', '', '```text', petitionText(t, it), '```', '');
     if (it.scope !== 'national') B.push('### 要望書（市長あて）', '', '```text', petitionText(t, it, true), '```', '');

@@ -50,7 +50,8 @@ window.Petition = (() => {
     lines.push('', '記', '');
     sel.forEach((it, i) => lines.push(`${kansuji[i]}　${fill(it.text, vars)}`));
     lines.push('', `【${isRequest ? '要望' : '陳情'}の理由】`);
-    sel.forEach((it, i) => lines.push(`${i + 1}．${it.title}`, `　${it.reason}`, ''));
+    // 要望書は役所の職員が読むので、実施のイメージ（forStaff）があれば理由のあとに足す
+    sel.forEach((it, i) => lines.push(`${i + 1}．${it.title}`, `　${it.reason}`, ...(isRequest && it.forStaff ? [`　${it.forStaff}`] : []), ''));
     if (story) lines.push(`（${isRequest ? '要望者' : '陳情者'}として）`, `　${story.replace(/\n/g, '\n　')}`, '');
     lines.push(`　${T.closing}`);
     // 選んだ項目の一次資料。添付できる議会では、この一覧の資料を印刷して添える
@@ -85,7 +86,7 @@ window.Petition = (() => {
     if (mixed) L.push('求める事項ごとに、次のどちらかです（下の「求める事項」に書いてあります）。', `- 国：${KIND_NAT}`, `- 自治体：${KIND_LOC}`);
     else L.push(nat ? KIND_NAT : request ? 'その自治体が自ら実施できる施策を求める要望書。' : KIND_LOC);
     L.push('', '## 求める事項');
-    sel.forEach((it, i) => L.push(`${i + 1}. ${it.title}${mixed ? `（種類：${isNational(it) ? '国' : '自治体'}）` : ''}`, `   要望の例：${it.text.replaceAll('{宛先}', 'その自治体')}`, `   背景：${it.reason}`));
+    sel.forEach((it, i) => L.push(`${i + 1}. ${it.title}${mixed ? `（種類：${isNational(it) ? '国' : '自治体'}）` : ''}`, `   要望の例：${it.text.replaceAll('{宛先}', 'その自治体')}`, `   背景：${it.reason}`, ...(request && it.forStaff ? [`   実施のイメージ（役所の職員向けに、理由の最後に添える）：${it.forStaff}`] : [])));
     if (sel.length > 1) L.push('', `※求める事項ごとに、別々の陳情書を${sel.length}通作成してください。1通には1つの事項だけを書き、それぞれ件名・趣旨・理由をその事項に合わせてください。`);
     if (story) L.push('', '## 陳情者としての一言（陳情の理由の最後に、1〜2文で一般的な表現にして添えてください。日付・地名・相手方・裁判や調停の経過など、個人や事件を特定できる内容は書かないでください）', story);
     L.push('', '## 書き方のルール（採択されやすくするため、必ず守ってください）');

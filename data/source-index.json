@@ -1518,7 +1518,7 @@
       "id": "src-beffcc49b3",
       "title": "文部科学省「令和8年度学校基本調査の公表について（速報）」",
       "url": "https://www.mext.go.jp/content/20260826-mxt_chousa01-000050842_01.pdf",
-      "note": "表1 高等学校の学校数",
+      "note": "表1 高等学校（全日制・定時制）の学校数・在学者数",
       "kind": "official",
       "fetchedAt": null,
       "localPath": null
@@ -1951,6 +1951,15 @@
       "title": "教育公務員特例法 第21条第2項・第23条第1項・第24条第1項",
       "url": "https://laws.e-gov.go.jp/law/324AC0000000001",
       "note": "研修の計画・初任者研修・中堅教諭等資質向上研修。臨時的に任用された者などを除く",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-f32778fe98",
+      "title": "出入国在留管理庁「本邦における不法残留者数について（令和8年7月1日現在）」（2026年10月16日）",
+      "url": "https://www.moj.go.jp/isa/publications/press/13_00071.html",
+      "note": "6万5,229人。令和8年1月1日の6万8,488人から3,259人（4.8％）減少",
       "kind": "law",
       "fetchedAt": null,
       "localPath": null

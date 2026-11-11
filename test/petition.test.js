@@ -63,6 +63,15 @@ test('自治体あては要望書に切り替えられる', () => {
   assert.doesNotMatch(t, /陳情の趣旨|陳情の理由/);
 });
 
+test('実施のイメージ（forStaff）は要望書にだけ入り、陳情書には入らない', () => {
+  const it = w.ASKS.find((a) => a.scope === 'local' && a.forStaff);
+  assert.ok(it, 'forStaff のある自治体あての項目がない');
+  const req = form([it.id]);
+  req.append('kind', 'request');
+  assert.ok(w.Petition.build(req, '横浜市議会', [it.id]).includes(it.forStaff));
+  assert.ok(!w.Petition.build(form([it.id]), '横浜市議会', [it.id]).includes(it.forStaff));
+});
+
 test('要望書の宛名は知事・市区町村長になり、宛先を替えると呼び方も替わる', () => {
   const k = w.ASKS.find((a) => a.scope === 'local').id;
   const fd = form([k], { story: '見聞きしたこと' });
