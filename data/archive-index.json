@@ -502,6 +502,46 @@
       "fetchedAt": "2026-11-11T13:59:08.952Z",
       "sha256": "29ceceae443fc34b69a5d515c7ddad14cd4141a7317f3087acd5d0e5d51de828",
       "localPath": "sources/archive/2026-11-11-29ceceae443f.bin"
+    },
+    {
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=6161830&rettype=xml",
+      "title": "PMC6161830 全文（PMC の XML）",
+      "note": "査読論文の本文",
+      "fetchedAt": "2026-11-11T14:02:29.140Z",
+      "sha256": "77888e1a040f694edfba002e35cc943efb9f6d25fe1e61f410de9e09c38af315",
+      "localPath": "sources/archive/2026-11-11-77888e1a040f.bin"
+    },
+    {
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=8229623&rettype=xml",
+      "title": "PMC8229623 全文（PMC の XML）",
+      "note": "査読論文の本文",
+      "fetchedAt": "2026-11-11T14:02:29.796Z",
+      "sha256": "dc62118be9cf4c993367e76f7c4b8e99d3ea6a15551628291303692081f30753",
+      "localPath": "sources/archive/2026-11-11-dc62118be9cf.bin"
+    },
+    {
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=6642686&rettype=xml",
+      "title": "PMC6642686 全文（PMC の XML）",
+      "note": "査読論文の本文",
+      "fetchedAt": "2026-11-11T14:02:30.537Z",
+      "sha256": "86015096d2e8145c3d1b624fed5b29df8ef74674a0f853ad2cb9fd529857c3f6",
+      "localPath": "sources/archive/2026-11-11-86015096d2e8.bin"
+    },
+    {
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=8055044&rettype=xml",
+      "title": "PMC8055044 全文（PMC の XML）",
+      "note": "査読論文の本文",
+      "fetchedAt": "2026-11-11T14:02:31.234Z",
+      "sha256": "4bdb61cff40e837f7ef8f07e21fa01c32c4d15a447c85ff30f03efd3c3a7db2c",
+      "localPath": "sources/archive/2026-11-11-4bdb61cff40e.bin"
+    },
+    {
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=9298911&rettype=xml",
+      "title": "PMC9298911 全文（PMC の XML）",
+      "note": "査読論文の本文",
+      "fetchedAt": "2026-11-11T14:02:32.002Z",
+      "sha256": "0448deffa19cd86ceaa01b152ecf99948c6df9e29253bafafabed0e48d5ee6d9",
+      "localPath": "sources/archive/2026-11-11-0448deffa19c.bin"
     }
   ]
 }
