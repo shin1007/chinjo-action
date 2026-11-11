@@ -279,6 +279,27 @@
       "fetchedAt": "2026-11-11T10:30:51.192Z",
       "sha256": "62383f4239c687ad3a02b566e03dfb72cd511bf69a83d8513c1d82516ecd9240",
       "localPath": "sources/archive/2026-11-11-62383f4239c6.pdf"
+    },
+    {
+      "url": "https://files.parliament.nsw.gov.au/fileapi/ParlFiles/GetArtifact/AGO_GSF_E%20Judicial%20Commission%20Annual%20Information%20Statement%2024-25.pdf?serverRelativeUrl=%2Ftp%2Ffiles%2F192189%2FAGO_GSF_E+Judicial+Commission+Annual+Information+Statement+24-25.pdf",
+      "title": "Judicial Commission of NSW Annual Information Statement 2024-25",
+      "fetchedAt": "2026-11-11T11:01:25.697Z",
+      "sha256": "caacdb0d4bf403a3cbbdd6831e5bc0f689072f454d08ed5822aa868756f0414a",
+      "localPath": "sources/archive/2026-11-11-caacdb0d4bf4.pdf"
+    },
+    {
+      "url": "https://sukoyaka21.cfa.go.jp/media/tools/s04_nyu_manyu033.pdf",
+      "title": "1か月児健康診査マニュアル（令和6年度こども家庭科学研究費補助金 研究代表者 永光信一郎）",
+      "fetchedAt": "2026-11-11T11:04:43.170Z",
+      "sha256": "5d59b8436864e038bd714d5ea47524e70a424e0ab745baaf551bdbae1420216e",
+      "localPath": "sources/archive/2026-11-11-5d59b8436864.pdf"
+    },
+    {
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=PMCID:PMC2902195&resultType=core&format=json",
+      "title": "Stanley ほか (2010) Decreasing Divorce in Army Couples（Europe PMC の書誌・要旨）",
+      "fetchedAt": "2026-11-11T11:04:56.853Z",
+      "sha256": "ef205e716c8dc06da1665dccb34540b5c94bfe1204bff9f25b99f42537076c19",
+      "localPath": "sources/archive/2026-11-11-ef205e716c8d.json"
     }
   ]
 }
