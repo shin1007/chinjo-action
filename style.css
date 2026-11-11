@@ -652,3 +652,8 @@ summary { cursor: pointer; font-weight: 700; }
 .item-search-results a { display: block; padding: 10px 4px; text-decoration: none; color: inherit; }
 .item-search-results a:hover, .item-search-results a:focus { background: var(--bg-alt); }
 .item-search-results small { display: block; color: var(--muted); }
+
+/* トップページの最近の修正 */
+.recent-changes { list-style: none; padding: 0; margin: 0 0 1em; }
+.recent-changes li { padding: .4em 0; border-bottom: 1px solid #e5e5e5; }
+.recent-changes time { display: inline-block; min-width: 6.5em; color: #666; font-variant-numeric: tabular-nums; }
