@@ -542,6 +542,38 @@
       "fetchedAt": "2026-11-11T14:02:32.002Z",
       "sha256": "0448deffa19cd86ceaa01b152ecf99948c6df9e29253bafafabed0e48d5ee6d9",
       "localPath": "sources/archive/2026-11-11-0448deffa19c.bin"
+    },
+    {
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=11427659&rettype=xml",
+      "title": "PMC11427659 全文（PMC の XML）",
+      "note": "査読論文",
+      "fetchedAt": "2026-11-11T14:05:25.190Z",
+      "sha256": "ac94165fd238eb363d77b4b63f5b9a9c4971bb0eeeaa1d5c881e03ef55d1b5a4",
+      "localPath": "sources/archive/2026-11-11-ac94165fd238.bin"
+    },
+    {
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=8928410&rettype=xml",
+      "title": "PMC8928410 全文（PMC の XML）",
+      "note": "査読論文",
+      "fetchedAt": "2026-11-11T14:05:26.172Z",
+      "sha256": "ecee25b570e0b1d2348b4c3608580584ec0969f68b5b86b8a6d898a7ee00f349",
+      "localPath": "sources/archive/2026-11-11-ecee25b570e0.bin"
+    },
+    {
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=13079862&rettype=xml",
+      "title": "PMC13079862 全文（PMC の XML）",
+      "note": "査読論文",
+      "fetchedAt": "2026-11-11T14:05:27.255Z",
+      "sha256": "cff3712ae44899ae49f6475ca94eeccabfd82fc3045c4829f7c9739d27c38363",
+      "localPath": "sources/archive/2026-11-11-cff3712ae448.bin"
+    },
+    {
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3250639&rettype=xml",
+      "title": "PMC3250639 全文（PMC の XML）",
+      "note": "査読論文",
+      "fetchedAt": "2026-11-11T14:05:27.760Z",
+      "sha256": "cb0d26425fe895fd014462dd3ca2a9b56a4f6c44d562475b2cffabd94c8c0a96",
+      "localPath": "sources/archive/2026-11-11-cb0d26425fe8.bin"
     }
   ]
 }

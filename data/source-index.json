@@ -264,6 +264,15 @@
       "localPath": null
     },
     {
+      "id": "src-23b5db79af",
+      "title": "Foettinger L ほか (2022) The Role of Community-Based Men’s Sheds in Health Promotion for Older Men: A Mixed-Methods Systematic Review. American Journal of Men’s Health 16(2)（査読のある系統的レビュー）",
+      "url": "https://doi.org/10.1177/15579883221084490",
+      "note": "52件の研究（質的35・量的9・混合8）を統合。メンズシェッドへの参加が、自分で感じる健康・社会的孤立・幸福感によい影響を持つ根拠を確認。成功の条件として、適した施設、十分な資金、参加者が主体となる運営を挙げる。本文で確認",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-25872cffa9",
       "title": "喫煙の健康影響に関する検討会「喫煙と健康 喫煙の健康影響に関する検討会報告書」（平成28年8月）",
       "url": "https://www.mhlw.go.jp/content/000550455.pdf",
@@ -1056,6 +1065,15 @@
       "localPath": null
     },
     {
+      "id": "src-7e32cf6b39",
+      "title": "総務省自治行政局「住基ネットと世帯情報等との関係について」資料2（2021年6月30日）",
+      "url": "https://www.soumu.go.jp/main_content/000757997.pdf",
+      "note": "8ページ：DV等支援措置の情報の漏えいの原因として、「『支援対象者は女性で、加害者は男性(夫)である』という思い込みから、漏えいにつながった事例も複数見受けられる」（平成28〜30年度に各1件）",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-7f4d0b65d5",
       "title": "総務省「住民基本台帳法施行令の一部を改正する政令案等に対する意見と考え方」別紙1 Ⅰ通称関係",
       "url": "https://www.soumu.go.jp/main_content/000142508.pdf",
@@ -1605,6 +1623,15 @@
       "localPath": null
     },
     {
+      "id": "src-be2003d60d",
+      "title": "Tokumitsu K ほか (2026) Indirect screening for paternal perinatal depression independent of maternal factors using mother-reported EPDS-partner in a community-based cohort in Japan. Scientific Reports 16: 12315（査読論文）",
+      "url": "https://doi.org/10.1038/s41598-026-43513-9",
+      "note": "青森県十和田市で保健師・助産師の家庭訪問の際に夫婦を調べたコホート研究。父親の抑うつ症状（CES-D 16点以上）は産前10.6％、産後6.3％。世界のメタ分析では父親の周産期うつは約8.4％と引用。母親が答える質問票で父親の不調に気づける可能性を示す。本文で確認",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-beffcc49b3",
       "title": "文部科学省「令和8年度学校基本調査の公表について（速報）」",
       "url": "https://www.mext.go.jp/content/20260826-mxt_chousa01-000050842_01.pdf",
@@ -1956,6 +1983,15 @@
       "localPath": null
     },
     {
+      "id": "src-e0adea005a",
+      "title": "Morishita J, Yasuda M, Suda S (2024) Help-seeking behavior of male victims of intimate partner violence in Japan. PCN Reports 3(4): e70013（査読論文）",
+      "url": "https://doi.org/10.1002/pcn5.70013",
+      "note": "日本に住む男性のパートナー間暴力の被害者1,466人のウェブ調査。助けを求めたのは43人だけで、その65.1％は家族・友人など公的でない相手のみに相談していた。著者は男性の被害者が使える公的な窓口を増やすよう提言。ウェブ調査ゆえの偏りは著者も限界としている。本文で確認",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-e17dcad4be",
       "title": "裁判官弾劾法 第2条・第15条",
       "url": "https://laws.e-gov.go.jp/law/322AC1000000137",
@@ -2051,6 +2087,15 @@
       "url": "https://laws.e-gov.go.jp/law/324AC0000000001",
       "note": "研修の計画・初任者研修・中堅教諭等資質向上研修。臨時的に任用された者などを除く",
       "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-f303ffd0c9",
+      "title": "Leigh JP (2011) Economic Burden of Occupational Injury and Illness in the United States. The Milbank Quarterly 89(4): 728-772（査読論文）",
+      "url": "https://doi.org/10.1111/j.1468-0009.2011.00648.x",
+      "note": "2007年の米国で、仕事による負傷・疾病の費用は約2,500億ドル（医療費27％・生産性の損失73％）で、がんの費用と同じくらい大きい。労災補償で賄われるのは25％未満で、残りは社会全体が負担している。要旨で確認（本文は PMC で取れず）",
+      "kind": "secondary",
       "fetchedAt": null,
       "localPath": null
     },
