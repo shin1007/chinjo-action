@@ -350,6 +350,70 @@
       "fetchedAt": "2026-11-11T13:31:37.345Z",
       "sha256": "df705625a368a282febfba1f2589e93a64b69340410edf63c407472ae6272c30",
       "localPath": "sources/archive/2026-11-11-df705625a368.pdf"
+    },
+    {
+      "url": "https://www.bls.gov/iif/fatal-injuries-tables/fatal-occupational-injuries-table-a-7-2024.htm",
+      "title": "米国労働統計局 Table A-7 Fatal occupational injuries by worker characteristics and event or exposure, 2024",
+      "note": "Chromeで保存。死亡5,070人、男性4,657人、女性413人",
+      "fetchedAt": "2026-11-11T13:38:00.018Z",
+      "sha256": "c3b85acf2a7ab89e8f84d31b113c275efc753aba2971a050f8eb5c4b127c7b1d",
+      "localPath": "sources/archive/2026-11-11-c3b85acf2a7a.html"
+    },
+    {
+      "url": "https://www.bls.gov/news.release/cfoi.nr0.htm",
+      "title": "米国労働統計局 Census of Fatal Occupational Injuries Summary, 2024",
+      "note": "Chromeで保存",
+      "fetchedAt": "2026-11-11T13:38:00.102Z",
+      "sha256": "baf219fd0f7b6f791e8ce08015988c49d80374d110b2ddab139821b88e61b6e8",
+      "localPath": "sources/archive/2026-11-11-baf219fd0f7b.html"
+    },
+    {
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32010L0064",
+      "title": "EU指令 2010/64/EU（刑事手続での通訳・翻訳の権利）PDF",
+      "note": "Chromeで保存",
+      "fetchedAt": "2026-11-11T13:38:00.185Z",
+      "sha256": "694bc1cc0ee4d8902833b4c5b5ac8031e4fcacd5e51172bce895cca94fa4272d",
+      "localPath": "sources/archive/2026-11-11-694bc1cc0ee4.pdf"
+    },
+    {
+      "url": "https://eur-lex.europa.eu/eli/dir/2010/64/oj",
+      "title": "EU指令 2010/64/EU（官報 L 280 の本文 HTML）",
+      "note": "Chromeで保存",
+      "fetchedAt": "2026-11-11T13:38:00.268Z",
+      "sha256": "0476e1184154487749fd4ab8ed83e2c08f044199942f8b17647ca9386133d170",
+      "localPath": "sources/archive/2026-11-11-0476e1184154.html"
+    },
+    {
+      "url": "https://www.gao.gov/assets/d24106237.pdf",
+      "title": "米国会計検査院 GAO-24-106237 Federal Spending Transparency（2023年11月）",
+      "note": "Chromeで保存",
+      "fetchedAt": "2026-11-11T13:38:00.367Z",
+      "sha256": "984fab5c6331a00f91f66168d0534a302abe75bbb5425d79ae04e42cb6b9aad4",
+      "localPath": "sources/archive/2026-11-11-984fab5c6331.pdf"
+    },
+    {
+      "url": "https://bmchealthservres.biomedcentral.com/counter/pdf/10.1186/s12913-020-05931-x.pdf",
+      "title": "Huntley ほか（2020）Help seeking by male victims of domestic violence and abuse, BMC Health Services Research 20:1085",
+      "note": "Chromeで保存",
+      "fetchedAt": "2026-11-11T13:38:00.456Z",
+      "sha256": "c01d3bedb950eea5aff08af9486c53ac92d079c2fb4092dcb51f9f7f7185bd8a",
+      "localPath": "sources/archive/2026-11-11-c01d3bedb950.pdf"
+    },
+    {
+      "url": "https://aifs.gov.au/all-research/research-reports/evaluation-2006-family-law-reforms-summary-report",
+      "title": "豪州家族問題研究所 Evaluation of the 2006 family law reforms: Summary report（ページ）",
+      "note": "Chromeで保存",
+      "fetchedAt": "2026-11-11T13:38:00.535Z",
+      "sha256": "8ff38050c6373e97a9f819a607d0ecf64802908c97661882cc0b7db2c0fc98d9",
+      "localPath": "sources/archive/2026-11-11-8ff38050c637.html"
+    },
+    {
+      "url": "https://aifs.gov.au/all-research/research-reports/evaluation-2006-family-law-reforms-summary-report#pdf",
+      "title": "豪州家族問題研究所 Evaluation of the 2006 family law reforms: Summary report（PDF）",
+      "note": "Chromeで保存（summaryreport_0_0.pdf）",
+      "fetchedAt": "2026-11-11T13:38:00.618Z",
+      "sha256": "448c3273f6a3cf8785a280a7d7447a0b6316a73da8b3ac9c4e9ec147ec24fa97",
+      "localPath": "sources/archive/2026-11-11-448c3273f6a3.pdf"
     }
   ]
 }
