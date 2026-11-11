@@ -12,10 +12,11 @@ require(path.join(ROOT, 'data/sites.js'));
 const POP = require(path.join(ROOT, 'data/municipality-populations.json')).populations;
 
 const DESIGNATED = ['札幌市', '仙台市', 'さいたま市', '千葉市', '横浜市', '川崎市', '相模原市', '新潟市', '静岡市', '浜松市', '名古屋市', '京都市', '大阪市', '堺市', '神戸市', '岡山市', '広島市', '北九州市', '福岡市', '熊本市'];
-const TOP = 800;
+const TOP = 1300;
 
 // 自動で見つけたページが違っていたとき、手で確かめたページに置き換える（キー：都道府県/市区町村。"@" は都道府県）
 const MANUAL = require('./request-pages-manual.js');
+const MANUAL_NOTE = MANUAL._notes || {};
 // 前に見つけたページはたどり直さない（--all を付けると全部たどり直す）
 const KEEP = process.argv.includes('--all') ? {} : (() => { try { require(path.join(ROOT, 'data/request-pages.js')); return window.REQUEST_PAGES || {}; } catch { return {}; } })();
 
@@ -143,6 +144,7 @@ function targets() {
       const [pref, key] = list[i++];
       const id = `${pref}/${key}`;
       const label = key === '@' ? pref : `${pref}${key}`;
+      if (MANUAL[id] === null) { fails.push([label, MANUAL_NOTE[id] || '手で確かめて外した']); continue; }
       if (MANUAL[id]) { out[id] = MANUAL[id]; continue; }
       if (KEEP[id]) { out[id] = KEEP[id]; continue; }
       const [site] = (window.SITES[pref] || {})[key] || [];
