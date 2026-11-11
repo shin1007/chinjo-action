@@ -622,6 +622,14 @@
       "fetchedAt": "2026-11-11T14:54:51.821Z",
       "sha256": "9c5be3dc46bd6d34dac4d5c8c6d7061a7d7f0fb96d90176775fffa53e1091501",
       "localPath": "sources/archive/2026-11-11-9c5be3dc46bd.bin"
+    },
+    {
+      "url": "https://www.cao.go.jp/zei-cho/shimon/26zen10kai7.pdf",
+      "title": "税制調査会「法人税の改革について」（2014年6月）",
+      "note": "8〜9ページ（7）公益法人課税等の見直し",
+      "fetchedAt": "2026-11-11T14:56:13.798Z",
+      "sha256": "3fd45ea9489cc0af2e81b8b73fac769a4bba0dafed960722ba31bcbec9cf0668",
+      "localPath": "sources/archive/2026-11-11-3fd45ea9489c.pdf"
     }
   ]
 }

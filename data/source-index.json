@@ -1326,6 +1326,15 @@
       "localPath": null
     },
     {
+      "id": "src-9769647005",
+      "title": "米国会計検査院（GAO）GAO-24-106237「Federal Spending Transparency: Opportunities Exist to Improve COVID-19 and Other Grant Subaward Data on USAspending.gov」（2023年11月）",
+      "url": "https://www.gao.gov/assets/d24106237.pdf",
+      "note": "補助金の再交付（subaward）を公開サイトで公表する米国の仕組みでも、約600万件のうち新型コロナ以外の26％、新型コロナの11％が重複の疑いのある記録で、金額や情報の欠けもあった。公開に加えてデータの質の点検が要ることを示す。要旨で確認",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-98a500c532",
       "title": "韓国政府「養育費先払い制度」（2025年7月開始）",
       "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148945174",
@@ -1574,6 +1583,15 @@
       "url": "https://www.cao.go.jp/zei-cho/content/20140709_26dis35kai11_1.pdf",
       "note": "学校法人等には軽減税率が適用されていることを確認したうえで、課税対象となる収益事業の範囲の見直し等を含めて抜本的に検討すべきとする政府税調の委員の意見（委員1人の書面意見で、税調の結論ではない）",
       "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-b6b663e175",
+      "title": "政府税制調査会「法人税の改革について」（2014年6月）",
+      "url": "https://www.cao.go.jp/zei-cho/shimon/26zen10kai7.pdf",
+      "note": "8〜9ページ「（7）公益法人課税等の見直し」：公益法人等の範囲や収益事業の範囲を見直すべきとし、民間と競合する事業の扱い、対価を得て行う事業は原則課税とする方式の検討、軽減税率とみなし寄附金制度の両方を受けることは「過大な対応」として見直し、配当等の金融資産収益の課税のあり方の見直しを挙げる",
+      "kind": "secondary",
       "fetchedAt": null,
       "localPath": null
     },
