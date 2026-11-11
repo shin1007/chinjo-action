@@ -185,6 +185,41 @@
       "fetchedAt": "2026-11-11T09:20:22.926Z",
       "sha256": "83ce5d6ce4e2ddf63cc3395d91cb5960a99584b38818654011304cf99c282229",
       "localPath": "sources/archive/2026-11-11-83ce5d6ce4e2.pdf"
+    },
+    {
+      "url": "https://www.mhlw.go.jp/content/12400000/001508503.pdf",
+      "title": "厚生労働省保険局保険課長通知 保保発0524第1号（令和5年5月24日）",
+      "fetchedAt": "2026-11-11T09:35:58.842Z",
+      "sha256": "17bab37b59432e818c35d5bdedc2afcc7634e4913100a11212a1f5d0bac2383e",
+      "localPath": "sources/archive/2026-11-11-17bab37b5943.pdf"
+    },
+    {
+      "url": "https://www.mhlw.go.jp/content/001684937.pdf",
+      "title": "厚生労働省社会・援護局「生活保護における外国人の取扱いについて」",
+      "fetchedAt": "2026-11-11T09:35:59.058Z",
+      "sha256": "a49a06977260922da7a640954eba3869c7b77287d00547b33d3797cc9541f9cc",
+      "localPath": "sources/archive/2026-11-11-a49a06977260.pdf"
+    },
+    {
+      "url": "https://www.gender.go.jp/policy/no_violence/e-vaw/chousa/pdf/r05/r05danjokan-4.pdf",
+      "title": "内閣府「男女間における暴力に関する調査（令和5年度）」報告書 r05danjokan-4",
+      "fetchedAt": "2026-11-11T09:35:59.380Z",
+      "sha256": "8b1df60a0947c8377e35ee058df64f60fd113b8eeb17675fd7f6a210fb477530",
+      "localPath": "sources/archive/2026-11-11-8b1df60a0947.pdf"
+    },
+    {
+      "url": "https://www.mhlw.go.jp/content/000550455.pdf",
+      "title": "喫煙の健康影響に関する検討会「喫煙と健康」報告書（平成28年8月）",
+      "fetchedAt": "2026-11-11T09:36:42.088Z",
+      "sha256": "974a13e568d214fd4742035c8b362ffe96706e21a38274ff5b3f2abd4ce10147",
+      "localPath": "sources/archive/2026-11-11-974a13e568d2.pdf"
+    },
+    {
+      "url": "https://www.mhlw.go.jp/toukei/saikin/hw/c-hoken/24/dl/R06gaikyo.pdf",
+      "title": "厚生労働省「令和6年度 地域保健・健康増進事業報告の概況」",
+      "fetchedAt": "2026-11-11T09:36:42.284Z",
+      "sha256": "2cf5580d49568553b2bd15d8d6501a8f5f63e1c325c58fe873e3b06c5aba1f93",
+      "localPath": "sources/archive/2026-11-11-2cf5580d4956.pdf"
     }
   ]
 }
