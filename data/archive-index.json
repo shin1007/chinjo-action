@@ -430,6 +430,38 @@
       "fetchedAt": "2026-11-11T13:41:13.436Z",
       "sha256": "c1b3babf06e362b7c99f613afb54099f0ed1eee5ebebf1c9b01c3701159d5118",
       "localPath": "sources/archive/2026-11-11-c1b3babf06e3.bin"
+    },
+    {
+      "url": "https://www.toukei.metro.tokyo.lg.jp/kurasi/2026/2026pdf/ku26rfmi01.pdf",
+      "title": "東京都総務局統計部「くらしと統計2026」",
+      "note": "Chromeで保存。28ページ「統計グラフの見方」",
+      "fetchedAt": "2026-11-11T13:50:17.435Z",
+      "sha256": "ba95b8b8df6f3878a0b245a299d74dd4941c811da04ea15db6b48e4039dd866c",
+      "localPath": "sources/archive/2026-11-11-ba95b8b8df6f.pdf"
+    },
+    {
+      "url": "https://www.kanaloco.jp/news/social/article-1317692.html",
+      "title": "神奈川新聞（共同通信）2026-11-03 被害者情報100件超が漏えい",
+      "note": "Chromeで保存",
+      "fetchedAt": "2026-11-11T13:50:17.521Z",
+      "sha256": "046fb57d09b2328d4297dff68d63ebf2e450ce12db5920e2842e680a2be088fa",
+      "localPath": "sources/archive/2026-11-11-046fb57d09b2.html"
+    },
+    {
+      "url": "https://www.daily.co.jp/society/national/2026/11/03/0020997289.shtml",
+      "title": "デイリースポーツ（共同通信）2026-11-03 被害者情報100件超が漏えい",
+      "note": "Chromeで保存",
+      "fetchedAt": "2026-11-11T13:50:17.637Z",
+      "sha256": "a0270fff9f62945aa5df40523984ef61a96627b43df6262130ff776b3f4aaa56",
+      "localPath": "sources/archive/2026-11-11-a0270fff9f62.html"
+    },
+    {
+      "url": "https://www.courts.go.jp/saikosai/vc-files/saikosai/toukei/toukei-pdf-16677.pdf",
+      "title": "最高裁判所事務総局「令和7年 司法統計年報 3 家事編」",
+      "note": "Chromeで保存。34ページ第15表",
+      "fetchedAt": "2026-11-11T13:51:36.498Z",
+      "sha256": "d3606d0140ce6ea93b7213b915bf141baa322181d9abbcc1540b6cdfd6c7bcaa",
+      "localPath": "sources/archive/2026-11-11-d3606d0140ce.pdf"
     }
   ]
 }
