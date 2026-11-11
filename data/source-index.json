@@ -795,6 +795,15 @@
       "localPath": null
     },
     {
+      "id": "src-643ddcfb82",
+      "title": "裁判所法 第61条の2（家庭裁判所調査官）",
+      "url": "https://laws.e-gov.go.jp/law/322AC0000000059",
+      "note": "家事の審判・調停に必要な調査を掌る。職務を行うについては、裁判官の命令に従う",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-654af2e494",
       "title": "Huntley AL, et al. \"Help-seeking by male victims of domestic violence and abuse (DVA): a systematic review and qualitative evidence synthesis\" BMJ Open 9(6): e021960（2019年）",
       "url": "https://doi.org/10.1136/bmjopen-2018-021960",
@@ -1007,6 +1016,15 @@
       "url": "https://www.soumu.go.jp/main_content/000142508.pdf",
       "note": "制度を作る際の意見募集で、通称による別人へのなりすましや不正行為の助長を懸念する意見が寄せられていた",
       "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-7fad9c843b",
+      "title": "厚生労働省社会・援護局地域福祉課女性支援室「困難な問題を抱える女性への支援について」（令和8年4月）",
+      "url": "https://www.mhlw.go.jp/content/001757541.pdf",
+      "note": "女性相談支援センターにおける一時保護の沿革：平成14年4月〜DV法に基づき、暴力被害女性及び同伴家族の一時保護を行うこととされた",
+      "kind": "official",
       "fetchedAt": null,
       "localPath": null
     },
@@ -1376,6 +1394,15 @@
       "url": "https://www.mhlw.go.jp/content/12400000/001508503.pdf",
       "note": "海外での出産の事実自体を偽装した不正受給の事案が発生したことを踏まえ、対策通知を改正",
       "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-ae50cc9544",
+      "title": "外国人の技能実習の適正な実施及び技能実習生の保護に関する法律 第25条・第37条・第39条",
+      "url": "https://laws.e-gov.go.jp/law/428AC0000000089",
+      "note": "第25条：監理団体の許可の基準。第37条：許可の取消し等。第39条第3項：実習の実施状況の監査等の業務を主務省令で定める基準に従って行う",
+      "kind": "law",
       "fetchedAt": null,
       "localPath": null
     },
@@ -1898,6 +1925,15 @@
       "url": "https://laws.e-gov.go.jp/law/325AC0000000144",
       "note": null,
       "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-e693988a7f",
+      "title": "「経済財政運営と改革の基本方針2025」（令和7年6月13日閣議決定）第2章4（5）",
+      "url": "https://www5.cao.go.jp/keizai-shimon/kaigi/cabinet/honebuto/2025/2025_basicpolicies_ja.pdf",
+      "note": "育成就労制度及び特定技能制度について、監理支援機関の要件厳格化等を行う",
+      "kind": "research",
       "fetchedAt": null,
       "localPath": null
     },

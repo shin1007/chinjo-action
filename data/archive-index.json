@@ -328,6 +328,20 @@
       "fetchedAt": "2026-11-11T11:08:41.507Z",
       "sha256": "b117cb5e4702b95a544ac07b52ad606588dd90f067a7d671d92db2f2c5507952",
       "localPath": "sources/archive/2026-11-11-b117cb5e4702.html"
+    },
+    {
+      "url": "https://www5.cao.go.jp/keizai-shimon/kaigi/cabinet/honebuto/2025/2025_basicpolicies_ja.pdf",
+      "title": "経済財政運営と改革の基本方針2025（令和7年6月13日閣議決定）",
+      "fetchedAt": "2026-11-11T12:01:01.017Z",
+      "sha256": "a7cd4a1bb6852a1d637999be525f990998a84f123a643b442d45e6dbaf82cdf4",
+      "localPath": "sources/archive/2026-11-11-a7cd4a1bb685.pdf"
+    },
+    {
+      "url": "https://www.mhlw.go.jp/content/001757541.pdf",
+      "title": "厚生労働省女性支援室「困難な問題を抱える女性への支援について」（令和8年4月）",
+      "fetchedAt": "2026-11-11T12:01:02.834Z",
+      "sha256": "6b139e610a09fe3c492984269526feb038c26e9c03c7ded05b97847644474ca8",
+      "localPath": "sources/archive/2026-11-11-6b139e610a09.pdf"
     }
   ]
 }
