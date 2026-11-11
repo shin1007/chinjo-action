@@ -236,6 +236,27 @@
       "fetchedAt": "2026-11-11T09:41:01.615Z",
       "sha256": "3ddd904c9d6b2aee340b57d15a1edf82cd1de0a9b0db86afea3c056d4c189837",
       "localPath": "sources/archive/2026-11-11-3ddd904c9d6b.pdf"
+    },
+    {
+      "url": "https://www.pref.saitama.lg.jp/b0102/nanbukenmin/kisei.html",
+      "title": "埼玉県「有害図書・深夜外出の規制等」",
+      "fetchedAt": "2026-11-11T09:44:12.787Z",
+      "sha256": "b8c05d03bc013011af69a5deb2efa6e04733d7ce897cd33f6d65c1ffd20a0dac",
+      "localPath": "sources/archive/2026-11-11-b8c05d03bc01.html"
+    },
+    {
+      "url": "https://www.pref.wakayama.lg.jp/prefg/020300/kids/graph.html",
+      "title": "和歌山県調査統計課「統計グラフを作ってみよう」",
+      "fetchedAt": "2026-11-11T09:44:13.083Z",
+      "sha256": "16eb08a4f9b61b03ccc16d2b2751543a48281d8640857d293c789951df9f4d54",
+      "localPath": "sources/archive/2026-11-11-16eb08a4f9b6.html"
+    },
+    {
+      "url": "https://mhlw-grants.niph.go.jp/system/files/report_pdf/202207001B-sogou.pdf",
+      "title": "竹原健二ほか「わが国における父親の子育て支援を推進するための科学的根拠の提示と支援プログラムの提案に関する研究」総合研究報告書（令和2～4年度厚労科研）",
+      "fetchedAt": "2026-11-11T09:44:13.330Z",
+      "sha256": "ce8b6b9e2c306262717932967bed9524605bfa2ccb914d157d3f943ad8f3921f",
+      "localPath": "sources/archive/2026-11-11-ce8b6b9e2c30.pdf"
     }
   ]
 }
