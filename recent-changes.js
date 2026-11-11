@@ -17,7 +17,7 @@
       list.innerHTML = items.map((item) => `<li><time datetime="${esc(item.date)}">${esc(item.date.replace(/-/g, '/'))}</time> <a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(item.title)}</a></li>`).join('');
       box.hidden = false;
     } catch (error) {
-      console.warn('最近の修正を表示できませんでした。', error);
+      console.warn('最近の修正・変更を表示できませんでした。', error);
       box.hidden = true;
     }
   })();
