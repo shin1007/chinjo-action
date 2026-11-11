@@ -272,6 +272,13 @@
       "fetchedAt": "2026-11-11T09:46:32.308Z",
       "sha256": "5e9fdbbf384593154c50dc0c3198ddffd032f0fa69fe47aa257deb6d3c93361f",
       "localPath": "sources/archive/2026-11-11-5e9fdbbf3845.pdf"
+    },
+    {
+      "url": "https://www.cao.go.jp/zei-cho/content/20140709_26dis35kai11_1.pdf",
+      "title": "税制調査会 法人課税DG 増田寛也委員「公益法人等に対する課税のあり方に関する意見」（平成26年5月9日）",
+      "fetchedAt": "2026-11-11T10:30:51.192Z",
+      "sha256": "62383f4239c687ad3a02b566e03dfb72cd511bf69a83d8513c1d82516ecd9240",
+      "localPath": "sources/archive/2026-11-11-62383f4239c6.pdf"
     }
   ]
 }
