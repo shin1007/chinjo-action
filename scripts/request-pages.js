@@ -1,5 +1,5 @@
 // 要望書の出し方のページ（知事・市長への手紙、市民の声など）を、自治体の公式サイトからたどって探し、data/request-pages.js に書き出す。
-// 対象：47都道府県・20の政令指定都市・それ以外で人口の多い市区町村300（data/municipality-populations.json の順）
+// 対象：47都道府県と、すべての市区町村（人口は data/municipality-populations.json）
 //   node scripts/request-pages.js            … 探して書き出す（前に見つけたページは残し、まだのところだけたどる）
 //   node scripts/request-pages.js --all      … 全部たどり直す（手で直した data/request-pages.js の値は MANUAL に置くと残る）
 // 見つからなかった・開けなかった自治体は docs/要望書の出し方のページが見つからない自治体.md に残す
@@ -12,7 +12,7 @@ require(path.join(ROOT, 'data/sites.js'));
 const POP = require(path.join(ROOT, 'data/municipality-populations.json')).populations;
 
 const DESIGNATED = ['札幌市', '仙台市', 'さいたま市', '千葉市', '横浜市', '川崎市', '相模原市', '新潟市', '静岡市', '浜松市', '名古屋市', '京都市', '大阪市', '堺市', '神戸市', '岡山市', '広島市', '北九州市', '福岡市', '熊本市'];
-const TOP = 2000;
+const TOP = Infinity; // 政令指定都市以外で調べる市区町村の数（人口の多い順）。今はすべて
 
 // 自動で見つけたページが違っていたとき、手で確かめたページに置き換える（キー：都道府県/市区町村。"@" は都道府県）
 const MANUAL = require('./request-pages-manual.js');
@@ -126,7 +126,8 @@ async function find(name, site) {
 }
 
 function targets() {
-  const prefs = Object.keys(window.SITES);
+  // 並びは、都道府県（人口の多い順）→ 政令指定都市（人口の多い順）→ それ以外の市区町村（人口の多い順）。書き出す2つのファイルもこの順
+  const prefs = Object.keys(window.SITES).sort((a, b) => (POP[`${b}|都道府県議会`] || 0) - (POP[`${a}|都道府県議会`] || 0));
   const list = prefs.map((p) => [p, '@']);
   const rest = Object.entries(POP).filter(([k]) => !k.endsWith('|都道府県議会')).sort((a, b) => b[1] - a[1]).map(([k]) => k.split('|'));
   rest.filter(([, n]) => DESIGNATED.includes(n)).forEach((x) => list.push(x));
@@ -160,7 +161,8 @@ function targets() {
   const today = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
   fs.writeFileSync(path.join(ROOT, 'data/request-pages.js'), `// 要望書の出し方のページ（知事・市長への手紙、市民の声など）。scripts/request-pages.js で作る。
 // キー：都道府県名/市区町村名（data/sites.js と同じ表記。"@" は都道府県）→ [ページのURL, ページの題]
-// 対象：47都道府県・政令指定都市・それ以外で人口の多い市区町村${TOP}。${today} に公式サイトのリンクをたどって見つけ、
+// 対象：47都道府県と、すべての市区町村（政令指定都市を含む）。${today} に公式サイトのリンクをたどって見つけ、
+// 並びは、都道府県 → 政令指定都市 → それ以外の市区町村（それぞれ人口の多い順）。
 // ページに出し方（フォーム・郵送・メールなど）が書いてあることを確かめた。県や市が国へ出した要望書の一覧などは除いた。
 window.REQUEST_PAGES = {
 ${Object.entries(sorted).map(([k, v]) => `  ${JSON.stringify(k)}: ${JSON.stringify(v)},`).join('\n')}
@@ -171,6 +173,7 @@ ${Object.entries(sorted).map(([k, v]) => `  ${JSON.stringify(k)}: ${JSON.stringi
   fs.writeFileSync(path.join(ROOT, 'docs/要望書の出し方のページが見つからない自治体.md'), `# 要望書の出し方のページが見つからない自治体
 
 scripts/request-pages.js で、公式サイトから「知事・市長への手紙」「市民の声」などのページを自動でたどったが、見つからなかった・開けなかった自治体（${today}）。
+並びは、都道府県 → 政令指定都市 → それ以外の市区町村（それぞれ人口の多い順）。
 かんたん作成の画面では、これらの自治体は Google の検索結果に案内する。ページが分かったら scripts/request-pages-manual.js に書き足して、スクリプトを流し直す。
 
 | 自治体 | 理由 | 公式サイト |
