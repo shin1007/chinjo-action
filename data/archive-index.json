@@ -462,6 +462,46 @@
       "fetchedAt": "2026-11-11T13:51:36.498Z",
       "sha256": "d3606d0140ce6ea93b7213b915bf141baa322181d9abbcc1540b6cdfd6c7bcaa",
       "localPath": "sources/archive/2026-11-11-d3606d0140ce.pdf"
+    },
+    {
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=PMCID:PMC6161830&resultType=core&format=json",
+      "title": "Europe PMC 要旨 PMC6161830",
+      "note": "査読論文の要旨（書誌情報つき）",
+      "fetchedAt": "2026-11-11T13:58:54.656Z",
+      "sha256": "61425cf12c65403f1cfdb1042ecd7e741ed524278afee6984e46a6d7e913d440",
+      "localPath": "sources/archive/2026-11-11-61425cf12c65.bin"
+    },
+    {
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=PMCID:PMC8229623&resultType=core&format=json",
+      "title": "Europe PMC 要旨 PMC8229623",
+      "note": "査読論文の要旨（書誌情報つき）",
+      "fetchedAt": "2026-11-11T13:58:56.078Z",
+      "sha256": "32b9e5e82c05b550e18190b9810fe9d831327315fa815126c075e6a4e7855319",
+      "localPath": "sources/archive/2026-11-11-32b9e5e82c05.bin"
+    },
+    {
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=PMCID:PMC6642686&resultType=core&format=json",
+      "title": "Europe PMC 要旨 PMC6642686",
+      "note": "査読論文の要旨（書誌情報つき）",
+      "fetchedAt": "2026-11-11T13:59:06.355Z",
+      "sha256": "14ceac9ae132b165f6317267a201ba94385921c13c4f7c33568ed9ba913c9244",
+      "localPath": "sources/archive/2026-11-11-14ceac9ae132.bin"
+    },
+    {
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=PMCID:PMC8055044&resultType=core&format=json",
+      "title": "Europe PMC 要旨 PMC8055044",
+      "note": "査読論文の要旨（書誌情報つき）",
+      "fetchedAt": "2026-11-11T13:59:07.873Z",
+      "sha256": "68d90979e9f96a2377b8e6843c6de695f2f9512d02716568d506470286211e20",
+      "localPath": "sources/archive/2026-11-11-68d90979e9f9.bin"
+    },
+    {
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=PMCID:PMC9298911&resultType=core&format=json",
+      "title": "Europe PMC 要旨 PMC9298911",
+      "note": "査読論文の要旨（書誌情報つき）",
+      "fetchedAt": "2026-11-11T13:59:08.952Z",
+      "sha256": "29ceceae443fc34b69a5d515c7ddad14cd4141a7317f3087acd5d0e5d51de828",
+      "localPath": "sources/archive/2026-11-11-29ceceae443f.bin"
     }
   ]
 }
