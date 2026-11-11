@@ -147,6 +147,15 @@
       "localPath": null
     },
     {
+      "id": "src-1650ae466f",
+      "title": "原田綾子「家族関係の再編成の観点から見た家事調停の現状と課題――未成年の子がいる夫婦の離婚事件の処理に焦点を当てて――」『家族社会学研究』29(1)（日本家族社会学会、2017年）49-62頁",
+      "url": "https://doi.org/10.4234/jjoffamilysociology.29.49",
+      "note": "家事調停委員の約7割が60代（平成28年）。選任は、現職者が退職の際に後任者を探して推薦する「縁故採用的方式」が主流で、一部の家庭裁判所で公募制に切り替えて書類選考と面接で選ぶようになったとする（51頁）。DVのからむ事案での調停委員の専門性の向上が急務とも指摘（58頁）。本文で確認",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-16e9a65511",
       "title": "財務省「酒税に関する資料」",
       "url": "https://www.mof.go.jp/tax_policy/summary/consumption/d08.htm",
@@ -566,6 +575,15 @@
       "url": "https://www.shugiin.go.jp/Internet/itdb_shitsumon.nsf/html/shitsumon/a198269.htm",
       "note": "法廷通訳が付いた第一審の被告人は2018年に3,757人で2014年より1,374人増えた一方、最高裁の法廷通訳候補者名簿の登録数は5年前より200人以上減ったと指摘",
       "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-3f04bde28d",
+      "title": "英国 司法行為調査局（Judicial Conduct Investigations Office）「Annual Report 2024-25」（2026年1月、議会に提出）",
+      "url": "https://data.parliament.uk/DepositedPapers/Files/DEP2026-0024/JCIO_Annual_Report_2024-25.pdf",
+      "note": "裁判官等への苦情を受け付ける独立の機関。2024-25年度に3,279件を受け付け、89人に懲戒。懲戒の仕組みは個人の非行だけを扱い、判断の中身には立ち入らない（判断は上訴で争う）と明記。苦情の扱いを独立のオンブズマン（JACO）が点検し、447件の申立てのうち11件で扱いの誤りを認めた",
+      "kind": "secondary",
       "fetchedAt": null,
       "localPath": null
     },

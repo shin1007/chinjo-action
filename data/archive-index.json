@@ -630,6 +630,21 @@
       "fetchedAt": "2026-11-11T14:56:13.798Z",
       "sha256": "3fd45ea9489cc0af2e81b8b73fac769a4bba0dafed960722ba31bcbec9cf0668",
       "localPath": "sources/archive/2026-11-11-3fd45ea9489c.pdf"
+    },
+    {
+      "url": "https://www.jstage.jst.go.jp/article/jjoffamilysociology/29/1/29_49/_article/-char/ja/",
+      "title": "原田綾子「家族関係の再編成の観点から見た家事調停の現状と課題」家族社会学研究 29(1)（2017）",
+      "note": "PDF",
+      "fetchedAt": "2026-11-11T14:58:21.748Z",
+      "sha256": "ecaca6fbdc3ffd9a622f0e6c777057445f5e4735447a7dbb2e81757d22c13eeb",
+      "localPath": "sources/archive/2026-11-11-ecaca6fbdc3f.pdf"
+    },
+    {
+      "url": "https://data.parliament.uk/DepositedPapers/Files/DEP2026-0024/JCIO_Annual_Report_2024-25.pdf",
+      "title": "英国 Judicial Conduct Investigations Office Annual Report 2024-25",
+      "fetchedAt": "2026-11-11T14:58:21.843Z",
+      "sha256": "e4a07fb185d32a4a0b0355155e648d2d11b11143b12100e8f527681649b42b1b",
+      "localPath": "sources/archive/2026-11-11-e4a07fb185d3.pdf"
     }
   ]
 }
