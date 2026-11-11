@@ -414,6 +414,22 @@
       "fetchedAt": "2026-11-11T13:38:00.618Z",
       "sha256": "448c3273f6a3cf8785a280a7d7447a0b6316a73da8b3ac9c4e9ec147ec24fa97",
       "localPath": "sources/archive/2026-11-11-448c3273f6a3.pdf"
+    },
+    {
+      "url": "https://www.soumu.go.jp/main_content/000757997.pdf",
+      "title": "総務省自治行政局「住基ネットと世帯情報等との関係について」資料2（令和3年6月30日）",
+      "note": "7〜8ページにDV等支援措置の緊急事案報告（H28〜R2、漏えい51件）と原因",
+      "fetchedAt": "2026-11-11T13:40:36.444Z",
+      "sha256": "6e7faeec87e7a5fcf6d357c95997f4bcd7456ad653e7ea31a94919599c87c895",
+      "localPath": "sources/archive/2026-11-11-6e7faeec87e7.pdf"
+    },
+    {
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=PMCID:PMC4237282&resultType=core&format=json",
+      "title": "Stanley ほか（2014）Family Relations 63(4) 2年後の追跡 要旨（Europe PMC）",
+      "note": "全文 API は500、Wiley は403",
+      "fetchedAt": "2026-11-11T13:41:13.436Z",
+      "sha256": "c1b3babf06e362b7c99f613afb54099f0ed1eee5ebebf1c9b01c3701159d5118",
+      "localPath": "sources/archive/2026-11-11-c1b3babf06e3.bin"
     }
   ]
 }
