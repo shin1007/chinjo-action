@@ -662,7 +662,12 @@
             {
               "sourceId": "src-7333ece7d7",
               "title": "法務省「Ｑ＆Ａ形式の解説資料（民法編）」",
-              "note": "Q2-3：被災時の子の安否の情報はいずれの親にも重要"
+              "note": "Q2-3：被災時の子の安否の情報はいずれの親にも重要。Q4-21：学校は登録された連絡先のいずれか一つに連絡すればよいとしつつ、親権者双方への連絡を求められたときは、親権者間で情報共有の方法を事前に協議するよう教示することが考えられるとする"
+            },
+            {
+              "sourceId": "src-2708e30255",
+              "title": "米国教育省 Student Privacy Policy Office「In the case of a divorce, do both parents have rights under FERPA?」",
+              "note": "米国の連邦法（FERPA）では、裁判所の命令などで別段の定めがない限り、同居している親にも別居している親にも、子の教育記録についての同じ権利がある（原文「FERPA gives custodial and noncustodial parents alike certain rights with respect to their children’s education records」）"
             }
           ]
         },
@@ -819,7 +824,12 @@
             {
               "sourceId": "src-8375bc0678",
               "title": "裁判所「夫婦関係調整調停（円満）」",
-              "note": null
+              "note": "円満な夫婦関係を回復するための話し合いの場。申立ての手数料は収入印紙1,200円"
+            },
+            {
+              "sourceId": "src-cd3d741e12",
+              "title": "Alan J. Hawkins・Tamara A. Fackrell「Does Relationship and Marriage Education for Lower-Income Couples Work? A Meta-Analysis of Emerging Research」Journal of Couple & Relationship Therapy 9: 181-191（2010年）",
+              "note": "米国で所得の低いカップル向けの関係教育15事業の評価をまとめ、対照群のある3研究で効果量 d=.250、事前と事後を比べた12研究で d=.293 の小〜中程度の効果があったとする"
             }
           ]
         },
@@ -925,6 +935,16 @@
               "sourceId": "src-a9e7a7084d",
               "title": "内閣府「男女間における暴力に関する調査（令和5年度）」調査結果のポイント",
               "note": "被害を受けた男性の57.2%がどこにも相談していない"
+            },
+            {
+              "sourceId": "src-343a80f79d",
+              "title": "埼玉県男女共同参画推進センター（With You さいたま）「男性のための相談」",
+              "note": "男性のDV被害者のための電話相談を設けている例"
+            },
+            {
+              "sourceId": "src-654af2e494",
+              "title": "Huntley AL, et al. \"Help-seeking by male victims of domestic violence and abuse (DVA): a systematic review and qualitative evidence synthesis\" BMJ Open 9(6): e021960（2019年）",
+              "note": "12の研究をまとめた系統的レビュー。男性の被害者が相談をためらう理由として、打ち明けることへの恐れ、男らしさへの挑戦、相手との関係への思い、自信の喪失、支援が見えないこと・支援の受け止め方を挙げる"
             }
           ]
         },
@@ -1585,6 +1605,11 @@
               "sourceId": "src-588ed49116",
               "title": "厚生労働省「ホームレスの実態に関する全国調査（概数調査）結果について」（令和8年4月27日）",
               "note": "2,481人のうち男性2,190人"
+            },
+            {
+              "sourceId": "src-3175d1c6de",
+              "title": "Olivet J, et al. \"Outreach and Engagement in Homeless Services: A Review of the Literature\" The Open Health Services and Policy Journal 3: 53-70（2010年）",
+              "note": "要旨の1文目「Outreach and engagement are regarded by many who work in homeless programs as essential services.」（訳：アウトリーチと関わりづくりは、ホームレス支援の現場の多くの人に、欠かせない支援とみなされている）。効果を測った研究はまだ少ないとも述べる"
             }
           ]
         },
@@ -1874,6 +1899,11 @@
               "sourceId": "src-fabce085da",
               "title": "刑事訴訟法 第205条・第208条（逮捕後の時間の制限、勾留の期間と延長）",
               "note": null
+            },
+            {
+              "sourceId": "src-3c503c8363",
+              "title": "松平浩一「外国人刑事事件の司法通訳に関する質問主意書」（第198回国会 質問第269号、令和元年6月20日提出）",
+              "note": "法廷通訳が付いた第一審の被告人は2018年に3,757人で2014年より1,374人増えた一方、最高裁の法廷通訳候補者名簿の登録数は5年前より200人以上減ったと指摘"
             }
           ]
         },
@@ -2057,6 +2087,16 @@
               "sourceId": "src-dbf14b7c6c",
               "title": "出入国在留管理庁「令和7年末現在における在留外国人数について」（令和8年3月27日）",
               "note": "412万5,395人"
+            },
+            {
+              "sourceId": "src-f7fe9826d2",
+              "title": "千葉市「家庭ごみと資源物の出し方一覧表、外国人市民向けのごみ出しに関する動画」",
+              "note": "ごみの出し方を多言語で案内している例"
+            },
+            {
+              "sourceId": "src-6ba1508921",
+              "title": "European Migration Network「Civic orientation courses or training offered to groups of third-country nationals in the EU」EMN Inform（2024年）",
+              "note": "EUの国々が移住者に行う市民オリエンテーションの講座の目的・内容・評価。権利と義務のほか、日常生活の実際の情報（practical information）を扱う"
             }
           ]
         },
@@ -2120,6 +2160,11 @@
               "sourceId": "src-bfe71791af",
               "title": "住民基本台帳法施行令 第30条の16（通称の記載）・第30条の17（通称の記載及び削除に関する事項）",
               "note": null
+            },
+            {
+              "sourceId": "src-05b9f9c0d7",
+              "title": "豊中市「外国人住民の通称に関する届出取扱要綱」",
+              "note": "第3条：通称の表記が分かる書類2点を添えて申し出ることとしている例"
             }
           ]
         }
@@ -2201,6 +2246,21 @@
               "sourceId": "src-a931040da0",
               "title": "最高裁判所事務総局「令和7年 司法統計年報 2 刑事編」",
               "note": "目次（第1表〜第81表）。第34表（罪名別刑期区分別）、第54表（外国人の国籍別終局区分別）"
+            },
+            {
+              "sourceId": "src-fef93e1ba9",
+              "title": "英国法務省「Statistics on Women and the Criminal Justice System 2021」（2022年11月）",
+              "note": "イングランドとウェールズでは、1991年刑事司法法第95条が、人種や性別による差別を避けるのに役立つ情報を毎年公表するよう国に義務づけ、1992年から男女別の統計が公表されている。2021年の平均の拘禁刑期は男性22.7か月、女性14.5か月"
+            },
+            {
+              "sourceId": "src-570a7e6809",
+              "title": "Sonja B. Starr「Estimating Gender Disparities in Federal Criminal Cases」University of Michigan Law & Economics Working Papers 57（2012年）",
+              "note": "米国の連邦の刑事事件を逮捕から量刑までつないで分析し、逮捕時の罪名や前歴などをそろえても、刑期に平均60%を超える男女差（女性が短い）があるとする"
+            },
+            {
+              "sourceId": "src-28880fef12",
+              "title": "向井智哉ほか「保護責任者遺棄致死罪で起訴された被告人の性別が一般市民の量刑判断に与える影響」『パーソナリティ研究』32巻3号（2024年）",
+              "note": "日本の成人185人を対象にした実験で、同じ事件でも被告人が女性のほうが短い刑が選ばれた"
             }
           ]
         },
@@ -2975,6 +3035,21 @@
               "sourceId": "src-8e0011ced7",
               "title": "特定非営利活動促進法 第28条〜第30条",
               "note": null
+            },
+            {
+              "sourceId": "src-496b8ec318",
+              "title": "三重県「補助金等に係る調書等の公表について」",
+              "note": "三重県における補助金等の基本的な在り方等に関する条例（平成15年三重県条例第31号）に基づき、補助金の調書を公表している例"
+            },
+            {
+              "sourceId": "src-3994062cef",
+              "title": "福岡市「令和7年度補助金調書（市民局）」",
+              "note": "補助金ごとに交付先を載せて公表している例"
+            },
+            {
+              "sourceId": "src-8596ea54f5",
+              "title": "英国政府「Data standard for grant making」（Open standards for government）",
+              "note": "英国政府は、補助金を出す政府の機関に、360Giving データ標準で補助金のデータを公開するよう定めている"
             }
           ]
         },
@@ -3030,6 +3105,13 @@
       "url": "https://laws.e-gov.go.jp/law/504AC0100000052",
       "note": "第1条：女性であることにより困難に直面することが多いことに鑑み",
       "kind": "law"
+    },
+    {
+      "id": "src-05b9f9c0d7",
+      "title": "豊中市「外国人住民の通称に関する届出取扱要綱」",
+      "url": "https://www.city.toyonaka.osaka.jp/joho/reiki/youkou/shiminkyoudou/youkou5.files/gaikokujinnjyuuminn.pdf",
+      "note": "第3条：通称の表記が分かる書類2点を添えて申し出ることとしている例",
+      "kind": "official"
     },
     {
       "id": "src-06ea7d644a",
@@ -3158,6 +3240,13 @@
       "kind": "law"
     },
     {
+      "id": "src-2708e30255",
+      "title": "米国教育省 Student Privacy Policy Office「In the case of a divorce, do both parents have rights under FERPA?」",
+      "url": "https://studentprivacy.ed.gov/faq/case-divorce-do-both-parents-have-rights-under-ferpa",
+      "note": "米国の連邦法（FERPA）では、裁判所の命令などで別段の定めがない限り、同居している親にも別居している親にも、子の教育記録についての同じ権利がある（原文「FERPA gives custodial and noncustodial parents alike certain rights with respect to their children’s education records」）",
+      "kind": "official"
+    },
+    {
       "id": "src-274684b6c9",
       "title": "厚生省社会局長通知「生活に困窮する外国人に対する生活保護の措置について」（昭和29年5月8日）",
       "url": "https://www.mhlw.go.jp/web/t_doc?dataId=00ta1609&dataType=1&pageNo=1",
@@ -3170,6 +3259,13 @@
       "url": "https://laws.e-gov.go.jp/law/321CONSTITUTION",
       "note": null,
       "kind": "law"
+    },
+    {
+      "id": "src-28880fef12",
+      "title": "向井智哉ほか「保護責任者遺棄致死罪で起訴された被告人の性別が一般市民の量刑判断に与える影響」『パーソナリティ研究』32巻3号（2024年）",
+      "url": "https://www.jstage.jst.go.jp/article/personality/32/3/32_32.3.7/_article/-char/ja",
+      "note": "日本の成人185人を対象にした実験で、同じ事件でも被告人が女性のほうが短い刑が選ばれた",
+      "kind": "secondary"
     },
     {
       "id": "src-294671fbb1",
@@ -3256,6 +3352,13 @@
       "kind": "law"
     },
     {
+      "id": "src-3175d1c6de",
+      "title": "Olivet J, et al. \"Outreach and Engagement in Homeless Services: A Review of the Literature\" The Open Health Services and Policy Journal 3: 53-70（2010年）",
+      "url": "https://endhomelessness.org/wp-content/uploads/2024/10/TOHSPJ-3-53.pdf",
+      "note": "要旨の1文目「Outreach and engagement are regarded by many who work in homeless programs as essential services.」（訳：アウトリーチと関わりづくりは、ホームレス支援の現場の多くの人に、欠かせない支援とみなされている）。効果を測った研究はまだ少ないとも述べる",
+      "kind": "secondary"
+    },
+    {
       "id": "src-327815282f",
       "title": "国家公務員法 第38条（欠格条項）",
       "url": "https://laws.e-gov.go.jp/law/322AC0000000120",
@@ -3268,6 +3371,13 @@
       "url": "https://www.moj.go.jp/isa/content/001434961.pdf",
       "note": null,
       "kind": "law"
+    },
+    {
+      "id": "src-343a80f79d",
+      "title": "埼玉県男女共同参画推進センター（With You さいたま）「男性のための相談」",
+      "url": "https://www.pref.saitama.lg.jp/withyou/counsel/mens.html",
+      "note": "男性のDV被害者のための電話相談を設けている例",
+      "kind": "official"
     },
     {
       "id": "src-358c9f8409",
@@ -3312,11 +3422,25 @@
       "kind": "official"
     },
     {
+      "id": "src-3994062cef",
+      "title": "福岡市「令和7年度補助金調書（市民局）」",
+      "url": "https://www.city.fukuoka.lg.jp/shisei/R7hojokintyoushimin.html",
+      "note": "補助金ごとに交付先を載せて公表している例",
+      "kind": "official"
+    },
+    {
       "id": "src-3bbadcfcba",
       "title": "厚生労働省「外国人の生活保護に関するよくあるご意見・ご質問」",
       "url": "https://www.mhlw.go.jp/content/001684938.pdf",
       "note": "令和6年度の外国人世帯主の被保護世帯は4万7,332世帯",
       "kind": "official"
+    },
+    {
+      "id": "src-3c503c8363",
+      "title": "松平浩一「外国人刑事事件の司法通訳に関する質問主意書」（第198回国会 質問第269号、令和元年6月20日提出）",
+      "url": "https://www.shugiin.go.jp/Internet/itdb_shitsumon.nsf/html/shitsumon/a198269.htm",
+      "note": "法廷通訳が付いた第一審の被告人は2018年に3,757人で2014年より1,374人増えた一方、最高裁の法廷通訳候補者名簿の登録数は5年前より200人以上減ったと指摘",
+      "kind": "law"
     },
     {
       "id": "src-3ff15932f8",
@@ -3380,6 +3504,13 @@
       "url": "https://www.amnesty.org/en/documents/pol30/4062/2016/en/",
       "note": "買う側を罰する法も含め、成人の合意による性労働の犯罪化が性労働者の人権の実現を妨げるとする方針",
       "kind": "secondary"
+    },
+    {
+      "id": "src-496b8ec318",
+      "title": "三重県「補助金等に係る調書等の公表について」",
+      "url": "https://www.pref.mie.lg.jp/ZAISEI/HP/31869028214.htm",
+      "note": "三重県における補助金等の基本的な在り方等に関する条例（平成15年三重県条例第31号）に基づき、補助金の調書を公表している例",
+      "kind": "official"
     },
     {
       "id": "src-4aaa795968",
@@ -3452,6 +3583,13 @@
       "kind": "secondary"
     },
     {
+      "id": "src-570a7e6809",
+      "title": "Sonja B. Starr「Estimating Gender Disparities in Federal Criminal Cases」University of Michigan Law & Economics Working Papers 57（2012年）",
+      "url": "https://repository.law.umich.edu/law_econ_current/57/",
+      "note": "米国の連邦の刑事事件を逮捕から量刑までつないで分析し、逮捕時の罪名や前歴などをそろえても、刑期に平均60%を超える男女差（女性が短い）があるとする",
+      "kind": "secondary"
+    },
+    {
       "id": "src-5824c99b30",
       "title": "厚生労働省「令和6年 労働災害発生状況について」（令和7年5月30日）",
       "url": "https://www.mhlw.go.jp/content/11302000/001543320.pdf",
@@ -3508,6 +3646,13 @@
       "kind": "secondary"
     },
     {
+      "id": "src-654af2e494",
+      "title": "Huntley AL, et al. \"Help-seeking by male victims of domestic violence and abuse (DVA): a systematic review and qualitative evidence synthesis\" BMJ Open 9(6): e021960（2019年）",
+      "url": "https://doi.org/10.1136/bmjopen-2018-021960",
+      "note": "12の研究をまとめた系統的レビュー。男性の被害者が相談をためらう理由として、打ち明けることへの恐れ、男らしさへの挑戦、相手との関係への思い、自信の喪失、支援が見えないこと・支援の受け止め方を挙げる",
+      "kind": "secondary"
+    },
+    {
       "id": "src-6651385e84",
       "title": "日弁連新聞 第589号（2023年）",
       "url": "https://www.nichibenren.or.jp/document/newspaper/year/2023/589.html",
@@ -3541,6 +3686,13 @@
       "url": "https://www.mhlw.go.jp/topics/bukyoku/nenkin/nenkin/toukei/dl/k_r07.pdf",
       "note": "令和7年度の最終納付率（令和5年度分保険料）55.0%",
       "kind": "official"
+    },
+    {
+      "id": "src-6ba1508921",
+      "title": "European Migration Network「Civic orientation courses or training offered to groups of third-country nationals in the EU」EMN Inform（2024年）",
+      "url": "https://emn.ie/wp-content/uploads/2024/10/EMN_INFORM_Civic-training.pdf",
+      "note": "EUの国々が移住者に行う市民オリエンテーションの講座の目的・内容・評価。権利と義務のほか、日常生活の実際の情報（practical information）を扱う",
+      "kind": "secondary"
     },
     {
       "id": "src-6bf34e5e04",
@@ -3688,6 +3840,13 @@
       "url": "https://laws.e-gov.go.jp/law/322AC0000000164",
       "note": null,
       "kind": "law"
+    },
+    {
+      "id": "src-8596ea54f5",
+      "title": "英国政府「Data standard for grant making」（Open standards for government）",
+      "url": "https://www.gov.uk/government/publications/open-standards-for-government/data-standard-for-grant-making",
+      "note": "英国政府は、補助金を出す政府の機関に、360Giving データ標準で補助金のデータを公開するよう定めている",
+      "kind": "official"
     },
     {
       "id": "src-871622948a",
@@ -4089,6 +4248,13 @@
       "kind": "research"
     },
     {
+      "id": "src-cd3d741e12",
+      "title": "Alan J. Hawkins・Tamara A. Fackrell「Does Relationship and Marriage Education for Lower-Income Couples Work? A Meta-Analysis of Emerging Research」Journal of Couple & Relationship Therapy 9: 181-191（2010年）",
+      "url": "https://scholarsarchive.byu.edu/facpub/4228",
+      "note": "米国で所得の低いカップル向けの関係教育15事業の評価をまとめ、対照群のある3研究で効果量 d=.250、事前と事後を比べた12研究で d=.293 の小〜中程度の効果があったとする",
+      "kind": "secondary"
+    },
+    {
       "id": "src-cd5bb15e76",
       "title": "北海道「水資源保全地域内の土地取引行為に係る事前届出」",
       "url": "https://www.pref.hokkaido.lg.jp/ss/stt/mizusigen/mizusigen_todokede.html",
@@ -4285,6 +4451,13 @@
       "kind": "law"
     },
     {
+      "id": "src-f7fe9826d2",
+      "title": "千葉市「家庭ごみと資源物の出し方一覧表、外国人市民向けのごみ出しに関する動画」",
+      "url": "https://www.city.chiba.jp/kankyo/junkan/shushugyomu/gomidasiitiranhyo.html",
+      "note": "ごみの出し方を多言語で案内している例",
+      "kind": "official"
+    },
+    {
       "id": "src-f861aa1791",
       "title": "教育公務員特例法施行令 第2条〜第4条",
       "url": "https://laws.e-gov.go.jp/law/324CO0000000006",
@@ -4359,6 +4532,13 @@
       "title": "参議院法務委員会（2021年4月13日）上川法務大臣の答弁",
       "url": "https://kokkai.ndl.go.jp/txt/120415206X00720210413/231",
       "note": null,
+      "kind": "law"
+    },
+    {
+      "id": "src-fef93e1ba9",
+      "title": "英国法務省「Statistics on Women and the Criminal Justice System 2021」（2022年11月）",
+      "url": "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1119965/statistics-on-women-and-the-criminal-justice-system-2021-.pdf",
+      "note": "イングランドとウェールズでは、1991年刑事司法法第95条が、人種や性別による差別を避けるのに役立つ情報を毎年公表するよう国に義務づけ、1992年から男女別の統計が公表されている。2021年の平均の拘禁刑期は男性22.7か月、女性14.5か月",
       "kind": "law"
     },
     {

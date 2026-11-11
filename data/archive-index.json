@@ -57,6 +57,105 @@
       "fetchedAt": "2026-11-10T02:53:49.920Z",
       "sha256": "2fe5e6c4523d2132efddb76e5db0fc5c6c0747f256fb76f4d5d15b6b16fa6201",
       "localPath": "sources/archive/2026-11-10-2fe5e6c4523d.html"
+    },
+    {
+      "url": "https://studentprivacy.ed.gov/faq/case-divorce-do-both-parents-have-rights-under-ferpa",
+      "title": "米国教育省 Student Privacy Policy Office「In the case of a divorce, do both parents have rights under FERPA?」",
+      "fetchedAt": "2026-11-11T06:30:37.859Z",
+      "sha256": "95e381c41eb51aca8ac2a3a078ee239d5b4477e8192807d7f68893cc3d5b0d71",
+      "localPath": "sources/archive/2026-11-11-95e381c41eb5.html"
+    },
+    {
+      "url": "https://endhomelessness.org/wp-content/uploads/2024/10/TOHSPJ-3-53.pdf",
+      "title": "Olivet ほか「Outreach and Engagement in Homeless Services」（2010年）",
+      "fetchedAt": "2026-11-11T06:30:38.159Z",
+      "sha256": "ef130643839a1f8e65e34e9790e18098b851a525914c570320076be70bde0c24",
+      "localPath": "sources/archive/2026-11-11-ef130643839a.pdf"
+    },
+    {
+      "url": "https://scholarsarchive.byu.edu/facpub/4228",
+      "title": "Hawkins・Fackrell（2010年）BYU ScholarsArchive の書誌と要旨",
+      "fetchedAt": "2026-11-11T06:30:39.768Z",
+      "sha256": "c83faea19b5e1a976fa14e099c25c2836aed285285d17b3d14a34acab6cc7e4f",
+      "localPath": "sources/archive/2026-11-11-c83faea19b5e.html"
+    },
+    {
+      "url": "https://repository.law.umich.edu/law_econ_current/57/",
+      "title": "Starr「Estimating Gender Disparities in Federal Criminal Cases」（2012年）の書誌と要旨",
+      "fetchedAt": "2026-11-11T06:30:40.617Z",
+      "sha256": "4b5049cc30eb644d914cd485ed46308a4615ef2f2c844b4c864c105177008247",
+      "localPath": "sources/archive/2026-11-11-4b5049cc30eb.html"
+    },
+    {
+      "url": "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1119965/statistics-on-women-and-the-criminal-justice-system-2021-.pdf",
+      "title": "英国法務省「Statistics on Women and the Criminal Justice System 2021」",
+      "fetchedAt": "2026-11-11T06:30:41.478Z",
+      "sha256": "d66ba847909bf67a96c4ea79724762243eb363d36c8de474f2de726b474a9716",
+      "localPath": "sources/archive/2026-11-11-d66ba847909b.pdf"
+    },
+    {
+      "url": "https://www.gov.uk/government/publications/open-standards-for-government/data-standard-for-grant-making",
+      "title": "英国政府「Data standard for grant making」",
+      "fetchedAt": "2026-11-11T06:30:43.937Z",
+      "sha256": "3eb989d2212417266695a723cdb0a6b8836643f16e56934920779e05c091d027",
+      "localPath": "sources/archive/2026-11-11-3eb989d22124.html"
+    },
+    {
+      "url": "https://emn.ie/wp-content/uploads/2024/10/EMN_INFORM_Civic-training.pdf",
+      "title": "EMN Inform「Civic orientation courses or training」（2024年）",
+      "fetchedAt": "2026-11-11T06:30:44.223Z",
+      "sha256": "de687c589fb6ee609faa3d746f5793949aeb6f696783b2bd4733c367f19a6b0d",
+      "localPath": "sources/archive/2026-11-11-de687c589fb6.pdf"
+    },
+    {
+      "url": "https://www.pref.saitama.lg.jp/withyou/counsel/mens.html",
+      "title": "With You さいたま「男性のための相談」",
+      "fetchedAt": "2026-11-11T06:30:44.967Z",
+      "sha256": "227ac5fc80ef0a9f6774ca5a06ed4dd1b1a3ecfb7e20402faa2014b04e5921cb",
+      "localPath": "sources/archive/2026-11-11-227ac5fc80ef.html"
+    },
+    {
+      "url": "https://www.city.toyonaka.osaka.jp/joho/reiki/youkou/shiminkyoudou/youkou5.files/gaikokujinnjyuuminn.pdf",
+      "title": "豊中市「外国人住民の通称に関する届出取扱要綱」",
+      "fetchedAt": "2026-11-11T06:30:45.478Z",
+      "sha256": "62dfba93b9a975877cd499a23b20f9eae468778d6c884d1b857a79fec82dab64",
+      "localPath": "sources/archive/2026-11-11-62dfba93b9a9.pdf"
+    },
+    {
+      "url": "https://www.city.fukuoka.lg.jp/shisei/R7hojokintyoushimin.html",
+      "title": "福岡市「令和7年度補助金調書（市民局）」",
+      "fetchedAt": "2026-11-11T06:30:46.255Z",
+      "sha256": "eb3ff6e8cd83f7d8c5466f1de8a1db20679bd8c71f1cfe97c1d7eee19005fb57",
+      "localPath": "sources/archive/2026-11-11-eb3ff6e8cd83.html"
+    },
+    {
+      "url": "https://www.pref.mie.lg.jp/ZAISEI/HP/31869028214.htm",
+      "title": "三重県「補助金等に係る調書等の公表について」",
+      "fetchedAt": "2026-11-11T06:30:46.969Z",
+      "sha256": "db7d700edf486f6a89a569a2b4323b6912bc1158f466c23c851076e1a2f881dd",
+      "localPath": "sources/archive/2026-11-11-db7d700edf48.html"
+    },
+    {
+      "url": "https://www.city.chiba.jp/kankyo/junkan/shushugyomu/gomidasiitiranhyo.html",
+      "title": "千葉市「家庭ごみと資源物の出し方一覧表」",
+      "fetchedAt": "2026-11-11T06:30:48.028Z",
+      "sha256": "c69aec8448aa4dcae171ca98eb20a6c85fd5ceb1405f011e6b876437146de979",
+      "localPath": "sources/archive/2026-11-11-c69aec8448aa.html"
+    },
+    {
+      "url": "https://www.jstage.jst.go.jp/article/personality/32/3/32_32.3.7/_article/-char/ja",
+      "title": "向井ほか（2024年）J-STAGE の書誌と抄録",
+      "fetchedAt": "2026-11-11T06:30:50.029Z",
+      "sha256": "5411343e3838b93effa29fd0e96e98cbba5801421f1d825798a43cd5a828a7b1",
+      "localPath": "sources/archive/2026-11-11-5411343e3838.html"
+    },
+    {
+      "url": "https://doi.org/10.1136/bmjopen-2018-021960",
+      "title": "Huntley ほか（2019年）BMJ Open 男性DV被害者の援助希求の系統的レビュー",
+      "note": "Europe PMC の全文XML（PMC6585830）から起こした本文。BMJ Open のサイトは403",
+      "fetchedAt": "2026-11-11T06:30:56.997Z",
+      "sha256": "6a9aadf4ae486ce1c9b8472c560face5458de767632400f29e242a88ef23b98e",
+      "localPath": "sources/archive/2026-11-11-6a9aadf4ae48.md"
     }
   ]
 }
