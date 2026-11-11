@@ -813,6 +813,15 @@
       "localPath": null
     },
     {
+      "id": "src-544689230e",
+      "title": "Oishi & Schimmack (2010) Residential mobility, well-being, and mortality. Journal of Personality and Social Psychology 98(6), 980-994",
+      "url": "https://doi.org/10.1037/a0019389",
+      "note": "米国の成人7,108人の10年追跡。子どもの頃の転居の回数が多いほど、大人になってからの幸福感が低かった。ただし、この関連は内向的な人に限って見られた（要旨で確認）",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-54e47965e8",
       "title": "上田倫徳「受動喫煙防止対策の推進と課題－健康増進法の一部を改正する法律案－」『立法と調査』第400号（参議院、2018年5月）",
       "url": "https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2018pdf/20180508016s.pdf",
@@ -1025,6 +1034,15 @@
       "url": "https://www2.ohchr.org/english/bodies/crc/docs/AdvanceVersions/CRC-C-GC-12.pdf",
       "note": "英文",
       "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-725711de70",
+      "title": "Hammer, Finkelhor & Sedlak (2002) Children Abducted by Family Members: National Estimates and Characteristics. NISMART Bulletin, 米国司法省 少年司法・非行防止局（OJJDP）",
+      "url": "https://www.ojp.gov/pdffiles1/ojjdp/196466.pdf",
+      "note": "米国は世帯調査と警察への調査で、家族による連れ去りの全国の件数を推計して公表している。1999年に推計203,900人の子が家族による連れ去りの被害にあい、うち117,200人は所在不明となり、56,500人は所在の発見のために警察等に届けられた（本文で確認）",
+      "kind": "secondary",
       "fetchedAt": null,
       "localPath": null
     },
@@ -1412,6 +1430,15 @@
       "url": "https://www.mhlw.go.jp/stf/nenkin_shikumi_013.html",
       "note": "夫は妻の死亡当時55歳以上に限る。見直しは令和10年4月施行予定",
       "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-9ed19c6ca2",
+      "title": "警察庁「令和６年の刑法犯に関する統計資料」（令和7年8月）図表2-1-6-4",
+      "url": "https://www.npa.go.jp/toukei/seianki/R06/r06keihouhantoukeisiryou.pdf",
+      "note": "未就学児が被害者の未成年者略取誘拐の検挙件数は、平成27年の23件から令和6年の79件に増え、令和6年の79件のうち77件は被疑者が「親族」。公表は「親族」までの区分で、父母かどうかや、その後の起訴の件数は分からない",
+      "kind": "law",
       "fetchedAt": null,
       "localPath": null
     },
@@ -2235,6 +2262,15 @@
       "localPath": null
     },
     {
+      "id": "src-f076b534ba",
+      "title": "公益社団法人商事法務研究会「父母の離婚、別居等を経験する子の養育について子の意見等を適切に反映させる方策に関する調査研究報告書」（法務省委託、令和8年3月）",
+      "url": "https://www.moj.go.jp/content/001463085.pdf",
+      "note": "「子どもの手続代理人の費用は、当事者である親の負担になることが選任のネックになっている」「子どもの手続代理人の費用について制度的な手当を行うことは、子どもの手続代理人の担い手の確保という観点からも重要な課題である」（本文で確認）",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-f24ec39a2b",
       "title": "教育公務員特例法 第21条第2項・第23条第1項・第24条第1項",
       "url": "https://laws.e-gov.go.jp/law/324AC0000000001",
@@ -2365,6 +2401,15 @@
       "title": "越智啓太「男性DV被害者の認知行動パターンとその支援の社会的実装に関する研究」科研費 2022年度実績報告書（法政大学）",
       "url": "https://kaken.nii.ac.jp/report/KAKENHI-PROJECT-20K03421/20K034212022jisseki/",
       "note": "行動に即して聞くと被害の男女差は非常に小さくなり、男性の被害は矮小化・暗数化されやすい",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-fd776865d4",
+      "title": "Plass, Finkelhor & Hotaling (1996) Family abduction outcomes: Factors associated with duration and emotional trauma to children. Youth & Society 28(1), 109-130",
+      "url": "https://doi.org/10.1177/0044118X96028001005",
+      "note": "米国の全国世帯調査（NISMART-1）の家族による連れ去り104件の分析。連れ去った親が子と残された親との接触を妨げた場合（オッズ比5.15）や、監護を恒久的に奪うと脅した場合（6.92）に、子の深刻な心の害が多かった。著者は、警察・裁判所はこれを重い事案の兆候として扱うべきとする（本文で確認。情報は残された親からのみ）",
       "kind": "secondary",
       "fetchedAt": null,
       "localPath": null
