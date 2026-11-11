@@ -574,6 +574,22 @@
       "fetchedAt": "2026-11-11T14:05:27.760Z",
       "sha256": "cb0d26425fe895fd014462dd3ca2a9b56a4f6c44d562475b2cffabd94c8c0a96",
       "localPath": "sources/archive/2026-11-11-cb0d26425fe8.bin"
+    },
+    {
+      "url": "https://www.jstage.jst.go.jp/article/its/24/0/24_2404/_article/-char/ja/",
+      "title": "田村智子「権力関係を乗り越えた法廷通訳の専門職化」通訳翻訳研究 No.24（2024）",
+      "note": "PDF",
+      "fetchedAt": "2026-11-11T14:44:35.636Z",
+      "sha256": "9d56585663d7ffd4fa5673f6c5e36fbd1bf8ff0706ef22be152db2d937512529",
+      "localPath": "sources/archive/2026-11-11-9d56585663d7.pdf"
+    },
+    {
+      "url": "https://www.jstage.jst.go.jp/article/citizenshipeducation/4/0/4_13/_article/-char/ja/",
+      "title": "野嵜雄太「学校の教職員に求められる宗教的配慮と子どもへの教育」シティズンシップ教育研究 第4号（2024）",
+      "note": "PDF",
+      "fetchedAt": "2026-11-11T14:44:35.719Z",
+      "sha256": "2ca3196921f07dd1781962867823b5b641d8001b5fc5d65db4d8bfb46756cac5",
+      "localPath": "sources/archive/2026-11-11-2ca3196921f0.pdf"
     }
   ]
 }
