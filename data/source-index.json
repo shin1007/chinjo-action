@@ -66,6 +66,15 @@
       "localPath": null
     },
     {
+      "id": "src-10ed6ab24a",
+      "title": "法務省 技能実習制度の運用に関するプロジェクトチーム「調査・検討結果報告書」（平成31年3月28日）",
+      "url": "https://www.moj.go.jp/isa/content/930004165.pdf",
+      "note": "失踪した技能実習生5,218人の実習実施機関を調べ、721人（631機関）について延べ893人分の不正行為等の疑い（割増賃金の不払176人、残業時間等不適正223人など）",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-117583ef31",
       "title": "厚生労働省保険局国民健康保険課 説明会資料（在留外国人の医療保険適用の課題と対応）",
       "url": "https://www.mhlw.go.jp/content/12401000/001616165.pdf",
@@ -1524,6 +1533,15 @@
       "localPath": null
     },
     {
+      "id": "src-c57d0762d6",
+      "title": "公益社団法人商事法務研究会「未成年期に父母の離婚を経験した子の養育に関する実態についての調査・分析業務報告書」（法務省委託、令和3年1月）",
+      "url": "https://www.moj.go.jp/content/001346918.pdf",
+      "note": "父母が不仲のとき誰かに相談した子は9.4％。「相談したかったが、適切な人がいなかった」19.0％（Q11_1、n=672）",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-c84e7196db",
       "title": "民事調停委員及び家事調停委員規則",
       "url": "https://www.courts.go.jp/vc-files/courts/2025/20250401minjityouteiiinn-oyobi-kajityouteiiinn-kisoku.pdf",
@@ -1591,6 +1609,15 @@
       "title": "最高裁判所第三小法廷 平成8年3月19日判決（平成4(オ)1796、民集50巻3号615頁、南九州税理士会事件）",
       "url": "https://www.courts.go.jp/hanrei/55864/detail2/index.html",
       "note": "税理士会が政治団体に寄付することは目的の範囲外で、そのための特別会費の決議は無効（参照法条に憲法第19条）",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-cff87ff86d",
+      "title": "食育基本法 第7条・第24条（伝統的な食文化への配意、食文化の継承）",
+      "url": "https://laws.e-gov.go.jp/law/417AC1000000063",
+      "note": "国及び地方公共団体は、伝統的な行事や作法と結びついた食文化等の継承を推進するため必要な施策を講ずる",
       "kind": "law",
       "fetchedAt": null,
       "localPath": null

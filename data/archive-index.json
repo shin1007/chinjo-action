@@ -220,6 +220,22 @@
       "fetchedAt": "2026-11-11T09:36:42.284Z",
       "sha256": "2cf5580d49568553b2bd15d8d6501a8f5f63e1c325c58fe873e3b06c5aba1f93",
       "localPath": "sources/archive/2026-11-11-2cf5580d4956.pdf"
+    },
+    {
+      "url": "https://www.moj.go.jp/isa/content/930004165.pdf",
+      "title": "法務省 技能実習制度の運用に関するプロジェクトチーム「調査・検討結果報告書」（平成31年3月28日）",
+      "note": "WebFetch で取得（curl は CloudFront 403）",
+      "fetchedAt": "2026-11-11T09:41:01.508Z",
+      "sha256": "5ee3a6d17ad0e1c7325c51a7e591dea3e54507eaa25e926ea4380e0eff368266",
+      "localPath": "sources/archive/2026-11-11-5ee3a6d17ad0.pdf"
+    },
+    {
+      "url": "https://www.moj.go.jp/content/001346918.pdf",
+      "title": "商事法務研究会「未成年期に父母の離婚を経験した子の養育に関する実態についての調査・分析業務報告書」（法務省委託、令和3年1月）",
+      "note": "WebFetch で取得（curl は CloudFront 403）",
+      "fetchedAt": "2026-11-11T09:41:01.615Z",
+      "sha256": "3ddd904c9d6b2aee340b57d15a1edf82cd1de0a9b0db86afea3c056d4c189837",
+      "localPath": "sources/archive/2026-11-11-3ddd904c9d6b.pdf"
     }
   ]
 }
