@@ -653,6 +653,35 @@
       "fetchedAt": "2026-11-11T14:59:30.257Z",
       "sha256": "6daa4e427e6d6cea0e2b6b467941cd053d711d676331406699c83c00214420ea",
       "localPath": "sources/archive/2026-11-11-6daa4e427e6d.pdf"
+    },
+    {
+      "url": "https://treaties.un.org/doc/Publication/UNTS/Volume%20999/volume-999-I-14668-English.pdf",
+      "title": "国連条約集（UNTS）市民的及び政治的権利に関する国際規約 英語正文",
+      "fetchedAt": "2026-11-11T15:06:08.783Z",
+      "sha256": "65294d97ba26f09761ecc70a07c27d0c288dde1a7fd38f2f0182dfcf62207ab5",
+      "localPath": "sources/archive/2026-11-11-65294d97ba26.pdf"
+    },
+    {
+      "url": "https://treaties.un.org/doc/Publication/UNTS/Volume%201249/volume-1249-I-20378-English.pdf",
+      "title": "国連条約集（UNTS）女子差別撤廃条約 英語正文",
+      "fetchedAt": "2026-11-11T15:06:08.869Z",
+      "sha256": "f4cdf8c71d341f91dfcce962c7f3ffda14ebd3e5180d35ff2d37535873a9dffa",
+      "localPath": "sources/archive/2026-11-11-f4cdf8c71d34.pdf"
+    },
+    {
+      "url": "https://treaties.un.org/doc/Publication/UNTS/Volume%20660/volume-660-I-9464-English.pdf",
+      "title": "国連条約集（UNTS）人種差別撤廃条約 英語正文",
+      "fetchedAt": "2026-11-11T15:06:08.952Z",
+      "sha256": "d27c6239c764f138c68521a4ea0c56c40e834219ffd30ac2bcb0bdeef63290e6",
+      "localPath": "sources/archive/2026-11-11-d27c6239c764.pdf"
+    },
+    {
+      "url": "https://www.unicef.or.jp/about_unicef/about_rig_all.html",
+      "title": "日本ユニセフ協会 掲載「児童の権利に関する条約」政府訳",
+      "note": "外務省のページは自動取得で403",
+      "fetchedAt": "2026-11-11T15:06:09.352Z",
+      "sha256": "df45233123f37f7802d4f5c31452007c32fa70b08c87c1bde925afaee822847b",
+      "localPath": "sources/archive/2026-11-11-df45233123f3.html"
     }
   ]
 }
