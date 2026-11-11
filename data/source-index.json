@@ -3,6 +3,15 @@
   "description": "陳情の参考資料として登録した一次資料と信頼のおける二次資料（kind: secondary）の索引。本文は必要なときだけ scripts/source.js で保存する。",
   "sources": [
     {
+      "id": "src-007df7e877",
+      "title": "健康保険法 第101条（出産育児一時金）",
+      "url": "https://laws.e-gov.go.jp/law/211AC0000000070",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-02ef0683c6",
       "title": "内閣府「第6次男女共同参画基本計画」（令和8年3月13日閣議決定）",
       "url": "https://www.gender.go.jp/about_danjo/basic_plans/6th/pdf/print.pdf",
@@ -600,15 +609,6 @@
       "id": "src-3ff15932f8",
       "title": "刑法 第224条（未成年者略取及び誘拐）",
       "url": "https://laws.e-gov.go.jp/law/140AC0000000045",
-      "note": null,
-      "kind": "law",
-      "fetchedAt": null,
-      "localPath": null
-    },
-    {
-      "id": "src-41395b5b0a",
-      "title": "健康保険法 第101条（出産育児一時金）",
-      "url": "https://laws.e-gov.go.jp/law/129AC0000000070",
       "note": null,
       "kind": "law",
       "fetchedAt": null,
