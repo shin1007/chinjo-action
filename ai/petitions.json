@@ -144,6 +144,21 @@
               "sourceId": "src-90b0f71bf3",
               "title": "衆議院予算委員会第一分科会（2024年2月27日）市村浩一郎委員の質問と、法務省大臣官房審議官の答弁",
               "note": "当事者の一方を有利にする目的でDVを受けたかのように偽装して主張することを弁護士が促している場合もあるとして、批判する意見があることは承知している（個別の当否へのコメントは差し控え）"
+            },
+            {
+              "sourceId": "src-c938fec120",
+              "title": "児童の権利に関する条約 第9条第3項（1994年に日本について効力発生）",
+              "note": "「締約国は、児童の最善の利益に反する場合を除くほか、父母の一方又は双方から分離されている児童が定期的に父母のいずれとも人的な関係及び直接の接触を維持する権利を尊重する。」（外務省の条約のページは自動の取得を拒むため、日本ユニセフ協会が掲載する政府訳で確認）"
+            },
+            {
+              "sourceId": "src-f5257b161c",
+              "title": "弁護士法 第56条第1項（懲戒事由）",
+              "note": "弁護士は、法律や所属弁護士会・日本弁護士連合会の会則に違反し、所属弁護士会の秩序又は信用を害し、その他職務の内外を問わずその品位を失うべき非行があつたときは、懲戒を受ける"
+            },
+            {
+              "sourceId": "src-263a72d47b",
+              "title": "民法 第817条の12第2項（親の責務等）",
+              "note": "「父母は、婚姻関係の有無にかかわらず、子に関する権利の行使又は義務の履行に関し、その子の利益のため、互いに人格を尊重し協力しなければならない。」"
             }
           ]
         },
@@ -216,6 +231,11 @@
               "sourceId": "src-b8251bed90",
               "title": "同 三谷法務副大臣の答弁",
               "note": null
+            },
+            {
+              "sourceId": "src-c938fec120",
+              "title": "児童の権利に関する条約 第11条第1項",
+              "note": "「締約国は、児童が不法に国外へ移送されることを防止し及び国外から帰還することができない事態を除去するための措置を講ずる。」（外務省の条約のページは自動の取得を拒むため、日本ユニセフ協会が掲載する政府訳で確認）"
             }
           ]
         },
@@ -242,6 +262,11 @@
               "sourceId": "src-0329c2b8fd",
               "title": "Courts and Legal Services Act 1990 s.58A（英国・イングランドとウェールズ）",
               "note": "家事事件（family proceedings）は、強制できる成功報酬型の契約（conditional fee agreement）の対象にできないと定める。訳は docs/英語の参考資料の訳.md"
+            },
+            {
+              "sourceId": "src-263a72d47b",
+              "title": "民法 第766条第1項（離婚後の子の監護に関する事項の定め等）",
+              "note": "子の監護の費用の分担などを定めるときは「子の利益を最も優先して考慮しなければならない」"
             }
           ]
         },
@@ -268,6 +293,16 @@
               "sourceId": "src-02ef0683c6",
               "title": "内閣府「第6次男女共同参画基本計画」（令和8年3月13日閣議決定）",
               "note": "民法等改正法（令和6年法律第33号）の円滑な施行のため、子の利益を確保する観点から必要な施策の充実に取り組み、改正の「正確な趣旨や内容について、引き続き適切な周知を図る」"
+            },
+            {
+              "sourceId": "src-c938fec120",
+              "title": "児童の権利に関する条約 第18条第1項",
+              "note": "「締約国は、児童の養育及び発達について父母が共同の責任を有するという原則についての認識を確保するために最善の努力を払う。」（外務省の条約のページは自動の取得を拒むため、日本ユニセフ協会が掲載する政府訳で確認）"
+            },
+            {
+              "sourceId": "src-263a72d47b",
+              "title": "民法 第817条の12第2項（親の責務等）",
+              "note": "「父母は、婚姻関係の有無にかかわらず、子に関する権利の行使又は義務の履行に関し、その子の利益のため、互いに人格を尊重し協力しなければならない。」"
             }
           ]
         },
@@ -537,6 +572,11 @@
               "sourceId": "src-a175c8e017",
               "title": "Cafcass（イングランド）",
               "note": null
+            },
+            {
+              "sourceId": "src-c938fec120",
+              "title": "児童の権利に関する条約 第12条第2項",
+              "note": "「児童は、特に、自己に影響を及ぼすあらゆる司法上及び行政上の手続において、国内法の手続規則に合致する方法により直接に又は代理人若しくは適当な団体を通じて聴取される機会を与えられる。」（外務省の条約のページは自動の取得を拒むため、日本ユニセフ協会が掲載する政府訳で確認）"
             }
           ]
         },
@@ -594,6 +634,11 @@
               "sourceId": "src-4bfdd35699",
               "title": "内閣「参議院議員牧山ひろえ君提出ＤＶ等被害者支援措置としての住民基本台帳閲覧制限等の期間制限に関する質問に対する答弁書」（内閣参質二一三第二二六号、令和6年7月2日）",
               "note": "三について：支援措置の継続に当たっては、必要な確認を行うべきもの。一について：期間を1年としたのは、被害の状況が様々に変化し得ること等による"
+            },
+            {
+              "sourceId": "src-d623002a66",
+              "title": "住民基本台帳法 第12条第6項",
+              "note": "「市町村長は、第一項の規定による請求が不当な目的によることが明らかなときは、これを拒むことができる。」DV等支援措置の法律上の根拠の一つ"
             }
           ]
         },
@@ -762,6 +807,16 @@
               "sourceId": "src-2708e30255",
               "title": "米国教育省 Student Privacy Policy Office「In the case of a divorce, do both parents have rights under FERPA?」",
               "note": "米国の連邦法（FERPA）では、裁判所の命令などで別段の定めがない限り、同居している親にも別居している親にも、子の教育記録についての同じ権利がある（原文「FERPA gives custodial and noncustodial parents alike certain rights with respect to their children’s education records」）"
+            },
+            {
+              "sourceId": "src-c938fec120",
+              "title": "児童の権利に関する条約 第9条第3項（1994年に日本について効力発生）",
+              "note": "「締約国は、児童の最善の利益に反する場合を除くほか、父母の一方又は双方から分離されている児童が定期的に父母のいずれとも人的な関係及び直接の接触を維持する権利を尊重する。」（外務省の条約のページは自動の取得を拒むため、日本ユニセフ協会が掲載する政府訳で確認）"
+            },
+            {
+              "sourceId": "src-c938fec120",
+              "title": "児童の権利に関する条約 第18条第1項",
+              "note": "「締約国は、児童の養育及び発達について父母が共同の責任を有するという原則についての認識を確保するために最善の努力を払う。」（外務省の条約のページは自動の取得を拒むため、日本ユニセフ協会が掲載する政府訳で確認）"
             }
           ]
         },
@@ -843,6 +898,11 @@
               "sourceId": "src-4bfdd35699",
               "title": "内閣「参議院議員牧山ひろえ君提出ＤＶ等被害者支援措置としての住民基本台帳閲覧制限等の期間制限に関する質問に対する答弁書」（内閣参質二一三第二二六号、令和6年7月2日）",
               "note": "三について：支援措置の継続に当たっては、必要な確認を行うべきもの。一について：期間を1年としたのは、被害の状況が様々に変化し得ること等による"
+            },
+            {
+              "sourceId": "src-d623002a66",
+              "title": "住民基本台帳法 第12条第6項",
+              "note": "「市町村長は、第一項の規定による請求が不当な目的によることが明らかなときは、これを拒むことができる。」DV等支援措置の法律上の根拠の一つ"
             }
           ]
         },
@@ -897,6 +957,11 @@
               "sourceId": "src-8a91894856",
               "title": "最高裁判所第二小法廷 平成17年12月6日決定（平成16(あ)2199、刑集59巻10号1901頁）",
               "note": "別居中の共同親権者である父が、母の監護下にある2歳の子を有形力を用いて連れ去った行為について、違法性は阻却されないとした"
+            },
+            {
+              "sourceId": "src-263a72d47b",
+              "title": "民法 第824条の2（親権の行使方法等）",
+              "note": "親権は父母が共同して行い、一方が単独で行えるのは、一方のみが親権者のとき、他方が行えないとき、「子の利益のため急迫の事情があるとき」と、監護及び教育に関する日常の行為に限られる"
             }
           ]
         },
@@ -1047,6 +1112,16 @@
               "sourceId": "src-b3b5086df4",
               "title": "文部科学省高等教育局私学部私学行政課 事務連絡「民法等の一部を改正する法律（令和６年法律第３３号）に係るＱ＆Ａ形式の解説資料の周知等について（依頼）」（令和7年10月8日）",
               "note": "Q&Aは、学校教育で何が「監護及び教育に関する日常の行為」等に当たるか、親権を持つ別居親から学校行事への参加の希望を受けた場合の対応などを示す（大阪府のサイトの写し）"
+            },
+            {
+              "sourceId": "src-263a72d47b",
+              "title": "民法 第824条の2（親権の行使方法等）",
+              "note": "親権は父母が共同して行い、一方が単独で行えるのは、一方のみが親権者のとき、他方が行えないとき、「子の利益のため急迫の事情があるとき」と、監護及び教育に関する日常の行為に限られる"
+            },
+            {
+              "sourceId": "src-c938fec120",
+              "title": "児童の権利に関する条約 第18条第1項",
+              "note": "「締約国は、児童の養育及び発達について父母が共同の責任を有するという原則についての認識を確保するために最善の努力を払う。」（外務省の条約のページは自動の取得を拒むため、日本ユニセフ協会が掲載する政府訳で確認）"
             }
           ]
         },
@@ -1295,6 +1370,16 @@
               "sourceId": "src-7e32cf6b39",
               "title": "総務省自治行政局「住基ネットと世帯情報等との関係について」資料2（2021年6月30日）",
               "note": "8ページ：DV等支援措置の情報の漏えいの原因として、「『支援対象者は女性で、加害者は男性(夫)である』という思い込みから、漏えいにつながった事例も複数見受けられる」（平成28〜30年度に各1件）"
+            },
+            {
+              "sourceId": "src-2b34a45195",
+              "title": "市民的及び政治的権利に関する国際規約 第26条（1979年に日本について効力発生）",
+              "note": "英語正文：All persons are equal before the law and are entitled without any discrimination to the equal protection of the law ... on any ground such as race, colour, sex ...（すべての者は法律の前に平等であり、性等によるいかなる差別もなしに法律による平等の保護を受ける権利を有する。仮訳）。外務省の和文のページは自動の取得を拒むため、国連条約集の英語正文で確認"
+            },
+            {
+              "sourceId": "src-7a17da8bf9",
+              "title": "女子に対するあらゆる形態の差別の撤廃に関する条約 第4条第1項（1985年に日本について効力発生）",
+              "note": "英語正文：男女の事実上の平等を促進する暫定的な特別措置は差別とはみなさないが、「these measures shall be discontinued when the objectives of equality of opportunity and treatment have been achieved」（機会及び待遇の平等の目的が達成された時に廃止されなければならない。仮訳）。性別で対象を限る措置について、目的の達成を検証し続ける根拠となる。国連条約集の英語正文で確認"
             }
           ]
         },
@@ -1513,6 +1598,16 @@
               "sourceId": "src-bc8eacfcdb",
               "title": "教育基本法 第4条（教育の機会均等）",
               "note": null
+            },
+            {
+              "sourceId": "src-7a17da8bf9",
+              "title": "女子に対するあらゆる形態の差別の撤廃に関する条約 第4条第1項（1985年に日本について効力発生）",
+              "note": "英語正文：男女の事実上の平等を促進する暫定的な特別措置は差別とはみなさないが、「these measures shall be discontinued when the objectives of equality of opportunity and treatment have been achieved」（機会及び待遇の平等の目的が達成された時に廃止されなければならない。仮訳）。性別で対象を限る措置について、目的の達成を検証し続ける根拠となる。国連条約集の英語正文で確認"
+            },
+            {
+              "sourceId": "src-2b34a45195",
+              "title": "市民的及び政治的権利に関する国際規約 第26条（1979年に日本について効力発生）",
+              "note": "英語正文：All persons are equal before the law and are entitled without any discrimination to the equal protection of the law ... on any ground such as race, colour, sex ...（すべての者は法律の前に平等であり、性等によるいかなる差別もなしに法律による平等の保護を受ける権利を有する。仮訳）。外務省の和文のページは自動の取得を拒むため、国連条約集の英語正文で確認"
             }
           ]
         },
@@ -1703,6 +1798,16 @@
               "sourceId": "src-14895d5331",
               "title": "Equality Act 2010 s.149（英国・公的部門の平等義務）",
               "note": "公的機関は、保護される特性（性別を含む）を持つ人と持たない人の間の機会の平等を進める必要などに、職務の中で相応の配慮をしなければならない。性別を問わず施策の影響を点検する仕組みの例。訳は docs/英語の参考資料の訳.md"
+            },
+            {
+              "sourceId": "src-2b34a45195",
+              "title": "市民的及び政治的権利に関する国際規約 第26条（1979年に日本について効力発生）",
+              "note": "英語正文：All persons are equal before the law and are entitled without any discrimination to the equal protection of the law ... on any ground such as race, colour, sex ...（すべての者は法律の前に平等であり、性等によるいかなる差別もなしに法律による平等の保護を受ける権利を有する。仮訳）。外務省の和文のページは自動の取得を拒むため、国連条約集の英語正文で確認"
+            },
+            {
+              "sourceId": "src-7a17da8bf9",
+              "title": "女子に対するあらゆる形態の差別の撤廃に関する条約 第4条第1項（1985年に日本について効力発生）",
+              "note": "英語正文：男女の事実上の平等を促進する暫定的な特別措置は差別とはみなさないが、「these measures shall be discontinued when the objectives of equality of opportunity and treatment have been achieved」（機会及び待遇の平等の目的が達成された時に廃止されなければならない。仮訳）。性別で対象を限る措置について、目的の達成を検証し続ける根拠となる。国連条約集の英語正文で確認"
             }
           ]
         },
@@ -2015,6 +2120,16 @@
               "sourceId": "src-bc8eacfcdb",
               "title": "教育基本法 第4条（教育の機会均等）",
               "note": null
+            },
+            {
+              "sourceId": "src-7a17da8bf9",
+              "title": "女子に対するあらゆる形態の差別の撤廃に関する条約 第4条第1項（1985年に日本について効力発生）",
+              "note": "英語正文：男女の事実上の平等を促進する暫定的な特別措置は差別とはみなさないが、「these measures shall be discontinued when the objectives of equality of opportunity and treatment have been achieved」（機会及び待遇の平等の目的が達成された時に廃止されなければならない。仮訳）。性別で対象を限る措置について、目的の達成を検証し続ける根拠となる。国連条約集の英語正文で確認"
+            },
+            {
+              "sourceId": "src-2b34a45195",
+              "title": "市民的及び政治的権利に関する国際規約 第26条（1979年に日本について効力発生）",
+              "note": "英語正文：All persons are equal before the law and are entitled without any discrimination to the equal protection of the law ... on any ground such as race, colour, sex ...（すべての者は法律の前に平等であり、性等によるいかなる差別もなしに法律による平等の保護を受ける権利を有する。仮訳）。外務省の和文のページは自動の取得を拒むため、国連条約集の英語正文で確認"
             }
           ]
         },
@@ -2252,6 +2367,16 @@
               "sourceId": "src-1a3fa224d9",
               "title": "厚生労働省社会・援護局「生活保護における外国人の取扱いについて」",
               "note": "生活保護法は日本国民のみが対象。永住・定住等の外国人には人道上の観点から行政措置として準じた保護を行っている"
+            },
+            {
+              "sourceId": "src-e5f98b3d59",
+              "title": "生活保護法 第1条・第2条",
+              "note": "第1条は「国が生活に困窮するすべての国民に対し」、第2条は「すべて国民は」と定め、法律上の保護の対象は国民。外国人への保護は通知に基づく行政措置"
+            },
+            {
+              "sourceId": "src-c27baeddc0",
+              "title": "あらゆる形態の人種差別の撤廃に関する国際条約 第1条第2項（1996年に日本について効力発生）",
+              "note": "英語正文：「This Convention shall not apply to distinctions, exclusions, restrictions or preferences made by a State Party to this Convention between citizens and non-citizens.」（この条約は、締約国が市民と市民でない者との間に設ける区別、排除、制限又は優先については、適用しない。仮訳）。国連条約集の英語正文で確認"
             }
           ]
         },
@@ -2382,6 +2507,11 @@
               "sourceId": "src-36467d4650",
               "title": "国籍法 第14条（国籍の選択）・第16条",
               "note": "選択の宣言の後の外国籍の離脱は努力義務"
+            },
+            {
+              "sourceId": "src-2b34a45195",
+              "title": "市民的及び政治的権利に関する国際規約 第25条（参政権・公務に携わる権利）",
+              "note": "英語正文：「Every citizen shall have the right and the opportunity ...」として、(b) 選挙で投票し選ばれること、(c)「To have access, on general terms of equality, to public service in his country」を、市民（citizen）の権利として定める。国連条約集の英語正文で確認"
             }
           ]
         },
@@ -2413,6 +2543,16 @@
               "sourceId": "src-74ebeeecde",
               "title": "最高裁判所大法廷 平成17年1月26日判決（平成10(行ツ)93、民集59巻1号128頁、東京都管理職選考事件）",
               "note": "公権力の行使に当たる職を含む一体的な管理職の任用制度で、昇任を日本国民の職員に限る措置は、労働基準法3条・憲法14条1項に違反しない"
+            },
+            {
+              "sourceId": "src-2b34a45195",
+              "title": "市民的及び政治的権利に関する国際規約 第25条（参政権・公務に携わる権利）",
+              "note": "英語正文：「Every citizen shall have the right and the opportunity ...」として、(b) 選挙で投票し選ばれること、(c)「To have access, on general terms of equality, to public service in his country」を、市民（citizen）の権利として定める。国連条約集の英語正文で確認"
+            },
+            {
+              "sourceId": "src-c27baeddc0",
+              "title": "あらゆる形態の人種差別の撤廃に関する国際条約 第1条第2項（1996年に日本について効力発生）",
+              "note": "英語正文：「This Convention shall not apply to distinctions, exclusions, restrictions or preferences made by a State Party to this Convention between citizens and non-citizens.」（この条約は、締約国が市民と市民でない者との間に設ける区別、排除、制限又は優先については、適用しない。仮訳）。国連条約集の英語正文で確認"
             }
           ]
         },
@@ -2618,6 +2758,16 @@
               "sourceId": "src-74ebeeecde",
               "title": "最高裁判所大法廷 平成17年1月26日判決（平成10(行ツ)93、民集59巻1号128頁、東京都管理職選考事件）",
               "note": "公権力の行使に当たる職を含む一体的な管理職の任用制度で、昇任を日本国民の職員に限る措置は、労働基準法3条・憲法14条1項に違反しない"
+            },
+            {
+              "sourceId": "src-2b34a45195",
+              "title": "市民的及び政治的権利に関する国際規約 第25条（参政権・公務に携わる権利）",
+              "note": "英語正文：「Every citizen shall have the right and the opportunity ...」として、(b) 選挙で投票し選ばれること、(c)「To have access, on general terms of equality, to public service in his country」を、市民（citizen）の権利として定める。国連条約集の英語正文で確認"
+            },
+            {
+              "sourceId": "src-c27baeddc0",
+              "title": "あらゆる形態の人種差別の撤廃に関する国際条約 第1条第2項（1996年に日本について効力発生）",
+              "note": "英語正文：「This Convention shall not apply to distinctions, exclusions, restrictions or preferences made by a State Party to this Convention between citizens and non-citizens.」（この条約は、締約国が市民と市民でない者との間に設ける区別、排除、制限又は優先については、適用しない。仮訳）。国連条約集の英語正文で確認"
             }
           ]
         },
@@ -2976,6 +3126,11 @@
               "sourceId": "src-ca97842008",
               "title": "総務省・文部科学省 高校生向け副教材「私たちが拓く日本の未来」",
               "note": null
+            },
+            {
+              "sourceId": "src-bc8eacfcdb",
+              "title": "教育基本法 第14条第1項（政治教育）",
+              "note": "「良識ある公民として必要な政治的教養は、教育上尊重されなければならない。」"
             }
           ]
         }
@@ -3902,9 +4057,9 @@
     },
     {
       "id": "src-263a72d47b",
-      "title": "民法 第766条・第766条の3（離婚後の子の監護に関する事項の定め等、法定養育費）",
+      "title": "民法 第817条の12第2項（親の責務等）",
       "url": "https://laws.e-gov.go.jp/law/129AC0000000089",
-      "note": "交流と監護費用の分担を、ともに子の監護について必要な事項として定める",
+      "note": "「父母は、婚姻関係の有無にかかわらず、子に関する権利の行使又は義務の履行に関し、その子の利益のため、互いに人格を尊重し協力しなければならない。」",
       "kind": "law"
     },
     {
@@ -3969,6 +4124,13 @@
       "url": "https://dl.ndl.go.jp/view/download/digidepo_10229412_po_201601a.pdf?contentNo=1",
       "note": "日本の最高裁裁判官の選任手続には法令の規定がなく、内閣による選任過程も非公開で実情が明らかでないこと、廃止された裁判官任命諮問委員会、英米独などの選任の仕組み",
       "kind": "secondary"
+    },
+    {
+      "id": "src-2b34a45195",
+      "title": "市民的及び政治的権利に関する国際規約 第26条（1979年に日本について効力発生）",
+      "url": "https://treaties.un.org/doc/Publication/UNTS/Volume%20999/volume-999-I-14668-English.pdf",
+      "note": "英語正文：All persons are equal before the law and are entitled without any discrimination to the equal protection of the law ... on any ground such as race, colour, sex ...（すべての者は法律の前に平等であり、性等によるいかなる差別もなしに法律による平等の保護を受ける権利を有する。仮訳）。外務省の和文のページは自動の取得を拒むため、国連条約集の英語正文で確認",
+      "kind": "official"
     },
     {
       "id": "src-2c7e27cc36",
@@ -4486,6 +4648,13 @@
       "title": "出入国在留管理庁「令和8年入管法等改正法について」",
       "url": "https://www.moj.go.jp/isa/01_00643.html",
       "note": "JESTAの創設。施行は令和11年3月31日までの政令で定める日",
+      "kind": "law"
+    },
+    {
+      "id": "src-7a17da8bf9",
+      "title": "女子に対するあらゆる形態の差別の撤廃に関する条約 第4条第1項（1985年に日本について効力発生）",
+      "url": "https://treaties.un.org/doc/Publication/UNTS/Volume%201249/volume-1249-I-20378-English.pdf",
+      "note": "英語正文：男女の事実上の平等を促進する暫定的な特別措置は差別とはみなさないが、「these measures shall be discontinued when the objectives of equality of opportunity and treatment have been achieved」（機会及び待遇の平等の目的が達成された時に廃止されなければならない。仮訳）。性別で対象を限る措置について、目的の達成を検証し続ける根拠となる。国連条約集の英語正文で確認",
       "kind": "law"
     },
     {
@@ -5063,6 +5232,13 @@
       "kind": "law"
     },
     {
+      "id": "src-c27baeddc0",
+      "title": "あらゆる形態の人種差別の撤廃に関する国際条約 第1条第2項（1996年に日本について効力発生）",
+      "url": "https://treaties.un.org/doc/Publication/UNTS/Volume%20660/volume-660-I-9464-English.pdf",
+      "note": "英語正文：「This Convention shall not apply to distinctions, exclusions, restrictions or preferences made by a State Party to this Convention between citizens and non-citizens.」（この条約は、締約国が市民と市民でない者との間に設ける区別、排除、制限又は優先については、適用しない。仮訳）。国連条約集の英語正文で確認",
+      "kind": "law"
+    },
+    {
       "id": "src-c2ecd9dabf",
       "title": "法務省「法教育」",
       "url": "https://www.moj.go.jp/housei/shihouhousei/index2.html",
@@ -5110,6 +5286,13 @@
       "url": "https://www.gender.go.jp/policy/no_violence/e-vaw/chousa/pdf/r05/r05danjokan-7.pdf",
       "note": "被害経験は男性0.7%、相談したのは男性20.0%",
       "kind": "official"
+    },
+    {
+      "id": "src-c938fec120",
+      "title": "児童の権利に関する条約 第9条第3項（1994年に日本について効力発生）",
+      "url": "https://www.unicef.or.jp/about_unicef/about_rig_all.html",
+      "note": "「締約国は、児童の最善の利益に反する場合を除くほか、父母の一方又は双方から分離されている児童が定期的に父母のいずれとも人的な関係及び直接の接触を維持する権利を尊重する。」（外務省の条約のページは自動の取得を拒むため、日本ユニセフ協会が掲載する政府訳で確認）",
+      "kind": "law"
     },
     {
       "id": "src-ca97842008",
@@ -5229,6 +5412,13 @@
       "url": "https://www.mext.go.jp/content/20220128-mxt_kyoikujinzai01-000020293-1.pdf",
       "note": "3〜4ページ。令和3年度始業日の不足2,558人、5月1日の不足2,065人。要因として臨時的任用教員の需要増と講師名簿登録者の減少",
       "kind": "official"
+    },
+    {
+      "id": "src-d623002a66",
+      "title": "住民基本台帳法 第12条第6項",
+      "url": "https://laws.e-gov.go.jp/law/342AC0000000081",
+      "note": "「市町村長は、第一項の規定による請求が不当な目的によることが明らかなときは、これを拒むことができる。」DV等支援措置の法律上の根拠の一つ",
+      "kind": "law"
     },
     {
       "id": "src-d7920ba608",
@@ -5379,9 +5569,9 @@
     },
     {
       "id": "src-f5257b161c",
-      "title": "弁護士法 第47条（会員）",
+      "title": "弁護士法 第56条第1項（懲戒事由）",
       "url": "https://laws.e-gov.go.jp/law/324AC1000000205",
-      "note": null,
+      "note": "弁護士は、法律や所属弁護士会・日本弁護士連合会の会則に違反し、所属弁護士会の秩序又は信用を害し、その他職務の内外を問わずその品位を失うべき非行があつたときは、懲戒を受ける",
       "kind": "law"
     },
     {
