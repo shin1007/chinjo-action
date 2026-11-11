@@ -726,7 +726,7 @@
       "id": "src-534c042e3b",
       "title": "Markman HJ, Hawkins AJ, Stanley SM ほか (2022) Helping couples achieve relationship success: A decade of progress in couple relationship education research and practice, 2010-2019. Journal of Marital and Family Therapy 48(1): 251-282（査読のある系統的レビュー）",
       "url": "https://doi.org/10.1111/jmft.12565",
-      "note": "厳密な評価研究34件を検討。夫婦関係教育は関係の質だけでなく、心身の健康・共同養育・子どもの健やかさにも効果があり、リスクの高い夫婦ほど効果が大きいことが多い",
+      "note": "厳密な評価研究34件を検討。夫婦関係教育は関係の質だけでなく、心身の健康・共同養育・子どもの健やかさにも効果があり、リスクの高い夫婦ほど効果が大きいことが多い。本文では、地域ぐるみで夫婦関係教育を広めたフロリダ州ジャクソンビルで、比べた郡より離婚率が大きく下がったとする準実験研究も紹介している",
       "kind": "secondary",
       "fetchedAt": null,
       "localPath": null
@@ -735,7 +735,7 @@
       "id": "src-53ec7fc40f",
       "title": "Sandler I, Wolchik S ほか (2020) Randomized Effectiveness Trial of the New Beginnings Program for Divorced Families with Children and Adolescents. Journal of Clinical Child & Adolescent Psychology 49(1): 60-78（査読論文）",
       "url": "https://doi.org/10.1080/15374416.2018.1540008",
-      "note": "家庭裁判所を通じて募った離婚・別居中の親830人の無作為化比較試験。地域の機関が行う10回の親向けプログラムで、子育てが改善し、子の心の問題が10か月後まで減った（効果は家庭により差がある）",
+      "note": "家庭裁判所を通じて募った離婚・別居中の父母830人の無作為化比較試験。地域の機関が行う10回の親向けプログラムを、同じ技能を2回で学ぶ群と比べ、子育てが改善し、子の心の問題が10か月後まで減った。ただし効果は家庭の条件により異なり、ヒスパニック系の家庭では見られなかった。本文で確認",
       "kind": "secondary",
       "fetchedAt": null,
       "localPath": null
@@ -1149,7 +1149,7 @@
       "id": "src-874804d057",
       "title": "Hjern A ほか (2021) Mental Health in Schoolchildren in Joint Physical Custody: A Longitudinal Study. Children 8(6): 473（査読論文）",
       "url": "https://doi.org/10.3390/children8060473",
-      "note": "デンマークの出生コホート31,519人を11歳まで追跡。父母の別居後、両方の家で暮らす子は、一方の親とだけ暮らす子より心の問題の割合が低かった（核家族と比べた調整オッズ比：共同 1.25、単独 1.63〜1.72）",
+      "note": "デンマークの出生コホート31,519人を11歳まで追跡。父母の別居後、両方の家で暮らす子は、一方の親とだけ暮らす子より心の問題の割合が低かった（核家族と比べた調整オッズ比：共同 1.25、継親家庭 1.63、新しいパートナーのいない単独 1.72）。本文で確認。共同の家庭はもともと学歴・収入が高い傾向があり、収入・学歴・精神科の受診歴などで調整しているが、追跡の脱落が多い点を著者は限界としている",
       "kind": "secondary",
       "fetchedAt": null,
       "localPath": null
@@ -1563,7 +1563,7 @@
       "id": "src-bb1ba3a0f8",
       "title": "Peterson C ほか (2018) Lifetime Economic Burden of Intimate Partner Violence Among U.S. Adults. American Journal of Preventive Medicine 55(4): 433-444（査読論文）",
       "url": "https://doi.org/10.1016/j.amepre.2018.04.049",
-      "note": "米国で、パートナー間暴力の生涯の費用は被害者1人あたり女性103,767ドル・男性23,414ドル、全体で約3.6兆ドル（2014年ドル）。うち37％を政府が負担。男性の被害も経済的な損失を生む",
+      "note": "米国で、パートナー間暴力の生涯の費用は被害者1人あたり女性103,767ドル・男性23,414ドル、全体で約3.6兆ドル（2014年ドル）。うち37％を政府が負担。男女の額の差は、被害の結果（妊娠など）と影響を受ける割合の違いによる。本文で確認。観察研究の差を暴力の結果とみなした推計である点は著者も限界としている",
       "kind": "secondary",
       "fetchedAt": null,
       "localPath": null
@@ -2094,7 +2094,7 @@
       "id": "src-f8e023d237",
       "title": "Wolchik SA ほか (2021) Developmental cascade effects of a parenting-focused program for divorced families on competence in emerging adulthood. Development and Psychopathology 33(1): 201-215（査読論文）",
       "url": "https://doi.org/10.1017/s095457941900169x",
-      "note": "離婚家庭240組の無作為化比較試験を15年追跡。親へのプログラムによる子育ての改善が、成人後の仕事の成果や学業の成果につながった。リスクの高い子ほど効果が大きい",
+      "note": "離婚後に子と暮らす母240組の無作為化比較試験を15年追跡。母へのプログラムによる子育ての改善が、成人後の仕事の成果や学業の成果につながった。リスクの高い子ほど効果が大きい。本文で確認",
       "kind": "secondary",
       "fetchedAt": null,
       "localPath": null
