@@ -3156,6 +3156,11 @@
               "sourceId": "src-af8faf18f2",
               "title": "厚生労働省「令和6(2024)年度 地域保健・健康増進事業報告の概況」健康増進編 表10",
               "note": "令和5年度の市区町村のがん検診の精密検査受診率は、胃85.7％・肺82.7％・大腸71.1％・子宮頸78.0％"
+            },
+            {
+              "sourceId": "src-d30d4416b5",
+              "title": "Gruner LF ほか (2021) The Effects of Different Invitation Schemes on the Use of Fecal Occult Blood Tests for Colorectal Cancer Screening: Systematic Review of Randomized Controlled Trials. Cancers 13(7): 1520（査読のある系統的レビュー）",
+              "note": "無作為化比較試験34件。大腸がん検診で、事前の案内で受診率が3.3〜10.8ポイント、検査キットの郵送で4〜19.7ポイント上がり、手紙・メールでの再勧奨は8.5〜15.8ポイント上がった（電話・ショートメッセージは0.6〜6.5ポイント）。本文で確認"
             }
           ]
         },
@@ -3183,6 +3188,11 @@
               "sourceId": "src-183addcea0",
               "title": "高齢者の医療の確保に関する法律 第19条・第20条・第24条",
               "note": null
+            },
+            {
+              "sourceId": "src-c1417b4bdd",
+              "title": "Hirata A, Uchida T (2026) The Specific Health Checkups and Specific Health Guidance Program: A Strategy for the Prevention of Cardiovascular Disease in Japan. Journal of Atherosclerosis and Thrombosis 33(4): 367-（査読のある総説）",
+              "note": "特定健診の受診は死亡の低さと関連し、特定保健指導は肥満や血圧・血糖を改善する（効果は時間とともに小さくなる）。費用の面では、保健指導の対象者1人あたりの費用が53,014円減り、質を調整した生存年が0.044増えるとの推計を紹介し、費用対効果がよいとする。課題として受診率の向上を挙げる。本文で確認"
             }
           ]
         },
@@ -3462,6 +3472,11 @@
               "sourceId": "src-07768f7047",
               "title": "東京都総務局統計部「くらしと統計2026」参考資料「統計グラフの見方」",
               "note": "グラフの基本構造で「目盛り数字（0から始めます）」。省略記号（波線等）は「省略した部分が大きいほど、実態とかけ離れたグラフになっているため、読みとる際には注意が必要です」"
+            },
+            {
+              "sourceId": "src-f8eaa128fa",
+              "title": "Wijnker W ほか (2026) Debunking misleading graphs effectively: How vocationally educated young adults perceive graphs. PLOS ONE 21(2): e0340100（査読論文）",
+              "note": "オランダの職業教育の学生130人の調査。誤解を招くグラフの訂正を見せると誤解が減り、同じ種類の誤解を招くグラフにも惑わされにくくなった。本文で確認"
             }
           ]
         },
@@ -3494,6 +3509,16 @@
               "sourceId": "src-1a1b279ca7",
               "title": "日テレNEWS NNN「高市内閣支持率71パーセント【NNN・読売新聞 緊急世論調査】」（2025年10月22日掲載）",
               "note": "末尾の【訂正・お詫び】（10月23日追記）：折れ線グラフに一部誤りがあったとだけ記し、どこがどう誤っていたかは示していない"
+            },
+            {
+              "sourceId": "src-114f1fb356",
+              "title": "Chan MS, Albarracín D (2023) A meta-analysis of correction effects in science-relevant misinformation. Nature Human Behaviour 7(9): 1514-1525（査読論文）",
+              "note": "74の報告（60,861人）を統合。誤った情報を訂正しても、平均すると効果ははっきりしなかったが、訂正が詳しいときは効果が大きかった。「誤りがありました」だけでなく、どこがどう誤っていたかを示す訂正の意義を裏付ける。要旨と本文で確認"
+            },
+            {
+              "sourceId": "src-f8eaa128fa",
+              "title": "Wijnker W ほか (2026) Debunking misleading graphs effectively: How vocationally educated young adults perceive graphs. PLOS ONE 21(2): e0340100（査読論文）",
+              "note": "オランダの職業教育の学生130人の調査。誤解を招くグラフの訂正を見せると誤解が減り、同じ種類の誤解を招くグラフにも惑わされにくくなった。本文で確認"
             }
           ]
         },
@@ -3585,6 +3610,11 @@
               "sourceId": "src-0f4c564591",
               "title": "埼玉県「有害図書・深夜外出の規制等」（埼玉県青少年健全育成条例による規制の案内）",
               "note": "他の自治体の例：10cm以上張り出した仕切り板、他の図書の棚と60cm以上離す、床から150cm以上の高さに背表紙のみ等、6つの区分陳列の方法を示す"
+            },
+            {
+              "sourceId": "src-bd2ce44368",
+              "title": "Coyne SM ほか (2019) Contributions of Mainstream Sexual Media Exposure to Sexual Attitudes, Perceived Peer Norms, and Sexual Behavior: A Meta-Analysis. Journal of Adolescent Health 64(4): 430-436（査読論文）",
+              "note": "59研究・394の効果量を統合。露骨でない性的なメディアに触れることも、性に関する態度と行動に小さいが有意な影響があり、その影響は青年期で大人になりかけの時期より強い。要旨で確認（本文は取れず）"
             }
           ]
         }
@@ -3675,6 +3705,13 @@
       "url": "https://www.moj.go.jp/isa/content/930004165.pdf",
       "note": "失踪した技能実習生5,218人の実習実施機関を調べ、721人（631機関）について延べ893人分の不正行為等の疑い（割増賃金の不払176人、残業時間等不適正223人など）",
       "kind": "law"
+    },
+    {
+      "id": "src-114f1fb356",
+      "title": "Chan MS, Albarracín D (2023) A meta-analysis of correction effects in science-relevant misinformation. Nature Human Behaviour 7(9): 1514-1525（査読論文）",
+      "url": "https://doi.org/10.1038/s41562-023-01623-8",
+      "note": "74の報告（60,861人）を統合。誤った情報を訂正しても、平均すると効果ははっきりしなかったが、訂正が詳しいときは効果が大きかった。「誤りがありました」だけでなく、どこがどう誤っていたかを示す訂正の意義を裏付ける。要旨と本文で確認",
+      "kind": "secondary"
     },
     {
       "id": "src-117583ef31",
@@ -4860,6 +4897,13 @@
       "kind": "law"
     },
     {
+      "id": "src-bd2ce44368",
+      "title": "Coyne SM ほか (2019) Contributions of Mainstream Sexual Media Exposure to Sexual Attitudes, Perceived Peer Norms, and Sexual Behavior: A Meta-Analysis. Journal of Adolescent Health 64(4): 430-436（査読論文）",
+      "url": "https://doi.org/10.1016/j.jadohealth.2018.11.016",
+      "note": "59研究・394の効果量を統合。露骨でない性的なメディアに触れることも、性に関する態度と行動に小さいが有意な影響があり、その影響は青年期で大人になりかけの時期より強い。要旨で確認（本文は取れず）",
+      "kind": "secondary"
+    },
+    {
       "id": "src-bd64384ffb",
       "title": "WHO「The SAFER initiative」",
       "url": "https://www.who.int/initiatives/SAFER",
@@ -4914,6 +4958,13 @@
       "url": "https://laws.e-gov.go.jp/law/325AC0000000132",
       "note": "第3号「報道は事実をまげないですること。」",
       "kind": "law"
+    },
+    {
+      "id": "src-c1417b4bdd",
+      "title": "Hirata A, Uchida T (2026) The Specific Health Checkups and Specific Health Guidance Program: A Strategy for the Prevention of Cardiovascular Disease in Japan. Journal of Atherosclerosis and Thrombosis 33(4): 367-（査読のある総説）",
+      "url": "https://doi.org/10.5551/jat.rv22047",
+      "note": "特定健診の受診は死亡の低さと関連し、特定保健指導は肥満や血圧・血糖を改善する（効果は時間とともに小さくなる）。費用の面では、保健指導の対象者1人あたりの費用が53,014円減り、質を調整した生存年が0.044増えるとの推計を紹介し、費用対効果がよいとする。課題として受診率の向上を挙げる。本文で確認",
+      "kind": "secondary"
     },
     {
       "id": "src-c1e58a69d5",
@@ -5053,6 +5104,13 @@
       "title": "高見富二男「令和６年民法（家族法制）改正に関する国会論議－離婚後共同親権及び法定養育費制度の導入等－」『立法と調査』第470号（参議院、2024年11月）",
       "url": "https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2024pdf/20241101117.pdf",
       "note": "2：父母相互の人格尊重・協力義務。無断で子の居所を変更する行為などが義務違反と評価され得るとの答弁",
+      "kind": "secondary"
+    },
+    {
+      "id": "src-d30d4416b5",
+      "title": "Gruner LF ほか (2021) The Effects of Different Invitation Schemes on the Use of Fecal Occult Blood Tests for Colorectal Cancer Screening: Systematic Review of Randomized Controlled Trials. Cancers 13(7): 1520（査読のある系統的レビュー）",
+      "url": "https://doi.org/10.3390/cancers13071520",
+      "note": "無作為化比較試験34件。大腸がん検診で、事前の案内で受診率が3.3〜10.8ポイント、検査キットの郵送で4〜19.7ポイント上がり、手紙・メールでの再勧奨は8.5〜15.8ポイント上がった（電話・ショートメッセージは0.6〜6.5ポイント）。本文で確認",
       "kind": "secondary"
     },
     {
@@ -5270,6 +5328,13 @@
       "title": "Wolchik SA ほか (2021) Developmental cascade effects of a parenting-focused program for divorced families on competence in emerging adulthood. Development and Psychopathology 33(1): 201-215（査読論文）",
       "url": "https://doi.org/10.1017/s095457941900169x",
       "note": "離婚後に子と暮らす母240組の無作為化比較試験を15年追跡。母へのプログラムによる子育ての改善が、成人後の仕事の成果や学業の成果につながった。リスクの高い子ほど効果が大きい。本文で確認",
+      "kind": "secondary"
+    },
+    {
+      "id": "src-f8eaa128fa",
+      "title": "Wijnker W ほか (2026) Debunking misleading graphs effectively: How vocationally educated young adults perceive graphs. PLOS ONE 21(2): e0340100（査読論文）",
+      "url": "https://doi.org/10.1371/journal.pone.0340100",
+      "note": "オランダの職業教育の学生130人の調査。誤解を招くグラフの訂正を見せると誤解が減り、同じ種類の誤解を招くグラフにも惑わされにくくなった。本文で確認",
       "kind": "secondary"
     },
     {
