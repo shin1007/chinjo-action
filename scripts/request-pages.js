@@ -1,6 +1,7 @@
 // 要望書の出し方のページ（知事・市長への手紙、市民の声など）を、自治体の公式サイトからたどって探し、data/request-pages.js に書き出す。
 // 対象：47都道府県・20の政令指定都市・それ以外で人口の多い市区町村300（data/municipality-populations.json の順）
-//   node scripts/request-pages.js            … 探して書き出す（手で直した data/request-pages.js の値は MANUAL に置くと残る）
+//   node scripts/request-pages.js            … 探して書き出す（前に見つけたページは残し、まだのところだけたどる）
+//   node scripts/request-pages.js --all      … 全部たどり直す（手で直した data/request-pages.js の値は MANUAL に置くと残る）
 // 見つからなかった・開けなかった自治体は docs/要望書の出し方のページが見つからない自治体.md に残す
 const fs = require('fs');
 const path = require('path');
@@ -11,10 +12,12 @@ require(path.join(ROOT, 'data/sites.js'));
 const POP = require(path.join(ROOT, 'data/municipality-populations.json')).populations;
 
 const DESIGNATED = ['札幌市', '仙台市', 'さいたま市', '千葉市', '横浜市', '川崎市', '相模原市', '新潟市', '静岡市', '浜松市', '名古屋市', '京都市', '大阪市', '堺市', '神戸市', '岡山市', '広島市', '北九州市', '福岡市', '熊本市'];
-const TOP = 300;
+const TOP = 800;
 
 // 自動で見つけたページが違っていたとき、手で確かめたページに置き換える（キー：都道府県/市区町村。"@" は都道府県）
 const MANUAL = require('./request-pages-manual.js');
+// 前に見つけたページはたどり直さない（--all を付けると全部たどり直す）
+const KEEP = process.argv.includes('--all') ? {} : (() => { try { require(path.join(ROOT, 'data/request-pages.js')); return window.REQUEST_PAGES || {}; } catch { return {}; } })();
 
 // 要望書を出すページらしい言葉。強いものほど点が高い
 const GOOD = [
@@ -106,7 +109,7 @@ async function find(name, site) {
       const title = titleOf(p.text) || c.text;
       if (BAD.test(title)) continue;
       // 「広聴」「広報・広聴」や課の紹介のような入口のページは、出し方のページではないので候補にしない（中のリンクはたどる）
-      const hub = /^(広報・?広聴|広聴|行政広聴|市の広聴|広聴・広報|集団広聴|広聴活動)(\s|／|\/|$)|^そのほか|概要|あらまし|課(\s|\/|／|$)|グループ$|係(\s|\/|／|$)|業務$|記事一覧|まとめ|紹介します/.test(title);
+      const hub = /^(広報・?広聴|広聴|行政広聴|市の広聴|広聴・広報|集団広聴|広聴活動)(\s|／|\/|$)|^そのほか|概要|あらまし|課(\s|\/|／|$)|グループ$|係(\s|\/|／|$)|業務$|記事一覧|まとめ|紹介します|広聴(事業|について)|戦略|プラン|広報・報道|広聴・(広報|協働|市民協働)|^([^／]+／)?(広報・)?広聴(s|：|$)|お知らせ（広報/.test(title) && !/手紙|の声|のこえ/.test(title);
       const ts = score(title.replace(name, ''));
       if (!hub && ts >= 7 && howTo(p.text)) return { url: p.url, title };
       if (ts >= 4 || c.s >= 7) {
@@ -141,6 +144,7 @@ function targets() {
       const id = `${pref}/${key}`;
       const label = key === '@' ? pref : `${pref}${key}`;
       if (MANUAL[id]) { out[id] = MANUAL[id]; continue; }
+      if (KEEP[id]) { out[id] = KEEP[id]; continue; }
       const [site] = (window.SITES[pref] || {})[key] || [];
       if (!site) { fails.push([label, '公式サイトが data/sites.js にない']); continue; }
       const r = await find(label, site);
