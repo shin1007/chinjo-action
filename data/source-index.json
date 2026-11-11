@@ -111,6 +111,15 @@
       "localPath": null
     },
     {
+      "id": "src-1a3fa224d9",
+      "title": "厚生労働省社会・援護局「生活保護における外国人の取扱いについて」",
+      "url": "https://www.mhlw.go.jp/content/001684937.pdf",
+      "note": "生活保護法は日本国民のみが対象。永住・定住等の外国人には人道上の観点から行政措置として準じた保護を行っている",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-1ade58b30e",
       "title": "高野涼子「高等学校等就学支援金法改正案をめぐる国会論議」『立法と調査』第486号（参議院、2026年8月）",
       "url": "https://www.sangiin.go.jp/jpn/shiryo/chousa/rippou_chousa/backnumber/2026pdf/20260806077.pdf",
@@ -197,6 +206,15 @@
       "url": "https://laws.e-gov.go.jp/law/331AC0000000118",
       "note": null,
       "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-25872cffa9",
+      "title": "喫煙の健康影響に関する検討会「喫煙と健康 喫煙の健康影響に関する検討会報告書」（平成28年8月）",
+      "url": "https://www.mhlw.go.jp/content/000550455.pdf",
+      "note": "小児の受動喫煙と喘息の既往、乳幼児突然死症候群（SIDS）は「因果関係を推定するのに十分（レベル1）」と判定",
+      "kind": "research",
       "fetchedAt": null,
       "localPath": null
     },
@@ -931,9 +949,9 @@
     },
     {
       "id": "src-7e2fa7ae89",
-      "title": "内閣府男女共同参画局「男女間における暴力に関する調査（令和5年度調査）」Ⅱ－2 配偶者からの被害経験",
+      "title": "内閣府男女共同参画局「男女間における暴力に関する調査報告書」（令和6年3月）Ⅱ－2（5）（6）",
       "url": "https://www.gender.go.jp/policy/no_violence/e-vaw/chousa/pdf/r05/r05danjokan-4.pdf",
-      "note": "図2-1-2（行為ごとの被害経験・男女別）、図2-5-1（相談の有無）、図2-6-1（相談しなかった理由）",
+      "note": "配偶者からの被害を誰かに相談した人は女性60.6％に対し男性39.9％。相談しなかった理由の「自分にも悪いところがあると思ったから」は女性17.1％、男性41.4％",
       "kind": "official",
       "fetchedAt": null,
       "localPath": null
@@ -1272,11 +1290,29 @@
       "localPath": null
     },
     {
+      "id": "src-abd3c4a778",
+      "title": "厚生労働省保険局保険課長通知「「海外療養費及び海外出産に係る出産育児一時金等の支給の適正化に向けた対策等について」の一部改正について」（令和5年5月24日 保保発0524第1号）",
+      "url": "https://www.mhlw.go.jp/content/12400000/001508503.pdf",
+      "note": "海外での出産の事実自体を偽装した不正受給の事案が発生したことを踏まえ、対策通知を改正",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-aeb772d14d",
       "title": "人事院規則八―一八（採用試験）第9条",
       "url": "https://laws.e-gov.go.jp/law/423RJNJ08018023",
       "note": "日本の国籍を有しない者は採用試験を受けることができない",
       "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-af8faf18f2",
+      "title": "厚生労働省「令和6(2024)年度 地域保健・健康増進事業報告の概況」健康増進編 表10",
+      "url": "https://www.mhlw.go.jp/toukei/saikin/hw/c-hoken/24/dl/R06gaikyo.pdf",
+      "note": "令和5年度の市区町村のがん検診の精密検査受診率は、胃85.7％・肺82.7％・大腸71.1％・子宮頸78.0％",
+      "kind": "official",
       "fetchedAt": null,
       "localPath": null
     },
