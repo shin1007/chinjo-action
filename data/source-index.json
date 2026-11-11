@@ -570,6 +570,15 @@
       "localPath": null
     },
     {
+      "id": "src-4bfdd35699",
+      "title": "内閣「参議院議員牧山ひろえ君提出ＤＶ等被害者支援措置としての住民基本台帳閲覧制限等の期間制限に関する質問に対する答弁書」（内閣参質二一三第二二六号、令和6年7月2日）",
+      "url": "https://www.sangiin.go.jp/japanese/joho1/kousei/syuisyo/213/touh/t213226.htm",
+      "note": "三について：支援措置の継続に当たっては、必要な確認を行うべきもの。一について：期間を1年としたのは、被害の状況が様々に変化し得ること等による",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-4c8f00bd22",
       "title": "スウェーデン社会保険庁「養育費補助」",
       "url": "https://www.forsakringskassan.se/privatperson/foralder/for-foraldrar-som-inte-lever-ihop/barnet-bor-hos-dig/underhallsstod-fran-forsakringskassan",
@@ -930,6 +939,15 @@
       "localPath": null
     },
     {
+      "id": "src-7f4d0b65d5",
+      "title": "総務省「住民基本台帳法施行令の一部を改正する政令案等に対する意見と考え方」別紙1 Ⅰ通称関係",
+      "url": "https://www.soumu.go.jp/main_content/000142508.pdf",
+      "note": "制度を作る際の意見募集で、通称による別人へのなりすましや不正行為の助長を懸念する意見が寄せられていた",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-8122e6ca73",
       "title": "私立学校振興助成法 第14条第2項（公認会計士の監査）",
       "url": "https://laws.e-gov.go.jp/law/350AC1000000061",
@@ -1061,6 +1079,15 @@
       "url": "https://kokkai.ndl.go.jp/txt/121305266X00120240227/226",
       "note": "当事者の一方を有利にする目的でDVを受けたかのように偽装して主張することを弁護士が促している場合もあるとして、批判する意見があることは承知している（個別の当否へのコメントは差し控え）",
       "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-92b72eab5d",
+      "title": "Eurostat「Accidents at work statistics」（2026年9月のデータ）",
+      "url": "https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Accidents_at_work_statistics",
+      "note": "EU でも2024年の休業を伴う労働災害の67.2%が男性。鉱業・製造業・建設業など男性の多い業種で災害が多いと説明。訳は docs/英語の参考資料の訳.md",
+      "kind": "research",
       "fetchedAt": null,
       "localPath": null
     },
