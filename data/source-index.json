@@ -12,6 +12,15 @@
       "localPath": null
     },
     {
+      "id": "src-0329c2b8fd",
+      "title": "Courts and Legal Services Act 1990 s.58A（英国・イングランドとウェールズ）",
+      "url": "https://www.legislation.gov.uk/ukpga/1990/41/section/58A",
+      "note": "家事事件（family proceedings）は、強制できる成功報酬型の契約（conditional fee agreement）の対象にできないと定める。訳は docs/英語の参考資料の訳.md",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-041c2458e0",
       "title": "参議院法務委員会（2026年4月14日）嘉田由紀子委員の質問",
       "url": "https://kokkai.ndl.go.jp/txt/122115206X00420260414/75",
@@ -98,6 +107,15 @@
       "url": "https://www.moj.go.jp/content/001452582.pdf",
       "note": "法定養育費は子1人あたり月2万円",
       "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-14895d5331",
+      "title": "Equality Act 2010 s.149（英国・公的部門の平等義務）",
+      "url": "https://www.legislation.gov.uk/ukpga/2010/15/section/149",
+      "note": "公的機関は、保護される特性（性別を含む）を持つ人と持たない人の間の機会の平等を進める必要などに、職務の中で相応の配慮をしなければならない。性別を問わず施策の影響を点検する仕組みの例。訳は docs/英語の参考資料の訳.md",
+      "kind": "research",
       "fetchedAt": null,
       "localPath": null
     },
@@ -1083,6 +1101,15 @@
       "localPath": null
     },
     {
+      "id": "src-8de1a2ba46",
+      "title": "Doherty WJ, Willoughby BJ, Peterson B (2011) Interest in Marital Reconciliation Among Divorcing Parents. Family Court Review 49(2): 313-321",
+      "url": "https://scholarsarchive.byu.edu/facpub/5112",
+      "note": "米ミネソタ州で離婚手続中の親2,484人を調査。約4人に1人が努力すれば結婚を救えると考え、約10人に3人が関係修復の支援に関心。訳は docs/英語の参考資料の訳.md",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-8e0011ced7",
       "title": "特定非営利活動促進法 第18条・第27条〜第30条・第43条・第45条",
       "url": "https://laws.e-gov.go.jp/law/410AC1000000007",
@@ -1213,6 +1240,15 @@
       "title": "厚生労働省「年金制度の仕組みと考え方 第13 遺族年金」",
       "url": "https://www.mhlw.go.jp/stf/nenkin_shikumi_013.html",
       "note": "夫は妻の死亡当時55歳以上に限る。見直しは令和10年4月施行予定",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-9f473886e4",
+      "title": "英国政府「Freedom from violence and abuse: men and boys explanatory note」（2025年12月）",
+      "url": "https://www.gov.uk/government/publications/freedom-from-violence-and-abuse-a-cross-government-strategy/freedom-from-violence-and-abuse-men-and-boys-explanatory-note-accessible",
+      "note": "英国の暴力・虐待対策の国家戦略は男性と男児を「それ自体として」認め、女性への影響の大きさを認める中で男性が見過ごされてきたと明記。訳は docs/英語の参考資料の訳.md",
       "kind": "official",
       "fetchedAt": null,
       "localPath": null

@@ -300,6 +300,34 @@
       "fetchedAt": "2026-11-11T11:04:56.853Z",
       "sha256": "ef205e716c8dc06da1665dccb34540b5c94bfe1204bff9f25b99f42537076c19",
       "localPath": "sources/archive/2026-11-11-ef205e716c8d.json"
+    },
+    {
+      "url": "https://scholarsarchive.byu.edu/facpub/5112",
+      "title": "Doherty, Willoughby & Peterson (2011) Interest in Marital Reconciliation Among Divorcing Parents（BYU ScholarsArchive）",
+      "fetchedAt": "2026-11-11T11:07:26.104Z",
+      "sha256": "b72ff10baeed621b9109161755f4a910391fc7e8ef62246e8f5a86deac2aec06",
+      "localPath": "sources/archive/2026-11-11-b72ff10baeed.html"
+    },
+    {
+      "url": "https://www.legislation.gov.uk/ukpga/1990/41/section/58A",
+      "title": "Courts and Legal Services Act 1990 s.58A（英国）",
+      "fetchedAt": "2026-11-11T11:07:28.608Z",
+      "sha256": "ae1fcd61c781ed2e73e253a5c10d866749de974b86bddf4c63432213be94818c",
+      "localPath": "sources/archive/2026-11-11-ae1fcd61c781.html"
+    },
+    {
+      "url": "https://www.legislation.gov.uk/ukpga/2010/15/section/149",
+      "title": "Equality Act 2010 s.149 Public sector equality duty（英国）",
+      "fetchedAt": "2026-11-11T11:07:33.657Z",
+      "sha256": "8583416a21eb7678909cff7dc3a2c4ff934cfb20bef6419ce4ce157e2e7fc2af",
+      "localPath": "sources/archive/2026-11-11-8583416a21eb.html"
+    },
+    {
+      "url": "https://www.gov.uk/government/publications/freedom-from-violence-and-abuse-a-cross-government-strategy/freedom-from-violence-and-abuse-men-and-boys-explanatory-note-accessible",
+      "title": "UK Government「Freedom from violence and abuse: men and boys explanatory note」（2025年12月）",
+      "fetchedAt": "2026-11-11T11:08:41.507Z",
+      "sha256": "b117cb5e4702b95a544ac07b52ad606588dd90f067a7d671d92db2f2c5507952",
+      "localPath": "sources/archive/2026-11-11-b117cb5e4702.html"
     }
   ]
 }
