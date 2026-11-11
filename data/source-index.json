@@ -255,6 +255,15 @@
       "localPath": null
     },
     {
+      "id": "src-2352d32c15",
+      "title": "野嵜雄太「学校の教職員に求められる宗教的配慮と子どもへの教育－法的な判断基準による許容範囲の考察を通して－」『シティズンシップ教育研究』第4号（日本シティズンシップ教育学会、2024年）13-22頁",
+      "url": "https://www.jstage.jst.go.jp/article/citizenshipeducation/4/0/4_13/_article/-char/ja/",
+      "note": "学校での宗教上の配慮の判断基準として、憲法第20条・教育基本法第15条と判例を整理。日曜日授業参観事件（東京地裁1986年）では、公教育の宗教的中立を保つため、宗教上の理由による個別の差異を認めないことにも合理的な根拠があるとされた。本文1〜3ページで確認",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-23b1fc113a",
       "title": "売春防止法 第3条・第5条",
       "url": "https://laws.e-gov.go.jp/law/331AC0000000118",
@@ -628,6 +637,15 @@
       "title": "Amnesty International「Policy on state obligations to respect, protect and fulfil the human rights of sex workers」（2016年5月26日）",
       "url": "https://www.amnesty.org/en/documents/pol30/4062/2016/en/",
       "note": "買う側を罰する法も含め、成人の合意による性労働の犯罪化が性労働者の人権の実現を妨げるとする方針",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-481582bc8a",
+      "title": "田村智子「権力関係を乗り越えた法廷通訳の専門職化：ボストンの法廷通訳人から日本へのヒント」『通訳翻訳研究』No.24（日本通訳翻訳学会、2024年）107-129頁",
+      "url": "https://www.jstage.jst.go.jp/article/its/24/0/24_2404/_article/-char/ja/",
+      "note": "米国（ボストン）の法廷通訳の観察と聞き取りから、通訳人の認定制度が米国で成り立ち、日本ではまだない理由を分析。専門職化の要素として法的な保護・職能団体・倫理綱領・技能の訓練を挙げる。英文要旨で確認（本文は日本語の文字を機械で取り出せず未読）",
       "kind": "secondary",
       "fetchedAt": null,
       "localPath": null
