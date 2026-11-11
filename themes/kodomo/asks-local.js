@@ -138,6 +138,7 @@ window.ASKS = (window.ASKS || []).concat([
     text: '{宛先}の相談窓口、学校・保育所及び住民窓口において、改正民法の「子の利益のため急迫の事情があるとき」の意味について、法務省の解説資料に基づき、DV・虐待からの避難が妨げられないことと、正当な理由のない子連れ転居が父母の協力義務に反し得ることを、職員の研修と住民向けの案内により正しく伝えること。' },
   { id: 'l_reunite', scope: 'local', category: '夫婦関係の修復', label: '低葛藤の別居家庭への同居再開の案内',
     refs: [{ t: '裁判所「夫婦関係調整調停（円満）」', url: 'https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_07_02/index.html' },
+      { t: '最高裁判所事務総局「令和7年 司法統計年報 3 家事編」第15表 婚姻関係事件数（終局区分別申立人及び申立ての趣旨別）', url: 'https://www.courts.go.jp/saikosai/vc-files/saikosai/toukei/toukei-pdf-16677.pdf', note: '34ページ。令和7年に終局した円満調整の申立ては1,837件（夫1,092件・妻745件）。調停成立512件のうち、婚姻継続（同居）162件、婚姻継続（別居）130件、調停離婚218件、協議離婚届出2件' },
       { t: 'Doherty WJ, Willoughby BJ, Peterson B (2011) Interest in Marital Reconciliation Among Divorcing Parents. Family Court Review 49(2): 313-321', url: 'https://scholarsarchive.byu.edu/facpub/5112', note: '米ミネソタ州で離婚手続中の親2,484人を調査。約4人に1人が努力すれば結婚を救えると考え、約10人に3人が関係修復の支援に関心。訳は docs/英語の参考資料の訳.md' }],
     forStaff: '実施にあたっては、子育てやひとり親の相談の窓口で配る資料に、家庭裁判所の夫婦関係調整調停（円満）や夫婦カウンセリングの相談先を加え、DV・虐待がないことを確かめたうえで、希望する人に案内する手順を定める方法が考えられます。既存の資料の改訂で対応できます。',
     title: '低葛藤の別居家庭に対する家族の同居再開に向けた案内と支援',
