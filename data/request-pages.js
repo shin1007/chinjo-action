@@ -2,6 +2,7 @@
 // キー：都道府県名/市区町村名（data/sites.js と同じ表記。"@" は都道府県）→ [ページのURL, ページの題]
 // 対象：47都道府県・政令指定都市・それ以外で人口の多い市区町村800。2026-11-11 に公式サイトのリンクをたどって見つけ、
 // ページに出し方（フォーム・郵送・メールなど）が書いてあることを確かめた。県や市が国へ出した要望書の一覧などは除いた。
+// 2026-11-11 に全ページを開き直し、題・出し方の記載・受付が終わっていないかを1件ずつ確かめた。
 window.REQUEST_PAGES = {
   "福岡県/@": ["https://www.pref.fukuoka.lg.jp/life/8/72/395/","県政提案メール"],
   "大阪府/@": ["https://www.pref.osaka.lg.jp/o070050/fumin/fusei_iken/index.html","府政へのご意見（最新情報など）／大阪府（おおさかふ）ホームページ [Osaka Prefectural Government]"],
@@ -365,12 +366,10 @@ window.REQUEST_PAGES = {
   "千葉県/東金市": ["https://www.city.togane.chiba.jp/category/2-4-1-0-0-0-0-0-0-0.html","市政へのご意見"],
   "北海道/北広島市": ["https://www.city.kitahiroshima.hokkaido.jp/hotnews/detail/00153000.html","市民の声"],
   "香川県/観音寺市": ["https://www.city.kanonji.kagawa.jp/site/shicho/9670.html","市長への手紙"],
-  "沖縄県/宮古島市": ["https://www.city.miyakojima.lg.jp/kurashi/kodomo/kosodate/2026-0302-1651-69.html","こども意見箱"],
   "福島県/伊達市": ["https://www.city.fukushima-date.lg.jp/soshiki/5/1162.html","市長への手紙"],
   "福島県/南相馬市": ["https://www.city.minamisoma.lg.jp/portal/admin/koho_kocho/2/2_1/index.html","市長への手紙／南相馬市公式ウェブサイト"],
   "東京都/羽村市": ["https://www.city.hamura.tokyo.jp/category/3-1-4-0-0-0-0-0-0-0.html","市長への手紙"],
   "奈良県/桜井市": ["https://www.city.sakurai.lg.jp/cgi-bin/inquiry.php/51?page_no=1","ご意見・ご要望／桜井市"],
-  "岩手県/滝沢市": ["https://www.city.takizawa.iwate.jp/about-takizawa/joho-hasshin/koutyou-kouhou","広聴広報"],
   "長野県/茅野市": ["https://www.city.chino.lg.jp/site/mayorroom/1105.html","市政への意見・提言メール"],
   "茨城県/つくばみらい市": ["https://www.city.tsukubamirai.lg.jp/temporary/page007080.html","市長へのメールを送信する前に"],
   "大阪府/四條畷市": ["https://www.city.shijonawate.lg.jp/life/8/43/198/","市長への意見箱"],
@@ -498,7 +497,6 @@ window.REQUEST_PAGES = {
   "岐阜県/下呂市": ["https://www.city.gero.lg.jp/life/6/31/171/","ご意見・お問い合わせ"],
   "鹿児島県/志布志市": ["https://www.city.shibushi.lg.jp/soshiki/2/14915.html","志布志市へのご意見・ご要望"],
   "兵庫県/川辺郡猪名川町": ["https://www.town.inagawa.lg.jp/cgi-bin/inquiry.php/11?page_no=6915","「町長への手紙」入力フォーム／猪名川町"],
-  "青森県/つがる市": ["https://www.city.tsugaru.aomori.jp/joho/mokuteki/administration/publicrelation_publichearing/1/index.html","過去のご意見・お問い合わせ／つがる市"],
   "山梨県/都留市": ["https://www.city.tsuru.yamanashi.jp/shimin/shisei/7809.html","意見箱を設置しました!／都留市"],
   "愛知県/知多郡阿久比町": ["https://www.town.agui.lg.jp/form/opinion.cgi","町政へのご意見(入力画面)"],
   "奈良県/生駒郡斑鳩町": ["https://www.town.ikaruga.nara.jp/mailform/opinion.cgi","町政への意見箱"],
