@@ -4,7 +4,7 @@
 //   README.md                 … 全体の説明と渡し方
 //   Grokへのプロンプト.md     … 貼り付けて使う依頼文
 //   <テーマ>/項目と参考資料.md … 項目ごとの求めること・理由・資料
-//   <テーマ>/陳情書の文面.md   … サイトが作る陳情書の文面（1項目1通）
+//   <テーマ>/陳情書と要望書の文面.md … サイトが作る陳情書・要望書の文面（1項目1通）
 'use strict';
 const fs = require('fs');
 const path = require('path');
@@ -32,14 +32,16 @@ const themes = themeIds.map(loadTheme);
 const themeName = (t) => t.theme.name || t.theme.title || t.id;
 
 // サイトの petition.js の buildText と同じ並びで、1項目1通の陳情書の文面を作る
-function petitionText(t, it) {
+// request=true は要望書（自治体あての項目だけ。市長あてに役所へ出す）
+function petitionText(t, it, request = false) {
   const nat = it.scope === 'national';
   const T = { ...t.template, ...(it.template || {}) };
-  const v = { 内容: it.title, 種類: '陳情', 宛先: '○○市' };
-  const L = ['令和　年　月　日', '', '○○市議会議長　　　　様', '', '住所　　　　　', '氏名　　　　　　　　印', ''];
+  const w = request ? '要望' : '陳情';
+  const v = { 内容: it.title, 種類: w, 宛先: '○○市' };
+  const L = ['令和　年　月　日', '', `${request ? '○○市長' : '○○市議会議長'}　　　　様`, '', '住所　　　　　', '氏名　　　　　　　　印', ''];
   L.push(`件名　${fill(nat ? T.subjectNational : T.subjectLocal, v)}`, '');
-  L.push('【陳情の趣旨】', `　${fill(nat ? T.purposeNational : T.purposeLocal, v)}`, '', '記', '');
-  L.push(`一　${fill(it.text, v)}`, '', '【陳情の理由】', `1．${it.title}`, `　${it.reason}`, '', `　${T.closing}`);
+  L.push(`【${w}の趣旨】`, `　${fill(nat ? T.purposeNational : T.purposeLocal, v)}`, '', '記', '');
+  L.push(`一　${fill(it.text, v)}`, '', `【${w}の理由】`, `1．${it.title}`, `　${it.reason}`, '', `　${T.closing}`);
   if ((it.refs || []).length) {
     L.push('', '【参考資料】');
     it.refs.forEach((r, i) => L.push(`${i + 1}　${r.t}${r.url ? `\n　　${r.url}` : ''}`));
@@ -76,18 +78,25 @@ for (const t of themes) {
   }
   fs.writeFileSync(path.join(dir, '項目と参考資料.md'), A.join('\n'));
 
-  const B = [`# ${themeName(t)}：陳情書の文面`, '', 'サイトが利用者に出す陳情書の文面です。サイトの方針で、1通に1つの事項だけを書きます。宛先の議会・氏名は「○○」や空欄にしています。', ''];
-  for (const it of t.asks) B.push(`## ${it.id}：${it.title}`, '', '```text', petitionText(t, it), '```', '');
-  fs.writeFileSync(path.join(dir, '陳情書の文面.md'), B.join('\n'));
+  const B = [`# ${themeName(t)}：陳情書・要望書の文面`, '',
+    'サイトが利用者に出す文面です。サイトの方針で、1通に1つの事項だけを書きます。宛先・氏名は「○○」や空欄にしています。', '',
+    '- 陳情書：議会の議長あて。読むのは議員（委員会で審査し、採択・不採択を決める）。国あての項目は、議会から国へ意見書を出すよう求める。',
+    '- 要望書：市長あて。役所（担当課の職員）に出し、施策として取り組むよう求める。自治体あての項目だけ作れる。',
+    '- いまのサイトでは、陳情書と要望書で、件名・趣旨・理由の本文は同じで、宛名と「陳情」「要望」の言葉だけが違う。', ''];
+  for (const it of t.asks) {
+    B.push(`## ${it.id}：${it.title}`, '', '### 陳情書（議会あて）', '', '```text', petitionText(t, it), '```', '');
+    if (it.scope !== 'national') B.push('### 要望書（市長あて）', '', '```text', petitionText(t, it, true), '```', '');
+  }
+  fs.writeFileSync(path.join(dir, '陳情書と要望書の文面.md'), B.join('\n'));
 }
 
 const R = ['# 外部レビュー用の資料', '', `作成日：${today}`, '',
-  '市民が地方議会に出す陳情書の文面を作るサイト（陳情アクション）の、陳情項目・参考資料・陳情書の文面を、テーマごとのフォルダに分けたものです。外部の AI に、資料の適切さ・より良い資料・足すべき項目を見てもらうために作りました。', '',
+  '市民が地方議会に出す陳情書や役所に出す要望書の文面を作るサイト（陳情アクション）の、陳情項目・参考資料・文面を、テーマごとのフォルダに分けたものです。外部の AI に、資料の適切さ・より良い資料・足すべき項目を見てもらうために作りました。', '',
   '## フォルダ', '', '| テーマ | フォルダ | 項目数 | 参考資料 |', '|---|---|---|---|',
   ...summary.map((s) => `| ${s.name}（${s.id}） | ${s.name}/ | ${s.items} | ${s.refs} |`), '',
-  '各フォルダの中身：', '- `項目と参考資料.md`：項目ごとの求めること・理由・参考資料（題名・URL・根拠にした所）', '- `陳情書の文面.md`：サイトが作る陳情書の文面（1項目1通）', '',
+  '各フォルダの中身：', '- `項目と参考資料.md`：項目ごとの求めること・理由・参考資料（題名・URL・根拠にした所）', '- `陳情書と要望書の文面.md`：サイトが作る陳情書（議会あて）と要望書（市長あて・自治体あての項目のみ）の文面（1項目1通）', '',
   '英語の資料の原文と訳は `docs/英語の参考資料の訳.md`、原文を確かめられなかった資料は `docs/一次資料に当たれていない資料.md` にあります。', '',
-  '## 渡し方', '', '1. `Grokへのプロンプト.md` の依頼文を貼る。', '2. テーマを1つ選び、そのフォルダの `項目と参考資料.md` と `陳情書の文面.md` を添付する（1回に1テーマ）。', '3. 英語の資料の読み違いも見てもらうなら、`docs/英語の参考資料の訳.md` も添える。', '',
+  '## 渡し方', '', '1. `Grokへのプロンプト.md` の依頼文を貼る。', '2. テーマを1つ選び、そのフォルダの `項目と参考資料.md` と `陳情書と要望書の文面.md` を添付する（1回に1テーマ）。', '3. 英語の資料の読み違いも見てもらうなら、`docs/英語の参考資料の訳.md` も添える。', '',
   '作り直すとき：`node scripts/review-pack.js`'];
 fs.writeFileSync(path.join(outDir, 'README.md'), R.join('\n'));
 
