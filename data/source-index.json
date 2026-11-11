@@ -84,6 +84,15 @@
       "localPath": null
     },
     {
+      "id": "src-10c7a1c47a",
+      "title": "Judicial Conduct Investigations Office Annual Report 2025-26（英国）",
+      "url": "https://www.complaints.judicialconduct.gov.uk/JCIOAnnualReport2025-2026",
+      "note": "2025-26年度の苦情は3,910件（前年度3,279件）、懲戒処分は95件（前年度89件）。訳は docs/英語の参考資料の訳.md",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-10ed6ab24a",
       "title": "法務省 技能実習制度の運用に関するプロジェクトチーム「調査・検討結果報告書」（平成31年3月28日）",
       "url": "https://www.moj.go.jp/isa/content/930004165.pdf",
@@ -672,7 +681,7 @@
       "id": "src-500f1224fb",
       "title": "厚生労働省「令和6年度 医療機関における外国人患者の受入に係る実態調査」概要版",
       "url": "https://www.mhlw.go.jp/content/10800000/001566020.pdf",
-      "note": "16.3%の病院が外国人患者の未収金を経験",
+      "note": "2024年9月に外国人患者を受け入れた2,890病院のうち470病院（16.3%）が外国人患者の未収金を経験（p.11）。ここでの外国人患者は在留外国人・訪日外国人旅行者・医療目的の外国人を合わせたもの。前年度の調査では18.3%",
       "kind": "official",
       "fetchedAt": null,
       "localPath": null

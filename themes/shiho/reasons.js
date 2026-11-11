@@ -61,6 +61,6 @@ window.BLOCKS = [
     caution: '家庭裁判所（家事事件）には名誉職裁判官は加わりません。家事事件の例としては書かないでください。' },
   { id: 'uk_jcio', cat: '外国の制度',
     title: 'イギリスの司法行状調査局',
-    text: 'イギリス（イングランド・ウェールズ）では、裁判官の行状に関する苦情を受け付ける司法行状調査局（JCIO）が置かれ、受け付けた苦情の件数や処分の結果が毎年公表されています。',
-    source: 'Judicial Conduct Investigations Office ウェブサイト・年次報告' },
+    text: 'イギリス（イングランド・ウェールズ）では、裁判官の行状に関する苦情を受け付ける司法行状調査局（JCIO）が置かれ、受け付けた苦情の件数や処分の結果が毎年公表されています。2025-26年度の年次報告では、受け付けた苦情は3,910件（前年度3,279件）、裁判官等への懲戒処分は95件（前年度89件）でした。',
+    source: 'Judicial Conduct Investigations Office「Annual Report 2025-26」（https://www.complaints.judicialconduct.gov.uk/JCIOAnnualReport2025-2026）、「Annual Report 2024-25」（https://www.complaints.judicialconduct.gov.uk/JCIOAnnualReport24-25）' },
 ];
