@@ -257,6 +257,21 @@
       "fetchedAt": "2026-11-11T09:44:13.330Z",
       "sha256": "ce8b6b9e2c306262717932967bed9524605bfa2ccb914d157d3f943ad8f3921f",
       "localPath": "sources/archive/2026-11-11-ce8b6b9e2c30.pdf"
+    },
+    {
+      "url": "https://www.pref.osaka.lg.jp/documents/105336/20251008.pdf",
+      "title": "文部科学省私学行政課 事務連絡「民法等の一部を改正する法律に係るＱ＆Ａ形式の解説資料の周知等について（依頼）」（令和7年10月8日）",
+      "note": "大阪府のサイトに掲載された写し",
+      "fetchedAt": "2026-11-11T09:46:21.908Z",
+      "sha256": "bc6ff3d1ba8931aa8649e80077f7e19db5f2ad7e6492909624cc137d8d08e610",
+      "localPath": "sources/archive/2026-11-11-bc6ff3d1ba89.pdf"
+    },
+    {
+      "url": "https://www.gender.go.jp/about_danjo/basic_plans/6th/pdf/print.pdf",
+      "title": "内閣府「第6次男女共同参画基本計画」（令和8年3月13日閣議決定）本文",
+      "fetchedAt": "2026-11-11T09:46:32.308Z",
+      "sha256": "5e9fdbbf384593154c50dc0c3198ddffd032f0fa69fe47aa257deb6d3c93361f",
+      "localPath": "sources/archive/2026-11-11-5e9fdbbf3845.pdf"
     }
   ]
 }
