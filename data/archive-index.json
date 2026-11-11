@@ -645,6 +645,14 @@
       "fetchedAt": "2026-11-11T14:58:21.843Z",
       "sha256": "e4a07fb185d32a4a0b0355155e648d2d11b11143b12100e8f527681649b42b1b",
       "localPath": "sources/archive/2026-11-11-e4a07fb185d3.pdf"
+    },
+    {
+      "url": "https://www.jstage.jst.go.jp/article/jjdp/30/2/30_86/_article/-char/ja/",
+      "title": "直原康光・安藤智子「別居・離婚後の子どもが体験する父母葛藤や父母協力の探索的検討」発達心理学研究 30(2)（2019）",
+      "note": "PDF",
+      "fetchedAt": "2026-11-11T14:59:30.257Z",
+      "sha256": "6daa4e427e6d6cea0e2b6b467941cd053d711d676331406699c83c00214420ea",
+      "localPath": "sources/archive/2026-11-11-6daa4e427e6d.pdf"
     }
   ]
 }
