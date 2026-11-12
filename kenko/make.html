@@ -81,7 +81,7 @@
           <label><input type="radio" name="wzKind" value="request"> <b>市区町村長・知事に出す（要望書）</b><span class="hint-sm">行政に直接、検討や説明を求めます。自治体の取り組みを求める内容だけ選べます。</span></label>
         </fieldset>
         <p class="hint-sm wz-seigan"><b>請願書は作れません</b>（紹介議員が要るため）。請願にしたいときは、ここで陳情書を作り、その文面を持って議員に紹介をお願いします（<a href="/letter">議員への手紙</a>）。</p>
-        <p class="hint-sm"><b>内容はいくつでも選べます。</b>選んだ内容1つにつき1通ずつできあがります。ただ、いくつも出すより、<b>とくに伝えたい内容を2〜3つに絞り、同じ分野（下の見出し）の中から選ぶ</b>ほうが伝わります。同じ分野の内容なら、最後の画面で「まとめて1通にする」と、1通にまとめて出せます。<a href="/#compare">陳情書・要望書・請願・手紙の違い</a></p>
+        <p class="hint-sm"><b>内容はいくつでも選べます。</b>選んだ内容1つにつき1通ずつできあがります。ただ、いくつも出すより、<b>とくに伝えたい内容を2〜3つに絞り、同じ分野（下の見出し）の中から選ぶ</b>ほうが伝わります。多くの議会は「1件に1つの趣旨」で分けて出すよう求めているので、ふつうは1通ずつ出します（<a href="/kenko/guide#split">1件ずつ分ける理由</a>）。同じ分野の内容を1通にまとめたいときは、最後の画面の「まとめて1通にする」でまとめられます。その議会が分けて出すよう求めていないか、先に確かめてください。<a href="/#compare">陳情書・要望書・請願・手紙の違い</a></p>
         <input type="search" id="wzItemFilter" class="wz-filter" placeholder="キーワードで内容を絞り込む" aria-label="キーワードで内容を絞り込む">
         <div id="wzItems" class="wz-cards"></div>
         <details id="wzPreview" class="wz-preview" hidden><summary id="wzPreviewTitle">文面の見本を見る</summary>
@@ -128,13 +128,13 @@
         </fieldset>
         <fieldset class="wz-part">
         <legend>② 差出人の住所・氏名（任意）</legend>
-        <p class="hint-sm">住所は<span data-doc-name>陳情書</span>に、氏名は鏡文（送付状）と封筒の差出人に入ります。<b><span data-doc-name>陳情書</span>の氏名は、印刷してから手書きで署名</b>します。空欄のままなら下線になり、手書きで記入できます。次に開いたときのために<b>この端末のブラウザの中にだけ</b>残ります。共用のパソコンでは、終わったら「この端末から消す」を押してください。</p>
+        <p class="hint-sm">住所は<span data-doc-name>陳情書</span>に、氏名は鏡文（送付状）と封筒の差出人に入ります。<b><span data-doc-name>陳情書</span>の氏名は、印刷してから手書きで署名</b>します。空欄のままなら下線になり、手書きで記入できます。下の「覚えておく」にチェックしたときだけ、次に開いたときのために<b>この端末のブラウザの中にだけ</b>残ります（初めはチェックなし）。</p>
         <div id="wzSender" class="sender-form">
           <label>郵便番号<input data-sender="zip" inputmode="numeric" autocomplete="postal-code" placeholder="例：123-4567"></label>
           <label class="wide">住所<input data-sender="address" autocomplete="street-address" placeholder="例：東京都○○市△△1-2-3"></label>
           <label>氏名（鏡文と封筒用）<input data-sender="name" autocomplete="name" placeholder="例：佐藤 花子"></label>
           <label>電話番号（任意・鏡文にだけ入ります）<input data-sender="tel" autocomplete="tel" inputmode="tel" placeholder="例：090-0000-0000"></label>
-          <label class="wide wz-remember"><input type="checkbox" id="wzRemember" checked> この端末のブラウザに覚えておく（次に作るとき入力を省けます。サーバーには送りません）<b class="wz-shared">⚠ 図書館・ネットカフェ・家族と共用の端末では、チェックを外してください。</b></label>
+          <label class="wide wz-remember"><input type="checkbox" id="wzRemember"> この端末のブラウザに覚えておく（次に作るとき入力を省けます。サーバーには送りません）<b class="wz-shared">⚠ 図書館・ネットカフェ・家族と共用の端末では、チェックしないでください。</b></label>
           <button type="button" id="wzSenderClear" class="btn btn-small">この端末から消す</button>
         </div>
         </fieldset>
@@ -225,7 +225,7 @@
           <li>
             <h4>① 手書きで記入し、署名する</h4>
             <ul class="wz-todo">
-              <li>陳情書の<b>氏名欄に手書きで署名し、押印</b>する（印がなくても受け付ける議会が多いですが、押すとより丁寧です）。</li>
+              <li>陳情書の<b>氏名欄に手書きで署名</b>する。押印は議会によって任意です（押印をやめた議会も増えています。様式で求められていれば押します）。</li>
               <li>空欄にした住所を手書きで記入する。</li>
               <li>陳情書と宛名の「議長」と「様」のあいだに、<b>議長の氏名を書き入れる</b>。議長は選挙や交代で変わるので、出す直前に議会の公式サイトで確かめます：<span id="wzChairLinks"></span></li>
             </ul>
