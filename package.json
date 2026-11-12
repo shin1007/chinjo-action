@@ -4,7 +4,8 @@
   "description": "陳情書作成サイト（ビルド不要の静的サイト）",
   "scripts": {
     "test": "node --test test/*.test.js",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "links": "node scripts/check-links.js"
   },
   "devDependencies": {
     "eslint": "^9.39.5",
