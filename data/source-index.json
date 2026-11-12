@@ -372,6 +372,15 @@
       "localPath": null
     },
     {
+      "id": "src-273166ed54",
+      "title": "文部科学省「教員勤務実態調査（令和4年度）の集計（確定値）について」（令和6年4月4日）",
+      "url": "https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf",
+      "note": "2ページ：対象はフルタイムの常勤教員（講師を含む）で、非常勤講師は対象外。6ページ：中学校の講師の土日の在校等時間は1日1時間53分（教諭2時間18分）。講師の部活動の時間は1〜10ページには見当たらない（11ページ以降は未確認）",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-274684b6c9",
       "title": "厚生省社会局長通知「生活に困窮する外国人に対する生活保護の措置について」（昭和29年5月8日）",
       "url": "https://www.mhlw.go.jp/web/t_doc?dataId=00ta1609&dataType=1&pageNo=1",

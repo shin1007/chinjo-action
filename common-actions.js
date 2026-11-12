@@ -42,7 +42,7 @@
         <ul>
           <li><b><a href="https://www.moj.go.jp/JINKEN/jinken20.html" target="_blank" rel="noopener">みんなの人権110番</a>（法務省）</b> <a href="tel:0570003110">0570-003-110</a>：差別・虐待・ハラスメントなど、さまざまな人権問題。最寄りの法務局につながります。女性の人権の相談は、ここで1番を選びます（前の「女性の人権ホットライン」は統合されました）。ネットからは<a href="https://www.moj.go.jp/JINKEN/jinken113.html" target="_blank" rel="noopener">インターネット人権相談</a>も使えます。</li>
           <li><b><a href="https://www.moj.go.jp/JINKEN/jinken112.html" target="_blank" rel="noopener">こどもの人権110番</a>（法務省）</b> <a href="tel:0120007110">0120-007-110</a>（無料）：いじめ・家庭で嫌なことをされるなど、子どもの悩み。子ども本人のほか、子どものことで悩む大人も相談できます。</li>
-          <li><b>児童相談所 虐待対応ダイヤル</b> <a href="tel:189">189</a>：子どもへの虐待の通告・相談。近くの児童相談所につながります（<a href="https://www.cfa.go.jp/" target="_blank" rel="noopener">こども家庭庁</a>）。</li>
+          <li><b>児童相談所 虐待対応ダイヤル</b> <a href="tel:189">189</a>：子どもへの虐待の通告・相談。近くの児童相談所につながります（<a href="https://www.cfa.go.jp/policies/jidougyakutai/gyakutai-taiou-dial" target="_blank" rel="noopener">こども家庭庁</a>）。</li>
           <li><b><a href="https://www.toben.or.jp/bengoshi/center/tel/children.html" target="_blank" rel="noopener">子どもの人権110番</a>（東京弁護士会）</b> <a href="tel:0335030110">03-3503-0110</a>：いじめ・不登校・体罰・虐待など、子どもの人権に関わることすべて。弁護士が無料で相談に乗ります。</li>
           <li><b><a href="https://www.gender.go.jp/policy/no_violence/dv_navi/" target="_blank" rel="noopener">DV相談ナビ</a></b> <a href="tel:%238008">#8008</a>：配偶者からの暴力。お近くの配偶者暴力相談支援センターにつながります。24時間の電話やチャットは同じページの「DV相談＋」から。</li>
           <li><b><a href="https://www.soumu.go.jp/main_sosiki/hyouka/soudan_n/" target="_blank" rel="noopener">行政相談</a>（総務省）</b> <a href="tel:0570090110">0570-090110</a>：国の行政への苦情・意見・要望。規制の見直しの提案は、上の内閣府のホットラインへ。</li>
