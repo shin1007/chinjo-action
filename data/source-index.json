@@ -75,6 +75,15 @@
       "localPath": null
     },
     {
+      "id": "src-064ed9ba6a",
+      "title": "商事法務研究会「未成年期に父母の離婚を経験した子の養育に関する実態についての調査・分析業務報告書」（令和3年1月、法務省の委託調査）",
+      "url": "https://www.moj.go.jp/MINJI/minji07_00199.html",
+      "note": "公表ページで確認。未成年時に父母の別居・離婚を経験した20代・30代の1,000人への調査。法務省がローデータの提供も行っている",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-06ea7d644a",
       "title": "出入国在留管理庁「技能実習生の失踪者数の推移（令和3年〜令和7年）」（令和8年7月）",
       "url": "https://www.moj.go.jp/isa/content/001425159.pdf",
@@ -2429,6 +2438,15 @@
       "url": "https://laws.e-gov.go.jp/law/324AC1000000205",
       "note": "弁護士は、法律や所属弁護士会・日本弁護士連合会の会則に違反し、所属弁護士会の秩序又は信用を害し、その他職務の内外を問わずその品位を失うべき非行があつたときは、懲戒を受ける",
       "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-f5b286a895",
+      "title": "WHO欧州地域事務局「Environmental noise guidelines for the European Region」（2018年、2019年1月30日公開）",
+      "url": "https://www.who.int/europe/publications/i/item/9789289053563",
+      "note": "公開ページで確認。道路交通などの環境騒音から健康を守るための、根拠に基づく勧告",
+      "kind": "secondary",
       "fetchedAt": null,
       "localPath": null
     },
