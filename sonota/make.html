@@ -77,13 +77,13 @@
         <h3>出し方と、求める内容を選んでください</h3>
         <fieldset class="wz-kind">
           <legend>どこに出しますか</legend>
-          <label><input type="radio" name="wzKind" value="petition" checked> <b>議会に出す（陳情書）</b><span class="hint-sm">議会で審査・配付されます。国へ意見書を出すよう求める内容も選べます。</span></label>
+          <label><input type="radio" name="wzKind" value="petition" checked> <b>議会に出す（陳情書）</b><span class="hint-sm">議会で審査されるか、議員に配られます。国へ意見書を出すよう求める内容も選べます。</span></label>
           <label><input type="radio" name="wzKind" value="request"> <b>市区町村長・知事に出す（要望書）</b><span class="hint-sm">行政に直接、検討や説明を求めます。自治体の取り組みを求める内容だけ選べます。</span></label>
         </fieldset>
         <p class="hint-sm wz-seigan"><b>請願書は作れません</b>（紹介議員が要るため）。請願にしたいときは、ここで陳情書を作り、その文面を持って議員に紹介をお願いします（<a href="/letter">議員への手紙</a>）。</p>
         <p class="hint-sm"><b>とくに伝えたい内容を、3つまで選ぶのがおすすめです。</b>選んだ内容1つにつき1通ずつできあがります。</p>
         <details class="hint-sm wz-fold"><summary>いくつも選ぶとき・1通にまとめたいとき</summary>
-          <p>多くの議会は「1件に1つの趣旨」で分けて出すよう求めているので、ふつうは1通ずつ出します（<a href="/sonota/guide#split">1件ずつ分ける理由</a>）。いくつも選ぶなら、同じ分野（下の見出し）の中から選ぶほうが伝わります。同じ分野の内容を1通にまとめたいときは、最後の画面の「まとめて1通にする」でまとめられます。その議会が分けて出すよう求めていないか、先に確かめてください。<a href="/#compare">陳情書・要望書・請願・手紙の違い</a></p>
+          <p>多くの議会は「1件に1つの求めること（趣旨）」で分けて出すよう求めているので、ふつうは1通ずつ出します（<a href="/sonota/guide#split">1件ずつ分ける理由</a>）。いくつも選ぶなら、同じ分野（下の見出し）の中から選ぶほうが伝わります。同じ分野の内容を1通にまとめたいときは、最後の画面の「まとめて1通にする」でまとめられます。その議会が分けて出すよう求めていないか、先に確かめてください。<a href="/#compare">陳情書・要望書・請願・手紙の違い</a></p>
         </details>
         <input type="search" id="wzItemFilter" class="wz-filter" placeholder="キーワードで内容を絞り込む" aria-label="キーワードで内容を絞り込む">
         <div id="wzItems" class="wz-cards"></div>
@@ -132,12 +132,12 @@
         </fieldset>
         <fieldset class="wz-part">
         <legend>② 差出人の住所・氏名（任意）</legend>
-        <p class="hint-sm">住所は<span data-doc-name>陳情書</span>に、氏名は鏡文（送付状）と封筒の差出人に入ります。<b><span data-doc-name>陳情書</span>の氏名は、印刷してから手書きで署名</b>します。空欄のままなら下線になり、手書きで記入できます。下の「覚えておく」にチェックしたときだけ、次に開いたときのために<b>この端末のブラウザの中にだけ</b>残ります（初めはチェックなし）。</p>
+        <p class="hint-sm">住所は<span data-doc-name>陳情書</span>に、氏名は送付状と封筒の差出人に入ります。<b><span data-doc-name>陳情書</span>の氏名は、印刷してから手書きで署名</b>します。空欄のままなら下線になり、手書きで記入できます。下の「覚えておく」にチェックしたときだけ、次に開いたときのために<b>この端末のブラウザの中にだけ</b>残ります（初めはチェックなし）。</p>
         <div id="wzSender" class="sender-form">
           <label>郵便番号<input data-sender="zip" inputmode="numeric" autocomplete="postal-code" placeholder="例：123-4567"></label>
           <label class="wide">住所<input data-sender="address" autocomplete="street-address" placeholder="例：東京都○○市△△1-2-3"></label>
-          <label>氏名（鏡文と封筒用）<input data-sender="name" autocomplete="name" placeholder="例：佐藤 花子"></label>
-          <label>電話番号（任意・鏡文にだけ入ります）<input data-sender="tel" autocomplete="tel" inputmode="tel" placeholder="例：090-0000-0000"></label>
+          <label>氏名（送付状と封筒用）<input data-sender="name" autocomplete="name" placeholder="例：佐藤 花子"></label>
+          <label>電話番号（任意・送付状にだけ入ります）<input data-sender="tel" autocomplete="tel" inputmode="tel" placeholder="例：090-0000-0000"></label>
           <label class="wide wz-remember"><input type="checkbox" id="wzRemember"> この端末のブラウザに覚えておく（次に作るとき入力を省けます。サーバーには送りません）<b class="wz-shared">⚠ 図書館・ネットカフェ・家族と共用の端末では、チェックしないでください。</b></label>
           <button type="button" id="wzSenderClear" class="btn btn-small">この端末から消す</button>
         </div>
@@ -159,7 +159,7 @@
           <div id="wzDocs" class="wz-docs"></div>
           <div id="wzRwBox" class="wz-rewrite" hidden>
             <h4><span id="wzRwTitle"></span>を、生成AIで自分の言葉に直す</h4>
-            <p class="hint-sm">AIに渡すのは「趣旨」と「理由」の本文だけです。住所・氏名や書式はそのまま残ります。</p>
+            <p class="hint-sm">AIに渡すのは「趣旨」（求めること）と「理由」の本文だけです。住所・氏名や書式はそのまま残ります。</p>
             <ol class="wz-rw-steps">
               <li><b>地域のことを書く（任意）</b>
                 <textarea id="wzRwLocal" rows="2" aria-label="この地域について知っていること" placeholder="この地域について知っていること（例：市の窓口に相談の案内が少ない）"></textarea>
@@ -191,7 +191,7 @@
                 <p class="hint-sm">「陳情書を出したいのですが、いくつか教えてください」と切り出して、次を聞きます。</p>
                 <ol>
                   <li><b>出し方</b>：「郵送（または市外から）でも、委員会で審査されますか。配るだけになりますか」</li>
-                  <li><b>締切</b>：「次の定例会に間に合う締切はいつですか」</li>
+                  <li><b>締切</b>：「次の定例会に間に合う締切はいつですか」<span class="hint-sm">（定例会は、年に数回、決まった時期に開かれる議会の会議です）</span></li>
                   <li><b>公開</b>：「出した人の住所と氏名は、会議録やサイトにどこまで載りますか」</li>
                   <li><b>書式</b>：「決まった様式や、写しの部数、押印は要りますか。議長のお名前も教えてください」</li>
                 </ol>
@@ -215,7 +215,7 @@
           <p class="wz-when">印刷する前に</p>
           <ul>
             <li data-petition-only><label><input type="checkbox" id="wzChkChair"> 議長の氏名を確かめた（上の欄に入れれば自動でチェックが付きます。空けて手書きにしてもかまいません）</label></li>
-                        <li data-petition-only><label><input type="checkbox"> 郵送するなら、その議会で郵送の陳情が審査されるか、配付だけかを確かめた</label>
+                        <li data-petition-only><label><input type="checkbox"> 郵送するなら、その議会で郵送の陳情が審査されるか、議員に配るだけかを確かめた</label>
               <ul id="wzCheckMail" class="wz-checkmail"></ul></li>
             <li><label><input type="checkbox"> <span data-doc-name>陳情書</span>は公開されることがあると知ったうえで、個人や事件を特定できることを書いていない</label></li>
           </ul>
@@ -247,7 +247,7 @@
           </li>
           <li>
             <h4>② 議会事務局へ出す</h4>
-            <p class="hint-sm">出し方は議会ごとに下に書いてあります。<b>電子申請</b>ができる議会はそれがいちばん手軽です。郵送で出せる議会もありますが、郵送だと審査されず配布だけになる議会もあるので、遠い議会には先に電話で「郵送でも審査されますか」と聞くのが確実です（<a href="/sonota/guide#mail">詳しく</a>）。締切は定例会の1〜2週間前が多いです。</p>
+            <p class="hint-sm">出し方は議会ごとに下に書いてあります。<b>電子申請</b>ができる議会はそれがいちばん手軽です。郵送で出せる議会もありますが、郵送だと審査されず議員に配るだけになる議会もあるので、遠い議会には先に電話で「郵送でも審査されますか」と聞くのが確実です（<a href="/sonota/guide#mail">詳しく</a>）。締切は定例会の1〜2週間前が多いです。</p>
             <div id="wzPostage" class="postage" hidden></div>
             <details class="send-howto">
               <summary>郵送するときの送り方（図解）と切手の目安</summary>

@@ -1,4 +1,4 @@
-// 陳情書・鏡文を、Word で直せる .docx にする（A4・明朝）。文書ごとに新しいページから始める
+// 陳情書・送付状を、Word で直せる .docx にする（A4・明朝）。文書ごとに新しいページから始める
 // .docx は XML を ZIP にまとめたものなので、ライブラリを使わずにここで組み立てる（圧縮はしない）。サーバーには何も送らない
 window.DocxDoc = (() => {
   const BLANK = window.Common.BLANK_TEXT;
