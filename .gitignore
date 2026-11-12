@@ -11,3 +11,9 @@ scripts/.opinion-cache.json
 
 # 証拠として保存したページの本文（著作物なので公開しない）
 sources/archive/
+
+# リンクの確認の結果
+scripts/.link-check.md
+
+# Claude Code の個人の設定
+.claude/settings.local.json
