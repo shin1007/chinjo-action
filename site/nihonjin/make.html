@@ -80,7 +80,7 @@
           <label><input type="radio" name="wzKind" value="petition" checked> <b>議会に出す（陳情書）</b><span class="hint-sm">議会で審査されるか、議員に配られます。国へ意見書を出すよう求める内容も選べます。</span></label>
           <label><input type="radio" name="wzKind" value="request"> <b>市区町村長・知事に出す（要望書）</b><span class="hint-sm">行政に直接、検討や説明を求めます。自治体の取り組みを求める内容だけ選べます。</span></label>
         </fieldset>
-        <p class="hint-sm wz-seigan"><b>請願書は作れません</b>（紹介議員が要るため）。請願にしたいときは、ここで陳情書を作り、その文面を持って議員に紹介をお願いします（<a href="/letter">議員への手紙</a>）。</p>
+        <p class="hint-sm wz-seigan">請願にしたいときも、まずここで陳情書を作り、その文面を持って議員に紹介をお願いします（<a href="/letter">議員への手紙</a>）。請願書は紹介議員が要るので、このサイトでは作りません。</p>
         <p class="hint-sm"><b>とくに伝えたい内容を、3つまで選ぶのがおすすめです。</b>選んだ内容1つにつき1通ずつできあがります。</p>
         <details class="hint-sm wz-fold"><summary>いくつも選ぶとき・1通にまとめたいとき</summary>
           <p>多くの議会は「1件に1つの求めること（趣旨）」で分けて出すよう求めているので、ふつうは1通ずつ出します（<a href="/nihonjin/guide#split">1件ずつ分ける理由</a>）。いくつも選ぶなら、同じ分野（下の見出し）の中から選ぶほうが伝わります。同じ分野の内容を1通にまとめたいときは、文面確認の画面で「まとめて1通にする」を選べます。その議会が分けて出すよう求めていないか、先に確かめてください。<a href="/#compare">陳情書・要望書・請願・手紙の違い</a></p>
@@ -139,7 +139,7 @@
           <label class="wide">住所<input data-sender="address" autocomplete="street-address" placeholder="例：東京都○○市△△1-2-3"></label>
           <label>氏名（送付状と封筒用）<input data-sender="name" autocomplete="name" placeholder="例：佐藤 花子"></label>
           <label>電話番号（任意・送付状にだけ入ります）<input data-sender="tel" autocomplete="tel" inputmode="tel" placeholder="例：090-0000-0000"></label>
-          <label class="wide wz-remember"><input type="checkbox" id="wzRemember"> この端末のブラウザに覚えておく（次に作るとき入力を省けます。サーバーには送りません）<b class="wz-shared">⚠ 図書館・ネットカフェ・家族と共用の端末では、チェックしないでください。</b></label>
+          <label class="wide wz-remember"><input type="checkbox" id="wzRemember"> この端末のブラウザに覚えておく（次に作るとき入力を省けます。サーバーには送りません）<b class="wz-shared">家族と共用の端末や、図書館などの端末では、チェックしないままにしてください。</b></label>
           <button type="button" id="wzSenderClear" class="btn btn-small">この端末から消す</button>
         </div>
         </fieldset>
@@ -161,7 +161,7 @@
 
         <details id="wzCheck" class="wz-check" open>
           <summary>文面を確かめる・直す（出す前に一度は読んでください）</summary>
-          <p class="hint-sm">内容ごとに下の欄で自由に直せます。直した文面はこの端末のブラウザの中だけに残ります。</p>
+          <p class="hint-sm">選んだ内容から作った文面なので、ざっと目を通して、気になるところだけ直せば足ります。内容ごとに下の欄で自由に直せます。直した文面はこの端末のブラウザの中だけに残ります。</p>
           <div id="wzDocs" class="wz-docs"></div>
           <div id="wzRwBox" class="wz-rewrite" hidden>
             <h4><span id="wzRwTitle"></span>を、生成AIで自分の言葉に直す</h4>
