@@ -674,3 +674,4 @@ summary { cursor: pointer; font-weight: 700; }
 .pick-others { font-size: 0.92rem; color: var(--muted); margin-top: 8px; }
 .wz-checklist > summary, .wz-after > summary { cursor: pointer; }
 .wz-checklist[open] > summary, .wz-after[open] > summary { margin-bottom: 8px; }
+.cost-more > summary { cursor: pointer; font-weight: 600; margin: 12px 0 8px; }
