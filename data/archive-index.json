@@ -693,10 +693,18 @@
     {
       "url": "https://www.courts.go.jp/saikosai/vc-files/saikosai/toukei/toukei-pdf-16693.pdf",
       "title": "最高裁判所事務総局「令和6年 司法統計年報 3 家事編」",
-      "note": "旧URL app/files/toukei/787/012787.pdf は Page Not Found。令和8年9月17日更新版が一覧に掲載",
+      "note": "令和8年9月17日更新版。司法統計年報の一覧（令和6年 家事編）の更新版のリンク先がこの URL。旧URL app/files/toukei/787/012787.pdf は Page Not Found",
       "fetchedAt": "2026-11-12T06:21:16.678Z",
       "sha256": "8fe504f1c6f348c61aa6def18fcae3669da6386f03ed36327b7ec2010226de08",
       "localPath": "sources/archive/2026-11-12-8fe504f1c6f3.pdf"
+    },
+    {
+      "url": "https://www.courts.go.jp/saikosai/vc-files/saikosai/toukei/toukei-excel-16693.xlsx",
+      "title": "最高裁判所事務総局「令和6年 司法統計年報 3 家事編」（Excel版）",
+      "note": "令和8年9月17日更新版の一覧ページに PDF（toukei-pdf-16693.pdf）と並んで掲載",
+      "fetchedAt": "2026-11-12T06:22:50.505Z",
+      "sha256": "a0fff1e1bf11cee6486d9bdf1a18e6fe9721ce8b56f3d828aa3267d3547619cf",
+      "localPath": "sources/archive/2026-11-12-a0fff1e1bf11.bin"
     }
   ]
 }
