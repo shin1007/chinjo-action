@@ -1,0 +1,2760 @@
+{
+  "schemaVersion": 1,
+  "description": "陳情の参考資料として登録した一次資料と信頼のおける二次資料（kind: secondary）の索引。本文は必要なときだけ scripts/source.js で保存する。",
+  "sources": [
+    {
+      "id": "src-007df7e877",
+      "title": "健康保険法 第101条（出産育児一時金）",
+      "url": "https://laws.e-gov.go.jp/law/211AC0000000070",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-02564898a8",
+      "title": "道路交通法施行令 第20条",
+      "url": "https://laws.e-gov.go.jp/law/335CO0000000270",
+      "note": "光度が1万カンデラを超える走行用前照灯をつけているときは、すれ違い用前照灯に切り替えるなど",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-02ef0683c6",
+      "title": "内閣府「第6次男女共同参画基本計画」（令和8年3月13日閣議決定）",
+      "url": "https://www.gender.go.jp/about_danjo/basic_plans/6th/pdf/print.pdf",
+      "note": "改正法の施行状況を踏まえた調査研究",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-0329c2b8fd",
+      "title": "Courts and Legal Services Act 1990 s.58A（英国・イングランドとウェールズ）",
+      "url": "https://www.legislation.gov.uk/ukpga/1990/41/section/58A",
+      "note": "家事事件（family proceedings）は、強制できる成功報酬型の契約（conditional fee agreement）の対象にできないと定める。訳は docs/作業メモ/英語の参考資料の訳.md",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-041c2458e0",
+      "title": "参議院法務委員会（2026年4月14日）嘉田由紀子委員の質問",
+      "url": "https://kokkai.ndl.go.jp/txt/122115206X00420260414/75",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-043ab14d4c",
+      "title": "文部科学省「令和7年度『教師不足』に関する実態調査」（令和8年3月5日公表）",
+      "url": "https://www.mext.go.jp/content/20260302-mxt_kyoikujinzai01-000047773_1_1.pdf",
+      "note": "2〜4ページ。5月1日の不足3,827人（0.45％）、令和3年度の2,065人と比べ43自治体で悪化。小学校の学級担任の代替1,086人。要因の回答。6ページ：臨時的任用職員の給与の適切な取扱いの周知。10ページ：教員と学級担任の雇用形態別内訳",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-0535672268",
+      "title": "困難な問題を抱える女性への支援に関する法律（令和4年法律第52号）",
+      "url": "https://laws.e-gov.go.jp/law/504AC0100000052",
+      "note": "第1条：女性であることにより困難に直面することが多いことに鑑み",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-05b9f9c0d7",
+      "title": "豊中市「外国人住民の通称に関する届出取扱要綱」",
+      "url": "https://www.city.toyonaka.osaka.jp/joho/reiki/youkou/shiminkyoudou/youkou5.files/gaikokujinnjyuuminn.pdf",
+      "note": "第3条：通称の表記が分かる書類2点を添えて申し出ることとしている例",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-064ed9ba6a",
+      "title": "商事法務研究会「未成年期に父母の離婚を経験した子の養育に関する実態についての調査・分析業務報告書」（令和3年1月、法務省の委託調査）",
+      "url": "https://www.moj.go.jp/MINJI/minji07_00199.html",
+      "note": "公表ページで確認。未成年時に父母の別居・離婚を経験した20代・30代の1,000人への調査。法務省がローデータの提供も行っている",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-06ea7d644a",
+      "title": "出入国在留管理庁「技能実習生の失踪者数の推移（令和3年〜令和7年）」（令和8年7月）",
+      "url": "https://www.moj.go.jp/isa/content/001425159.pdf",
+      "note": "令和5年9,753人、令和7年3,950人",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-07768f7047",
+      "title": "東京都総務局統計部「くらしと統計2026」参考資料「統計グラフの見方」",
+      "url": "https://www.toukei.metro.tokyo.lg.jp/kurasi/2026/2026pdf/ku26rfmi01.pdf",
+      "note": "グラフの基本構造で「目盛り数字（0から始めます）」。省略記号（波線等）は「省略した部分が大きいほど、実態とかけ離れたグラフになっているため、読みとる際には注意が必要です」",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-0beb2ab648",
+      "title": "Li W ほか (2021) The Longitudinal Association Between Retirement and Depression: A Systematic Review and Meta-Analysis. Am J Epidemiol 190(10): 2220-2230（査読論文）",
+      "url": "https://doi.org/10.1093/aje/kwab125",
+      "note": "縦断研究25本のメタ分析。退職は抑うつ症状の増加と関連し（効果は小さい）、望まない退職で強く、東アジアなどの東の先進国では西の先進国より強かった。要旨（PubMed）で確認",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-0dfdcbb71c",
+      "title": "欧州議会「日本におけるEUの子の国際的・国内的な親による連れ去りに関する決議」（2020年7月8日、P9_TA(2020)0182）",
+      "url": "https://www.europarl.europa.eu/doceo/document/TA-9-2020-0182_EN.html",
+      "note": "第2項（ハーグ条約の返還決定の執行）、第12項（刑法・民法の適用）、第17項（共同親権の導入）",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-0f4c564591",
+      "title": "埼玉県「有害図書・深夜外出の規制等」（埼玉県青少年健全育成条例による規制の案内）",
+      "url": "https://www.pref.saitama.lg.jp/b0102/nanbukenmin/kisei.html",
+      "note": "他の自治体の例：10cm以上張り出した仕切り板、他の図書の棚と60cm以上離す、床から150cm以上の高さに背表紙のみ等、6つの区分陳列の方法を示す",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-1016ef04d1",
+      "title": "福島テレビ（福テレ空ネット）「テレポートプラスよりご報告とお詫び」（2020年9月21日、X の投稿）",
+      "url": "https://x.com/ftv_tenki/status/1308001585885097985",
+      "note": "9月17日放送のグラフが「0%ではなく80%から始まっていて」日本では「思う」が大半に見える表現だったとして、「割合を示すグラフは省略をせずに全体を表示する必要がありました」と謝罪（実際は15.25％）",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-10c7a1c47a",
+      "title": "Judicial Conduct Investigations Office Annual Report 2025-26（英国）",
+      "url": "https://www.complaints.judicialconduct.gov.uk/JCIOAnnualReport2025-2026",
+      "note": "2025-26年度の苦情は3,910件（前年度3,279件）、懲戒処分は95件（前年度89件）。訳は docs/作業メモ/英語の参考資料の訳.md",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-10ed6ab24a",
+      "title": "法務省 技能実習制度の運用に関するプロジェクトチーム「調査・検討結果報告書」（平成31年3月28日）",
+      "url": "https://www.moj.go.jp/isa/content/930004165.pdf",
+      "note": "失踪した技能実習生5,218人の実習実施機関を調べ、721人（631機関）について延べ893人分の不正行為等の疑い（割増賃金の不払176人、残業時間等不適正223人など）",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-114f1fb356",
+      "title": "Chan MS, Albarracín D (2023) A meta-analysis of correction effects in science-relevant misinformation. Nature Human Behaviour 7(9): 1514-1525（査読論文）",
+      "url": "https://doi.org/10.1038/s41562-023-01623-8",
+      "note": "74の報告（60,861人）を統合。誤った情報を訂正しても、平均すると効果ははっきりしなかったが、訂正が詳しいときは効果が大きかった。「誤りがありました」だけでなく、どこがどう誤っていたかを示す訂正の意義を裏付ける。要旨と本文で確認",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-117583ef31",
+      "title": "厚生労働省保険局国民健康保険課 説明会資料（在留外国人の医療保険適用の課題と対応）",
+      "url": "https://www.mhlw.go.jp/content/12401000/001616165.pdf",
+      "note": "外国人の収納率63%、全体93%",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-13aeb9f08b",
+      "title": "法務省「養育費に関する法務省令の概要」（令和7年12月）",
+      "url": "https://www.moj.go.jp/content/001452582.pdf",
+      "note": "法定養育費は子1人あたり月2万円",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-14895d5331",
+      "title": "Equality Act 2010 s.149（英国・公的部門の平等義務）",
+      "url": "https://www.legislation.gov.uk/ukpga/2010/15/section/149",
+      "note": "公的機関は、保護される特性（性別を含む）を持つ人と持たない人の間の機会の平等を進める必要などに、職務の中で相応の配慮をしなければならない。性別を問わず施策の影響を点検する仕組みの例。訳は docs/作業メモ/英語の参考資料の訳.md",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-1650ae466f",
+      "title": "原田綾子「家族関係の再編成の観点から見た家事調停の現状と課題――未成年の子がいる夫婦の離婚事件の処理に焦点を当てて――」『家族社会学研究』29(1)（日本家族社会学会、2017年）49-62頁",
+      "url": "https://doi.org/10.4234/jjoffamilysociology.29.49",
+      "note": "家事調停委員の約7割が60代（平成28年）。選任は、現職者が退職の際に後任者を探して推薦する「縁故採用的方式」が主流で、一部の家庭裁判所で公募制に切り替えて書類選考と面接で選ぶようになったとする（51頁）。DVのからむ事案での調停委員の専門性の向上が急務とも指摘（58頁）。本文で確認",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-16e9a65511",
+      "title": "財務省「酒税に関する資料」",
+      "url": "https://www.mof.go.jp/tax_policy/summary/consumption/d08.htm",
+      "note": null,
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-183addcea0",
+      "title": "高齢者の医療の確保に関する法律 第19条・第20条・第24条",
+      "url": "https://laws.e-gov.go.jp/law/357AC0000000080",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-1a1b279ca7",
+      "title": "日テレNEWS NNN「高市内閣支持率71パーセント【NNN・読売新聞 緊急世論調査】」（2025年10月22日掲載）",
+      "url": "https://news.ntv.co.jp/category/politics/a0d77b57b61148728007a87b55385314",
+      "note": "末尾の【訂正・お詫び】（10月23日追記）：折れ線グラフに一部誤りがあったとだけ記し、どこがどう誤っていたかは示していない",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-1a3fa224d9",
+      "title": "厚生労働省社会・援護局「生活保護における外国人の取扱いについて」",
+      "url": "https://www.mhlw.go.jp/content/001684937.pdf",
+      "note": "生活保護法は日本国民のみが対象。永住・定住等の外国人には人道上の観点から行政措置として準じた保護を行っている",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-1ade58b30e",
+      "title": "高野涼子「高等学校等就学支援金法改正案をめぐる国会論議」『立法と調査』第486号（参議院、2026年8月）",
+      "url": "https://www.sangiin.go.jp/jpn/shiryo/chousa/rippou_chousa/backnumber/2026pdf/20260806077.pdf",
+      "note": "4(4)：私立への支援の拡充で公立高校離れが加速するとの懸念と文部科学省の答弁。4(11)：公立高校の志願者数の減少などの懸念",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-1b7ba1f1ab",
+      "title": "明石市「離婚等のこども養育支援」",
+      "url": "https://www.city.akashi.lg.jp/seisaku/soudan_shitsu/kodomo-kyoiku/youikushien/youikushien.html",
+      "note": "2014年4月から",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-1b88219884",
+      "title": "内閣官房 検討会「安全保障上重要な土地等の取得等に関するルールの在り方について 提言」（令和8年10月）",
+      "url": "https://www.cas.go.jp/jp/seisaku/symbiotic_society/gaikokujin_tochishutoku/kaisai-jokyo/dai5/teigen.pdf",
+      "note": "許可制の導入、対象となる者",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-1ca15e90b9",
+      "title": "小室敬「子育て世帯に対する包括的な支援体制等の強化－児童福祉法等の一部を改正する法律案－」『立法と調査』第445号（参議院、2022年4月）",
+      "url": "https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2022pdf/20220428030.pdf",
+      "note": "（５）一時保護開始時の要件及び手続の整備：判断の適正性と手続の透明性の確保を求める国連児童の権利委員会の要請と、一時保護状の司法審査の導入",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-1cf09c7fd1",
+      "title": "検察庁法 第14条（法務大臣の一般的指揮監督）",
+      "url": "https://laws.e-gov.go.jp/law/322AC0000000061",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-2138b0be22",
+      "title": "最高裁判所「下級裁判所裁判官指名諮問委員会」",
+      "url": "https://www.courts.go.jp/saikosai/iinkai/kakyusaibansyo/index.html",
+      "note": null,
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-21be73aa3c",
+      "title": "学校給食法 第2条第6号（伝統的な食文化への理解）",
+      "url": "https://laws.e-gov.go.jp/law/329AC0000000160",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-21e5d52d10",
+      "title": "出入国管理及び難民認定法 第5条（上陸の拒否）",
+      "url": "https://laws.e-gov.go.jp/law/326CO0000000319",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-21f792c886",
+      "title": "内田亜也子「施行後６年を迎えた裁判員制度の評価と課題－裁判員法の一部を改正する法律の成立－」『立法と調査』第368号（参議院、2015年9月）",
+      "url": "https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2015pdf/20150904016.pdf",
+      "note": "刑事裁判への国民の参加（裁判員制度）の6年の評価と、裁判員候補者の辞退率の上昇・出席率の低下などの課題",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-2352d32c15",
+      "title": "野嵜雄太「学校の教職員に求められる宗教的配慮と…への教育－法的な判断基準による許容範囲の考察を通して－」（題名の一部を略）『シティズンシップ教育研究』第4号（日本シティズンシップ教育学会、2024年）13-22頁",
+      "url": "https://www.jstage.jst.go.jp/article/citizenshipeducation/4/0/4_13/_article/-char/ja/",
+      "note": "学校での宗教上の配慮の判断基準として、憲法第20条・教育基本法第15条と判例を整理。日曜日授業参観事件（東京地裁1986年）では、公教育の宗教的中立を保つため、宗教上の理由による個別の差異を認めないことにも合理的な根拠があるとされた。本文1〜3ページで確認",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-23b1fc113a",
+      "title": "売春防止法 第3条・第5条",
+      "url": "https://laws.e-gov.go.jp/law/331AC0000000118",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-23b5db79af",
+      "title": "Foettinger L ほか (2022) The Role of Community-Based Men’s Sheds in Health Promotion for Older Men: A Mixed-Methods Systematic Review. American Journal of Men’s Health 16(2)（査読のある系統的レビュー）",
+      "url": "https://doi.org/10.1177/15579883221084490",
+      "note": "52件の研究（質的35・量的9・混合8）を統合。メンズシェッドへの参加が、自分で感じる健康・社会的孤立・幸福感によい影響を持つ根拠を確認。成功の条件として、適した施設、十分な資金、参加者が主体となる運営を挙げる。本文で確認",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-25872cffa9",
+      "title": "喫煙の健康影響に関する検討会「喫煙と健康 喫煙の健康影響に関する検討会報告書」（平成28年8月）",
+      "url": "https://www.mhlw.go.jp/content/000550455.pdf",
+      "note": "小児の受動喫煙と喘息の既往、乳幼児突然死症候群（SIDS）は「因果関係を推定するのに十分（レベル1）」と判定",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-263a72d47b",
+      "title": "民法 第817条の12第2項（親の責務等）",
+      "url": "https://laws.e-gov.go.jp/law/129AC0000000089",
+      "note": "「父母は、婚姻関係の有無にかかわらず、子に関する権利の行使又は義務の履行に関し、その子の利益のため、互いに人格を尊重し協力しなければならない。」",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-2708e30255",
+      "title": "米国教育省 Student Privacy Policy Office「In the case of a divorce, do both parents have rights under FERPA?」",
+      "url": "https://studentprivacy.ed.gov/faq/case-divorce-do-both-parents-have-rights-under-ferpa",
+      "note": "米国の連邦法（FERPA）では、裁判所の命令などで別段の定めがない限り、同居している親にも別居している親にも、子の教育記録についての同じ権利がある（原文「FERPA gives custodial and noncustodial parents alike certain rights with respect to their children’s education records」）",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-273166ed54",
+      "title": "文部科学省「教員勤務実態調査（令和4年度）の集計（確定値）について」（令和6年4月4日）",
+      "url": "https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf",
+      "note": "6ページ：職種別の1日当たりの在校等時間（講師・教諭）。21ページ：雇用形態別の在校等時間",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-274684b6c9",
+      "title": "厚生省社会局長通知「生活に困窮する外国人に対する生活保護の措置について」（昭和29年5月8日）",
+      "url": "https://www.mhlw.go.jp/web/t_doc?dataId=00ta1609&dataType=1&pageNo=1",
+      "note": null,
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-278388bbae",
+      "title": "道路運送車両の保安基準 第30条（騒音防止装置）",
+      "url": "https://laws.e-gov.go.jp/law/326M50000800067",
+      "note": "騒音を著しく発しないものとして告示で定める基準に適合し、内燃機関の自動車は告示の基準に適合する消音器を備えなければならない",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-27e11b2cb0",
+      "title": "日本国憲法 第6条第2項・第79条第1項",
+      "url": "https://laws.e-gov.go.jp/law/321CONSTITUTION",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-28880fef12",
+      "title": "向井智哉ほか「保護責任者遺棄致死罪で起訴された被告人の性別が一般市民の量刑判断に与える影響」『パーソナリティ研究』32巻3号（2024年）",
+      "url": "https://www.jstage.jst.go.jp/article/personality/32/3/32_32.3.7/_article/-char/ja",
+      "note": "日本の成人185人を対象にした実験で、同じ事件でも被告人が女性のほうが短い刑が選ばれた",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-294671fbb1",
+      "title": "竹内健太「教員不足とその対応－公教育の担い手確保に向けて－」『立法と調査』第467号（参議院、2024年6月）",
+      "url": "https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2024pdf/20240627003.pdf",
+      "note": "2・3：臨時的任用教員の配置割合が過度に大きくなると、年度をまたいだ継続的な関わりが難しくなるおそれ。非常勤講師は原則、担任や部活動顧問を担わない。臨時的任用教員のなり手不足と採用倍率の低下",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-2954d3d3da",
+      "title": "参議院法制局「前文とその改正」（法律の［窓］）",
+      "url": "https://houseikyoku.sangiin.go.jp/column/column063.htm",
+      "note": "前文は各条文の解釈の基準となるとされること。DV防止法の前文は平成16年改正で一部改められ、前文も他の条文と同じように改正できること",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-2a304b2167",
+      "title": "ドイツ 家事事件・非訟事件手続法 第158c条（報酬は常に国庫から）",
+      "url": "https://www.gesetze-im-internet.de/famfg/__158c.html",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-2a8e6e0162",
+      "title": "文部科学省「令和9年度大学入学者選抜実施要項」（令和8年5月27日）",
+      "url": "https://www.mext.go.jp/content/20260529-mxt_daigakuc02-000005144_1.pdf",
+      "note": "属性を理由に一律に取扱いの差異を設けること、理工系分野における女子等",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-2b30a26662",
+      "title": "国立国会図書館調査及び立法考査局「違憲審査制の論点（改訂版）」基本情報シリーズ㉓（調査資料2016-1-a、2016年12月）",
+      "url": "https://dl.ndl.go.jp/view/download/digidepo_10229412_po_201601a.pdf?contentNo=1",
+      "note": "日本の最高裁裁判官の選任手続には法令の規定がなく、内閣による選任過程も非公開で実情が明らかでないこと、廃止された裁判官任命諮問委員会、英米独などの選任の仕組み",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-2b34a45195",
+      "title": "市民的及び政治的権利に関する国際規約 第26条（1979年に日本について効力発生）",
+      "url": "https://treaties.un.org/doc/Publication/UNTS/Volume%20999/volume-999-I-14668-English.pdf",
+      "note": "英語正文：All persons are equal before the law and are entitled without any discrimination to the equal protection of the law ... on any ground such as race, colour, sex ...（すべての者は法律の前に平等であり、性等によるいかなる差別もなしに法律による平等の保護を受ける権利を有する。仮訳）。外務省の和文のページは自動の取得を拒むため、国連条約集の英語正文で確認",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-2c7e27cc36",
+      "title": "裁判所「平成30年度司法研究（養育費，婚姻費用の算定に関する実証的研究）の報告について」",
+      "url": "https://www.courts.go.jp/toukei_siryou/siryo/H30shihou_houkoku/index.html",
+      "note": "家庭裁判所で養育費・婚姻費用の算定に用いられる標準算定方式・算定表（令和元年版）",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-2e2c32e7de",
+      "title": "青木義郎ほか「交通弱者に配慮したグレアレスADBに関する評価解析」交通安全環境研究所フォーラム2019（自動車技術総合機構 交通安全環境研究所）",
+      "url": "https://www.ntsel.go.jp/Portals/0/resources/forum/2019files/P08.pdf",
+      "note": "図1：歩行者へのアンケート（非高齢312人・高齢312人）で、最近の前照灯を以前より「眩しく感じる」は非高齢49.0％、高齢56.6％。実験（14人）：走行ビームはグレアの許容限界を超え、光度が高いほど横断の判断が慎重になった",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-2e7a5edfc1",
+      "title": "文部科学省 事務連絡「新年度の学校給食における食物アレルギー等を有する児童生徒等への対応等について」（平成25年3月22日）",
+      "url": "https://www.mext.go.jp/a_menu/sports/syokuiku/1332720.htm",
+      "note": "対応が困難な料理では弁当を持参させる",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-2f32698431",
+      "title": "厚生労働省「出産育児一時金について」",
+      "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/shussan/index.html",
+      "note": "公的医療保険に加入する者への支給制度",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-2ff23b880c",
+      "title": "財務省「たばこ税等に関する資料」",
+      "url": "https://www.mof.go.jp/tax_policy/summary/consumption/d09.htm",
+      "note": "令和9年4月から3段階の引上げ、税収はおおむね2兆円",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-2ff6d3c962",
+      "title": "公職選挙法施行令 第88条",
+      "url": "https://laws.e-gov.go.jp/law/325CO0000000089",
+      "note": "届出に戸籍の謄本又は抄本を添える",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-30b6143ab4",
+      "title": "HM Revenue & Customs「Check if your drink is liable for the Soft Drinks Industry Levy」（英国）",
+      "url": "https://www.gov.uk/guidance/check-if-your-drink-is-liable-for-the-soft-drinks-industry-levy",
+      "note": "2018年4月6日から。100mlあたり糖分5g以上と8g以上の2段階",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-312abbdd51",
+      "title": "ギャンブル等依存症対策基本法 第2条・第6条・第13条〜第15条・第17条",
+      "url": "https://laws.e-gov.go.jp/law/430AC1000000074",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-3175d1c6de",
+      "title": "Olivet J, et al. \"Outreach and Engagement in Homeless Services: A Review of the Literature\" The Open Health Services and Policy Journal 3: 53-70（2010年）",
+      "url": "https://endhomelessness.org/wp-content/uploads/2024/10/TOHSPJ-3-53.pdf",
+      "note": "要旨の1文目「Outreach and engagement are regarded by many who work in homeless programs as essential services.」（訳：アウトリーチと関わりづくりは、ホームレス支援の現場の多くの人に、欠かせない支援とみなされている）。効果を測った研究はまだ少ないとも述べる",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-327815282f",
+      "title": "国家公務員法 第38条（欠格条項）",
+      "url": "https://laws.e-gov.go.jp/law/322AC0000000120",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-32b621602f",
+      "title": "出入国在留管理庁「令和5年改正入管法の運用状況について」（令和7年3月14日）",
+      "url": "https://www.moj.go.jp/isa/content/001434961.pdf",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-343a80f79d",
+      "title": "埼玉県男女共同参画推進センター（With You さいたま）「男性のための相談」",
+      "url": "https://www.pref.saitama.lg.jp/withyou/counsel/mens.html",
+      "note": "男性のDV被害者のための電話相談を設けている例",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-347c64543f",
+      "title": "道路交通法 第71条第5号の3",
+      "url": "https://laws.e-gov.go.jp/law/335AC0000000105",
+      "note": "正当な理由なく、著しく他人に迷惑を及ぼす騒音を生じさせるような急発進・急加速・空ぶかしの禁止",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-358c9f8409",
+      "title": "厚生労働省「がん対策推進基本計画」（令和5年3月28日閣議決定）",
+      "url": "https://www.mhlw.go.jp/content/10900000/001522768.pdf",
+      "note": "「がん検診受診率の向上」の個別目標（受診率60％・精密検査受診率90％）と注20",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-36218ab982",
+      "title": "中央教育審議会「『令和の日本型学校教育』を担う質の高い教師の確保のための環境整備に関する総合的な方策について（答申）」（令和6年8月27日、中教審第251号）",
+      "url": "https://www.mext.go.jp/b_menu/shingi/chukyo/chukyo3/079/sonota/1412985_00006.htm",
+      "note": "本体・概要・考え方の3つの資料に、臨時的任用教員の給与・待遇についての記述は見当たらない",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-362bf9e8d5",
+      "title": "内閣官房「孤独・孤立に関連する各種調査について」",
+      "url": "https://www.cas.go.jp/jp/seisaku/juten_keikaku/dai5/siryou2.pdf",
+      "note": "相談できる友人が「いない」男性は女性の約3倍",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-36467d4650",
+      "title": "国籍法 第14条（国籍の選択）・第16条",
+      "url": "https://laws.e-gov.go.jp/law/325AC0000000147",
+      "note": "選択の宣言の後の外国籍の離脱は努力義務",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-367d6e4e96",
+      "title": "内閣府「第6次男女共同参画基本計画」成果目標等一覧",
+      "url": "https://www.gender.go.jp/about_danjo/basic_plans/6th/pdf/seika_mokuhyo.pdf",
+      "note": "都道府県・市町村の審議会等委員：40%以上、60%以下",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-36abf6a56d",
+      "title": "Wagenaar AC, Salois MJ, Komro KA「Effects of beverage alcohol price and tax levels on drinking: a meta-analysis of 1003 estimates from 112 studies」Addiction 2009;104(2):179-190",
+      "url": "https://doi.org/10.1111/j.1360-0443.2008.02438.x",
+      "note": "112件の研究のメタ分析。酒類の価格・税と飲酒量は負の関係にあり、その効果はほかの予防策と比べて大きい",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-37f3d05d1e",
+      "title": "Lancaster University「New research reveals the children with ‘no voice’ in the family courts」（2024年2月20日、Nuffield Family Justice Observatory の研究の紹介）",
+      "url": "https://www.lancaster.ac.uk/fass/projects/cfj-archive/news/new-research-reveals-the-children-with-no-voice-in-the-family-court.html",
+      "note": "本文で確認。イングランド・ウェールズで2019年に始まった子の監護の申立ての行政データを分析し、関わった約6万7千人の子の約半数が意見を述べる機会を持てなかったことを明らかにした",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-38d1c1cf5a",
+      "title": "文部科学省「『教師不足』への対応等について（アンケート結果の共有と留意点）」（令和5年6月20日、5教教人第13号）",
+      "url": "https://www.mext.go.jp/content/20230626-mxt_kyoikujinzai01-000022259-3.pdf",
+      "note": "2ページ。正規教員の割合の目標設定、非正規教員の枠の正規教員への置き換え",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-3994062cef",
+      "title": "福岡市「令和7年度補助金調書（市民局）」",
+      "url": "https://www.city.fukuoka.lg.jp/shisei/R7hojokintyoushimin.html",
+      "note": "補助金ごとに交付先を載せて公表している例",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-3bbadcfcba",
+      "title": "厚生労働省「外国人の生活保護に関するよくあるご意見・ご質問」",
+      "url": "https://www.mhlw.go.jp/content/001684938.pdf",
+      "note": "令和6年度の外国人世帯主の被保護世帯は4万7,332世帯",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-3c503c8363",
+      "title": "松平浩一「外国人刑事事件の司法通訳に関する質問主意書」（第198回国会 質問第269号、令和元年6月20日提出）",
+      "url": "https://www.shugiin.go.jp/Internet/itdb_shitsumon.nsf/html/shitsumon/a198269.htm",
+      "note": "法廷通訳が付いた第一審の被告人は2018年に3,757人で2014年より1,374人増えた一方、最高裁の法廷通訳候補者名簿の登録数は5年前より200人以上減ったと指摘",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-3cadd4c7ab",
+      "title": "TRL \"Glare from vehicle lighting on UK roads\" PPR2069（英国運輸省の委託、2025年10月）",
+      "url": "https://www.trl.co.uk/uploads/trl/documents/PPR2069-Glare-from-road-vehicle-lighting.pdf",
+      "note": "要旨（ii〜iv）：運転者1,850人の調査で、前照灯がまぶしすぎると受け止められ、白い前照灯が特に問題とされ、半数を超える人が夜の運転をやめたか減らした（またはできればそうしたい）。路上の測定では、明るさが増すほどまぶしさを感じやすく、SUVなどの大きな車やLEDの前照灯との関係は暫定的でさらに調べる必要がある。運転者が対象で、歩行者・自転車は調べていない。上り坂・右カーブ（左側通行）や、段差・坂の頂上などの場所でまぶしさが起きやすかった",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-3f04bde28d",
+      "title": "英国 司法行為調査局（Judicial Conduct Investigations Office）「Annual Report 2024-25」（2026年1月、議会に提出）",
+      "url": "https://data.parliament.uk/DepositedPapers/Files/DEP2026-0024/JCIO_Annual_Report_2024-25.pdf",
+      "note": "裁判官等への苦情を受け付ける独立の機関。2024-25年度に3,279件を受け付け、89人に懲戒。懲戒の仕組みは個人の非行だけを扱い、判断の中身には立ち入らない（判断は上訴で争う）と明記。苦情の扱いを独立のオンブズマン（JACO）が点検し、447件の申立てのうち11件で扱いの誤りを認めた",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-3ff15932f8",
+      "title": "刑法 第224条（未成年者略取及び誘拐）",
+      "url": "https://laws.e-gov.go.jp/law/140AC0000000045",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-4483ba9758",
+      "title": "Takehara ほか (2020) Scientific Reports 10:13770",
+      "url": "https://doi.org/10.1038/s41598-020-70727-2",
+      "note": "論文",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-46050a4ae7",
+      "title": "アルコール健康障害対策基本法 第16条",
+      "url": "https://laws.e-gov.go.jp/law/425AC1000000109",
+      "note": "酒類の表示について、不適切な飲酒を誘引しないための施策を国に求める",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-465c143b6b",
+      "title": "総務省「令和6年10月27日執行 最高裁判所裁判官国民審査結果調」",
+      "url": "https://www.soumu.go.jp/main_content/000979139.pdf",
+      "note": null,
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-4745e9281b",
+      "title": "前澤貴子「離婚後面会交流及び養育費に係る法制度－米・英・仏・独・韓－」『調査と情報』第882号（国立国会図書館、2015年11月）。法務省 法制審議会家族法制部会の委員提出資料として掲載",
+      "url": "https://www.moj.go.jp/content/001374742.pdf",
+      "note": "Ⅲ：フランスでは、居所の変更を1か月以内に通知しないことが6か月以下の拘禁刑又は7,500ユーロ以下の罰金の対象",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-477fa7ad84",
+      "title": "文部科学省「教員勤務実態調査（令和4年度）の集計（速報値）について」（令和5年4月28日）",
+      "url": "https://www.mext.go.jp/content/20230428-mxt_zaimu01-000029160_2.pdf",
+      "note": "6ページ：職種別の在校等時間（講師・教諭）。講師の部活動の時間の表はない",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-47df007173",
+      "title": "久里浜医療センター「令和5年度 ギャンブル障害およびギャンブル関連問題の実態調査 報告書概要」（厚生労働省の依存症に関する調査研究事業）",
+      "url": "https://ncasa-japan.jp/pdf/document97.pdf",
+      "note": "(2)PGSI8点以上の割合と最もお金を使ったギャンブル、(7)対策の認知度",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-47e533f0a6",
+      "title": "Amnesty International「Policy on state obligations to respect, protect and fulfil the human rights of sex workers」（2016年5月26日）",
+      "url": "https://www.amnesty.org/en/documents/pol30/4062/2016/en/",
+      "note": "買う側を罰する法も含め、成人の合意による性労働の犯罪化が性労働者の人権の実現を妨げるとする方針",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-481582bc8a",
+      "title": "田村智子「権力関係を乗り越えた法廷通訳の専門職化：ボストンの法廷通訳人から日本へのヒント」『通訳翻訳研究』No.24（日本通訳翻訳学会、2024年）107-129頁",
+      "url": "https://www.jstage.jst.go.jp/article/its/24/0/24_2404/_article/-char/ja/",
+      "note": "米国（ボストン）の法廷通訳の観察と聞き取りから、通訳人の認定制度が米国で成り立ち、日本ではまだない理由を分析。専門職化の要素として法的な保護・職能団体・倫理綱領・技能の訓練を挙げる。英文要旨で確認（本文は日本語の文字を機械で取り出せず未読）",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-496b8ec318",
+      "title": "三重県「補助金等に係る調書等の公表について」",
+      "url": "https://www.pref.mie.lg.jp/ZAISEI/HP/31869028214.htm",
+      "note": "三重県における補助金等の基本的な在り方等に関する条例（平成15年三重県条例第31号）に基づき、補助金の調書を公表している例",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-4aaa795968",
+      "title": "上田倫徳「こども家庭庁の創設とこども基本法の成立」『立法と調査』第450号（参議院、2022年10月）",
+      "url": "https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2022pdf/20221003026.pdf",
+      "note": "基本法案の概要：こども施策に対するこども等の意見の反映（第11条）。国会での議論：こどもの意見を年齢や発達の程度に応じて政策に反映させる方針",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-4bd3480f09",
+      "title": "Anderson ND ほか (2014) The benefits associated with volunteering among seniors: a critical review and recommendations for future research. Psychological Bulletin 140(6): 1505-1533（査読論文）",
+      "url": "https://doi.org/10.1037/a0037610",
+      "note": "73本の研究を検討。高齢者のボランティア活動は、抑うつの症状の少なさ、自己評価の健康のよさ、生活機能の制限の少なさ、死亡率の低さと、もっとも一貫して関連していた。要旨（PubMed）で確認",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-4bfdd35699",
+      "title": "内閣「参議院議員牧山ひろえ君提出ＤＶ等被害者支援措置としての住民基本台帳閲覧制限等の期間制限に関する質問に対する答弁書」（内閣参質二一三第二二六号、令和6年7月2日）",
+      "url": "https://www.sangiin.go.jp/japanese/joho1/kousei/syuisyo/213/touh/t213226.htm",
+      "note": "三について：支援措置の継続に当たっては、必要な確認を行うべきもの。一について：期間を1年としたのは、被害の状況が様々に変化し得ること等による",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-4c8f00bd22",
+      "title": "スウェーデン社会保険庁「養育費補助」",
+      "url": "https://www.forsakringskassan.se/privatperson/foralder/for-foraldrar-som-inte-lever-ihop/barnet-bor-hos-dig/underhallsstod-fran-forsakringskassan",
+      "note": null,
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-4df9b9b1b6",
+      "title": "文部科学省「教師不足について」",
+      "url": "https://www.mext.go.jp/a_menu/shotou/kyoin/mext_00004.html",
+      "note": null,
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-4ea7ee54b6",
+      "title": "国立成育医療研究センター プレスリリース（2020年8月27日）",
+      "url": "https://www.ncchd.go.jp/press/2020/pr_20200827.html",
+      "note": "父親のメンタルヘルスの不調",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-4ed0c0397b",
+      "title": "厚生労働省「2024年度 特定健康診査・特定保健指導の実施状況の訂正について」（令和8年10月29日）",
+      "url": "https://www.mhlw.go.jp/content/12400000/001764398.pdf",
+      "note": "特定保健指導の実施率の訂正（全国28.9％、市町村国保30.2％）",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-4eebef3a65",
+      "title": "AAA (American Automobile Association) \"Headlamp Lens Deterioration\"（2018年12月）",
+      "url": "https://www.aaa.com/AAA/common/AAR/files/Headlamp-Lens-Deterioration.pdf",
+      "note": "要旨と3.3：劣化（黄ばみ・くもり）したレンズのロービームの光は新品の約22％で、光は極めて拡散し、明暗の境目（カットオフ）がほとんどなかった。磨いて直すと約70％まで戻った。米国の自動車団体の試験で、台数は少ない",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-500f1224fb",
+      "title": "厚生労働省「令和6年度 医療機関における外国人患者の受入に係る実態調査」概要版",
+      "url": "https://www.mhlw.go.jp/content/10800000/001566020.pdf",
+      "note": "2024年9月に外国人患者を受け入れた2,890病院のうち470病院（16.3%）が外国人患者の未収金を経験（p.11）。ここでの外国人患者は在留外国人・訪日外国人旅行者・医療目的の外国人を合わせたもの。前年度の調査では18.3%",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-50ab28c2f6",
+      "title": "地方税法 第348条第2項第9号（固定資産税の非課税）",
+      "url": "https://laws.e-gov.go.jp/law/325AC0000000226",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-511dbc09af",
+      "title": "高澤美有紀「女性国会議員比率の動向」『調査と情報』第883号（国立国会図書館、2015年11月）",
+      "url": "https://dl.ndl.go.jp/view/download/digidepo_9535004_po_0883.pdf?contentNo=1",
+      "note": "おわりに：法令で一定の議席を確保する「法律型クオータ制」は、平等原則等との関係から憲法上の疑義が生じ得るため慎重な検討が求められるとの指摘",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-52dafa271b",
+      "title": "最高裁判所事務総局「令和7年 司法統計年報 3 家事編」第15表 婚姻関係事件数（終局区分別申立人及び申立ての趣旨別）",
+      "url": "https://www.courts.go.jp/saikosai/vc-files/saikosai/toukei/toukei-pdf-16677.pdf",
+      "note": "34ページ。令和7年に終局した円満調整の申立ては1,837件（夫1,092件・妻745件）。調停成立512件のうち、婚姻継続（同居）162件、婚姻継続（別居）130件、調停離婚218件、協議離婚届出2件",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-5339b29581",
+      "title": "環境省 報道発表「令和６年度騒音規制法等施行状況調査の結果について」（令和8年2月27日）",
+      "url": "https://www.env.go.jp/content/000384661.pdf",
+      "note": "騒音の苦情19,886件。アイドリング・空ふかしは前年度から22件（6.3％）増。騒音規制法の指定地域内の自動車騒音の苦情326件",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-534c042e3b",
+      "title": "Markman HJ, Hawkins AJ, Stanley SM ほか (2022) Helping couples achieve relationship success: A decade of progress in couple relationship education research and practice, 2010-2019. Journal of Marital and Family Therapy 48(1): 251-282（査読のある系統的レビュー）",
+      "url": "https://doi.org/10.1111/jmft.12565",
+      "note": "厳密な評価研究34件を検討。夫婦関係教育は関係の質だけでなく、心身の健康・共同養育・子どもの健やかさにも効果があり、リスクの高い夫婦ほど効果が大きいことが多い。本文では、地域ぐるみで夫婦関係教育を広めたフロリダ州ジャクソンビルで、比べた郡より離婚率が大きく下がったとする準実験研究も紹介している",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-53ec7fc40f",
+      "title": "Sandler I, Wolchik S ほか (2020) Randomized Effectiveness Trial of the New Beginnings Program for Divorced Families with Children and Adolescents. Journal of Clinical Child & Adolescent Psychology 49(1): 60-78（査読論文）",
+      "url": "https://doi.org/10.1080/15374416.2018.1540008",
+      "note": "家庭裁判所を通じて募った離婚・別居中の父母830人の無作為化比較試験。地域の機関が行う10回の親向けプログラムを、同じ技能を2回で学ぶ群と比べ、子育てが改善し、子の心の問題が10か月後まで減った。ただし効果は家庭の条件により異なり、ヒスパニック系の家庭では見られなかった。本文で確認",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-53ff0a7d99",
+      "title": "新井賢治「重要土地等調査法の運用状況と課題」『立法と調査』第462号（参議院、2023年12月）",
+      "url": "https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2023pdf/20231218006.pdf",
+      "note": "2. 外国人等による土地所有規制の限界",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-544689230e",
+      "title": "Oishi & Schimmack (2010) Residential mobility, well-being, and mortality. Journal of Personality and Social Psychology 98(6), 980-994",
+      "url": "https://doi.org/10.1037/a0019389",
+      "note": "米国の成人7,108人の10年追跡。子どもの頃の転居の回数が多いほど、大人になってからの幸福感が低かった。ただし、この関連は内向的な人に限って見られた（要旨で確認）",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-54e47965e8",
+      "title": "上田倫徳「受動喫煙防止対策の推進と課題－健康増進法の一部を改正する法律案－」『立法と調査』第400号（参議院、2018年5月）",
+      "url": "https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2018pdf/20180508016s.pdf",
+      "note": "2・4・5：受動喫煙の状況、学校・児童福祉施設等の第一種施設の規制と特定屋外喫煙場所をめぐる論点",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-570a7e6809",
+      "title": "Sonja B. Starr「Estimating Gender Disparities in Federal Criminal Cases」University of Michigan Law & Economics Working Papers 57（2012年）",
+      "url": "https://repository.law.umich.edu/law_econ_current/57/",
+      "note": "米国の連邦の刑事事件を逮捕から量刑までつないで分析し、逮捕時の罪名や前歴などをそろえても、刑期に平均60%を超える男女差（女性が短い）があるとする",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-5824c99b30",
+      "title": "厚生労働省「令和6年 労働災害発生状況について」（令和7年5月30日）",
+      "url": "https://www.mhlw.go.jp/content/11302000/001543320.pdf",
+      "note": "死亡災害は男性が9割超",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-588ed49116",
+      "title": "厚生労働省「ホームレスの実態に関する全国調査（概数調査）結果について」（令和8年4月27日）",
+      "url": "https://www.mhlw.go.jp/stf/newpage_72779.html",
+      "note": "2,481人のうち男性2,190人",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-59f23b5be8",
+      "title": "重要土地等調査法（令和3年法律第84号）第13条（特別注視区域の届出）",
+      "url": "https://laws.e-gov.go.jp/law/503AC0000000084",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-5d2359d3e3",
+      "title": "法人税法 第4条第1項・第66条・別表第二",
+      "url": "https://laws.e-gov.go.jp/law/340AC0000000034",
+      "note": "公益法人等は収益事業を行う場合に限り納税義務。税率は普通法人23.2％、公益法人等19％",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-5d32e6285e",
+      "title": "Keizer K, Lindenberg S, Steg L (2008) The spreading of disorder. Science 322(5908): 1681-1685（査読論文）",
+      "url": "https://doi.org/10.1126/science.1161405",
+      "note": "6つの野外実験で、他人が規範や決まりを破っている様子を見た人は、ほかの規範や決まりも破りやすくなり、無秩序が広がることを示した。要旨（PubMed）で確認",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-5de3275148",
+      "title": "廃棄物の処理及び清掃に関する法律 第4条第1項・第16条",
+      "url": "https://laws.e-gov.go.jp/law/345AC0000000137",
+      "note": "第4条第1項：市町村は、一般廃棄物の減量に関し住民の自主的な活動の促進を図る。第16条：何人も、みだりに廃棄物を捨ててはならない",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-5edb1eb63a",
+      "title": "明石市「参考書式など」（こども養育プラン・合意書）",
+      "url": "https://www.city.akashi.lg.jp/seisaku/soudan_shitsu/kodomo-kyoiku/youikushien/sannkousyosiki.html",
+      "note": null,
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-5f0a906a9a",
+      "title": "藤原夏人「韓国のギャンブル依存症対策」『外国の立法』第269号（国立国会図書館、2016年9月）",
+      "url": "https://dl.ndl.go.jp/view/download/digidepo_10193088_po_02690004.pdf?contentNo=1",
+      "note": "Ⅲ3・表4：江原ランド（カジノ）の本人・家族の要請による入場制限と、解除の際の義務カウンセリング",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-5fc559d5d0",
+      "title": "酒税の保全及び酒類業組合等に関する法律施行令 第8条の3第1項",
+      "url": "https://laws.e-gov.go.jp/law/328CO0000000028",
+      "note": "容器に表示する義務があるのは内容量・品目・アルコール分など。純アルコール量は含まれない",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-60b4d331a7",
+      "title": "Andreyeva T, et al.「Outcomes Following Taxation of Sugar-Sweetened Beverages: A Systematic Review and Meta-analysis」JAMA Network Open 2022;5(6):e2215276",
+      "url": "https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2792842",
+      "note": "系統的レビュー。税の82％が価格に転嫁され、課税された飲料の販売は平均15％減",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-63d623debf",
+      "title": "国土交通省 報道発表「交換用マフラーを備えた四輪自動車等の騒音規制の取扱いを見直します」（平成30年11月30日）",
+      "url": "https://www.mlit.go.jp/report/press/jidosha10_hh_000203.html",
+      "note": "新車時の近接排気騒音が一定の値を超える四輪自動車等に交換用マフラーを備える場合に限り、新車時から悪化しないことを確認する相対値規制を導入。二輪自動車等の一部は前年12月に同様の改正",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-643ddcfb82",
+      "title": "裁判所法 第61条の2（家庭裁判所調査官）",
+      "url": "https://laws.e-gov.go.jp/law/322AC0000000059",
+      "note": "家事の審判・調停に必要な調査を掌る。職務を行うについては、裁判官の命令に従う",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-654af2e494",
+      "title": "Huntley AL, et al. \"Help-seeking by male victims of domestic violence and abuse (DVA): a systematic review and qualitative evidence synthesis\" BMJ Open 9(6): e021960（2019年）",
+      "url": "https://doi.org/10.1136/bmjopen-2018-021960",
+      "note": "12の研究をまとめた系統的レビュー。男性の被害者が相談をためらう理由として、打ち明けることへの恐れ、男らしさへの挑戦、相手との関係への思い、自信の喪失、支援が見えないこと・支援の受け止め方を挙げる",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-6651385e84",
+      "title": "日弁連新聞 第589号（2023年）",
+      "url": "https://www.nichibenren.or.jp/document/newspaper/year/2023/589.html",
+      "note": "家族法制の中間試案への意見書：会員の間で賛否が分かれたため、共同親権の導入について一致した意見の表明を見送った",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-665b833e44",
+      "title": "WHO「Fiscal policies to promote healthy diets: policy brief」（2022年6月13日）",
+      "url": "https://www.who.int/publications/i/item/9789240049543",
+      "note": "健康によくない食品と飲料への課税を呼びかけ",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-6736595c02",
+      "title": "出入国在留管理庁「不法滞在者ゼロプラン」",
+      "url": "https://www.moj.go.jp/isa/09_00048.html",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-67d6c6e1c0",
+      "title": "東京都青少年の健全な育成に関する条例施行規則",
+      "url": "https://www.reiki.metro.tokyo.lg.jp/reiki/reiki_honbun/g101RG00003367.html",
+      "note": "区分陳列の方法",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-68832b2245",
+      "title": "厚生労働省年金局「公的年金加入状況等調査」参考3 外国人に係る公的年金加入状況等",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/nenkin/nenkin/toukei/dl/k_r07.pdf",
+      "note": "令和7年度の最終納付率（令和5年度分保険料）55.0%",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-6ba1508921",
+      "title": "European Migration Network「Civic orientation courses or training offered to groups of third-country nationals in the EU」EMN Inform（2024年）",
+      "url": "https://emn.ie/wp-content/uploads/2024/10/EMN_INFORM_Civic-training.pdf",
+      "note": "EUの国々が移住者に行う市民オリエンテーションの講座の目的・内容・評価。権利と義務のほか、日常生活の実際の情報（practical information）を扱う",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-6bf34e5e04",
+      "title": "衆議院法務委員会（2024年4月9日）法務省刑事局長の答弁",
+      "url": "https://kokkai.ndl.go.jp/txt/121305206X00920240409/117",
+      "note": "有罪となった事案の数は「網羅的、統計的に把握をしていない」",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-6d4c5bf6b0",
+      "title": "Judicial Commission of New South Wales「Annual Information Statement 2024–25」（豪州ニューサウスウェールズ州）",
+      "url": "https://files.parliament.nsw.gov.au/fileapi/ParlFiles/GetArtifact/AGO_GSF_E%20Judicial%20Commission%20Annual%20Information%20Statement%2024-25.pdf?serverRelativeUrl=%2Ftp%2Ffiles%2F192189%2FAGO_GSF_E+Judicial+Commission+Annual+Information+Statement+24-25.pdf",
+      "note": "裁判官の「能力または行状」についての苦情を独立の委員会が調べる例。2024-25年度は35件の苦情を受け、調べた44件の95％を略式に却下。訳は docs/作業メモ/英語の参考資料の訳.md",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-6dc21d5775",
+      "title": "配偶者からの暴力の防止及び被害者の保護等に関する法律 第3条第4項（一時保護）",
+      "url": "https://laws.e-gov.go.jp/law/413AC0100000031",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-6ea083b8dd",
+      "title": "ドイツ 養育費前払法 第1条・第7条",
+      "url": "https://www.gesetze-im-internet.de/uhvorschg/__7.html",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-7122608066",
+      "title": "最高裁判所「裁判所データブック2026」2 裁判所の職員 §3・§4",
+      "url": "https://www.courts.go.jp/assets/db2026_all.pdf",
+      "note": "家事調停官89人（令和7年12月1日現在）。家事調停委員11,742人のうち弁護士1,731人・14.7％（令和8年4月1日現在）",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-720026ec33",
+      "title": "国連子どもの権利委員会 一般的意見第12号（2009年）意見を聴かれる子どもの権利",
+      "url": "https://www2.ohchr.org/english/bodies/crc/docs/AdvanceVersions/CRC-C-GC-12.pdf",
+      "note": "英文",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-725711de70",
+      "title": "Hammer, Finkelhor & Sedlak (2002) Children Abducted by Family Members: National Estimates and Characteristics. NISMART Bulletin, 米国司法省 少年司法・非行防止局（OJJDP）",
+      "url": "https://www.ojp.gov/pdffiles1/ojjdp/196466.pdf",
+      "note": "米国は世帯調査と警察への調査で、家族による連れ去りの全国の件数を推計して公表している。1999年に推計203,900人の子が家族による連れ去りの被害にあい、うち117,200人は所在不明となり、56,500人は所在の発見のために警察等に届けられた（本文で確認）",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-72717fbaca",
+      "title": "公職選挙法 第10条（被選挙権）・第86条の4（立候補の届出）",
+      "url": "https://laws.e-gov.go.jp/law/325AC1000000100",
+      "note": "届出書の記載事項は氏名・本籍・住所・生年月日・職業・所属政党など",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-7333ece7d7",
+      "title": "法務省「Ｑ＆Ａ形式の解説資料（民法編）」（令和8年9月11日改訂）",
+      "url": "https://www.moj.go.jp/MINJI/minji07_00377.html",
+      "note": "Q2-1：正当な理由なく無断で子の居所を変更することと協力義務",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-74ebeeecde",
+      "title": "最高裁判所大法廷 平成17年1月26日判決（平成10(行ツ)93、民集59巻1号128頁、東京都管理職選考事件）",
+      "url": "https://www.courts.go.jp/hanrei/52248/detail2/index.html",
+      "note": "公権力の行使に当たる職を含む一体的な管理職の任用制度で、昇任を日本国民の職員に限る措置は、労働基準法3条・憲法14条1項に違反しない",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-76980b470a",
+      "title": "女性の職業生活における活躍の推進に関する法律（平成27年法律第64号）",
+      "url": "https://laws.e-gov.go.jp/law/427AC0000000064",
+      "note": "第8条第3項・第19条第3項（女性の割合などの数値目標）、第24条（認定事業主の受注機会の増大）",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-78aedba99c",
+      "title": "出入国在留管理庁「令和8年入管法等改正法について」",
+      "url": "https://www.moj.go.jp/isa/01_00643.html",
+      "note": "JESTAの創設。施行は令和11年3月31日までの政令で定める日",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-7a17da8bf9",
+      "title": "女子に対するあらゆる形態の差別の撤廃に関する条約 第4条第1項（1985年に日本について効力発生）",
+      "url": "https://treaties.un.org/doc/Publication/UNTS/Volume%201249/volume-1249-I-20378-English.pdf",
+      "note": "英語正文：男女の事実上の平等を促進する暫定的な特別措置は差別とはみなさないが、「these measures shall be discontinued when the objectives of equality of opportunity and treatment have been achieved」（機会及び待遇の平等の目的が達成された時に廃止されなければならない。仮訳）。性別で対象を限る措置について、目的の達成を検証し続ける根拠となる。国連条約集の英語正文で確認",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-7a5aca0e02",
+      "title": "内田亜也子「被害の実態に即した性犯罪施策の課題（２）－刑法の一部を改正する法律案に対する附帯決議の対応状況－」『立法と調査』第425号（参議院、2020年7月）",
+      "url": "https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2020pdf/20200708051.pdf",
+      "note": "2(4)：男性の性被害の経験（男性1.5％）と、男性や性的マイノリティの被害に対応する相談窓口が少ないとの指摘",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-7b71d9a249",
+      "title": "内閣府男女共同参画局「配偶者から逃げたい」（被害者の要望別支援方法）",
+      "url": "https://www.gender.go.jp/policy/no_violence/e-vaw/siensya/03.html",
+      "note": "避難の手順の案内。別居後の親子関係には触れていない",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-7d674ad27b",
+      "title": "高野涼子「第217回国会における『高校無償化』をめぐる国会論議」『立法と調査』第477号（参議院、2025年7月）",
+      "url": "https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2025pdf/20250725118.pdf",
+      "note": "2：大阪府・東京都の独自の無償化と、3党合意に至る経緯",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-7dbb21a266",
+      "title": "厚生労働省・警察庁「令和6年中における自殺の状況」",
+      "url": "https://www.mhlw.go.jp/content/001464717.pdf",
+      "note": "自殺者20,320人のうち男性13,801人",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-7e2fa7ae89",
+      "title": "内閣府男女共同参画局「男女間における暴力に関する調査報告書」（令和6年3月）Ⅱ－2（1）",
+      "url": "https://www.gender.go.jp/policy/no_violence/e-vaw/chousa/pdf/r05/r05danjokan-4.pdf",
+      "note": "配偶者からの被害経験が「ある」のは女性27.5％、男性22.0％。この1年間に被害を受けた人の割合は男性50.3％、女性42.6％（被害経験のある人のうち）",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-7e32cf6b39",
+      "title": "総務省自治行政局「住基ネットと世帯情報等との関係について」資料2（2021年6月30日）",
+      "url": "https://www.soumu.go.jp/main_content/000757997.pdf",
+      "note": "8ページ：DV等支援措置の情報の漏えいの原因として、「『支援対象者は女性で、加害者は男性(夫)である』という思い込みから、漏えいにつながった事例も複数見受けられる」（平成28〜30年度に各1件）",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-7f4d0b65d5",
+      "title": "総務省「住民基本台帳法施行令の一部を改正する政令案等に対する意見と考え方」別紙1 Ⅰ通称関係",
+      "url": "https://www.soumu.go.jp/main_content/000142508.pdf",
+      "note": "制度を作る際の意見募集で、通称による別人へのなりすましや不正行為の助長を懸念する意見が寄せられていた",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-7fad9c843b",
+      "title": "厚生労働省社会・援護局地域福祉課女性支援室「困難な問題を抱える女性への支援について」（令和8年4月）",
+      "url": "https://www.mhlw.go.jp/content/001757541.pdf",
+      "note": "女性相談支援センターにおける一時保護の沿革：平成14年4月〜DV法に基づき、暴力被害女性及び同伴家族の一時保護を行うこととされた",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-8122e6ca73",
+      "title": "私立学校振興助成法 第14条第2項（公認会計士の監査）",
+      "url": "https://laws.e-gov.go.jp/law/350AC1000000061",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-81cedc271a",
+      "title": "法務省「民法等の一部を改正する法律（父母の離婚後等の子の養育に関する見直し）について」",
+      "url": "https://www.moj.go.jp/MINJI/minji07_00357.html",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-81f39b8619",
+      "title": "Betsey Stevenson・Justin Wolfers「The Paradox of Declining Female Happiness」American Economic Journal: Economic Policy 1(2): 190–225（2009年8月）",
+      "url": "https://www.aeaweb.org/articles?id=10.1257/pol.1.2.190",
+      "note": "要旨で確認。米国の女性の暮らしは客観的な指標では改善したが、主観的な幸福度は絶対的にも男性と比べても下がり、他の先進国でも同じ傾向",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-8375bc0678",
+      "title": "裁判所「夫婦関係調整調停（円満）」",
+      "url": "https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_07_02/index.html",
+      "note": "円満な夫婦関係を回復するための話合いの場",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-8414ee9375",
+      "title": "日本新聞協会「新聞倫理綱領」（2000年6月21日制定）",
+      "url": "https://www.pressnet.or.jp/outline/ethics/",
+      "note": "「正確と公正」",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-847c538a85",
+      "title": "文部科学省「令和5年度 私立大学等改革総合支援事業調査票」タイプ1",
+      "url": "https://www.mext.go.jp/content/20240207-mxt_sigakujo-100001428_9.pdf",
+      "note": "設問⑳：女子学生の占める割合の少ない学部等における女子学生選抜などを行うと3点",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-849ad36954",
+      "title": "小林元気（2021）「児童会・生徒会投票選挙の経験と主権者教育の知識定着の関連性」日本特別活動学会紀要 29号 51-60頁（研究論文）",
+      "url": "https://doi.org/10.51044/tokkatsu.29.0_51",
+      "note": "全国の学校教育に関する社会調査の二次分析。学校生活での選挙経験は、成人後の主権者教育の知識の定着を強めることが示された（要旨で確認）",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-850179d2ff",
+      "title": "児童福祉法 第33条（一時保護と一時保護状）",
+      "url": "https://laws.e-gov.go.jp/law/322AC0000000164",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-8596ea54f5",
+      "title": "英国政府「Data standard for grant making」（Open standards for government）",
+      "url": "https://www.gov.uk/government/publications/open-standards-for-government/data-standard-for-grant-making",
+      "note": "英国政府は、補助金を出す政府の機関に、360Giving データ標準で補助金のデータを公開するよう定めている",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-871622948a",
+      "title": "孤独・孤立対策推進法 第4条（地方公共団体の責務）",
+      "url": "https://laws.e-gov.go.jp/law/505AC0000000045",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-874804d057",
+      "title": "Hjern A ほか (2021) Mental Health in Schoolchildren in Joint Physical Custody: A Longitudinal Study. Children 8(6): 473（査読論文）",
+      "url": "https://doi.org/10.3390/children8060473",
+      "note": "デンマークの出生コホート31,519人を11歳まで追跡。父母の別居後、両方の家で暮らす子は、一方の親とだけ暮らす子より心の問題の割合が低かった（核家族と比べた調整オッズ比：共同 1.25、継親家庭 1.63、新しいパートナーのいない単独 1.72）。本文で確認。共同の家庭はもともと学歴・収入が高い傾向があり、収入・学歴・精神科の受診歴などで調整しているが、追跡の脱落が多い点を著者は限界としている",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-8a1b879cbd",
+      "title": "澤田康幸・崔允禎・菅野早紀「不況・失業と自殺の関係についての一考察」『日本労働研究雑誌』No.598（2010年5月）",
+      "url": "https://www.jil.go.jp/institute/zassi/backnumber/2010/05/pdf/058-066.pdf",
+      "note": "日本では失業率と自殺率、特に男性の自殺率の相関が強い",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-8a91894856",
+      "title": "最高裁判所第二小法廷 平成17年12月6日決定（平成16(あ)2199、刑集59巻10号1901頁）",
+      "url": "https://www.courts.go.jp/hanrei/50081/detail2/index.html",
+      "note": "別居中の共同親権者である父が、母の監護下にある2歳の子を有形力を用いて連れ去った行為について、違法性は阻却されないとした",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-8de1a2ba46",
+      "title": "Doherty WJ, Willoughby BJ, Peterson B (2011) Interest in Marital Reconciliation Among Divorcing Parents. Family Court Review 49(2): 313-321",
+      "url": "https://scholarsarchive.byu.edu/facpub/5112",
+      "note": "米ミネソタ州で離婚手続中の親2,484人を調査。約4人に1人が努力すれば結婚を救えると考え、約10人に3人が関係修復の支援に関心。訳は docs/作業メモ/英語の参考資料の訳.md",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-8e0011ced7",
+      "title": "特定非営利活動促進法 第18条・第27条〜第30条・第43条・第45条",
+      "url": "https://laws.e-gov.go.jp/law/410AC1000000007",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-8e8b9c1482",
+      "title": "法務省・厚生労働省 タスクフォース「公的機関による養育費の立替払い制度・取立て制度に関する論点整理」（2020年12月24日）",
+      "url": "https://www.moj.go.jp/content/001341513.pdf",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-8eb7c2df64",
+      "title": "内閣府男女共同参画局「配偶者暴力相談支援センターにおける相談件数等（令和6年度分）」",
+      "url": "https://www.gender.go.jp/policy/no_violence/e-vaw/data/pdf/2024soudan.pdf",
+      "note": null,
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-8fa2601d12",
+      "title": "厚生労働省「健康に配慮した飲酒に関するガイドライン」（令和6年2月19日）",
+      "url": "https://www.mhlw.go.jp/content/12200000/001211974.pdf",
+      "note": "4（1）純アルコール量の算出式、4（2）男性40g・女性20gの量と「個々人の許容量を示したものではありません」の注",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-90b0f71bf3",
+      "title": "衆議院予算委員会第一分科会（2024年2月27日）市村浩一郎委員の質問と、法務省大臣官房審議官の答弁",
+      "url": "https://kokkai.ndl.go.jp/txt/121305266X00120240227/226",
+      "note": "当事者の一方を有利にする目的でDVを受けたかのように偽装して主張することを弁護士が促している場合もあるとして、批判する意見があることは承知している（個別の当否へのコメントは差し控え）",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-92b72eab5d",
+      "title": "Eurostat「Accidents at work statistics」（2026年9月のデータ）",
+      "url": "https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Accidents_at_work_statistics",
+      "note": "EU でも2024年の休業を伴う労働災害の67.2%が男性。鉱業・製造業・建設業など男性の多い業種で災害が多いと説明。訳は docs/作業メモ/英語の参考資料の訳.md",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-948fcce9e1",
+      "title": "Courts and Tribunals Judiciary「Open reporting provisions extended to all family courts」（2025年1月27日、英国）",
+      "url": "https://www.judiciary.uk/open-reporting-provisions-extended-to-all-family-courts-in-watershed-moment-for-family-justice/",
+      "note": null,
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-94ac94c510",
+      "title": "東京都青少年の健全な育成に関する条例 第8条・第9条・第9条の2・第17条",
+      "url": "https://www.reiki.metro.tokyo.lg.jp/reiki/reiki_honbun/g101RG00002150.html",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-94b4f1527d",
+      "title": "WHO「WHO urges global action to curtail consumption and health impacts of sugary drinks」（2016年10月11日）",
+      "url": "https://www.who.int/news/item/11-10-2016-who-urges-global-action-to-curtail-consumption-and-health-impacts-of-sugary-drinks",
+      "note": "小売価格を20％以上上げる課税で、消費が比例して減る",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-94c50f0ffe",
+      "title": "こども家庭庁「一時保護時の司法審査に関する児童相談所の対応マニュアル」の通知（2024年12月26日）",
+      "url": "https://www.cfa.go.jp/assets/contents/node/basic_page/field_ref_resources/fdf4848a-9194-4b7c-b228-1b7ed4847d58/5a312ba7/20251208_policies_jidougyakutai_hourei-tsuuchi_208.pdf",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-9628c4ddac",
+      "title": "最高裁判所裁判官国民審査法 第15条（投票の方法）",
+      "url": "https://laws.e-gov.go.jp/law/322AC1000000136",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-9769647005",
+      "title": "米国会計検査院（GAO）GAO-24-106237「Federal Spending Transparency: Opportunities Exist to Improve COVID-19 and Other Grant Subaward Data on USAspending.gov」（2023年11月）",
+      "url": "https://www.gao.gov/assets/d24106237.pdf",
+      "note": "補助金の再交付（subaward）を公開サイトで公表する米国の仕組みでも、約600万件のうち新型コロナ以外の26％、新型コロナの11％が重複の疑いのある記録で、金額や情報の欠けもあった。公開に加えてデータの質の点検が要ることを示す。要旨で確認",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-98a3c6632a",
+      "title": "中央環境審議会 自動車単体騒音専門委員会（第23回、令和7年5月16日）資料23-3「第四次答申において示された検討課題に係る対応状況について【マフラー性能等確認制度】」",
+      "url": "https://www.env.go.jp/content/000314822.pdf",
+      "note": "5ページ：平成25年度以降に調べた交換用マフラー44本のうち、未認証のものにいずれの試験法でも規制値を満たさないものがあった。7ページ：未認証の交換用マフラーは500Hz以下の成分が強いものが多く、聞いた人の評価が悪い。9ページ：必要に応じて制度の見直しを検討",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-98a500c532",
+      "title": "韓国政府「養育費先払い制度」（2025年7月開始）",
+      "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148945174",
+      "note": "国税強制徴収の例により取り立てる",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-998efe23ad",
+      "title": "Gruenewald TL ほか (2007) Feelings of Usefulness to Others, Disability, and Mortality in Older Adults: the MacArthur Study of Successful Aging. J Gerontol B Psychol Sci Soc Sci 62(1): P28-37（査読論文）",
+      "url": "https://doi.org/10.1093/geronb/62.1.p28",
+      "note": "70〜79歳の米国の高齢者を7年追跡。家族や友人の役に立っていると感じることがない・まれな人は、よく感じる人に比べて、生活機能の障害が進んだり亡くなったりしやすかった。要旨（PubMed）で確認",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-9a5b9ce1b9",
+      "title": "道路運送車両法 第54条・第54条の2（整備命令等）・第58条（自動車の検査）・第99条の2（不正改造等の禁止）",
+      "url": "https://laws.e-gov.go.jp/law/326AC0000000185",
+      "note": "第58条第1項：検査対象外軽自動車は検査（車検）を受けなくてよい",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-9c1142e6fe",
+      "title": "日本弁護士連合会「子どもが国費・公費で弁護士による法的支援を受けられる制度構築を求める意見書」（2024年1月18日）",
+      "url": "https://www.nichibenren.or.jp/library/pdf/document/opinion/2024/240118_4.pdf",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-9d6661e596",
+      "title": "後藤雅貴「第213回国会法律案等NAVI『育成就労法案（永住許可制度の適正化）』」『立法と調査』第466号（参議院、2024年4月）",
+      "url": "https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2024pdf/20240426037.pdf",
+      "note": "技能実習に代わる育成就労の創設、本人の意向による転籍、監理団体に代わる設置要件を厳格化した監理支援機関",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-9e837aad78",
+      "title": "厚生労働省「年金制度の仕組みと考え方 第13 遺族年金」",
+      "url": "https://www.mhlw.go.jp/stf/nenkin_shikumi_013.html",
+      "note": "夫は妻の死亡当時55歳以上に限る。見直しは令和10年4月施行予定",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-9ed19c6ca2",
+      "title": "警察庁「令和６年の刑法犯に関する統計資料」（令和7年8月）図表2-1-6-4",
+      "url": "https://www.npa.go.jp/toukei/seianki/R06/r06keihouhantoukeisiryou.pdf",
+      "note": "未就学児が被害者の未成年者略取誘拐の検挙件数は、平成27年の23件から令和6年の79件に増え、令和6年の79件のうち77件は被疑者が「親族」。公表は「親族」までの区分で、父母かどうかや、その後の起訴の件数は分からない",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-9f473886e4",
+      "title": "英国政府「Freedom from violence and abuse: men and boys explanatory note」（2025年12月）",
+      "url": "https://www.gov.uk/government/publications/freedom-from-violence-and-abuse-a-cross-government-strategy/freedom-from-violence-and-abuse-men-and-boys-explanatory-note-accessible",
+      "note": "英国の暴力・虐待対策の国家戦略は男性と男児を「それ自体として」認め、女性への影響の大きさを認める中で男性が見過ごされてきたと明記。訳は docs/作業メモ/英語の参考資料の訳.md",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-a0168cc7fc",
+      "title": "WHO「Tobacco」（ファクトシート）",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/tobacco",
+      "note": "小売価格の少なくとも75％を税とする水準を勧めている",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-a0299738d6",
+      "title": "総務省自治行政局住民制度課長通知「DV等支援措置に関する取扱いについて」（令和5年3月17日 総行住第21号）",
+      "url": "https://www.soumu.go.jp/main_content/000929817.pdf",
+      "note": "措置期間は1年。延長時に支援の必要性を確認",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-a175c8e017",
+      "title": "Cafcass（イングランド）",
+      "url": "https://www.cafcass.gov.uk/about-cafcass",
+      "note": null,
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-a1b52f67c4",
+      "title": "こども家庭庁「児童の権利条約」",
+      "url": "https://www.cfa.go.jp/policies/international/convention",
+      "note": "条約の和文と、国連子どもの権利委員会の総括所見の仮訳",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-a44f920eb6",
+      "title": "Stanley SM, Allen ES, Markman HJ, Rhoades GK, Prentice DL (2010) Decreasing Divorce in Army Couples: Results from a Randomized Controlled Trial using PREP for Strong Bonds. Journal of Couple & Relationship Therapy 9(2)",
+      "url": "https://doi.org/10.1080/15332691003694901",
+      "note": "米陸軍の夫婦476組の無作為化比較試験。夫婦関係の教育を受けた群の1年後の離婚率は2.03％、対照群は6.20％。短期・軍人の夫婦での結果。訳は docs/作業メモ/英語の参考資料の訳.md",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-a47d2b15fd",
+      "title": "Platt L, et al. Associations between sex work laws and sex workers’ health: A systematic review and meta-analysis of quantitative and qualitative studies. PLoS Medicine 15(12): e1002680 (2018)",
+      "url": "https://doi.org/10.1371/journal.pmed.1002680",
+      "note": null,
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-a4e7f212fd",
+      "title": "和歌山県調査統計課（和歌山県統計情報館）「統計グラフを作ってみよう」",
+      "url": "https://www.pref.wakayama.lg.jp/prefg/020300/kids/graph.html",
+      "note": "棒グラフの決まりとして「目盛りの出発点は、必ずゼロにします」。公的な統計部局が子ども向けにも示す基本",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-a5748aaca5",
+      "title": "van Eldik ほか (2020) The Interparental Relationship: Meta-Analytic Associations With Children’s Maladjustment and Responses to Interparental Conflict, Psychological Bulletin 146(7), 553–594",
+      "url": "https://doi.org/10.1037/bul0000233",
+      "note": "要旨で確認。メタ分析（子の不適応169研究、対立への反応61研究）。親の間の敵意的・回避的・非建設的な対立や子をめぐる対立は、子の外在化・内在化の問題と関連し、関連の多くは時間がたっても続く",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-a8b1206c3b",
+      "title": "地方公務員法 第16条（欠格条項）",
+      "url": "https://laws.e-gov.go.jp/law/325AC0000000261",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-a8c25efbb1",
+      "title": "皆川健一「最高裁判所裁判官国民審査法の改正－在外邦人にも国民審査が可能に－」『立法と調査』第452号（参議院、2022年12月）",
+      "url": "https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2022pdf/20221216017-1.pdf",
+      "note": "国民審査の制度の概要と国会審議の論点",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-a931040da0",
+      "title": "最高裁判所事務総局「令和7年 司法統計年報 2 刑事編」",
+      "url": "https://www.courts.go.jp/saikosai/vc-files/saikosai/toukei/toukei-pdf-16676.pdf",
+      "note": "目次（第1表〜第81表）。第34表（罪名別刑期区分別）、第54表（外国人の国籍別終局区分別）",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-a9e7a7084d",
+      "title": "内閣府「男女間における暴力に関する調査（令和5年度）」調査結果のポイント",
+      "url": "https://www.gender.go.jp/kaigi/senmon/boryoku/siryo/pdf/bo124-1.pdf",
+      "note": "被害を受けた男性の57.2%がどこにも相談していない",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-aac68ed129",
+      "title": "日本年金機構「遺族年金の受給要件」",
+      "url": "https://www.nenkin.go.jp/service/jukyu/seido/izokunenkin/jukyu-yoken/20150424.html",
+      "note": null,
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-abd3c4a778",
+      "title": "厚生労働省保険局保険課長通知「「海外療養費及び海外出産に係る出産育児一時金等の支給の適正化に向けた対策等について」の一部改正について」（令和5年5月24日 保保発0524第1号）",
+      "url": "https://www.mhlw.go.jp/content/12400000/001508503.pdf",
+      "note": "海外での出産の事実自体を偽装した不正受給の事案が発生したことを踏まえ、対策通知を改正",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-adaeb2348e",
+      "title": "米国連邦最高裁判所 Keller v. State Bar of California, 496 U.S. 1（1990年6月4日、全員一致）",
+      "url": "https://www.law.cornell.edu/supremecourt/text/496/1",
+      "note": "本文で確認。加入が義務の弁護士会は、法曹の規律や法律サービスの質の向上に必要でない政治的・思想的な活動に、反対する会員の会費を使えない",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-ae50cc9544",
+      "title": "外国人の技能実習の適正な実施及び技能実習生の保護に関する法律 第25条・第37条・第39条",
+      "url": "https://laws.e-gov.go.jp/law/428AC0000000089",
+      "note": "第25条：監理団体の許可の基準。第37条：許可の取消し等。第39条第3項：実習の実施状況の監査等の業務を主務省令で定める基準に従って行う",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-aeb772d14d",
+      "title": "人事院規則八―一八（採用試験）第9条",
+      "url": "https://laws.e-gov.go.jp/law/423RJNJ08018023",
+      "note": "日本の国籍を有しない者は採用試験を受けることができない",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-af8faf18f2",
+      "title": "厚生労働省「令和6(2024)年度 地域保健・健康増進事業報告の概況」健康増進編 表10",
+      "url": "https://www.mhlw.go.jp/toukei/saikin/hw/c-hoken/24/dl/R06gaikyo.pdf",
+      "note": "令和5年度の市区町村のがん検診の精密検査受診率は、胃85.7％・肺82.7％・大腸71.1％・子宮頸78.0％",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-b1ab5072b6",
+      "title": "Department for Transport (UK) \"Noise camera technology: roadside trial\"（2024年3月17日）",
+      "url": "https://www.gov.uk/government/publications/noise-camera-technology-roadside-trial",
+      "note": "英国運輸省が、カメラとマイクで騒音の大きい車を自動で特定する装置を、2022年10月18日〜2023年2月1日に4か所で試した報告",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-b2fa3174d5",
+      "title": "道路運送車両法施行規則 第35条の2第1号・別表第一",
+      "url": "https://laws.e-gov.go.jp/law/326M50000800074",
+      "note": "検査対象外軽自動車は二輪の軽自動車。別表第一：二輪の軽自動車は総排気量0.250リットル以下",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-b38f16b879",
+      "title": "厚生労働省「2022（令和4）年 国民生活基礎調査の概況」各種世帯の所得等の状況",
+      "url": "https://www.mhlw.go.jp/toukei/saikin/hw/k-tyosa/k-tyosa22/dl/03.pdf",
+      "note": "大人が一人の世帯員の相対的貧困率44.5%",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-b39492b90a",
+      "title": "民法等の一部を改正する法律（令和6年法律第33号）",
+      "url": "https://www.shugiin.go.jp/Internet/itdb_housei.nsf/html/housei/21320240524033.htm",
+      "note": "第817条の12（父母の協力義務）、附則第19条（施行後の検討）",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-b3b5086df4",
+      "title": "文部科学省高等教育局私学部私学行政課 事務連絡「民法等の一部を改正する法律（令和６年法律第３３号）に係るＱ＆Ａ形式の解説資料の周知等について（依頼）」（令和7年10月8日）",
+      "url": "https://www.pref.osaka.lg.jp/documents/105336/20251008.pdf",
+      "note": "Q&Aは、学校教育で何が「監護及び教育に関する日常の行為」等に当たるか、親権を持つ別居親から学校行事への参加の希望を受けた場合の対応などを示す（大阪府のサイトの写し）",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-b46392ebe6",
+      "title": "ドイツ 行政裁判所法 第19条（名誉職裁判官）",
+      "url": "https://www.gesetze-im-internet.de/vwgo/__19.html",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-b4c7c7c53d",
+      "title": "法務省「売買春に係る規制の在り方検討会」取りまとめ報告書（令和8年）",
+      "url": "https://www.moj.go.jp/content/001471143.pdf",
+      "note": "第3の2「売春及びその相手方となる行為に対する規制の在り方」",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-b65181c693",
+      "title": "税制調査会 法人課税ディスカッショングループ 増田寛也委員「公益法人等に対する課税のあり方に関する意見」（平成26年5月9日、法D5-9）",
+      "url": "https://www.cao.go.jp/zei-cho/content/20140709_26dis35kai11_1.pdf",
+      "note": "学校法人等には軽減税率が適用されていることを確認したうえで、課税対象となる収益事業の範囲の見直し等を含めて抜本的に検討すべきとする政府税調の委員の意見（委員1人の書面意見で、税調の結論ではない）",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-b6b663e175",
+      "title": "政府税制調査会「法人税の改革について」（2014年6月）",
+      "url": "https://www.cao.go.jp/zei-cho/shimon/26zen10kai7.pdf",
+      "note": "8〜9ページ「（7）公益法人課税等の見直し」：公益法人等の範囲や収益事業の範囲を見直すべきとし、民間と競合する事業の扱い、対価を得て行う事業は原則課税とする方式の検討、軽減税率とみなし寄附金制度の両方を受けることは「過大な対応」として見直し、配当等の金融資産収益の課税のあり方の見直しを挙げる",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-b7537375ef",
+      "title": "永光信一郎（研究代表者）「1か月児健康診査マニュアル」（令和6年度こども家庭科学研究費補助金、こども家庭庁「健やか親子21」掲載）",
+      "url": "https://sukoyaka21.cfa.go.jp/media/tools/s04_nyu_manyu033.pdf",
+      "note": "父親の産後うつも母親と同水準と報告されていること、健診では「母親だけでなく父親（パートナー）も「支援される対象」であることに留意する必要があります」",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-b8251bed90",
+      "title": "同 三谷法務副大臣の答弁",
+      "url": "https://kokkai.ndl.go.jp/txt/122115206X00420260414/76",
+      "note": "親権者でも未成年者略取誘拐罪に該当し得る。検察庁に適切な対処を周知",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-b9aacd852d",
+      "title": "WHO「Healthy diet」（ファクトシート）",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/healthy-diet",
+      "note": "遊離糖類は総エネルギー摂取量の10％未満に",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-bb1ba3a0f8",
+      "title": "Peterson C ほか (2018) Lifetime Economic Burden of Intimate Partner Violence Among U.S. Adults. American Journal of Preventive Medicine 55(4): 433-444（査読論文）",
+      "url": "https://doi.org/10.1016/j.amepre.2018.04.049",
+      "note": "米国で、パートナー間暴力の生涯の費用は被害者1人あたり女性103,767ドル・男性23,414ドル、全体で約3.6兆ドル（2014年ドル）。うち37％を政府が負担。男女の額の差は、被害の結果（妊娠など）と影響を受ける割合の違いによる。本文で確認。観察研究の差を暴力の結果とみなした推計である点は著者も限界としている",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-bbb3457df1",
+      "title": "明石市「こどもの養育費立替支援事業」",
+      "url": "https://www.city.akashi.lg.jp/seisaku/soudan_shitsu/kodomo-kyoiku/youikushien/tatekaesien.html",
+      "note": "最大3か月分、上限月5万円を立て替え、市が督促",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-bc5ca45306",
+      "title": "公益社団法人及び公益財団法人の認定等に関する法律 第5条第13号（会計監査人）",
+      "url": "https://laws.e-gov.go.jp/law/418AC0000000049",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-bc8eacfcdb",
+      "title": "教育基本法 第4条（教育の機会均等）",
+      "url": "https://laws.e-gov.go.jp/law/418AC0000000120",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-bd2ce44368",
+      "title": "Coyne SM ほか (2019) Contributions of Mainstream Sexual Media Exposure to Sexual Attitudes, Perceived Peer Norms, and Sexual Behavior: A Meta-Analysis. Journal of Adolescent Health 64(4): 430-436（査読論文）",
+      "url": "https://doi.org/10.1016/j.jadohealth.2018.11.016",
+      "note": "59研究・394の効果量を統合。露骨でない性的なメディアに触れることも、性に関する態度と行動に小さいが有意な影響があり、その影響は青年期で大人になりかけの時期より強い。要旨で確認（本文は取れず）",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-bd64384ffb",
+      "title": "WHO「The SAFER initiative」",
+      "url": "https://www.who.int/initiatives/SAFER",
+      "note": "酒税と価格政策は、最も効果的で費用対効果の高い対策の一つ",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-be2003d60d",
+      "title": "Tokumitsu K ほか (2026) Indirect screening for paternal perinatal depression independent of maternal factors using mother-reported EPDS-partner in a community-based cohort in Japan. Scientific Reports 16: 12315（査読論文）",
+      "url": "https://doi.org/10.1038/s41598-026-43513-9",
+      "note": "青森県十和田市で保健師・助産師の家庭訪問の際に夫婦を調べたコホート研究。父親の抑うつ症状（CES-D 16点以上）は産前10.6％、産後6.3％。世界のメタ分析では父親の周産期うつは約8.4％と引用。母親が答える質問票で父親の不調に気づける可能性を示す。本文で確認",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-be6c060142",
+      "title": "総務省「令和6年度会計年度任用職員制度の施行状況等に関する調査結果（任用件数等）」（令和6年12月27日）",
+      "url": "https://www.soumu.go.jp/main_content/000985059.pdf",
+      "note": "6ページ：教員講師（義務教育）の1時間当たりの給料（報酬）の基本額の団体数の分布（任用1,207団体、単純平均1,697円）。7ページ：臨時的任用職員7.6万人のうち教員・講師64,981人（85.5％）",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-beffcc49b3",
+      "title": "文部科学省「令和8年度学校基本調査の公表について（速報）」",
+      "url": "https://www.mext.go.jp/content/20260826-mxt_chousa01-000050842_01.pdf",
+      "note": "表1 高等学校（全日制・定時制）の学校数・在学者数",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-bf4669fac1",
+      "title": "出入国在留管理庁「本邦における不法残留者数について（令和8年1月1日現在）」",
+      "url": "https://www.moj.go.jp/isa/publications/press/13_00061.html",
+      "note": "6万8,488人",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-bfe71791af",
+      "title": "住民基本台帳法施行令 第30条の16（通称の記載）・第30条の17（通称の記載及び削除に関する事項）",
+      "url": "https://laws.e-gov.go.jp/law/342CO0000000292",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-c007cf7a2a",
+      "title": "こども家庭庁「児童の権利に関する条約 全文」",
+      "url": "https://www.cfa.go.jp/policies/international/convention/text",
+      "note": "第9条3：父母のいずれとも人的な関係及び直接の接触を維持する権利",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-c0ba915bee",
+      "title": "厚生労働省「令和3年度 全国ひとり親世帯等調査」結果の公表",
+      "url": "https://www.cfa.go.jp/assets/contents/node/basic_page/field_ref_resources/f1dc19f2-79dc-49bf-a774-21607026a21d/9ff012a5/20230725_councils_shingikai_hinkon_hitorioya_6TseCaln_05.pdf",
+      "note": "母子世帯で養育費を現在も受けているのは28.1%",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-c0cb8b991d",
+      "title": "放送法 第4条第1項",
+      "url": "https://laws.e-gov.go.jp/law/325AC0000000132",
+      "note": "第3号「報道は事実をまげないですること。」",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-c0dec91f89",
+      "title": "仙台市「ボランティア清掃支援申し込み」",
+      "url": "https://www.city.sendai.jp/haiki-shido/download/bunyabetsu/gomi/machibika/seso.html",
+      "note": "団体・個人を問わず、公共の場所の散乱ごみをボランティアで清掃する人に、地域清掃ごみ袋の配布、火ばさみなどの清掃用具の貸与、回収したごみの処理を行っている例",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-c1417b4bdd",
+      "title": "Hirata A, Uchida T (2026) The Specific Health Checkups and Specific Health Guidance Program: A Strategy for the Prevention of Cardiovascular Disease in Japan. Journal of Atherosclerosis and Thrombosis 33(4): 367-（査読のある総説）",
+      "url": "https://doi.org/10.5551/jat.rv22047",
+      "note": "特定健診の受診は死亡の低さと関連し、特定保健指導は肥満や血圧・血糖を改善する（効果は時間とともに小さくなる）。費用の面では、保健指導の対象者1人あたりの費用が53,014円減り、質を調整した生存年が0.044増えるとの推計を紹介し、費用対効果がよいとする。課題として受診率の向上を挙げる。本文で確認",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-c1e58a69d5",
+      "title": "日本弁護士連合会「家族法制の見直しに関する要綱についての会長声明」（2024年2月16日）",
+      "url": "https://www.nichibenren.or.jp/document/statement/year/2024/240216.html",
+      "note": "親権者の定めについて共同・単独のどちらも原則としない規律を高く評価し、政府に一般の市民に分かりやすいガイドラインの作成を求める",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-c1e7e44925",
+      "title": "家事事件手続法 第152条の3（親子交流の試行的実施）",
+      "url": "https://laws.e-gov.go.jp/law/423AC0000000052",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-c237fb79d9",
+      "title": "法務省「ハーグ条約実施法の概要について」",
+      "url": "https://www.moj.go.jp/MINJI/minji07_00148.html",
+      "note": "国境を越えた連れ去りでは、子を元の居住国に迅速に返還する",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-c26d11f18b",
+      "title": "こども基本法 第3条・第11条",
+      "url": "https://laws.e-gov.go.jp/law/504AC1000000077",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-c27baeddc0",
+      "title": "あらゆる形態の人種差別の撤廃に関する国際条約 第1条第2項（1996年に日本について効力発生）",
+      "url": "https://treaties.un.org/doc/Publication/UNTS/Volume%20660/volume-660-I-9464-English.pdf",
+      "note": "英語正文：「This Convention shall not apply to distinctions, exclusions, restrictions or preferences made by a State Party to this Convention between citizens and non-citizens.」（この条約は、締約国が市民と市民でない者との間に設ける区別、排除、制限又は優先については、適用しない。仮訳）。国連条約集の英語正文で確認",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-c2ecd9dabf",
+      "title": "法務省「法教育」",
+      "url": "https://www.moj.go.jp/housei/shihouhousei/index2.html",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-c558bcf616",
+      "title": "英国 2005年憲法改革法 第61条（裁判官任命委員会）",
+      "url": "https://www.legislation.gov.uk/ukpga/2005/4/section/61",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-c577cc6390",
+      "title": "男女共同参画社会基本法 第6条（家庭生活における活動と他の活動の両立）",
+      "url": "https://laws.e-gov.go.jp/law/411AC0000000078",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-c57d0762d6",
+      "title": "公益社団法人商事法務研究会「未成年期に父母の離婚を経験した子の養育に関する実態についての調査・分析業務報告書」（法務省委託、令和3年1月）",
+      "url": "https://www.moj.go.jp/content/001346918.pdf",
+      "note": "父母が不仲のとき誰かに相談した子は9.4％。「相談したかったが、適切な人がいなかった」19.0％（Q11_1、n=672）",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-c68479d78f",
+      "title": "介護保険法 第115条の45 第1項",
+      "url": "https://laws.e-gov.go.jp/law/409AC0000000123",
+      "note": "市町村は、地域支援事業として、要介護状態等となることの予防のため必要な事業を行う（第2号）",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-c799ce20ee",
+      "title": "直原康光・安藤智子「別居・離婚後の子どもが体験する父母葛藤や父母協力の探索的検討」『発達心理学研究』30(2)（日本発達心理学会、2019年）86-100頁（査読のある原著論文）",
+      "url": "https://doi.org/10.11201/jjdp.30.86",
+      "note": "5〜15歳で父母の別居・離婚を経験した14人への面接調査。父母の葛藤には「他方親否定」「板ばさみ」などがあり、「他方親否定・交流なし群」では、別居親を否定される体験が重なり、多くが自分自身にも否定的な影響があったと感じていた。父母が協力し交流が安定した群では、離婚を乗り越えたうえで友人等の支えもあった。要旨（1頁）で確認",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-c84e7196db",
+      "title": "民事調停委員及び家事調停委員規則",
+      "url": "https://www.courts.go.jp/vc-files/courts/2025/20250401minjityouteiiinn-oyobi-kajityouteiiinn-kisoku.pdf",
+      "note": "第1条：任命の要件",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-c908124bd4",
+      "title": "内閣府「男女間における暴力に関する調査（令和5年度）」第5章 不同意性交等をされた経験",
+      "url": "https://www.gender.go.jp/policy/no_violence/e-vaw/chousa/pdf/r05/r05danjokan-7.pdf",
+      "note": "被害経験は男性0.7%、相談したのは男性20.0%",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-c938fec120",
+      "title": "児童の権利に関する条約 第9条第3項（1994年に日本について効力発生）",
+      "url": "https://www.unicef.or.jp/about_unicef/about_rig_all.html",
+      "note": "「締約国は、児童の最善の利益に反する場合を除くほか、父母の一方又は双方から分離されている児童が定期的に父母のいずれとも人的な関係及び直接の接触を維持する権利を尊重する。」（外務省の条約のページは自動の取得を拒むため、日本ユニセフ協会が掲載する政府訳で確認）",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-ca97842008",
+      "title": "総務省・文部科学省 高校生向け副教材「私たちが拓く日本の未来」",
+      "url": "https://www.soumu.go.jp/main_content/000378818.pdf",
+      "note": null,
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-cbc1200a77",
+      "title": "総務省「第51回衆議院議員総選挙・最高裁判所裁判官国民審査結果調」（令和8年2月13日）",
+      "url": "https://www.soumu.go.jp/main_content/001061492.pdf",
+      "note": null,
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-ccc83b540c",
+      "title": "Department for Transport (UK) \"Road Safety Strategy\"（2026年1月）",
+      "url": "https://assets.publishing.service.gov.uk/media/695e2cff8832ab3a48513809/road-safety-strategy.pdf",
+      "note": "「Tackling glare」：前照灯のまぶしさが増えた原因となる車の設計の要因をさらに調べ、国連の灯火の規則の改正の提案に生かす",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-ccfb4bcc3b",
+      "title": "Judicial Conduct Investigations Office Annual Report 2024-25（英国）",
+      "url": "https://www.complaints.judicialconduct.gov.uk/JCIOAnnualReport24-25",
+      "note": "3,279件の苦情",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-cd3d741e12",
+      "title": "Alan J. Hawkins・Tamara A. Fackrell「Does Relationship and Marriage Education for Lower-Income Couples Work? A Meta-Analysis of Emerging Research」Journal of Couple & Relationship Therapy 9: 181-191（2010年）",
+      "url": "https://scholarsarchive.byu.edu/facpub/4228",
+      "note": "米国で所得の低いカップル向けの関係教育15事業の評価をまとめ、対照群のある3研究で効果量 d=.250、事前と事後を比べた12研究で d=.293 の小〜中程度の効果があったとする",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-cd5bb15e76",
+      "title": "北海道「水資源保全地域内の土地取引行為に係る事前届出」",
+      "url": "https://www.pref.hokkaido.lg.jp/ss/stt/mizusigen/mizusigen_todokede.html",
+      "note": "3か月前までに届出。面積の基準なし",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-ce7f4c1218",
+      "title": "最高裁判所第三小法廷 平成8年3月19日判決（平成4(オ)1796、民集50巻3号615頁、南九州税理士会事件）",
+      "url": "https://www.courts.go.jp/hanrei/55864/detail2/index.html",
+      "note": "税理士会が政治団体に寄付することは目的の範囲外で、そのための特別会費の決議は無効（参照法条に憲法第19条）",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-cff87ff86d",
+      "title": "食育基本法 第7条・第24条（伝統的な食文化への配意、食文化の継承）",
+      "url": "https://laws.e-gov.go.jp/law/417AC1000000063",
+      "note": "国及び地方公共団体は、伝統的な行事や作法と結びついた食文化等の継承を推進するため必要な施策を講ずる",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-d13f248de6",
+      "title": "Sir Andrew McFarlane（家事部長官）「Confidence and Confidentiality: Transparency in the Family Courts」（2021年10月、英国）",
+      "url": "https://www.judiciary.uk/wp-content/uploads/2021/10/Confidence-and-Confidentiality-Transparency-in-the-Family-Courts-final.pdf",
+      "note": "家庭裁判所への信頼と当事者の秘密の両立を検討した報告",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-d2655c7a43",
+      "title": "Amato (2000) The Consequences of Divorce for Adults and Children, Journal of Marriage and Family",
+      "url": "https://doi.org/10.1111/j.1741-3737.2000.01269.x",
+      "note": "論文",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-d2c77ce7fa",
+      "title": "高見富二男「令和６年民法（家族法制）改正に関する国会論議－離婚後共同親権及び法定養育費制度の導入等－」『立法と調査』第470号（参議院、2024年11月）",
+      "url": "https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2024pdf/20241101117.pdf",
+      "note": "2：父母相互の人格尊重・協力義務。無断で子の居所を変更する行為などが義務違反と評価され得るとの答弁",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-d30d4416b5",
+      "title": "Gruner LF ほか (2021) The Effects of Different Invitation Schemes on the Use of Fecal Occult Blood Tests for Colorectal Cancer Screening: Systematic Review of Randomized Controlled Trials. Cancers 13(7): 1520（査読のある系統的レビュー）",
+      "url": "https://doi.org/10.3390/cancers13071520",
+      "note": "無作為化比較試験34件。大腸がん検診で、事前の案内で受診率が3.3〜10.8ポイント、検査キットの郵送で4〜19.7ポイント上がり、手紙・メールでの再勧奨は8.5〜15.8ポイント上がった（電話・ショートメッセージは0.6〜6.5ポイント）。本文で確認",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-d3f8b5854f",
+      "title": "Zuckermann AME, et al.「The effects of alcohol container labels on consumption behaviour, knowledge, and support for labelling: a systematic review」Lancet Public Health 2024;9(7):e481-e494",
+      "url": "https://doi.org/10.1016/S2468-2667(24)00097-5",
+      "note": "容器の表示（健康警告・純アルコール量・低リスク飲酒の目安）の効果の系統的レビュー。証拠の確実性は項目により低〜高",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-d4c642568a",
+      "title": "母子保健法 第12条（乳幼児健康診査）",
+      "url": "https://laws.e-gov.go.jp/law/340AC0000000141",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-d54c11138a",
+      "title": "竹原健二（研究代表者）「わが国における父親の子育て支援を推進するための科学的根拠の提示と支援プログラムの提案に関する研究」令和2～4年度 厚生労働科学研究 総合研究報告書",
+      "url": "https://mhlw-grants.niph.go.jp/system/files/report_pdf/202207001B-sogou.pdf",
+      "note": "父親の産後うつや父親支援の議論が進む一方「まだ国内のエビデンスは大幅に不足している」。自治体の父親支援事業の好事例集を作成",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-d574704e5d",
+      "title": "最高裁判所事務総局「裁判の迅速化に係る検証に関する報告書（第10回）家事事件」（令和5年7月）",
+      "url": "https://www.courts.go.jp/vc-files/courts/2023/10_houkoku_5_kaji.pdf",
+      "note": "子の監護事件の平均審理期間の長期化",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-d59cd233c9",
+      "title": "総務省「国民審査 制度のポイントを知ろう！」",
+      "url": "https://www.soumu.go.jp/senkyo/kokuminshinsa/seido_point.html",
+      "note": null,
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-d5f2f73ff2",
+      "title": "文部科学省「『教師不足』に関する実態調査」（令和4年1月）",
+      "url": "https://www.mext.go.jp/content/20220128-mxt_kyoikujinzai01-000020293-1.pdf",
+      "note": "3〜4ページ。令和3年度始業日の不足2,558人、5月1日の不足2,065人。要因として臨時的任用教員の需要増と講師名簿登録者の減少。7ページ：教員の雇用形態別内訳（令和3年5月1日時点、正規教員の欄は再任用を含む）",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-d623002a66",
+      "title": "住民基本台帳法 第12条第6項",
+      "url": "https://laws.e-gov.go.jp/law/342AC0000000081",
+      "note": "「市町村長は、第一項の規定による請求が不当な目的によることが明らかなときは、これを拒むことができる。」DV等支援措置の法律上の根拠の一つ",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-d7920ba608",
+      "title": "文部科学省「令和7年度 学校教員統計調査（中間報告）」表3・表4 年齢別 職名別 本務教員数（小学校・中学校）",
+      "url": "https://www.e-stat.go.jp/stat-search/files?page=1&toukei=00400003&tstat=000001016172&cycle=0&tclass1=000001245116&tclass2=000001245117&tclass3=000001245118&layout=datalist&tclass4val=0",
+      "note": "「２．うち公立」の講師の欄",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-d81d82c73c",
+      "title": "自殺対策基本法 第13条（都道府県・市町村の自殺対策計画）",
+      "url": "https://laws.e-gov.go.jp/law/418AC0100000085",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-d83f866a46",
+      "title": "警察庁「令和6年におけるストーカー事案、配偶者からの暴力事案等…への対応状況について」",
+      "url": "https://www.npa.go.jp/bureau/safetylife/stalker/R6_STDVRP_CA_kouhoushiryou.pdf",
+      "note": "配偶者からの暴力事案の被害者のうち男性は29.7%",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-dbf14b7c6c",
+      "title": "出入国在留管理庁「令和7年末現在における在留外国人数について」（令和8年3月27日）",
+      "url": "https://www.moj.go.jp/isa/publications/press/13_00062.html",
+      "note": "412万5,395人",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-de92d0f160",
+      "title": "比較法研究センター「各国の離婚後の親権制度に関する調査研究業務報告書」（平成26年12月、法務省の委託調査）",
+      "url": "https://www.moj.go.jp/content/001130860.pdf",
+      "note": "欧米とアジアの各国の離婚後の親権制度",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-de9b4a7a67",
+      "title": "文部科学省「大学入学者選抜に関する最新動向」（2025年8月28日）",
+      "url": "https://www.mext.go.jp/content/20250828-mxt_daigakuc02-000044252_01.pdf",
+      "note": "理工系女子枠を設ける国公立大学は30大学（令和7年度入試）",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-df39d6de30",
+      "title": "文部科学大臣記者会見録（令和8年3月31日）",
+      "url": "https://www.mext.go.jp/b_menu/daijin/detail/mext_00680.html",
+      "note": "親権者の意思が分かれたときの学校の対応",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-e0adea005a",
+      "title": "Morishita J, Yasuda M, Suda S (2024) Help-seeking behavior of male victims of intimate partner violence in Japan. PCN Reports 3(4): e70013（査読論文）",
+      "url": "https://doi.org/10.1002/pcn5.70013",
+      "note": "日本に住む男性のパートナー間暴力の被害者1,466人のウェブ調査。助けを求めたのは43人だけで、その65.1％は家族・友人など公的でない相手のみに相談していた。著者は男性の被害者が使える公的な窓口を増やすよう提言。ウェブ調査ゆえの偏りは著者も限界としている。本文で確認",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-e0f1e62b51",
+      "title": "文部科学省「地方公務員（教育公務員）の人事行政状況調査」",
+      "url": "https://www.mext.go.jp/a_menu/shotou/jinji/1318889.htm",
+      "note": "臨時的任用教員・非常勤講師の人数の項目は見当たらない",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-e17dcad4be",
+      "title": "裁判官弾劾法 第2条・第15条",
+      "url": "https://laws.e-gov.go.jp/law/322AC1000000137",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-e54333b571",
+      "title": "安藤結香子「外国人政策と政府の対応策」『立法と調査』第483号（参議院、2026年4月）",
+      "url": "https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2026pdf/20260430125.pdf",
+      "note": "関係閣僚会議での指示（国民健康保険料・医療費等の制度の適正化、不法滞在者ゼロプランなど）と総合的対応策",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-e58324b029",
+      "title": "欧州人権裁判所 M.A. and Others v. France 判決（2024年7月25日、申立番号63664/19ほか）",
+      "url": "https://hudoc.echr.coe.int/eng?i=001-235426",
+      "note": "第40段（フランス政府の評価報告書）、第154段・第155段・第165段〜第167段",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-e5f98b3d59",
+      "title": "生活保護法 第1条・第2条",
+      "url": "https://laws.e-gov.go.jp/law/325AC0000000144",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-e693988a7f",
+      "title": "「経済財政運営と改革の基本方針2025」（令和7年6月13日閣議決定）第2章4（5）",
+      "url": "https://www5.cao.go.jp/keizai-shimon/kaigi/cabinet/honebuto/2025/2025_basicpolicies_ja.pdf",
+      "note": "育成就労制度及び特定技能制度について、監理支援機関の要件厳格化等を行う",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-e8b083994e",
+      "title": "東村翔吾「年金制度改正法案をめぐる国会論議－被用者保険の適用拡大、基礎年金の給付水準の底上げ等－」『立法と調査』第478号（参議院、2025年9月）",
+      "url": "https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2025pdf/20250929079.pdf",
+      "note": "3(3)ア：遺族厚生年金の支給条件の男女差の解消（改正前は、子のない夫は妻の死亡時に55歳未満だと支給されない）と、国会での議論",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-ec3d87c158",
+      "title": "宗教法人法 第6条（公益事業その他の事業）",
+      "url": "https://laws.e-gov.go.jp/law/326AC0000000126",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-eca9c0199c",
+      "title": "青森県「令和6年度 青森県男女共同参画推進条例の規定に基づく苦情等申出処理状況年次報告書」",
+      "url": "https://www.pref.aomori.lg.jp/soshiki/kodomo/kenmin/files/R6_kujyoshorinennjihokoku.pdf",
+      "note": "令和5年6月29日の離婚講座への申出。発言は認定できなかったが、講座内容の公表の手順の不備を認め、チェック体制の改善と男性側のニーズを拾う講座の検討を指示",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-eeca0437fe",
+      "title": "厚生労働省「人口動態統計月報（概数）（令和8年4月分）」（2026年9月公表）",
+      "url": "https://www.mhlw.go.jp/toukei/saikin/hw/jinkou/geppo/m2026/04.html",
+      "note": "親権の種類別にみた親が離婚した未成年の子の数",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-efe7b9527e",
+      "title": "最高裁判所「裁判員制度の概要」",
+      "url": "https://www.courts.go.jp/saibanin/introduction/index.html",
+      "note": null,
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-f00983d737",
+      "title": "国土交通省・自動車技術総合機構・軽自動車検査協会「令和８年８月１日より、『ロービーム計測』に移行します」（令和8年5月）",
+      "url": "https://wwwtb.mlit.go.jp/kinki/content/000374454.pdf",
+      "note": "照射光線は走行時の振動等によりずれていき、点検・調整しないと他の交通を妨げる。平成10年9月1日以降に製作された自動車の車検をロービーム計測に移行。二輪自動車・側車付二輪自動車などは除く。裏面：ヘッドライトは樹脂製が主流で劣化や摩耗を避けられず、整備の例としてレンズ面の清掃・磨き・交換などを挙げる",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-f076b534ba",
+      "title": "公益社団法人商事法務研究会「父母の離婚、別居等を経験する子の養育について子の意見等を適切に反映させる方策に関する調査研究報告書」（法務省委託、令和8年3月）",
+      "url": "https://www.moj.go.jp/content/001463085.pdf",
+      "note": "「子どもの手続代理人の費用は、当事者である親の負担になることが選任のネックになっている」「子どもの手続代理人の費用について制度的な手当を行うことは、子どもの手続代理人の担い手の確保という観点からも重要な課題である」（本文で確認）",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-f24ec39a2b",
+      "title": "教育公務員特例法 第21条第2項・第23条第1項・第24条第1項",
+      "url": "https://laws.e-gov.go.jp/law/324AC0000000001",
+      "note": "研修の計画・初任者研修・中堅教諭等資質向上研修。臨時的に任用された者などを除く",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-f2695e83d1",
+      "title": "厚生労働省「健康づくりのための身体活動・運動ガイド2023」高齢者版",
+      "url": "https://www.mhlw.go.jp/content/001195868.pdf",
+      "note": "高齢者に、歩行またはそれと同等以上の強度の身体活動を1日40分以上（1日約6,000歩以上に相当）行うことを推奨。これを満たす高齢者は、男性の75〜84歳で32％、女性の75〜84歳で22％",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-f303ffd0c9",
+      "title": "Leigh JP (2011) Economic Burden of Occupational Injury and Illness in the United States. The Milbank Quarterly 89(4): 728-772（査読論文）",
+      "url": "https://doi.org/10.1111/j.1468-0009.2011.00648.x",
+      "note": "2007年の米国で、仕事による負傷・疾病の費用は約2,500億ドル（医療費27％・生産性の損失73％）で、がんの費用と同じくらい大きい。労災補償で賄われるのは25％未満で、残りは社会全体が負担している。要旨で確認（本文は PMC で取れず）",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-f32778fe98",
+      "title": "出入国在留管理庁「本邦における不法残留者数について（令和8年7月1日現在）」（2026年10月16日）",
+      "url": "https://www.moj.go.jp/isa/publications/press/13_00071.html",
+      "note": "6万5,229人。令和8年1月1日の6万8,488人から3,259人（4.8％）減少",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-f5257b161c",
+      "title": "弁護士法 第56条第1項（懲戒事由）",
+      "url": "https://laws.e-gov.go.jp/law/324AC1000000205",
+      "note": "弁護士は、法律や所属弁護士会・日本弁護士連合会の会則に違反し、所属弁護士会の秩序又は信用を害し、その他職務の内外を問わずその品位を失うべき非行があつたときは、懲戒を受ける",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-f5b286a895",
+      "title": "WHO欧州地域事務局「Environmental noise guidelines for the European Region」（2018年、2019年1月30日公開）",
+      "url": "https://www.who.int/europe/publications/i/item/9789289053563",
+      "note": "公開ページで確認。道路交通などの環境騒音から健康を守るための、根拠に基づく勧告",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-f7fe9826d2",
+      "title": "千葉市「家庭ごみと資源物の出し方一覧表、外国人市民向けのごみ出しに関する動画」",
+      "url": "https://www.city.chiba.jp/kankyo/junkan/shushugyomu/gomidasiitiranhyo.html",
+      "note": "ごみの出し方を多言語で案内している例",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-f861aa1791",
+      "title": "教育公務員特例法施行令 第2条〜第4条",
+      "url": "https://laws.e-gov.go.jp/law/324CO0000000006",
+      "note": "除かれる者：臨時的に任用された者、会計年度任用職員など",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-f8e023d237",
+      "title": "Wolchik SA ほか (2021) Developmental cascade effects of a parenting-focused program for divorced families on competence in emerging adulthood. Development and Psychopathology 33(1): 201-215（査読論文）",
+      "url": "https://doi.org/10.1017/s095457941900169x",
+      "note": "離婚後に子と暮らす母240組の無作為化比較試験を15年追跡。母へのプログラムによる子育ての改善が、成人後の仕事の成果や学業の成果につながった。リスクの高い子ほど効果が大きい。本文で確認",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-f8eaa128fa",
+      "title": "Wijnker W ほか (2026) Debunking misleading graphs effectively: How vocationally educated young adults perceive graphs. PLOS ONE 21(2): e0340100（査読論文）",
+      "url": "https://doi.org/10.1371/journal.pone.0340100",
+      "note": "オランダの職業教育の学生130人の調査。誤解を招くグラフの訂正を見せると誤解が減り、同じ種類の誤解を招くグラフにも惑わされにくくなった。本文で確認",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-f9bab748a8",
+      "title": "近藤倫子「米英仏のアルコール対策－飲酒に関する法規制と健康対策－」『調査と情報』第831号（国立国会図書館、2014年9月）",
+      "url": "https://dl.ndl.go.jp/view/download/digidepo_8748100_po_0831.pdf?contentNo=1",
+      "note": "Ⅲ2：英国の最低単位価格の検討と、酒税と付加価値税の合計を下回る価格での販売の禁止（2014年5月から）",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-fa61f1279e",
+      "title": "世田谷区監査委員「世田谷区職員措置請求監査結果〔世田谷区立男女共同参画センター運営委託の支出に関する件〕」（令和6年7月）",
+      "url": "https://www.city.setagaya.lg.jp/documents/15970/r6juuminkansa_1.pdf",
+      "note": "令和5年9月9日の講座。区が講師の声と確認した音声に「いざというときは子どもも連れて家を出てください」という趣旨の内容。講座全体を確認しないまま委託料を支出したのは不当とし、検証と再発防止策を勧告",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-fa6d36015c",
+      "title": "WHO「SAFER: Pricing policies」",
+      "url": "https://www.who.int/initiatives/SAFER/pricing-policies",
+      "note": "物価に合わせて定期的に見直し、引き上げるべき",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-fa86e934cb",
+      "title": "総務省「DV等被害者の方への支援措置」",
+      "url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/daityo/dv_shien.html",
+      "note": null,
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-fabce085da",
+      "title": "刑事訴訟法 第205条・第208条（逮捕後の時間の制限、勾留の期間と延長）",
+      "url": "https://laws.e-gov.go.jp/law/323AC0000000131",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-fc1419bd97",
+      "title": "健康増進法 第19条の2",
+      "url": "https://laws.e-gov.go.jp/law/414AC0000000103",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-fc7eb9a82b",
+      "title": "越智啓太「男性DV被害者の認知行動パターンとその支援の社会的実装に関する研究」科研費 2022年度実績報告書（法政大学）",
+      "url": "https://kaken.nii.ac.jp/report/KAKENHI-PROJECT-20K03421/20K034212022jisseki/",
+      "note": "行動に即して聞くと被害の男女差は非常に小さくなり、男性の被害は矮小化・暗数化されやすい",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-fd776865d4",
+      "title": "Plass, Finkelhor & Hotaling (1996) Family abduction outcomes: Factors associated with duration and emotional trauma to children. Youth & Society 28(1), 109-130",
+      "url": "https://doi.org/10.1177/0044118X96028001005",
+      "note": "米国の全国世帯調査（NISMART-1）の家族による連れ去り104件の分析。連れ去った親が子と残された親との接触を妨げた場合（オッズ比5.15）や、監護を恒久的に奪うと脅した場合（6.92）に、子の深刻な心の害が多かった。著者は、警察・裁判所はこれを重い事案の兆候として扱うべきとする（本文で確認。情報は残された親からのみ）",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-fd83adcd5a",
+      "title": "文部科学省「高等学校等就学支援金・新制度の概要」",
+      "url": "https://www.mext.go.jp/content/20260616-mxt_shuukyo03-100002595_7.pdf",
+      "note": "支給上限額 公立11万8800円、私立45万7200円",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-feaad35961",
+      "title": "厚生労働省「2024年度 特定健康診査・特定保健指導の実施状況（概要）」",
+      "url": "https://www.mhlw.go.jp/content/12400000/001764145.pdf",
+      "note": "保険者の種類別の実施率と、国の目標（2029年度までに70％以上・45％以上）",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-fef77de3b1",
+      "title": "参議院法務委員会（2021年4月13日）上川法務大臣の答弁",
+      "url": "https://kokkai.ndl.go.jp/txt/120415206X00720210413/231",
+      "note": null,
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-fef93e1ba9",
+      "title": "英国法務省「Statistics on Women and the Criminal Justice System 2021」（2022年11月）",
+      "url": "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1119965/statistics-on-women-and-the-criminal-justice-system-2021-.pdf",
+      "note": "イングランドとウェールズでは、1991年刑事司法法第95条が、人種や性別による差別を避けるのに役立つ情報を毎年公表するよう国に義務づけ、1992年から男女別の統計が公表されている。2021年の平均の拘禁刑期は男性22.7か月、女性14.5か月",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-ff97a23567",
+      "title": "文部科学省「高校生等への修学支援」",
+      "url": "https://www.mext.go.jp/a_menu/shotou/mushouka/index.htm",
+      "note": "令和8年度から所得制限を撤廃",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-ffe0bf6ee2",
+      "title": "IARC Handbooks of Cancer Prevention Vol.14「Effectiveness of Tax and Price Policies for Tobacco Control」（2011年、WHO国際がん研究機関）",
+      "url": "https://publications.iarc.who.int/384",
+      "note": "25人の専門家による、たばこの税・価格の政策の効果の評価",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    }
+  ]
+}

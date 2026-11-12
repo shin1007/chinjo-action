@@ -1,14 +1,15 @@
-// 作成画面で作られる文書の見本を、docs/見本/ に Markdown で書き出す（サイトを開かなくても読み返せるように）
+// 作成画面で作られる文書の見本を、docs/確認用/見本/ に Markdown で書き出す（サイトを開かなくても読み返せるように）
 //   - 出し方メモ.md：印刷用のPDFの最後につく「出し方メモ」（陳情書・要望書）
 //   - <テーマ名>.md：テーマごとに、内容1つずつの陳情書の文面（参考資料まで）
 //   node scripts/samples.js         … 書き出す
-//   node scripts/samples.js --check … 書き出さずに、docs/見本/ と食い違いがあれば知らせる（npm test でも確かめる）
+//   node scripts/samples.js --check … 書き出さずに、docs/確認用/見本/ と食い違いがあれば知らせる（npm test でも確かめる）
 const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 
 const ROOT = path.join(__dirname, '..');
-const OUT = path.join(ROOT, 'docs', '見本');
+const SITE = path.join(ROOT, 'site');
+const OUT = path.join(ROOT, 'docs', '確認用', '見本');
 const THEMES = [['kodomo', '子どもの権利'], ['dansei', '男女平等'], ['nihonjin', '日本人の権利'], ['shiho', '司法への参加'], ['kenko', '国民の健康'], ['sonota', 'その他の陳情']];
 const COMMON = ['data/prefs.js', 'data/municipalities.js', 'data/offices.js', 'data/sites.js', 'data/councils.js', 'data/kana.js'];
 // 日付は書き出すたびに変わらないよう、見本では固定する
@@ -19,8 +20,8 @@ function load(theme) {
   ctx.window = ctx;
   vm.createContext(ctx);
   const files = [`themes/${theme}/theme.js`, 'data/prefs.js', `themes/${theme}/asks-national.js`, `themes/${theme}/asks-local.js`, `themes/${theme}/template.js`,
-    ...COMMON.slice(1), `themes/${theme}/reasons.js`, 'common.js', 'places.js', 'petition.js'];
-  for (const f of files) vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), ctx, { filename: f });
+    ...COMMON.slice(1), `themes/${theme}/reasons.js`, 'js/common.js', 'js/places.js', 'js/petition.js'];
+  for (const f of files) vm.runInContext(fs.readFileSync(path.join(SITE, f), 'utf8'), ctx, { filename: f });
   return ctx;
 }
 
@@ -49,7 +50,7 @@ function memoFile() {
   const ctx = {};
   ctx.window = ctx;
   vm.createContext(ctx);
-  vm.runInContext(fs.readFileSync(path.join(ROOT, 'send-memo.js'), 'utf8'), ctx, { filename: 'send-memo.js' });
+  vm.runInContext(fs.readFileSync(path.join(SITE, 'js/send-memo.js'), 'utf8'), ctx, { filename: 'js/send-memo.js' });
   const council = {
     name: '〇〇市議会事務局',
     page: 'https://www.city.example.lg.jp/gikai/chinjo.html',
@@ -77,11 +78,11 @@ if (process.argv.includes('--check')) {
     return !fs.existsSync(p) || fs.readFileSync(p, 'utf8').split('\r\n').join('\n') !== text;
   }).map(([name]) => name);
   if (stale.length) {
-    console.error(`docs/見本/ が古くなっています（${stale.join('、')}）。node scripts/samples.js で書き出し直してください。`);
+    console.error(`docs/確認用/見本/ が古くなっています（${stale.join('、')}）。node scripts/samples.js で書き出し直してください。`);
     process.exit(1);
   }
 } else {
   fs.mkdirSync(OUT, { recursive: true });
   files.forEach(([name, text]) => fs.writeFileSync(path.join(OUT, name), text));
-  console.log(`${files.length}ファイルを docs/見本/ に書き出しました`);
+  console.log(`${files.length}ファイルを docs/確認用/見本/ に書き出しました`);
 }

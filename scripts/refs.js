@@ -6,6 +6,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
+const SITE = path.join(ROOT, 'site');
 const THEMES = ['kodomo', 'dansei', 'nihonjin', 'shiho', 'kenko', 'sonota'];
 const START = '<!-- asks-refs:start -->';
 const END = '<!-- asks-refs:end -->';
@@ -16,7 +17,7 @@ const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 function asks(theme) {
   const window = {};
   for (const scope of ['national', 'local']) {
-    const src = read(path.join(ROOT, 'themes', theme, `asks-${scope}.js`));
+    const src = read(path.join(SITE, 'themes', theme, `asks-${scope}.js`));
     new Function('window', src)(window);
   }
   return window.ASKS;
@@ -49,7 +50,7 @@ function block(theme) {
 
 function pages() {
   return THEMES.map((theme) => {
-    const file = path.join(ROOT, theme, 'refs.html');
+    const file = path.join(SITE, theme, 'refs.html');
     const src = read(file);
     const from = src.indexOf(START);
     const to = src.indexOf(END);

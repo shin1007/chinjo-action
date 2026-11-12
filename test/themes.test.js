@@ -6,14 +6,15 @@ const path = require('node:path');
 const vm = require('node:vm');
 
 const ROOT = path.join(__dirname, '..');
-const THEMES = fs.readdirSync(path.join(ROOT, 'themes')).filter((d) => fs.existsSync(path.join(ROOT, 'themes', d, 'asks-national.js')));
+const SITE = path.join(ROOT, 'site');
+const THEMES = fs.readdirSync(path.join(SITE, 'themes')).filter((d) => fs.existsSync(path.join(SITE, 'themes', d, 'asks-national.js')));
 
 function asks(theme) {
   const ctx = {};
   ctx.window = ctx;
   vm.createContext(ctx);
   for (const f of ['asks-national.js', 'asks-local.js']) {
-    const p = path.join(ROOT, 'themes', theme, f);
+    const p = path.join(SITE, 'themes', theme, f);
     if (fs.existsSync(p)) vm.runInContext(fs.readFileSync(p, 'utf8'), ctx, { filename: `themes/${theme}/${f}` });
   }
   return ctx.ASKS || [];

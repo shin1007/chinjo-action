@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>権利を守る陳情アクション｜地方議会への陳情書をつくる</title>
+<meta name="description" content="地方議会への陳情・請願を、誰でも簡単に作成・提出できるサイトです。子どもの権利・男女平等・日本人の権利・司法・健康・税と教育の陳情を選べます。">
+<link rel="canonical" href="https://chinjo-action.vercel.app/">
+<meta property="og:site_name" content="権利を守る陳情アクション">
+<meta property="og:title" content="権利を守る陳情アクション">
+<meta property="og:description" content="子ども・男女平等・日本人の権利・司法・健康・税と教育の6つのテーマから、地方議会への陳情書・要望書や議員への手紙を、選択肢を選んでつくれます。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://chinjo-action.vercel.app/">
+<meta property="og:image" content="https://chinjo-action.vercel.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="権利を守る陳情アクション ― 地方議会に、意見を正式な手続きで届ける。">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <details class="theme-menu">
+      <summary>テーマを選ぶ</summary>
+      <nav class="theme-nav" aria-label="陳情のテーマ">
+        <a href="/kodomo">子どもの権利</a>
+        <a href="/dansei">男女平等</a>
+        <a href="/nihonjin">日本人の権利</a>
+        <a href="/shiho">司法への参加</a>
+        <a href="/kenko">国民の健康</a>
+        <a href="/sonota">その他の陳情</a>
+      </nav>
+    </details>
+    <a href="/" class="logo">陳情アクション</a>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">気になっている国内の問題を、地元の議会に正式に届ける。</p>
+    <h1>選んでいくだけで、<br>議会に出せる陳情書ができます。</h1>
+    <p class="lead">テーマと内容を選び、住所・氏名を入れると、そのまま印刷して出せる文面になります。紹介議員（議会に取り次いでくれる議員）はいりません。費用は、陳情3件をまとめて郵送して約460円、持参なら約230円が目安です。入力した住所・氏名や文面は、このサイトのサーバーに送られません。</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#themes">テーマを選んでつくる</a>
+      <a class="btn btn-ghost" href="#shindan">陳情書でいいか迷ったら（質問2つ）</a>
+    </div>
+  </div>
+</section>
+<section id="themes" class="section">
+  <div class="wrap">
+    <h2>テーマを選ぶ</h2>
+    <p class="lead-sm">テーマを1つに決めて、その中でとくに伝えたい内容に絞って出すのがおすすめです。</p>
+    <div class="item-search">
+      <label for="itemSearch">どのテーマか分からないときは、言葉でさがす</label>
+      <input type="search" id="itemSearch" class="wz-filter" placeholder="例：受動喫煙、養育費、授業料（気になる言葉で探せます）" autocomplete="off">
+      <p id="itemSearchCount" class="hint-sm" aria-live="polite"></p>
+      <ul id="itemSearchResults" class="item-search-results"></ul>
+    </div>
+    <ul class="theme-list">
+      <li><a href="/kodomo"><b>子どもの権利</b></a></li>
+      <li><a href="/dansei"><b>男女平等</b></a></li>
+      <li><a href="/nihonjin"><b>日本人の権利</b></a></li>
+      <li><a href="/shiho"><b>司法への参加</b></a></li>
+      <li><a href="/kenko"><b>国民の健康</b></a></li>
+      <li><a href="/sonota"><b>その他（税・教育）</b></a></li>
+    </ul>
+    <ol class="howto">
+      <li><b>テーマを選ぶ</b> ― 上の一覧から。</li>
+      <li><b>届け方を選ぶ</b> ― 迷ったら陳情書（議会に出します）。要望書・議員への手紙も選べます。</li>
+      <li><b>つくる</b> ― 内容と出す先を選び、住所・氏名を入れると文面ができます。</li>
+      <li><b>出し方を確かめて出す</b> ― 署名して、郵送・持参・電子申請で出します。</li>
+    </ol>
+  </div>
+</section>
+<section id="shindan" class="section shindan">
+  <div class="wrap">
+    <h2>陳情書でいいか、2つの質問で確かめる</h2>
+    <p class="lead-sm">迷ったら陳情書で大丈夫です。ほかの届け方（要望書・請願・議員への手紙・国への提案）は、だれに動いてほしいかで選びます。どれがいちばん効く、というものではありません。</p>
+    <fieldset class="shindan-q" data-q="who">
+      <legend>Q1. だれに動いてほしいですか</legend>
+      <button type="button" class="wz-card" data-a="council"><b>議会</b><span>議会で話し合ってほしい・国に意見書を出してほしい</span></button>
+      <button type="button" class="wz-card" data-a="exec"><b>市区町村長・知事</b><span>役所に取り組みや説明をしてほしい</span></button>
+      <button type="button" class="wz-card" data-a="member"><b>地元の特定の議員</b><span>議員に知ってほしい・議会で取り上げてほしい</span></button>
+      <button type="button" class="wz-card" data-a="nation"><b>国（省庁）</b><span>国の法律・省令などの規制を見直してほしい</span></button>
+      <button type="button" class="wz-card" data-a="unknown"><b>まだわからない</b><span>まずしくみを知りたい</span></button>
+    </fieldset>
+    <fieldset class="shindan-q" data-q="intro" hidden>
+      <legend>Q2. 請願の「紹介議員」になってくれる議員はいますか</legend>
+      <button type="button" class="wz-card" data-a="yes"><b>いる</b><span>相談できる議員がいる</span></button>
+      <button type="button" class="wz-card" data-a="no"><b>いない・わからない</b><span>紹介議員なしで出したい</span></button>
+    </fieldset>
+    <div id="shindanResult" class="shindan-result" aria-live="polite" hidden></div>
+  </div>
+</section>
+<section id="compare" class="section alt">
+  <div class="wrap">
+    <h2>届け方の違い</h2>
+    <details class="compare-details">
+    <summary>陳情書・要望書・議員への手紙・請願書・国への提案の違いを見る</summary>
+    <div class="table-scroll">
+    <table class="compare">
+      <thead><tr><th scope="col"></th><th scope="col">陳情書</th><th scope="col">要望書</th><th scope="col">議員への手紙</th><th scope="col">請願書</th><th scope="col">国への提案</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">出す先</th><td>議会（議長あて）</td><td>市区町村長・知事・担当課</td><td>地元の議員</td><td>議会（議長あて）</td><td>内閣府（規制改革・行政改革ホットライン）</td></tr>
+        <tr><th scope="row">紹介議員</th><td>いらない</td><td>いらない</td><td>いらない</td><td>必要</td><td>いらない</td></tr>
+        <tr><th scope="row">扱い</th><td>議会ごとに違う（審査される／議員に配るだけ）</td><td>行政に直接届く（回答の扱いは自治体ごとに違う）</td><td>議員が読む。公開されない</td><td>法律に基づいて審査される</td><td>所管の省庁が検討し、回答が内閣府のサイトで公開される（個人の氏名は公表されない）</td></tr>
+        <tr><th scope="row">このサイトで</th><td>作れる</td><td>作れる</td><td>作れる</td><td>作れません。陳情書の文面を土台にして、紹介してくれる議員に相談します</td><td>作れません。<a href="https://form.cao.go.jp/kokumin_koe/opinion-0016.html" target="_blank" rel="noopener">内閣府のフォーム</a>から直接出します</td></tr>
+      </tbody>
+    </table>
+    </div>
+    </details>
+    <p class="hint-sm">陳情書は、郵送したものや住民以外が出したものを「配るだけ」にする議会もあります。作成画面で議会を選ぶと、わかっている扱いを表示します（<a href="/kakunin">議会ごとの扱い</a>）。情報公開請求・パブリックコメントなどほかの手段は<a href="/about">しくみのページ</a>で。</p>
+  </div>
+</section>
+<section id="before" class="section">
+  <div class="wrap">
+    <h2>出す前に知っておいてほしいこと</h2>
+    <ul class="howto">
+      <li><b>費用の目安。</b>1つの議会に陳情3件をまとめて出すと、コンビニの印刷代を含めて郵送で約460円、持参なら約230円＋交通費です。枚数や件数で変わります（<a href="/kodomo#cost">内訳</a>）。</li>
+      <li><b>扱いは議会ごとに違います。</b>作成画面で議会を選ぶと、分かっている扱いを表示します。分からない議会でも、電話せずに出せます（住んでいる議会への持参がいちばん確実です）。</li>
+      <li><b>採択されたら。</b>議会がその内容を認めたことが正式な記録に残ります。国への意見書を求める陳情なら、議会が国会や関係行政庁に意見書を出すことがあります（地方自治法第99条）。ただし、行政や国を従わせる強制力まではありません。</li>
+    </ul>
+    <p class="hint-sm center">人権侵害・DV・虐待などで今困っているときは、陳情の前に専門の窓口へ相談できます（<a href="https://www.moj.go.jp/JINKEN/jinken20.html" target="_blank" rel="noopener">みんなの人権110番</a>・<a href="https://www.gender.go.jp/policy/no_violence/dv_navi/" target="_blank" rel="noopener">DV相談ナビ #8008</a>・児童相談所 189）。</p>
+  </div>
+</section>
+<section id="faq" class="section alt">
+  <div class="wrap">
+    <h2>よくある質問</h2>
+    <details><summary>費用はいくらかかりますか？</summary><p>「<a href="#before">出す前に知っておいてほしいこと</a>」の目安をご覧ください。件数を増やしたときの金額は<a href="/kodomo#cost">内訳</a>にあります。</p></details>
+    <details><summary>陳情と請願の違いは？</summary><p>請願は紹介議員が必要で、法律（請願法・地方自治法）に基づき審査されます。陳情は紹介議員なしで誰でも提出でき、扱いは議会ごとに異なります（審査・配布のみ等）。</p></details>
+    <details open><summary>住んでいない自治体の議会にも出せますか？</summary><p>多くの議会で可能ですが、「市内在住者に限る」「郵送は配布のみ」など運用が異なります。作成画面で議会を選ぶと、このサイトで分かっている扱いを表示します。分かっていない議会には、議会事務局の電話番号と、電話で聞くことを示します。</p></details>
+    <details><summary>入力した個人情報は保存されますか？</summary><p>サーバーには送信・保存されません。陳情書の作成はすべてお使いのブラウザ内で行われます。サーバーに送るのは、自分で押したときの「提出を報告」（議会名だけ）と「分かったことを共有する」（議会の扱いだけ）だけです。生成AIで文面を直すときは、趣旨と理由の本文だけが、選んだAIのサービスに渡ります。お使いの端末のブラウザには、続きから使えるように、選んだ内容と直した文面が残ります。住所・氏名は「覚えておく」にチェックしたときだけ残ります。「最初からやり直す」で選んだ内容と文面が、「この端末から消す」で住所・氏名が消えます。</p></details>
+    <details open><summary>特定の人や団体を批判してもいいですか？</summary><p>陳情書は公文書として公開されることがあります。個人名や事件を特定できる記載、誹謗中傷は避け、制度の問題として記載してください。</p></details>
+  </div>
+</section>
+<section id="recent-changes" class="section" hidden>
+  <div class="wrap">
+    <h2>最近の修正・変更</h2>
+    <ol class="recent-changes"></ol>
+    <p class="hint-sm">これまでのすべての修正・変更は<a href="https://github.com/shin1007/chinjo-action/commits/main" target="_blank" rel="noopener">GitHub</a>で見られます。</p>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="small">本サイトは市民による政策提言のための情報提供サイトです。法的助言を行うものではありません。</p>
+    <p class="small"><a href="/support">このサイトを支える</a></p>
+  </div>
+</footer>
+<script src="/js/shindan.js" defer></script>
+<script src="/js/search-index.js" defer></script>
+<script src="/js/search.js" defer></script>
+<script src="/js/recent-changes.js" defer></script>
+</body>
+</html>

@@ -2,14 +2,15 @@
 // 対象：47都道府県と、すべての市区町村（人口は data/municipality-populations.json）
 //   node scripts/request-pages.js            … 探して書き出す（前に見つけたページは残し、まだのところだけたどる）
 //   node scripts/request-pages.js --all      … 全部たどり直す（手で直した data/request-pages.js の値は MANUAL に置くと残る）
-// 見つからなかった・開けなかった自治体は docs/要望書の出し方のページが見つからない自治体.md に残す
+// 見つからなかった・開けなかった自治体は docs/確認用/要望書の出し方のページが見つからない自治体.md に残す
 const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
+const SITE = path.join(ROOT, 'site');
 global.window = global;
-require(path.join(ROOT, 'data/sites.js'));
-const POP = require(path.join(ROOT, 'data/municipality-populations.json')).populations;
+require(path.join(SITE, 'data/sites.js'));
+const POP = require(path.join(SITE, 'data/municipality-populations.json')).populations;
 
 const DESIGNATED = ['札幌市', '仙台市', 'さいたま市', '千葉市', '横浜市', '川崎市', '相模原市', '新潟市', '静岡市', '浜松市', '名古屋市', '京都市', '大阪市', '堺市', '神戸市', '岡山市', '広島市', '北九州市', '福岡市', '熊本市'];
 const TOP = Infinity; // 政令指定都市以外で調べる市区町村の数（人口の多い順）。今はすべて
@@ -18,7 +19,7 @@ const TOP = Infinity; // 政令指定都市以外で調べる市区町村の数�
 const MANUAL = require('./request-pages-manual.js');
 const MANUAL_NOTE = MANUAL._notes || {};
 // 前に見つけたページはたどり直さない（--all を付けると全部たどり直す）
-const KEEP = process.argv.includes('--all') ? {} : (() => { try { require(path.join(ROOT, 'data/request-pages.js')); return window.REQUEST_PAGES || {}; } catch { return {}; } })();
+const KEEP = process.argv.includes('--all') ? {} : (() => { try { require(path.join(SITE, 'data/request-pages.js')); return window.REQUEST_PAGES || {}; } catch { return {}; } })();
 
 // 要望書を出すページらしい言葉。強いものほど点が高い
 const GOOD = [
@@ -159,7 +160,7 @@ function targets() {
   await Promise.all(Array.from({ length: 8 }, worker));
   const sorted = Object.fromEntries(list.map(([p, k]) => `${p}/${k}`).filter((id) => out[id]).map((id) => [id, out[id]]));
   const today = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
-  fs.writeFileSync(path.join(ROOT, 'data/request-pages.js'), `// 要望書の出し方のページ（知事・市長への手紙、市民の声など）。scripts/request-pages.js で作る。
+  fs.writeFileSync(path.join(SITE, 'data/request-pages.js'), `// 要望書の出し方のページ（知事・市長への手紙、市民の声など）。scripts/request-pages.js で作る。
 // キー：都道府県名/市区町村名（data/sites.js と同じ表記。"@" は都道府県）→ [ページのURL, ページの題]
 // 対象：47都道府県と、すべての市区町村（政令指定都市を含む）。${today} に公式サイトのリンクをたどって見つけ、
 // 並びは、都道府県 → 政令指定都市 → それ以外の市区町村（それぞれ人口の多い順）。
@@ -170,7 +171,7 @@ ${Object.entries(sorted).map(([k, v]) => `  ${JSON.stringify(k)}: ${JSON.stringi
 `);
   const order = new Map(list.map(([p, k], n) => [k === '@' ? p : `${p}${k}`, n]));
   fails.sort((a, b) => order.get(a[0]) - order.get(b[0]));
-  fs.writeFileSync(path.join(ROOT, 'docs/要望書の出し方のページが見つからない自治体.md'), `# 要望書の出し方のページが見つからない自治体
+  fs.writeFileSync(path.join(ROOT, 'docs/確認用/要望書の出し方のページが見つからない自治体.md'), `# 要望書の出し方のページが見つからない自治体
 
 scripts/request-pages.js で、公式サイトから「知事・市長への手紙」「市民の声」などのページを自動でたどったが、見つからなかった・開けなかった自治体（${today}）。
 並びは、都道府県 → 政令指定都市 → それ以外の市区町村（それぞれ人口の多い順）。

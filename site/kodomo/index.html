@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>子どもの権利を守る陳情アクション｜実子誘拐の解決・共同親権の原則化</title>
+<meta name="description" content="子どもが両親と関わり続ける権利を守るため、実子誘拐の問題解決、共同親権の原則化、葛藤を不必要に高める離婚弁護活動の規制を求める陳情・請願を、誰でも簡単に作成・提出できるサイトです。">
+<link rel="canonical" href="https://chinjo-action.vercel.app/kodomo">
+<meta property="og:site_name" content="子どもの権利を守る陳情アクション">
+<meta property="og:title" content="子どもの権利を守る陳情アクション">
+<meta property="og:description" content="陳情書を作成。あなたの一通が制度を動かします。実子誘拐の解決・共同親権の原則化を地方議会へ。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://chinjo-action.vercel.app/kodomo">
+<meta property="og:image" content="https://chinjo-action.vercel.app/themes/kodomo/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="子どもの権利を守る陳情アクション ― 子どもが両方の親と関わり続けられる制度を、地方議会に。">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <details class="theme-menu">
+      <summary>子どもの権利</summary>
+      <nav class="theme-nav" aria-label="陳情のテーマ">
+        <a href="/kodomo" aria-current="true">子どもの権利</a>
+        <a href="/dansei">男女平等</a>
+        <a href="/nihonjin">日本人の権利</a>
+        <a href="/shiho">司法への参加</a>
+        <a href="/kenko">国民の健康</a>
+        <a href="/sonota">その他の陳情</a>
+      </nav>
+    </details>
+    <a href="/" class="logo">陳情アクション</a>
+    <nav>
+      <a href="/kodomo/make">つくる</a>
+      <a href="/kodomo/guide">出し方</a>
+    </nav>
+    <nav class="page-nav" aria-label="このページの中">
+      <a href="/kodomo#faq">よくある質問</a>
+      <a href="/about">陳情って何？</a>
+      <a href="/kodomo#actions">陳情以外の手段</a>
+      <a href="/kodomo#shop">関連グッズ</a>
+      <a href="/kodomo/refs">関連資料</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap">
+    <p class="hero-crumb"><a href="/">陳情アクション</a> ＞ <b>子どもの権利を守る陳情</b></p>
+    <h1>子どもが両方の親と関わり続けられる制度を、<br>地方議会に求める。</h1>
+    <p class="lead">実子誘拐（一方的な子の連れ去り）の解決、共同親権の原則化、夫婦間の葛藤を不必要に高める離婚弁護活動の規制。<br>このテーマの陳情書・要望書を、このページから作れます。</p>
+    <div class="pick-ways pick-one">
+      <a href="/kodomo/make" class="pick-way pick-main"><b>陳情書をつくる</b><span>選択肢を押していくだけで、議会に出せる文面ができます。議員の紹介はいりません。</span></a>
+    </div>
+    <p class="pick-others">ほかの届け方：<a href="/kodomo/make?kind=request">市区町村長・知事への要望書</a>／<a href="/letter">議員への手紙</a>（公開されない）</p>
+    <p class="hint-sm">作ったあとは<a href="/kodomo/guide">出し方ガイド</a>で、署名・提出・その後の流れを確かめられます。違いは<a href="/#compare">比較表</a>で。</p>
+    <p class="cost-line">1つの議会に陳情3件をまとめて出すと、コンビニの印刷代を含めて郵送で<b>約460円</b>、持参なら<b>約230円</b>＋交通費が目安です（<a href="#cost">内訳</a>）。</p>
+  </div>
+</section>
+
+<section id="letter" class="section section-sub">
+  <div class="wrap">
+    <details class="advanced" id="letterFold" hidden>
+    <p class="lead-sm">紹介議員のお願いや、議会で取り上げてもらうきっかけになります。陳情書だけでも提出できます。</p>
+
+    <form id="letterForm" class="gen-form">
+      <p class="privacy">🔒 ここに入力した内容は、このサイトのサーバーに送信も保存もされません。ページを閉じると消えます。</p>
+
+      <div class="gen-step">
+        <h3><span class="step-badge">1</span>だれに、何をお願いしますか</h3>
+        <div class="gen-grid">
+          <label>議会名<input name="council" list="councilList" placeholder="例：横浜市議会"></label>
+          <label>議員名（任意）<input name="member" placeholder="空欄なら下線になります"></label>
+        </div>
+        <fieldset>
+          <legend>お願いしたいこと（複数選択可）</legend>
+          <label class="check"><input type="checkbox" name="purpose" value="intro" checked> 陳情・請願の紹介議員になってほしい</label>
+          <label class="check"><input type="checkbox" name="purpose" value="question"> 議会の一般質問で取り上げてほしい</label>
+          <label class="check"><input type="checkbox" name="purpose" value="meet" checked> 直接会って話を聞いてほしい</label>
+          <label class="check"><input type="checkbox" name="purpose" value="know"> 提出した陳情の背景を知っておいてほしい</label>
+        </fieldset>
+      </div>
+
+      <div class="gen-step">
+        <h3><span class="step-badge">2</span>子どもとあなたの今</h3>
+        <div class="gen-grid">
+          <label>あなたの立場
+            <select name="role"><option value="">選んでください</option><option>子と離れて暮らす父</option><option>子と離れて暮らす母</option><option>子と離れて暮らす祖父母</option><option>その他の家族</option></select>
+          </label>
+          <label>子どもの人数・年齢<input name="children" placeholder="例：2人（現在8歳と5歳）"></label>
+          <label>子どもと離れた時期<input name="since" type="month"></label>
+          <label>いまの交流
+            <select name="contact">
+              <option value="">選んでください</option>
+              <option value="none">まったく会えていない</option>
+              <option value="indirect">間接交流のみ（手紙・写真など）</option>
+              <option value="rare">直接会えるが、年に数回以下</option>
+              <option value="regular">定期的に会えている</option>
+            </select>
+          </label>
+        </div>
+        <label>交流の様子（任意）
+          <textarea name="contactDetail" rows="3" placeholder="例：月1回手紙とプレゼントを送っているが、返事はなく、子どもに届いているのか、使われているのか分からない。写真の送付も止まっている。"></textarea>
+        </label>
+        <p class="hint-sm">「間接交流」では、子どもに親の存在が伝わっているか確かめられないことが多くあります。その実情は、制度の問題として議員に伝わりやすい事実です。</p>
+      </div>
+
+      <div class="gen-step">
+        <h3><span class="step-badge">3</span>これまでの経緯（事実だけ）</h3>
+        <label>別居・連れ去りの経緯
+          <textarea name="history" rows="4" placeholder="例：○年○月、仕事から帰ると妻と子が家におらず、その後弁護士から連絡があった。事前の話し合いはなかった。"></textarea>
+        </label>
+        <p class="hint-sm">いつ・何が起きたかを、推測や評価を交えずに書きます。相手の名前や住所は書きません。</p>
+        <label>あなたがしてきたこと
+          <textarea name="efforts" rows="3" placeholder="例：面会交流調停を申し立てた（○年）。婚姻費用を毎月支払っている。共同養育の講座を受けた。相手に交流の具体案を手紙で提案した。"></textarea>
+        </label>
+        <p class="hint-sm">婚姻費用・養育費を払っていること、話し合いを試みたことは、あなたの言葉の信頼性を高めます。</p>
+      </div>
+
+      <div class="gen-step">
+        <h3><span class="step-badge">4</span>制度や窓口で困ったこと</h3>
+        <fieldset>
+          <legend>当てはまるもの（複数選択可）</legend>
+          <div id="troubleList"></div>
+        </fieldset>
+        <label>その他・具体的に（任意）
+          <textarea name="troubleDetail" rows="3" placeholder="例：子どもの通う学校が分からず、学校行事の様子を知る手段がない。"></textarea>
+        </label>
+        <p class="hint-sm">議員が動けるのは、個別の事件ではなく制度や行政の運用です。ここに書くことが、手紙の中心になります。</p>
+      </div>
+
+      <div class="gen-step">
+        <h3><span class="step-badge">5</span>子どもについて心配なこと</h3>
+        <fieldset>
+          <legend>当てはまるもの（複数選択可）</legend>
+          <div id="worryList"></div>
+        </fieldset>
+        <label>具体的に（任意）
+          <textarea name="worryDetail" rows="3" placeholder="例：子どもが父親の存在を知らないまま育つことが心配。祖父母も孫に会えないまま高齢になっている。"></textarea>
+        </label>
+        <label>虐待やネグレクトのおそれについて
+          <select name="abuse">
+            <option value="">特になし・書かない</option>
+            <option value="consulted">おそれがあり、児童相談所・警察などに相談した</option>
+            <option value="worried">おそれを感じているが、まだ相談していない</option>
+          </select>
+        </label>
+        <p class="hint-sm">子どもの安全に関わる具体的な心配があるなら、手紙より先に児童相談所（189）や警察に相談してください。手紙には「相談した」という事実を書くのが効果的です。</p>
+      </div>
+
+      <div class="gen-step">
+        <h3><span class="step-badge">6</span>暮らしとお金</h3>
+        <label>子どもの暮らし向きについて（任意）
+          <textarea name="economy" rows="3" placeholder="例：相手は別居前、パートで月○万円程度の収入だった。子どもの生活が苦しくなっていないか心配している。"></textarea>
+        </label>
+        <label>あなた自身の生活の変化（任意）
+          <textarea name="mylife" rows="3" placeholder="例：子どもに会えなくなってから心身の調子を崩し、仕事を休職した時期があった。"></textarea>
+        </label>
+      </div>
+
+      <div class="gen-step">
+        <h3><span class="step-badge">7</span>DV・相手のことについて</h3>
+        <label>DV・モラハラについて
+          <select name="dv">
+            <option value="">書かない</option>
+            <option value="none">どちらからも、なかった</option>
+            <option value="victim">自分が相手から受けていた</option>
+            <option value="accused">相手からDVを主張されているが、事実ではない</option>
+            <option value="both">お互いに言い争いが絶えなかった</option>
+          </select>
+        </label>
+        <label>相手の言動や状態で、子どもへの影響が心配なこと（任意）
+          <textarea name="partner" rows="3" placeholder="例：子どもの前で大声で怒鳴ることがよくあった（○年頃から）。"></textarea>
+        </label>
+        <p class="hint-sm warn">相手の性格の評価や、病名の推測は書かないでください。議員には「相手への非難」に見え、あなたの訴え全体の信頼を下げます。書くなら、いつ・何があったかという、あなたが見聞きした具体的な事実だけにします。精神疾患は、診断や入院などの事実があり、子どもの安全に直接関わる場合に限りましょう。</p>
+      </div>
+
+      <div class="gen-step">
+        <h3><span class="step-badge">8</span>最後に伝えたいこと</h3>
+        <label>議員に伝えたい思い（任意）
+          <textarea name="message" rows="3" placeholder="例：自分の子どもだけでなく、同じ思いをする子どもを減らしたい。"></textarea>
+        </label>
+        <div class="gen-grid">
+          <label>あなたの氏名<input name="name" placeholder="空欄なら下線になります"></label>
+          <label>連絡先（電話・メール）<input name="contact_info" placeholder="例：090-0000-0000"></label>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block">手紙をつくる</button>
+      <button type="button" id="letterAiBtn" class="btn btn-block btn-ai">生成AIに整えてもらう（指示文をつくる）</button>
+    </form>
+
+    <div id="letterAiOutput" class="gen-output" hidden>
+      <h3>生成AIへの指示文（手紙）</h3>
+      <p class="privacy warn-box">⚠ 生成AIのサービスによっては、入力した内容が保存されたり、学習に使われたりします。指示文には氏名・連絡先・子どもの名前は入れていませんが、経緯に地名や固有名詞があれば、貼り付ける前に「○○」に置き換えてください。</p>
+      <div class="ai-launch" data-source="letterAiPrompt" data-temporary></div>
+      <div class="out-toolbar">
+        <button type="button" id="letterAiCopy" class="btn btn-small">指示文だけコピー</button>
+      </div>
+      <textarea id="letterAiPrompt" rows="16"></textarea>
+    </div>
+
+    <div id="letterOutput" class="gen-output" hidden>
+      <h3>できあがった手紙</h3>
+      <p class="hint-sm">自由に書き換えられます。手書きで清書したり、自分の言葉を足したりすると、より気持ちが伝わります。このページを閉じると消えるので、残したいときは「メールで自分に送る」かコピーして保存してください。</p>
+      <div class="out-toolbar">
+        <button type="button" id="letterCopy" class="btn btn-small">コピー</button>
+        <button type="button" id="letterPrint" class="btn btn-small btn-primary">印刷</button>
+        <button type="button" id="letterMail" class="btn btn-small">メールで自分に送る</button>
+      </div>
+      <textarea id="letterText" rows="24"></textarea>
+    </div>
+  </details>
+  </div>
+</section>
+
+<div data-common-actions></div>
+
+<section id="adopted" class="section alt">
+  <div class="wrap">
+    <h2>陳情が採択された例</h2>
+    <p class="lead-sm">市民が出した1枚の陳情が、議会で認められた例です。</p>
+    <ul class="adopted-list">
+      <li><b>静岡市議会（令和3年6月定例会）</b>：市民の団体が出した「『離婚後共同親権制度の採用及び共同養育・面会交流支援等に必要な法整備を求める意見書』の提出に関する陳情書」（陳情第2号）が<b>採択</b>されました。国に法整備を求める意見書の案も、同じ資料に載っています（<a href="https://www.city.shizuoka.lg.jp/documents/6558/000902505.pdf" target="_blank" rel="noopener">静岡市議会の結果と陳情文書表</a>）。その後、離婚後に共同親権を選べるようにする改正民法が、2026年4月に施行されました。</li>
+    </ul>
+    <p class="hint-sm">採択は、議会がその内容を認めたという意味で、そのとおりに国や自治体の施策が決まるとは限りません。</p>
+  </div>
+</section>
+
+<section id="shop" class="section">
+  <div class="wrap">
+    <h2>関連する本・グッズ</h2>
+    <div data-shop></div>
+  </div>
+</section>
+
+<section id="faq" class="section">
+  <div class="wrap">
+    <h2>よくある質問</h2>
+    <details id="cost"><summary>費用はいくらかかりますか？</summary>
+      <p><b>1つの議会に3件の陳情をまとめて出すとき</b></p>
+      <table class="cost-table">
+        <tr><th></th><th>郵送（1通にまとめる）</th><th>持参</th></tr>
+        <tr><td>印刷（コンビニの白黒A4・1枚20円）</td><td>13枚 260円</td><td>11枚 220円</td></tr>
+        <tr><td>　うち陳情書（3枚×3件）</td><td>9枚</td><td>9枚</td></tr>
+        <tr><td>　うち送付状</td><td>1枚</td><td>－</td></tr>
+        <tr><td>　うち宛名・差出人用紙</td><td>1枚</td><td>－</td></tr>
+        <tr><td>　うち送り方メモ（手元に残す）</td><td>2枚</td><td>2枚</td></tr>
+        <tr><td>クリアファイル（全部をまとめて1枚）</td><td>約11円</td><td>約11円</td></tr>
+        <tr><td>封筒（角2）</td><td>約10円</td><td>－</td></tr>
+        <tr><td>切手（定形外・100gまで）</td><td>180円</td><td>－</td></tr>
+        <tr class="cost-sum"><td>合計</td><td><b>約460円</b></td><td><b>約230円</b>＋交通費</td></tr>
+      </table>
+      <p class="hint-sm">コンビニの白黒の印刷は、セブン‐イレブンの<a href="https://www.printing.ne.jp/support/common/pricelist.html" target="_blank" rel="noopener">ネットプリント</a>も、ファミリーマート・ローソンの<a href="https://networkprint.ne.jp/info/howto/top.html" target="_blank" rel="noopener">ネットワークプリント</a>もA4で1枚20円です（2026年11月時点）。家庭のプリンターなら1枚数円で済みます。<b>送り方メモはPDFをスマホで見られれば印刷しなくてよく</b>、印刷するものの選択で外すと40円安くなります。持参するときは送付状と宛名も外せます。クリアファイル・封筒は100円ショップのまとめ買いの値段、切手は<b>2026年11月時点</b>の料金です。封筒の中身は紙10枚（陳情書9枚と送付状）とクリアファイル1枚、それに封筒に貼る宛名・差出人で、重さは約76gです。</p>
+      <details class="cost-more"><summary>件数を変えたとき・重さと切手の料金</summary>
+      <p><b>件数を増やすとき</b>（どれも1通にまとめた合計）</p>
+      <table class="cost-table">
+        <tr><th>件数</th><th>郵送</th><th>持参</th></tr>
+        <tr><td>1件</td><td>約340円（切手180円）</td><td>約110円＋交通費</td></tr>
+        <tr><td>5件</td><td>約580円（切手180円）</td><td>約350円＋交通費</td></tr>
+        <tr><td>10件</td><td>約1,020円（切手320円）</td><td>約650円＋交通費</td></tr>
+        <tr><td>15件</td><td>約1,320円（切手320円）</td><td>約950円＋交通費</td></tr>
+        <tr><td>20件</td><td>約1,810円（切手510円）</td><td>約1,250円＋交通費</td></tr>
+      </table>
+      <p class="hint-sm">5件はちょうど100gの境目なので、270円分を貼っておくと安心です。20件では重さが250gを超え、切手は500gまでの510円になります。</p>
+      <p><b>重さと切手の料金</b>（角2封筒の定形外郵便・規格内、2026年11月時点）</p>
+      <table class="cost-table">
+        <tr><th>重さ</th><th>切手</th><th>入る陳情の目安（1件＝3枚。送付状1枚とクリアファイル1枚を含む）</th></tr>
+        <tr><td>50gまで</td><td>140円</td><td>送付状をつけなければ1件</td></tr>
+        <tr><td>100gまで</td><td>180円</td><td>5件</td></tr>
+        <tr><td>150gまで</td><td>270円</td><td>9件</td></tr>
+        <tr><td>250gまで</td><td>320円</td><td>17件</td></tr>
+        <tr><td>500gまで</td><td>510円</td><td>38件</td></tr>
+        <tr><td>1kgまで</td><td>750円</td><td>80件</td></tr>
+      </table>
+      <p class="hint-sm">料金は<a href="https://www.post.japanpost.jp/send/fee/kokunai/one_two.html" target="_blank" rel="noopener">日本郵便の料金表</a>によります。厚さが3cmを超えると規格外になり、料金が上がります。境目に近いときは1つ上の料金分を貼っておくと安心です。</p>
+      </details>
+    </details>
+    <details><summary>陳情と請願の違いは？</summary><p>請願は紹介議員が必要で、法律（請願法・地方自治法）に基づき審査されます。陳情は紹介議員なしで誰でも提出でき、扱いは議会ごとに異なります（審査・配布のみ等）。</p></details>
+    <details><summary>住んでいない自治体の議会にも出せますか？</summary><p>多くの議会で可能ですが、「市内在住者に限る」「郵送は配布のみ」など運用が異なります。作成画面で議会を選ぶと、このサイトで分かっている扱いを表示します。分かっていない議会には、議会事務局の電話番号と、電話で聞くことを示します。</p></details>
+    <details><summary>共同親権はもう導入されたのでは？</summary><p>2026年4月施行の改正民法で、離婚後に共同親権を選べるようになりました。ただし合意できない場合は家庭裁判所が判断する選択制です。原則化や運用の改善、連れ去りへの対応はなお課題であり、地方議会から国へ意見書を出すことには意味があります。</p></details>
+    <details><summary>入力した個人情報は保存されますか？</summary><p>サーバーには送信・保存されません。陳情書の作成はすべてお使いのブラウザ内で行われます。サーバーに送るのは、自分で押したときの「提出を報告」（議会名だけ）と「分かったことを共有する」（議会の扱いだけ）だけです。生成AIで文面を直すときは、趣旨と理由の本文だけが、選んだAIのサービスに渡ります。お使いの端末のブラウザには、続きから使えるように、選んだ内容と直した文面が残ります。住所・氏名は「覚えておく」にチェックしたときだけ残ります。「最初からやり直す」で選んだ内容と文面が、「この端末から消す」で住所・氏名が消えます。</p></details>
+    <details><summary>特定の弁護士や相手方を批判してもいいですか？</summary><p>陳情書は公文書として公開されることがあります。個人名や事件を特定できる記載、誹謗中傷は避け、制度の問題として記載してください。</p></details>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>子どもの権利を守る陳情アクション</p>
+    <p class="small">本サイトは市民による政策提言のための情報提供サイトです。法的助言を行うものではありません。DV・虐待でお困りの方は <a href="https://www.gender.go.jp/policy/no_violence/dv_navi/" target="_blank" rel="noopener">DV相談ナビ #8008</a>、子どもの虐待は <a href="https://www.cfa.go.jp/policies/jidougyakutai/gyakutai-taiou-dial" target="_blank" rel="noopener">児童相談所 189</a> へ。</p>
+    <p class="small"><a href="/support">このサイトを支える</a></p>
+    <p class="small"><a href="/kodomo/guide">陳情の出し方ガイド</a></p>
+    <p class="small credit">市区町村の一覧：<a href="https://github.com/geolonia/japanese-addresses" target="_blank" rel="noopener">Geolonia 住所データ</a>（<a href="https://creativecommons.org/licenses/by/4.0/deed.ja" target="_blank" rel="noopener">CC BY 4.0</a>）を加工して作成。最寄り駅：<a href="https://nlftp.mlit.go.jp/ksj/" target="_blank" rel="noopener">国土数値情報</a>（鉄道データ）（国土交通省）を加工して作成。位置：<a href="https://maps.gsi.go.jp/" target="_blank" rel="noopener">地理院地図</a>の住所検索</p></div>
+</footer>
+<p id="toast" class="toast" hidden>コピーしました</p>
+
+<script src="/themes/kodomo/theme.js"></script>
+<script src="/data/prefs.js"></script>
+<script src="/themes/kodomo/asks-national.js"></script>
+<script src="/themes/kodomo/asks-local.js"></script>
+<script src="/themes/kodomo/template.js"></script>
+<script src="/data/municipalities.js"></script>
+<script src="/data/offices.js"></script>
+<script src="/data/sites.js"></script>
+<script src="/data/councils.js"></script>
+<script src="/data/mail.js"></script>
+<script src="/data/tel.js"></script>
+<script src="/data/access.js"></script>
+<script src="/data/kana.js"></script>
+<script src="/vendor/qrcode.js"></script>
+<script src="/js/yomi.js"></script>
+<script src="/js/public-comment.js"></script>
+<script src="/js/common.js"></script>
+<script src="/js/places.js"></script>
+<script src="/js/petition.js"></script>
+<script src="/js/pdfdoc.js"></script>
+<script src="/js/docxdoc.js"></script>
+<script src="/js/postage.js"></script>
+<script src="/js/report.js"></script>
+<script src="/js/app.js"></script>
+<script src="/themes/kodomo/letter.js"></script>
+<script src="/js/ai-launch.js"></script>
+<script src="/js/send-figs.js"></script>
+<script src="/themes/kodomo/shop.js"></script>
+<script src="/js/shop.js"></script>
+<script src="/js/common-actions.js"></script>
+</body>
+</html>

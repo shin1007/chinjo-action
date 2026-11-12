@@ -1,0 +1,733 @@
+{
+  "schemaVersion": 1,
+  "description": "証拠として保存したページの一覧。本文は sources/archive/ にあり Git には入れていない。",
+  "pages": [
+    {
+      "url": "https://www.j-cast.com/2020/09/23395016.html?p=all",
+      "title": "J-CASTニュース「番組内のグラフに『印象操作』 SNS物議で福島テレビが謝罪『体制の不備でした』」（2020年9月23日）",
+      "note": "福島テレビ『テレポートプラス』2020年9月17日放送の横棒グラフ（目盛り80〜100%）",
+      "fetchedAt": "2026-11-10T01:34:10.355Z",
+      "sha256": "f4c7e8f1beeba6950eeff100f21ff0d8ae4fa68e114e98a4fdee01cda67cd822",
+      "localPath": "sources/archive/2026-11-10-f4c7e8f1beeb.html"
+    },
+    {
+      "url": "https://news.yahoo.co.jp/expert/articles/df92be8276b0dd8b58ad3647296156b9105ecf53",
+      "title": "楊井人文「日テレが内閣支持率グラフの誤りを陳謝 筆者も事実誤認の記事を一時掲載したことをお詫びします」Yahoo!ニュース エキスパート（2025年10月23日）",
+      "note": "日本テレビの内閣支持率グラフ",
+      "fetchedAt": "2026-11-10T01:34:11.255Z",
+      "sha256": "7dcf20ff5bf21b140d26ce395dc4cf937f5ec88ff9c7ac392457647709fa3964",
+      "localPath": "sources/archive/2026-11-10-7dcf20ff5bf2.html"
+    },
+    {
+      "url": "https://note.com/q_owl/n/n2d99f3aa7f80",
+      "title": "高橋将「陳情・請願のリアルな扱い方」note（2025年5月）",
+      "note": "docs/作業メモ/陳情の基本方針.md で引用",
+      "fetchedAt": "2026-11-10T01:34:11.655Z",
+      "sha256": "6ccd8cf878e14a65411743170021f1a22d26fba7e6a9df1889b5c37ef474f834",
+      "localPath": "sources/archive/2026-11-10-6ccd8cf878e1.html"
+    },
+    {
+      "url": "https://s-newscommons.com/article/2091",
+      "title": "生活ニュースコモンズ編集部「離婚後の共同親権導入で22万筆超の反対署名提出 DV被害当事者らの声を聴いて」（2024年4月25日）",
+      "note": "docs/作業メモ/陳情の基本方針.md で引用",
+      "fetchedAt": "2026-11-10T01:34:12.272Z",
+      "sha256": "6cf6fab3fa162a191cfb0e53fc3a20871a6ecaaa09751e16cf9998a2375b771a",
+      "localPath": "sources/archive/2026-11-10-6cf6fab3fa16.html"
+    },
+    {
+      "url": "https://news.ntv.co.jp/category/politics/a0d77b57b61148728007a87b55385314",
+      "title": "日テレNEWS NNN「高市内閣支持率71パーセント【NNN・読売新聞 緊急世論調査】」（2025年10月22日掲載、10月23日に訂正・お詫びを追記）",
+      "note": "末尾の【訂正・お詫び】：折れ線グラフに一部誤りがあったとだけ記載",
+      "fetchedAt": "2026-11-10T01:58:10.922Z",
+      "sha256": "0f5fe3287a1b7ceee64f31434e5a441ca17d8daa4270ddfec9a594814f399627",
+      "localPath": "sources/archive/2026-11-10-0f5fe3287a1b.html"
+    },
+    {
+      "url": "https://www.nichibenren.or.jp/document/statement/year/2024/240216.html",
+      "title": "日本弁護士連合会「家族法制の見直しに関する要綱についての会長声明」（2024年2月16日）",
+      "note": "要綱の規律を高く評価する点と、残る問題点",
+      "fetchedAt": "2026-11-10T02:53:49.734Z",
+      "sha256": "39cfd3dca34acdb2da26f3e47af3f71a2e6cf6ec500baec0e64146b79abd6beb",
+      "localPath": "sources/archive/2026-11-10-39cfd3dca34a.html"
+    },
+    {
+      "url": "https://www.nichibenren.or.jp/document/newspaper/year/2023/589.html",
+      "title": "日弁連新聞 第589号（2023年）「家族法制の見直しに関する中間試案に対する意見書」の紹介",
+      "note": "共同親権の導入について一致した意見の表明を見送った",
+      "fetchedAt": "2026-11-10T02:53:49.920Z",
+      "sha256": "2fe5e6c4523d2132efddb76e5db0fc5c6c0747f256fb76f4d5d15b6b16fa6201",
+      "localPath": "sources/archive/2026-11-10-2fe5e6c4523d.html"
+    },
+    {
+      "url": "https://studentprivacy.ed.gov/faq/case-divorce-do-both-parents-have-rights-under-ferpa",
+      "title": "米国教育省 Student Privacy Policy Office「In the case of a divorce, do both parents have rights under FERPA?」",
+      "fetchedAt": "2026-11-11T06:30:37.859Z",
+      "sha256": "95e381c41eb51aca8ac2a3a078ee239d5b4477e8192807d7f68893cc3d5b0d71",
+      "localPath": "sources/archive/2026-11-11-95e381c41eb5.html"
+    },
+    {
+      "url": "https://endhomelessness.org/wp-content/uploads/2024/10/TOHSPJ-3-53.pdf",
+      "title": "Olivet ほか「Outreach and Engagement in Homeless Services」（2010年）",
+      "fetchedAt": "2026-11-11T06:30:38.159Z",
+      "sha256": "ef130643839a1f8e65e34e9790e18098b851a525914c570320076be70bde0c24",
+      "localPath": "sources/archive/2026-11-11-ef130643839a.pdf"
+    },
+    {
+      "url": "https://scholarsarchive.byu.edu/facpub/4228",
+      "title": "Hawkins・Fackrell（2010年）BYU ScholarsArchive の書誌と要旨",
+      "fetchedAt": "2026-11-11T06:30:39.768Z",
+      "sha256": "c83faea19b5e1a976fa14e099c25c2836aed285285d17b3d14a34acab6cc7e4f",
+      "localPath": "sources/archive/2026-11-11-c83faea19b5e.html"
+    },
+    {
+      "url": "https://repository.law.umich.edu/law_econ_current/57/",
+      "title": "Starr「Estimating Gender Disparities in Federal Criminal Cases」（2012年）の書誌と要旨",
+      "fetchedAt": "2026-11-11T06:30:40.617Z",
+      "sha256": "4b5049cc30eb644d914cd485ed46308a4615ef2f2c844b4c864c105177008247",
+      "localPath": "sources/archive/2026-11-11-4b5049cc30eb.html"
+    },
+    {
+      "url": "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1119965/statistics-on-women-and-the-criminal-justice-system-2021-.pdf",
+      "title": "英国法務省「Statistics on Women and the Criminal Justice System 2021」",
+      "fetchedAt": "2026-11-11T06:30:41.478Z",
+      "sha256": "d66ba847909bf67a96c4ea79724762243eb363d36c8de474f2de726b474a9716",
+      "localPath": "sources/archive/2026-11-11-d66ba847909b.pdf"
+    },
+    {
+      "url": "https://www.gov.uk/government/publications/open-standards-for-government/data-standard-for-grant-making",
+      "title": "英国政府「Data standard for grant making」",
+      "fetchedAt": "2026-11-11T06:30:43.937Z",
+      "sha256": "3eb989d2212417266695a723cdb0a6b8836643f16e56934920779e05c091d027",
+      "localPath": "sources/archive/2026-11-11-3eb989d22124.html"
+    },
+    {
+      "url": "https://emn.ie/wp-content/uploads/2024/10/EMN_INFORM_Civic-training.pdf",
+      "title": "EMN Inform「Civic orientation courses or training」（2024年）",
+      "fetchedAt": "2026-11-11T06:30:44.223Z",
+      "sha256": "de687c589fb6ee609faa3d746f5793949aeb6f696783b2bd4733c367f19a6b0d",
+      "localPath": "sources/archive/2026-11-11-de687c589fb6.pdf"
+    },
+    {
+      "url": "https://www.pref.saitama.lg.jp/withyou/counsel/mens.html",
+      "title": "With You さいたま「男性のための相談」",
+      "fetchedAt": "2026-11-11T06:30:44.967Z",
+      "sha256": "227ac5fc80ef0a9f6774ca5a06ed4dd1b1a3ecfb7e20402faa2014b04e5921cb",
+      "localPath": "sources/archive/2026-11-11-227ac5fc80ef.html"
+    },
+    {
+      "url": "https://www.city.toyonaka.osaka.jp/joho/reiki/youkou/shiminkyoudou/youkou5.files/gaikokujinnjyuuminn.pdf",
+      "title": "豊中市「外国人住民の通称に関する届出取扱要綱」",
+      "fetchedAt": "2026-11-11T06:30:45.478Z",
+      "sha256": "62dfba93b9a975877cd499a23b20f9eae468778d6c884d1b857a79fec82dab64",
+      "localPath": "sources/archive/2026-11-11-62dfba93b9a9.pdf"
+    },
+    {
+      "url": "https://www.city.fukuoka.lg.jp/shisei/R7hojokintyoushimin.html",
+      "title": "福岡市「令和7年度補助金調書（市民局）」",
+      "fetchedAt": "2026-11-11T06:30:46.255Z",
+      "sha256": "eb3ff6e8cd83f7d8c5466f1de8a1db20679bd8c71f1cfe97c1d7eee19005fb57",
+      "localPath": "sources/archive/2026-11-11-eb3ff6e8cd83.html"
+    },
+    {
+      "url": "https://www.pref.mie.lg.jp/ZAISEI/HP/31869028214.htm",
+      "title": "三重県「補助金等に係る調書等の公表について」",
+      "fetchedAt": "2026-11-11T06:30:46.969Z",
+      "sha256": "db7d700edf486f6a89a569a2b4323b6912bc1158f466c23c851076e1a2f881dd",
+      "localPath": "sources/archive/2026-11-11-db7d700edf48.html"
+    },
+    {
+      "url": "https://www.city.chiba.jp/kankyo/junkan/shushugyomu/gomidasiitiranhyo.html",
+      "title": "千葉市「家庭ごみと資源物の出し方一覧表」",
+      "fetchedAt": "2026-11-11T06:30:48.028Z",
+      "sha256": "c69aec8448aa4dcae171ca98eb20a6c85fd5ceb1405f011e6b876437146de979",
+      "localPath": "sources/archive/2026-11-11-c69aec8448aa.html"
+    },
+    {
+      "url": "https://www.jstage.jst.go.jp/article/personality/32/3/32_32.3.7/_article/-char/ja",
+      "title": "向井ほか（2024年）J-STAGE の書誌と抄録",
+      "fetchedAt": "2026-11-11T06:30:50.029Z",
+      "sha256": "5411343e3838b93effa29fd0e96e98cbba5801421f1d825798a43cd5a828a7b1",
+      "localPath": "sources/archive/2026-11-11-5411343e3838.html"
+    },
+    {
+      "url": "https://doi.org/10.1136/bmjopen-2018-021960",
+      "title": "Huntley ほか（2019年）BMJ Open 男性DV被害者の援助希求の系統的レビュー",
+      "note": "Europe PMC の全文XML（PMC6585830）から起こした本文。BMJ Open のサイトは403",
+      "fetchedAt": "2026-11-11T06:30:56.997Z",
+      "sha256": "6a9aadf4ae486ce1c9b8472c560face5458de767632400f29e242a88ef23b98e",
+      "localPath": "sources/archive/2026-11-11-6a9aadf4ae48.md"
+    },
+    {
+      "url": "https://www.sangiin.go.jp/japanese/joho1/kousei/syuisyo/213/touh/t213226.htm",
+      "title": "参議院 答弁書（内閣参質二一三第二二六号、令和6年7月2日）",
+      "note": "DV等支援措置の期間の根拠・継続時の確認",
+      "fetchedAt": "2026-11-11T09:20:20.505Z",
+      "sha256": "b3d4e14df682fc0a976de0997924d86d10c7d42fb738512eea6ff6a4efb38cd9",
+      "localPath": "sources/archive/2026-11-11-b3d4e14df682.html"
+    },
+    {
+      "url": "https://www.sangiin.go.jp/japanese/joho1/kousei/syuisyo/213/syuh/s213226.htm",
+      "title": "参議院 質問主意書 第213回国会 質問第226号（牧山ひろえ）",
+      "fetchedAt": "2026-11-11T09:20:20.935Z",
+      "sha256": "65043d9c4ef1a47b44ae90ed9e4fb97bac22444c55c12099c7cf463d70a14444",
+      "localPath": "sources/archive/2026-11-11-65043d9c4ef1.html"
+    },
+    {
+      "url": "https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Accidents_at_work_statistics",
+      "title": "Eurostat: Accidents at work statistics",
+      "fetchedAt": "2026-11-11T09:20:22.247Z",
+      "sha256": "927135371d139feaf56a54a4db841247f9b8e0ea20b2b0e383d4b2bbcac9562e",
+      "localPath": "sources/archive/2026-11-11-927135371d13.html"
+    },
+    {
+      "url": "https://www.soumu.go.jp/main_content/000142508.pdf",
+      "title": "総務省 住民基本台帳法施行令改正案等への意見と考え方（通称関係）",
+      "fetchedAt": "2026-11-11T09:20:22.926Z",
+      "sha256": "83ce5d6ce4e2ddf63cc3395d91cb5960a99584b38818654011304cf99c282229",
+      "localPath": "sources/archive/2026-11-11-83ce5d6ce4e2.pdf"
+    },
+    {
+      "url": "https://www.mhlw.go.jp/content/12400000/001508503.pdf",
+      "title": "厚生労働省保険局保険課長通知 保保発0524第1号（令和5年5月24日）",
+      "fetchedAt": "2026-11-11T09:35:58.842Z",
+      "sha256": "17bab37b59432e818c35d5bdedc2afcc7634e4913100a11212a1f5d0bac2383e",
+      "localPath": "sources/archive/2026-11-11-17bab37b5943.pdf"
+    },
+    {
+      "url": "https://www.mhlw.go.jp/content/001684937.pdf",
+      "title": "厚生労働省社会・援護局「生活保護における外国人の取扱いについて」",
+      "fetchedAt": "2026-11-11T09:35:59.058Z",
+      "sha256": "a49a06977260922da7a640954eba3869c7b77287d00547b33d3797cc9541f9cc",
+      "localPath": "sources/archive/2026-11-11-a49a06977260.pdf"
+    },
+    {
+      "url": "https://www.gender.go.jp/policy/no_violence/e-vaw/chousa/pdf/r05/r05danjokan-4.pdf",
+      "title": "内閣府「男女間における暴力に関する調査（令和5年度）」報告書 r05danjokan-4",
+      "fetchedAt": "2026-11-11T09:35:59.380Z",
+      "sha256": "8b1df60a0947c8377e35ee058df64f60fd113b8eeb17675fd7f6a210fb477530",
+      "localPath": "sources/archive/2026-11-11-8b1df60a0947.pdf"
+    },
+    {
+      "url": "https://www.mhlw.go.jp/content/000550455.pdf",
+      "title": "喫煙の健康影響に関する検討会「喫煙と健康」報告書（平成28年8月）",
+      "fetchedAt": "2026-11-11T09:36:42.088Z",
+      "sha256": "974a13e568d214fd4742035c8b362ffe96706e21a38274ff5b3f2abd4ce10147",
+      "localPath": "sources/archive/2026-11-11-974a13e568d2.pdf"
+    },
+    {
+      "url": "https://www.mhlw.go.jp/toukei/saikin/hw/c-hoken/24/dl/R06gaikyo.pdf",
+      "title": "厚生労働省「令和6年度 地域保健・健康増進事業報告の概況」",
+      "fetchedAt": "2026-11-11T09:36:42.284Z",
+      "sha256": "2cf5580d49568553b2bd15d8d6501a8f5f63e1c325c58fe873e3b06c5aba1f93",
+      "localPath": "sources/archive/2026-11-11-2cf5580d4956.pdf"
+    },
+    {
+      "url": "https://www.moj.go.jp/isa/content/930004165.pdf",
+      "title": "法務省 技能実習制度の運用に関するプロジェクトチーム「調査・検討結果報告書」（平成31年3月28日）",
+      "note": "WebFetch で取得（curl は CloudFront 403）",
+      "fetchedAt": "2026-11-11T09:41:01.508Z",
+      "sha256": "5ee3a6d17ad0e1c7325c51a7e591dea3e54507eaa25e926ea4380e0eff368266",
+      "localPath": "sources/archive/2026-11-11-5ee3a6d17ad0.pdf"
+    },
+    {
+      "url": "https://www.moj.go.jp/content/001346918.pdf",
+      "title": "商事法務研究会「未成年期に父母の離婚を経験した子の養育に関する実態についての調査・分析業務報告書」（法務省委託、令和3年1月）",
+      "note": "WebFetch で取得（curl は CloudFront 403）",
+      "fetchedAt": "2026-11-11T09:41:01.615Z",
+      "sha256": "3ddd904c9d6b2aee340b57d15a1edf82cd1de0a9b0db86afea3c056d4c189837",
+      "localPath": "sources/archive/2026-11-11-3ddd904c9d6b.pdf"
+    },
+    {
+      "url": "https://www.pref.saitama.lg.jp/b0102/nanbukenmin/kisei.html",
+      "title": "埼玉県「有害図書・深夜外出の規制等」",
+      "fetchedAt": "2026-11-11T09:44:12.787Z",
+      "sha256": "b8c05d03bc013011af69a5deb2efa6e04733d7ce897cd33f6d65c1ffd20a0dac",
+      "localPath": "sources/archive/2026-11-11-b8c05d03bc01.html"
+    },
+    {
+      "url": "https://www.pref.wakayama.lg.jp/prefg/020300/kids/graph.html",
+      "title": "和歌山県調査統計課「統計グラフを作ってみよう」",
+      "fetchedAt": "2026-11-11T09:44:13.083Z",
+      "sha256": "16eb08a4f9b61b03ccc16d2b2751543a48281d8640857d293c789951df9f4d54",
+      "localPath": "sources/archive/2026-11-11-16eb08a4f9b6.html"
+    },
+    {
+      "url": "https://mhlw-grants.niph.go.jp/system/files/report_pdf/202207001B-sogou.pdf",
+      "title": "竹原健二ほか「わが国における父親の子育て支援を推進するための科学的根拠の提示と支援プログラムの提案に関する研究」総合研究報告書（令和2～4年度厚労科研）",
+      "fetchedAt": "2026-11-11T09:44:13.330Z",
+      "sha256": "ce8b6b9e2c306262717932967bed9524605bfa2ccb914d157d3f943ad8f3921f",
+      "localPath": "sources/archive/2026-11-11-ce8b6b9e2c30.pdf"
+    },
+    {
+      "url": "https://www.pref.osaka.lg.jp/documents/105336/20251008.pdf",
+      "title": "文部科学省私学行政課 事務連絡「民法等の一部を改正する法律に係るＱ＆Ａ形式の解説資料の周知等について（依頼）」（令和7年10月8日）",
+      "note": "大阪府のサイトに掲載された写し",
+      "fetchedAt": "2026-11-11T09:46:21.908Z",
+      "sha256": "bc6ff3d1ba8931aa8649e80077f7e19db5f2ad7e6492909624cc137d8d08e610",
+      "localPath": "sources/archive/2026-11-11-bc6ff3d1ba89.pdf"
+    },
+    {
+      "url": "https://www.gender.go.jp/about_danjo/basic_plans/6th/pdf/print.pdf",
+      "title": "内閣府「第6次男女共同参画基本計画」（令和8年3月13日閣議決定）本文",
+      "fetchedAt": "2026-11-11T09:46:32.308Z",
+      "sha256": "5e9fdbbf384593154c50dc0c3198ddffd032f0fa69fe47aa257deb6d3c93361f",
+      "localPath": "sources/archive/2026-11-11-5e9fdbbf3845.pdf"
+    },
+    {
+      "url": "https://www.cao.go.jp/zei-cho/content/20140709_26dis35kai11_1.pdf",
+      "title": "税制調査会 法人課税DG 増田寛也委員「公益法人等に対する課税のあり方に関する意見」（平成26年5月9日）",
+      "fetchedAt": "2026-11-11T10:30:51.192Z",
+      "sha256": "62383f4239c687ad3a02b566e03dfb72cd511bf69a83d8513c1d82516ecd9240",
+      "localPath": "sources/archive/2026-11-11-62383f4239c6.pdf"
+    },
+    {
+      "url": "https://files.parliament.nsw.gov.au/fileapi/ParlFiles/GetArtifact/AGO_GSF_E%20Judicial%20Commission%20Annual%20Information%20Statement%2024-25.pdf?serverRelativeUrl=%2Ftp%2Ffiles%2F192189%2FAGO_GSF_E+Judicial+Commission+Annual+Information+Statement+24-25.pdf",
+      "title": "Judicial Commission of NSW Annual Information Statement 2024-25",
+      "fetchedAt": "2026-11-11T11:01:25.697Z",
+      "sha256": "caacdb0d4bf403a3cbbdd6831e5bc0f689072f454d08ed5822aa868756f0414a",
+      "localPath": "sources/archive/2026-11-11-caacdb0d4bf4.pdf"
+    },
+    {
+      "url": "https://sukoyaka21.cfa.go.jp/media/tools/s04_nyu_manyu033.pdf",
+      "title": "1か月児健康診査マニュアル（令和6年度こども家庭科学研究費補助金 研究代表者 永光信一郎）",
+      "fetchedAt": "2026-11-11T11:04:43.170Z",
+      "sha256": "5d59b8436864e038bd714d5ea47524e70a424e0ab745baaf551bdbae1420216e",
+      "localPath": "sources/archive/2026-11-11-5d59b8436864.pdf"
+    },
+    {
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=PMCID:PMC2902195&resultType=core&format=json",
+      "title": "Stanley ほか (2010) Decreasing Divorce in Army Couples（Europe PMC の書誌・要旨）",
+      "fetchedAt": "2026-11-11T11:04:56.853Z",
+      "sha256": "ef205e716c8dc06da1665dccb34540b5c94bfe1204bff9f25b99f42537076c19",
+      "localPath": "sources/archive/2026-11-11-ef205e716c8d.json"
+    },
+    {
+      "url": "https://scholarsarchive.byu.edu/facpub/5112",
+      "title": "Doherty, Willoughby & Peterson (2011) Interest in Marital Reconciliation Among Divorcing Parents（BYU ScholarsArchive）",
+      "fetchedAt": "2026-11-11T11:07:26.104Z",
+      "sha256": "b72ff10baeed621b9109161755f4a910391fc7e8ef62246e8f5a86deac2aec06",
+      "localPath": "sources/archive/2026-11-11-b72ff10baeed.html"
+    },
+    {
+      "url": "https://www.legislation.gov.uk/ukpga/1990/41/section/58A",
+      "title": "Courts and Legal Services Act 1990 s.58A（英国）",
+      "fetchedAt": "2026-11-11T11:07:28.608Z",
+      "sha256": "ae1fcd61c781ed2e73e253a5c10d866749de974b86bddf4c63432213be94818c",
+      "localPath": "sources/archive/2026-11-11-ae1fcd61c781.html"
+    },
+    {
+      "url": "https://www.legislation.gov.uk/ukpga/2010/15/section/149",
+      "title": "Equality Act 2010 s.149 Public sector equality duty（英国）",
+      "fetchedAt": "2026-11-11T11:07:33.657Z",
+      "sha256": "8583416a21eb7678909cff7dc3a2c4ff934cfb20bef6419ce4ce157e2e7fc2af",
+      "localPath": "sources/archive/2026-11-11-8583416a21eb.html"
+    },
+    {
+      "url": "https://www.gov.uk/government/publications/freedom-from-violence-and-abuse-a-cross-government-strategy/freedom-from-violence-and-abuse-men-and-boys-explanatory-note-accessible",
+      "title": "UK Government「Freedom from violence and abuse: men and boys explanatory note」（2025年12月）",
+      "fetchedAt": "2026-11-11T11:08:41.507Z",
+      "sha256": "b117cb5e4702b95a544ac07b52ad606588dd90f067a7d671d92db2f2c5507952",
+      "localPath": "sources/archive/2026-11-11-b117cb5e4702.html"
+    },
+    {
+      "url": "https://www5.cao.go.jp/keizai-shimon/kaigi/cabinet/honebuto/2025/2025_basicpolicies_ja.pdf",
+      "title": "経済財政運営と改革の基本方針2025（令和7年6月13日閣議決定）",
+      "fetchedAt": "2026-11-11T12:01:01.017Z",
+      "sha256": "a7cd4a1bb6852a1d637999be525f990998a84f123a643b442d45e6dbaf82cdf4",
+      "localPath": "sources/archive/2026-11-11-a7cd4a1bb685.pdf"
+    },
+    {
+      "url": "https://www.mhlw.go.jp/content/001757541.pdf",
+      "title": "厚生労働省女性支援室「困難な問題を抱える女性への支援について」（令和8年4月）",
+      "fetchedAt": "2026-11-11T12:01:02.834Z",
+      "sha256": "6b139e610a09fe3c492984269526feb038c26e9c03c7ded05b97847644474ca8",
+      "localPath": "sources/archive/2026-11-11-6b139e610a09.pdf"
+    },
+    {
+      "url": "https://www.complaints.judicialconduct.gov.uk/JCIOAnnualReport2025-2026",
+      "title": "Judicial Conduct Investigations Office Annual Report 2025-26",
+      "note": "苦情3,910件・懲戒95件",
+      "fetchedAt": "2026-11-11T13:31:37.345Z",
+      "sha256": "df705625a368a282febfba1f2589e93a64b69340410edf63c407472ae6272c30",
+      "localPath": "sources/archive/2026-11-11-df705625a368.pdf"
+    },
+    {
+      "url": "https://www.bls.gov/iif/fatal-injuries-tables/fatal-occupational-injuries-table-a-7-2024.htm",
+      "title": "米国労働統計局 Table A-7 Fatal occupational injuries by worker characteristics and event or exposure, 2024",
+      "note": "Chromeで保存。死亡5,070人、男性4,657人、女性413人",
+      "fetchedAt": "2026-11-11T13:38:00.018Z",
+      "sha256": "c3b85acf2a7ab89e8f84d31b113c275efc753aba2971a050f8eb5c4b127c7b1d",
+      "localPath": "sources/archive/2026-11-11-c3b85acf2a7a.html"
+    },
+    {
+      "url": "https://www.bls.gov/news.release/cfoi.nr0.htm",
+      "title": "米国労働統計局 Census of Fatal Occupational Injuries Summary, 2024",
+      "note": "Chromeで保存",
+      "fetchedAt": "2026-11-11T13:38:00.102Z",
+      "sha256": "baf219fd0f7b6f791e8ce08015988c49d80374d110b2ddab139821b88e61b6e8",
+      "localPath": "sources/archive/2026-11-11-baf219fd0f7b.html"
+    },
+    {
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32010L0064",
+      "title": "EU指令 2010/64/EU（刑事手続での通訳・翻訳の権利）PDF",
+      "note": "Chromeで保存",
+      "fetchedAt": "2026-11-11T13:38:00.185Z",
+      "sha256": "694bc1cc0ee4d8902833b4c5b5ac8031e4fcacd5e51172bce895cca94fa4272d",
+      "localPath": "sources/archive/2026-11-11-694bc1cc0ee4.pdf"
+    },
+    {
+      "url": "https://eur-lex.europa.eu/eli/dir/2010/64/oj",
+      "title": "EU指令 2010/64/EU（官報 L 280 の本文 HTML）",
+      "note": "Chromeで保存",
+      "fetchedAt": "2026-11-11T13:38:00.268Z",
+      "sha256": "0476e1184154487749fd4ab8ed83e2c08f044199942f8b17647ca9386133d170",
+      "localPath": "sources/archive/2026-11-11-0476e1184154.html"
+    },
+    {
+      "url": "https://www.gao.gov/assets/d24106237.pdf",
+      "title": "米国会計検査院 GAO-24-106237 Federal Spending Transparency（2023年11月）",
+      "note": "Chromeで保存",
+      "fetchedAt": "2026-11-11T13:38:00.367Z",
+      "sha256": "984fab5c6331a00f91f66168d0534a302abe75bbb5425d79ae04e42cb6b9aad4",
+      "localPath": "sources/archive/2026-11-11-984fab5c6331.pdf"
+    },
+    {
+      "url": "https://bmchealthservres.biomedcentral.com/counter/pdf/10.1186/s12913-020-05931-x.pdf",
+      "title": "Huntley ほか（2020）Help seeking by male victims of domestic violence and abuse, BMC Health Services Research 20:1085",
+      "note": "Chromeで保存",
+      "fetchedAt": "2026-11-11T13:38:00.456Z",
+      "sha256": "c01d3bedb950eea5aff08af9486c53ac92d079c2fb4092dcb51f9f7f7185bd8a",
+      "localPath": "sources/archive/2026-11-11-c01d3bedb950.pdf"
+    },
+    {
+      "url": "https://aifs.gov.au/all-research/research-reports/evaluation-2006-family-law-reforms-summary-report",
+      "title": "豪州家族問題研究所 Evaluation of the 2006 family law reforms: Summary report（ページ）",
+      "note": "Chromeで保存",
+      "fetchedAt": "2026-11-11T13:38:00.535Z",
+      "sha256": "8ff38050c6373e97a9f819a607d0ecf64802908c97661882cc0b7db2c0fc98d9",
+      "localPath": "sources/archive/2026-11-11-8ff38050c637.html"
+    },
+    {
+      "url": "https://aifs.gov.au/all-research/research-reports/evaluation-2006-family-law-reforms-summary-report#pdf",
+      "title": "豪州家族問題研究所 Evaluation of the 2006 family law reforms: Summary report（PDF）",
+      "note": "Chromeで保存（summaryreport_0_0.pdf）",
+      "fetchedAt": "2026-11-11T13:38:00.618Z",
+      "sha256": "448c3273f6a3cf8785a280a7d7447a0b6316a73da8b3ac9c4e9ec147ec24fa97",
+      "localPath": "sources/archive/2026-11-11-448c3273f6a3.pdf"
+    },
+    {
+      "url": "https://www.soumu.go.jp/main_content/000757997.pdf",
+      "title": "総務省自治行政局「住基ネットと世帯情報等との関係について」資料2（令和3年6月30日）",
+      "note": "7〜8ページにDV等支援措置の緊急事案報告（H28〜R2、漏えい51件）と原因",
+      "fetchedAt": "2026-11-11T13:40:36.444Z",
+      "sha256": "6e7faeec87e7a5fcf6d357c95997f4bcd7456ad653e7ea31a94919599c87c895",
+      "localPath": "sources/archive/2026-11-11-6e7faeec87e7.pdf"
+    },
+    {
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=PMCID:PMC4237282&resultType=core&format=json",
+      "title": "Stanley ほか（2014）Family Relations 63(4) 2年後の追跡 要旨（Europe PMC）",
+      "note": "全文 API は500、Wiley は403",
+      "fetchedAt": "2026-11-11T13:41:13.436Z",
+      "sha256": "c1b3babf06e362b7c99f613afb54099f0ed1eee5ebebf1c9b01c3701159d5118",
+      "localPath": "sources/archive/2026-11-11-c1b3babf06e3.bin"
+    },
+    {
+      "url": "https://www.toukei.metro.tokyo.lg.jp/kurasi/2026/2026pdf/ku26rfmi01.pdf",
+      "title": "東京都総務局統計部「くらしと統計2026」",
+      "note": "Chromeで保存。28ページ「統計グラフの見方」",
+      "fetchedAt": "2026-11-11T13:50:17.435Z",
+      "sha256": "ba95b8b8df6f3878a0b245a299d74dd4941c811da04ea15db6b48e4039dd866c",
+      "localPath": "sources/archive/2026-11-11-ba95b8b8df6f.pdf"
+    },
+    {
+      "url": "https://www.kanaloco.jp/news/social/article-1317692.html",
+      "title": "神奈川新聞（共同通信）2026-11-03 被害者情報100件超が漏えい",
+      "note": "Chromeで保存",
+      "fetchedAt": "2026-11-11T13:50:17.521Z",
+      "sha256": "046fb57d09b2328d4297dff68d63ebf2e450ce12db5920e2842e680a2be088fa",
+      "localPath": "sources/archive/2026-11-11-046fb57d09b2.html"
+    },
+    {
+      "url": "https://www.daily.co.jp/society/national/2026/11/03/0020997289.shtml",
+      "title": "デイリースポーツ（共同通信）2026-11-03 被害者情報100件超が漏えい",
+      "note": "Chromeで保存",
+      "fetchedAt": "2026-11-11T13:50:17.637Z",
+      "sha256": "a0270fff9f62945aa5df40523984ef61a96627b43df6262130ff776b3f4aaa56",
+      "localPath": "sources/archive/2026-11-11-a0270fff9f62.html"
+    },
+    {
+      "url": "https://www.courts.go.jp/saikosai/vc-files/saikosai/toukei/toukei-pdf-16677.pdf",
+      "title": "最高裁判所事務総局「令和7年 司法統計年報 3 家事編」",
+      "note": "Chromeで保存。34ページ第15表",
+      "fetchedAt": "2026-11-11T13:51:36.498Z",
+      "sha256": "d3606d0140ce6ea93b7213b915bf141baa322181d9abbcc1540b6cdfd6c7bcaa",
+      "localPath": "sources/archive/2026-11-11-d3606d0140ce.pdf"
+    },
+    {
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=PMCID:PMC6161830&resultType=core&format=json",
+      "title": "Europe PMC 要旨 PMC6161830",
+      "note": "査読論文の要旨（書誌情報つき）",
+      "fetchedAt": "2026-11-11T13:58:54.656Z",
+      "sha256": "61425cf12c65403f1cfdb1042ecd7e741ed524278afee6984e46a6d7e913d440",
+      "localPath": "sources/archive/2026-11-11-61425cf12c65.bin"
+    },
+    {
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=PMCID:PMC8229623&resultType=core&format=json",
+      "title": "Europe PMC 要旨 PMC8229623",
+      "note": "査読論文の要旨（書誌情報つき）",
+      "fetchedAt": "2026-11-11T13:58:56.078Z",
+      "sha256": "32b9e5e82c05b550e18190b9810fe9d831327315fa815126c075e6a4e7855319",
+      "localPath": "sources/archive/2026-11-11-32b9e5e82c05.bin"
+    },
+    {
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=PMCID:PMC6642686&resultType=core&format=json",
+      "title": "Europe PMC 要旨 PMC6642686",
+      "note": "査読論文の要旨（書誌情報つき）",
+      "fetchedAt": "2026-11-11T13:59:06.355Z",
+      "sha256": "14ceac9ae132b165f6317267a201ba94385921c13c4f7c33568ed9ba913c9244",
+      "localPath": "sources/archive/2026-11-11-14ceac9ae132.bin"
+    },
+    {
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=PMCID:PMC8055044&resultType=core&format=json",
+      "title": "Europe PMC 要旨 PMC8055044",
+      "note": "査読論文の要旨（書誌情報つき）",
+      "fetchedAt": "2026-11-11T13:59:07.873Z",
+      "sha256": "68d90979e9f96a2377b8e6843c6de695f2f9512d02716568d506470286211e20",
+      "localPath": "sources/archive/2026-11-11-68d90979e9f9.bin"
+    },
+    {
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=PMCID:PMC9298911&resultType=core&format=json",
+      "title": "Europe PMC 要旨 PMC9298911",
+      "note": "査読論文の要旨（書誌情報つき）",
+      "fetchedAt": "2026-11-11T13:59:08.952Z",
+      "sha256": "29ceceae443fc34b69a5d515c7ddad14cd4141a7317f3087acd5d0e5d51de828",
+      "localPath": "sources/archive/2026-11-11-29ceceae443f.bin"
+    },
+    {
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=6161830&rettype=xml",
+      "title": "PMC6161830 全文（PMC の XML）",
+      "note": "査読論文の本文",
+      "fetchedAt": "2026-11-11T14:02:29.140Z",
+      "sha256": "77888e1a040f694edfba002e35cc943efb9f6d25fe1e61f410de9e09c38af315",
+      "localPath": "sources/archive/2026-11-11-77888e1a040f.bin"
+    },
+    {
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=8229623&rettype=xml",
+      "title": "PMC8229623 全文（PMC の XML）",
+      "note": "査読論文の本文",
+      "fetchedAt": "2026-11-11T14:02:29.796Z",
+      "sha256": "dc62118be9cf4c993367e76f7c4b8e99d3ea6a15551628291303692081f30753",
+      "localPath": "sources/archive/2026-11-11-dc62118be9cf.bin"
+    },
+    {
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=6642686&rettype=xml",
+      "title": "PMC6642686 全文（PMC の XML）",
+      "note": "査読論文の本文",
+      "fetchedAt": "2026-11-11T14:02:30.537Z",
+      "sha256": "86015096d2e8145c3d1b624fed5b29df8ef74674a0f853ad2cb9fd529857c3f6",
+      "localPath": "sources/archive/2026-11-11-86015096d2e8.bin"
+    },
+    {
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=8055044&rettype=xml",
+      "title": "PMC8055044 全文（PMC の XML）",
+      "note": "査読論文の本文",
+      "fetchedAt": "2026-11-11T14:02:31.234Z",
+      "sha256": "4bdb61cff40e837f7ef8f07e21fa01c32c4d15a447c85ff30f03efd3c3a7db2c",
+      "localPath": "sources/archive/2026-11-11-4bdb61cff40e.bin"
+    },
+    {
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=9298911&rettype=xml",
+      "title": "PMC9298911 全文（PMC の XML）",
+      "note": "査読論文の本文",
+      "fetchedAt": "2026-11-11T14:02:32.002Z",
+      "sha256": "0448deffa19cd86ceaa01b152ecf99948c6df9e29253bafafabed0e48d5ee6d9",
+      "localPath": "sources/archive/2026-11-11-0448deffa19c.bin"
+    },
+    {
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=11427659&rettype=xml",
+      "title": "PMC11427659 全文（PMC の XML）",
+      "note": "査読論文",
+      "fetchedAt": "2026-11-11T14:05:25.190Z",
+      "sha256": "ac94165fd238eb363d77b4b63f5b9a9c4971bb0eeeaa1d5c881e03ef55d1b5a4",
+      "localPath": "sources/archive/2026-11-11-ac94165fd238.bin"
+    },
+    {
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=8928410&rettype=xml",
+      "title": "PMC8928410 全文（PMC の XML）",
+      "note": "査読論文",
+      "fetchedAt": "2026-11-11T14:05:26.172Z",
+      "sha256": "ecee25b570e0b1d2348b4c3608580584ec0969f68b5b86b8a6d898a7ee00f349",
+      "localPath": "sources/archive/2026-11-11-ecee25b570e0.bin"
+    },
+    {
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=13079862&rettype=xml",
+      "title": "PMC13079862 全文（PMC の XML）",
+      "note": "査読論文",
+      "fetchedAt": "2026-11-11T14:05:27.255Z",
+      "sha256": "cff3712ae44899ae49f6475ca94eeccabfd82fc3045c4829f7c9739d27c38363",
+      "localPath": "sources/archive/2026-11-11-cff3712ae448.bin"
+    },
+    {
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=3250639&rettype=xml",
+      "title": "PMC3250639 全文（PMC の XML）",
+      "note": "査読論文",
+      "fetchedAt": "2026-11-11T14:05:27.760Z",
+      "sha256": "cb0d26425fe895fd014462dd3ca2a9b56a4f6c44d562475b2cffabd94c8c0a96",
+      "localPath": "sources/archive/2026-11-11-cb0d26425fe8.bin"
+    },
+    {
+      "url": "https://www.jstage.jst.go.jp/article/its/24/0/24_2404/_article/-char/ja/",
+      "title": "田村智子「権力関係を乗り越えた法廷通訳の専門職化」通訳翻訳研究 No.24（2024）",
+      "note": "PDF",
+      "fetchedAt": "2026-11-11T14:44:35.636Z",
+      "sha256": "9d56585663d7ffd4fa5673f6c5e36fbd1bf8ff0706ef22be152db2d937512529",
+      "localPath": "sources/archive/2026-11-11-9d56585663d7.pdf"
+    },
+    {
+      "url": "https://www.jstage.jst.go.jp/article/citizenshipeducation/4/0/4_13/_article/-char/ja/",
+      "title": "野嵜雄太「学校の教職員に求められる宗教的配慮と子どもへの教育」シティズンシップ教育研究 第4号（2024）",
+      "note": "PDF",
+      "fetchedAt": "2026-11-11T14:44:35.719Z",
+      "sha256": "2ca3196921f07dd1781962867823b5b641d8001b5fc5d65db4d8bfb46756cac5",
+      "localPath": "sources/archive/2026-11-11-2ca3196921f0.pdf"
+    },
+    {
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=8037417&rettype=xml",
+      "title": "PMC8037417 全文（PMC の XML）",
+      "note": "査読論文",
+      "fetchedAt": "2026-11-11T14:54:49.758Z",
+      "sha256": "fc4768e9abc00ad9ec24d69e327a94f033b0bd421d2272c0a107bd8eb6dea1a8",
+      "localPath": "sources/archive/2026-11-11-fc4768e9abc0.bin"
+    },
+    {
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=13053199&rettype=xml",
+      "title": "PMC13053199 全文（PMC の XML）",
+      "note": "査読論文",
+      "fetchedAt": "2026-11-11T14:54:50.339Z",
+      "sha256": "6750d2ddfd21082e0ddf381b867aadfaa36f8f75a9420b7f0d5e4d9822af2e14",
+      "localPath": "sources/archive/2026-11-11-6750d2ddfd21.bin"
+    },
+    {
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=12397989&rettype=xml",
+      "title": "PMC12397989 全文（PMC の XML）",
+      "note": "査読論文",
+      "fetchedAt": "2026-11-11T14:54:51.079Z",
+      "sha256": "dbdf0d6ad847d422e48c83f90caee20dd7bc81dcae5afc85dceb02e4dc446fae",
+      "localPath": "sources/archive/2026-11-11-dbdf0d6ad847.bin"
+    },
+    {
+      "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&id=12885246&rettype=xml",
+      "title": "PMC12885246 全文（PMC の XML）",
+      "note": "査読論文",
+      "fetchedAt": "2026-11-11T14:54:51.821Z",
+      "sha256": "9c5be3dc46bd6d34dac4d5c8c6d7061a7d7f0fb96d90176775fffa53e1091501",
+      "localPath": "sources/archive/2026-11-11-9c5be3dc46bd.bin"
+    },
+    {
+      "url": "https://www.cao.go.jp/zei-cho/shimon/26zen10kai7.pdf",
+      "title": "税制調査会「法人税の改革について」（2014年6月）",
+      "note": "8〜9ページ（7）公益法人課税等の見直し",
+      "fetchedAt": "2026-11-11T14:56:13.798Z",
+      "sha256": "3fd45ea9489cc0af2e81b8b73fac769a4bba0dafed960722ba31bcbec9cf0668",
+      "localPath": "sources/archive/2026-11-11-3fd45ea9489c.pdf"
+    },
+    {
+      "url": "https://www.jstage.jst.go.jp/article/jjoffamilysociology/29/1/29_49/_article/-char/ja/",
+      "title": "原田綾子「家族関係の再編成の観点から見た家事調停の現状と課題」家族社会学研究 29(1)（2017）",
+      "note": "PDF",
+      "fetchedAt": "2026-11-11T14:58:21.748Z",
+      "sha256": "ecaca6fbdc3ffd9a622f0e6c777057445f5e4735447a7dbb2e81757d22c13eeb",
+      "localPath": "sources/archive/2026-11-11-ecaca6fbdc3f.pdf"
+    },
+    {
+      "url": "https://data.parliament.uk/DepositedPapers/Files/DEP2026-0024/JCIO_Annual_Report_2024-25.pdf",
+      "title": "英国 Judicial Conduct Investigations Office Annual Report 2024-25",
+      "fetchedAt": "2026-11-11T14:58:21.843Z",
+      "sha256": "e4a07fb185d32a4a0b0355155e648d2d11b11143b12100e8f527681649b42b1b",
+      "localPath": "sources/archive/2026-11-11-e4a07fb185d3.pdf"
+    },
+    {
+      "url": "https://www.jstage.jst.go.jp/article/jjdp/30/2/30_86/_article/-char/ja/",
+      "title": "直原康光・安藤智子「別居・離婚後の子どもが体験する父母葛藤や父母協力の探索的検討」発達心理学研究 30(2)（2019）",
+      "note": "PDF",
+      "fetchedAt": "2026-11-11T14:59:30.257Z",
+      "sha256": "6daa4e427e6d6cea0e2b6b467941cd053d711d676331406699c83c00214420ea",
+      "localPath": "sources/archive/2026-11-11-6daa4e427e6d.pdf"
+    },
+    {
+      "url": "https://treaties.un.org/doc/Publication/UNTS/Volume%20999/volume-999-I-14668-English.pdf",
+      "title": "国連条約集（UNTS）市民的及び政治的権利に関する国際規約 英語正文",
+      "fetchedAt": "2026-11-11T15:06:08.783Z",
+      "sha256": "65294d97ba26f09761ecc70a07c27d0c288dde1a7fd38f2f0182dfcf62207ab5",
+      "localPath": "sources/archive/2026-11-11-65294d97ba26.pdf"
+    },
+    {
+      "url": "https://treaties.un.org/doc/Publication/UNTS/Volume%201249/volume-1249-I-20378-English.pdf",
+      "title": "国連条約集（UNTS）女子差別撤廃条約 英語正文",
+      "fetchedAt": "2026-11-11T15:06:08.869Z",
+      "sha256": "f4cdf8c71d341f91dfcce962c7f3ffda14ebd3e5180d35ff2d37535873a9dffa",
+      "localPath": "sources/archive/2026-11-11-f4cdf8c71d34.pdf"
+    },
+    {
+      "url": "https://treaties.un.org/doc/Publication/UNTS/Volume%20660/volume-660-I-9464-English.pdf",
+      "title": "国連条約集（UNTS）人種差別撤廃条約 英語正文",
+      "fetchedAt": "2026-11-11T15:06:08.952Z",
+      "sha256": "d27c6239c764f138c68521a4ea0c56c40e834219ffd30ac2bcb0bdeef63290e6",
+      "localPath": "sources/archive/2026-11-11-d27c6239c764.pdf"
+    },
+    {
+      "url": "https://www.unicef.or.jp/about_unicef/about_rig_all.html",
+      "title": "日本ユニセフ協会 掲載「児童の権利に関する条約」政府訳",
+      "note": "外務省のページは自動取得で403",
+      "fetchedAt": "2026-11-11T15:06:09.352Z",
+      "sha256": "df45233123f37f7802d4f5c31452007c32fa70b08c87c1bde925afaee822847b",
+      "localPath": "sources/archive/2026-11-11-df45233123f3.html"
+    },
+    {
+      "url": "https://www.aaa.com/AAA/common/AAR/files/Headlamp-Lens-Deterioration.pdf",
+      "title": "AAA Headlamp Lens Deterioration (2018)",
+      "fetchedAt": "2026-11-12T00:47:32.078Z",
+      "sha256": "c29ddc37affbda38d27869652c2cb3234355cd231e83bfd69b3ce2fe09bcb891",
+      "localPath": "sources/archive/2026-11-12-c29ddc37affb.pdf"
+    },
+    {
+      "url": "https://www.courts.go.jp/saikosai/vc-files/saikosai/toukei/toukei-pdf-16693.pdf",
+      "title": "最高裁判所事務総局「令和6年 司法統計年報 3 家事編」",
+      "note": "令和8年9月17日更新版。司法統計年報の一覧（令和6年 家事編）の更新版のリンク先がこの URL。旧URL app/files/toukei/787/012787.pdf は Page Not Found",
+      "fetchedAt": "2026-11-12T06:21:16.678Z",
+      "sha256": "8fe504f1c6f348c61aa6def18fcae3669da6386f03ed36327b7ec2010226de08",
+      "localPath": "sources/archive/2026-11-12-8fe504f1c6f3.pdf"
+    },
+    {
+      "url": "https://www.courts.go.jp/saikosai/vc-files/saikosai/toukei/toukei-excel-16693.xlsx",
+      "title": "最高裁判所事務総局「令和6年 司法統計年報 3 家事編」（Excel版）",
+      "note": "令和8年9月17日更新版の一覧ページに PDF（toukei-pdf-16693.pdf）と並んで掲載",
+      "fetchedAt": "2026-11-12T06:22:50.505Z",
+      "sha256": "a0fff1e1bf11cee6486d9bdf1a18e6fe9721ce8b56f3d828aa3267d3547619cf",
+      "localPath": "sources/archive/2026-11-12-a0fff1e1bf11.bin"
+    },
+    {
+      "url": "https://pbs.twimg.com/media/Eib0ggyU4AEXFzz.jpg?name=orig",
+      "title": "福島テレビ（福テレ空ネット @ftv_tenki）「テレポートプラスよりご報告とお詫び」（2020年9月21日の X の投稿 https://x.com/ftv_tenki/status/1308001585885097985 の画像）",
+      "note": "9月17日放送のグラフが0%でなく80%から始まり誤解を招いたとして謝罪。大阪大学 三浦教授の調査、日本で『本人のせいだと思う』15.25%",
+      "fetchedAt": "2026-11-12T06:33:50.119Z",
+      "sha256": "228105423286e0af8b4fd4e4d1c3e6a624b77fc6e8a785774eb869b571e69733",
+      "localPath": "sources/archive/2026-11-12-228105423286.bin"
+    },
+    {
+      "url": "https://news.ntv.co.jp/info/75bc1a6375fe48ae9e65910b33adfb4b",
+      "title": "日本テレビ「お知らせ」内閣支持率のグラフの訂正とおわび（2025年10月23日）",
+      "fetchedAt": "2026-11-12T06:33:50.682Z",
+      "sha256": "8e895c093c58d9276bdf838328ea814164d097eca7fb1c56e06273ce32a15e9b",
+      "localPath": "sources/archive/2026-11-12-8e895c093c58.html"
+    },
+    {
+      "url": "https://x.com/ftv_tenki/status/1308001585885097985",
+      "title": "福島テレビ（福テレ空ネット @ftv_tenki）の X の投稿（2020年9月21日）",
+      "note": "投稿の本文と画像の URL（X の syndication の JSON）。画像そのものは pbs.twimg.com/media/Eib0ggyU4AEXFzz.jpg で別に保存",
+      "fetchedAt": "2026-11-12T06:35:16.761Z",
+      "sha256": "fbdf9bb0b0897b4376eb427d3071ab1bfb9c99d954b0e1be900d417253615cee",
+      "localPath": "sources/archive/2026-11-12-fbdf9bb0b089.json"
+    }
+  ]
+}

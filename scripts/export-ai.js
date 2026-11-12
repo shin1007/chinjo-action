@@ -7,9 +7,10 @@ const vm = require('node:vm');
 const crypto = require('node:crypto');
 
 const ROOT = path.join(__dirname, '..');
+const SITE = path.join(ROOT, 'site');
 const THEMES = ['kodomo', 'dansei', 'nihonjin', 'shiho', 'kenko', 'sonota'];
 const OUT = path.join(ROOT, 'ai');
-const SOURCE_INDEX = path.join(ROOT, 'data', 'source-index.json');
+const SOURCE_INDEX = path.join(SITE, 'data', 'source-index.json');
 
 const read = (file) => fs.readFileSync(file, 'utf8');
 
@@ -18,7 +19,7 @@ function loadTheme(theme) {
   ctx.window.window = ctx.window;
   vm.createContext(ctx);
   for (const file of ['theme.js', 'asks-national.js', 'asks-local.js', 'template.js']) {
-    vm.runInContext(read(path.join(ROOT, 'themes', theme, file)), ctx, { filename: file });
+    vm.runInContext(read(path.join(SITE, 'themes', theme, file)), ctx, { filename: file });
   }
   return ctx.window;
 }
@@ -120,7 +121,7 @@ if (require.main === module) {
     sources: data.sources.map((s) => ({ ...s, ...(saved.get(s.id) || { fetchedAt: null, localPath: null }) })),
   });
   writeJson(path.join(OUT, 'petitions.json'), data);
-  fs.writeFileSync(path.join(ROOT, 'search-index.js'), searchIndex(data));
+  fs.writeFileSync(path.join(SITE, 'js/search-index.js'), searchIndex(data));
   console.log(`${data.themes.length}テーマ、${data.sources.length}資料を書き出しました`);
 }
 

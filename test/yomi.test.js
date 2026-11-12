@@ -8,7 +8,7 @@ const vm = require('node:vm');
 const ctx = {};
 ctx.window = ctx;
 vm.createContext(ctx);
-vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'yomi.js'), 'utf8'), ctx);
+vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'site', 'js', 'yomi.js'), 'utf8'), ctx);
 const LIST = ['千葉県/鎌ヶ谷市議会', '千葉県/袖ケ浦市議会', '茨城県/かすみがうら市議会'];
 const find = (q) => [...ctx.Yomi.filter(LIST, q, () => '')];
 

@@ -7,14 +7,15 @@ const path = require('node:path');
 const vm = require('node:vm');
 
 const ROOT = path.join(__dirname, '..');
+const SITE = path.join(ROOT, 'site');
 const [stationFile, cacheFile = path.join(ROOT, 'scripts/.geocode-cache.json')] = process.argv.slice(2);
 if (!stationFile) throw new Error('使い方：node scripts/access.js <N02-xx_Station.geojson>');
 
 const ctx = {};
 ctx.window = ctx;
 vm.createContext(ctx);
-for (const f of ['data/prefs.js', 'data/municipalities.js', 'data/offices.js', 'data/councils.js', 'places.js']) {
-  vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), ctx, { filename: f });
+for (const f of ['data/prefs.js', 'data/municipalities.js', 'data/offices.js', 'data/councils.js', 'js/places.js']) {
+  vm.runInContext(fs.readFileSync(path.join(SITE, f), 'utf8'), ctx, { filename: f });
 }
 
 // ---------- 駅：同じ名前で近くにあるもの（路線違い）は1つにまとめる ----------
@@ -85,7 +86,7 @@ async function geocode(address) {
     (out[pl.pref] ||= {})[pl.key] = [p.lat, p.lng, best.s.name, best.s.lines.join('・'), best.d];
   }
   const body = JSON.stringify(out).replace(/\],"/g, '],\n"').replace(/\},"/g, '},\n"');
-  fs.writeFileSync(path.join(ROOT, 'data/access.js'), `// 自動で作ったファイル（node scripts/access.js）。手で直さない。
+  fs.writeFileSync(path.join(SITE, 'data/access.js'), `// 自動で作ったファイル（node scripts/access.js）。手で直さない。
 // 議会事務局（なければ本庁舎）の位置と最寄り駅。キーは data/offices.js と同じ。
 // → [緯度, 経度, 最寄り駅, 路線, 駅からの直線距離(m)]
 // 出典：位置は国土地理院の住所検索（地理院地図）、駅は国土数値情報（鉄道データ N02-24）国土交通省 を加工して作成
