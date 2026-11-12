@@ -1412,9 +1412,9 @@
               "note": "第1条：女性であることにより困難に直面することが多いことに鑑み"
             },
             {
-              "sourceId": "src-a5d3413c15",
-              "title": "Betsey Stevenson・Justin Wolfers「The Paradox of Declining Female Happiness」NBER Working Paper 14969（2009年）",
-              "note": "女性の主観的幸福度の長期的な変化を分析"
+              "sourceId": "src-81f39b8619",
+              "title": "Betsey Stevenson・Justin Wolfers「The Paradox of Declining Female Happiness」American Economic Journal: Economic Policy 1(2): 190–225（2009年8月）",
+              "note": "要旨で確認。米国の女性の暮らしは客観的な指標では改善したが、主観的な幸福度は絶対的にも男性と比べても下がり、他の先進国でも同じ傾向"
             },
             {
               "sourceId": "src-7e32cf6b39",
@@ -2930,6 +2930,11 @@
               "sourceId": "src-eeca0437fe",
               "title": "厚生労働省「人口動態統計月報（概数）（令和8年4月分）」",
               "note": "親権の種類別の子の数"
+            },
+            {
+              "sourceId": "src-37f3d05d1e",
+              "title": "Lancaster University「New research reveals the children with ‘no voice’ in the family courts」（2024年2月20日、Nuffield Family Justice Observatory の研究の紹介）",
+              "note": "本文で確認。イングランド・ウェールズで2019年に始まった子の監護の申立ての行政データを分析し、関わった約6万7千人の子の約半数が意見を述べる機会を持てなかったことを明らかにした"
             }
           ]
         },
@@ -4501,6 +4506,13 @@
       "kind": "secondary"
     },
     {
+      "id": "src-37f3d05d1e",
+      "title": "Lancaster University「New research reveals the children with ‘no voice’ in the family courts」（2024年2月20日、Nuffield Family Justice Observatory の研究の紹介）",
+      "url": "https://www.lancaster.ac.uk/fass/projects/cfj-archive/news/new-research-reveals-the-children-with-no-voice-in-the-family-court.html",
+      "note": "本文で確認。イングランド・ウェールズで2019年に始まった子の監護の申立ての行政データを分析し、関わった約6万7千人の子の約半数が意見を述べる機会を持てなかったことを明らかにした",
+      "kind": "secondary"
+    },
+    {
       "id": "src-38d1c1cf5a",
       "title": "文部科学省「『教師不足』への対応等について（アンケート結果の共有と留意点）」（令和5年6月20日、5教教人第13号）",
       "url": "https://www.mext.go.jp/content/20230626-mxt_kyoikujinzai01-000022259-3.pdf",
@@ -5019,6 +5031,13 @@
       "kind": "law"
     },
     {
+      "id": "src-81f39b8619",
+      "title": "Betsey Stevenson・Justin Wolfers「The Paradox of Declining Female Happiness」American Economic Journal: Economic Policy 1(2): 190–225（2009年8月）",
+      "url": "https://www.aeaweb.org/articles?id=10.1257/pol.1.2.190",
+      "note": "要旨で確認。米国の女性の暮らしは客観的な指標では改善したが、主観的な幸福度は絶対的にも男性と比べても下がり、他の先進国でも同じ傾向",
+      "kind": "secondary"
+    },
+    {
       "id": "src-8375bc0678",
       "title": "裁判所「夫婦関係調整調停（円満）」",
       "url": "https://www.courts.go.jp/saiban/syurui/syurui_kazi/kazi_07_02/index.html",
@@ -5283,13 +5302,6 @@
       "url": "https://www.pref.wakayama.lg.jp/prefg/020300/kids/graph.html",
       "note": "棒グラフの決まりとして「目盛りの出発点は、必ずゼロにします」。公的な統計部局が子ども向けにも示す基本",
       "kind": "official"
-    },
-    {
-      "id": "src-a5d3413c15",
-      "title": "Betsey Stevenson・Justin Wolfers「The Paradox of Declining Female Happiness」NBER Working Paper 14969（2009年）",
-      "url": "https://www.nber.org/papers/w14969",
-      "note": "女性の主観的幸福度の長期的な変化を分析",
-      "kind": "research"
     },
     {
       "id": "src-a8b1206c3b",
