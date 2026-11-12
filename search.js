@@ -22,7 +22,15 @@
     count.textContent = hits.length
       ? `${hits.length}件${hits.length > MAX ? `（はじめの${MAX}件を表示）` : ''}。押すと、その内容を選んだ状態で作成画面が開きます。`
       : '見つかりませんでした。言葉を短くするか、下のテーマから選んでください。';
-    list.innerHTML = hits.slice(0, MAX).map((a) => `<li><a href="/${a.theme}/make?item=${encodeURIComponent(a.id)}"><b>${esc(a.label)}</b><small>${esc(a.themeName)}／${esc(a.category || 'そのほか')}・${a.scope === 'local' ? '自治体の取り組み' : '国へ意見書'}</small></a></li>`).join('');
+    // 同じテーマ・同じ見出しのものをまとめて出す（見出しの順は、当てはまりのよいものが先）
+    const groups = new Map();
+    hits.slice(0, MAX).forEach((a) => {
+      const k = `${a.theme}	${a.category || 'そのほか'}`;
+      if (!groups.has(k)) groups.set(k, { theme: a.theme, themeName: a.themeName, category: a.category || 'そのほか', list: [] });
+      groups.get(k).list.push(a);
+    });
+    list.innerHTML = [...groups.values()].map((g) => `<li class="item-search-group"><p class="item-search-head"><b>${esc(g.themeName)}／${esc(g.category)}</b>${g.list.length > 1 ? `<a class="btn btn-small" href="/${g.theme}/make?item=${encodeURIComponent(g.list.map((a) => a.id).join(','))}">この${g.list.length}件をすべて選んでつくる</a>` : ''}</p>
+      <ul>${g.list.map((a) => `<li><a href="/${a.theme}/make?item=${encodeURIComponent(a.id)}"><b>${esc(a.label)}</b><small>${a.scope === 'local' ? '自治体の取り組み' : '国へ意見書'}</small></a></li>`).join('')}</ul></li>`).join('');
   }
   input.addEventListener('input', render);
 })();

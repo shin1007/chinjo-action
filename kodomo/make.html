@@ -83,9 +83,10 @@
         <p class="hint-sm wz-seigan"><b>請願書は作れません</b>（紹介議員が要るため）。請願にしたいときは、ここで陳情書を作り、その文面を持って議員に紹介をお願いします（<a href="/letter">議員への手紙</a>）。</p>
         <p class="hint-sm"><b>とくに伝えたい内容を、3つまで選ぶのがおすすめです。</b>選んだ内容1つにつき1通ずつできあがります。</p>
         <details class="hint-sm wz-fold"><summary>いくつも選ぶとき・1通にまとめたいとき</summary>
-          <p>多くの議会は「1件に1つの求めること（趣旨）」で分けて出すよう求めているので、ふつうは1通ずつ出します（<a href="/kodomo/guide#split">1件ずつ分ける理由</a>）。いくつも選ぶなら、同じ分野（下の見出し）の中から選ぶほうが伝わります。同じ分野の内容を1通にまとめたいときは、最後の画面の「まとめて1通にする」でまとめられます。その議会が分けて出すよう求めていないか、先に確かめてください。<a href="/#compare">陳情書・要望書・請願・手紙の違い</a></p>
+          <p>多くの議会は「1件に1つの求めること（趣旨）」で分けて出すよう求めているので、ふつうは1通ずつ出します（<a href="/kodomo/guide#split">1件ずつ分ける理由</a>）。いくつも選ぶなら、同じ分野（下の見出し）の中から選ぶほうが伝わります。同じ分野の内容を1通にまとめたいときは、文面確認の画面で「まとめて1通にする」を選べます。その議会が分けて出すよう求めていないか、先に確かめてください。<a href="/#compare">陳情書・要望書・請願・手紙の違い</a></p>
         </details>
         <input type="search" id="wzItemFilter" class="wz-filter" placeholder="キーワードで内容を絞り込む" aria-label="キーワードで内容を絞り込む">
+        <p class="wz-bulk"><button type="button" id="wzItemsAll" class="btn btn-small">見えている内容をすべて選ぶ</button> <span id="wzItemsAllNote" class="hint-sm"></span></p>
         <div id="wzItems" class="wz-cards"></div>
         <details id="wzPreview" class="wz-preview" hidden><summary id="wzPreviewTitle">文面の見本を見る</summary>
           <p class="hint-sm">「〇〇市」と住所・氏名は、このあと選ぶ自治体と入力で入ります。最後の一文は、あなたの立場に合わせて変わります。</p>
@@ -124,14 +125,14 @@
 
       <div class="wz-step" data-step="you" hidden>
         <h3>あなたのことを教えてください</h3>
-        <p class="hint-sm">聞くことは2つです。①を選ぶと［次へ］を押せます。②は任意で、あとで手書きにもできます。</p>
+        <p class="hint-sm">聞くことは2つです。①を選ぶと［次へ］を押せます。<b>②の住所・氏名を入れておくと、次の画面で、そのまま出せる形の文面を確かめられます。</b>空けたままでも進め、あとで手書きにもできます。</p>
         <fieldset class="wz-part">
         <legend>① あなたの立場（必須）</legend>
         <p class="hint-sm"><span data-doc-name>陳情書</span>の最後に、立場に合った一文を添えます。個人の事情は書きません。</p>
         <div id="wzRoles" class="wz-cards"></div>
         </fieldset>
         <fieldset class="wz-part">
-        <legend>② 差出人の住所・氏名（任意）</legend>
+        <legend>② 差出人の住所・氏名（入れておくのがおすすめ）</legend>
         <p class="hint-sm">住所は<span data-doc-name>陳情書</span>に、氏名は送付状と封筒の差出人に入ります。<b><span data-doc-name>陳情書</span>の氏名は、印刷してから手書きで署名</b>します。空欄のままなら下線になり、手書きで記入できます。下の「覚えておく」にチェックしたときだけ、次に開いたときのために<b>この端末のブラウザの中にだけ</b>残ります（初めはチェックなし）。</p>
         <div id="wzSender" class="sender-form">
           <label>郵便番号<input data-sender="zip" inputmode="numeric" autocomplete="postal-code" placeholder="例：123-4567"></label>
@@ -147,9 +148,14 @@
       <div class="wz-step" data-step="done" hidden>
         <h3>できあがりました</h3>
         <div id="wzMerge" class="wz-merge" hidden>
-          <label><input type="checkbox" id="wzMergeOn"> <b id="wzMergeLabel"></b></label>
+          <fieldset class="wz-merge-pick">
+            <legend id="wzMergeLabel"></legend>
+            <label><input type="radio" name="wzMergeOn" value="split"> <b>1つずつ分ける（ふつうはこちら）</b><span class="hint-sm">議会が内容ごとに採否を決められるので、どれか1つが通りやすくなります。多くの議会が「1件に1つの求めること」で分けて出すよう求めています。そのぶん、1通ごとに署名が要ります。</span></label>
+            <label><input type="radio" name="wzMergeOn" value="merge"> <b>まとめて1通にする</b><span class="hint-sm">記の一・二…に内容が並ぶ1通になり、署名も1回、紙も少なくて済みます。ただし、1つでも賛成しにくい内容があると、全体が通りにくくなります。分けて出すよう求める議会もあるので、先に確かめてください。</span></label>
+          </fieldset>
           <p id="wzMergeWhy" class="hint-sm"></p>
         </div>
+        <div id="wzNoSender" class="wz-nosender" hidden><p><b>差出人の住所・氏名が空いています。</b>入れると、下の文面と印刷用のPDFが、そのまま出せる形になります（空けたままなら下線になり、手書きで書き入れます）。</p><button type="button" id="wzToSender" class="btn btn-small">住所・氏名を入れる</button></div>
         <p id="wzSummary" class="wz-summary"></p>
         <div id="wzMatrix" class="wz-matrix"></div>
 
@@ -190,22 +196,29 @@
               <details class="wz-call" data-petition-only><summary>審査まで確実にしたいとき：議会事務局に電話で聞くこと（任意・数分）</summary>
                 <p class="hint-sm">「陳情書を出したいのですが、いくつか教えてください」と切り出して、次を聞きます。</p>
                 <ol>
-                  <li><b>出し方</b>：「郵送（または市外から）でも、委員会で審査されますか。配るだけになりますか」</li>
-                  <li><b>締切</b>：「次の定例会に間に合う締切はいつですか」<span class="hint-sm">（定例会は、年に数回、決まった時期に開かれる議会の会議です）</span></li>
-                  <li><b>公開</b>：「出した人の住所と氏名は、会議録やサイトにどこまで載りますか」</li>
-                  <li><b>書式</b>：「決まった様式や、写しの部数、押印は要りますか。議長のお名前も教えてください」</li>
+                  <li><b>出し方</b>「郵送（または市外から）でも、委員会で審査されますか。配るだけになりますか」</li>
+                  <li><b>締切</b>「次の定例会に間に合う締切はいつですか」<span class="hint-sm">（定例会は、年に数回、決まった時期に開かれる議会の会議です）</span></li>
+                  <li><b>公開</b>「出した人の住所と氏名は、会議録やサイトにどこまで載りますか」</li>
+                  <li><b>書式</b>「決まった様式や、写しの部数、押印は要りますか。議長のお名前も教えてください」</li>
                 </ol>
                 <p class="hint-sm">分かった扱いは、下の「出す前に確かめること」の「分かったことを共有する」から送ると、次の人が電話しなくて済みます。</p>
               </details></li>
-            <li id="wzNowChairItem"><b>日付と議長の氏名（任意）</b>：日付は<b id="wzNowDate"></b>（今日）で入ります。議長の氏名は、分かれば入れると宛名に入り、空けておけば手書きで書き入れます。
+            <li id="wzNowChairItem"><b>日付と議長の氏名（任意）</b>日付は<b id="wzNowDate"></b>（今日）で入ります。議長の氏名は、分かれば入れると宛名に入り、空けておけば手書きで書き入れます。
               <div id="wzChairBox" class="wz-chairs" hidden><div id="wzChairs"></div><p class="hint-sm">議長は選挙や交代で変わります。出す直前に議会の公式サイトで確かめてください。</p></div></li>
-            <li><b>印刷する</b>：<span id="wzNowCount"></span>
+            <li><b>印刷する</b><span id="wzNowCount"></span>
               <p id="wzNowLeft" class="wz-now-left" role="status" hidden></p>
+              <fieldset class="wz-print-picks">
+                <legend>PDFに入れるもの <button type="button" id="wzPickAll" class="btn btn-small">すべて選ぶ</button></legend>
+                <label><input type="checkbox" id="wzBody" checked> <span data-doc-name>陳情書</span>（出すもの）</label>
+                <label data-petition-only><input type="checkbox" id="wzCover" checked> 送付状（郵送するとき、いちばん上に重ねる1枚）</label>
+                <label data-petition-only><input type="checkbox" id="wzWithLabels" checked> 宛名・差出人の用紙（封筒の表と裏に、切って貼る）</label>
+                <label><input type="checkbox" id="wzWithMemo" checked> 出し方メモ（手元に残す。やることにチェックを付けながら進められます）</label>
+              </fieldset>
               <div class="out-toolbar"><button type="button" id="wzNowPdf" class="btn btn-primary">印刷用のPDFを開く</button> <button type="button" id="wzNowCopy" class="btn btn-small">文面をすべてコピー</button></div>
               <p class="hint-sm">家にプリンターがなくても、PDFをコンビニのネットプリントで印刷できます（A4白黒1枚20円）。電子申請で出すなら、印刷も封筒も切手も要りません。</p></li>
-            <li><b>手書きで署名する</b>：1通ごとに氏名を署名します（住所を空けたなら住所も）。</li>
-            <li id="wzNowHow"></li>
-            <li id="wzNowReport"><b>出したら知らせる（任意）</b>：「くわしい手順」の②にある「この議会に提出した」を押すと、出した人の数に加わります。電話で聞いて分かった扱いは、「出す前に確かめること」の「分かったことを共有する」から送れます。</li>
+            <li><b>手書きで署名する</b>1通ごとに氏名を署名します（住所を空けたなら住所も）。</li>
+            <li><span id="wzNowHow"></span></li>
+            <li id="wzNowReport"><b>出したら知らせる（任意）</b>「くわしい手順」の②にある「この議会に提出した」を押すと、出した人の数に加わります。電話で聞いて分かった扱いは、「出す前に確かめること」の「分かったことを共有する」から送れます。</li>
           </ol>
           <div id="wzAlso" class="wz-also" hidden></div>
           <p class="hint-sm" data-request-html="下は、出す前に確かめることです。このサイトは法的助言をするものではありません。受け付け方は自治体ごとに違い、変わることもあります。">確かめることやくわしい手順は、下を開くと見られます。このサイトは法的助言をするものではありません。</p>
@@ -344,6 +357,7 @@
 <script src="/figs.js"></script>
 <script src="/docxdoc.js"></script>
 <script src="/postage.js"></script>
+<script src="/send-memo.js"></script>
 <script src="/report.js"></script>
 <script src="/wizard.js"></script>
 <script src="/ai-launch.js"></script>

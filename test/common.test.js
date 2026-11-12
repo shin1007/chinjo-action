@@ -58,3 +58,8 @@ test('関連資料のページの項目ごとの資料が asks-*.js の refs と
     assert.ok(read(file) === html, `${path.relative(ROOT, file)} が asks-*.js の refs と違います`);
   }
 });
+
+test('docs/見本/ の文面と出し方メモが、いまの文面と食い違わない（直したら node scripts/samples.js）', () => {
+  const r = require('node:child_process').spawnSync(process.execPath, [path.join(ROOT, 'scripts', 'samples.js'), '--check'], { encoding: 'utf8' });
+  assert.strictEqual(r.status, 0, r.stderr);
+});
