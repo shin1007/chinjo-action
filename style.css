@@ -676,3 +676,47 @@ summary { cursor: pointer; font-weight: 700; }
 .wz-checklist[open] > summary, .wz-after[open] > summary { margin-bottom: 8px; }
 .cost-more > summary { cursor: pointer; font-weight: 600; margin: 12px 0 8px; }
 .adopted-list { padding-left: 1.2em; } .adopted-list li { margin-bottom: 8px; }
+
+/* 内容をまとめて選ぶ・選び終えたら［次へ］を目立たせる */
+.wz-bulk { margin: 8px 0; }
+.wz-nav #wzNext.is-ready { box-shadow: 0 0 0 3px var(--accent-soft), 0 4px 14px rgba(0, 0, 0, 0.18); animation: wz-ready 1.6s ease-in-out 2; }
+@keyframes wz-ready { 50% { transform: scale(1.06); } }
+@media (prefers-reduced-motion: reduce) { .wz-nav #wzNext.is-ready { animation: none; } }
+.wz-region-all { margin-left: 6px; padding: 0 8px; font-size: 0.75rem; }
+
+/* 1つずつ分けるか、まとめて1通にするか */
+.wz-merge-pick { border: 0; padding: 0; margin: 0; }
+.wz-merge-pick legend { font-weight: 700; margin-bottom: 6px; }
+.wz-merge-pick label { display: block; border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; margin-bottom: 6px; cursor: pointer; }
+.wz-merge-pick label .hint-sm { display: block; margin: 2px 0 0 1.6em; }
+.wz-nosender { margin: 12px 0; padding: 10px 14px; border: 1px solid var(--accent-line); border-radius: 8px; background: var(--accent-soft); }
+.wz-nosender p { margin: 0 0 6px; }
+
+/* スマホでは、文面の紙をできるだけ横に広げる */
+@media (max-width: 640px) {
+  #generator .wrap { padding-left: 8px; padding-right: 8px; }
+  .wizard { padding: 12px 8px; }
+  .wz-check { padding-left: 6px; padding-right: 6px; }
+  .wz-doc { padding: 6px 4px; }
+  .wz-paper { padding: 10px 8px; font-size: 0.95rem; line-height: 1.8; }
+}
+.item-search-group { border-bottom: 0 !important; margin-bottom: 12px; }
+.item-search-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px; margin: 8px 0 4px; padding: 4px 8px; background: var(--bg-alt); border-radius: 6px; }
+.item-search-group ul { list-style: none; padding: 0; margin: 0; }
+.item-search-group ul li { border-bottom: 1px solid var(--line); }
+
+/* 「今やること」は手順ごとに分けた札にし、番号と「できた」の印を付ける */
+.wz-now .wz-now-steps { list-style: none; padding: 0; counter-reset: wzs; }
+.wz-now .wz-now-steps > li { counter-increment: wzs; position: relative; margin: 0 0 10px; padding: 12px 12px 10px 48px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.wz-now .wz-now-steps > li::before { content: counter(wzs); position: absolute; left: 12px; top: 12px; width: 26px; height: 26px; border-radius: 50%; background: var(--main); color: #fff; font-weight: 700; text-align: center; line-height: 26px; }
+.wz-now .wz-now-steps > li > b:first-child, .wz-now .wz-now-steps > li > span > b:first-child { display: block; font-size: 1.05rem; margin-bottom: 4px; }
+.wz-now .wz-now-steps > li.is-done { opacity: 0.55; }
+.wz-now .wz-now-steps > li.is-done::before { content: "✓"; background: var(--muted); }
+.wz-step-done { width: max-content; display: flex; align-items: center; gap: 6px; margin-top: 8px; padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; font-size: 0.9rem; cursor: pointer; }
+.wz-print-picks { border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; margin: 8px 0; }
+.wz-print-picks legend { font-weight: 700; padding: 0 4px; }
+.wz-print-picks label { display: block; margin: 4px 0; }
+@media (max-width: 640px) {
+  .wz-now { padding: 10px 8px 12px; }
+  .wz-now .wz-now-steps > li { padding-left: 42px; }
+}

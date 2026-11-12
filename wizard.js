@@ -22,7 +22,8 @@
 
   // トップページの検索から来たときは ?item= の項目を初めから選んでおく
   const linkedItem = new URLSearchParams(location.search).get('item');
-  const firstItems = () => (window.ASKS.some((a) => a.id === linkedItem) ? [linkedItem] : []);
+  // ?item=a,b のように、いくつか並べて渡すこともできる（トップの「言葉でさがす」で見出しごとにまとめて選ぶとき）
+  const firstItems = () => (linkedItem || '').split(',').filter((k) => window.ASKS.some((a) => a.id === k));
   // テーマのページで「要望書」を選んで来たときは ?kind=request が付いている
   const startKind = () => (new URLSearchParams(location.search).get('kind') === 'request' ? 'request' : 'petition');
   const state = { step: 0, pref: '', councils: [], items: firstItems(), role: '', kind: startKind(), merge: false };
@@ -115,6 +116,8 @@
     [(p) => mailOk(p), 'ok', '📮 郵送で審査', '📮 郵送でも審査されるとわかっている議会', '家から送るだけで審査してもらえます。'],
     [mailHandout, 'jisan', '📮 郵送で配付', '📮 郵送すると議員に配付される議会', '審査はされなくても、陳情書の写しが議員に配られて読んでもらえます。持参すれば審査される議会や、住民なら審査される議会もあります（議会を選ぶ画面で議会ごとに出ます）。'],
   ].map((x) => { const el = document.createElement('details'); el.className = `wz-mailok ${x[1]}`; $('wzPrefs').before(el); return [el, ...x]; });
+  const ids0 = (groups) => groups.flatMap(([, ids]) => ids);
+  const allOn = (ids) => ids.every((id) => state.councils.includes(id));
   function renderMailAll() {
     // 要望書は議会に出さないので、郵送の扱いの一覧も都道府県のボタンの印も出さない
     document.querySelectorAll('[data-pref] .wz-mk').forEach((m) => { m.hidden = state.kind === 'request'; });
@@ -129,7 +132,8 @@
       });
       const open = box.open;
       box.innerHTML = `<summary><b>${title}（全国${n}）</b></summary><p class="hint-sm">${note}押すと選ばれ、下にその都道府県の議会の一覧が出ます。まだ調べきれていない議会も多いので、ここにない議会のほうが多くあります。</p>
-        ${groups.map(([p, ids]) => `<div class="wz-region"><span>${esc(p)}</span><div class="wz-grid">${ids.map((id) => { const on = state.councils.includes(id); return `<button type="button" class="wz-chip ${on ? 'on' : ''}" data-mail-pick="${esc(id)}" aria-pressed="${on}">${esc(nameOf(id))}${c === 'ok' ? '' : chipMail(id)}</button>`; }).join('')}</div></div>`).join('')}`;
+        <p><button type="button" class="btn btn-small" data-mail-box="${esc(ids0(groups).join(','))}">${allOn(ids0(groups)) ? `全国の${n}議会の選択をすべて外す` : `全国の${n}議会をすべて選ぶ`}</button></p>
+        ${groups.map(([p, ids]) => `<div class="wz-region"><span>${esc(p)} <button type="button" class="btn btn-small wz-region-all" data-mail-box="${esc(ids.join(','))}">${allOn(ids) ? '外す' : 'すべて選ぶ'}</button></span><div class="wz-grid">${ids.map((id) => { const on = state.councils.includes(id); return `<button type="button" class="wz-chip ${on ? 'on' : ''}" data-mail-pick="${esc(id)}" aria-pressed="${on}">${esc(nameOf(id))}${c === 'ok' ? '' : chipMail(id)}</button>`; }).join('')}</div></div>`).join('')}`;
       box.open = open;
     });
   }
@@ -262,11 +266,34 @@
       d.hidden = !hit;
       if (q && hit) d.open = true;
     });
+    renderItemsAll();
   }
+  // 見えている内容（開いている見出しの中で、絞り込みに当てはまるもの）をまとめて選ぶ・外す
+  const visibleItems = () => [...document.querySelectorAll('#wzItems .wz-cat[open]:not([hidden]) [data-item]:not([hidden])')];
+  function renderItemsAll() {
+    const vis = visibleItems();
+    const all = vis.length && vis.every((b) => state.items.includes(b.dataset.item));
+    $('wzItemsAll').hidden = !vis.length;
+    $('wzItemsAll').textContent = all ? `見えている${vis.length}件の選択をすべて外す` : `見えている${vis.length}件をすべて選ぶ`;
+    $('wzItemsAll').dataset.all = all ? '1' : '';
+    $('wzItemsAllNote').textContent = vis.length > 3 && !all ? '（たくさん選ぶと、1件ごとに陳情書が1通ずつできます）' : '';
+  }
+  $('wzItemsAll').addEventListener('click', () => {
+    const vis = visibleItems().map((b) => b.dataset.item);
+    if ($('wzItemsAll').dataset.all) state.items = state.items.filter((k) => !vis.includes(k));
+    else vis.forEach((k) => { if (!state.items.includes(k)) state.items.push(k); });
+    const q = $('wzItemFilter').value;
+    renderItems();
+    $('wzItemFilter').value = q;
+    filterItems();
+    saveDraft();
+    updateNav();
+  });
   $('wzItemFilter').addEventListener('input', filterItems);
   $('wzItems').addEventListener('toggle', (e) => {
     const c = e.target.dataset && e.target.dataset.cat;
     if (c && !$('wzItemFilter').value) (e.target.open ? openCats.add(c) : openCats.delete(c));
+    if (c) renderItemsAll();
   }, true);
 
   $('wzRoles').innerHTML = ROLES.map(([k, label]) => `<button type="button" class="wz-card wz-small" data-role="${k}"><b>${label}</b></button>`).join('');
@@ -323,6 +350,8 @@
     const lead = document.querySelector('#generator .lead-sm');
     if (lead) lead.textContent = state.kind === 'request' ? '選択肢を押していくだけで、市区町村長・知事に出せる要望書ができます。' : '選択肢を押していくだけで、議会に出せる陳情書ができます。';
     $('wzNext').disabled = !canNext();
+    // 選び終えたら［次へ］を目立たせて、押せばよいことが分かるようにする
+    $('wzNext').classList.toggle('is-ready', !!canNext() && STEPS[state.step] !== 'done');
     $('wzNextWhy').textContent = whyNotNext();
     renderPreview();
   }
@@ -418,6 +447,13 @@
       i < 0 ? state.councils.push(d.mailPick) : state.councils.splice(i, 1);
       if (i < 0) state.pref = prefOf(d.mailPick);
       show();
+    } else if (d.mailBox) {
+      // 郵送の扱いの一覧から、全国・都道府県ごとにまとめて選ぶ（全部選ばれていれば外す）
+      const ids = d.mailBox.split(',').filter(Boolean);
+      if (allOn(ids)) state.councils = state.councils.filter((id) => !ids.includes(id));
+      else ids.forEach((id) => { if (!state.councils.includes(id)) state.councils.push(id); });
+      if (!state.pref && ids.length) state.pref = prefOf(ids[0]);
+      show();
     } else if (d.mailAll) {
       mailOk(state.pref).forEach((id) => { if (!state.councils.includes(id)) state.councils.push(id); });
       renderCouncils();
@@ -443,6 +479,7 @@
       b.setAttribute('aria-pressed', String(i < 0));
       const cat = b.closest('.wz-cat');
       cat.querySelector('.wz-cat-n').innerHTML = catCount(cat);
+      renderItemsAll();
       renderCount();
       saveDraft();
       updateNav();
@@ -519,6 +556,8 @@
     const fd = formData();
     renderMerge();
     const keys = docKeys();
+    // 差出人が空なら、入れるとそのまま出せる形になることを知らせる
+    $('wzNoSender').hidden = !!(sender.address || sender.name);
     $('wzDocs').innerHTML = keys.map((k, i) => {
       const it = { label: docLabel(k) };
       const e = edits[ek(k)];
@@ -537,7 +576,7 @@
         ${others.length ? `<p class="hint-sm">下は${esc(first)}あての文面です。${others.map(esc).join('・')}あてにも、同じ内容で1通ずつ作ります。ここで直すと、宛名と自治体名を差し替えてすべての議会に反映されます。</p>` : ''}
         <textarea class="wz-paper" rows="4" spellcheck="false" data-key="${esc(k)}" aria-label="${esc(it.label)}の文面">${esc(text)}</textarea>
         <p class="wz-docstat hint-sm" aria-live="polite"></p>
-        <div class="out-toolbar"><button type="button" class="btn btn-small" data-doc-view="${i}">仕上がりを見る</button><button type="button" class="btn btn-small" data-doc-ai="${i}">生成AIで自分の言葉に直す</button><button type="button" class="btn btn-small" data-doc-reset="${esc(k)}"${e ? '' : ' hidden'}>元の文面に戻す</button></div>
+        <div class="out-toolbar"><button type="button" class="btn btn-small" data-doc-ai="${i}">生成AIで自分の言葉に直す</button><button type="button" class="btn btn-small" data-doc-reset="${esc(k)}"${e ? '' : ' hidden'}>元の文面に戻す</button></div>
       </details>`;
     }).join('');
     areas().forEach((ta) => { fit(ta); docStat(ta); });
@@ -556,15 +595,22 @@
     box.hidden = n < 2;
     if (box.hidden) return;
     const ok = canMerge();
-    $('wzMergeOn').disabled = !ok;
-    $('wzMergeOn').checked = ok && !!state.merge;
-    $('wzMergeLabel').textContent = `選んだ${n}つの内容を、まとめて1通にする`;
+    const radios = [...document.querySelectorAll('input[name="wzMergeOn"]')];
+    radios.forEach((r) => {
+      r.disabled = !ok && r.value === 'merge';
+      r.checked = r.value === (ok && state.merge ? 'merge' : 'split');
+    });
+    $('wzMergeLabel').textContent = `選んだ${n}つの内容を、1つずつ分けて出すか、まとめて1通にするか`;
     $('wzMergeWhy').textContent = ok
-      ? 'まとめると、記の一・二…に内容が並ぶ1通になり、署名も1回で済みます。1つずつ分けると、議会が内容ごとに採否を決めやすくなります。'
+      ? ''
       : n > MERGE_MAX ? `まとめられるのは${MERGE_MAX}つまでです。`
         : '国に意見書を出すよう求める内容と、自治体の取り組みを求める内容が混ざっているため、まとめられません（文書の種類が違います）。';
   }
-  $('wzMergeOn').addEventListener('change', (e) => { state.merge = e.target.checked; build(); renderNow(); saveDraft(); });
+  document.querySelectorAll('input[name="wzMergeOn"]').forEach((r) => r.addEventListener('change', (e) => {
+    if (!e.target.checked) return;
+    state.merge = e.target.value === 'merge';
+    build(); renderNow(); saveDraft();
+  }));
 
   // 何通できるかを、宛先 × 内容の表で見せる。1通ずつでも、まとめて1つのPDFでも開ける
   function renderMatrix() {
@@ -572,18 +618,10 @@
     const items = docKeys().map((k) => ({ label: docLabel(k) }));
     const total = items.length * state.councils.length;
     const head = `<tr><th scope="col">内容 ＼ 宛先</th>${state.councils.map((c) => `<th scope="col">${esc(isNone(c) ? '（宛先を空ける）' : municipalityName(c))}</th>`).join('')}</tr>`;
-    const rows = items.map((it, i) => `<tr><th scope="row">${i + 1}. ${esc(it.label)}</th>${state.councils.map((c, j) => `<td><button type="button" class="btn btn-small" data-cell="${i}:${j}" aria-label="${esc(it.label)}・${esc(isNone(c) ? '宛先なし' : municipalityName(c))}あてを開く">1通を開く</button></td>`).join('')}</tr>`).join('');
+    const rows = items.map((it, i) => `<tr><th scope="row">${i + 1}. ${esc(it.label)}</th>${state.councils.map((c, j) => `<td>1通</td>`).join('')}</tr>`).join('');
     $('wzMatrix').innerHTML = `<div class="table-scroll"><table class="compare">${head}${rows}</table></div>
-      ${total > 1 ? `<p class="hint-sm"><b>${docName}は1通ずつ別の紙になります</b>（1通ごとに署名が要ります）。上のボタンで1通ずつ開くか、下のボタンで${total}通を1つのPDFにまとめて開いて印刷できます。同じ議会に出す分は、1つの封筒にまとめて送れます。</p>
-      <p><button type="button" id="wzAllPdf" class="btn btn-primary">${total}通をまとめてPDFで開く</button></p>` : ''}`;
+      ${total > 1 ? `<p class="hint-sm"><b>${docName}は1通ずつ別の紙になります</b>（1通ごとに署名が要ります）。印刷用のPDFは、次の画面で${total}通を1つにまとめて開けます。同じ議会に出す分は、1つの封筒にまとめて送れます。</p>` : ''}`;
   }
-  $('wzMatrix').addEventListener('click', (e) => {
-    const b = e.target.closest('button');
-    if (!b) return;
-    if (b.id === 'wzAllPdf') { viewPdf(b, null, allDocs(), allKeys()); return; }
-    const [i, j] = b.dataset.cell.split(':').map(Number);
-    viewPdf(b, null, [docFor(areas()[i], state.councils[j])], [areas()[i].dataset.key]);
-  });
 
   // 文面の欄は中身の長さに合わせて伸ばし、欄の中でスクロールしなくても全体を読めるようにする
   const fit = (ta) => { ta.style.height = 'auto'; ta.style.height = `${ta.scrollHeight + 2}px`; };
@@ -599,35 +637,6 @@
   const docFor = (ta, c) => withChair(withSender(edits[ek(ta.dataset.key)] ? forCouncil(ta.value, c)
     : window.Petition.build(formData(), nameOf(c), keysOf(ta.dataset.key)), sender), c).trim();
   const allDocs = () => state.councils.flatMap((c) => areas().map((ta) => docFor(ta, c)));
-  // allDocs() と同じ順の、文面ごとの項目（参考図表の別紙を選ぶのに使う）
-  const allKeys = () => state.councils.flatMap(() => areas().map((ta) => ta.dataset.key));
-  // 1通目の議会あての1通だけをPDFにして、新しいタブで開く（送付状・宛名はつけない）
-  // 開くのを待つとポップアップとして止められるので、タブは先に開いておく
-  // texts を渡すと、その文面（何通でも）を1つのPDFにする。1通ずつ新しいページから始まる
-  // keys：texts と同じ順の項目。項目に図があれば、その文面のあとに参考図表の別紙をつける（figs.js）
-  async function viewPdf(btn, ta, texts, keys = ta ? [ta.dataset.key] : []) {
-    const win = window.open('', '_blank');
-    const text = btn.textContent;
-    btn.disabled = true;
-    btn.textContent = 'PDFを作っています…';
-    try {
-      const doc = await window.PdfDoc.create();
-      const list = texts || [docFor(ta, state.councils[0])];
-      for (let i = 0; i < list.length; i += 1) {
-        doc.addDocument(list[i]);
-        if (keys[i] && window.Figs) await window.Figs.addTo(doc, keysOf(keys[i]));
-      }
-      const url = URL.createObjectURL(new Blob([await doc.bytes()], { type: 'application/pdf' }));
-      if (win) win.location.href = url;
-      else window.location.href = url;
-    } catch (e) {
-      if (win) win.close();
-      flash(`PDFを作れませんでした（${e.message}）。通信のよい所でもう一度試してください。`, 5000);
-    } finally {
-      btn.disabled = false;
-      btn.textContent = text;
-    }
-  }
   $('wzDocs').addEventListener('input', (e) => {
     const k = e.target.dataset.key;
     if (!k) return;
@@ -644,8 +653,6 @@
   // 閉じた中では高さが測れないので、開いたときに合わせ直す
   $('wzCheck').addEventListener('toggle', (e) => { if (e.target.open) areas().forEach(fit); });
   $('wzDocs').addEventListener('click', (e) => {
-    const v = e.target.dataset.docView;
-    if (v !== undefined) viewPdf(e.target, areas()[v]);
     const a = e.target.dataset.docAi;
     if (a !== undefined) openRewrite(areas()[a]);
     const k = e.target.dataset.docReset;
@@ -859,6 +866,10 @@
     near.forEach((n) => councilsOf(n.pl.pref));
   }
 
+  $('wzToSender').addEventListener('click', () => {
+    go(STEPS.indexOf('you') - state.step);
+    setTimeout(() => { const el = $('wzSender').querySelector('[data-sender="address"]'); if (el) el.focus(); }, 50);
+  });
   // 差出人（あなた）の住所・氏名。入れるとすぐ、下の文面の住所・氏名の行に入る
   const sender = window.Common.bindSender($('wzSender'), () => {
     areas().forEach((ta) => { ta.value = withSender(ta.value, sender); });
@@ -1066,8 +1077,8 @@
     $('wzNowAskH').textContent = request ? '出し方のページを開く' : '出し方を決める';
     $('wzNowReport').hidden = request || !window.Report.enabled;
     $('wzNowHow').innerHTML = request
-      ? '<b>出す</b>：上で開いたページに書かれた方法（窓口・郵送・メール・フォームなど）で出します。宛名の知事・市区町村長と「様」のあいだは、氏名を書き入れても空けたままでも構いません。メールやフォームで出すときは、「文面をすべてコピー」した文を貼り付けます。'
-      : '<b>出す</b>：持参・郵送・電子申請。議会ごとの出し方は、下の「くわしい手順」の②にあります。締切を過ぎても、次の定例会で扱われます。';
+      ? '<b>出す</b>上で開いたページに書かれた方法（窓口・郵送・メール・フォームなど）で出します。宛名の知事・市区町村長と「様」のあいだは、氏名を書き入れても空けたままでも構いません。メールやフォームで出すときは、「文面をすべてコピー」した文を貼り付けます。'
+      : '<b>出す</b>持参・郵送・電子申請。議会ごとの出し方は、下の「くわしい手順」の②にあります。締切を過ぎても、次の定例会で扱われます。';
     renderAlso();
     document.querySelectorAll('[data-petition-only]').forEach((el) => { el.hidden = request; });
   }
@@ -1141,8 +1152,138 @@
     $('wzNowAsk').innerHTML = html;
     renderKindParts();
   }
-  $('wzNowPdf').addEventListener('click', (e) => viewPdf(e.currentTarget, null, allDocs(), allKeys()));
+  // ---------- 印刷用のPDF（陳情書・送付状・宛名・出し方メモ） ----------
+  // 要望書は議会に出さないので、送付状と宛名の用紙は入れない
+  const pick = (id) => $(id).checked && !$(id).closest('label').hidden;
+  const PICKS = ['wzBody', 'wzCover', 'wzWithLabels', 'wzWithMemo'];
+  const pickBoxes = () => PICKS.map($).filter((el) => !el.closest('label').hidden);
+  function renderPickAll() {
+    const all = pickBoxes().every((el) => el.checked);
+    $('wzPickAll').textContent = all ? 'すべて外す' : 'すべて選ぶ';
+  }
+  $('wzPickAll').addEventListener('click', () => {
+    const all = pickBoxes().every((el) => el.checked);
+    pickBoxes().forEach((el) => { el.checked = !all; });
+    renderPickAll();
+  });
+  PICKS.forEach((id) => $(id).addEventListener('change', renderPickAll));
+
+  // 議会ごとに、封筒に入れる文書（送付状と陳情書）をまとめる。keys は参考図表の別紙を選ぶのに使う
+  const envelopes = () => state.councils.map((c) => {
+    const docs = areas().map((ta) => docFor(ta, c));
+    const cover = pick('wzCover') && !isNone(c) ? [window.Petition.cover(nameOf(c), docs, sender)] : [];
+    return { c, cover, docs: pick('wzBody') ? docs : [], keys: areas().map((ta) => ta.dataset.key) };
+  });
+
+  // 送り方の図（send-figs.js）は、画面の SVG を3枚横に並べた PNG にしてメモに入れる
+  async function figsPng() {
+    const svgs = [...document.querySelectorAll('[data-send-figs] svg')].slice(0, 3);
+    if (!svgs.length) return null;
+    const W = 600;
+    const H = 750;
+    const canvas = document.createElement('canvas');
+    canvas.width = W * svgs.length;
+    canvas.height = H;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    await Promise.all(svgs.map((svg, i) => new Promise((ok, ng) => {
+      const c = svg.cloneNode(true);
+      c.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+      c.setAttribute('width', W);
+      c.setAttribute('height', H);
+      const img = new Image();
+      img.onload = () => { ctx.drawImage(img, i * W, 0, W, H); ok(); };
+      img.onerror = () => ng(new Error('送り方の図を描けませんでした'));
+      img.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(new XMLSerializer().serializeToString(c))}`;
+    })));
+    const blob = await new Promise((ok) => canvas.toBlob(ok, 'image/png'));
+    return new Uint8Array(await blob.arrayBuffer());
+  }
+
+  // 出し方メモの、議会ごとの欄に入れること（文は send-memo.js で組み立てる）
+  const plain = (t) => t.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]\uFE0F?\s*/gu, '');
+  function memoCouncil(c, sheets) {
+    const [pref, key] = officeKeys[c] || [];
+    const info = infoOf(c);
+    const o = window.Places.office(pref, key);
+    const t = ((window.TEL || {})[pref] || {})[key];
+    const a = accessOf(pref, key);
+    const rule = mailRule(info);
+    const p = sheets && window.Postage.estimate(sheets);
+    return {
+      name: `${label(c)}事務局`,
+      page: ((window.SITES[pref] || {})[key] || [])[1] || '',
+      mail: rule ? plain(rule.label) : '',
+      denshi: !!info.denshi,
+      tel: t ? `${t[1]}（${t[0] === 'gikai' ? '議会事務局' : '役所。「議会事務局につないでください」と伝える'}）` : '',
+      address: o.address ? `〒${o.zip}　${o.address}${o.main ? '（役所の本庁舎。議会事務局が別の建物のこともある）' : ''}` : '',
+      access: a ? `${a[2]}駅（${a[3]}）から${a[4] <= 2500 ? `徒歩約${Math.ceil((a[4] * 1.3) / 80)}分` : `約${km(a[4])}。バスかタクシーが便利`}` : '',
+      deadline: info.deadline ? clip(info.deadline) : '',
+      stamp: p ? (p.yen ? `${sheets}枚・約${p.g}g → ${p.yen}円${p.safe ? `（心配なら${p.safe}円）` : ''}` : `${sheets}枚・約${p.g}g → 郵便局の窓口で出す`) : '',
+    };
+  }
+
+  async function makePdf() {
+    const doc = await window.PdfDoc.create();
+    const envs = envelopes();
+    const sheets = new Map();
+    for (const { c, cover, docs, keys } of envs) {
+      let n = 0;
+      for (const t of cover) n += doc.addDocument(t);
+      for (let i = 0; i < docs.length; i += 1) {
+        n += doc.addDocument(docs[i]);
+        if (window.Figs) await window.Figs.addTo(doc, keysOf(keys[i]));
+      }
+      sheets.set(c, n);
+    }
+    if (pick('wzWithLabels') && real().length) {
+      const rows = real().map((c) => {
+        const [pref, key] = officeKeys[c] || [];
+        return { council: nameOf(c), ...window.Places.office(pref, key) };
+      });
+      doc.addLabels(window.PdfDoc.SHEETS.plain, window.PdfDoc.labelItems(rows, sender, { to: 'chair', zaichu: true, from: true, back: true }));
+    }
+    if (pick('wzWithMemo')) {
+      const png = await figsPng().catch(() => null);
+      const text = window.SendMemo.build({
+        kind: state.kind,
+        count: docKeys().length,
+        titles: docKeys().map(docLabel),
+        councils: real().map((c) => memoCouncil(c, sheets.get(c))),
+        figs: !!png,
+      });
+      doc.addDocument(text, png ? { send: await doc.embedImage(png) } : {});
+    }
+    return doc.bytes();
+  }
+  $('wzNowPdf').addEventListener('click', async (e) => {
+    const btn = e.currentTarget;
+    if (!PICKS.some(pick)) { flash('PDFに入れるものを選んでください'); return; }
+    // 開くのを待つとポップアップとして止められるので、タブは先に開いておく
+    const win = window.open('', '_blank');
+    const text = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'PDFを作っています…';
+    try {
+      const url = URL.createObjectURL(new Blob([await makePdf()], { type: 'application/pdf' }));
+      if (win) win.location.href = url;
+      else window.location.href = url;
+    } catch (err) {
+      if (win) win.close();
+      flash(`PDFを作れませんでした（${err.message}）。通信のよい所でもう一度試してください。`, 5000);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = text;
+    }
+  });
   $('wzNowCopy').addEventListener('click', () => $('wzCopy').click());
+
+  // 「今やること」の手順ごとに、済んだら印を付けられるようにする（読み飛ばしを防ぎ、どこまで済んだか分かるように）
+  document.querySelectorAll('.wz-now-steps > li').forEach((li) => {
+    li.insertAdjacentHTML('beforeend', '<label class="wz-step-done"><input type="checkbox"> できた</label>');
+    li.querySelector('.wz-step-done input').addEventListener('change', (e) => li.classList.toggle('is-done', e.target.checked));
+  });
 
   // 確かめた項目の数を出す。進むのは止めないが、残りがあれば知らせる
   const checks = () => [...document.querySelectorAll('.wz-checklist > ul > li > label > input')].filter((c) => !c.closest('li').hidden);
