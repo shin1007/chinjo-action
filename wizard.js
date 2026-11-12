@@ -366,6 +366,7 @@
     }
     if (s === 'items') renderItems();
     if (s === 'done') $('wzCheck').open = true;
+    if (s === 'send') $('wzHotline').hidden = !state.items.some(isNat);
     if (s === 'send') { renderCheckMail(); renderNow(); renderCheckLeft(); renderChairs(); }
     if (state.step >= ASK_STEPS) build();
     renderCount();
