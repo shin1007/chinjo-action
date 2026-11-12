@@ -675,3 +675,4 @@ summary { cursor: pointer; font-weight: 700; }
 .wz-checklist > summary, .wz-after > summary { cursor: pointer; }
 .wz-checklist[open] > summary, .wz-after[open] > summary { margin-bottom: 8px; }
 .cost-more > summary { cursor: pointer; font-weight: 600; margin: 12px 0 8px; }
+.adopted-list { padding-left: 1.2em; } .adopted-list li { margin-bottom: 8px; }
