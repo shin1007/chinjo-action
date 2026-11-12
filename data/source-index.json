@@ -795,6 +795,15 @@
       "localPath": null
     },
     {
+      "id": "src-4eebef3a65",
+      "title": "AAA (American Automobile Association) \"Headlamp Lens Deterioration\"（2018年12月）",
+      "url": "https://www.aaa.com/AAA/common/AAR/files/Headlamp-Lens-Deterioration.pdf",
+      "note": "要旨と3.3：劣化（黄ばみ・くもり）したレンズのロービームの光は新品の約22％で、光は極めて拡散し、明暗の境目（カットオフ）がほとんどなかった。磨いて直すと約70％まで戻った。米国の自動車団体の試験で、台数は少ない",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-500f1224fb",
       "title": "厚生労働省「令和6年度 医療機関における外国人患者の受入に係る実態調査」概要版",
       "url": "https://www.mhlw.go.jp/content/10800000/001566020.pdf",
@@ -2373,7 +2382,7 @@
       "id": "src-f00983d737",
       "title": "国土交通省・自動車技術総合機構・軽自動車検査協会「令和８年８月１日より、『ロービーム計測』に移行します」（令和8年5月）",
       "url": "https://wwwtb.mlit.go.jp/kinki/content/000374454.pdf",
-      "note": "照射光線は走行時の振動等によりずれていき、点検・調整しないと他の交通を妨げる。平成10年9月1日以降に製作された自動車の車検をロービーム計測に移行。二輪自動車・側車付二輪自動車などは除く",
+      "note": "照射光線は走行時の振動等によりずれていき、点検・調整しないと他の交通を妨げる。平成10年9月1日以降に製作された自動車の車検をロービーム計測に移行。二輪自動車・側車付二輪自動車などは除く。裏面：ヘッドライトは樹脂製が主流で劣化や摩耗を避けられず、整備の例としてレンズ面の清掃・磨き・交換などを挙げる",
       "kind": "official",
       "fetchedAt": null,
       "localPath": null

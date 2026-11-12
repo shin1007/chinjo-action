@@ -682,6 +682,13 @@
       "fetchedAt": "2026-11-11T15:06:09.352Z",
       "sha256": "df45233123f37f7802d4f5c31452007c32fa70b08c87c1bde925afaee822847b",
       "localPath": "sources/archive/2026-11-11-df45233123f3.html"
+    },
+    {
+      "url": "https://www.aaa.com/AAA/common/AAR/files/Headlamp-Lens-Deterioration.pdf",
+      "title": "AAA Headlamp Lens Deterioration (2018)",
+      "fetchedAt": "2026-11-12T00:47:32.078Z",
+      "sha256": "c29ddc37affbda38d27869652c2cb3234355cd231e83bfd69b3ce2fe09bcb891",
+      "localPath": "sources/archive/2026-11-12-c29ddc37affb.pdf"
     }
   ]
 }
