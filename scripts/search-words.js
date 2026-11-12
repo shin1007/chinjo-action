@@ -111,6 +111,8 @@ module.exports = {
   'sonota/n_regular_teacher': '教員 先生 教師不足 正規 非正規 臨時的任用 講師',
   'sonota/n_media_graph': 'グラフ 印象操作 報道 テレビ 新聞 マスコミ 偏向',
   'sonota/n_media_correction': '誤報 訂正 謝罪 おわび 報道 テレビ 新聞 マスコミ',
+  'sonota/n_vehicle_noise': '騒音 うるさい マフラー バイク 暴走族 空ぶかし 改造 車検',
+  'sonota/n_vehicle_light': 'ライト まぶしい 眩しい ヘッドライト 前照灯 LED ハイビーム 車検 バイク',
   'sonota/l_public_school': '公立高校 統廃合 学校 廃校',
   'sonota/l_npo_open': 'NPO 会計 公開 委託 補助金',
   'sonota/l_book_display': '図書館 本屋 書店 BL 本 ゾーニング',
