@@ -561,12 +561,6 @@
     $('wzDocs').innerHTML = keys.map((k, i) => {
       const it = { label: docLabel(k) };
       const e = edits[ek(k)];
-      // 前の日に直した文面は、日付だけを今日にする（出す日に合わせて直すのは、この欄でできる）
-      if (e && e.day !== window.Common.reiwaToday()) {
-        e.text = e.text.replace(/^(\s*)令和.{1,3}年\d{1,2}月\d{1,2}日/, `$1${window.Common.reiwaToday()}`);
-        e.day = window.Common.reiwaToday();
-        saveEdits();
-      }
       // 前に別の議会あてに直した文面は、宛名と自治体名をいまの議会に差し替えて使う
       const text = withSender(e ? swapCouncil(e.text, e.council, first) : window.Petition.build(fd, first, keysOf(k)), sender);
       const others = state.councils.slice(1).map(label);
@@ -1054,7 +1048,6 @@
       : `${docName}は1通です。`;
     $('wzNowCount').classList.toggle('bump', !!bump);
     $('wzNowPdf').textContent = n > 1 ? `${n}通を印刷用のPDFで開く` : '印刷用のPDFを開く';
-    $('wzNowDate').textContent = window.Common.reiwaToday();
     renderNowAsk();
   }
   // 要望書の出し方のページ。都道府県・政令指定都市・人口の多い市区町村は、公式サイトで確かめたページ（data/request-pages.js）へ直接案内する。
