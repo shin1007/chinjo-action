@@ -115,5 +115,6 @@ module.exports = {
   'sonota/n_vehicle_light': 'ライト まぶしい 眩しい ヘッドライト 前照灯 LED ハイビーム 車検 バイク',
   'sonota/l_public_school': '公立高校 統廃合 学校 廃校',
   'sonota/l_npo_open': 'NPO 会計 公開 委託 補助金',
+  'sonota/l_cleanup': 'ごみ拾い ゴミ ポイ捨て 清掃 除草 草刈り ボランティア フレイル 高齢者',
   'sonota/l_book_display': '図書館 本屋 書店 BL 本 ゾーニング',
 };
