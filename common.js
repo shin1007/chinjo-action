@@ -61,14 +61,19 @@ window.Common = (() => {
     try { v = JSON.parse(localStorage.getItem(SENDER_KEY)) || {}; } catch { /* 読めなければ空 */ }
     return Object.fromEntries(SENDER_FIELDS.map((k) => [k, String(v[k] || '')]));
   }
-  // 覚えておくかどうかは利用者が選べる（初めは覚える）。断ったことだけを残し、住所・氏名は残さない
+  // 覚えておくかどうかは利用者が選べる（初めは覚えない）。選んだことだけを残す。
+  // 以前の版（初めは覚える）で住所・氏名が残っている端末は、断っていなければそのまま覚える
+  const SENDER_ON_KEY = 'chinjo-sender-on';
   const SENDER_OFF_KEY = 'chinjo-sender-off';
   function remembers() {
-    try { return localStorage.getItem(SENDER_OFF_KEY) !== '1'; } catch { return false; }
+    try {
+      if (localStorage.getItem(SENDER_OFF_KEY) === '1') return false;
+      return localStorage.getItem(SENDER_ON_KEY) === '1' || localStorage.getItem(SENDER_KEY) !== null;
+    } catch { return false; }
   }
   function setRemember(on, v) {
     try {
-      if (on) { localStorage.removeItem(SENDER_OFF_KEY); saveSender(v || {}); } else { localStorage.setItem(SENDER_OFF_KEY, '1'); forgetSender(); }
+      if (on) { localStorage.removeItem(SENDER_OFF_KEY); localStorage.setItem(SENDER_ON_KEY, '1'); saveSender(v || {}); } else { localStorage.removeItem(SENDER_ON_KEY); localStorage.setItem(SENDER_OFF_KEY, '1'); forgetSender(); }
     } catch { /* 覚えられない環境では、この画面の間だけ使う */ }
   }
   function saveSender(v) {
