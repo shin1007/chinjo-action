@@ -108,7 +108,7 @@
   }
 
   // 郵送でも審査される議会と、郵送だと議員に配付される議会は、都道府県を選ぶ前に全国分を見せる
-  // （家から出せる議会を先に知ってもらう。配付だけでも議員に読んでもらえる）
+  // （家から出せる議会を先に知ってもらう。議員に配るだけでも議員に読んでもらえる）
   // 一覧は長いので、都道府県のボタンの上に折りたたんで置く
   const mailHandout = (pref) => councilsOf(pref).map((c) => idOf(pref, c)).filter((id) => { const r = mailRule(infoOf(id)); return r && r.c !== 'ok'; });
   const MAIL_BOXES = [
@@ -163,7 +163,7 @@
     if (state.kind === 'request') { el.hidden = true; return; }
     el.hidden = !state.councils.length;
     if (el.hidden) return;
-    el.innerHTML = `<p><b>出し方と締切の目安</b>：締切は定例会（多くは2〜3月・6月・9月・12月）の1〜2週間前が多く、過ぎると次の定例会に回ります。住んでいない自治体の議会や郵送の陳情は、審査されず配布だけになることがあります。</p>
+    el.innerHTML = `<p><b>出し方と締切の目安</b>：締切は定例会（多くは2〜3月・6月・9月・12月）の1〜2週間前が多く、過ぎると次の定例会に回ります。住んでいない自治体の議会や郵送の陳情は、審査されず議員に配るだけになることがあります。</p>
       <ul>${state.councils.map((c) => {
         const d = infoOf(c).deadline && clip(infoOf(c).deadline);
         const q = encodeURIComponent(`${search(c)} 陳情 提出 締切`);
@@ -171,12 +171,12 @@
       }).join('')}</ul>`;
   }
 
-  // 出し方の目安。住民以外・郵送の陳情は配布だけになる議会があるので、作る前に選び直せるよう議会を選んだ時点で出す
+  // 出し方の目安。住民以外・郵送の陳情は議員に配るだけになる議会があるので、作る前に選び直せるよう議会を選んだ時点で出す
   // 読み取れた議会は一部だけなので、書いていない議会は「わからない」として扱う
   // 案内ページの一文から、郵送で出して審査してもらえるかを分ける。読み取れた議会だけで、書いていない議会は出さない
-  // ok：郵送で出せる／jisan：審査してもらうには持参が必要／outside：住民以外の郵送は配付だけ／none：出し方に関わらず配付だけ
+  // ok：郵送で出せる／jisan：審査してもらうには持参が必要／outside：住民以外の郵送は議員に配るだけ／none：出し方に関わらず議員に配るだけ
   function mailRule(info) {
-    const fixed = { ok: '📮 郵送でも審査されます', jisan: '🚶 審査してもらうには持参が必要です（郵送は配付だけ）', outside: '🚶 住民以外が審査してもらうには持参が必要です（郵送は配付だけ）', none: '持参でも郵送でも、陳情は審査されず配付だけです' };
+    const fixed = { ok: '📮 郵送でも審査されます', jisan: '🚶 審査してもらうには持参が必要です（郵送は議員に配るだけ）', outside: '🚶 住民以外が審査してもらうには持参が必要です（郵送は議員に配るだけ）', none: '持参でも郵送でも、陳情は審査されず議員に配るだけです' };
     if (info.policy) {
       const { mail_resident: resident, mail_nonresident: nonresident } = info.policy;
       if (resident === 'distribute' && nonresident === 'distribute') return { c: 'none', label: fixed.none };
@@ -188,10 +188,10 @@
     if (info.mail) return { c: info.mail === 'outside' ? 'jisan' : info.mail, label: fixed[info.mail] };
     const t = [info.yusoNote, info.outsideNote].filter((x) => x && /郵送/.test(x)).join(' ');
     if (!t) return null;
-    if (/関わらず|持参（または郵送）/.test(t)) return { c: 'none', label: '持参でも郵送でも、陳情は審査されず配付だけのようです' };
+    if (/関わらず|持参（または郵送）/.test(t)) return { c: 'none', label: '持参でも郵送でも、陳情は審査されず議員に配るだけのようです' };
     if (/郵送[^。]{0,8}可/.test(t)) return { c: 'ok', label: '📮 郵送で出せます' };
-    if (/(市|町|村)外[^。]{0,12}郵送|外に住所[^。]{0,12}郵送/.test(t)) return { c: 'jisan', label: '🚶 住民以外が審査してもらうには持参が必要です（郵送は配付だけ）' };
-    if (/配布|配付|参考|審議[はを]?行わ|審査[はを]?行わ|報告はありません|持参してください/.test(t)) return { c: 'jisan', label: '🚶 審査してもらうには持参が必要です（郵送は配付だけ）' };
+    if (/(市|町|村)外[^。]{0,12}郵送|外に住所[^。]{0,12}郵送/.test(t)) return { c: 'jisan', label: '🚶 住民以外が審査してもらうには持参が必要です（郵送は議員に配るだけ）' };
+    if (/配布|配付|参考|審議[はを]?行わ|審査[はを]?行わ|報告はありません|持参してください/.test(t)) return { c: 'jisan', label: '🚶 審査してもらうには持参が必要です（郵送は議員に配るだけ）' };
     return { c: 'ok', label: '📮 郵送でも受け付けます' };
   }
   // 扱いを最後に確かめた日。data/mail-policy.js は1件ごとの確認日、旧 data/mail.js から移した分はファイルの確認日（11/5・11/6）、
@@ -601,7 +601,7 @@
   const allDocs = () => state.councils.flatMap((c) => areas().map((ta) => docFor(ta, c)));
   // allDocs() と同じ順の、文面ごとの項目（参考図表の別紙を選ぶのに使う）
   const allKeys = () => state.councils.flatMap(() => areas().map((ta) => ta.dataset.key));
-  // 1通目の議会あての1通だけをPDFにして、新しいタブで開く（鏡文・宛名はつけない）
+  // 1通目の議会あての1通だけをPDFにして、新しいタブで開く（送付状・宛名はつけない）
   // 開くのを待つとポップアップとして止められるので、タブは先に開いておく
   // texts を渡すと、その文面（何通でも）を1つのPDFにする。1通ずつ新しいページから始まる
   // keys：texts と同じ順の項目。項目に図があれば、その文面のあとに参考図表の別紙をつける（figs.js）
@@ -958,7 +958,7 @@
         const [pref, key] = officeKeys[id] || [];
         return `<li><b>${esc(municipalityName(id))}</b>：このサイトではまだ扱いを調べられていません。議会事務局に電話で次のことを聞くと確実です。${telHtml(pref, key, false)}
           <ul class="wz-ask">
-            <li>陳情は郵送でも受け付けますか。郵送だと審査されますか、議員への配付だけですか（住民以外が出す場合も）</li>
+            <li>陳情は郵送でも受け付けますか。郵送だと審査されますか、議員に配るだけですか（住民以外が出す場合も）</li>
             <li>次の定例会に間に合う提出の締切はいつですか</li>
             <li>必要な部数（正本・写し）と、決まった書式があるか</li>
             <li>いまの議長のお名前（宛名に書き入れるため）</li>
@@ -975,7 +975,7 @@
     return `${known ? '' : '<p class="wz-tip-lead">📝 聞いて分かったら、下の「分かったことを共有する」を押して送れます（1分ほど・任意）。次に同じ議会に出す人の助けになります。</p>'}<details class="wz-tip"><summary>${known ? `${name}の情報が古い・違うときは、修正を送る（任意）` : `分かったことを共有する（任意）`}</summary>
       <form data-tip="${esc(id)}">
         <p class="hint-sm">電話や公式サイトで分かった<b>${name}の扱い</b>を送ると、確かめてこのサイトに反映します。次に同じ議会に出す人の助けになります。<b>送るのは下の欄の内容だけ</b>で、陳情書の文面・住所・氏名は送りません。分かったところだけで構いません。</p>
-        <fieldset><legend>郵送した陳情は</legend>${radio('mail', [['review', '審査される'], ['distribute', '議員への配付だけ'], ['unknown', '分からない']])}</fieldset>
+        <fieldset><legend>郵送した陳情は</legend>${radio('mail', [['review', '審査される'], ['distribute', '議員に配るだけ'], ['unknown', '分からない']])}</fieldset>
         <fieldset><legend>持参での提出</legend>${radio('bring', [['yes', 'できる'], ['no', 'できない'], ['unknown', '分からない']])}</fieldset>
         <fieldset><legend>電子申請・メールでの提出</legend>${radio('online', [['yes', 'できる'], ['no', 'できない'], ['unknown', '分からない']])}</fieldset>
         <label>電子申請のページのURL<input type="url" name="online_url" maxlength="300" placeholder="https://"></label>

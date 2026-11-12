@@ -214,8 +214,8 @@ window.Petition = (() => {
   }
 
   // 文面の住所の行を、差出人（Common.sender の形）で書き換える。手で直した文面にも使えるよう、行ごと置き換える
-  // 氏名は本人が手書きで署名するので、いつも下線のままにする（入力した氏名は鏡文と封筒にだけ使う）
-  // 電話番号は陳情書には入れない（陳情書は公開されることがあるため）。議会事務局だけが読む鏡文に入れる
+  // 氏名は本人が手書きで署名するので、いつも下線のままにする（入力した氏名は送付状と封筒にだけ使う）
+  // 電話番号は陳情書には入れない（陳情書は公開されることがあるため）。議会事務局だけが読む送付状に入れる
   function withSender(text, s) {
     const addr = [s.zip && `〒${s.zip}`, s.address].filter(Boolean).join('　') || BLANK_TEXT;
     const t = text
@@ -234,7 +234,7 @@ window.Petition = (() => {
     return text.split(from).join(to).split(requestTo(place(from))).join(requestTo(place(to))).split(place(from)).join(place(to));
   }
 
-  // 郵送で陳情書の上に重ねる鏡文（送付状）。docs はその議会に送る陳情書の文面（件名を一覧にする）
+  // 郵送で陳情書の上に重ねる送付状。docs はその議会に送る陳情書の文面（件名を一覧にする）
   function cover(council, docs, s) {
     const addr = [s.zip && `〒${s.zip}`, s.address].filter(Boolean).join('　') || BLANK_TEXT;
     const from = [`住所　${addr}`, `氏名　${s.name || BLANK_TEXT}`, `電話　${s.tel || BLANK_TEXT}`];

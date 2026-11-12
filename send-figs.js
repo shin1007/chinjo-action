@@ -5,7 +5,7 @@ document.querySelectorAll('[data-send-figs]').forEach((box, n) => {
   box.innerHTML = `
     <figure>
       <svg viewBox="0 0 200 250" role="img" aria-labelledby="fig${n}InTitle">
-        <title id="fig${n}InTitle">中身の重ね方：陳情書は1件ごとに左上を留め、鏡文は留めずに上に置き、全部をクリアファイルに入れる</title>
+        <title id="fig${n}InTitle">中身の重ね方：陳情書は1件ごとに左上を留め、送付状は留めずに上に置き、全部をクリアファイルに入れる</title>
         <rect x="22" y="22" width="118" height="160" rx="3" fill="#fff" stroke="#999"/>
         <path d="M27 31 l9 -5" stroke="#333" stroke-width="2.5" stroke-linecap="round"/>
         <text x="92" y="32" font-size="8.5" text-anchor="middle" fill="#666">陳情書2（これだけで留める）</text>
@@ -15,11 +15,11 @@ document.querySelectorAll('[data-send-figs]').forEach((box, n) => {
         <rect x="42" y="50" width="118" height="160" rx="3" fill="#fff" stroke="#555"/>
         <text x="101" y="72" font-size="10" text-anchor="middle" font-weight="bold">陳情書の送付について</text>
         <g stroke="#bbb"><line x1="54" y1="88" x2="148" y2="88"/><line x1="54" y1="98" x2="148" y2="98"/><line x1="54" y1="108" x2="132" y2="108"/><line x1="54" y1="126" x2="148" y2="126"/><line x1="54" y1="136" x2="122" y2="136"/></g>
-        <text x="101" y="170" font-size="9" text-anchor="middle" fill="#666">鏡文（留めずに上に置く）</text>
+        <text x="101" y="170" font-size="9" text-anchor="middle" fill="#666">送付状（留めずに上に置く）</text>
         <rect x="12" y="12" width="158" height="208" rx="4" fill="#e8743b" fill-opacity="0.08" stroke="#e8743b" stroke-dasharray="4 3"/>
         <text x="91" y="236" font-size="8.5" text-anchor="middle" fill="#c95a24">クリアファイル（全部をまとめて入れる）</text>
       </svg>
-      <figcaption><b>① 中身</b><br>ホチキスは<b>陳情書1件ごとに、その陳情書のページだけ</b>を左上で1か所留めます。<b>全部をまとめて留めない</b>でください（件名ごとに別の委員会へ回ることがあります）。鏡文は留めずにいちばん上に置き、全部をクリアファイルに入れます。</figcaption>
+      <figcaption><b>① 中身</b><br>ホチキスは<b>陳情書1件ごとに、その陳情書のページだけ</b>を左上で1か所留めます。<b>全部をまとめて留めない</b>でください（件名ごとに別の委員会へ回ることがあります）。送付状は留めずにいちばん上に置き、全部をクリアファイルに入れます。</figcaption>
     </figure>
     <figure>
       <svg viewBox="0 0 200 250" role="img" aria-labelledby="fig${n}FrontTitle">
