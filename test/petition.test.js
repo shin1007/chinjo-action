@@ -7,15 +7,16 @@ const path = require('node:path');
 const vm = require('node:vm');
 
 const ROOT = path.join(__dirname, '..');
+const SITE = path.join(ROOT, 'site');
 const FILES = ['themes/kodomo/theme.js', 'data/prefs.js', 'themes/kodomo/asks-national.js', 'themes/kodomo/asks-local.js', 'themes/kodomo/template.js', 'data/municipalities.js',
-  'data/offices.js', 'data/sites.js', 'data/councils.js', 'data/kana.js', 'themes/kodomo/reasons.js', 'common.js', 'places.js', 'petition.js'];
+  'data/offices.js', 'data/sites.js', 'data/councils.js', 'data/kana.js', 'themes/kodomo/reasons.js', 'js/common.js', 'js/places.js', 'js/petition.js'];
 
 function load() {
   const ctx = { FormData };
   ctx.window = ctx;
   vm.createContext(ctx);
   // 書き間違いがあると、ここでファイル名つきのエラーになる
-  for (const f of FILES) vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), ctx, { filename: f });
+  for (const f of FILES) vm.runInContext(fs.readFileSync(path.join(SITE, f), 'utf8'), ctx, { filename: f });
   return ctx;
 }
 const w = load();
@@ -105,7 +106,7 @@ test('要望書も生成AIで趣旨と理由を書き直せる', () => {
 test('要望書の出し方のページは、公式サイトのある自治体の https のページで、47都道府県と政令指定都市がそろっている', () => {
   const ctx = { window: {} };
   vm.createContext(ctx);
-  vm.runInContext(fs.readFileSync(path.join(ROOT, 'data/request-pages.js'), 'utf8'), ctx);
+  vm.runInContext(fs.readFileSync(path.join(SITE, 'data/request-pages.js'), 'utf8'), ctx);
   const pages = ctx.window.REQUEST_PAGES;
   for (const [id, [url, title]] of Object.entries(pages)) {
     const [pref, key] = id.split('/');
@@ -114,7 +115,7 @@ test('要望書の出し方のページは、公式サイトのある自治体�
     assert.ok(title, id);
     assert.doesNotMatch(title, /要望活動|パブリック/, id);
   }
-  // 熊本県は見つからなかった（docs/要望書の出し方のページが見つからない自治体.md）
+  // 熊本県は見つからなかった（docs/確認用/要望書の出し方のページが見つからない自治体.md）
   const missing = w.PREFS.filter((p) => !pages[`${p}/@`]);
   assert.deepStrictEqual([...missing], ['熊本県']);
   for (const c of ['札幌市', '仙台市', 'さいたま市', '千葉市', '横浜市', '川崎市', '相模原市', '新潟市', '静岡市', '浜松市', '名古屋市', '京都市', '大阪市', '堺市', '神戸市', '岡山市', '広島市', '北九州市', '福岡市', '熊本市']) {
@@ -173,7 +174,7 @@ for (const theme of ['dansei', 'nihonjin', 'shiho', 'kenko', 'sonota']) {
     ctx.window = ctx;
     vm.createContext(ctx);
     for (const f of FILES.map((f) => f.replace('themes/kodomo/', `themes/${theme}/`))) {
-      vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), ctx, { filename: f });
+      vm.runInContext(fs.readFileSync(path.join(SITE, f), 'utf8'), ctx, { filename: f });
     }
     assert.strictEqual(ctx.THEME.id, theme);
     const ids = ctx.ASKS.map((a) => a.id);

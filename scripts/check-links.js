@@ -6,21 +6,22 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
+const SITE = path.join(ROOT, 'site');
 const arg = process.argv.indexOf('--theme');
 const only = arg > 0 ? process.argv[arg + 1] : null;
-const THEMES = fs.readdirSync(path.join(ROOT, 'themes')).filter((d) => (!only || d === only) && fs.existsSync(path.join(ROOT, 'themes', d, 'asks-national.js')));
+const THEMES = fs.readdirSync(path.join(SITE, 'themes')).filter((d) => (!only || d === only) && fs.existsSync(path.join(SITE, 'themes', d, 'asks-national.js')));
 
 const urls = new Map(); // url -> 使っている場所
 const add = (url, where) => { if (!/^https?:/.test(url || '')) return; if (!urls.has(url)) urls.set(url, []); urls.get(url).push(where); };
 for (const theme of THEMES) {
   const window = {};
   for (const f of ['asks-national.js', 'asks-local.js']) {
-    const p = path.join(ROOT, 'themes', theme, f);
+    const p = path.join(SITE, 'themes', theme, f);
     if (fs.existsSync(p)) new Function('window', fs.readFileSync(p, 'utf8'))(window);
   }
   for (const a of window.ASKS || []) for (const r of a.refs || []) add(r.url, `${theme}/${a.id}`);
 }
-if (!only) for (const p of JSON.parse(fs.readFileSync(path.join(ROOT, 'data/archive-index.json'), 'utf8')).pages || []) add(p.url, 'archive-index');
+if (!only) for (const p of JSON.parse(fs.readFileSync(path.join(SITE, 'data/archive-index.json'), 'utf8')).pages || []) add(p.url, 'archive-index');
 
 async function check(url) {
   for (const method of ['HEAD', 'GET']) {

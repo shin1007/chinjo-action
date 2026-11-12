@@ -5,10 +5,11 @@ const path = require('node:path');
 const vm = require('node:vm');
 
 const ROOT = path.join(__dirname, '..');
+const SITE = path.join(ROOT, 'site');
 const ctx = {};
 ctx.window = ctx;
 vm.createContext(ctx);
-for (const f of ['data/prefs.js', 'data/municipalities.js', 'places.js']) vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), ctx, { filename: f });
+for (const f of ['data/prefs.js', 'data/municipalities.js', 'js/places.js']) vm.runInContext(fs.readFileSync(path.join(SITE, f), 'utf8'), ctx, { filename: f });
 
 const q = (s) => `'${s.replaceAll("'", "''")}'`;
 const rows = [...new Set(ctx.Places.all().map((pl) => `(${q(pl.pref)}, ${q(pl.council)})`))];

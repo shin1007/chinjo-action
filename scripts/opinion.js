@@ -9,14 +9,15 @@ const path = require('node:path');
 const vm = require('node:vm');
 
 const ROOT = path.join(__dirname, '..');
-const OUT = path.join(ROOT, 'data/candidates/opinion-unverified.csv');
+const SITE = path.join(ROOT, 'site');
+const OUT = path.join(SITE, 'data/candidates/opinion-unverified.csv');
 const CACHE = path.join(ROOT, 'scripts/.opinion-cache.json');
 const onlyPref = process.argv[2];
 
 const ctx = {};
 ctx.window = ctx;
 vm.createContext(ctx);
-vm.runInContext(fs.readFileSync(path.join(ROOT, 'data/sites.js'), 'utf8'), ctx, { filename: 'data/sites.js' });
+vm.runInContext(fs.readFileSync(path.join(SITE, 'data/sites.js'), 'utf8'), ctx, { filename: 'data/sites.js' });
 
 // 意見を送るページの名前。パブリックコメントは期間と案件が決まっているので入れない
 const WORDS = /市長への(手紙|提案|メール|ご意見)|知事への(手紙|提案|メール|ご意見)|町長への(手紙|提案)|村長への(手紙|提案)|区長への(手紙|提案)|(市民|町民|村民|区民|県民|府民|都民|道民)の(声|ご意見|意見)|ご意見・ご提案|ご意見・ご要望|意見・提案|ご意見箱|提案箱|ＷＥＢ提案箱/;

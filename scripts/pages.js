@@ -6,6 +6,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
+const SITE = path.join(ROOT, 'site');
 const THEMES = [
   // ogAlt：リンクカードの画像（themes/<id>/og-image.png、scripts/og-images.py で作る）の大見出し
   // letter：かんたん作成のできあがりの画面に出す、議員への手紙（トップページにある）への案内
@@ -43,7 +44,7 @@ function render(page, theme) {
 }
 
 function pages() {
-  return THEMES.flatMap((t) => PAGES.map((p) => ({ file: path.join(ROOT, t.id, `${p}.html`), html: render(p, t) })));
+  return THEMES.flatMap((t) => PAGES.map((p) => ({ file: path.join(SITE, t.id, `${p}.html`), html: render(p, t) })));
 }
 
 if (require.main === module) {

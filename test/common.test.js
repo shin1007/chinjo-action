@@ -6,12 +6,13 @@ const path = require('node:path');
 const vm = require('node:vm');
 
 const ROOT = path.join(__dirname, '..');
+const SITE = path.join(ROOT, 'site');
 const ctx = {};
 ctx.window = ctx;
 vm.createContext(ctx);
 for (const f of ['themes/kodomo/theme.js', 'data/prefs.js', 'themes/kodomo/asks-national.js', 'themes/kodomo/asks-local.js', 'themes/kodomo/template.js',
-  'common.js', 'petition.js', 'yomi.js', 'postage.js']) {
-  vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), ctx, { filename: f });
+  'js/common.js', 'js/petition.js', 'js/yomi.js', 'js/postage.js']) {
+  vm.runInContext(fs.readFileSync(path.join(SITE, f), 'utf8'), ctx, { filename: f });
 }
 
 test('esc は HTML の記号をすべて置き換える', () => {
@@ -59,7 +60,7 @@ test('関連資料のページの項目ごとの資料が asks-*.js の refs と
   }
 });
 
-test('docs/見本/ の文面と出し方メモが、いまの文面と食い違わない（直したら node scripts/samples.js）', () => {
+test('docs/確認用/見本/ の文面と出し方メモが、いまの文面と食い違わない（直したら node scripts/samples.js）', () => {
   const r = require('node:child_process').spawnSync(process.execPath, [path.join(ROOT, 'scripts', 'samples.js'), '--check'], { encoding: 'utf8' });
   assert.strictEqual(r.status, 0, r.stderr);
 });

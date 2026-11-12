@@ -5,6 +5,7 @@ const path = require('node:path');
 const { collect, searchIndex } = require('../scripts/export-ai');
 
 const ROOT = path.join(__dirname, '..');
+const SITE = path.join(ROOT, 'site');
 
 test('AI連携用データが全テーマと全資料を含む', () => {
   const actual = JSON.parse(fs.readFileSync(path.join(ROOT, 'ai', 'petitions.json'), 'utf8'));
@@ -27,7 +28,7 @@ test('項目の参考資料IDが一次資料索引に存在する', () => {
 
 test('トップの検索用の一覧が最新', () => {
   // Windows で取り出すと改行が CRLF になるので、そろえて比べる
-  const actual = fs.readFileSync(path.join(ROOT, 'search-index.js'), 'utf8').replace(/\r\n/g, '\n');
+  const actual = fs.readFileSync(path.join(SITE, 'js/search-index.js'), 'utf8').replace(/\r\n/g, '\n');
   assert.strictEqual(actual, searchIndex(collect()));
 });
 

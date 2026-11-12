@@ -1,15 +1,15 @@
 # 日常の UI・フロー改修では、巨大な実データを自動でコンテキストに含めない。
 # 必要な場合は、対象ファイルをプロンプトで明示して読み込むこと。
-/data/councils.js
-/data/sites.js
-/data/tel.js
-/data/offices.js
-/data/access.js
-/data/kana.js
-/themes/*/asks-national.js
-/themes/*/asks-local.js
+/site/data/councils.js
+/site/data/sites.js
+/site/data/tel.js
+/site/data/offices.js
+/site/data/access.js
+/site/data/kana.js
+/site/themes/*/asks-national.js
+/site/themes/*/asks-local.js
 
 # 実行時に必要だが、通常の改修では読む必要がないライブラリ本体。
 # 必要な場合は、対象ファイルを明示して読み込むこと。
-/vendor/*.min.js
-/vendor/qrcode.js
+/site/vendor/*.min.js
+/site/vendor/qrcode.js

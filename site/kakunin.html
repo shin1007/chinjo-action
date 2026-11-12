@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>送りたい議会の郵送・持参の扱いがわからない｜陳情アクション</title>
+<meta name="description" content="送りたい議会の陳情が郵送で審査されるか、持参が必要かを公式案内で確認するためのページです。">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header class="site-header"><div class="wrap header-inner">
+  <a href="/" class="logo">陳情アクション</a>
+  <nav class="primary-nav" aria-label="主要メニュー"><a href="/about">陳情って何？</a></nav>
+</div></header>
+<main class="wrap guide contribution">
+  <p class="hero-crumb"><a href="/">陳情アクション</a> ＞ <b>送りたい議会の郵送・持参の扱いがわからない</b></p>
+  <h1>議会への出し方を、みんなで確かめる</h1>
+  <p>まだ確認できていない議会について、案内を読んで電話で確かめてください。確認できた内容だけを送ってください。</p>
+  <div class="box">
+    <b>公開前の確認</b>
+    <ul>
+      <li>電話番号は議会事務局を優先して表示しています。つながらないときは代表番号にお尋ねください。</li>
+      <li>教えていただいた内容は、管理者が確認してから公開します。</li>
+      <li>個人の体験談だけで公式根拠がない場合は、公開データの根拠に使いません。</li>
+    </ul>
+  </div>
+  <form id="contributionForm">
+    <p class="form-label">自治体（人口順）</p>
+    <p class="hint-sm">人口は総務省「住民基本台帳に基づく人口」（2026年1月1日現在）を使っています。</p>
+    <label>自治体を検索
+      <input id="councilSearch" type="search" placeholder="例：杉並区、東京都">
+    </label>
+    <label>検索結果から自治体を選択
+      <select id="council" required><option value="">選んでください</option></select>
+    </label>
+    <p id="councilPhone" class="phone-callout" hidden></p>
+    <fieldset>
+      <legend>その自治体の住民が、郵送で出した場合は？</legend>
+      <label><input type="radio" name="mailResident" value="ok" required> 審査される</label>
+      <label><input type="radio" name="mailResident" value="distribute"> 写しの配付だけ</label>
+      <label><input type="radio" name="mailResident" value="conditional"> 場合による</label>
+    </fieldset>
+    <fieldset>
+      <legend>その自治体の住民以外が、郵送で出した場合は？</legend>
+      <label><input type="radio" name="mailNonresident" value="ok" required> 審査される</label>
+      <label><input type="radio" name="mailNonresident" value="distribute"> 写しの配付だけ</label>
+      <label><input type="radio" name="mailNonresident" value="conditional"> 場合による</label>
+    </fieldset>
+    <fieldset>
+      <legend>その自治体の住民以外が、持参で出した場合は？</legend>
+      <label><input type="radio" name="handNonresident" value="ok" required> 審査される</label>
+      <label><input type="radio" name="handNonresident" value="distribute"> 写しの配付だけ</label>
+      <label><input type="radio" name="handNonresident" value="conditional"> 場合による</label>
+    </fieldset>
+    <fieldset>
+      <legend>参考資料を添付できるか？</legend>
+      <label><input type="radio" name="referenceMaterials" value="yes" required> 添付できる</label>
+      <label><input type="radio" name="referenceMaterials" value="no"> 添付できない</label>
+      <label><input type="radio" name="referenceMaterials" value="conditional"> 場合による</label>
+    </fieldset>
+    <label>注意事項（場合による・任意）
+      <textarea id="note" rows="4" placeholder="委員会で審査した結果による、在勤・在学の場合のみ、など"></textarea>
+    </label>
+    <label>確認した日付
+      <input id="verifiedAt" type="date" required>
+    </label>
+    <button class="btn btn-primary" type="submit">送る</button>
+  </form>
+  <section id="result" hidden>
+    <h2>送る内容を確認する</h2>
+    <p class="hint-sm">内容を確認してから、確認内容をコピーするかデータを保存してください。管理者が電話での確認結果を確認して公開します。</p>
+    <textarea id="output" rows="16" readonly></textarea>
+    <p><button id="copyReport" class="btn btn-small" type="button">確認内容をコピー</button> <button id="downloadJson" class="btn btn-small" type="button">確認内容を保存</button></p>
+  </section>
+</main>
+<footer class="site-footer"><div class="wrap"><p><a href="/">陳情アクション</a>　｜　<a href="/about">陳情って何？</a>　｜　<a href="/support">このサイトを支える</a></p></div></footer>
+<p id="toast" class="toast" hidden>コピーしました</p>
+<script src="/data/municipalities.js"></script>
+<script src="/data/tel.js"></script>
+<script src="/js/kakunin.js"></script>
+</body>
+</html>

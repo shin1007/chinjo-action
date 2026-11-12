@@ -1,6 +1,6 @@
 // 陳情項目・参考資料・陳情書の文面を、外部の AI にレビューを頼むためのフォルダにまとめる。
 // 使い方：node scripts/review-pack.js（themes/*/ を直接読む）
-// 出力：docs/外部レビュー/
+// 出力：docs/確認用/外部レビュー/
 //   README.md                 … 全体の説明と渡し方
 //   Grokへのプロンプト.md     … 貼り付けて使う依頼文
 //   <テーマ>/項目と参考資料.md … 項目ごとの求めること・理由・資料
@@ -11,14 +11,14 @@ const path = require('path');
 const vm = require('vm');
 
 const root = path.join(__dirname, '..');
-const outDir = path.join(root, 'docs', '外部レビュー');
+const outDir = path.join(root, 'docs', '確認用', '外部レビュー');
 const fill = (s, v) => String(s || '').replace(/\{(内容|種類|宛先)\}/g, (_, k) => v[k]);
 
 function loadTheme(id) {
   const ctx = { window: {} };
   vm.createContext(ctx);
   for (const f of ['theme.js', 'template.js', 'asks-national.js', 'asks-local.js']) {
-    const p = path.join(root, 'themes', id, f);
+    const p = path.join(root, 'site', 'themes', id, f);
     if (fs.existsSync(p)) vm.runInContext(fs.readFileSync(p, 'utf8'), ctx, { filename: p });
   }
   const w = ctx.window;
@@ -26,8 +26,8 @@ function loadTheme(id) {
   return { id, theme: w.THEME || {}, template: w.TEMPLATE || {}, asks };
 }
 
-const themeIds = fs.readdirSync(path.join(root, 'themes'))
-  .filter((d) => fs.existsSync(path.join(root, 'themes', d, 'template.js')));
+const themeIds = fs.readdirSync(path.join(root, 'site', 'themes'))
+  .filter((d) => fs.existsSync(path.join(root, 'site', 'themes', d, 'template.js')));
 const themes = themeIds.map(loadTheme);
 const themeName = (t) => t.theme.name || t.theme.title || t.id;
 
@@ -97,10 +97,10 @@ const R = ['# 外部レビュー用の資料', '', `作成日：${today}`, '',
   '## フォルダ', '', '| テーマ | フォルダ | 項目数 | 参考資料 |', '|---|---|---|---|',
   ...summary.map((s) => `| ${s.name}（${s.id}） | ${s.name}/ | ${s.items} | ${s.refs} |`), '',
   '各フォルダの中身：', '- `項目と参考資料.md`：項目ごとの求めること・理由・参考資料（題名・URL・根拠にした所）', '- `陳情書と要望書の文面.md`：サイトが作る陳情書（議会あて）と要望書（市長あて・自治体あての項目のみ）の文面（1項目1通）', '',
-  '英語の資料の原文と訳は `docs/英語の参考資料の訳.md`、原文を確かめられなかった資料は `docs/一次資料に当たれていない資料.md` にあります。', '',
-  '## 渡し方', '', '1. `Grokへのプロンプト.md` の依頼文を貼る。', '2. テーマを1つ選び、そのフォルダの `項目と参考資料.md` と `陳情書と要望書の文面.md` を添付する（1回に1テーマ）。', '3. 英語の資料の読み違いも見てもらうなら、`docs/英語の参考資料の訳.md` も添える。', '',
+  '英語の資料の原文と訳は `docs/作業メモ/英語の参考資料の訳.md`、原文を確かめられなかった資料は `docs/確認用/一次資料に当たれていない資料.md` にあります。', '',
+  '## 渡し方', '', '1. `Grokへのプロンプト.md` の依頼文を貼る。', '2. テーマを1つ選び、そのフォルダの `項目と参考資料.md` と `陳情書と要望書の文面.md` を添付する（1回に1テーマ）。', '3. 英語の資料の読み違いも見てもらうなら、`docs/作業メモ/英語の参考資料の訳.md` も添える。', '',
   '作り直すとき：`node scripts/review-pack.js`'];
 fs.writeFileSync(path.join(outDir, 'README.md'), R.join('\n'));
 
 fs.copyFileSync(path.join(__dirname, 'review-prompt-grok.md'), path.join(outDir, 'Grokへのプロンプト.md'));
-console.log(`docs/外部レビュー/ に ${themes.length} テーマ・${summary.reduce((n, s) => n + s.items, 0)} 項目を書きました`);
+console.log(`docs/確認用/外部レビュー/ に ${themes.length} テーマ・${summary.reduce((n, s) => n + s.items, 0)} 項目を書きました`);

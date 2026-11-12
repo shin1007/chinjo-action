@@ -10,7 +10,8 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 
 const ROOT = path.join(__dirname, '..');
-const INDEX_FILE = path.join(ROOT, 'data', 'archive-index.json');
+const SITE = path.join(ROOT, 'site');
+const INDEX_FILE = path.join(SITE, 'data', 'archive-index.json');
 const DIR = path.join(ROOT, 'sources', 'archive');
 const index = fs.existsSync(INDEX_FILE)
   ? JSON.parse(fs.readFileSync(INDEX_FILE, 'utf8'))

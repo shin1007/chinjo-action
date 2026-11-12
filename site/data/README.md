@@ -1,0 +1,33 @@
+# 陳情書の文面を直すには
+
+陳情書の文面はこのフォルダのファイルにまとめてあります。直すと、かんたん作成・詳しい版の両方に反映されます。
+
+| 直したいもの | ファイル |
+|---|---|
+| 国に意見書を求める陳情の内容（件名の言葉・求めること・理由） | [../themes/kodomo/asks-national.js](../themes/kodomo/asks-national.js) |
+| 自治体に取り組んでもらう陳情の内容 | [../themes/kodomo/asks-local.js](../themes/kodomo/asks-local.js) |
+| 件名・趣旨・結びの決まった文章、意見書の提出先 | [../themes/kodomo/template.js](../themes/kodomo/template.js) |
+| 理由の例文（出典つき。廃止した陳情書ビルダー用で、今は使っていない） | [../themes/kodomo/reasons.js](../themes/kodomo/reasons.js) |
+| 都道府県の一覧 | [prefs.js](prefs.js) |
+
+以下のファイルは自動で作ったデータなので、手で直す必要はありません。
+- [municipalities.js](municipalities.js)：市区町村の一覧
+- [offices.js](offices.js)：役所の住所
+- [kana.js](kana.js)：市区町村名の読み（ひらがなで議会を絞り込むため）
+- [sites.js](sites.js)：公式サイトと、陳情・請願の案内ページへのリンク（自動で見つけたもの）
+- [councils.js](councils.js)：議長名・議会事務局の住所・提出方法の注意（各議会のページから自動で読み取ったもの）
+- [access.js](access.js)：議会事務局（なければ本庁舎）の位置と最寄り駅（`node scripts/access.js` で作る）
+
+## 直すときの注意
+- 文章は `'` と `'` で囲まれています。文章の中に半角の `'` を書くと壊れるので、使うときは全角の「’」にしてください。
+- 各行の最後の `,` は消さないでください。
+- `id` は変えないでください。
+- Node.js が入っていれば、直したあとに `npm test` を実行すると、書き間違いのあるファイル名と行を教えてくれます。
+- 直したら、トップページを開いてかんたん作成を最後まで進め、陳情書ができることを確かめてください。画面に何も出ないときは、`,` や `'` の抜けがないか見直してください。
+- `mail.js`：陳情を郵送で出したときに審査されるか。議会の公式サイトで1件ずつ確かめたもの（Grok で調べたものと、sites.js の案内ページから郵送についての一文を拾ったものを、1件ずつ読んで確かめて取り込む）。
+- `candidates/councils-unverified.csv`：AI でまとめた議会の一覧（2026-11-05、全8地方の CSV）から、今のデータにない値だけを控えたもの。まだ確かめていないので、サイトでは使っていない。郵便番号は住所が同じなのに番号だけ違うもの（議会や役所の専用の番号かもしれない）、電話番号は tel.js にない議会のもの。使う前に公式サイトで確かめる。
+
+## AI連携用の文面と一次資料
+
+- `source-index.json`：`themes/*/asks-*.js` の参考資料をまとめた索引。本文は保存せず、必要な資料だけ `node scripts/source.js <資料ID>` で `sources/cache/` に保存する。
+- `../../ai/petitions.json`：陳情の項目、求める事項、理由、定型文、参考資料IDをまとめたAI連携用データ。`node scripts/export-ai.js` で再生成する。

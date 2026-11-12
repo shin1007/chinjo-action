@@ -9,8 +9,9 @@
 const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
+const SITE = path.join(ROOT, 'site');
 global.window = global;
-require(path.join(ROOT, 'data/request-pages.js'));
+require(path.join(SITE, 'data/request-pages.js'));
 
 const MODEL = process.env.OLLAMA_MODEL || 'qwen3:8b';
 const HOST = process.env.OLLAMA_HOST || 'http://localhost:11434';

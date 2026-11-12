@@ -5,7 +5,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const ROOT = path.join(__dirname, '..');
-const INDEX_FILE = path.join(ROOT, 'data', 'source-index.json');
+const SITE = path.join(ROOT, 'site');
+const INDEX_FILE = path.join(SITE, 'data', 'source-index.json');
 const CACHE = path.join(ROOT, 'sources', 'cache');
 const index = JSON.parse(fs.readFileSync(INDEX_FILE, 'utf8'));
 
