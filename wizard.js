@@ -1150,7 +1150,7 @@
     $('wzCheckLeft').textContent = left ? `⚠ まだ確かめていない項目が ${left}つ あります。チェックがないまま出すと、${state.kind === 'request' ? '受け付けられなかったり、思わぬ形で公開されたりすることがあります' : '受け付けられなかったり審査されなかったりすることがあります'}。` : '✓ すべて確かめました。印刷して出せます。';
     $('wzCheckLeft').classList.toggle('done', !left);
     $('wzNowLeft').hidden = !left;
-    $('wzNowLeft').textContent = `⚠ 下の「出す前に確かめること」が、まだ${left}つ残っています。印刷はできますが、出す前に確かめてください。`;
+    $('wzNowLeft').textContent = `下の「出す前に確かめること」を開くと、出す前に見ておくと安心な項目が${left}つあります（印刷はこのままできます）。`;
   }
   checks().forEach((c) => c.addEventListener('change', renderCheckLeft));
 

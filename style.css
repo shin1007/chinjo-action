@@ -672,3 +672,5 @@ summary { cursor: pointer; font-weight: 700; }
 .compare-details > summary { cursor: pointer; font-weight: 600; color: var(--main-dark); margin-bottom: 12px; }
 .pick-ways.pick-one { grid-template-columns: minmax(0, 480px); justify-content: center; }
 .pick-others { font-size: 0.92rem; color: var(--muted); margin-top: 8px; }
+.wz-checklist > summary, .wz-after > summary { cursor: pointer; }
+.wz-checklist[open] > summary, .wz-after[open] > summary { margin-bottom: 8px; }
