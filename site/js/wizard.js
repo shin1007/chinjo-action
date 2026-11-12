@@ -26,7 +26,7 @@
   const firstItems = () => (linkedItem || '').split(',').filter((k) => window.ASKS.some((a) => a.id === k));
   // テーマのページで「要望書」を選んで来たときは ?kind=request が付いている
   const startKind = () => (new URLSearchParams(location.search).get('kind') === 'request' ? 'request' : 'petition');
-  const state = { step: 0, pref: '', councils: [], items: firstItems(), role: '', kind: startKind(), merge: false };
+  const state = { step: 0, pref: '', councils: [], items: firstItems(), role: '', kind: startKind(), merge: false, reply: false };
   const kindInputs = () => document.querySelectorAll('input[name="wzKind"]');
   const setKindInputs = () => kindInputs().forEach((r) => { r.checked = r.value === state.kind; });
 
@@ -549,20 +549,26 @@
   // 陳情書と要望書は文面が違うので、直した文面は別々に残す（陳情書は前からのキーのまま）
   const ek = (k) => (state.kind === 'request' ? `request:${k}` : k);
   const { swapCouncil } = window.Petition;
+  // 要望書で「回答を希望する」を選んだときだけ、最後に回答のお願いを入れる
+  const replied = (text) => window.Petition.withReply(text, state.kind === 'request' && state.reply);
   const forCouncil = (text, c) => swapCouncil(text, nameOf(state.councils[0]), nameOf(c));
 
   function build() {
     const first = nameOf(state.councils[0]);
     const fd = formData();
     renderMerge();
+    renderReply();
     const keys = docKeys();
+    // 意見書の案は、国に意見書を求める陳情のときだけ選べる
+    const P = window.Petition;
+    $('wzIkensho').closest('label').hidden = state.kind === 'request' || !keys.some((k) => keysOf(k).some((x) => P.ITEMS[x] && P.isNational(P.ITEMS[x])));
     // 差出人が空なら、入れるとそのまま出せる形になることを知らせる
     $('wzNoSender').hidden = !!(sender.address || sender.name);
     $('wzDocs').innerHTML = keys.map((k, i) => {
       const it = { label: docLabel(k) };
       const e = edits[ek(k)];
       // 前に別の議会あてに直した文面は、宛名と自治体名をいまの議会に差し替えて使う
-      const text = withSender(e ? swapCouncil(e.text, e.council, first) : window.Petition.build(fd, first, keysOf(k)), sender);
+      const text = replied(withSender(e ? swapCouncil(e.text, e.council, first) : window.Petition.build(fd, first, keysOf(k)), sender));
       const others = state.councils.slice(1).map(label);
       return `<details class="wz-doc" ${i === 0 || keys.length <= 3 ? 'open' : ''}>
         <summary><b>${i + 1}. ${esc(it.label)}</b><span><i class="wz-edited"${e ? '' : ' hidden'}>直した文面・</i>${state.councils.length}通</span></summary>
@@ -581,6 +587,18 @@
     renderMatrix();
     renderOffices();
   }
+
+  // 要望書の回答を希望するか。要らない人もいるので、選んだときだけ文面に入れる
+  function renderReply() {
+    const box = $('wzReply');
+    if (!box) return;
+    box.hidden = state.kind !== 'request';
+    $('wzReplyOn').checked = !!state.reply;
+  }
+  if ($('wzReplyOn')) $('wzReplyOn').addEventListener('change', (e) => {
+    state.reply = e.target.checked;
+    build(); renderNow(); saveDraft();
+  });
 
   // まとめて1通にするかの切り替え。まとめられないときは理由を出す
   function renderMerge() {
@@ -628,8 +646,8 @@
   // 内容ごとの文面を、議会の数だけ広げる
   // 直していない内容は議会ごとに組み立て直す（「東京都」のような名前を本文ごと置き換えないように）
   const areas = () => [...$('wzDocs').querySelectorAll('textarea')];
-  const docFor = (ta, c) => withChair(withSender(edits[ek(ta.dataset.key)] ? forCouncil(ta.value, c)
-    : window.Petition.build(formData(), nameOf(c), keysOf(ta.dataset.key)), sender), c).trim();
+  const docFor = (ta, c) => replied(withChair(withSender(edits[ek(ta.dataset.key)] ? forCouncil(ta.value, c)
+    : window.Petition.build(formData(), nameOf(c), keysOf(ta.dataset.key)), sender), c)).trim();
   const allDocs = () => state.councils.flatMap((c) => areas().map((ta) => docFor(ta, c)));
   $('wzDocs').addEventListener('input', (e) => {
     const k = e.target.dataset.key;
@@ -1148,7 +1166,7 @@
   // ---------- 印刷用のPDF（陳情書・送付状・宛名・出し方メモ） ----------
   // 要望書は議会に出さないので、送付状と宛名の用紙は入れない
   const pick = (id) => $(id).checked && !$(id).closest('label').hidden;
-  const PICKS = ['wzBody', 'wzCover', 'wzWithLabels', 'wzWithMemo'];
+  const PICKS = ['wzBody', 'wzIkensho', 'wzCover', 'wzWithLabels', 'wzWithMemo'];
   const pickBoxes = () => PICKS.map($).filter((el) => !el.closest('label').hidden);
   function renderPickAll() {
     const all = pickBoxes().every((el) => el.checked);
@@ -1165,7 +1183,9 @@
   const envelopes = () => state.councils.map((c) => {
     const docs = areas().map((ta) => docFor(ta, c));
     const cover = pick('wzCover') && !isNone(c) ? [window.Petition.cover(nameOf(c), docs, sender)] : [];
-    return { c, cover, docs: pick('wzBody') ? docs : [], keys: areas().map((ta) => ta.dataset.key) };
+    // 国に意見書を求める陳情には、意見書の案を別紙で添えられる（その陳情書のすぐ後ろに入れる）
+    const iken = areas().map((ta) => (pick('wzIkensho') && !isNone(c) ? window.Petition.ikensho(nameOf(c), keysOf(ta.dataset.key)) : ''));
+    return { c, cover, docs: pick('wzBody') ? docs : [], iken, keys: areas().map((ta) => ta.dataset.key) };
   });
 
   // 送り方の図（send-figs.js）は、画面の SVG を3枚横に並べた PNG にしてメモに入れる
@@ -1213,6 +1233,7 @@
       address: o.address ? `〒${o.zip}　${o.address}${o.main ? '（役所の本庁舎。議会事務局が別の建物のこともある）' : ''}` : '',
       access: a ? `${a[2]}駅（${a[3]}）から${a[4] <= 2500 ? `徒歩約${Math.ceil((a[4] * 1.3) / 80)}分` : `約${km(a[4])}。バスかタクシーが便利`}` : '',
       deadline: info.deadline ? clip(info.deadline) : '',
+      sessions: ((((window.SESSIONS || {})[pref] || {})[key]) || [])[0] || '',
       stamp: p ? (p.yen ? `${sheets}枚・約${p.g}g → ${p.yen}円${p.safe ? `（心配なら${p.safe}円）` : ''}` : `${sheets}枚・約${p.g}g → 郵便局の窓口で出す`) : '',
     };
   }
@@ -1221,12 +1242,15 @@
     const doc = await window.PdfDoc.create();
     const envs = envelopes();
     const sheets = new Map();
-    for (const { c, cover, docs, keys } of envs) {
+    for (const { c, cover, docs, iken, keys } of envs) {
       let n = 0;
       for (const t of cover) n += doc.addDocument(t);
-      for (let i = 0; i < docs.length; i += 1) {
-        n += doc.addDocument(docs[i]);
-        if (window.Figs) await window.Figs.addTo(doc, keysOf(keys[i]));
+      for (let i = 0; i < keys.length; i += 1) {
+        if (docs[i]) {
+          n += doc.addDocument(docs[i]);
+          if (window.Figs) await window.Figs.addTo(doc, keysOf(keys[i]));
+        }
+        if (iken[i]) n += doc.addDocument(iken[i]);
       }
       sheets.set(c, n);
     }
@@ -1337,8 +1361,8 @@
     if (state.step >= ASK_STEPS) rememberCouncils();
     if (STEPS[state.step] === 'council') renderRecent();
     if (!state.items.length) return;
-    const { step, pref, councils, items, role, kind, merge } = state;
-    try { localStorage.setItem(DRAFT_KEY, JSON.stringify({ step, pref, councils, items, role, kind, merge })); } catch { /* 残せなくても作れる */ }
+    const { step, pref, councils, items, role, kind, merge, reply } = state;
+    try { localStorage.setItem(DRAFT_KEY, JSON.stringify({ step, pref, councils, items, role, kind, merge, reply })); } catch { /* 残せなくても作れる */ }
   }
   function clearDraft() {
     try { localStorage.removeItem(DRAFT_KEY); } catch { /* 残していない */ }
@@ -1355,7 +1379,7 @@
       let step = Math.max(0, Math.min(Number(d.step) || 0, STEPS.length - 1));
       if (!councils.length) step = Math.min(step, 1);
       else if (!role) step = Math.min(step, 2);
-      return { items, councils, role, step, pref: window.PREFS.includes(d.pref) ? d.pref : '', kind: d.kind === 'request' ? 'request' : 'petition', merge: !!d.merge };
+      return { items, councils, role, step, pref: window.PREFS.includes(d.pref) ? d.pref : '', kind: d.kind === 'request' ? 'request' : 'petition', merge: !!d.merge, reply: !!d.reply };
     } catch { return null; }
   }
 

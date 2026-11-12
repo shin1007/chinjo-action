@@ -145,6 +145,9 @@
           </fieldset>
           <p id="wzMergeWhy" class="hint-sm"></p>
         </div>
+        <div id="wzReply" class="wz-merge" hidden>
+          <label><input type="checkbox" id="wzReplyOn"> <b>役所からの回答を希望する</b><span class="hint-sm">選ぶと、要望書の最後に「回答のお願い」が入り、検討の結果を住所あてに知らせてもらうよう頼みます。回答をもらうには、住所と氏名をはっきり書く必要があります（匿名だと回答しない自治体が多くあります）。回答まではおおむね1〜3週間です。回答が要らなければ、選ばずにそのまま出せます。</span></label>
+        </div>
         <div id="wzNoSender" class="wz-nosender" hidden><p><b>差出人の住所・氏名が空いています。</b>入れると、下の文面と印刷用のPDFが、そのまま出せる形になります（空けたままなら下線になり、手書きで書き入れます）。</p><button type="button" id="wzToSender" class="btn btn-small">住所・氏名を入れる</button></div>
         <p id="wzSummary" class="wz-summary"></p>
         <div id="wzMatrix" class="wz-matrix"></div>
@@ -200,6 +203,7 @@
               <fieldset class="wz-print-picks">
                 <legend>PDFに入れるもの <button type="button" id="wzPickAll" class="btn btn-small">すべて選ぶ</button></legend>
                 <label><input type="checkbox" id="wzBody" checked> <span data-doc-name>陳情書</span>（出すもの）</label>
+                <label hidden><input type="checkbox" id="wzIkensho" checked> 意見書の案（別紙。国に意見書を求める陳情の後ろに添える。議会が意見書を書くときのたたき台になります）</label>
                 <label data-petition-only><input type="checkbox" id="wzCover" checked> 送付状（郵送するとき、いちばん上に重ねる1枚）</label>
                 <label data-petition-only><input type="checkbox" id="wzWithLabels" checked> 宛名・差出人の用紙（封筒の表と裏に、切って貼る）</label>
                 <label><input type="checkbox" id="wzWithMemo" checked> 出し方メモ（手元に残す。やることにチェックを付けながら進められます）</label>
@@ -334,6 +338,7 @@
 <script src="/data/request-pages.js"></script>
 <script src="/data/councils.js"></script>
 <script src="/data/mail.js"></script>
+<script src="/data/sessions.js"></script>
 <script src="/data/tel.js"></script>
 <script src="/data/access.js"></script>
 <script src="/data/kana.js"></script>

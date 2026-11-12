@@ -38,10 +38,12 @@ const fence = (t) => `\`\`\`text\n${t}\n\`\`\``;
 function themeFile([theme, title]) {
   const w = load(theme);
   const L = [`# ${title}：陳情書の文面の見本`, '',
-    '`node scripts/samples.js` で書き出したもの。作成画面で「〇〇市議会」あてに、内容を1つだけ選んだときの文面（参考資料まで）。日付・住所・氏名は空けてある。', ''];
+    '`node scripts/samples.js` で書き出したもの。作成画面で「〇〇市議会」あてに、内容を1つだけ選んだときの文面（参考資料まで）。日付・住所・氏名は空けてある。', '国へ意見書を求める内容には、印刷用のPDFで別紙として添える「意見書の案」も載せる。', ''];
   w.Petition.ordered().forEach((a, i) => {
     const text = w.Petition.build(form([a.id]), '〇〇市議会', [a.id]).replace(/^(\s*)令和.{1,3}年\d{1,2}月\d{1,2}日/, `$1${DAY}`);
     L.push(`## ${i + 1}. ${a.label}`, '', `- 種類：${w.Petition.isNational(a) ? '国へ意見書を求める' : '自治体の取り組みを求める'}${a.category ? `／見出し：${a.category}` : ''}`, '', fence(text), '');
+    const iken = w.Petition.ikensho('〇〇市議会', [a.id]).replace(/^(s*)令和.{1,3}年d{1,2}月d{1,2}日/m, `$1${DAY}`);
+    if (iken) L.push('意見書の案（別紙）', '', fence(iken), '');
   });
   return [`${title}.md`, L.join('\n')];
 }
