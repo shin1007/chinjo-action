@@ -17,3 +17,4 @@ scripts/.link-check.md
 
 # Claude Code の個人の設定
 .claude/settings.local.json
+scripts/.intake-cache/
