@@ -60,6 +60,13 @@ window.Petition = (() => {
       lines.push('', '【参考資料】');
       refs.forEach((r, i) => lines.push(`${i + 1}　${r.t}${r.url ? `\n　　${r.url}` : ''}`));
     }
+    // 項目に図（figs）があれば、PDF では別紙のグラフにする（figs.js）。ここには一覧だけを書く
+    const seen = new Set();
+    const figs = sel.flatMap((it) => it.figs || []).filter((f) => !seen.has(f.t) && seen.add(f.t));
+    if (figs.length) {
+      lines.push('', '【参考図表】（別紙）');
+      figs.forEach((f, i) => lines.push(`図${i + 1}　${f.t}`));
+    }
     if (isIkensho) lines.push('', '【意見書の提出先（案）】', T.ikenshoTo);
     lines.push('', '以上');
     return lines.join('\n');
