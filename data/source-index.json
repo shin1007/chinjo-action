@@ -957,6 +957,24 @@
       "localPath": null
     },
     {
+      "id": "src-5d32e6285e",
+      "title": "Keizer K, Lindenberg S, Steg L (2008) The spreading of disorder. Science 322(5908): 1681-1685（査読論文）",
+      "url": "https://doi.org/10.1126/science.1161405",
+      "note": "6つの野外実験で、他人が規範や決まりを破っている様子を見た人は、ほかの規範や決まりも破りやすくなり、無秩序が広がることを示した。要旨（PubMed）で確認",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-5de3275148",
+      "title": "廃棄物の処理及び清掃に関する法律 第4条第1項・第16条",
+      "url": "https://laws.e-gov.go.jp/law/345AC0000000137",
+      "note": "第4条第1項：市町村は、一般廃棄物の減量に関し住民の自主的な活動の促進を図る。第16条：何人も、みだりに廃棄物を捨ててはならない",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-5edb1eb63a",
       "title": "明石市「参考書式など」（こども養育プラン・合意書）",
       "url": "https://www.city.akashi.lg.jp/seisaku/soudan_shitsu/kodomo-kyoiku/youikushien/sannkousyosiki.html",
@@ -1947,6 +1965,15 @@
       "localPath": null
     },
     {
+      "id": "src-c0dec91f89",
+      "title": "仙台市「ボランティア清掃支援申し込み」",
+      "url": "https://www.city.sendai.jp/haiki-shido/download/bunyabetsu/gomi/machibika/seso.html",
+      "note": "団体・個人を問わず、公共の場所の散乱ごみをボランティアで清掃する人に、地域清掃ごみ袋の配布、火ばさみなどの清掃用具の貸与、回収したごみの処理を行っている例",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-c1417b4bdd",
       "title": "Hirata A, Uchida T (2026) The Specific Health Checkups and Specific Health Guidance Program: A Strategy for the Prevention of Cardiovascular Disease in Japan. Journal of Atherosclerosis and Thrombosis 33(4): 367-（査読のある総説）",
       "url": "https://doi.org/10.5551/jat.rv22047",
@@ -2032,6 +2059,15 @@
       "title": "公益社団法人商事法務研究会「未成年期に父母の離婚を経験した子の養育に関する実態についての調査・分析業務報告書」（法務省委託、令和3年1月）",
       "url": "https://www.moj.go.jp/content/001346918.pdf",
       "note": "父母が不仲のとき誰かに相談した子は9.4％。「相談したかったが、適切な人がいなかった」19.0％（Q11_1、n=672）",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-c68479d78f",
+      "title": "介護保険法 第115条の45 第1項",
+      "url": "https://laws.e-gov.go.jp/law/409AC0000000123",
+      "note": "市町村は、地域支援事業として、要介護状態等となることの予防のため必要な事業を行う（第2号）",
       "kind": "law",
       "fetchedAt": null,
       "localPath": null
