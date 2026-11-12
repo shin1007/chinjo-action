@@ -81,7 +81,10 @@
           <label><input type="radio" name="wzKind" value="request"> <b>市区町村長・知事に出す（要望書）</b><span class="hint-sm">行政に直接、検討や説明を求めます。自治体の取り組みを求める内容だけ選べます。</span></label>
         </fieldset>
         <p class="hint-sm wz-seigan"><b>請願書は作れません</b>（紹介議員が要るため）。請願にしたいときは、ここで陳情書を作り、その文面を持って議員に紹介をお願いします（<a href="/letter">議員への手紙</a>）。</p>
-        <p class="hint-sm"><b>内容はいくつでも選べます。</b>選んだ内容1つにつき1通ずつできあがります。ただ、いくつも出すより、<b>とくに伝えたい内容を2〜3つに絞り、同じ分野（下の見出し）の中から選ぶ</b>ほうが伝わります。多くの議会は「1件に1つの趣旨」で分けて出すよう求めているので、ふつうは1通ずつ出します（<a href="/sonota/guide#split">1件ずつ分ける理由</a>）。同じ分野の内容を1通にまとめたいときは、最後の画面の「まとめて1通にする」でまとめられます。その議会が分けて出すよう求めていないか、先に確かめてください。<a href="/#compare">陳情書・要望書・請願・手紙の違い</a></p>
+        <p class="hint-sm"><b>とくに伝えたい内容を、3つまで選ぶのがおすすめです。</b>選んだ内容1つにつき1通ずつできあがります。</p>
+        <details class="hint-sm wz-fold"><summary>いくつも選ぶとき・1通にまとめたいとき</summary>
+          <p>多くの議会は「1件に1つの趣旨」で分けて出すよう求めているので、ふつうは1通ずつ出します（<a href="/sonota/guide#split">1件ずつ分ける理由</a>）。いくつも選ぶなら、同じ分野（下の見出し）の中から選ぶほうが伝わります。同じ分野の内容を1通にまとめたいときは、最後の画面の「まとめて1通にする」でまとめられます。その議会が分けて出すよう求めていないか、先に確かめてください。<a href="/#compare">陳情書・要望書・請願・手紙の違い</a></p>
+        </details>
         <input type="search" id="wzItemFilter" class="wz-filter" placeholder="キーワードで内容を絞り込む" aria-label="キーワードで内容を絞り込む">
         <div id="wzItems" class="wz-cards"></div>
         <details id="wzPreview" class="wz-preview" hidden><summary id="wzPreviewTitle">文面の見本を見る</summary>
@@ -90,7 +93,8 @@
       </div>
 
       <div class="wz-step" data-step="council" hidden>
-        <h3>どの自治体にしますか？ <small>（いくつでも）</small></h3>
+        <h3>どの自治体にしますか？</h3>
+        <p class="hint-sm"><b>住んでいる自治体の議会を1つ選ぶのが、いちばん確実です。</b>ほかの議会にも出したいときは、あとから書き足せます。</p>
         <label class="wz-global">自治体名で探す
           <input type="search" id="wzGlobal" class="wz-filter" placeholder="例：せたがや、船橋、sapporo" autocomplete="off">
         </label>
@@ -108,12 +112,12 @@
         </div>
         <div id="wzCouncilBox" class="wz-council-box" hidden>
           <h4 id="wzCouncilTitle" class="wz-sub"></h4>
-          <p class="hint-sm">住んでいる自治体の議会がいちばん確実です。<span id="wzCountHint" hidden>「出した人 ○人」はこのサイトで提出を報告した人の数です。まだ誰も出していない議会に出すと、全国に広がります。</span></p>
+          <p class="hint-sm"><span id="wzCountHint" hidden>「出した人 ○人」はこのサイトで提出を報告した人の数です。まだ誰も出していない議会に出すと、全国に広がります。</span></p>
           <div id="wzMailOk" class="wz-mailok" hidden></div>
           <input type="search" id="wzFilter" class="wz-filter" placeholder="自治体名で絞り込む（ひらがな・ローマ字でも）">
           <div id="wzCouncils" class="wz-grid wz-scroll"></div>
           <p class="wz-picked" id="wzPicked"></p>
-          <button type="button" id="wzMorePref" class="btn btn-small">＋ ほかの都道府県の議会も選ぶ</button>
+          <button type="button" id="wzMorePref" class="btn btn-small btn-ghost">＋ ほかの都道府県の議会も選ぶ（任意）</button>
           <div id="wzDeadline" class="wz-deadline" hidden></div>
         </div>
       </div>

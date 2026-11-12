@@ -289,7 +289,7 @@
   // 押せない理由を［次へ］のそばに出す
   function whyNotNext() {
     const s = STEPS[state.step];
-    if (s === 'items' && !state.items.length) return '求める内容を1つ以上選んでください（いくつでも選べます）。';
+    if (s === 'items' && !state.items.length) return '求める内容を1つ以上選んでください（3つまでがおすすめです）。';
     if (s === 'council' && !state.councils.length) return '自治体を選ぶか、「自治体を選ばずに作る」を押してください。';
     if (s === 'you' && !state.role) return '①あなたの立場を選んでください（住所・氏名は空のままでもかまいません）。';
     return '';
