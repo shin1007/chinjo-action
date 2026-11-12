@@ -580,9 +580,9 @@
   $('wzMatrix').addEventListener('click', (e) => {
     const b = e.target.closest('button');
     if (!b) return;
-    if (b.id === 'wzAllPdf') { viewPdf(b, null, allDocs()); return; }
+    if (b.id === 'wzAllPdf') { viewPdf(b, null, allDocs(), allKeys()); return; }
     const [i, j] = b.dataset.cell.split(':').map(Number);
-    viewPdf(b, null, [docFor(areas()[i], state.councils[j])]);
+    viewPdf(b, null, [docFor(areas()[i], state.councils[j])], [areas()[i].dataset.key]);
   });
 
   // 文面の欄は中身の長さに合わせて伸ばし、欄の中でスクロールしなくても全体を読めるようにする
@@ -599,17 +599,24 @@
   const docFor = (ta, c) => withChair(withSender(edits[ek(ta.dataset.key)] ? forCouncil(ta.value, c)
     : window.Petition.build(formData(), nameOf(c), keysOf(ta.dataset.key)), sender), c).trim();
   const allDocs = () => state.councils.flatMap((c) => areas().map((ta) => docFor(ta, c)));
+  // allDocs() と同じ順の、文面ごとの項目（参考図表の別紙を選ぶのに使う）
+  const allKeys = () => state.councils.flatMap(() => areas().map((ta) => ta.dataset.key));
   // 1通目の議会あての1通だけをPDFにして、新しいタブで開く（鏡文・宛名はつけない）
   // 開くのを待つとポップアップとして止められるので、タブは先に開いておく
   // texts を渡すと、その文面（何通でも）を1つのPDFにする。1通ずつ新しいページから始まる
-  async function viewPdf(btn, ta, texts) {
+  // keys：texts と同じ順の項目。項目に図があれば、その文面のあとに参考図表の別紙をつける（figs.js）
+  async function viewPdf(btn, ta, texts, keys = ta ? [ta.dataset.key] : []) {
     const win = window.open('', '_blank');
     const text = btn.textContent;
     btn.disabled = true;
     btn.textContent = 'PDFを作っています…';
     try {
       const doc = await window.PdfDoc.create();
-      (texts || [docFor(ta, state.councils[0])]).forEach((t) => doc.addDocument(t));
+      const list = texts || [docFor(ta, state.councils[0])];
+      for (let i = 0; i < list.length; i += 1) {
+        doc.addDocument(list[i]);
+        if (keys[i] && window.Figs) await window.Figs.addTo(doc, keysOf(keys[i]));
+      }
       const url = URL.createObjectURL(new Blob([await doc.bytes()], { type: 'application/pdf' }));
       if (win) win.location.href = url;
       else window.location.href = url;
@@ -1132,7 +1139,7 @@
     $('wzNowAsk').innerHTML = html;
     renderKindParts();
   }
-  $('wzNowPdf').addEventListener('click', (e) => viewPdf(e.currentTarget, null, allDocs()));
+  $('wzNowPdf').addEventListener('click', (e) => viewPdf(e.currentTarget, null, allDocs(), allKeys()));
   $('wzNowCopy').addEventListener('click', () => $('wzCopy').click());
 
   // 確かめた項目の数を出す。進むのは止めないが、残りがあれば知らせる
