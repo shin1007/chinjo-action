@@ -65,6 +65,7 @@ window.ASKS = (window.ASKS || []).concat([
       { t: '日本新聞協会「新聞倫理綱領」（2000年6月21日制定）', url: 'https://www.pressnet.or.jp/outline/ethics/', note: '「正確と公正」' },
       { t: '和歌山県調査統計課（和歌山県統計情報館）「統計グラフを作ってみよう」', url: 'https://www.pref.wakayama.lg.jp/prefg/020300/kids/graph.html', note: '棒グラフの決まりとして「目盛りの出発点は、必ずゼロにします」。公的な統計部局が子ども向けにも示す基本' },
       { t: '東京都総務局統計部「くらしと統計2026」参考資料「統計グラフの見方」', url: 'https://www.toukei.metro.tokyo.lg.jp/kurasi/2026/2026pdf/ku26rfmi01.pdf', note: 'グラフの基本構造で「目盛り数字（0から始めます）」。省略記号（波線等）は「省略した部分が大きいほど、実態とかけ離れたグラフになっているため、読みとる際には注意が必要です」' },
+      { t: '福島テレビ（福テレ空ネット）「テレポートプラスよりご報告とお詫び」（2020年9月21日、X の投稿）', url: 'https://x.com/ftv_tenki/status/1308001585885097985', note: '9月17日放送のグラフが「0%ではなく80%から始まっていて」日本では「思う」が大半に見える表現だったとして、「割合を示すグラフは省略をせずに全体を表示する必要がありました」と謝罪（実際は15.25％）' },
       { t: 'Wijnker W ほか (2026) Debunking misleading graphs effectively: How vocationally educated young adults perceive graphs. PLOS ONE 21(2): e0340100（査読論文）', url: 'https://doi.org/10.1371/journal.pone.0340100', note: 'オランダの職業教育の学生130人の調査。誤解を招くグラフの訂正を見せると誤解が減り、同じ種類の誤解を招くグラフにも惑わされにくくなった。本文で確認', secondary: true }],
     template: { subjectNational: '正確な報道を守るため、{内容}を求める意見書の提出を求める{種類}',
       purposeNational: '視聴者・読者が事実を正しく受け取れるよう、国に対し、下記事項の実現を求める意見書を提出していただきたく{種類}いたします。',

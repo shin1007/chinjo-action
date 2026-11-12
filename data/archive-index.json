@@ -705,6 +705,21 @@
       "fetchedAt": "2026-11-12T06:22:50.505Z",
       "sha256": "a0fff1e1bf11cee6486d9bdf1a18e6fe9721ce8b56f3d828aa3267d3547619cf",
       "localPath": "sources/archive/2026-11-12-a0fff1e1bf11.bin"
+    },
+    {
+      "url": "https://pbs.twimg.com/media/Eib0ggyU4AEXFzz.jpg?name=orig",
+      "title": "福島テレビ（福テレ空ネット @ftv_tenki）「テレポートプラスよりご報告とお詫び」（2020年9月21日の X の投稿 https://x.com/ftv_tenki/status/1308001585885097985 の画像）",
+      "note": "9月17日放送のグラフが0%でなく80%から始まり誤解を招いたとして謝罪。大阪大学 三浦教授の調査、日本で『本人のせいだと思う』15.25%",
+      "fetchedAt": "2026-11-12T06:33:50.119Z",
+      "sha256": "228105423286e0af8b4fd4e4d1c3e6a624b77fc6e8a785774eb869b571e69733",
+      "localPath": "sources/archive/2026-11-12-228105423286.bin"
+    },
+    {
+      "url": "https://news.ntv.co.jp/info/75bc1a6375fe48ae9e65910b33adfb4b",
+      "title": "日本テレビ「お知らせ」内閣支持率のグラフの訂正とおわび（2025年10月23日）",
+      "fetchedAt": "2026-11-12T06:33:50.682Z",
+      "sha256": "8e895c093c58d9276bdf838328ea814164d097eca7fb1c56e06273ce32a15e9b",
+      "localPath": "sources/archive/2026-11-12-8e895c093c58.html"
     }
   ]
 }
