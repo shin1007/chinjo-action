@@ -141,6 +141,11 @@
               "note": "論文"
             },
             {
+              "sourceId": "src-a5748aaca5",
+              "title": "van Eldik ほか (2020) The Interparental Relationship: Meta-Analytic Associations With Children’s Maladjustment and Responses to Interparental Conflict, Psychological Bulletin 146(7), 553–594",
+              "note": "要旨で確認。メタ分析（子の不適応169研究、対立への反応61研究）。親の間の敵意的・回避的・非建設的な対立や子をめぐる対立は、子の外在化・内在化の問題と関連し、関連の多くは時間がたっても続く"
+            },
+            {
               "sourceId": "src-90b0f71bf3",
               "title": "衆議院予算委員会第一分科会（2024年2月27日）市村浩一郎委員の質問と、法務省大臣官房審議官の答弁",
               "note": "当事者の一方を有利にする目的でDVを受けたかのように偽装して主張することを弁護士が促している場合もあるとして、批判する意見があることは承知している（個別の当否へのコメントは差し控え）"
@@ -5466,6 +5471,13 @@
       "url": "https://www.pref.wakayama.lg.jp/prefg/020300/kids/graph.html",
       "note": "棒グラフの決まりとして「目盛りの出発点は、必ずゼロにします」。公的な統計部局が子ども向けにも示す基本",
       "kind": "official"
+    },
+    {
+      "id": "src-a5748aaca5",
+      "title": "van Eldik ほか (2020) The Interparental Relationship: Meta-Analytic Associations With Children’s Maladjustment and Responses to Interparental Conflict, Psychological Bulletin 146(7), 553–594",
+      "url": "https://doi.org/10.1037/bul0000233",
+      "note": "要旨で確認。メタ分析（子の不適応169研究、対立への反応61研究）。親の間の敵意的・回避的・非建設的な対立や子をめぐる対立は、子の外在化・内在化の問題と関連し、関連の多くは時間がたっても続く",
+      "kind": "secondary"
     },
     {
       "id": "src-a8b1206c3b",

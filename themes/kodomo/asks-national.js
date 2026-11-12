@@ -42,6 +42,7 @@ window.ASKS = (window.ASKS || []).concat([
   { id: 'n_lawyer', scope: 'national', category: '離婚事件の弁護活動', defaultOn: true, pair: 'n_fee', label: '葛藤を高める離婚弁護活動の規制',
     refs: [{ t: '法務省「Ｑ＆Ａ形式の解説資料（民法編）」', url: 'https://www.moj.go.jp/MINJI/minji07_00377.html', note: 'Q2-1：誹謗中傷や濫訴は協力義務違反と評価され得る' },
       { t: 'Amato (2000) The Consequences of Divorce for Adults and Children, Journal of Marriage and Family', url: 'https://doi.org/10.1111/j.1741-3737.2000.01269.x', note: '論文' },
+      { t: 'van Eldik ほか (2020) The Interparental Relationship: Meta-Analytic Associations With Children’s Maladjustment and Responses to Interparental Conflict, Psychological Bulletin 146(7), 553–594', url: 'https://doi.org/10.1037/bul0000233', note: '要旨で確認。メタ分析（子の不適応169研究、対立への反応61研究）。親の間の敵意的・回避的・非建設的な対立や子をめぐる対立は、子の外在化・内在化の問題と関連し、関連の多くは時間がたっても続く', secondary: true },
       { t: '衆議院予算委員会第一分科会（2024年2月27日）市村浩一郎委員の質問と、法務省大臣官房審議官の答弁', url: 'https://kokkai.ndl.go.jp/txt/121305266X00120240227/226', note: '当事者の一方を有利にする目的でDVを受けたかのように偽装して主張することを弁護士が促している場合もあるとして、批判する意見があることは承知している（個別の当否へのコメントは差し控え）' },
       { t: '児童の権利に関する条約 第9条第3項（1994年に日本について効力発生）', url: 'https://www.unicef.or.jp/about_unicef/about_rig_all.html', note: '「締約国は、児童の最善の利益に反する場合を除くほか、父母の一方又は双方から分離されている児童が定期的に父母のいずれとも人的な関係及び直接の接触を維持する権利を尊重する。」（外務省の条約のページは自動の取得を拒むため、日本ユニセフ協会が掲載する政府訳で確認）' },
       { t: '弁護士法 第56条第1項（懲戒事由）', url: 'https://laws.e-gov.go.jp/law/324AC1000000205', note: '弁護士は、法律や所属弁護士会・日本弁護士連合会の会則に違反し、所属弁護士会の秩序又は信用を害し、その他職務の内外を問わずその品位を失うべき非行があつたときは、懲戒を受ける' },
