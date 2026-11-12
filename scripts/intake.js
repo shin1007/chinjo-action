@@ -6,6 +6,7 @@
 //   node scripts/intake.js check              形を確かめる（npm test からも呼ぶ）
 //   node scripts/intake.js population         人口を municipality-populations.json で入れ直す
 //   node scripts/intake.js stats              どこまで埋まったかを数える
+//   node scripts/intake.js report             人が読む一覧表を docs/確認用/陳情・要望の受け付け方の一覧.md に書く
 'use strict';
 const fs = require('fs');
 const path = require('path');
@@ -225,5 +226,6 @@ if (require.main === module) {
   else if (cmd === 'check') check();
   else if (cmd === 'population') population();
   else if (cmd === 'stats') stats();
-  else { console.error('使い方: node scripts/intake.js migrate|check|population|stats'); process.exit(1); }
+  else if (cmd === 'report') require('./intake-report.js')();
+  else { console.error('使い方: node scripts/intake.js migrate|check|population|stats|report'); process.exit(1); }
 }
