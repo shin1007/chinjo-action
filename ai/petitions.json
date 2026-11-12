@@ -3753,6 +3753,11 @@
               "note": "6ページ：職種別の在校等時間（講師・教諭）。講師の部活動の時間の表はない"
             },
             {
+              "sourceId": "src-273166ed54",
+              "title": "文部科学省「教員勤務実態調査（令和4年度）の集計（確定値）について」（令和6年4月4日）",
+              "note": "2ページ：対象はフルタイムの常勤教員（講師を含む）で、非常勤講師は対象外。6ページ：中学校の講師の土日の在校等時間は1日1時間53分（教諭2時間18分）。講師の部活動の時間は1〜10ページには見当たらない（11ページ以降は未確認）"
+            },
+            {
               "sourceId": "src-294671fbb1",
               "title": "竹内健太「教員不足とその対応－公教育の担い手確保に向けて－」『立法と調査』第467号（参議院、2024年6月）",
               "note": "臨時的任用教員の配置割合が過度に大きくなると、年度をまたいだ継続的な関わりが難しくなるおそれ"
@@ -4419,6 +4424,13 @@
       "title": "米国教育省 Student Privacy Policy Office「In the case of a divorce, do both parents have rights under FERPA?」",
       "url": "https://studentprivacy.ed.gov/faq/case-divorce-do-both-parents-have-rights-under-ferpa",
       "note": "米国の連邦法（FERPA）では、裁判所の命令などで別段の定めがない限り、同居している親にも別居している親にも、子の教育記録についての同じ権利がある（原文「FERPA gives custodial and noncustodial parents alike certain rights with respect to their children’s education records」）",
+      "kind": "official"
+    },
+    {
+      "id": "src-273166ed54",
+      "title": "文部科学省「教員勤務実態調査（令和4年度）の集計（確定値）について」（令和6年4月4日）",
+      "url": "https://www.mext.go.jp/content/20240404-mxt_zaimu01-100003067-2.pdf",
+      "note": "2ページ：対象はフルタイムの常勤教員（講師を含む）で、非常勤講師は対象外。6ページ：中学校の講師の土日の在校等時間は1日1時間53分（教諭2時間18分）。講師の部活動の時間は1〜10ページには見当たらない（11ページ以降は未確認）",
       "kind": "official"
     },
     {
