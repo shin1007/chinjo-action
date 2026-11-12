@@ -80,7 +80,7 @@
     const L = [];
     const council = val(d, 'council');
     const member = val(d, 'member') || BLANK_TEXT;
-    L.push(`　　　　　　　　　　　　　　　　　　　　　　　　${window.Common.reiwaToday()}`, '', `${council ? council + '議員　' : ''}${member}　先生`, '');
+    L.push(`　　　　　　　　　　　　　　　　　　　　　　　　${window.Common.DATE_BLANK}`, '', `${council ? council + '議員　' : ''}${member}　先生`, '');
     L.push('拝啓　日頃より地域のためにご尽力いただき、心より感謝申し上げます。');
     L.push(`　${val(d, 'role') ? val(d, 'role') + 'の立場から、' : ''}父母の別居・離婚に伴い、子どもが一方の親との関係を失ってしまう問題について、私自身の経験をお伝えしたく、お手紙を差し上げました。`, '');
 

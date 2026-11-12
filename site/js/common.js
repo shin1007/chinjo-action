@@ -48,6 +48,8 @@ window.Common = (() => {
       .formatToParts(new Date()).map((x) => [x.type, Number(x.value)]));
     return { y: p.year, m: p.month, d: p.day };
   }
+  // 文書の日付は空けておき、出す日に手書きで書き入れてもらう
+  const DATE_BLANK = '令和　　年　　月　　日';
   function reiwaToday() {
     const { y, m, d } = jstToday();
     return `令和${y - 2018 === 1 ? '元' : y - 2018}年${m}月${d}日`;
@@ -121,5 +123,5 @@ window.Common = (() => {
   // 項目の名前の横に付ける、だれに求めるかの小さな印
   const scopeTag = (a) => `<small class="ask-scope">${a.scope === 'local' ? '自治体の取り組み' : '国へ意見書'}</small>`;
 
-  return { jstToday, BLANK_TEXT, esc, sender, bindSender, forgetSender, remembers, setRemember, flash, copy, printTexts, reiwaToday, askGroups, scopeTag };
+  return { jstToday, BLANK_TEXT, esc, sender, bindSender, forgetSender, remembers, setRemember, flash, copy, printTexts, reiwaToday, DATE_BLANK, askGroups, scopeTag };
 })();

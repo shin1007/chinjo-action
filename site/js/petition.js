@@ -1,7 +1,7 @@
 // 陳情書の文面と、生成AIへの指示文を組み立てる。詳しい版（app.js）とかんたん作成（wizard.js）の両方が使う。
 // data には FormData（items・story・address・name・tel）を渡す。国あてか自治体あてかは、項目の scope で決まる。
 window.Petition = (() => {
-  const { BLANK_TEXT, reiwaToday } = window.Common;
+  const { BLANK_TEXT, DATE_BLANK } = window.Common;
 
   // 求める事項は data/asks-*.js、決まった文章は data/template.js にある
   const TEMPLATE = window.TEMPLATE;
@@ -39,7 +39,7 @@ window.Petition = (() => {
     const subject = fill(isIkensho ? T.subjectNational : T.subjectLocal, vars);
 
     const lines = [];
-    lines.push(reiwaToday(), '');
+    lines.push(DATE_BLANK, '');
     lines.push(`${destination}　${BLANK_TEXT}　様`, '');
     lines.push(`住所　${data.get('address').trim() || BLANK_TEXT}`);
     lines.push(`氏名　${data.get('name').trim() || BLANK_TEXT}　　　　印`);
@@ -243,7 +243,7 @@ window.Petition = (() => {
     const list = subjects.length
       ? subjects.map((t, i) => `${KANSUJI[i] || i + 1}　${documentLabel}「${t}」　1通`).join('\n')
       : `一　${documentLabel}　${docs.length}通`;
-    return fill(TEMPLATE.cover, { 日付: reiwaToday(), 宛先: council, 差出人: from.join('\n'), 書類: list, 通数: String(docs.length) }).replaceAll('陳情書', documentLabel);
+    return fill(TEMPLATE.cover, { 日付: DATE_BLANK, 宛先: council, 差出人: from.join('\n'), 書類: list, 通数: String(docs.length) }).replaceAll('陳情書', documentLabel);
   }
 
   return { headOf, build, buildPrompt, sections, buildRewritePrompt, applyRewrite, rewritePlans, withSender, swapCouncil, cover, selectedKeys, isNational, ordered, ITEMS, MANY, SEP };

@@ -1,6 +1,6 @@
 // 議員への手紙を、入力内容を送信せずブラウザ内だけで組み立てる。
 (() => {
-  const { BLANK_TEXT, copy, printTexts, reiwaToday } = window.Common;
+  const { BLANK_TEXT, copy, printTexts, DATE_BLANK } = window.Common;
   const SITE_URL = 'https://chinjo-action.vercel.app/letter';
 
   const THEMES = [
@@ -141,7 +141,7 @@
     const name = value('name') || BLANK_TEXT;
     const contact = value('contact') || BLANK_TEXT;
     const lines = [
-      `　　　　　　　　　　　　　　　　　　　　　　　　${reiwaToday()}`,
+      `　　　　　　　　　　　　　　　　　　　　　　　　${DATE_BLANK}`,
       '',
       `${council ? `${council}議会　` : ''}${member}　先生`,
       '',
