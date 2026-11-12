@@ -149,6 +149,13 @@ window.PdfDoc = (() => {
             row(block(), lh, (p, y) => drawLine(p, l, A4.w - M.right - l.w, y, BODY));
             return;
           }
+          // ※で始まる注意書き：小さい灰色の字にする
+          if (s.startsWith('※')) {
+            const size = 8.5;
+            const b = block();
+            wrap(s, size, textW).forEach((l) => row(b, size * 1.6 * k, (p, y) => drawLine(p, l, M.left, y, size, R, gray)));
+            return;
+          }
           // 宛名（○○議会議長 様／○○事務局 御中）：少し大きく
           if (/(様|御中)$/.test(s) && i < 6) {
             const size = 12.5;

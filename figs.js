@@ -1,5 +1,5 @@
 // 陳情書・要望書に添える「参考図表」（別紙）のグラフ。項目（asks-*.js）の figs から横棒グラフの PNG を描き、PDF（pdfdoc.js）に埋め込む。
-// figs の形：{ t：題名, unit：単位, rows：[[ラベル, 値, 'alt'（2つ目の系列）|'hl'（強調）]], src：出典, dec：小数の桁 }
+// figs の形：{ t：題名, unit：単位, rows：[[ラベル, 値, 'alt'（2つ目の系列）|'hl'（強調）]], src：出典, note：注意書き（小さい字で出典の下に書く）, dec：小数の桁 }
 // 値に負の数があるときは、0 を真ん中にした左右のグラフにする。白黒で印刷しても見分けられる濃さにしている
 window.Figs = (() => {
   const W = 1600;
@@ -65,7 +65,7 @@ window.Figs = (() => {
   }
 
   // 別紙の文面。「[[図:fN]]」の行に PDF が絵を置く
-  const sheet = (figs) => ['【別紙　参考図表】', '', ...figs.flatMap((f, i) => [`図${i + 1}　${f.t}`, `[[図:f${i}]]`, `出典：${f.src}`, ''])].join('\n');
+  const sheet = (figs) => ['【別紙　参考図表】', '', ...figs.flatMap((f, i) => [`図${i + 1}　${f.t}`, `[[図:f${i}]]`, `出典：${f.src}`, ...(f.note ? [`※${f.note}`] : []), ''])].join('\n');
 
   // PDF（PdfDoc.create() で作ったもの）に、選んだ項目の図の別紙を足す
   async function addTo(doc, keys) {
