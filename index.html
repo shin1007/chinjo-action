@@ -41,38 +41,18 @@
 <main>
 <section class="hero">
   <div class="wrap">
-    <p class="eyebrow">陳情書・要望書・議員への手紙の文面づくりと、出し方の案内まで。署名と提出はご自身で。</p>
-    <h1>地方議会に、<br>意見を正式な手続きで届ける。</h1>
-    <p class="lead">テーマを選び、届け方を選び、文面を整えて、出し方を確かめる。その順にお手伝いします。入力した住所・氏名や文面は、このサイトのサーバーに送られません。</p>
+    <p class="eyebrow">気になっている国内の問題を、地元の議会に正式に届ける。</p>
+    <h1>選んでいくだけで、<br>議会に出せる陳情書ができます。</h1>
+    <p class="lead">テーマと内容を選び、住所・氏名を入れると、そのまま印刷して出せる文面になります。紹介議員はいりません。費用は郵送で1件約340円、持参なら約110円が目安です。入力した住所・氏名や文面は、このサイトのサーバーに送られません。</p>
     <div class="hero-actions">
-      <a class="btn btn-primary" href="#shindan">はじめての方：どれで出すか選ぶ（質問2つ）</a>
-      <a class="btn btn-ghost" href="#themes">決まっている方：テーマを選んでつくる</a>
+      <a class="btn btn-primary" href="#themes">テーマを選んでつくる</a>
+      <a class="btn btn-ghost" href="#shindan">陳情書でいいか迷ったら（質問2つ）</a>
     </div>
-  </div>
-</section>
-<section id="shindan" class="section shindan">
-  <div class="wrap">
-    <h2>どれで出すか、2つの質問で選ぶ</h2>
-    <p class="lead-sm">陳情書・要望書・請願・議員への手紙・国への提案は、だれに動いてほしいかで選びます。どれがいちばん効く、というものではありません。</p>
-    <fieldset class="shindan-q" data-q="who">
-      <legend>Q1. だれに動いてほしいですか</legend>
-      <button type="button" class="wz-card" data-a="council"><b>議会</b><span>議会で話し合ってほしい・国に意見書を出してほしい</span></button>
-      <button type="button" class="wz-card" data-a="exec"><b>市区町村長・知事</b><span>役所に取り組みや説明をしてほしい</span></button>
-      <button type="button" class="wz-card" data-a="member"><b>地元の特定の議員</b><span>議員に知ってほしい・議会で取り上げてほしい</span></button>
-      <button type="button" class="wz-card" data-a="nation"><b>国（省庁）</b><span>国の法律・省令などの規制を見直してほしい</span></button>
-      <button type="button" class="wz-card" data-a="unknown"><b>まだわからない</b><span>まずしくみを知りたい</span></button>
-    </fieldset>
-    <fieldset class="shindan-q" data-q="intro" hidden>
-      <legend>Q2. 請願の「紹介議員」になってくれる議員はいますか</legend>
-      <button type="button" class="wz-card" data-a="yes"><b>いる</b><span>相談できる議員がいる</span></button>
-      <button type="button" class="wz-card" data-a="no"><b>いない・わからない</b><span>紹介議員なしで出したい</span></button>
-    </fieldset>
-    <div id="shindanResult" class="shindan-result" aria-live="polite" hidden></div>
   </div>
 </section>
 <section id="themes" class="section">
   <div class="wrap">
-    <h2>1. テーマを選ぶ</h2>
+    <h2>テーマを選ぶ</h2>
     <p class="lead-sm">テーマを1つに決めて、その中でとくに伝えたい内容に絞って出すのがおすすめです。</p>
     <div class="item-search">
       <label for="itemSearch">どのテーマか分からないときは、言葉でさがす</label>
@@ -90,15 +70,37 @@
     </ul>
     <ol class="howto">
       <li><b>テーマを選ぶ</b> ― 上の一覧から。</li>
-      <li><b>届け方を選ぶ</b> ― テーマのページで、陳情書・要望書・議員への手紙から選びます（違いは下の表）。</li>
+      <li><b>届け方を選ぶ</b> ― 迷ったら陳情書（議会に出します）。要望書・議員への手紙も選べます。</li>
       <li><b>つくる</b> ― 内容と出す先を選び、住所・氏名を入れると文面ができます。</li>
       <li><b>出し方を確かめて出す</b> ― 署名して、郵送・持参・電子申請で出します。</li>
     </ol>
   </div>
 </section>
+<section id="shindan" class="section shindan">
+  <div class="wrap">
+    <h2>陳情書でいいか、2つの質問で確かめる</h2>
+    <p class="lead-sm">迷ったら陳情書で大丈夫です。ほかの届け方（要望書・請願・議員への手紙・国への提案）は、だれに動いてほしいかで選びます。どれがいちばん効く、というものではありません。</p>
+    <fieldset class="shindan-q" data-q="who">
+      <legend>Q1. だれに動いてほしいですか</legend>
+      <button type="button" class="wz-card" data-a="council"><b>議会</b><span>議会で話し合ってほしい・国に意見書を出してほしい</span></button>
+      <button type="button" class="wz-card" data-a="exec"><b>市区町村長・知事</b><span>役所に取り組みや説明をしてほしい</span></button>
+      <button type="button" class="wz-card" data-a="member"><b>地元の特定の議員</b><span>議員に知ってほしい・議会で取り上げてほしい</span></button>
+      <button type="button" class="wz-card" data-a="nation"><b>国（省庁）</b><span>国の法律・省令などの規制を見直してほしい</span></button>
+      <button type="button" class="wz-card" data-a="unknown"><b>まだわからない</b><span>まずしくみを知りたい</span></button>
+    </fieldset>
+    <fieldset class="shindan-q" data-q="intro" hidden>
+      <legend>Q2. 請願の「紹介議員」になってくれる議員はいますか</legend>
+      <button type="button" class="wz-card" data-a="yes"><b>いる</b><span>相談できる議員がいる</span></button>
+      <button type="button" class="wz-card" data-a="no"><b>いない・わからない</b><span>紹介議員なしで出したい</span></button>
+    </fieldset>
+    <div id="shindanResult" class="shindan-result" aria-live="polite" hidden></div>
+  </div>
+</section>
 <section id="compare" class="section alt">
   <div class="wrap">
-    <h2>2. 届け方の違い</h2>
+    <h2>届け方の違い</h2>
+    <details class="compare-details">
+    <summary>陳情書・要望書・議員への手紙・請願書・国への提案の違いを見る</summary>
     <div class="table-scroll">
     <table class="compare">
       <thead><tr><th scope="col"></th><th scope="col">陳情書</th><th scope="col">要望書</th><th scope="col">議員への手紙</th><th scope="col">請願書</th><th scope="col">国への提案</th></tr></thead>
@@ -110,12 +112,13 @@
       </tbody>
     </table>
     </div>
+    </details>
     <p class="hint-sm">陳情書は、郵送したものや住民以外が出したものを「配るだけ」にする議会もあります。作成画面で議会を選ぶと、わかっている扱いを表示します（<a href="/kakunin">議会ごとの扱い</a>）。情報公開請求・パブリックコメントなどほかの手段は<a href="/about">しくみのページ</a>で。</p>
   </div>
 </section>
 <section id="before" class="section">
   <div class="wrap">
-    <h2>3. 出す前に知っておいてほしいこと</h2>
+    <h2>出す前に知っておいてほしいこと</h2>
     <ul class="howto">
       <li><b>費用の目安。</b>陳情1件をコンビニで印刷して出すと、郵送で約340円、持参なら約110円＋交通費です。枚数や件数で変わります（<a href="/kodomo#cost">内訳</a>）。</li>
       <li><b>扱いは議会ごとに違います。</b>作成画面で議会を選ぶと、分かっている扱いを表示します。分からない議会は、電話で聞くこと（1分ほど）を案内します。</li>

@@ -20,7 +20,7 @@
     // テーマへのリンクを、診断で選んだ届け方の作成画面に向ける
     themeLinks.forEach((a, i) => a.setAttribute('href', kind ? `${base[i]}/make${kind === 'request' ? '?kind=request' : ''}` : base[i]));
     result.innerHTML = `<p class="shindan-name">あなたには <b>${name}</b> が合います</p><p>${text}</p>
-      <p>${href ? `<a class="btn btn-primary" href="${href}"${href.startsWith('http') ? ' target="_blank" rel="noopener"' : ''}>${label}</a>` : '<a class="btn btn-primary" href="#themes">テーマを選ぶ ↓</a>'}
+      <p>${href ? `<a class="btn btn-primary" href="${href}"${href.startsWith('http') ? ' target="_blank" rel="noopener"' : ''}>${label}</a>` : '<a class="btn btn-primary" href="#themes">テーマを選ぶ ↑</a>'}
       <button type="button" class="btn btn-small" data-reset>選び直す</button></p>`;
     result.hidden = false;
   }
@@ -47,4 +47,15 @@
     } else show(a === 'yes' ? 'seigan' : 'petition');
     result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   });
+})();
+
+// 「比較表」へのリンク（/#compare）で来たときは、折りたたんだ表を開く
+(() => {
+  const open = () => {
+    if (location.hash !== '#compare') return;
+    const d = document.querySelector('#compare details');
+    if (d) d.open = true;
+  };
+  open();
+  window.addEventListener('hashchange', open);
 })();

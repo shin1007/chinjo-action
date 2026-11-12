@@ -669,3 +669,4 @@ summary { cursor: pointer; font-weight: 700; }
 .wz-call { margin: .5em 0; }
 .wz-call summary { cursor: pointer; font-weight: bold; }
 .wz-call ol { margin: .4em 0 .4em 1.4em; }
+.compare-details > summary { cursor: pointer; font-weight: 600; color: var(--main-dark); margin-bottom: 12px; }
