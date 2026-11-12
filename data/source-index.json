@@ -588,6 +588,15 @@
       "localPath": null
     },
     {
+      "id": "src-36218ab982",
+      "title": "中央教育審議会「『令和の日本型学校教育』を担う質の高い教師の確保のための環境整備に関する総合的な方策について（答申）」（令和6年8月27日、中教審第251号）",
+      "url": "https://www.mext.go.jp/b_menu/shingi/chukyo/chukyo3/079/sonota/1412985_00006.htm",
+      "note": "本体・概要・考え方の3つの資料に、臨時的任用教員の給与・待遇についての記述は見当たらない",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-362bf9e8d5",
       "title": "内閣官房「孤独・孤立に関連する各種調査について」",
       "url": "https://www.cas.go.jp/jp/seisaku/juten_keikaku/dai5/siryou2.pdf",
@@ -2384,6 +2393,15 @@
       "url": "https://doi.org/10.1002/pcn5.70013",
       "note": "日本に住む男性のパートナー間暴力の被害者1,466人のウェブ調査。助けを求めたのは43人だけで、その65.1％は家族・友人など公的でない相手のみに相談していた。著者は男性の被害者が使える公的な窓口を増やすよう提言。ウェブ調査ゆえの偏りは著者も限界としている。本文で確認",
       "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-e0f1e62b51",
+      "title": "文部科学省「地方公務員（教育公務員）の人事行政状況調査」",
+      "url": "https://www.mext.go.jp/a_menu/shotou/jinji/1318889.htm",
+      "note": "臨時的任用教員・非常勤講師の人数の項目は見当たらない",
+      "kind": "official",
       "fetchedAt": null,
       "localPath": null
     },
