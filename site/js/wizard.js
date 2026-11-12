@@ -169,9 +169,11 @@
     if (el.hidden) return;
     el.innerHTML = `<p><b>出し方と締切の目安</b>：締切は定例会（多くは2〜3月・6月・9月・12月）の1〜2週間前が多く、過ぎると次の定例会に回ります。住んでいない自治体の議会や郵送の陳情は、審査されず議員に配るだけになることがあります。</p>
       <ul>${state.councils.map((c) => {
-        const d = infoOf(c).deadline && clip(infoOf(c).deadline);
+        const i = intakeOf(c, 'chinjo');
+        const d = clip((i && i.deadline) || infoOf(c).deadline || '');
         const q = encodeURIComponent(`${search(c)} 陳情 提出 締切`);
-        return `<li><b>${esc(label(c))}</b>：${d ? `「${esc(d)}」` : ''}<a href="https://www.google.com/search?q=${q}" target="_blank" rel="noopener">締切を調べる</a>${howTo(infoOf(c), c)}</li>`;
+        const how = i && (i.auto || []).includes('deadline') ? '<small class="wz-checked">（公式ページから自動で読み取り）</small>' : '';
+        return `<li><b>${esc(label(c))}</b>：${d ? `「${esc(d)}」${how}` : ''}<a href="https://www.google.com/search?q=${q}" target="_blank" rel="noopener">締切を調べる</a>${howTo(infoOf(c), c)}</li>`;
       }).join('')}</ul>`;
   }
 
@@ -201,6 +203,9 @@
   // 扱いを最後に確かめた日。data/mail-policy.js は1件ごとの確認日、旧 data/mail.js から移した分はファイルの確認日（11/5・11/6）、
   // data/councils.js の一文から読み取った分は機械的に読み取った日
   const ymd = (d) => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(d || ''); return m ? `${m[1]}年${+m[2]}月${+m[3]}日` : ''; };
+  // 確かめてから3か月（90日）より古い情報は、出す前に確かめ直してもらう
+  const STALE_DAYS = 90;
+  const isStale = (d) => { const t = Date.parse(d || ''); return !Number.isNaN(t) && Date.now() - t > STALE_DAYS * 86400000; };
   function checkedOn(info) {
     const p = info.policy;
     if ((p && /^旧 mail\.js/.test(p.note)) || (!p && info.mail)) return '2026年11月5〜6日に議会の公式案内で確認';
@@ -208,7 +213,8 @@
     if (info.yusoNote || info.outsideNote) return '2026年11月4日に議会の公式ページから自動で読み取り';
     return '';
   }
-  const checkedTag = (info) => { const t = checkedOn(info); return t ? `<small class="wz-checked">（${esc(t)}）</small>` : ''; };
+  const checkedDate = (info) => { const p = info.policy; if ((p && /^旧 mail\.js/.test(p.note)) || (!p && info.mail)) return '2026-11-05'; if (p && p.verified_at) return p.verified_at; return (info.yusoNote || info.outsideNote) ? '2026-11-04' : ''; };
+  const checkedTag = (info) => { const t = checkedOn(info); return t ? `<small class="wz-checked">（${esc(t)}${isStale(checkedDate(info)) ? '。3か月以上前なので、出す前に公式の案内で確かめてください' : ''}）</small>` : ''; };
   const mailBadge = (info) => { const r = mailRule(info); return r ? `<span class="wz-mail ${r.c === 'ok' ? 'ok' : r.c === 'none' ? 'none' : r.c === 'unknown' ? 'unknown' : 'jisan'}">${esc(r.label)}</span>${r.c === 'unknown' ? '' : checkedTag(info)}` : ''; };
   const ONLY_HANDOUT = /配布|配付|参考資料/;
   function howTo(info, id) {
@@ -243,21 +249,29 @@
     const d = intakeOf(id, kind);
     if (!d) return [];
     const n = [];
+    const fieldOf = [];
+    const push = (f, t) => { fieldOf.push(f); n.push(t); };
     const link = (u, t) => `<a href="${esc(u)}" target="_blank" rel="noopener">${t}</a>`;
-    if (d.form && d.form.some(OK)) n.push(`✅ Webフォーム・電子申請で出せます${viaText(d.form)}。${d.form_url ? link(d.form_url, 'フォームを開く') : '案内ページからフォームへ進みます'}（文面は「文面をすべてコピー」で貼り付けます）。`);
-    if (d.email && d.email.some(OK)) n.push(`✅ メールで出せます${viaText(d.email)}${d.email_addr ? `：${esc(d.email_addr)}` : '（あて先は案内ページで確かめます）'}。`);
-    if (d.form && !d.form.some(OK) && d.form.includes('no')) n.push('Webフォーム・電子申請では受け付けていません。');
-    if (d.email && !d.email.some(OK) && d.email.includes('no')) n.push('メールでは受け付けていません。');
-    if (d.name_published === 'yes') n.push('⚠ 陳情者の氏名は、会議録や文書表などで公開されます。');
-    if (d.name_published === 'no') n.push('陳情者の氏名は公開されないと案内されています。');
-    if (d.statement === 'yes') n.push('委員会で陳情者が趣旨を説明（意見陳述）できます。');
-    if (d.result_notice === 'yes') n.push('審査の結果を知らせてもらえます。');
-    if (d.reply === 'yes') n.push('回答をもらえます（希望したとき・内容によるときもあります）。');
-    if (d.reply === 'no') n.push('個別の回答はしないと案内されています。');
-    if (d.anonymous_ok === 'no') n.push('匿名では受け付けていません（住所・氏名を書きます）。');
-    if (d.anonymous_ok === 'yes') n.push('匿名でも受け付けますが、回答はもらえないことがあります。');
-    if (d.page_url && !(kind === 'yobo' && requestLinks(id).page === d.page_url)) n.push(`${link(d.page_url, '公式の案内ページを開く')}<small class="wz-checked">（${esc(ymd(d.at))}に公式サイトで確認）</small>`);
-    return n;
+    if (d.form && d.form.some(OK)) push('form', `✅ Webフォーム・電子申請で出せます${viaText(d.form)}。${d.form_url ? link(d.form_url, 'フォームを開く') : '案内ページからフォームへ進みます'}（文面は「文面をすべてコピー」で貼り付けます）。`);
+    if (d.email && d.email.some(OK)) push('email', `✅ メールで出せます${viaText(d.email)}${d.email_addr ? `：${esc(d.email_addr)}` : '（あて先は案内ページで確かめます）'}。`);
+    if (d.form && !d.form.some(OK) && d.form.includes('no')) push('form', 'Webフォーム・電子申請では受け付けていません。');
+    if (d.email && !d.email.some(OK) && d.email.includes('no')) push('email', 'メールでは受け付けていません。');
+    if (d.name_published === 'yes') push('name_published', '⚠ 陳情者の氏名は、会議録や文書表などで公開されます。');
+    if (d.name_published === 'no') push('name_published', '陳情者の氏名は公開されないと案内されています。');
+    if (d.statement === 'yes') push('statement', '委員会で陳情者が趣旨を説明（意見陳述）できます。');
+    if (d.result_notice === 'yes') push('result_notice', '審査の結果を知らせてもらえます。');
+    if (d.reply === 'yes') push('reply', '回答をもらえます（希望したとき・内容によるときもあります）。');
+    if (d.reply === 'no') push('reply', '個別の回答はしないと案内されています。');
+    if (d.anonymous_ok === 'no') push('anonymous_ok', '匿名では受け付けていません（住所・氏名を書きます）。');
+    if (d.anonymous_ok === 'yes') push('anonymous_ok', '匿名でも受け付けますが、回答はもらえないことがあります。');
+    if (d.copies) push('copies', `部数：「${esc(clip(d.copies))}」`);
+    // 機械で読み取っただけの項目には印を付ける
+    const auto = new Set(d.auto || []);
+    const mark = (t, f) => (auto.has(f) ? `${t}<small class="wz-checked">（公式ページから自動で読み取り）</small>` : t);
+    const out = n.map((t, i) => mark(t, fieldOf[i]));
+    if (d.page_url && !(kind === 'yobo' && requestLinks(id).page === d.page_url)) out.push(`${link(d.page_url, '公式の案内ページを開く')}<small class="wz-checked">（${esc(ymd(d.at))}に確認）</small>`);
+    if (isStale(d.at)) out.push(`⚠ このサイトで確かめたのは${esc(ymd(d.at))}で、3か月以上たっています。変わっていることがあるので、出す前に公式の案内ページで確かめてください。`);
+    return out;
   }
 
   // 項目は見出しごとに折りたたむ。選んだ項目がある見出しと、最初の見出しは開いておく

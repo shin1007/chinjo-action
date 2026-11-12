@@ -219,15 +219,20 @@ function stats() {
   }
 }
 
-// 作成画面に出すのは、公式サイトか事務局の回答を根拠にした値だけ（機械で読み取っただけ・利用者からの情報は出さない）
+// 作成画面に出すのは、確かめた日が分かる値だけ。公式サイト・事務局の回答を優先し、なければ公式ページから機械で読み取った値を
+// 「自動で読み取り」と分かる形で出す（auto に項目名を入れる）。利用者からの情報（user_tip）は出さない
 const SURE = new Set(['official_site', 'office_reply']);
 const EXPORT_FIELDS = {
-  chinjo: ['page_url', 'form_url', 'email_addr', 'name_published', 'statement', 'result_notice'],
+  chinjo: ['page_url', 'form_url', 'email_addr', 'deadline', 'copies', 'name_published', 'statement', 'result_notice'],
   yobo: ['page_url', 'form_url', 'email_addr', 'reply', 'anonymous_ok'],
 };
-function sureSource(r, field) {
-  return r.sources.filter((s) => SURE.has(s.route) && s.fields.some((f) => f === field || f.startsWith(field + '.')))
-    .sort((a, b) => (b.checked_at || '').localeCompare(a.checked_at || ''))[0];
+const newest = (list) => list.sort((x, y) => (y.checked_at || '').localeCompare(x.checked_at || ''))[0];
+function sourceFor(r, field) {
+  const hit = r.sources.filter((s) => s.checked_at && s.fields.some((f) => f === field || f.startsWith(field + '.')));
+  const sure = newest(hit.filter((s) => SURE.has(s.route)));
+  if (sure) return { s: sure, auto: false };
+  const auto = newest(hit.filter((s) => s.route === 'auto_extract'));
+  return auto ? { s: auto, auto: true } : null;
 }
 function exportData() {
   const out = {};
@@ -235,36 +240,40 @@ function exportData() {
     out[kind] = {};
     for (const r of readJsonl(FILES[kind])) {
       const e = {};
+      const auto = [];
       let at = '';
+      // 出した値のうち、いちばん古い確認日を at にする（古くなったら確かめ直してもらうため）
+      const use = (f, v, hit) => {
+        e[f] = v;
+        if (hit.auto) auto.push(f);
+        if (!at || hit.s.checked_at < at) at = hit.s.checked_at;
+      };
       for (const f of EXPORT_FIELDS[kind]) {
         const v = r[f];
         if (!v || v === 'unknown') continue;
         // 案内ページの URL は根拠の出どころそのものなので、根拠の欄がなくても出す
-        const s = f === 'page_url' ? (sureSource(r, f) || r.sources.find((x) => SURE.has(x.route) && x.url === v)) : sureSource(r, f);
-        if (!s) continue;
-        e[f] = v;
-        if ((s.checked_at || '') > at) at = s.checked_at;
+        const urlSrc = r.sources.find((x) => SURE.has(x.route) && x.url === v && x.checked_at);
+        const hit = sourceFor(r, f) || (f === 'page_url' && urlSrc ? { s: urlSrc, auto: false } : null);
+        if (hit) use(f, v, hit);
       }
       for (const m of ['email', 'form']) {
-        const s = sureSource(r, `methods.${m}`);
+        const hit = sourceFor(r, `methods.${m}`);
         const v = r.methods[m];
-        if (s && (v.resident !== 'unknown' || v.nonresident !== 'unknown')) {
-          e[m] = [v.resident, v.nonresident];
-          if ((s.checked_at || '') > at) at = s.checked_at;
-        }
+        if (hit && (v.resident !== 'unknown' || v.nonresident !== 'unknown')) use(m, [v.resident, v.nonresident], hit);
       }
-      // 宛先の URL・アドレスは、その出し方で受け付けると確かめたときだけ出す（問い合わせ用の窓口のことがあるため）
+      // 宛先の URL・アドレスは、その出し方で受け付けると分かったときだけ出す（問い合わせ用の窓口のことがあるため）
       const ok = (m) => (e[m] || []).some((x) => x === 'accept' || x === 'review');
       if (!ok('form')) delete e.form_url;
       if (!ok('email')) delete e.email_addr;
-      if (Object.keys(e).length) out[kind][r.id] = { ...e, at };
+      const left = auto.filter((f) => f in e);
+      if (Object.keys(e).length) out[kind][r.id] = { ...e, ...(left.length ? { auto: left } : {}), at };
     }
   }
   return out;
 }
 function exportText() {
   return '// node scripts/intake.js export で site/data/intake/*.jsonl から作る。手で直さない\n'
-    + '// 公式サイト・議会事務局の回答で確かめた値だけ。at はいちばん新しい確認日\n'
+    + '// 確かめた日が分かる値だけ。auto は公式ページから機械で読み取っただけの項目。at はいちばん古い確認日\n'
     + `window.INTAKE = ${JSON.stringify(exportData())};\n`;
 }
 const EXPORT_FILE = path.join(DATA, 'intake.js');
