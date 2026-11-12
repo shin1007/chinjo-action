@@ -664,3 +664,8 @@ summary { cursor: pointer; font-weight: 700; }
 .recent-changes { list-style: none; padding: 0; margin: 0 0 1em; }
 .recent-changes li { padding: .4em 0; border-bottom: 1px solid #e5e5e5; }
 .recent-changes time { display: inline-block; min-width: 6.5em; color: #666; font-variant-numeric: tabular-nums; }
+
+/* 作成画面：議会事務局に電話で聞くこと */
+.wz-call { margin: .5em 0; }
+.wz-call summary { cursor: pointer; font-weight: bold; }
+.wz-call ol { margin: .4em 0 .4em 1.4em; }
