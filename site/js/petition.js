@@ -226,6 +226,48 @@ window.Petition = (() => {
     return t;
   }
 
+  // 要望書の最後に「回答のお願い」を入れるか外す。回答が要らない人もいるので、選んだときだけ入れる
+  // 手で直した文面にも使えるよう、前に入れた段落を取り除いてから入れ直す
+  const REPLY = '【回答のお願い】';
+  const REPLY_TEXT = '　本要望について、ご検討の結果をお知らせいただけますと幸いです。回答は、上記の住所あてにお送りください。';
+  function withReply(text, on) {
+    const lines = text.replace(/\r/g, '').split('\n');
+    const at = lines.findIndex((l) => l.trim() === REPLY);
+    if (at >= 0) {
+      let to = at + 1;
+      while (to < lines.length && lines[to].trim() && lines[to].trim() !== '以上') to += 1;
+      while (to < lines.length && !lines[to].trim()) to += 1;
+      lines.splice(at, to - at);
+    }
+    if (on) {
+      let end = lines.length - 1;
+      while (end > 0 && lines[end].trim() !== '以上') end -= 1;
+      if (end > 0) lines.splice(end, 0, REPLY, REPLY_TEXT, '');
+    }
+    return lines.join('\n');
+  }
+
+  // 国に意見書を求める陳情に別紙で添える「意見書の案」。議会が意見書を書くときのたたき台になる
+  // 前文は項目の ikensho（議会の言葉で書いた前文。である調）があればそれを、なければ理由をそのまま使う
+  // 結びは地方自治法第99条（議会は、公益に関する事件につき意見書を国会又は関係行政庁に提出することができる）による
+  function ikensho(council, keys) {
+    const sel = keys.map((k) => ITEMS[k]).filter((it) => it && isNational(it));
+    if (!sel.length) return '';
+    const T = { ...TEMPLATE, ...(sel[0].template || {}) };
+    const place = council.replace(/議会$/, '');
+    const vars = { 内容: sel.map((it) => it.title).join('および'), 種類: '陳情', 宛先: place };
+    // 趣旨の「〇〇ため、国に対し、…」から、目的の部分（〇〇ため）だけを取り出す
+    const aim = (fill(T.purposeNational, vars).match(/^(.+?ため)、国に対し/) || [])[1];
+    const L = ['（別紙）', '', `　　　　${vars.内容}を求める意見書（案）`, ''];
+    sel.forEach((it) => L.push(`　${(it.ikensho || it.reason).replace(/\n/g, '\n　')}`, ''));
+    L.push(`　よって、国においては、${aim ? `${aim}、` : ''}下記事項を実現するよう強く要望する。`, '', '記', '');
+    sel.forEach((it, i) => L.push(`${KANSUJI[i] || i + 1}　${fill(it.text, vars)}`));
+    L.push('', '　以上、地方自治法第99条の規定により意見書を提出する。', '', DATE_BLANK, '', `　　　　　　　　　　　　　　　　　　${council}`, '', '（提出先）');
+    T.ikenshoTo.split('、').forEach((to) => L.push(`　${to}　様`));
+    L.push('', '※この意見書の案は、陳情者が参考として添えたものです。文面は議会でご自由にお直しください。');
+    return L.join('\n');
+  }
+
   // ある議会あての文面を、別の議会あてに書き換える（宛名の「○○市議会」と、本文の「○○市」を差し替える）
   function swapCouncil(text, from, to) {
     if (from === to) return text;
@@ -246,5 +288,5 @@ window.Petition = (() => {
     return fill(TEMPLATE.cover, { 日付: DATE_BLANK, 宛先: council, 差出人: from.join('\n'), 書類: list, 通数: String(docs.length) }).replaceAll('陳情書', documentLabel);
   }
 
-  return { headOf, build, buildPrompt, sections, buildRewritePrompt, applyRewrite, rewritePlans, withSender, swapCouncil, cover, selectedKeys, isNational, ordered, ITEMS, MANY, SEP };
+  return { headOf, build, withReply, ikensho, buildPrompt, sections, buildRewritePrompt, applyRewrite, rewritePlans, withSender, swapCouncil, cover, selectedKeys, isNational, ordered, ITEMS, MANY, SEP };
 })();

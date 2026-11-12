@@ -247,3 +247,27 @@ test('国あてと自治体あてを一緒に選ぶと、指示文で項目ご�
   assert.match(p, /（種類：自治体）/);
   assert.match(p, /意見書の提出先（国の事項のみ）/);
 });
+
+test('要望書の「回答のお願い」は選んだときだけ入り、外すと元に戻る', () => {
+  const k = w.ASKS.find((a) => a.scope === 'local').id;
+  const fd = form([k]);
+  fd.append('kind', 'request');
+  const t = w.Petition.build(fd, '横浜市議会', [k], 'request');
+  const on = w.Petition.withReply(t, true);
+  assert.match(on, /【回答のお願い】\n　本要望について[^\n]+\n\n以上$/);
+  assert.strictEqual(w.Petition.withReply(on, true), on);
+  assert.strictEqual(w.Petition.withReply(on, false), t);
+  assert.strictEqual(w.Petition.withReply(t, false), t);
+});
+
+test('意見書の案は国あての内容にだけでき、地方自治法第99条の結びと提出先が入る', () => {
+  const n = w.ASKS.find((a) => a.scope === 'national').id;
+  const l = w.ASKS.find((a) => a.scope === 'local').id;
+  const t = w.Petition.ikensho('横浜市議会', [n]);
+  assert.match(t, /を求める意見書（案）/);
+  assert.match(t, /よって、国においては、.+ため、下記事項を実現するよう強く要望する。/);
+  assert.match(t, /地方自治法第99条の規定により意見書を提出する。/);
+  assert.match(t, /　衆議院議長　様/);
+  assert.match(t, /横浜市議会\n/);
+  assert.strictEqual(w.Petition.ikensho('横浜市議会', [l]), '');
+});

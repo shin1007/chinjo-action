@@ -6,7 +6,8 @@ window.SendMemo = (() => {
   const check = (t) => `${CHECK}${t}`;
 
   // o：{ kind: 'petition' | 'request', count: 通数（議会1つあたり）, titles: 件名の並び, figs: 送り方の図を入れるか,
-  //      councils: [{ name, page, mail, denshi, tel, address, access, deadline, stamp }] }
+  //      councils: [{ name, page, mail, denshi, tel, address, access, deadline, sessions, stamp }] }
+  //      sessions：定例会の月（例：'3・6・9・12'。data/sessions.js）
   function build(o) {
     const request = o.kind === 'request';
     const doc = request ? '要望書' : '陳情書';
@@ -31,6 +32,8 @@ window.SendMemo = (() => {
         '',
         '【2　出し方を決める】',
         '下の「出す先ごとのこと」を見て、どれか1つに決めます。',
+        check('次の定例会の開会日を、議会の公式サイトの日程で確かめた（開会日：　　月　　日）'),
+        check('その3週間前（　　月　　日）までに届くように出す（締切は開会日の数日〜2週間前の議会が多く、郵送は「必着」が多い）'),
         check('電子申請ができる議会なら、電子申請で出す（紙・封筒・切手は要らない）'),
         check('住んでいる議会なら、持参すると審査される見込みがいちばん高い'),
         check('郵送する（議会によっては、審査されず議員に配るだけになる）'),
@@ -69,6 +72,7 @@ window.SendMemo = (() => {
         L.push('', `■ ${c.name}`);
         if (!request) L.push(`・郵送：${c.mail || '郵送で審査されるかは分かっていません（審査まで確実にしたいときは電話で聞く）'}`);
         if (c.denshi) L.push('・電子申請でも出せるようです。');
+        if (!request && c.sessions) L.push(`・定例会：${c.sessions}月（開会日は議会の日程で確かめ、その3週間前までに届くように出す）`);
         if (c.deadline) L.push(`・締切：「${c.deadline}」`);
         if (c.tel) L.push(`・電話：${c.tel}`);
         if (c.address) L.push(`・住所：${c.address}`);
