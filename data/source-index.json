@@ -102,6 +102,15 @@
       "localPath": null
     },
     {
+      "id": "src-0beb2ab648",
+      "title": "Li W ほか (2021) The Longitudinal Association Between Retirement and Depression: A Systematic Review and Meta-Analysis. Am J Epidemiol 190(10): 2220-2230（査読論文）",
+      "url": "https://doi.org/10.1093/aje/kwab125",
+      "note": "縦断研究25本のメタ分析。退職は抑うつ症状の増加と関連し（効果は小さい）、望まない退職で強く、東アジアなどの東の先進国では西の先進国より強かった。要旨（PubMed）で確認",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-0dfdcbb71c",
       "title": "欧州議会「日本におけるEUの子の国際的・国内的な親による連れ去りに関する決議」（2020年7月8日、P9_TA(2020)0182）",
       "url": "https://www.europarl.europa.eu/doceo/document/TA-9-2020-0182_EN.html",
@@ -1538,6 +1547,15 @@
       "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148945174",
       "note": "国税強制徴収の例により取り立てる",
       "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-998efe23ad",
+      "title": "Gruenewald TL ほか (2007) Feelings of Usefulness to Others, Disability, and Mortality in Older Adults: the MacArthur Study of Successful Aging. J Gerontol B Psychol Sci Soc Sci 62(1): P28-37（査読論文）",
+      "url": "https://doi.org/10.1093/geronb/62.1.p28",
+      "note": "70〜79歳の米国の高齢者を7年追跡。家族や友人の役に立っていると感じることがない・まれな人は、よく感じる人に比べて、生活機能の障害が進んだり亡くなったりしやすかった。要旨（PubMed）で確認",
+      "kind": "secondary",
       "fetchedAt": null,
       "localPath": null
     },
