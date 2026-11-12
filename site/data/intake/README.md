@@ -7,6 +7,7 @@
 
 どちらも 47都道府県＋全市区町村の 1787 行。ここが本体で、手で（またはAIで）1行ずつ書き足していく。
 `node scripts/intake.js check` で形を確かめる（`npm test` でも走る）。`stats` で埋まり具合を数える。
+`export` で作成画面用の site/data/intake.js を書き出す（公式サイト・事務局の回答を根拠にした値だけ。npm test で書き出し忘れを見つける）。
 `population` で人口を `municipality-populations.json` から入れ直す。
 `migrate` は最初に今あるデータ（mail.js・mail-policy.js・councils.js・request-pages.js・docs/確認用/郵送の扱いが不明な議会.csv）から作ったときのもので、`--force` を付けると手で足した分が消える。
 

@@ -7,6 +7,7 @@
 //   node scripts/intake.js population         人口を municipality-populations.json で入れ直す
 //   node scripts/intake.js stats              どこまで埋まったかを数える
 //   node scripts/intake.js report             人が読む一覧表を docs/確認用/陳情・要望の受け付け方の一覧.md に書く
+//   node scripts/intake.js export             作成画面で使う site/data/intake.js を書く（公式サイト・事務局の回答で確かめた値だけ）
 'use strict';
 const fs = require('fs');
 const path = require('path');
@@ -218,7 +219,57 @@ function stats() {
   }
 }
 
-module.exports = { checkKind, METHODS, FILES };
+// 作成画面に出すのは、公式サイトか事務局の回答を根拠にした値だけ（機械で読み取っただけ・利用者からの情報は出さない）
+const SURE = new Set(['official_site', 'office_reply']);
+const EXPORT_FIELDS = {
+  chinjo: ['page_url', 'form_url', 'email_addr', 'name_published', 'statement', 'result_notice'],
+  yobo: ['page_url', 'form_url', 'email_addr', 'reply', 'anonymous_ok'],
+};
+function sureSource(r, field) {
+  return r.sources.filter((s) => SURE.has(s.route) && s.fields.some((f) => f === field || f.startsWith(field + '.')))
+    .sort((a, b) => (b.checked_at || '').localeCompare(a.checked_at || ''))[0];
+}
+function exportData() {
+  const out = {};
+  for (const kind of ['chinjo', 'yobo']) {
+    out[kind] = {};
+    for (const r of readJsonl(FILES[kind])) {
+      const e = {};
+      let at = '';
+      for (const f of EXPORT_FIELDS[kind]) {
+        const v = r[f];
+        if (!v || v === 'unknown') continue;
+        // 案内ページの URL は根拠の出どころそのものなので、根拠の欄がなくても出す
+        const s = f === 'page_url' ? (sureSource(r, f) || r.sources.find((x) => SURE.has(x.route) && x.url === v)) : sureSource(r, f);
+        if (!s) continue;
+        e[f] = v;
+        if ((s.checked_at || '') > at) at = s.checked_at;
+      }
+      for (const m of ['email', 'form']) {
+        const s = sureSource(r, `methods.${m}`);
+        const v = r.methods[m];
+        if (s && (v.resident !== 'unknown' || v.nonresident !== 'unknown')) {
+          e[m] = [v.resident, v.nonresident];
+          if ((s.checked_at || '') > at) at = s.checked_at;
+        }
+      }
+      // 宛先の URL・アドレスは、その出し方で受け付けると確かめたときだけ出す（問い合わせ用の窓口のことがあるため）
+      const ok = (m) => (e[m] || []).some((x) => x === 'accept' || x === 'review');
+      if (!ok('form')) delete e.form_url;
+      if (!ok('email')) delete e.email_addr;
+      if (Object.keys(e).length) out[kind][r.id] = { ...e, at };
+    }
+  }
+  return out;
+}
+function exportText() {
+  return '// node scripts/intake.js export で site/data/intake/*.jsonl から作る。手で直さない\n'
+    + '// 公式サイト・議会事務局の回答で確かめた値だけ。at はいちばん新しい確認日\n'
+    + `window.INTAKE = ${JSON.stringify(exportData())};\n`;
+}
+const EXPORT_FILE = path.join(DATA, 'intake.js');
+
+module.exports = { checkKind, METHODS, FILES, exportText, EXPORT_FILE };
 
 if (require.main === module) {
   const [cmd, opt] = process.argv.slice(2);
@@ -227,5 +278,6 @@ if (require.main === module) {
   else if (cmd === 'population') population();
   else if (cmd === 'stats') stats();
   else if (cmd === 'report') require('./intake-report.js')();
-  else { console.error('使い方: node scripts/intake.js migrate|check|population|stats|report'); process.exit(1); }
+  else if (cmd === 'export') { fs.writeFileSync(EXPORT_FILE, exportText()); console.log('書いた', path.relative(ROOT, EXPORT_FILE)); }
+  else { console.error('使い方: node scripts/intake.js migrate|check|population|stats|report|export'); process.exit(1); }
 }
