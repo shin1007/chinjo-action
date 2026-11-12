@@ -193,7 +193,7 @@
                 </ol>
                 <p class="hint-sm">分かった扱いは、下の「出す前に確かめること」の「分かったことを共有する」から送ると、次の人が電話しなくて済みます。</p>
               </details></li>
-            <li id="wzNowChairItem"><b>日付と議長の氏名</b>：文面の日付は<b id="wzNowDate"></b>（今日）です。出す日が違うときは、前の画面の「文面を確かめる・直す」で直すか、印刷後に手書きで直してください。議長の氏名は、調べて入れると宛名に入ります。空けておけば手書きでも構いません。
+            <li id="wzNowChairItem"><b>日付と議長の氏名（任意）</b>：日付は<b id="wzNowDate"></b>（今日）で入ります。議長の氏名は、分かれば入れると宛名に入り、空けておけば手書きで書き入れます。
               <div id="wzChairBox" class="wz-chairs" hidden><div id="wzChairs"></div><p class="hint-sm">議長は選挙や交代で変わります。出す直前に議会の公式サイトで確かめてください。</p></div></li>
             <li><b>印刷する</b>：<span id="wzNowCount"></span>
               <p id="wzNowLeft" class="wz-now-left" role="status" hidden></p>
@@ -203,10 +203,10 @@
             <li id="wzNowReport"><b>出したら知らせる（任意）</b>：「くわしい手順」の②にある「この議会に提出した」を押すと、出した人の数に加わります。電話で聞いて分かった扱いは、「出す前に確かめること」の「分かったことを共有する」から送れます。</li>
           </ol>
           <div id="wzAlso" class="wz-also" hidden></div>
-          <p class="hint-sm" data-request-html="下は、出す前に確かめることです。このサイトは法的助言をするものではありません。受け付け方は自治体ごとに違い、変わることもあります。">下は、出す前に確かめることと、くわしい手順です。このサイトは法的助言をするものではありません。扱いは議会ごとに変わることがあります。</p>
+          <p class="hint-sm" data-request-html="下は、出す前に確かめることです。このサイトは法的助言をするものではありません。受け付け方は自治体ごとに違い、変わることもあります。">確かめることやくわしい手順は、下を開くと見られます。このサイトは法的助言をするものではありません。</p>
         </section>
-        <div class="wz-checklist">
-          <h4>出す前に確かめること</h4>
+        <details class="wz-checklist">
+          <summary><b>出す前に確かめること</b>（チェックリスト・開いて確かめる）</summary>
           <p class="wz-when">印刷する前に</p>
           <ul>
             <li data-petition-only><label><input type="checkbox" id="wzChkChair"> 議長の氏名を確かめた（上の欄に入れれば自動でチェックが付きます。空けて手書きにしてもかまいません）</label></li>
@@ -228,7 +228,7 @@
           </ul>
           </details>
           <p class="hint-sm" data-petition-only>扱いがはっきりしないときは、議会事務局に電話で聞くのが確実です。本サイトは法的助言をするものではありません。詳しくは<a href="/dansei/guide">陳情の出し方ガイド</a>へ。</p>
-        </div>
+        </details>
         <details class="wz-fold wz-flow-box" data-petition-only>
         <summary>くわしい手順を開く（議会ごとの出し方・郵送のしかたと切手・近くの議会にも出す）</summary>
         <ol class="wz-flow">
@@ -283,15 +283,15 @@
           </div>
         </details>
 
-        <div class="wz-after">
-          <h4>提出したあとにできること</h4>
+        <details class="wz-after">
+          <summary><b>提出したあとにできること</b>（ほかの議会にも出す・審査を見届ける・広める）</summary>
           <ul>
           <li><b>ほかの議会にも出す：</b>同じ内容のまま、近くの議会や別の都道府県の議会を書き足せます。同じ地域でまとめて出すと、採択につながりやすくなります。<button type="button" id="wzOther" class="btn btn-small">ほかの議会を選ぶ</button></li>
           <li id="wzHotline" hidden><b>国に直接提案する：</b>国の法律や省令を変える内容は、内閣府の<a href="https://form.cao.go.jp/kokumin_koe/opinion-0016.html" target="_blank" rel="noopener">規制改革・行政改革ホットライン</a>にも個人で出せます。所管の省庁が検討し、回答が<a href="https://www8.cao.go.jp/kisei-kaikaku/kisei/hotline/h_index.html" target="_blank" rel="noopener">内閣府のサイト</a>で公開されます。氏名は公表されません。<a href="/about#methods">ほかの手段</a></li>
           <li><b>審査を見届ける：</b>1週間ほどしたら議会事務局に受理と審査の日程を確かめ、できれば委員会を傍聴します。<a href="/dansei/guide#flow">提出までの流れ</a></li>
           <li><b>広める：</b>結果が出たら、ほかの地域の人の後押しになるよう共有してください。<a id="wzShareX" target="_blank" rel="noopener">Xで共有</a>／<a id="wzShareLine" target="_blank" rel="noopener">LINEで共有</a></li>
           </ul>
-        </div>
+        </details>
       </div>
 
       <div class="wz-nav">
