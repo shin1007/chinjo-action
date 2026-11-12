@@ -23,6 +23,7 @@ window.MAIL = {
 "三重県":{
 "四日市市":["none", "また、「陳情」については、審議の対象としていませんが、全議員に対して文書を配付しています。", "https://www.city.yokkaichi.lg.jp/www/contents/1001000002962/index.html"]},
 "静岡県":{
+"沼津市":["none", "受理された陳情は、原本の写しが全議員に配付されます。請願とは異なり、原則として定例会において審議されませんが、内容によっては所管の委員会で検討することもあります。", "https://www.city.numazu.shizuoka.jp/shisei/g-shigiki/g-sigiki/boucho/seigan.htm"],
 "浜松市":["jisan", "なお、郵送により受理したものや、審査になじまないものについては、委員会に送付することなく、議長名により各会派の長へ写しを配付する取り扱いとなります。", "https://www.city.hamamatsu.shizuoka.jp/gikai/seigan.html"]},
 "兵庫県":{
 "明石市":["jisan", "市内在住の方から持参により提出された陳情で、要件の整っているものは、所管の委員会で審査されます。", "https://www.city.akashi.lg.jp/gikai/torikumi/seiganchinjou/c-teishutsu.html"],
@@ -31,6 +32,7 @@ window.MAIL = {
 "西宮市":["jisan", "次の「陳情」は、原則として議長の供覧とされ、委員会では審査されません。（1）市民でない方から提出されたもの（2）直接議会事務局に持参されなかったもの", "https://www.nishi.or.jp/nishinomiyashigikai/you/seiganteishutsu.html"],
 "神戸市":["outside", "なお、市外にお住まいの方からの郵送またはこれに類する方法での陳情書は、要望書として扱いますのでご了承ください。", "https://www.city.kobe.lg.jp/a91127/shise/municipal/seigann_tinnjyou/seigan.html"]},
 "京都府":{
+"宇治市":["none", "議長が諸報告の中で受理報告をし、写しを全議員に配布", "https://www.city.uji.kyoto.jp/soshiki/2/3175.html"],
 "@":["none", "提出された陳情書については、所管の委員会に送付されますが、「採択」か「不採択」かの決定はされません。", "https://www.pref.kyoto.jp/gikai/html/osirase/osirase3.html"]},
 "埼玉県":{
 "所沢市":["none", "陳情は、参考資料として議員に配付されます。", "https://www.city.tokorozawa.saitama.jp/shigikai/minasanto/seigantinjou.html"],
@@ -95,6 +97,7 @@ window.MAIL = {
 "上田市":["jisan","郵送による陳情書については、議会の取り決めにより、受理はしますが、審査は行わないことになっておりますのでご注意ください。","https://www.city.ueda.nagano.jp/site/gikai/4736.html"],
 "中野市":["ok","※陳情については、郵送でも提出できますが、できるだけ議会事務局へご持参ください。","https://www.city.nakano.nagano.jp/shigikai/2017103100016/"]},
 "千葉県":{
+"習志野市":["outside", "(注意)ただし、市外に住所を有する方から提出された陳情は、原則、全議員に写しを配付することにとどまります。", "https://www.city.narashino.lg.jp/joho/shigikai/gaiyo/seigan.html"],
 "流山市":["jisan", "※郵送による陳情については、参考配付となり審査されませんのでご注意ください。", "https://www.nagareyamagikai.jp/procedure/seigan-thinjou.html"],
 "柏市":["none", "陳情につきましては紹介議員は必要ありませんが、陳情の写しを全議員に配付するのみとなり、審査を行いません。", "https://www.city.kashiwa.lg.jp/gikaigiji/assembly/bocho/seiganchinjo.html"],
 "市川市":["none", "受理された陳情は、原本の写しが各会派及び会派に所属していない議員（無会派）に配付されますが、原則として、定例会において審議されません。", "https://www.city.ichikawa.lg.jp/site/gikai/7618.html"],
@@ -120,6 +123,7 @@ window.MAIL = {
 "墨田区":["ok","区役所15階の区議会事務局へ、持参又は郵送してください。","https://www.city.sumida.lg.jp/kugikai/sinsa_report/index.html"],
 "西東京市":["ok","直接お越しいただくことが困難な場合は郵送でも受け付けています。","https://www.city.nishitokyo.lg.jp/sigikai/about/seigan_chinjo.html"]},
 "神奈川県":{
+"鎌倉市":["outside", "次の内容の陳情については、議会運営委員会における協議の上、委員会付託を行わず、全議員配付の取り扱いとする。１ 鎌倉市に住所を有しない者（市政に利害関係を有する者を除く）から郵送により提出されたもの", "https://www.city.kamakura.kanagawa.jp/gikai/documents/20251201haifukijyun.pdf"],
 "大和市":["outside", "本市に住所を有しない者から郵送により提出されたもの", "https://www.city.yamato.lg.jp/gyosei/soshik/29/shigikai/shigikainitsuite/4367.html"],
 "厚木市":["jisan", "請願書・陳情書の提出はいつでも受け付けており、持参されたものは各定例会議（2月、6月、9月、12月に開催）で審議されます（郵送等、持参によらない方法により提出された、または、持参されても議会運営委員会において審議しないと判断したものは、議員へ写しを配付するのみとなり、本会議で審議されません。）。", "https://www.city.atsugi.kanagawa.jp/shigikai/13/1/37204.html"],
 "横須賀市":["outside", "(5)横須賀市に住所を有しない者（市政に利害関係を有する者を除く。）から郵送または電子申請により提出されたもの", "https://www.city.yokosuka.kanagawa.jp/7860/g_info/l100000956.html"],
@@ -137,6 +141,7 @@ window.MAIL = {
 "胆沢郡金ケ崎町":["outside","町外から郵送により提出された陳情書については、議長が議会運営委員会に諮り、議員に配布することとしています。","https://www.town.kanegasaki.iwate.jp/gikai/seigan.html"],
 "陸前高田市":["ok","持参または郵送により提出してください。","https://www.city.rikuzentakata.iwate.jp/soshiki/gikaijimukyoku/6/6154.html"]},
 "愛知県":{
+"安城市":["jisan", "ただし、陳情書として提出されていても、次のものは陳情として扱われませんので、ご注意ください。提出の際、議長に郵送されたもの。", "https://anjo-shigikai.jp/other/petition.html"],
 "春日井市":["none", "また、陳情書が受理されると、請願のように審査の対象とはしませんが、全議員に対して写しを配付します。", "https://www.city.kasugai.lg.jp/shisei/shigikai/seigan.html"],
 "岡崎市":["jisan", "郵送及びオンラインにより提出された陳情は、議会への要望事項として取り扱います。正副議長及び各会派の代表者に配付しますが、委員会では審査しません。", "https://www.city.okazaki.lg.jp/shigikai/seigan/1009852.html"],
 "一宮市":["none", "市議会へ提出された陳情はその写しを議員に配付します。", "https://www.city.ichinomiya.aichi.jp/shigikai/1000081/1005022.html"],
@@ -160,6 +165,7 @@ window.MAIL = {
 "高知市":["none", "陳情については、採決を行わないものとし、陳情文書表（住所、氏名、内容を記載）を作成し、議員に配付しています。", "https://www.city.kochi.kochi.jp/soshiki/97/st-tei2.html"],
 "@":["ok","請願書・陳情書は窓口で受け付けしていますが、持参が困難な場合には郵送でも受け付けています。","https://gikai.pref.kochi.lg.jp/procedure/petition.html"]},
 "島根県":{
+"出雲市":["outside", "陳情書の内容が次のいずれかに該当すると議長が判断した場合は、審査を行わず全議員へ写しを配付する取り扱いとなります。…⑾ 市外から郵送で提出されたもの", "https://gikai.izumo-city.jp/petition"],
 "松江市":["outside", "たとえば、「個人のプライバシーを侵害する恐れがあるもの」「極めて個人的な事案、または私人間のみで解決すべき問題と考えられるもの」「県外から郵送で提出されたもの」などがあります。", "https://www.city.matsue.lg.jp/soshikikarasagasu/gikaijimukyoku_gijichosaka/matsueshigikai/5/2954.html"],
 "雲南市":["jisan","郵送やメールにて提出された際は、写しを議員へ配付し、審査は行いません。","https://www.city.unnan.shimane.jp/unnan/shiseijouhou/shigikai/minasama/seigan.html"]},
 "福島県":{
@@ -203,4 +209,6 @@ window.MAIL = {
 "秋田県":{
 "大館市":["ok","議会事務局に直接持参するか、郵送で提出する方法があります。","https://www.city.odate.lg.jp/city/soshiki/gikaizimu/seigan"],
 "山本郡八峰町":["jisan","※郵送のみの提出の場合は、議員配布のみとなります。","https://www.town.happo.lg.jp/archive/p20230510140559"]},
+"鳥取県":{
+"鳥取市":["ok", "下記郵送先・お問い合わせ先まで郵送またはご持参ください。", "https://www.city.tottori.lg.jp/site/shigikai/6343.html"]},
 };
