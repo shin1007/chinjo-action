@@ -171,7 +171,7 @@
       <ul>${state.councils.map((c) => {
         const d = infoOf(c).deadline && clip(infoOf(c).deadline);
         const q = encodeURIComponent(`${search(c)} 陳情 提出 締切`);
-        return `<li><b>${esc(label(c))}</b>：${d ? `「${esc(d)}」` : ''}<a href="https://www.google.com/search?q=${q}" target="_blank" rel="noopener">締切を調べる</a>${howTo(infoOf(c))}</li>`;
+        return `<li><b>${esc(label(c))}</b>：${d ? `「${esc(d)}」` : ''}<a href="https://www.google.com/search?q=${q}" target="_blank" rel="noopener">締切を調べる</a>${howTo(infoOf(c), c)}</li>`;
       }).join('')}</ul>`;
   }
 
@@ -211,7 +211,7 @@
   const checkedTag = (info) => { const t = checkedOn(info); return t ? `<small class="wz-checked">（${esc(t)}）</small>` : ''; };
   const mailBadge = (info) => { const r = mailRule(info); return r ? `<span class="wz-mail ${r.c === 'ok' ? 'ok' : r.c === 'none' ? 'none' : r.c === 'unknown' ? 'unknown' : 'jisan'}">${esc(r.label)}</span>${r.c === 'unknown' ? '' : checkedTag(info)}` : ''; };
   const ONLY_HANDOUT = /配布|配付|参考資料/;
-  function howTo(info) {
+  function howTo(info, id) {
     const n = [];
     if (mailRule(info)) n.push(mailBadge(info));
     if (info.denshi) n.push('✅ 電子申請でも出せるようです（紙・封筒・切手は要りません）。');
@@ -228,7 +228,36 @@
       const o = info.outsideNote && clip(info.outsideNote);
       if (o) n.push(`⚠ 住民以外の陳情について：「${esc(o)}」`);
     }
+    if (id) n.push(...intakeNotes(id, 'chinjo'));
     return n.length ? `<ul class="wz-notes">${n.map((t) => `<li>${t}</li>`).join('')}</ul>` : '';
+  }
+
+  // 受け付け方のデータベース（data/intake.js）から、公式サイト・事務局の回答で確かめたことだけを出す
+  const intakeOf = (id, kind) => {
+    const [pref, key] = officeKeys[id] || [];
+    return ((window.INTAKE || {})[kind || (state.kind === 'request' ? 'yobo' : 'chinjo')] || {})[`${pref}/${key}`];
+  };
+  const OK = (v) => v === 'accept' || v === 'review';
+  const viaText = (v) => (OK(v[0]) && OK(v[1]) ? '' : OK(v[0]) ? '（住民の方）' : '（住民以外の方）');
+  function intakeNotes(id, kind) {
+    const d = intakeOf(id, kind);
+    if (!d) return [];
+    const n = [];
+    const link = (u, t) => `<a href="${esc(u)}" target="_blank" rel="noopener">${t}</a>`;
+    if (d.form && d.form.some(OK)) n.push(`✅ Webフォーム・電子申請で出せます${viaText(d.form)}。${d.form_url ? link(d.form_url, 'フォームを開く') : '案内ページからフォームへ進みます'}（文面は「文面をすべてコピー」で貼り付けます）。`);
+    if (d.email && d.email.some(OK)) n.push(`✅ メールで出せます${viaText(d.email)}${d.email_addr ? `：${esc(d.email_addr)}` : '（あて先は案内ページで確かめます）'}。`);
+    if (d.form && !d.form.some(OK) && d.form.includes('no')) n.push('Webフォーム・電子申請では受け付けていません。');
+    if (d.email && !d.email.some(OK) && d.email.includes('no')) n.push('メールでは受け付けていません。');
+    if (d.name_published === 'yes') n.push('⚠ 陳情者の氏名は、会議録や文書表などで公開されます。');
+    if (d.name_published === 'no') n.push('陳情者の氏名は公開されないと案内されています。');
+    if (d.statement === 'yes') n.push('委員会で陳情者が趣旨を説明（意見陳述）できます。');
+    if (d.result_notice === 'yes') n.push('審査の結果を知らせてもらえます。');
+    if (d.reply === 'yes') n.push('回答をもらえます（希望したとき・内容によるときもあります）。');
+    if (d.reply === 'no') n.push('個別の回答はしないと案内されています。');
+    if (d.anonymous_ok === 'no') n.push('匿名では受け付けていません（住所・氏名を書きます）。');
+    if (d.anonymous_ok === 'yes') n.push('匿名でも受け付けますが、回答はもらえないことがあります。');
+    if (d.page_url && !(kind === 'yobo' && requestLinks(id).page === d.page_url)) n.push(`${link(d.page_url, '公式の案内ページを開く')}<small class="wz-checked">（${esc(ymd(d.at))}に公式サイトで確認）</small>`);
+    return n;
   }
 
   // 項目は見出しごとに折りたたむ。選んだ項目がある見出しと、最初の見出しは開いておく
@@ -1126,6 +1155,7 @@
     saveDraft();
   });
 
+  const reqNotes = (id) => { const n = intakeNotes(id, 'yobo'); return n.length ? `<ul class="wz-notes">${n.map((t) => `<li>${t}</li>`).join('')}</ul>` : ''; };
   // 「今やること」の1つ目：議会ごとに、分かっている扱いか、電話で聞くことを出す
   function renderNowAsk() {
     const list = real();
@@ -1137,8 +1167,8 @@
         ? list.map((id) => {
           const { page, title, results } = requestLinks(id);
           return page
-            ? `<li><b>${esc(municipalityName(id))}</b>：<a href="${esc(page)}" target="_blank" rel="noopener" class="btn btn-small">要望・意見の出し方のページを開く</a><span class="hint-sm">（${esc(title)}。公式サイトで確かめたページです）</span></li>`
-            : `<li><b>${esc(municipalityName(id))}</b>：<span class="wz-notfound">⚠ このサイトでは、${esc(municipalityName(id))}の要望書の出し方のページを見つけられていません。</span>下のボタンで公式サイトの中を検索して、ご自身で探してください。<br><a href="${esc(results)}" target="_blank" rel="noopener" class="btn btn-small">公式サイトで出し方のページを探す</a><span class="hint-sm">（「${esc(headOf(municipalityName(id)))}への手紙」「市民の声」「ご意見・ご提案」などの名前のページです。見つからなければ、代表電話で要望書の受付窓口を聞きます）</span></li>`;
+            ? `<li><b>${esc(municipalityName(id))}</b>：<a href="${esc(page)}" target="_blank" rel="noopener" class="btn btn-small">要望・意見の出し方のページを開く</a><span class="hint-sm">（${esc(title)}。公式サイトで確かめたページです）</span>${reqNotes(id)}</li>`
+            : `<li><b>${esc(municipalityName(id))}</b>：<span class="wz-notfound">⚠ このサイトでは、${esc(municipalityName(id))}の要望書の出し方のページを見つけられていません。</span>下のボタンで公式サイトの中を検索して、ご自身で探してください。<br><a href="${esc(results)}" target="_blank" rel="noopener" class="btn btn-small">公式サイトで出し方のページを探す</a><span class="hint-sm">（「${esc(headOf(municipalityName(id)))}への手紙」「市民の声」「ご意見・ご提案」などの名前のページです。見つからなければ、代表電話で要望書の受付窓口を聞きます）</span>${reqNotes(id)}</li>`;
         }).join('')
         : '<li>出す先を決めたら、その自治体の公式サイトで、要望・意見の受け付け方（窓口・郵送・メール・フォーム）を確かめます。</li>';
     } else if (!list.length) {
