@@ -46,6 +46,7 @@
           <li><b><a href="https://www.toben.or.jp/bengoshi/center/tel/children.html" target="_blank" rel="noopener">子どもの人権110番</a>（東京弁護士会）</b> <a href="tel:0335030110">03-3503-0110</a>：いじめ・不登校・体罰・虐待など、子どもの人権に関わることすべて。弁護士が無料で相談に乗ります。</li>
           <li><b><a href="https://www.gender.go.jp/policy/no_violence/dv_navi/" target="_blank" rel="noopener">DV相談ナビ</a></b> <a href="tel:%238008">#8008</a>：配偶者からの暴力。お近くの配偶者暴力相談支援センターにつながります。24時間の電話やチャットは同じページの「DV相談＋」から。</li>
           <li><b><a href="https://www.soumu.go.jp/main_sosiki/hyouka/soudan_n/" target="_blank" rel="noopener">行政相談</a>（総務省）</b> <a href="tel:0570090110">0570-090110</a>：国の行政への苦情・意見・要望。規制の見直しの提案は、上の内閣府のホットラインへ。</li>
+          <li><b><a href="https://www.sotsui.go.jp/claim/index.html" target="_blank" rel="noopener">裁判官の罷免の訴追請求</a>（裁判官訴追委員会・国会）</b>：裁判官に、職務上の義務への著しい違反や、裁判官の威信を著しく失わせる非行があったとき、日本国民ならだれでも、罷免の訴追を求められます。書面を郵送し、手数料はいりません。判決が間違っている・主張を採用してくれないといった不満は、原則として対象にならず、控訴などの裁判の手続で争います。</li>
           <li><b><a href="https://www.nichibenren.or.jp/activity/human.html" target="_blank" rel="noopener">人権救済申立て</a>（日本弁護士連合会・各地の弁護士会）</b>：人権侵害を受けた人からの申立てを受けて調査します。子ども・高齢者・障がい者・外国人・女性・性的少数者などの人権問題。</li>
           <li><b><a href="https://www.bpo.gr.jp/?page_id=1126" target="_blank" rel="noopener">放送人権委員会</a>（BPO）</b>：あなたや家族が、個別の番組で名誉やプライバシーなどの人権を侵害されたときの申立て。</li>
           <li><b><a href="https://www.houterasu.or.jp/" target="_blank" rel="noopener">法テラス</a></b> <a href="tel:0570078374">0570-078374</a>：法的なトラブル全般で、どこに相談すればよいかの案内。犯罪被害者支援ダイヤル <a href="tel:0120079714">0120-079714</a> もあります。</li>
