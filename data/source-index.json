@@ -768,6 +768,15 @@
       "localPath": null
     },
     {
+      "id": "src-4bd3480f09",
+      "title": "Anderson ND ほか (2014) The benefits associated with volunteering among seniors: a critical review and recommendations for future research. Psychological Bulletin 140(6): 1505-1533（査読論文）",
+      "url": "https://doi.org/10.1037/a0037610",
+      "note": "73本の研究を検討。高齢者のボランティア活動は、抑うつの症状の少なさ、自己評価の健康のよさ、生活機能の制限の少なさ、死亡率の低さと、もっとも一貫して関連していた。要旨（PubMed）で確認",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-4bfdd35699",
       "title": "内閣「参議院議員牧山ひろえ君提出ＤＶ等被害者支援措置としての住民基本台帳閲覧制限等の期間制限に関する質問に対する答弁書」（内閣参質二一三第二二六号、令和6年7月2日）",
       "url": "https://www.sangiin.go.jp/japanese/joho1/kousei/syuisyo/213/touh/t213226.htm",
@@ -2465,6 +2474,15 @@
       "url": "https://laws.e-gov.go.jp/law/324AC0000000001",
       "note": "研修の計画・初任者研修・中堅教諭等資質向上研修。臨時的に任用された者などを除く",
       "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-f2695e83d1",
+      "title": "厚生労働省「健康づくりのための身体活動・運動ガイド2023」高齢者版",
+      "url": "https://www.mhlw.go.jp/content/001195868.pdf",
+      "note": "高齢者に、歩行またはそれと同等以上の強度の身体活動を1日40分以上（1日約6,000歩以上に相当）行うことを推奨。これを満たす高齢者は、男性の75〜84歳で32％、女性の75〜84歳で22％",
+      "kind": "official",
       "fetchedAt": null,
       "localPath": null
     },
