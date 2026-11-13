@@ -234,7 +234,7 @@
       const o = info.outsideNote && clip(info.outsideNote);
       if (o) n.push(`⚠ 住民以外の陳情について：「${esc(o)}」`);
     }
-    if (id) n.push(...intakeNotes(id, 'chinjo'));
+    if (id) n.push(...intakeNotes(id, 'chinjo'), ...kaitoNotes(id));
     return n.length ? `<ul class="wz-notes">${n.map((t) => `<li>${t}</li>`).join('')}</ul>` : '';
   }
 
@@ -271,6 +271,22 @@
     const out = n.map((t, i) => mark(t, fieldOf[i]));
     if (d.page_url && !(kind === 'yobo' && requestLinks(id).page === d.page_url)) out.push(`${link(d.page_url, '公式の案内ページを開く')}<small class="wz-checked">（${esc(ymd(d.at))}に確認）</small>`);
     if (isStale(d.at)) out.push(`⚠ このサイトで確かめたのは${esc(ymd(d.at))}で、3か月以上たっています。変わっていることがあるので、出す前に公式の案内ページで確かめてください。`);
+    return out;
+  }
+
+  // 自治体が公開している「寄せられた意見と回答」（data/kaito.js）。選んでいる項目に関係のある回答は1件ずつ、なければ一覧のページへ
+  function kaitoNotes(id) {
+    const [pref, key] = officeKeys[id] || [];
+    const k = ((window.KAITO || {})[`${pref}/${key}`]);
+    if (!k) return [];
+    const link = (u, t) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>`;
+    const mine = new Set(state.items.map((i) => `${window.THEME.id}/${i}`));
+    const hits = k.i.filter((x) => x[4].some((a) => mine.has(a)));
+    const out = [];
+    if (hits.length) {
+      out.push(`選んだ内容に近い、過去に寄せられた意見と${esc(headOf(municipalityName(id)))}の回答：<ul>${hits.slice(0, 5).map((x) => `<li>${link(x[1], x[0])}${x[2] ? `（${esc(ymd(x[2]) || x[2].replace(/^(\d{4})-0?(\d+)$/, '$1年$2月'))}${esc(x[3] || '')}）` : '（日付は読み取れませんでした）'}</li>`).join('')}</ul><small class="wz-checked">（機械で選び、題名を見て確かめたものです。回答の中身は開いて確かめてください）</small>`);
+    }
+    out.push(`${link(k.l[0], hits.length ? '過去の意見と回答の一覧を開く' : '過去に寄せられた意見と回答の一覧を開く')}<small class="wz-checked">（${esc(k.l[1])}。${esc(ymd(k.l[2]))}に${k.l[3] ? '確認' : '自動で見つけたページ'}）</small>`);
     return out;
   }
 
@@ -1169,7 +1185,7 @@
     saveDraft();
   });
 
-  const reqNotes = (id) => { const n = intakeNotes(id, 'yobo'); return n.length ? `<ul class="wz-notes">${n.map((t) => `<li>${t}</li>`).join('')}</ul>` : ''; };
+  const reqNotes = (id) => { const n = [...intakeNotes(id, 'yobo'), ...kaitoNotes(id)]; return n.length ? `<ul class="wz-notes">${n.map((t) => `<li>${t}</li>`).join('')}</ul>` : ''; };
   // 「今やること」の1つ目：議会ごとに、分かっている扱いか、電話で聞くことを出す
   function renderNowAsk() {
     const list = real();
