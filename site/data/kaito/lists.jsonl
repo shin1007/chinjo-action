@@ -11,6 +11,8 @@
 {"muni":"愛知県/田原市","kind":"yobo","url":"https://www.city.tahara.aichi.jp/seisaku/kohou/1012016.html","title":"これまでの市民の声への回答｜田原市","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"愛知県/名古屋市","kind":"yobo","url":"https://www.city.nagoya.jp/shisei/kouchou/1028241/1028242/index.html","title":"これまでに寄せられた「市民の声」｜名古屋市公式ウェブサイト","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"愛媛県/@","kind":"yobo","url":"https://www.pref.ehime.jp/site/chiji/15140.html","title":"知事に 寄せられた 提言 - ようこそ知事室へ","found_at":"2026-11-13","route":"auto_extract","checked":false}
+{"muni":"愛媛県/今治市","kind":"yobo","url":"https://www.city.imabari.ehime.jp/mayor/q_a/R0806.html","title":"令和8年6月 | 寄せられたご意見と回答 | ようこそ市長室へ | 今治市","found_at":"2026-11-13","route":"auto_extract","checked":false}
+{"muni":"愛媛県/新居浜市","kind":"yobo","url":"https://www.city.niihama.lg.jp/soshiki/hisyokouhou/ikenkaitou202604.html","title":"市長への手紙・メールにいただいたみなさんからのご意見と回答（令和8年4月受付分） - 愛媛県新居浜市ホームページ｜四国屈指の臨海工業都市","found_at":"2026-11-13","route":"auto_extract","checked":false}
 {"muni":"愛媛県/西予市","kind":"yobo","url":"https://www.city.seiyo.ehime.jp/shisei/kouhou_kouchou/shimin_koe/siminnokoe_kaitou/index.html","title":"「市民の声」に寄せられたご意見・ご提言、市の回答／西予市","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"愛媛県/東温市","kind":"yobo","url":"https://www.city.toon.ehime.jp/site/1102/","title":"意見箱に寄せられたご意見と回答を掲載します - 東温市公式ホームページ","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"茨城県/@","kind":"yobo","url":"https://www.pref.ibaraki.jp/bugai/koho/kocho/data/sodan/kensei.html","title":"県民の皆様から寄せられたご意見に対する現状・対応について／茨城県","found_at":"2026-11-12","route":"auto_extract","checked":false}
@@ -25,6 +27,7 @@
 {"muni":"茨城県/龍ヶ崎市","kind":"yobo","url":"https://www.city.ryugasaki.ibaraki.jp/shisei/koho/public_comments/ikenkohyochu/index.html","title":"意見に対する市の考え方について公表中の案件｜龍ケ崎市公式ホームページ","found_at":"2026-11-13","route":"auto_extract","checked":false}
 {"muni":"岡山県/@","kind":"yobo","url":"https://www.pref.okayama.lg.jp/page/985831.html","title":"「県政への提言に寄せられたご意見・ご提言（令和7年4月分） - 岡山県ホームページ（公聴広報課）","found_at":"2026-11-13","route":"auto_extract","checked":false}
 {"muni":"岡山県/井原市","kind":"yobo","url":"https://www.city.ibara.okayama.jp/soshiki/12/2877.html","title":"井原市へのご意見・ご提言に対する回答を公開します - 井原市役所","found_at":"2026-11-12","route":"auto_extract","checked":false}
+{"muni":"岡山県/津山市","kind":"yobo","url":"https://www.city.tsuyama.lg.jp/article?articleId=6709a0187fc4e33c7ad01435","title":"令和5年度「市民の声」にお 寄せ いただいたご 意見 など","found_at":"2026-11-13","route":"auto_extract","checked":false}
 {"muni":"沖縄県/@","kind":"yobo","url":"https://www.pref.okinawa.lg.jp/kensei/kochokoho/1014932/1015136/1023804/1034874.html","title":"令和7年度 県民ご意見箱へいただいたご意見への回答｜沖縄県公式ホームページ","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"沖縄県/浦添市","kind":"yobo","url":"https://www.city.urasoe.lg.jp/category/bunya/kohokocho/goikenkokai/","title":"市へのご意見公開 | 浦添市","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"沖縄県/宜野湾市","kind":"yobo","url":"https://www.city.ginowan.lg.jp/site/iken_yobo/3127.html","title":"ご意見・ご要望 回答集／宜野湾市","found_at":"2026-11-12","route":"auto_extract","checked":false}
@@ -35,12 +38,14 @@
 {"muni":"岐阜県/@","kind":"yobo","url":"https://www.pref.gifu.lg.jp/page/18159.html","title":"皆様から寄せられたご意見と県の考え方 - 岐阜県公式ホームページ（行政管理課）","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"岐阜県/加茂郡八百津町","kind":"yobo","url":"https://www.town.yaotsu.lg.jp/4271.htm","title":"みなさまから頂いたご意見/八百津町","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"岐阜県/加茂郡富加町","kind":"yobo","url":"https://www.town.tomika.gifu.jp/docs/1913673.html","title":"町民の声 ～町からの回答～ - 富加町","found_at":"2026-11-13","route":"auto_extract","checked":false}
+{"muni":"岐阜県/各務原市","kind":"yobo","url":"https://www.city.kakamigahara.lg.jp/shisei/message/1006142/1006145/index.html","title":"提案・回答集｜各務原市公式ウェブサイト","found_at":"2026-11-13","route":"auto_extract","checked":false}
 {"muni":"岐阜県/岐阜市","kind":"yobo","url":"https://www.city.gifu.lg.jp/info/kouchou/1008456/1008457/1012626/index.html","title":"市長への手紙提案と回答事例｜岐阜市公式ホームページ-Gifu city","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"岐阜県/郡上市","kind":"yobo","url":"https://www.city.gujo.gifu.jp/admin/detail/9672.html","title":"郡上市ホームページに寄せられたご意見等の対応状況 | 郡上市 Gujo City","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"岐阜県/高山市","kind":"yobo","url":"https://www.city.takayama.lg.jp/shisei/1000059/1009170/index.html","title":"市にお寄せいただいたご意見｜高山市","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"岐阜県/大垣市","kind":"yobo","url":"https://www.city.ogaki.lg.jp/0000066289.html","title":"「市政への意見箱」に関する回答のご紹介 | 大垣市公式ホームページ／水の都おおがき","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"宮崎県/@","kind":"yobo","url":"https://www.pref.miyazaki.lg.jp/kense/koho/kenminnokoe/koe_page/20260622153829.html","title":"宮崎県：県に寄せられた主な提言と回答（令和8年度）","found_at":"2026-11-13","route":"auto_extract","checked":false}
 {"muni":"宮崎県/児湯郡高鍋町","kind":"yobo","url":"https://www.town.takanabe.lg.jp/soshiki/chiikiseisaku/7/2/koucyou/4736.html","title":"「たかなべ町民の声制度」意見等への回答／高鍋町","found_at":"2026-11-12","route":"auto_extract","checked":false}
+{"muni":"宮崎県/都城市","kind":"yobo","url":"https://www.city.miyakonojo.miyazaki.jp/site/gikai/51598.html","title":"みなさまから寄せられた意見の一部を掲載します。 - 宮崎県都城市ホームページ","found_at":"2026-11-13","route":"auto_extract","checked":false}
 {"muni":"宮城県/@","kind":"yobo","url":"https://www.pref.miyagi.jp/soshiki/kohou/r6teiannaiyou.html","title":"令和6年度「知事への提案」に寄せられたご意見・ご提案の紹介 - 宮城県公式ウェブサイト","found_at":"2026-11-13","route":"auto_extract","checked":false}
 {"muni":"宮城県/塩竈市","kind":"yobo","url":"https://www.city.shiogama.miyagi.jp/life/5/44/245/","title":"市民の声 - 塩竈市ホームページ","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"宮城県/仙台市","kind":"yobo","url":"https://www.city.sendai.jp/kochotoke-kocho/kaitou/0804.html","title":"市民の声「令和8年4月に回答文を送付したもの」｜仙台市","found_at":"2026-11-12","route":"auto_extract","checked":false}
@@ -97,8 +102,8 @@
 {"muni":"山梨県/甲府市","kind":"yobo","url":"https://www.city.kofu.lg.jp/k028/p005731.html","title":"これまでに寄せられた市民の声（令和8年度）／甲府市","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"滋賀県/@","kind":"yobo","url":"https://www.pref.shiga.lg.jp/hiroba/19852.html","title":"県政に寄せられたご意見への回答の紹介｜滋賀県","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"滋賀県/守山市","kind":"yobo","url":"https://www.city.moriyama.lg.jp/shichoushitsu/kouchou/1003906/1003908/index.html","title":"手紙の回答｜滋賀県守山市公式ウェブサイト","found_at":"2026-11-12","route":"auto_extract","checked":false}
-{"muni":"滋賀県/草津市","kind":"yobo","url":"https://www.city.kusatsu.shiga.jp/shisei/shichoshitsu/kaikentaiwa/shiminnokoe.files/R7.12_1.pdf","title":"令和7年12月に回答したもの（介護保険料に関する要望について、児童・生徒がのびのびと身体を動かせる屋内環境の整備について他）","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"鹿児島県/薩摩川内市","kind":"yobo","url":"https://www.city.satsumasendai.lg.jp/soshiki/1042/2/11-2/1/21034.html","title":"市民の皆さまより寄せられたご意見とその対応状況・回答の公表(令和8年4月～6月分)／薩摩川内市","found_at":"2026-11-12","route":"auto_extract","checked":false}
+{"muni":"鹿児島県/鹿屋市","kind":"yobo","url":"https://www.city.kanoya.lg.jp/hisyo/shise/gaiyo/shicho/ikenr603.html","title":"寄せられた御意見とその対応状況（令和6年3月）／鹿屋市","found_at":"2026-11-13","route":"auto_extract","checked":false}
 {"muni":"鹿児島県/鹿児島市","kind":"yobo","url":"https://www.city.kagoshima.lg.jp/shimin/shiminbunka/soudan/teigen7.html","title":"これまでに寄せられた主なご意見・ご提案と対応(令和7年度)｜鹿児島市","found_at":"2026-11-13","route":"auto_extract","checked":false}
 {"muni":"秋田県/@","kind":"yobo","url":"https://www.pref.akita.lg.jp/pages/genre/pref_voice","title":"県民の声 | 美の国あきたネット","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"秋田県/横手市","kind":"yobo","url":"https://www.city.yokote.lg.jp/shisei/1001176/1012846.html","title":"まちづくり民間提案窓口【課題設定型の課題一覧】｜横手市公式サイト","found_at":"2026-11-12","route":"auto_extract","checked":false}
@@ -114,6 +119,7 @@
 {"muni":"新潟県/南魚沼市","kind":"yobo","url":"https://www.city.minamiuonuma.niigata.jp/docs/81087.html","title":"主な寄せられた声(令和8年度) - 南魚沼市","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"新潟県/柏崎市","kind":"yobo","url":"https://www.city.kashiwazaki.lg.jp/shiseijoho/otoiawase_goiken_goyobo/public_comment/3/index.html","title":"ご意見に対する回答／柏崎市公式ホームページ","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"神奈川県/@","kind":"yobo","url":"https://www.pref.kanagawa.jp/docs/h3e/cnt/f3492/p10882.html","title":"提案・改善事例紹介 - 神奈川県ホームページ","found_at":"2026-11-12","route":"auto_extract","checked":false}
+{"muni":"神奈川県/伊勢原市","kind":"yobo","url":"https://www.city.isehara.kanagawa.jp/docs/2022031400244/","title":"「わたしの提案」に寄せられた意見を紹介 | 伊勢原市","found_at":"2026-11-13","route":"auto_extract","checked":false}
 {"muni":"神奈川県/鎌倉市","kind":"yobo","url":"https://www.city.kamakura.kanagawa.jp/soudan/goiken_goteian_mail.html","title":"鎌倉市／「わたしの提案」（メールでの回答をご希望の方へ）","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"神奈川県/厚木市","kind":"yobo","url":"https://www.city.atsugi.kanagawa.jp/shiseijoho/shiminsanka/2/7/1/index.html","title":"一般提案回答／厚木市","found_at":"2026-11-13","route":"auto_extract","checked":false}
 {"muni":"神奈川県/川崎市","kind":"yobo","url":"https://www.city.kawasaki.jp/170/page/0000184888.html","title":"川崎市 : 市民の声から生まれた主な改善事例","found_at":"2026-11-12","route":"auto_extract","checked":false}
@@ -127,6 +133,7 @@
 {"muni":"静岡県/賀茂郡東伊豆町","kind":"yobo","url":"https://www.town.higashiizu.lg.jp/soshiki/kikaku_cyoseika/2/11/tyouminnokoe/639.html","title":"令和5年度に回答した町民の声／東伊豆町｜満点の海・山・空は東伊豆","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"静岡県/沼津市","kind":"yobo","url":"https://www.city.numazu.shizuoka.jp/opinion/kouhyo/monthly.htm","title":"「市民の声」【月別】の公表／沼津市","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"静岡県/静岡市","kind":"yobo","url":"https://www.city.shizuoka.lg.jp/faq/p009731.html","title":"寄せられた市政へのご意見・ご提案：静岡市公式ホームページ","found_at":"2026-11-12","route":"auto_extract","checked":false}
+{"muni":"静岡県/島田市","kind":"yobo","url":"https://www.city.shimada.shizuoka.jp/fs/9/8/2/4/7/1/_/R8kaitou9.pdf","title":"市民の皆様からいただいた「市長への手紙」に対する 回答 の ...","found_at":"2026-11-13","route":"auto_extract","checked":false}
 {"muni":"静岡県/浜松市","kind":"yobo","url":"https://www.city.hamamatsu.shizuoka.jp/koho2/square/room/opinion/kakonogoiken.html","title":"市長へのご意見箱に寄せられた主な意見・提言と回答／浜松市","found_at":"2026-11-13","route":"auto_extract","checked":false}
 {"muni":"石川県/@","kind":"yobo","url":"https://www.pref.ishikawa.lg.jp/tedori/qa.html","title":"Q＆A（ご質問についての回答） | 石川県","found_at":"2026-11-13","route":"auto_extract","checked":false}
 {"muni":"千葉県/印旛郡栄町","kind":"yobo","url":"https://www.town.sakae.chiba.jp/mayor/mayor-Inquiry/","title":"町へのご意見・お問合わせ（今までにお寄せいただいたご意見と回答） | 栄町公式ホームページ","found_at":"2026-11-12","route":"auto_extract","checked":false}
@@ -134,6 +141,7 @@
 {"muni":"千葉県/佐倉市","kind":"yobo","url":"https://www.city.sakura.lg.jp/soshiki/hishoka/25/index.html","title":"過去にいただいた市政へのご意見と回答／佐倉市｜佐倉で才能が開花する","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"千葉県/四街道市","kind":"yobo","url":"https://www.city.yotsukaido.chiba.jp/shichonoheya/shiseiiken-kaitou/index.html","title":"市民の声に対する回答 四街道市","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"千葉県/市川市","kind":"yobo","url":"https://www.city.ichikawa.lg.jp/page/56789.html","title":"市民の意見箱にお寄せいただいたご意見・ご提案と回答 - 市川市公式Webサイト（広報広聴課）","found_at":"2026-11-12","route":"auto_extract","checked":false}
+{"muni":"千葉県/習志野市","kind":"yobo","url":"https://www.city.narashino.lg.jp/joho/mayor/faq/index.html","title":"寄せられたご意見・ご提案に対する回答／習志野市ホームページ","found_at":"2026-11-13","route":"auto_extract","checked":false}
 {"muni":"千葉県/成田市","kind":"yobo","url":"https://www.city.narita.chiba.jp/environment/page0122_00087.html","title":"「市長への手紙」などを通じて寄せられたご意見等｜成田市公式ホームページ","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"千葉県/千葉市","kind":"yobo","url":"https://www.city.chiba.jp/sogoseisaku/shichokoshitsu/kohokocho/shiminnokoe/4gatsu.html","title":"千葉市：市民の声 2025年3月回答分","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"千葉県/船橋市","kind":"yobo","url":"https://www.city.funabashi.lg.jp/other/0002/p123996.html","title":"市政ポストに対する過去の回答について｜船橋市公式ホームページ","found_at":"2026-11-12","route":"auto_extract","checked":false}
@@ -147,6 +155,7 @@
 {"muni":"大阪府/阪南市","kind":"yobo","url":"https://www.city.hannan.lg.jp/kakuka/mirai/skyousou/shiminnokoe.html","title":"市政へのご意見（市民の声）について／阪南市","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"大阪府/堺市","kind":"yobo","url":"https://www.city.sakai.lg.jp/shisei/koho/kocho/shiminnokoe/R08/index.html","title":"市民の声Q&A（令和8年度分） 堺市","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"大阪府/四條畷市","kind":"yobo","url":"https://www.city.shijonawate.lg.jp/site/ikenbako/123924.html","title":"市長への意見箱の回答とホームページでの公表は同じタイミングにしてほしい - 市長への意見箱 - 四條畷市ホームページ（秘書政策課）","found_at":"2026-11-12","route":"auto_extract","checked":false}
+{"muni":"大阪府/守口市","kind":"yobo","url":"https://www.city.moriguchi.osaka.jp/kakukanoannai/kikakuzaiseibu/miryokusouzouhasshin/kocyo/shiminnokoe/shiminnnokoekaitou/shiminnokoe_2025/19374.html","title":"市民の声回答(令和7年7月)／守口市ホームページ","found_at":"2026-11-13","route":"auto_extract","checked":false}
 {"muni":"大阪府/吹田市","kind":"yobo","url":"https://www.city.suita.osaka.jp/shisei/1018939/1018941/1018942/index.html","title":"市民の声の公表｜吹田市公式ウェブサイト","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"大阪府/泉南市","kind":"yobo","url":"https://www.city.sennan.lg.jp/kakuka/gyouseikeiei/hisyojinji/hisyo/youboukouhyou/index.html","title":"要望書及び回答の公表／泉南市ウェブサイトにようこそ！","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"大阪府/大阪市","kind":"yobo","url":"https://www.city.osaka.lg.jp/shisei/category/3065-1-9-2-0-0-0-0-0-0.html","title":"大阪市：「市民の声」の施策反映事例 （…>皆さんの声をお寄せください>区政・市政へのご意見・ご要望（市民の声））","found_at":"2026-11-12","route":"auto_extract","checked":false}
@@ -173,6 +182,7 @@
 {"muni":"鳥取県/東伯郡琴浦町","kind":"yobo","url":"https://www.town.kotoura.tottori.jp/docs/2024070100017/","title":"「町民の声」に対する回答のご紹介 | 鳥取県琴浦町","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"鳥取県/東伯郡湯梨浜町","kind":"yobo","url":"https://www.yurihama.jp/life/4/19/106/","title":"町政への提言 - 湯梨浜町","found_at":"2026-11-13","route":"auto_extract","checked":false}
 {"muni":"鳥取県/東伯郡北栄町","kind":"yobo","url":"https://www.e-hokuei.net/soshiki/4/1277.html","title":"町民の声への対応状況 （公表） - 北栄町公式ホームページ（町民課）","found_at":"2026-11-12","route":"auto_extract","checked":false}
+{"muni":"鳥取県/米子市","kind":"yobo","url":"https://www.city.yonago.lg.jp/32670.htm","title":"過去に寄せられた提案と市の回答/米子市ホームページ","found_at":"2026-11-13","route":"auto_extract","checked":false}
 {"muni":"島根県/@","kind":"yobo","url":"https://www.pref.shimane.lg.jp/admin/seisaku/koho/teian/record/","title":"島根県：今までにいただいたご提案と回答（トップ / 県政・統計 / 政策・財政 / 広聴・広報 / 知事への提案箱 / 今までにいただいたご提案と回答）","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"島根県/隠岐郡隠岐の島町","kind":"yobo","url":"https://www.town.okinoshima.shimane.jp/soshiki/somu/gyomu/19/314.html","title":"町長への手紙回答一覧／隠岐の島町-つながらぁや つながぁや 一万年の隠岐の島‐","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"島根県/雲南市","kind":"yobo","url":"https://www.city.unnan.shimane.jp/unnan/kurashi/machidukuri/chiikidantaiyouboukaitou.html","title":"地域団体要望に対する回答 | 雲南市ホームページ","found_at":"2026-11-12","route":"auto_extract","checked":false}
@@ -181,6 +191,7 @@
 {"muni":"島根県/大田市","kind":"yobo","url":"https://www.city.oda.lg.jp/ohda_city/city_organization/25b/4799/3188/273/20666","title":"市民の声への回答 | 島根県大田市公式サイト","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"島根県/邑智郡邑南町","kind":"yobo","url":"https://www.town.ohnan.lg.jp/soshiki/2/1220.html","title":"町長への手紙の回答（令和7年度分） - 邑南町ホームページ（総務課）","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"東京都/@","kind":"yobo","url":"https://www.metro.tokyo.lg.jp/tosei/iken-sodan/shokai","title":"寄せられた声の紹介|意見・相談・都政への参加|都庁総合ホームページ","found_at":"2026-11-12","route":"auto_extract","checked":false}
+{"muni":"東京都/稲城市","kind":"yobo","url":"https://www.city.inagi.tokyo.jp/cgi-crm","title":"ご意見と回答｜稲城市公式ウェブサイト","found_at":"2026-11-13","route":"auto_extract","checked":false}
 {"muni":"東京都/葛飾区","kind":"yobo","url":"https://www.city.katsushika.lg.jp/_res/projects/default_project/_page_/001/005/396/r7iken.pdf","title":"令和7年度区長への主なご意見・回答 （PDF 6.0MB）","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"東京都/江戸川区","kind":"yobo","url":"https://www.city.edogawa.tokyo.jp/kuseijoho/kohokocho/goiken/iken_kaitou/index.html","title":"主なご意見と回答 江戸川区ホームページ","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"東京都/荒川区","kind":"yobo","url":"https://www.city.arakawa.tokyo.jp/a003/kouhou/kouchou/iken.html","title":"お寄せいただいた主な区民の声と回答／荒川区公式サイト","found_at":"2026-11-12","route":"auto_extract","checked":false}
@@ -211,6 +222,7 @@
 {"muni":"奈良県/磯城郡田原本町","kind":"yobo","url":"https://www.town.tawaramoto.nara.jp/iken/goteian/index.html","title":"主なご提案・ご意見と回答／田原本町","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"奈良県/生駒郡三郷町","kind":"yobo","url":"https://www.town.sango.nara.jp/soshiki/3/12462.html","title":"ご意見等と回答 - 三郷町公式ホームページ","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"奈良県/生駒郡平群町","kind":"yobo","url":"https://www.town.heguri.nara.jp/site/tyousei/list102.html","title":"主なご提案・ご意見と回答 - 町政へのご意見 - 平群町ホームページ","found_at":"2026-11-12","route":"auto_extract","checked":false}
+{"muni":"富山県/高岡市","kind":"yobo","url":"https://www.city.takaoka.toyama.jp/soshiki/kohohasshinka/2/7/2/1/1/9110.html","title":"市への意見・回答(令和5年度)／高岡市公式ホームページ","found_at":"2026-11-13","route":"auto_extract","checked":false}
 {"muni":"富山県/中新川郡立山町","kind":"yobo","url":"https://www.town.tateyama.toyama.jp/soshikikarasagasu/kikakuseisakuka/hishoseisakukakari/5/2/index.html","title":"町長への手紙と回答内容／立山町","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"富山県/富山市","kind":"yobo","url":"https://www.city.toyama.lg.jp/shisei/koho/1010862/1012156/1010863/index.html","title":"これまでのご意見・ご要望と回答を読む｜富山市公式ウェブサイト","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"福井県/大野市","kind":"yobo","url":"https://www.city.ono.fukui.jp/shisei/kouho-koucho/yamabiko/yamabiko_teian.html","title":"今までに寄せられたご提案 大野市公式ウェブサイト","found_at":"2026-11-12","route":"auto_extract","checked":false}
@@ -218,7 +230,10 @@
 {"muni":"福岡県/@","kind":"yobo","url":"https://www.pref.fukuoka.lg.jp/life/8/72/395/","title":"県政提案メール - 福岡県庁ホームページ","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"福岡県/鞍手郡小竹町","kind":"yobo","url":"https://town.kotake.lg.jp/hpkiji/pub/detail.aspx?c_id=3&type=top&id=4238","title":"小竹町政治倫理審査会に係る意見書の公表について / 小竹町","found_at":"2026-11-13","route":"auto_extract","checked":false}
 {"muni":"福岡県/久留米市","kind":"yobo","url":"https://www.city.kurume.fukuoka.jp/1050kurashi/2170civic_voice/3020syoukai/index.html","title":"久留米市：これまでに寄せられた市民の声紹介","found_at":"2026-11-12","route":"auto_extract","checked":false}
+{"muni":"福岡県/糸島市","kind":"yobo","url":"https://www.city.itoshima.lg.jp/s005/030/h030/040/20250122115426.html","title":"「市長への手紙」に寄せられたご意見と回答（令和6年12月受付 掲載希望分） - 糸島市","found_at":"2026-11-13","route":"auto_extract","checked":false}
 {"muni":"福岡県/糟屋郡志免町","kind":"yobo","url":"https://www.town.shime.lg.jp/site/goiken/","title":"ご意見箱（お問い合わせと回答） - 志免町ホームページ","found_at":"2026-11-12","route":"auto_extract","checked":false}
+{"muni":"福岡県/大牟田市","kind":"yobo","url":"https://www.city.omuta.lg.jp/list01277.html","title":"令和8年度『寄せられた市民のこえ』 / 大牟田市","found_at":"2026-11-13","route":"auto_extract","checked":false}
+{"muni":"福岡県/大野城市","kind":"yobo","url":"https://www.city.onojo.fukuoka.jp/kiji0036862/index.html","title":"【質疑 回答 （ 提案 書に関すること）】23大野城心のふるさと館 ...","found_at":"2026-11-13","route":"auto_extract","checked":false}
 {"muni":"福岡県/朝倉市","kind":"yobo","url":"https://www.city.asakura.lg.jp/www/contents/1377838794903/index.html","title":"市政への提言メール回答（福岡ソフトバンクファーム本拠地の誘致について1）","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"福岡県/福岡市","kind":"yobo","url":"https://shiminnnokoe.city.fukuoka.lg.jp/index.html","title":"福岡市　寄せられた市民の声","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"福岡県/北九州市","kind":"yobo","url":"https://www.city.kitakyushu.lg.jp/kurashi/menu05_00387.html","title":"寄せられた市民のこえ - 北九州市","found_at":"2026-11-13","route":"auto_extract","checked":false}
@@ -229,6 +244,7 @@
 {"muni":"福島県/田村郡小野町","kind":"yobo","url":"https://www.town.ono.fukushima.jp/soshiki/2/assets/%E5%B0%8F%E9%87%8E%E7%94%BA%E3%83%87%E3%82%B8%E3%82%BF%E3%83%AB%E7%9B%AE%E5%AE%89%E7%AE%B1%E3%81%AB%E5%AF%84%E3%81%9B%E3%82%89%E3%82%8C%E3%81%9F%E6%8F%90%E6%A1%88%E3%83%BB%E6%84%8F%E8%A6%8B%E3%81%A8%E7%94%BA%E3%81%8B%E3%82%89%E3%81%AE%E5%9B%9E%E7%AD%94%EF%BC%88%E4%BB%A4%E5%92%8C%EF%BC%98%E5%B9%B4%EF%BC%93%E6%9C%88%E5%88%86%EF%BC%89.pdf","title":"デジタル目安箱に寄せられた提案・意見と町からの回答（令和８年３月分） (287.3KB)","found_at":"2026-11-13","route":"auto_extract","checked":false}
 {"muni":"福島県/田村市","kind":"yobo","url":"https://www.city.tamura.lg.jp/soshiki/2/shiminnokoe-kohyo.html","title":"「市民の声」 公表 - 田村市ホームページ","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"兵庫県/@","kind":"yobo","url":"https://web.pref.hyogo.lg.jp/kk04/teianbako/teiannbako-goikennshokai.html","title":"さわやか提案箱にお寄せいただいたご意見 | 兵庫県","found_at":"2026-11-12","route":"auto_extract","checked":false}
+{"muni":"兵庫県/三田市","kind":"yobo","url":"https://www.city.sanda.lg.jp/soshiki/2/gyomu/koho/kocho/chinjyoyobo/3937.html","title":"令和3年度陳情・要望の公表／三田市ホームページ","found_at":"2026-11-13","route":"auto_extract","checked":false}
 {"muni":"兵庫県/美方郡新温泉町","kind":"yobo","url":"https://www.town.shinonsen.hyogo.jp/p/list/C243001/","title":"頂いたご意見に対する回答 | 町政へのご意見 | 行政情報 | 新温泉町","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"兵庫県/明石市","kind":"yobo","url":"https://www.city.akashi.lg.jp/seisaku/soudan_shitsu/shise/kocho/shokai/tsukibetsuichiran/index.html","title":"意見と回答／明石市","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"北海道/虻田郡ニセコ町","kind":"yobo","url":"https://www.town.niseko.lg.jp/inquiry/iken_toiawase/","title":"みなさんからいただいたご意見・お問い合わせ | ご意見・お問い合わせ | 北海道ニセコ町","found_at":"2026-11-12","route":"auto_extract","checked":false}
@@ -236,6 +252,7 @@
 {"muni":"北海道/空知郡奈井江町","kind":"yobo","url":"https://www.town.naie.hokkaido.jp/town/tegamitp/tegamiop/","title":"これまでに寄せられた意見と回答 | 町長に手紙を出す運動 | 町政情報 | 健康と福祉のまち 北海道奈井江町ホームページ","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"北海道/根室市","kind":"yobo","url":"https://www.city.nemuro.hokkaido.jp/lifeinfo/kakuka/soumubu/soumu/kouhoukoutyou/sityohenotegamiiken/index.html","title":"「市長への手紙」で寄せられたご意見を紹介します／朝日にいちばん近い街","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"北海道/砂川市","kind":"yobo","url":"https://www.city.sunagawa.hokkaido.jp/contact/files/2019goiken.pdf","title":"寄せられた主なご意見・ご提言 平成31年4月から令和元年9月 (154KB)","found_at":"2026-11-13","route":"auto_extract","checked":false}
+{"muni":"北海道/小樽市","kind":"yobo","url":"https://www.city.otaru.lg.jp/docs/2024040400017/","title":"令和6年度「市長への手紙」に寄せられた手紙 | 小樽市","found_at":"2026-11-13","route":"auto_extract","checked":false}
 {"muni":"北海道/上川郡鷹栖町","kind":"yobo","url":"https://www.town.takasu.hokkaido.jp/page/1122.html","title":"町長への手紙と回答 - 鷹栖町公式ホームページ（まちづくり推進課）","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"北海道/苫小牧市","kind":"yobo","url":"https://www.city.tomakomai.hokkaido.jp/shisei/koho/kocho/ikembako/","title":"寄せられた市民の声と市の考え方｜北海道苫小牧市","found_at":"2026-11-12","route":"auto_extract","checked":false}
 {"muni":"北海道/函館市","kind":"yobo","url":"https://www.city.hakodate.hokkaido.jp/citizensvoice/","title":"市民の声回答一覧 | 函館市","found_at":"2026-11-12","route":"auto_extract","checked":false}
