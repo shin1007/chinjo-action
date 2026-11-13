@@ -1524,6 +1524,15 @@
       "localPath": null
     },
     {
+      "id": "src-924245b233",
+      "title": "内閣府男女共同参画局「令和4年度 性別による無意識の思い込み（アンコンシャス・バイアス）に関する調査研究」",
+      "url": "https://www.gender.go.jp/research/kenkyu/seibetsu_r04.html",
+      "note": "調査結果のPDFは文字を取り出せず、男女別の割合は未確認",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-92b72eab5d",
       "title": "Eurostat「Accidents at work statistics」（2026年9月のデータ）",
       "url": "https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Accidents_at_work_statistics",
@@ -2375,6 +2384,15 @@
       "url": "https://laws.e-gov.go.jp/law/342AC0000000081",
       "note": "「市町村長は、第一項の規定による請求が不当な目的によることが明らかなときは、これを拒むことができる。」DV等支援措置の法律上の根拠の一つ",
       "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-d6cd0620d0",
+      "title": "内閣府男女共同参画局総務課「性別による無意識の思い込み（アンコンシャス・バイアス）に関する調査結果」広報誌「共同参画」2022年12月号",
+      "url": "https://www.gender.go.jp/public/kyodosankaku/2022/202212/202212_06.html",
+      "note": "令和4年8月、全国の20〜60代10,906人。男女とも「男性は仕事をして家計を支えるべきだ」が最も高い。男性は「伝統的な役割観に自身がとらわれていることに気づいていない可能性がうかがえました」",
+      "kind": "official",
       "fetchedAt": null,
       "localPath": null
     },
