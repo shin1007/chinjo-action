@@ -23,8 +23,8 @@ test('集まり具合は、目標と現在額がそろっているときだけ�
   }
 });
 
-test('ランキングには表示名だけを持ち、金額は持たない', () => {
-  for (const r of data.ranking) {
+test('応援者の欄には表示名だけを持ち、金額は持たない', () => {
+  for (const r of data.supporters) {
     assert.deepStrictEqual(Object.keys(r), ['name']);
     assert.ok(r.name.length <= 20);
   }
