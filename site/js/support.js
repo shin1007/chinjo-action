@@ -44,10 +44,10 @@
     box.hidden = false;
   };
 
-  const renderRanking = (box, ranking) => {
-    const names = (Array.isArray(ranking) ? ranking : []).filter((r) => r && typeof r.name === 'string' && r.name.trim());
+  const renderSupporters = (box, supporters) => {
+    const names = (Array.isArray(supporters) ? supporters : []).filter((r) => r && typeof r.name === 'string' && r.name.trim());
     if (!names.length) { box.hidden = true; return; }
-    const list = box.querySelector('ol');
+    const list = box.querySelector('ul');
     list.textContent = '';
     for (const r of names) list.appendChild(el('li', r.name));
     box.hidden = false;
@@ -60,7 +60,7 @@
       const data = await response.json();
       renderMethods(document.getElementById('support-methods'), Array.isArray(data.methods) ? data.methods : []);
       renderProgress(document.getElementById('support-progress'), data);
-      renderRanking(document.getElementById('support-ranking'), data.ranking);
+      renderSupporters(document.getElementById('support-supporters'), data.supporters);
     } catch (error) {
       console.warn('応援の情報を読み込めませんでした。', error);
     }
