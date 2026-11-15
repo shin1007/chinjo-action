@@ -267,7 +267,7 @@ async function main() {
     const line = (c) => `| ${c.id} | ${c.start} | ${c.error ? `取得できない（${c.error}）` : (c.lists || []).find((l) => l.error) ? `一覧を開けない（${c.lists.find((l) => l.error).error}）` : (c.candidates || []).some((x) => x.s >= 3) ? '候補はあったが、題名から回答の一覧ではないと判断した（計画案への意見・意見交換会など）' : c.searched === 'ok' ? '一覧らしいページが見つからない（サイト内の検索もした）' : '一覧らしいページが見つからない（検索エンジンでの検索は断られたか、まだ）'} | ${c.fetched_at} |`;
     fs.writeFileSync(path.join(ROOT, 'docs', '確認用', '回答の一覧を取得できなかった自治体.md'), `# 意見と回答の一覧を取得できなかった・見つからなかった自治体
 
-scripts/kaito-build.js が書き出す（手で直さない）。出発点は要望の案内ページ（site/data/intake/yobo.jsonl の page_url）。案内ページのない自治体（約1090）はまだ調べていない。
+scripts/kaito-build.js が書き出す（手で直さない）。出発点は要望の案内ページ（site/data/intake/yobo.jsonl の page_url）。案内ページのない自治体は、各自治体の公式サイトの入口からたどって探した（検索エンジンでの検索はしていない）。
 
 | 自治体 | 出発点 | 理由 | 調べた日 |
 |---|---|---|---|
