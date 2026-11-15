@@ -720,3 +720,9 @@ summary { cursor: pointer; font-weight: 700; }
   .wz-now { padding: 10px 8px 12px; }
   .wz-now .wz-now-steps > li { padding-left: 42px; }
 }
+
+/* 応援のページ */
+.support-method { text-align: center; margin: 4px; }
+.support-total { font-size: 1.2rem; font-weight: bold; margin: 8px 0; }
+.support-fill { height: 100%; background: var(--main); }
+#support-ranking ol { padding-left: 1.6em; }

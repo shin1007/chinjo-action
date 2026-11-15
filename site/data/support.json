@@ -1,0 +1,16 @@
+{
+  "_memo": "応援の集まり具合と応援者の表示。手で更新する（各サービスの管理画面で金額を確かめて書き写す）。amount が null の間は集まり具合を表示しない。",
+  "updated": null,
+  "month": null,
+  "goal": null,
+  "collected": null,
+  "methods": [
+    {
+      "id": "bmc",
+      "name": "Buy Me a Coffee",
+      "url": "https://buymeacoffee.com/shin1007",
+      "note": "クレジットカードなどで1回から。"
+    }
+  ],
+  "ranking": []
+}
