@@ -65,16 +65,6 @@ function itemsOf(c) {
   return [...m.values()];
 }
 
-async function embed(texts) {
-  const need = [...new Set(texts.filter((t) => !emb[t]))];
-  for (let i = 0; i < need.length; i += 64) {
-    const r = await fetch(`${HOST}/api/embed`, { method: 'POST', body: JSON.stringify({ model: 'bge-m3', input: need.slice(i, i + 64) }) });
-    const j = await r.json();
-    need.slice(i, i + 64).forEach((t, k) => { emb[t] = j.embeddings[k].map((v) => Math.round(v * 1e4) / 1e4); });
-  }
-}
-const cos = (a, b) => { let s = 0, x = 0, y = 0; for (let i = 0; i < a.length; i++) { s += a[i] * b[i]; x += a[i] * a[i]; y += b[i] * b[i]; } return s / Math.sqrt(x * y); };
-
 async function ask(prompt) {
   const r = await fetch(`${HOST}/api/generate`, { method: 'POST', body: JSON.stringify({ model: 'qwen3:8b', prompt, stream: false, think: false, format: 'json', options: { temperature: 0 } }), signal: AbortSignal.timeout(180000) }).catch(() => null);
   if (!r) return {};
@@ -178,7 +168,6 @@ const readJsonl = (f) => (fs.existsSync(f) ? fs.readFileSync(f, 'utf8').split('\
 const writeJsonl = (f, rows) => fs.writeFileSync(f, rows.map((r) => JSON.stringify(r)).join('\n') + '\n');
 const LIST_BAD = /計画|戦略|案）|案\)|（案|\(案|素案|方針|ビジョン|構想|条例|世論調査|アンケート|タウンミーティング|懇話会|懇談会|審議|委員|定例会|議会|議案|チャットボット|移住|LINE・|SNS|メール配信|緊急メール|メールアドレス|電話|防災|組織でさがす|業務案内|設置箇所|意見公募|パブリック|監査|入札|よくある|意見交換|説明会|事業|サウンディング|技術|プレゼント|自由回答|市民会議|相談窓口|情報公開|施設|フォーム|web版|Web版|ミーティング|ワークショップ|オープンハウス|対話集会|フォーラム|交換会|会議|見つかりません|見つけること|基準|公表分類|の要旨と区の考え方|自由 回答|自由回答|^市原市ウェブサイト$|第\d+章|資料|整備|パブコメ|事前に|報告書|事務改善|質疑回答|業務委託|構築業務|調整状況|年代性別|^洞爺湖町|臼杵磨崖仏|PDF形式|PDFファイル|^PDF/;
 const LIST_GOOD = /回答|お答え|と(?:市|区|町|村|県|府|都|道)の考え|寄せられ|お寄せ|いただい|頂い|紹介|提言集|意見集|声一覧|反映|事例|こえ|の声|提言|提案|公開|公表|対応/;
-const LIST_OK = (t) => LIST_GOOD.test(t) && !LIST_BAD.test(t);
 const RESULT = (t) => (/しました|始めました|設置|改善|変更|拡大|見直し|追加|開始|実施|導入|反映/.test(t) ? 'reflected' : null);
 
 async function main() {

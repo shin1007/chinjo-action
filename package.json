@@ -10,5 +10,8 @@
   "devDependencies": {
     "eslint": "^9.39.5",
     "globals": "^15.15.0"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }

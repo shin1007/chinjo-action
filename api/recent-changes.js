@@ -23,7 +23,7 @@ module.exports = async (req, res) => {
   try {
     const headers = { Accept: 'application/vnd.github+json', 'User-Agent': 'chinjo-site' };
     if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
-    const response = await fetch(COMMITS_URL, { headers });
+    const response = await fetch(COMMITS_URL, { headers, signal: AbortSignal.timeout(8000) });
     if (!response.ok) throw new Error(`GitHub API returned ${response.status}`);
     const commits = await response.json();
     const items = commits
