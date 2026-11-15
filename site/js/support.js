@@ -9,9 +9,10 @@
   const isAmount = (n) => typeof n === 'number' && Number.isFinite(n) && n >= 0;
 
   const renderMethods = (box, methods) => {
+    const valid = methods.filter((m) => /^https:\/\//.test(m.url || ''));
+    if (!valid.length) return;
     box.textContent = '';
-    for (const m of methods) {
-      if (!/^https:\/\//.test(m.url || '')) continue;
+    for (const m of valid) {
       const a = el('a', `${m.name} で応援する`, 'btn btn-primary');
       a.href = m.url;
       a.target = '_blank';
