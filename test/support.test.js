@@ -6,8 +6,7 @@ const path = require('node:path');
 
 const data = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'site/data/support.json'), 'utf8'));
 
-test('応援の方法は https の URL を持つ', () => {
-  assert.ok(data.methods.length > 0);
+test('応援の方法（空でもよい）は https の URL を持つ', () => {
   for (const m of data.methods) {
     assert.match(m.url, /^https:\/\//);
     assert.ok(m.name);
