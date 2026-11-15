@@ -10,7 +10,7 @@
     const env = $('lbEnv').value;
     const cur = $('lbSheet').value;
     const ok = Object.entries(SHEETS).filter(([, s]) => s.envs.includes(env));
-    $('lbSheet').innerHTML = ok.map(([k, s]) => `<option value="${k}">${s.label}</option>`).join('');
+    $('lbSheet').innerHTML = ok.map(([k, s]) => `<option value="${esc(k)}">${esc(s.label)}</option>`).join('');
     if (ok.some(([k]) => k === cur)) $('lbSheet').value = cur;
   }
 

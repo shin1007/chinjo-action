@@ -35,20 +35,42 @@ const parseDescription = (description) => {
   };
 };
 
-module.exports = async (req, res) => {
+// 利用者が決められるのは絞り込みの語だけ。個数と長さを抑え、上流（e-Gov）へは数分に1回しか取りに行かない
+const MAX_KEYWORDS = 10;
+const MAX_KEYWORD_LENGTH = 30;
+const FETCH_TIMEOUT_MS = 8000;
+const XML_TTL_MS = 5 * 60 * 1000;
+let cache = { xml: '', at: 0 };
+
+const parseKeywords = (raw) => {
+  if (typeof raw !== 'string') return DEFAULT_KEYWORDS;
+  const words = raw.slice(0, 500).split(',')
+    .map((word) => word.trim().slice(0, MAX_KEYWORD_LENGTH))
+    .filter(Boolean)
+    .slice(0, MAX_KEYWORDS);
+  return words.length ? words : DEFAULT_KEYWORDS;
+};
+
+// リンクに使うのは http(s) だけ（javascript: などを通さない）
+const isWebUrl = (url) => /^https?:\/\/[^\s]+$/i.test(url);
+
+const loadXml = async () => {
+  if (cache.xml && Date.now() - cache.at < XML_TTL_MS) return cache.xml;
+  const response = await fetch(RSS_URL, { signal: AbortSignal.timeout(FETCH_TIMEOUT_MS) });
+  if (!response.ok) throw new Error(`e-Gov RSS returned ${response.status}`);
+  cache = { xml: await response.text(), at: Date.now() };
+  return cache.xml;
+};
+
+const handler = async (req, res) => {
   if (req.method && req.method !== 'GET') {
     res.status(405).json({ error: 'Method Not Allowed' });
     return;
   }
 
   try {
-    const response = await fetch(RSS_URL);
-    if (!response.ok) throw new Error(`e-Gov RSS returned ${response.status}`);
-    const xml = await response.text();
-    const requested = typeof req.query?.keywords === 'string'
-      ? req.query.keywords.split(',').map((word) => word.trim()).filter(Boolean)
-      : DEFAULT_KEYWORDS;
-    const keywords = requested.length ? requested : DEFAULT_KEYWORDS;
+    const xml = await loadXml();
+    const keywords = parseKeywords(req.query?.keywords);
     const items = [...xml.matchAll(/<item\b[^>]*>([\s\S]*?)<\/item>/gi)]
       .map((match) => {
         const body = match[1];
@@ -61,7 +83,7 @@ module.exports = async (req, res) => {
           ...details,
         };
       })
-      .filter((item) => item.title && item.url && keywords.some((word) => `${item.title} ${item.text}`.includes(word)))
+      .filter((item) => item.title && isWebUrl(item.url) && keywords.some((word) => `${item.title} ${item.text}`.includes(word)))
       .slice(0, 8)
       .map(({ text, ...item }) => item);
 
@@ -72,3 +94,7 @@ module.exports = async (req, res) => {
     res.status(502).json({ error: 'Public comment feed is unavailable' });
   }
 };
+
+module.exports = handler;
+module.exports.parseKeywords = parseKeywords;
+module.exports.resetCache = () => { cache = { xml: '', at: 0 }; };
