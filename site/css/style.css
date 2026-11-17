@@ -442,6 +442,10 @@ summary { cursor: pointer; font-weight: 700; }
 .stationery { margin: 10px 0 0; padding: 0; list-style: none; }
 .stationery li { padding: 8px 0; border-top: 1px solid var(--line); }
 .stationery-name { font-weight: 700; }
+.stationery-cart { margin: 10px 0; padding: 10px 12px; background: var(--bg-alt, #f6f6f3); border-radius: 8px; }
+.stationery-presets { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; }
+.stationery-pick { display: inline-block; margin-right: 8px; font-size: 0.85rem; }
+.stationery-cart .is-disabled { opacity: 0.5; pointer-events: none; }
 .stationery-by { margin-left: 8px; color: var(--muted); font-size: 0.85rem; }
 .stationery-note { display: block; margin-top: 2px; padding-left: 10px; border-left: 3px solid var(--line); font-size: 0.88rem; }
 
