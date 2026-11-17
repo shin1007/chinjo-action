@@ -446,6 +446,9 @@
 
   function show() {
     const s = STEPS[state.step];
+    // 自治体ごとのデータ（data/pref/*.js）は、選んだ都道府県の分だけ読み込む。届いたら描き直す
+    const need = [state.pref, ...state.councils.map(prefOf)];
+    if (!window.PrefData.has(need)) window.PrefData.load(need).then(show);
     if (state.councils.length > 1) state.councils = real();
     document.querySelectorAll('.wz-step').forEach((el) => (el.hidden = el.dataset.step !== s));
     const progress = state.step / (STEPS.length - 1);
@@ -840,7 +843,9 @@
     const btn = e.currentTarget;
     btn.disabled = true;
     btn.textContent = '現在地を調べています…';
-    navigator.geolocation.getCurrentPosition((p) => {
+    navigator.geolocation.getCurrentPosition(async (p) => {
+      // 近い議会は全国から探すので、ここだけは全都道府県の行き方を読み込む
+      await window.PrefData.loadAll();
       const me = { lat: p.coords.latitude, lng: p.coords.longitude };
       const rad = Math.PI / 180;
       const dist = (a) => {
