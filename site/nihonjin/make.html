@@ -77,8 +77,8 @@
         <h3>出し方と、求める内容を選んでください</h3>
         <fieldset class="wz-kind">
           <legend>どこに出しますか</legend>
-          <label><input type="radio" name="wzKind" value="petition" checked> <b>議会に出す（陳情書）</b><span class="hint-sm">議会で審査されるか、議員に配られます。国へ意見書を出すよう求める内容も選べます。</span></label>
-          <label><input type="radio" name="wzKind" value="request"> <b>市区町村長・知事に出す（要望書）</b><span class="hint-sm">行政に直接、検討や説明を求めます。自治体の取り組みを求める内容だけ選べます。</span></label>
+          <label><input type="radio" name="wzKind" value="petition" checked> <b>議会に出す（陳情書）</b><span class="hint-sm">議会で審査されるか、議員に配られます。国へ意見書を出すよう求める内容と、条例・予算など議会の判断が要る内容が向いています。</span></label>
+          <label><input type="radio" name="wzKind" value="request"> <b>市区町村長・知事に出す（要望書）</b><span class="hint-sm">行政に直接、検討や説明を求めます。通知・窓口・研修・公表など、担当課が自分の判断でできる内容が向いています。</span></label>
         </fieldset>
         <p class="hint-sm wz-seigan">請願にしたいときも、まずここで陳情書を作り、その文面を持って議員に紹介をお願いします（<a href="/letter">議員への手紙</a>）。請願書は紹介議員が要るので、このサイトでは作りません。</p>
         <p class="hint-sm"><b>とくに伝えたい内容を、3つまで選ぶのがおすすめです。</b>選んだ内容1つにつき1通ずつできあがります。</p>
@@ -86,6 +86,7 @@
           <p>多くの議会は「1件に1つの求めること（趣旨）」で分けて出すよう求めているので、ふつうは1通ずつ出します（<a href="/nihonjin/guide#split">1件ずつ分ける理由</a>）。いくつも選ぶなら、同じ分野（下の見出し）の中から選ぶほうが伝わります。同じ分野の内容を1通にまとめたいときは、文面確認の画面で「まとめて1通にする」を選べます。その議会が分けて出すよう求めていないか、先に確かめてください。<a href="/#compare">陳情書・要望書・請願・手紙の違い</a></p>
         </details>
         <input type="search" id="wzItemFilter" class="wz-filter" placeholder="キーワードで内容を絞り込む" aria-label="キーワードで内容を絞り込む">
+        <p id="wzRouteNote" class="hint-sm wz-routenote" hidden></p>
         <p class="wz-bulk"><button type="button" id="wzItemsAll" class="btn btn-small">見えている内容をすべて選ぶ</button> <span id="wzItemsAllNote" class="hint-sm"></span></p>
         <div id="wzItems" class="wz-cards"></div>
         <details id="wzPreview" class="wz-preview" hidden><summary id="wzPreviewTitle">文面の見本を見る</summary>

@@ -25,7 +25,14 @@
   // ?item=a,b のように、いくつか並べて渡すこともできる（トップの「言葉でさがす」で見出しごとにまとめて選ぶとき）
   const firstItems = () => (linkedItem || '').split(',').filter((k) => window.ASKS.some((a) => a.id === k));
   // テーマのページで「要望書」を選んで来たときは ?kind=request が付いている
-  const startKind = () => (new URLSearchParams(location.search).get('kind') === 'request' ? 'request' : 'petition');
+  // ?kind がないときも、?item= で渡された内容が要望書向けだけなら、要望書から始める（陳情書では選べないため）
+  const startKind = () => {
+    const kind = new URLSearchParams(location.search).get('kind');
+    if (kind === 'request') return 'request';
+    if (kind) return 'petition';
+    const linked = firstItems().map((k) => window.ASKS.find((a) => a.id === k));
+    return linked.length && linked.every((a) => !window.Petition.usableFor(a, 'petition')) ? 'request' : 'petition';
+  };
   const state = { step: 0, pref: '', councils: [], items: firstItems(), role: '', kind: startKind(), merge: false, reply: false };
   const kindInputs = () => document.querySelectorAll('input[name="wzKind"]');
   const setKindInputs = () => kindInputs().forEach((r) => { r.checked = r.value === state.kind; });
@@ -292,8 +299,29 @@
 
   // 項目は見出しごとに折りたたむ。選んだ項目がある見出しと、最初の見出しは開いておく
   const openCats = new Set();
-  // 要望書は自治体あての文書なので、国への意見書を求める項目は選べない
-  const usable = (a) => state.kind !== 'request' || !window.Petition.isNational(a);
+  // 要望書は自治体あての文書なので、国への意見書を求める項目と、議会の判断が要る陳情向けの項目は選べない。
+  // 陳情書では、役所の担当課が運用で対応できる要望向けの項目は選べない（要望書のほうで選ぶ）
+  const usable = (a) => window.Petition.usableFor(a, state.kind);
+  // いまの出し方では選べない項目の数と、そちらに切り替えるボタン
+  function renderRouteNote() {
+    const other = state.kind === 'request' ? 'petition' : 'request';
+    const n = window.ASKS.filter((a) => !usable(a)).length;
+    const el = $('wzRouteNote');
+    el.hidden = !n;
+    if (!n) return;
+    el.innerHTML = state.kind === 'request'
+      ? `要望書では、役所の担当課が自分の判断でできることを選べます。国への意見書や、条例・予算など議会の判断が要る内容（${n}件）は、陳情書のほうにあります。<button type="button" class="btn btn-small" data-switch-kind="${other}">陳情書で選ぶ</button>`
+      : `陳情書では、議会に取り上げてもらう内容を選べます。通知・窓口・研修・公表など、役所の担当課が運用で対応できる内容（${n}件）は、要望書のほうにあります。<button type="button" class="btn btn-small" data-switch-kind="${other}">要望書で選ぶ</button>`;
+  }
+  $('wzRouteNote').addEventListener('click', (e) => {
+    const to = e.target.dataset && e.target.dataset.switchKind;
+    if (!to) return;
+    state.kind = to;
+    setKindInputs();
+    renderItems();
+    updateNav();
+    saveDraft();
+  });
   const catCount = (cat) => {
     const n = cat.querySelectorAll('[data-item].on').length;
     return `${cat.querySelectorAll('[data-item]').length}件${n ? `・<b>${n}件選択中</b>` : ''}`;
@@ -314,6 +342,7 @@
       }).join('')}</div></details>`;
     }).join('');
     document.querySelectorAll('#wzItems .wz-cat').forEach((cat) => { cat.querySelector('.wz-cat-n').innerHTML = catCount(cat); });
+    renderRouteNote();
     filterItems();
     renderCount();
   }
@@ -1163,18 +1192,18 @@
       box.innerHTML = '<p>陳情書に戻るときは、下のボタンを押します。陳情書の文面と直したところは残っています。</p><button type="button" class="btn btn-small" data-also="petition">陳情書に戻る</button>';
       return;
     }
-    const ok = state.items.filter((k) => !window.Petition.isNational(window.Petition.ITEMS[k] || {}));
+    const ok = state.items.filter((k) => window.Petition.ITEMS[k] && window.Petition.usableFor(window.Petition.ITEMS[k], 'request'));
     box.hidden = false;
     box.innerHTML = `<p><b>同じ内容を、要望書として市区町村長・知事にも出せます。</b>陳情書は議会に、要望書は役所に届きます。両方出すと、議会と行政の両方に検討してもらえます。</p>
-      ${ok.length ? `${ok.length < state.items.length ? `<p class="hint-sm">国に意見書を求める内容（${state.items.length - ok.length}つ）は要望書にできないので、残りの${ok.length}つで作ります。</p>` : ''}<p class="hint-sm">先に陳情書を印刷しておくと安心です。あとで陳情書に戻ることもできます。</p><button type="button" class="btn btn-small" data-also="request">同じ内容で要望書も作る</button>`
-    : '<p class="hint-sm">いま選んでいる内容は、どれも国に意見書を求めるものなので、要望書にはできません。</p>'}`;
+      ${ok.length ? `${ok.length < state.items.length ? `<p class="hint-sm">国に意見書を求める内容や、議会の判断が要る陳情向けの内容（${state.items.length - ok.length}つ）は要望書にできないので、残りの${ok.length}つで作ります。</p>` : ''}<p class="hint-sm">先に陳情書を印刷しておくと安心です。あとで陳情書に戻ることもできます。</p><button type="button" class="btn btn-small" data-also="request">同じ内容で要望書も作る</button>`
+    : '<p class="hint-sm">いま選んでいる内容は、どれも国に意見書を求めるか、議会の判断が要る陳情向けのものなので、要望書にはできません。</p>'}`;
   }
   $('wzAlso').addEventListener('click', (e) => {
     const to = e.target.dataset && e.target.dataset.also;
     if (!to) return;
     if (to === 'request') {
       petitionItems = [...state.items];
-      state.items = state.items.filter((k) => !window.Petition.isNational(window.Petition.ITEMS[k] || {}));
+      state.items = state.items.filter((k) => window.Petition.ITEMS[k] && window.Petition.usableFor(window.Petition.ITEMS[k], 'request'));
     } else {
       state.items = petitionItems || state.items;
       petitionItems = null;

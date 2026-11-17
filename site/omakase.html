@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>おまかせで3つの議会に郵送する｜権利を守る陳情アクション</title>
+<meta name="description" content="3つのテーマからそれぞれ3つの陳情を引き、郵送でも審査される人口の多い議会3つに出す分を、まとめて印刷できるページです。">
+<link rel="canonical" href="https://chinjo-action.vercel.app/omakase">
+<meta property="og:site_name" content="権利を守る陳情アクション">
+<meta property="og:title" content="おまかせで3つの議会に郵送する">
+<meta property="og:description" content="3テーマ×3つの陳情と、郵送で審査される人口の多い議会3つを自動で選び、封筒に入れる分をまとめて印刷します。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://chinjo-action.vercel.app/omakase">
+<meta property="og:image" content="https://chinjo-action.vercel.app/og-image.png">
+<meta property="og:locale" content="ja_JP">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body data-skip-data-check="1">
+<header class="site-header">
+  <div class="wrap header-inner">
+    <details class="theme-menu">
+      <summary>テーマを選ぶ</summary>
+      <nav class="theme-nav" aria-label="陳情のテーマ">
+        <a href="/kodomo">子どもの権利</a>
+        <a href="/dansei">男女平等</a>
+        <a href="/nihonjin">日本人の権利</a>
+        <a href="/shiho">司法への参加</a>
+        <a href="/kenko">国民の健康</a>
+        <a href="/sonota">その他の陳情</a>
+      </nav>
+    </details>
+    <a href="/" class="logo">陳情アクション</a>
+  </div>
+</header>
+
+<main>
+<div class="wrap guide about omakase">
+  <h1>おまかせで、3つの議会に郵送する</h1>
+  <p>内容を選ぶのが大変なときのための、くじ引きです。<b>テーマを3つ、それぞれから陳情を3つ</b>引き、<b>郵送でも審査される、人口の多い議会を3つ</b>選びます。1つの議会に、1つのテーマの陳情3通を出す組み合わせです。封筒に入れる分（送付状・陳情書・宛名ラベル・出し方メモ）を、1つのPDFにまとめて保存できます。</p>
+  <ul>
+    <li>議会は、<b>郵送でも審査される</b>と公式の案内で確かめた議会のうち、人口の多い上位20議会から、人口に応じた確率で選びます（同じ都道府県が重ならないようにします）。</li>
+    <li>陳情の内容は、<b>議会に出す陳情向け</b>のものから選びます（国への意見書を求める内容と、条例・予算など議会の判断が要る内容。役所の担当課が運用で対応できる「要望向け」の内容は入りません）。</li>
+    <li>引いた結果が気に入らなければ、議会も内容も、何度でも引き直せます。1つずつ入れ替えることもできます。</li>
+    <li>住所・氏名は、このサイトのサーバーには送られません（ブラウザの中だけで作ります）。</li>
+  </ul>
+
+  <h2>1　差出人（任意）</h2>
+  <p class="hint-sm">入れると、陳情書の住所の行と、送付状・宛名ラベルの差出人に入ります。空けたままでも作れて、その場合は下線になるので、印刷してから手書きで書き入れます。氏名は陳情書には入れず、<b>印刷してから手書きで署名</b>します。</p>
+  <div id="omSender" class="sender-form">
+    <label>郵便番号<input data-sender="zip" inputmode="numeric" autocomplete="postal-code" placeholder="例：123-4567"></label>
+    <label class="wide">住所<input data-sender="address" autocomplete="street-address" placeholder="例：東京都○○市△△1-2-3"></label>
+    <label>氏名（送付状と封筒用）<input data-sender="name" autocomplete="name" placeholder="例：佐藤 花子"></label>
+    <label>電話（送付状用）<input data-sender="tel" type="tel" autocomplete="tel" placeholder="例：090-0000-0000"></label>
+  </div>
+
+  <h2>2　くじを引く</h2>
+  <p>
+    <button type="button" id="omDraw" class="btn btn-primary">くじを引く</button>
+    <span id="omStatus" class="hint-sm" aria-live="polite"></span>
+  </p>
+  <div id="omResult" hidden>
+    <p>
+      <button type="button" id="omRedrawAll" class="btn btn-small">全部引き直す</button>
+      <button type="button" id="omRedrawCouncils" class="btn btn-small">議会だけ引き直す</button>
+      <button type="button" id="omRedrawSets" class="btn btn-small">内容だけ引き直す</button>
+    </p>
+    <ol id="omSets" class="om-sets"></ol>
+    <p id="omSource" class="hint-sm"></p>
+
+    <h2>3　まとめて印刷する</h2>
+    <fieldset class="wz-part">
+      <legend>PDFに入れるもの</legend>
+      <label><input type="checkbox" id="omCover" checked> 送付状（議会ごとに1枚。いちばん上に重ねます）</label><br>
+      <label><input type="checkbox" id="omIken" checked> 国への意見書の案（国に意見書を求める陳情の後ろに別紙で添えます）</label><br>
+      <label><input type="checkbox" id="omLabels" checked> 宛名ラベル（普通紙に印刷して、切って貼ります）</label><br>
+      <label><input type="checkbox" id="omMemo" checked> 出し方メモ（手元に残すもの。出す先には送りません）</label>
+    </fieldset>
+    <p>
+      <button type="button" id="omPdf" class="btn btn-primary">PDFで保存する（印刷用）</button>
+      <button type="button" id="omPrint" class="btn btn-small">送付状と陳情書だけ、ブラウザで印刷する</button>
+    </p>
+    <p class="hint-sm">PDFは、プリンターか、コンビニのネットプリント（<a href="https://www.printing.ne.jp/" target="_blank" rel="noopener">セブン‐イレブン</a>・<a href="https://networkprint.ne.jp/" target="_blank" rel="noopener">ファミリーマート・ローソンなど</a>）で印刷します。印刷したら、陳情書に手書きで署名し、議会ごとに角2封筒に入れて郵送します。出し方メモに、封筒への入れ方と切手の目安を書いています。</p>
+  </div>
+
+  <h2>出す前に、必ず確かめてほしいこと</h2>
+  <ul>
+    <li><b>内容は、引いたあとで自分で読んで確かめてください。</b>くじで決まった内容でも、出すのはあなたの名前の陳情です。文面は「文面を見る」で全文が読めます。賛成できない内容があれば、「別の内容に」で入れ替えてください。</li>
+    <li><b>議会の扱いは、変わることがあります。</b>郵送で審査されるかは、議会の公式案内で確かめた日（各議会の欄に表示）時点の情報です。出す前に、各議会の案内ページ（欄のリンク）で確かめてください。確かめてから3か月以上たったものには、その旨を表示します。</li>
+    <li>審査されても、採択されるとは限りません。住民以外が郵送で出したものは、審査されても結果は議会が決めます。</li>
+    <li>いま困っていることと、これからの予定は、<a href="/trouble">困っていること</a>と<a href="/roadmap">これからの予定</a>にまとめています。</li>
+  </ul>
+  <p class="small">一般情報です。個別の事案は専門家にご相談ください。<a href="/">トップページ</a>に戻る。</p>
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="small">本サイトは市民による政策提言のための情報提供サイトです。法的助言を行うものではありません。</p>
+    <p class="small"><a href="/roadmap">これからの予定</a>　<a href="/trouble">困っていること</a>　<a href="/board">質問と答えの掲示板</a>　<a href="/feedback">ご意見・追加してほしい項目</a>　<a href="/support">このサイトを支える</a></p>
+  </div>
+</footer>
+
+<p id="toast" class="toast" role="status" hidden></p>
+
+<script src="/data/prefs.js"></script>
+<script src="/data/municipalities.js"></script>
+<script src="/data/offices.js"></script>
+<script src="/data/sites.js"></script>
+<script src="/data/councils.js"></script>
+<script src="/data/mail.js"></script>
+<script src="/data/mail-policy.js"></script>
+<script src="/data/sessions.js"></script>
+<script src="/data/tel.js"></script>
+<script src="/js/common.js"></script>
+<script src="/js/places.js"></script>
+<script src="/js/petition.js"></script>
+<script src="/js/pdfdoc.js"></script>
+<script src="/js/figs.js"></script>
+<script src="/js/postage.js"></script>
+<script src="/js/send-memo.js"></script>
+<script src="/js/omakase.js"></script>
+</body>
+</html>

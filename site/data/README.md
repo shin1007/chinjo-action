@@ -9,6 +9,7 @@
 | 件名・趣旨・結びの決まった文章、意見書の提出先 | [../themes/kodomo/template.js](../themes/kodomo/template.js) |
 | 理由の例文（出典つき。廃止した陳情書ビルダー用で、今は使っていない） | [../themes/kodomo/reasons.js](../themes/kodomo/reasons.js) |
 | 都道府県の一覧 | [prefs.js](prefs.js) |
+| 自治体あての項目を、陳情向け・要望向け・どちらでもに分ける | 各テーマの `asks-local.js` の項目の `route`（`'chinjo'`・`'yobo'`・`'both'`）。`'both'` のときは、要望書の「記」に書く文を `yoboText` に書く（陳情書は `text`）。国への意見書の項目（`asks-national.js`）は陳情向けだけなので書かない |
 
 以下のファイルは自動で作ったデータなので、手で直す必要はありません。
 - [municipalities.js](municipalities.js)：市区町村の一覧
