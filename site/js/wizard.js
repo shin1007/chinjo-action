@@ -1354,6 +1354,29 @@
       btn.textContent = text;
     }
   });
+  // 保存：開かずに、そのまま端末に保存する（コンビニのネットプリントに登録する・USBに入れるとき）
+  $('wzNowPdfSave').addEventListener('click', async (e) => {
+    const btn = e.currentTarget;
+    if (!PICKS.some(pick)) { flash('PDFに入れるものを選んでください'); return; }
+    const text = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'PDFを作っています…';
+    try {
+      const url = URL.createObjectURL(new Blob([await makePdf()], { type: 'application/pdf' }));
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${state.kind === 'request' ? '要望書' : '陳情書'}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 10000);
+    } catch (err) {
+      flash(`PDFを作れませんでした（${err.message}）。通信のよい所でもう一度試してください。`, 5000);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = text;
+    }
+  });
   $('wzNowCopy').addEventListener('click', () => $('wzCopy').click());
 
   // 「今やること」の手順ごとに、済んだら印を付けられるようにする（読み飛ばしを防ぎ、どこまで済んだか分かるように）
