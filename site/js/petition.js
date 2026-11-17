@@ -82,7 +82,7 @@ window.makePetition = (ASKS, TEMPLATE) => {
   }
 
   // ---------- 生成AIへの指示文 ----------
-  // 採択されやすい陳情の方針（docs/作業メモ/陳情の基本方針.md）を指示文に織り込む。個人情報は入れない。
+  // 採択されやすい陳情の方針（docs/設計/陳情の基本方針.md）を指示文に織り込む。個人情報は入れない。
   function buildPrompt(data, councils) {
     const sel = selectedKeys(data).map((k) => ITEMS[k]);
     // 国あてと自治体あての項目が混ざっていたら、項目ごとに種類を書き分けてもらう

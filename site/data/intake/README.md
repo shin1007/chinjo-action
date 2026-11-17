@@ -9,7 +9,7 @@
 `node scripts/intake.js check` で形を確かめる（`npm test` でも走る）。`stats` で埋まり具合を数える。
 `export` で作成画面用の site/data/intake.js を書き出す（公式サイト・事務局の回答を根拠にした値だけ。npm test で書き出し忘れを見つける）。
 `population` で人口を `municipality-populations.json` から入れ直す。
-`migrate` は最初に今あるデータ（mail.js・mail-policy.js・councils.js・request-pages.js・docs/確認用/郵送の扱いが不明な議会.csv）から作ったときのもので、`--force` を付けると手で足した分が消える。
+`migrate` は最初に今あるデータ（mail.js・mail-policy.js・councils.js・request-pages.js・docs/調査/郵送の扱いが不明な議会.csv）から作ったときのもので、`--force` を付けると手で足した分が消える。
 
 ## 1行の形
 
@@ -72,9 +72,9 @@
 - Supabase の `council_tips` に届いた情報は、取り込むときに route を `user_tip` にする。
 
 ## 案内ページから埋める（2026-11-12〜）
-1. `node scripts/intake-fetch.js chinjo|yobo`：案内ページの本文を `scripts/.intake-cache/` に取る（公開しない）。取れなかったものは [docs/確認用/受け付け方の案内ページを取得できなかった自治体.md](../../../docs/確認用/受け付け方の案内ページを取得できなかった自治体.md) に書く。
+1. `node scripts/intake-fetch.js chinjo|yobo`：案内ページの本文を `scripts/.intake-cache/` に取る（公開しない）。取れなかったものは [docs/調査/受け付け方の案内ページを取得できなかった自治体.md](../../../docs/調査/受け付け方の案内ページを取得できなかった自治体.md) に書く。
 2. `node scripts/intake-extract.js chinjo|yobo [--list|--apply]`：本文を決まった言い回しで読み取り、`unknown` の項目だけ埋める。根拠の一文を sources に `route: official_site, confidence: likely, from: intake-extract` で残す。読み取りが食い違ったものは note に書いて値は入れない。
-3. `node scripts/intake.js report`：一覧表 [docs/確認用/陳情・要望の受け付け方の一覧.md](../../../docs/確認用/陳情・要望の受け付け方の一覧.md) を作り直す。
+3. `node scripts/intake.js report`：一覧表 [docs/調査/陳情・要望の受け付け方の一覧.md](../../../docs/調査/陳情・要望の受け付け方の一覧.md) を作り直す。
 
 機械の読み取りには間違いが混じる（例：住民の扱いだけ書いてあって住民以外は「?」のまま、内容の制限を受付の制限と取り違える）。原文を読んで確かめたら、その sources の confidence を confirmed にする。
 要望の「受け付けません」は営業・誹謗中傷など内容の制限がほとんどなので、読み取りでは「不可」にしない（「市民に限る」などの書き方だけ住民以外を「不可」にする）。

@@ -18,3 +18,9 @@ scripts/.link-check.md
 # Claude Code の個人の設定
 .claude/settings.local.json
 scripts/.intake-cache/
+
+# 運営者の手元にだけ置く資料（運営費の検討・ほかのAIへの依頼・下書きなど）
+docs/非公開/
+
+# エディタ・エージェントの個人の設定
+.serena/

@@ -2,7 +2,7 @@
 // 対象：47都道府県と、すべての市区町村（人口は data/municipality-populations.json）
 //   node scripts/request-pages.js            … 探して書き出す（前に見つけたページは残し、まだのところだけたどる）
 //   node scripts/request-pages.js --all      … 全部たどり直す（手で直した data/request-pages.js の値は MANUAL に置くと残る）
-// 見つからなかった・開けなかった自治体は docs/確認用/要望書の出し方のページが見つからない自治体.md に残す
+// 見つからなかった・開けなかった自治体は docs/調査/要望書の出し方のページが見つからない自治体.md に残す
 const fs = require('fs');
 const path = require('path');
 
@@ -171,7 +171,7 @@ ${Object.entries(sorted).map(([k, v]) => `  ${JSON.stringify(k)}: ${JSON.stringi
 `);
   const order = new Map(list.map(([p, k], n) => [k === '@' ? p : `${p}${k}`, n]));
   fails.sort((a, b) => order.get(a[0]) - order.get(b[0]));
-  fs.writeFileSync(path.join(ROOT, 'docs/確認用/要望書の出し方のページが見つからない自治体.md'), `# 要望書の出し方のページが見つからない自治体
+  fs.writeFileSync(path.join(ROOT, 'docs/調査/要望書の出し方のページが見つからない自治体.md'), `# 要望書の出し方のページが見つからない自治体
 
 scripts/request-pages.js で、公式サイトから「知事・市長への手紙」「市民の声」などのページを自動でたどったが、見つからなかった・開けなかった自治体（${today}）。
 並びは、都道府県 → 政令指定都市 → それ以外の市区町村（それぞれ人口の多い順）。

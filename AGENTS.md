@@ -18,22 +18,22 @@
 - `templates/`：テーマのページのひな形、`scripts/`：データやページを作る道具、`test/`：テスト
 - `ai/`：ほかの AI に渡すための文面データ（`node scripts/export-ai.js`）
 - `supabase/`：データベースの定義、`sources/`：保存した資料（Git に入れない）
-- `docs/確認用/`：オーナーが読む・確かめるもの（文面の見本、未確認の資料、TODO、ほかの AI への依頼）
-- `docs/作業メモ/`：AI が作業に使う設計・方針・訳
+- `docs/`：案内は [docs/README.md](./docs/README.md)。`設計/`（設計・方針・訳）、`調査/`（調べた結果と調べきれていない一覧）、`TODO/`、`見本/`（文面の見本）
+- `docs/非公開/`：運営者の手元だけに置くもの（Git に入れない）。運営費・スポンサーの検討、ほかの AI への依頼と返事、外部レビュー用の資料、投稿の下書き。公開してよいか迷う内部のメモはここに書く
 
 ## 通常読んでよいファイル
 
 - 画面：対象の `*.html`、`site/css/style.css`、`site/css/labels.css`
 - UI・フロー：`site/js/` の `app.js`、`common.js`、`petition.js`、`wizard.js`、`places.js`、`shop.js`、`postage.js`、`report.js`
 - テーマの見た目・定型文：対象テーマの `theme.js`、`template.js`、`shop.js`
-- 仕様・編集案内：`site/data/README.md`、`docs/作業メモ/` の対象資料、`package.json`
+- 仕様・編集案内：`site/data/README.md`、`docs/設計/` の対象資料、`package.json`
 
 ## 通常読まないファイル
 
 - 大きな自動生成データ：`site/data/councils.js`、`sites.js`、`tel.js`、`offices.js`、`access.js`、`kana.js`
 - 長いテーマ別文面：`site/themes/*/asks-national.js`、`site/themes/*/asks-local.js`
 - 実行時ライブラリ：`site/vendor/`
-- 上記は構造確認や特定データの修正など、必要な作業で対象を明示された場合だけ読みます。構造の概要は [docs/作業メモ/data-structure.md](./docs/作業メモ/data-structure.md) を先に参照します。
+- 上記は構造確認や特定データの修正など、必要な作業で対象を明示された場合だけ読みます。構造の概要は [docs/設計/data-structure.md](./docs/設計/data-structure.md) を先に参照します。
 
 ## データファイルを変更するとき
 

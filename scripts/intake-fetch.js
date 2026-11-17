@@ -3,7 +3,7 @@
 //   node scripts/intake-fetch.js chinjo|yobo [--refetch]
 // 陳情は site/data/intake/chinjo.jsonl の page_url（なければ sites.js の陳情・請願の案内ページ）、要望は yobo.jsonl の page_url。
 // 本文は scripts/.intake-cache/<kind>/<id>.json に置く（著作物なので公開しない。.gitignore 済み）。
-// 取れなかったものは docs/確認用/受け付け方の案内ページを取得できなかった自治体.md に書く。
+// 取れなかったものは docs/調査/受け付け方の案内ページを取得できなかった自治体.md に書く。
 'use strict';
 const fs = require('fs');
 const path = require('path');
@@ -77,7 +77,7 @@ async function main() {
   // 取れなかったものの記録
   const failed = items.map((x) => { try { return JSON.parse(fs.readFileSync(fileOf(kind, x.id), 'utf8')); } catch { return null; } })
     .filter((p) => p && (p.error || p.status >= 400 || !p.text));
-  const log = path.join(ROOT, 'docs', '確認用', '受け付け方の案内ページを取得できなかった自治体.md');
+  const log = path.join(ROOT, 'docs', '調査', '受け付け方の案内ページを取得できなかった自治体.md');
   const head = '# 受け付け方の案内ページを取得できなかった自治体\n\nscripts/intake-fetch.js で取ろうとして取れなかったもの。ブラウザで開けば読めることが多い（ボット拒否・PDF・タイムアウトなど）。\n\n';
   const old = fs.existsSync(log) ? fs.readFileSync(log, 'utf8') : head;
   const section = `## ${kind === 'chinjo' ? '陳情（議会）' : '要望（首長）'}\n\n| 自治体 | 結果 | URL | 取得日 |\n|---|---|---|---|\n` +

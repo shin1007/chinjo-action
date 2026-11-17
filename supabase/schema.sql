@@ -136,7 +136,7 @@ grant insert (pref, council, mail, bring, online, online_url, deadline, copies, 
 
 -- 利用者のご意見（陳情の項目の追加案・誤りの指摘・根拠の資料・議会の手続きの違いなど）を受け取る。
 -- 氏名・住所・連絡先の列は作らない。支払いの有無の列も作らない（応援しても採否は変わらない）。
--- 設計：docs/確認用/応援と運営費/ご意見データベースの設計.md
+-- 設計：docs/設計/ご意見データベースの設計.md
 create table if not exists public.feedback (
   id bigint generated always as identity primary key,
   created_at timestamptz not null default now(),
