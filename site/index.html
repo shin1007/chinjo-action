@@ -50,6 +50,16 @@
     </div>
   </div>
 </section>
+<section id="tally" class="tally" aria-label="これまでの歩み">
+  <div class="wrap">
+    <dl class="tally-list">
+      <div><dt>要望を出した件数（項目数×自治体）</dt><dd><span id="tallyItems">—</span><small>件</small></dd></div>
+      <div><dt>陳情を出した自治体</dt><dd><span id="tallyCouncils">—</span><small>自治体</small></dd></div>
+      <div id="tallySupport" hidden><dt>今月の応援（<a href="/support">運営費</a>）</dt><dd>—</dd></div>
+    </dl>
+    <p id="tallyNote" class="small">準備中：提出の報告の受け付けを始めたら、ここに数が出ます（<a href="/roadmap">これからの予定</a>）。</p>
+  </div>
+</section>
 <section id="themes" class="section">
   <div class="wrap">
     <h2>テーマを選ぶ</h2>
@@ -152,6 +162,7 @@
     <p class="small"><a href="/roadmap">これからの予定</a>　<a href="/trouble">困っていること</a>　<a href="/board">質問と答えの掲示板</a>　<a href="/feedback">ご意見・追加してほしい項目</a>　<a href="/support">このサイトを支える</a></p>
   </div>
 </footer>
+<script src="/js/totals.js" defer></script>
 <script src="/js/shindan.js" defer></script>
 <script src="/js/search-index.js" defer></script>
 <script src="/js/search.js" defer></script>
