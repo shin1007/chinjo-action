@@ -42,14 +42,49 @@
   const dp = (asin) => 'https://www.amazon.co.jp/dp/' + encodeURIComponent(asin) + (AMAZON_TAG ? '?tag=' + encodeURIComponent(AMAZON_TAG) : '');
   const NOTE = '※ このサイトは Amazon アソシエイト・プログラムに参加しています。リンクから購入されると、サイトの運営者に紹介料が入ります（広告）。';
 
+  // まとめてカートに入れる：Amazon アソシエイトの「カートに追加」のリンク（GET）。asin のあるものだけ入る。
+  // 中身は、陳情書を出す人が最低限そろえるもの（封筒・ペン・ホッチキス・のり・はさみ）を最初にチェックしておく。
+  const BASIC = ['B0F53W8816', 'B00P0PT7BS', 'B01AOZSI7M', 'B0FR88W4TR', 'B0079WLDLW'];
+  const cartUrl = (asins) => 'https://www.amazon.co.jp/gp/aws/cart/add.html?' + asins.map((a, i) => `ASIN.${i + 1}=${encodeURIComponent(a)}&Quantity.${i + 1}=1`).join('&') + (AMAZON_TAG ? '&AssociateTag=' + encodeURIComponent(AMAZON_TAG) : '');
+
   // 長い一覧なので折りたたみにし、開くと商品名（太字のリンクと型番）の下に選んだ理由を出す
   const stationery = () => `<details class="stationery-box">
     <summary>陳情書提出に使える おすすめ文具</summary>
+    <div class="stationery-cart" data-cart>
+      <p class="hint-sm">買いたいものにチェックを入れて、下のボタンを押すと、Amazon のカートにまとめて入ります（買うかどうかは、Amazon の画面で決めます）。</p>
+      <p class="stationery-presets">
+        <button type="button" class="btn btn-small" data-preset="basic">最低限の5点だけ選ぶ</button>
+        <button type="button" class="btn btn-small" data-preset="all">ぜんぶ選ぶ</button>
+        <button type="button" class="btn btn-small" data-preset="none">選びなおす</button>
+      </p>
+      <a class="btn btn-primary" data-cart-go href="#" target="_blank" rel="noopener sponsored">選んだ0点を Amazon のカートに入れる</a>
+    </div>
     <ul class="stationery">${COMMON.map((it) => `
-      <li><a class="stationery-name" href="${it.asin ? dp(it.asin) : link(it.q)}" target="_blank" rel="noopener sponsored">${esc(it.title)}</a><span class="stationery-by">${esc(it.by)}</span>
+      <li>${it.asin ? `<label class="stationery-pick"><input type="checkbox" value="${esc(it.asin)}"${BASIC.includes(it.asin) ? ' checked' : ''}> カートに入れる</label> ` : ''}<a class="stationery-name" href="${it.asin ? dp(it.asin) : link(it.q)}" target="_blank" rel="noopener sponsored">${esc(it.title)}</a><span class="stationery-by">${esc(it.by)}</span>
         <span class="stationery-note">${esc(it.note)}</span></li>`).join('')}
     </ul>
     </details>`;
+
+  // チェックの数に合わせて、カートへのリンクと文言を直す
+  const wireCart = (root) => {
+    const boxes = [...root.querySelectorAll('.stationery-pick input')];
+    const go = root.querySelector('[data-cart-go]');
+    const sync = () => {
+      const on = boxes.filter((b) => b.checked).map((b) => b.value);
+      go.textContent = `選んだ${on.length}点を Amazon のカートに入れる`;
+      go.classList.toggle('is-disabled', !on.length);
+      go.setAttribute('aria-disabled', on.length ? 'false' : 'true');
+      go.href = on.length ? cartUrl(on) : '#';
+    };
+    boxes.forEach((b) => b.addEventListener('change', sync));
+    root.querySelectorAll('[data-preset]').forEach((btn) => btn.addEventListener('click', () => {
+      const k = btn.dataset.preset;
+      boxes.forEach((b) => { b.checked = k === 'all' || (k === 'basic' && BASIC.includes(b.value)); });
+      sync();
+    }));
+    go.addEventListener('click', (e) => { if (go.getAttribute('aria-disabled') === 'true') e.preventDefault(); });
+    sync();
+  };
 
   // 関連グッズの欄は、おすすめ文具を先に出し、その下にテーマの本・グッズを並べる
   const box = document.querySelector('[data-shop]');
@@ -71,4 +106,5 @@
     el.innerHTML = `${stationery()}
     <p class="hint-sm">${NOTE}</p>`;
   });
+  document.querySelectorAll('.stationery-box').forEach(wireCart);
 })();
