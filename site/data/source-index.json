@@ -129,6 +129,15 @@
       "localPath": null
     },
     {
+      "id": "src-0f2d2beddc",
+      "title": "法務省「検察統計」2024年 表24-00-07「罪名別 被疑事件の受理の人員」・表24-00-08「罪名別 被疑事件の既済及び未済の人員」（e-Stat）",
+      "url": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00250003&tstat=000001012929&cycle=7&year=20240&tclass1val=0",
+      "note": "虚偽告訴：新規受理138人。既済129人のうち起訴8人（すべて公判請求）、不起訴120人（起訴猶予13人・嫌疑不十分68人・嫌疑なし35人・罪とならず3人など）、家庭裁判所送致1人。Excel を開いて確認",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-0f4c564591",
       "title": "埼玉県「有害図書・深夜外出の規制等」（埼玉県青少年健全育成条例による規制の案内）",
       "url": "https://www.pref.saitama.lg.jp/b0102/nanbukenmin/kisei.html",
