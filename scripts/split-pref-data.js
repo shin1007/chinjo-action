@@ -13,7 +13,7 @@ const DATA = path.join(__dirname, '..', 'site', 'data');
 const OUT = path.join(DATA, 'pref');
 
 // 都道府県 → 市区町村 の形のもの
-const NESTED = { SITES: 'sites.js', TEL: 'tel.js', OFFICES: 'offices.js', ACCESS: 'access.js' };
+const NESTED = { SITES: 'sites.js', TEL: 'tel.js', OFFICES: 'offices.js', ACCESS: 'access.js', COUNCILS: 'councils.js' };
 // "都道府県/市区町村" の鍵のもの
 const FLAT = { KAITO: 'kaito.js', REQUEST_PAGES: 'request-pages.js' };
 
@@ -39,12 +39,30 @@ function build(w = load()) {
   });
 }
 
+// 都道府県を選ぶ前に出す「郵送でも審査される議会（全国）」には、議会ごとの情報のうち郵送についての一文だけが要る。
+// その分だけを全国まとめて data/council-mail.js に書き出す（wizard.js の mailRule が見るのと同じ条件）
+function councilMail(w = load()) {
+  const out = {};
+  for (const [pref, rows] of Object.entries(w.COUNCILS)) {
+    for (const [key, r] of Object.entries(rows)) {
+      const pick = Object.fromEntries(['yusoNote', 'outsideNote'].filter((f) => r[f] && /郵送/.test(r[f])).map((f) => [f, r[f]]));
+      if (Object.keys(pick).length) (out[pref] = out[pref] || {})[key] = pick;
+    }
+  }
+  return out;
+}
+const councilMailText = (d) => `// 自動で作ったファイル（node scripts/split-pref-data.js）。手で直さない
+// data/councils.js のうち、郵送についての一文だけ（全国分）。陳情書をつくる画面で、都道府県を選ぶ前の一覧に使う
+window.COUNCILS_MAIL = ${JSON.stringify(d)};
+`;
+
 const fileText = (pref, d) => `// 自動で作ったファイル（node scripts/split-pref-data.js）。手で直さない\nwindow.PrefData.put(${JSON.stringify(pref)},${JSON.stringify(d)});\n`;
 
 if (require.main === module) {
   fs.mkdirSync(OUT, { recursive: true });
   build().forEach(([pref, d], i) => fs.writeFileSync(path.join(OUT, `${pad(i)}.js`), fileText(pref, d)));
+  fs.writeFileSync(path.join(DATA, 'council-mail.js'), councilMailText(councilMail()));
   console.log(`${OUT} に47ファイルを書き出しました`);
 }
 
-module.exports = { build, fileText, pad, OUT };
+module.exports = { build, fileText, pad, OUT, DATA, councilMail, councilMailText };

@@ -616,7 +616,8 @@
   // 公式サイトで確かめた郵送の扱い（data/mail.js）があれば、読み取った一文より優先する
   const infoOf = (c) => {
     const [pref, key] = officeKeys[c] || [];
-    const info = (window.COUNCILS[pref] || {})[key] || {};
+    // 選んだ都道府県の分（data/pref/）が届くまでは、全国分の郵送の一文（data/council-mail.js）だけで判断する
+    const info = (window.COUNCILS[pref] || {})[key] || ((window.COUNCILS_MAIL || {})[pref] || {})[key] || {};
     const m = ((window.MAIL || {})[pref] || {})[key];
     const policy = window.MailPolicy && window.MailPolicy.get(pref, key);
     return m ? { ...info, mail: m[0], yusoNote: m[1], policy } : { ...info, policy };
