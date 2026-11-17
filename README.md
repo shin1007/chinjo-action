@@ -32,4 +32,8 @@ npx serve site  # 手元で見る（ほかの静的サーバーでも可）
 | [ai/](ai/) | ほかの AI に渡すための文面データ（`node scripts/export-ai.js`） |
 | [docs/](docs/) | 設計・調査の記録・TODO・文面の見本。案内は [docs/README.md](docs/README.md) |
 
+## ライセンス
+
+プログラムは [MIT](LICENSE)、陳情書・要望書の文面は CC0、データと説明文は CC BY 4.0 です。引用した資料や元のデータは対象外です。くわしくは [LICENSE-CONTENT.md](LICENSE-CONTENT.md)。
+
 AI エージェントで作業するときのきまりは [AGENTS.md](AGENTS.md) と [CLAUDE.md](CLAUDE.md) にあります。

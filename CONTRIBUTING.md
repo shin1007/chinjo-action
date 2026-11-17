@@ -6,6 +6,7 @@ Issue・プルリクエストを歓迎します。日本語で書いてくださ
 
 - [good first issue](https://github.com/shin1007/chinjo-action/labels/good%20first%20issue) の印が付いた Issue
 - サイトの [これからの予定](https://chinjo-action.vercel.app/roadmap) と [困っていること](https://chinjo-action.vercel.app/trouble)
+- **自治体の受け付け方を調べる**（郵送・電子申請・住民以外の扱いなど）。手順は [docs/調査/受け付け方の調べ方.md](docs/調査/受け付け方の調べ方.md)。コードを書かなくても手伝えます
 - 調べきれていない自治体・資料の一覧：[docs/調査/](docs/調査/)（たとえば [陳情の案内ページが見つからない議会](docs/調査/陳情の案内ページが見つからない議会.md)、[一次資料に当たれていない資料](docs/調査/一次資料に当たれていない資料.md)）
 
 ## 手元で動かす
@@ -37,6 +38,10 @@ npx serve site
 ### 自治体・議会のデータ（`site/data/`）
 - 自動で作るファイル（`councils.js`・`sites.js`・`tel.js` など）は手で直さず、`scripts/` の道具を使います。詳しくは [site/data/README.md](site/data/README.md)。
 - 議会の受け付け方（郵送で審査されるか など）を足すときは、議会の公式の案内ページの URL と確かめた日を付けてください。
+
+## ライセンス
+
+プルリクエストを送ると、その変更を [LICENSE-CONTENT.md](LICENSE-CONTENT.md) の同じ区分のライセンス（プログラムは MIT、陳情の文面は CC0、データと説明文は CC BY 4.0）で公開することに同意したものとします。
 
 ## やらないこと
 - 特定の政党・候補者の応援になる変更、個人の名前・住所を載せる変更は取り込みません。

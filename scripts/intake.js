@@ -7,6 +7,7 @@
 //   node scripts/intake.js population         人口を municipality-populations.json で入れ直す
 //   node scripts/intake.js stats              どこまで埋まったかを数える
 //   node scripts/intake.js report             人が読む一覧表を docs/調査/陳情・要望の受け付け方の一覧.md に書く
+//   node scripts/intake.js todo <page|mail|online|nonresident|yobo> [都道府県]  まだ調べていない自治体を人口の多い順に出す（手伝う人向け）
 //   node scripts/intake.js export             作成画面で使う site/data/intake.js を書く（公式サイト・事務局の回答で確かめた値だけ）
 'use strict';
 const fs = require('fs');
@@ -276,6 +277,23 @@ function exportText() {
     + '// 確かめた日が分かる値だけ。auto は公式ページから機械で読み取っただけの項目。at はいちばん古い確認日\n'
     + `window.INTAKE = ${JSON.stringify(exportData())};\n`;
 }
+
+// まだ調べていない自治体を、人口の多い順に出す。CONTRIBUTING.md・GitHub の good first issue から使う
+const TODO = {
+  page: ['chinjo', (r) => !r.page_url, '陳情の案内ページ（page_url）がない'],
+  mail: ['chinjo', (r) => r.methods.mail.resident === 'unknown' || r.methods.mail.nonresident === 'unknown', '郵送で出した陳情を審査するかが分からない'],
+  online: ['chinjo', (r) => ['email', 'form'].every((m) => r.methods[m].resident === 'unknown'), 'メール・電子申請で出せるかが分からない'],
+  nonresident: ['chinjo', (r) => !r.nonresident_rule && r.anyone_can_submit !== 'yes' && Object.values(r.methods).every((m) => m.nonresident === 'unknown'), '住民以外の陳情の扱いが分からない'],
+  yobo: ['yobo', (r) => Object.values(r.methods).every((m) => m.resident === 'unknown'), '首長あての要望の出し方が分からない'],
+};
+function todo(topic, pref) {
+  const t = TODO[topic];
+  if (!t) { console.error('使い方: node scripts/intake.js todo ' + Object.keys(TODO).join('|') + ' [都道府県]'); process.exit(1); }
+  const rows = readJsonl(FILES[t[0]]).filter((r) => (!pref || r.pref === pref) && t[1](r))
+    .sort((a, b) => (b.population || 0) - (a.population || 0));
+  console.log(`# ${t[2]}（${pref || '全国'}、${rows.length} 件、人口の多い順）`);
+  for (const r of rows) console.log([r.id, r.population || '', r.page_url || ''].join('	'));
+}
 const EXPORT_FILE = path.join(DATA, 'intake.js');
 
 module.exports = { checkKind, METHODS, FILES, exportText, EXPORT_FILE };
@@ -287,6 +305,7 @@ if (require.main === module) {
   else if (cmd === 'population') population();
   else if (cmd === 'stats') stats();
   else if (cmd === 'report') require('./intake-report.js')();
+  else if (cmd === 'todo') todo(opt, process.argv[4]);
   else if (cmd === 'export') { fs.writeFileSync(EXPORT_FILE, exportText()); console.log('書いた', path.relative(ROOT, EXPORT_FILE)); }
-  else { console.error('使い方: node scripts/intake.js migrate|check|population|stats|report|export'); process.exit(1); }
+  else { console.error('使い方: node scripts/intake.js migrate|check|population|stats|report|todo|export'); process.exit(1); }
 }
