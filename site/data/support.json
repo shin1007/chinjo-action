@@ -1,9 +1,20 @@
 {
-  "_memo": "supporters は掲載を希望された方の表示名（順位ではなく登録順に並べる。金額は持たない）。応援の集まり具合と応援者の表示。手で更新する（各サービスの管理画面で金額を確かめて書き写す）。amount が null の間は集まり具合を表示しない。 methods が空の間は「準備中」と表示する。Buy Me a Coffee（https://buymeacoffee.com/shin1007）は 2026-11-15 も 404 のため外した。直ったら methods に戻す。",
+  "_memo": "応援の集まり具合と応援者の表示。手で更新する（各サービスの管理画面で金額を確かめて書き写す）。collected はその月の応援の合計（円）、stages は段階ごとの目標（goal はその月の合計がいくらに届けば達成か。前の段階より大きくする。goal が全部入り collected が入るまで、集まり具合は出さない）。supporters は掲載を希望された方の表示名（順位ではなく登録順。金額は持たない）。methods が空の間は「準備中」と表示する。Buy Me a Coffee（https://buymeacoffee.com/shin1007）は 2026-11-15 も 404 のため外した。直ったら methods に戻す。",
   "updated": null,
   "month": null,
-  "goal": null,
   "collected": null,
+  "stages": [
+    {
+      "name": "第一段階：Claude Pro",
+      "goal": null,
+      "note": "いまの利用料（運営者が自費で支払い中）"
+    },
+    {
+      "name": "第二段階：Claude Max（Pro の5倍の使用量）",
+      "goal": null,
+      "note": "使用量が Pro の5倍になる"
+    }
+  ],
   "methods": [],
   "supporters": []
 }
