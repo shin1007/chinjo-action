@@ -1,4 +1,5 @@
 // 応援の段階ごとの目標と、到達割合・あといくらの計算（表示とは分けて、テストできるようにしている）。
+/* global module */
 (() => {
   const isAmount = (n) => typeof n === 'number' && Number.isFinite(n) && n >= 0;
 

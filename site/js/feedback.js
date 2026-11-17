@@ -5,7 +5,7 @@
   const KEY = 'sb_publishable_IAXFoFaXZ3bjk-49Z-pD9w_SQZEgzXE';
   // supabase/schema.sql の feedback を Supabase に反映して動作を確かめたら true にする。
   // false の間は入力欄を出さず「準備中」と表示する（書き込みが失敗する欄を見せないため）
-  const LIVE = false;
+  const LIVE = true;
   // schema.sql の「grant insert (...) on public.feedback to anon」と同じ列だけを送る（test/feedback.test.js が突き合わせる）
   const FIELDS = ['kind', 'theme', 'target', 'body', 'source_url'];
 

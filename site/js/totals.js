@@ -4,7 +4,7 @@
 (() => {
   const URL = 'https://oquuysfeistgpgrpeswq.supabase.co';
   const KEY = 'sb_publishable_IAXFoFaXZ3bjk-49Z-pD9w_SQZEgzXE';
-  const LIVE = false;
+  const LIVE = true;
 
   const box = document.getElementById('tally');
   if (!box) return;
