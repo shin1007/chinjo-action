@@ -739,3 +739,4 @@ summary { cursor: pointer; font-weight: 700; }
 .board-list { list-style: none; padding: 0; }
 .board-list li { padding: 12px 16px; margin: 0 0 12px; border: 1px solid var(--field-line); border-radius: 6px; background: var(--surface); white-space: pre-wrap; }
 .board-list li p { margin: 0 0 6px; }
+.about blockquote { margin: 12px 0; padding: 10px 16px; border-left: 4px solid var(--main); background: var(--bg-alt); }

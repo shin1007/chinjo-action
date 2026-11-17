@@ -65,3 +65,12 @@ test('掲示板のページがあり、準備中の表示と、フッターか�
   assert.match(board, /id="board-pending"/);
   for (const page of ['index', 'about', 'support', 'roadmap', 'trouble', 'feedback']) assert.match(read(`site/${page}.html`), /href="\/board"/, `${page} から /board`);
 });
+
+test('非弁行為の説明ページ（/horitsu）：弁護士法第72条・行政書士法第19条の原文の引用と e-Gov へのリンクがあり、関連ページからたどれる', () => {
+  const page = read('site/horitsu.html');
+  assert.match(page, /報酬を得る目的で訴訟事件、非訟事件及び審査請求/);
+  assert.match(page, /報酬を得て、業として第一条の三に規定する業務を行うことができない/);
+  assert.match(page, /https:\/\/laws\.e-gov\.go\.jp\/law\/324AC1000000205/);
+  assert.match(page, /https:\/\/laws\.e-gov\.go\.jp\/law\/326AC1000000004/);
+  for (const f of ['feedback', 'board', 'roadmap', 'trouble']) assert.match(read(`site/${f}.html`), /href="\/horitsu"/, `${f} から /horitsu`);
+});
