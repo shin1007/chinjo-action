@@ -4,8 +4,11 @@ create table if not exists public.reports (
   id bigint generated always as identity primary key,
   pref text not null check (char_length(pref) between 2 and 4),
   council text not null check (char_length(council) between 3 and 30 and council like '%議会'),
+  -- そのとき出した陳情の項目数（「要望の件数」＝項目数×議会数 の集計に使う）。古い報告は null（1件として数える）
+  items smallint check (items between 1 and 50),
   created_at timestamptz not null default now()
 );
+alter table public.reports add column if not exists items smallint check (items between 1 and 50);
 
 -- 報告を受け付ける議会の一覧（中身は councils.sql で入れる）。ここにない議会への報告は断る
 create table if not exists public.councils (
@@ -57,7 +60,7 @@ create policy "anyone can report" on public.reports for insert to anon with chec
 -- 書き込めるのは都道府県と議会名だけ（created_at を偽って「最後の報告日」を変えられないように）
 -- Supabase は public のテーブルに anon・authenticated の全権限を最初から付けるので、使うものだけを残す
 revoke all on public.reports, public.councils, public.report_guard from anon, authenticated;
-grant insert (pref, council) on public.reports to anon;
+grant insert (pref, council, items) on public.reports to anon;
 
 -- 読めるのは議会ごとの件数だけ
 create or replace view public.council_counts as
@@ -65,6 +68,15 @@ create or replace view public.council_counts as
   from public.reports group by pref, council;
 revoke all on public.council_counts from anon, authenticated;
 grant select on public.council_counts to anon;
+
+-- トップページの数字用：陳情を出した自治体の数と、要望の件数（項目数×議会数）の合計。1行だけ返す
+create or replace view public.action_totals as
+  select count(distinct (pref, council))::int as councils,
+         coalesce(sum(coalesce(items, 1)), 0)::int as items,
+         count(*)::int as reports
+  from public.reports;
+revoke all on public.action_totals from anon, authenticated;
+grant select on public.action_totals to anon;
 
 -- 議会の陳情の扱い（郵送・持参・電子申請・締切など）を利用者から受け取る。
 -- 受け取るのは議会の手続きの情報だけ。陳情の文面・氏名・住所の列は作らない。

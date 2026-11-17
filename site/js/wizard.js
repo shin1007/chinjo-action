@@ -991,7 +991,7 @@
     const id = e.target.dataset.report;
     if (!id) return;
     e.target.disabled = true;
-    const ok = await window.Report.report(id);
+    const ok = await window.Report.report(id, state.items.length);
     e.target.textContent = ok ? '✓ 提出を報告しました。ありがとうございます' : '送れませんでした。もう一度押してください';
     e.target.disabled = ok;
   });
@@ -1377,6 +1377,29 @@
       else window.location.href = url;
     } catch (err) {
       if (win) win.close();
+      flash(`PDFを作れませんでした（${err.message}）。通信のよい所でもう一度試してください。`, 5000);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = text;
+    }
+  });
+  // 保存：開かずに、そのまま端末に保存する（コンビニのネットプリントに登録する・USBに入れるとき）
+  $('wzNowPdfSave').addEventListener('click', async (e) => {
+    const btn = e.currentTarget;
+    if (!PICKS.some(pick)) { flash('PDFに入れるものを選んでください'); return; }
+    const text = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'PDFを作っています…';
+    try {
+      const url = URL.createObjectURL(new Blob([await makePdf()], { type: 'application/pdf' }));
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${state.kind === 'request' ? '要望書' : '陳情書'}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 10000);
+    } catch (err) {
       flash(`PDFを作れませんでした（${err.message}）。通信のよい所でもう一度試してください。`, 5000);
     } finally {
       btn.disabled = false;
