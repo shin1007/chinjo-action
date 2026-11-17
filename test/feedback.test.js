@@ -48,3 +48,20 @@ test('予定のページは、各項目に「出てくる場所」を書いて�
   assert.ok(rows.length >= 4);
   for (const r of rows) assert.strictEqual((r.match(/<td>/g) || []).length, 3, r.slice(0, 80));
 });
+
+test('掲示板：読むのは feedback_public ビューだけで、書き込まない。原文・対象・根拠 URL・状態は出さない', () => {
+  const boardJs = fs.readFileSync(path.join(ROOT, 'site/js/board.js'), 'utf8');
+  assert.match(boardJs, /const LIVE = (true|false);/);
+  assert.ok(!/method:\s*'(POST|PATCH|DELETE|PUT)'/.test(boardJs));
+  const view = sql.match(/create or replace view public\.feedback_public as([\s\S]*?);/)[1];
+  assert.match(view, /where published and public_text is not null/);
+  for (const col of ['body', 'target', 'source_url', 'status', 'owner_note']) assert.ok(!new RegExp(`\\b${col}\\b`).test(view), `${col} を出している`);
+  assert.match(sql, /new\.published := false;/);
+  assert.match(sql, /new\.public_text := null;/);
+});
+
+test('掲示板のページがあり、準備中の表示と、フッターからのリンクがある', () => {
+  const board = fs.readFileSync(path.join(ROOT, 'site/board.html'), 'utf8');
+  assert.match(board, /id="board-pending"/);
+  for (const page of ['index', 'about', 'support', 'roadmap', 'trouble', 'feedback']) assert.match(read(`site/${page}.html`), /href="\/board"/, `${page} から /board`);
+});

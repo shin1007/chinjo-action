@@ -12,7 +12,16 @@
 - [ ] Supabase の管理画面（SQL Editor）で、`supabase/schema.sql` の末尾「利用者のご意見」の節（`create table if not exists public.feedback` から最後のビューまで）を実行する。
 - [ ] 動作を確かめる：匿名の接続（サイトのキー）から feedback に1件入れられること、読めないこと、`feedback_inbox` が管理画面で見えることを確かめる。
 - [ ] `site/js/feedback.js` の `const LIVE = false;` を `true` にして、/feedback のフォームから1件送って確かめる。（私に「反映した」と伝えてくれれば、`LIVE` を直して公開する）
+- 2026-11-17 に、掲示板用の `feedback.published`・`public_text` 列と `feedback_public` ビュー（だれでも読める。運営が載せると決めたものだけ）を、同じ節に足した。上の SQL の実行は、この分も含めて1回でよい。
+- [ ] 掲示板に載せるとき：管理画面で、載せたい行の `published` を true にし、`public_text` に「質問の趣旨を自分の言葉で要約＋一次資料にもとづく答え」を書く（原文はそのまま写さない。氏名・住所・事件の内容は入れない）。反映したら、`site/js/board.js` の `LIVE` を true にする（私に伝えてくれれば直す）。
 - 公開したページ：[これからの予定](https://chinjo-action.vercel.app/roadmap)、[困っていること](https://chinjo-action.vercel.app/trouble)、[ご意見・追加してほしい項目](https://chinjo-action.vercel.app/feedback)（フォームは準備中の表示）。
+
+## 0-2. 閲覧数の解析（オーナー専用）
+- 方針：Google アナリティクスは使わず、**Vercel Web Analytics** を候補にする。理由は、Cookie を使わず、リクエストから作ったハッシュで訪問者を数え、24時間で破棄する（Vercel の公式ドキュメント https://vercel.com/docs/analytics/privacy-policy 、2026-11-17 に読んだ）。見るのは Vercel の管理画面（ログインしたオーナーだけ）なので、サイトに解析ページを作る必要がない。Google アナリティクスは、CSP（`script-src 'self'`）の緩和・Cookie・Google への送信が要り、サイトの「個人情報を集めない」方針と合わない。
+- 料金：公式の料金ページ（https://vercel.com/docs/analytics/limits-and-pricing ）では、Hobby プランに月5万イベントまで含まれ、超えても課金されない（機能が止まる扱い）。**Hobby が非営利向けのプランかどうか（応援・スポンサーの収入が出たら Pro が要るか）は、Vercel の利用規約を確かめていない。**
+- 電気通信事業法第27条の12（外部送信の通知・公表）：条文（e-Gov）は読んだ。対象は「総務省令で定める電気通信役務を提供する者」に限られ、**個人運営のこのサイトが対象に当たるかは、総務省令を読んでいないので未確認**。当たらなくても、利用者に分かるよう、サイトに「閲覧数を個人を特定せずに数えている」と書く。
+- [ ] Vercel の管理画面で、このプロジェクトの Analytics タブから Web Analytics を有効にする。プランと料金の表示を確かめる。
+- [ ] 有効にしたと私に伝える。私が、各ページに計測用のスクリプト（同じドメインの `/_vercel/insights/script.js`）を足し、サイトに知らせの文を書いて、/roadmap の表示を更新する。（有効にする前に足すと、読み込みに失敗するだけなので、先に足さない）
 
 ## A. 急ぐ：窓口を1つ確保する（ブラウザで確かめる）
 - [ ] **Buy Me a Coffee が 404（2026-11-15 も）**：ダッシュボードの「View page」の URL（ユーザー名が変わっていないか）、審査中の表示を見る。直らなければサポートに問い合わせる。直ったら `site/data/support.json` の `methods` に戻す。

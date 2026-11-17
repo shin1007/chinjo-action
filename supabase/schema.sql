@@ -141,8 +141,13 @@ create table if not exists public.feedback (
   owner_note text,
   resolution_url text,
   faq boolean not null default false,
+  -- 掲示板（/board）に載せる文。運営が、質問の趣旨を自分の言葉で要約し、答えを添えて書く。原文は載せない
+  published boolean not null default false,
+  public_text text check (char_length(public_text) <= 1000),
   updated_at timestamptz not null default now()
 );
+alter table public.feedback add column if not exists published boolean not null default false;
+alter table public.feedback add column if not exists public_text text check (char_length(public_text) <= 1000);
 
 -- 同じ接続元から1日5件まで、同じ本文は1日1回だけ（report_guard を「fb:」付きで使う。IP は残さない）
 create or replace function public.check_feedback() returns trigger
@@ -162,6 +167,8 @@ begin
   new.owner_note := null;
   new.resolution_url := null;
   new.faq := false;
+  new.published := false;
+  new.public_text := null;
   new.created_at := now();
   new.updated_at := now();
   delete from report_guard where day < current_date;
@@ -194,3 +201,11 @@ create or replace view public.feedback_by_target as
 create or replace view public.feedback_faq as
   select id, theme, target, body, owner_note, resolution_url from public.feedback where faq order by created_at;
 revoke all on public.feedback_inbox, public.feedback_by_target, public.feedback_faq from anon, authenticated;
+
+-- 掲示板（/board）用：運営が published にして public_text を書いたものだけを、だれでも読める。
+-- 本文の原文・対象・根拠 URL は出さない。日付は日単位まで。
+create or replace view public.feedback_public as
+  select id, created_at::date as day, theme, kind, public_text
+  from public.feedback where published and public_text is not null order by created_at desc;
+revoke all on public.feedback_public from anon, authenticated;
+grant select on public.feedback_public to anon;
