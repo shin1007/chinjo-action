@@ -3,7 +3,7 @@
 // 「陳情」「請願」のリンクをたどって探し、見つかったら site/data/intake/chinjo.jsonl の page_url に入れる。
 //   node scripts/intake-find.js [--apply]
 // 探した結果は scripts/.intake-cache/find.json に残す（公開しない）。見つからなかった議会は
-// docs/確認用/陳情の案内ページが見つからない議会.md に書く（あとでブラウザで探せるように）。
+// docs/調査/陳情の案内ページが見つからない議会.md に書く（あとでブラウザで探せるように）。
 // 見つけたページは「陳情」「請願」の語を本文に含むものだけ。出し方の読み取りは intake-fetch.js → intake-extract.js で行う。
 'use strict';
 const fs = require('fs');
@@ -113,7 +113,7 @@ async function main() {
     const miss = rows.filter((r) => !r.page_url && !(((window.SITES[r.pref] || {})[r.level === 'pref' ? '@' : r.name]) || [])[1]);
     const md = '# 陳情の案内ページが見つからない議会\n\nscripts/intake-find.js が、議会のページ（なければ市区町村の公式サイト）から「陳情」「請願」のリンクを探したが、見つからなかったもの。ブラウザで議会のサイトを開いて、出し方の案内ページを探して、site/data/intake/chinjo.jsonl の page_url に入れる。\n\n| 自治体 | 議会のページ（なければ公式サイト） |\n|---|---|\n' +
       miss.map((r) => { const s = ((window.SITES[r.pref] || {})[r.level === 'pref' ? '@' : r.name]) || []; return `| ${r.id} | ${s[2] || s[0] || ''} |`; }).join('\n') + '\n';
-    fs.writeFileSync(path.join(ROOT, 'docs', '確認用', '陳情の案内ページが見つからない議会.md'), md);
+    fs.writeFileSync(path.join(ROOT, 'docs', '調査', '陳情の案内ページが見つからない議会.md'), md);
     console.error(`page_url を ${hit.length} 件入れた`);
   }
 }

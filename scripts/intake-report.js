@@ -1,4 +1,4 @@
-// 受け付け方のデータベースから、人が読む一覧表を docs/確認用/陳情・要望の受け付け方の一覧.md に書く。
+// 受け付け方のデータベースから、人が読む一覧表を docs/調査/陳情・要望の受け付け方の一覧.md に書く。
 // node scripts/intake.js report から呼ぶ。
 'use strict';
 const fs = require('fs');
@@ -64,7 +64,7 @@ module.exports = function report() {
     }
     lines.push('');
   }
-  const out = path.join(ROOT, 'docs', '確認用', '陳情・要望の受け付け方の一覧.md');
+  const out = path.join(ROOT, 'docs', '調査', '陳情・要望の受け付け方の一覧.md');
   fs.writeFileSync(out, lines.join('\n'));
   console.log(`書いた：${path.relative(ROOT, out)}`);
 };

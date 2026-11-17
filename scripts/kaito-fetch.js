@@ -4,7 +4,7 @@
 //   node scripts/kaito-fetch.js [--refetch] [id ...]
 // 出発点は site/data/intake/yobo.jsonl の page_url（要望の案内ページ）。
 // 結果は scripts/.intake-cache/kaito/<id>.json（ページ本文は置かない。リンクの文字とURLだけ）。
-// 取れなかったものは docs/確認用/回答の一覧を取得できなかった自治体.md に書く。
+// 取れなかったものは docs/調査/回答の一覧を取得できなかった自治体.md に書く。
 'use strict';
 const fs = require('fs');
 const path = require('path');

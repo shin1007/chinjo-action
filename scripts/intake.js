@@ -6,7 +6,7 @@
 //   node scripts/intake.js check              形を確かめる（npm test からも呼ぶ）
 //   node scripts/intake.js population         人口を municipality-populations.json で入れ直す
 //   node scripts/intake.js stats              どこまで埋まったかを数える
-//   node scripts/intake.js report             人が読む一覧表を docs/確認用/陳情・要望の受け付け方の一覧.md に書く
+//   node scripts/intake.js report             人が読む一覧表を docs/調査/陳情・要望の受け付け方の一覧.md に書く
 //   node scripts/intake.js export             作成画面で使う site/data/intake.js を書く（公式サイト・事務局の回答で確かめた値だけ）
 'use strict';
 const fs = require('fs');
@@ -69,7 +69,7 @@ function baseRecord(pref, key, pop) {
 }
 
 function readUnresolved() {
-  const file = path.join(ROOT, 'docs', '確認用', '郵送の扱いが不明な議会.csv');
+  const file = path.join(ROOT, 'docs', '調査', '郵送の扱いが不明な議会.csv');
   const out = {};
   if (!fs.existsSync(file)) return out;
   const lines = fs.readFileSync(file, 'utf8').replace(/^﻿/, '').split(/\r?\n/).slice(1);
