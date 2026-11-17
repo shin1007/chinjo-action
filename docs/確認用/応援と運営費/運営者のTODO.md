@@ -12,6 +12,106 @@
 - [ ] Supabase の管理画面（SQL Editor）で、`supabase/schema.sql` の末尾「利用者のご意見」の節（`create table if not exists public.feedback` から最後のビューまで）を実行する。
 - [ ] 動作を確かめる：匿名の接続（サイトのキー）から feedback に1件入れられること、読めないこと、`feedback_inbox` が管理画面で見えることを確かめる。
 - [ ] `site/js/feedback.js` の `const LIVE = false;` を `true` にして、/feedback のフォームから1件送って確かめる。（私に「反映した」と伝えてくれれば、`LIVE` を直して公開する）
+### 実行する SQL（そのまま貼る）
+Supabase の管理画面 → SQL Editor に、下をまとめて貼って実行する。前提：`report_guard` と `councils` のテーブルは、前の SQL（`supabase/schema.sql` の先頭の節）で作成済み。実行は1回でよい（`if not exists`・`create or replace` なので、やり直しても壊れない）。内容の正本は `supabase/schema.sql` の末尾（「利用者のご意見」から最後まで）で、下はその写し（2026-11-17 時点）。食い違ったら `schema.sql` が正しい。
+
+```sql
+-- 利用者のご意見（陳情の項目の追加案・誤りの指摘・根拠の資料・議会の手続きの違いなど）を受け取る。
+-- 氏名・住所・連絡先の列は作らない。支払いの有無の列も作らない（応援しても採否は変わらない）。
+-- 設計：docs/確認用/応援と運営費/ご意見データベースの設計.md
+create table if not exists public.feedback (
+  id bigint generated always as identity primary key,
+  created_at timestamptz not null default now(),
+  channel text not null default 'site' check (channel in ('site', 'paid_q', 'gift_msg', 'mail', 'x')),
+  kind text not null check (kind in ('fact_error', 'missing_source', 'wording', 'missing_item', 'council_procedure', 'question', 'other')),
+  theme text check (theme in ('kodomo', 'dansei', 'nihonjin', 'shiho', 'kenko', 'sonota')),
+  target text check (char_length(target) <= 100),
+  body text not null check (char_length(body) between 5 and 1000),
+  source_url text check (char_length(source_url) <= 300 and source_url ~ '^https?://'),
+  -- ここから下は運営だけが書く（トリガーで、利用者が入れた値は初期値に戻す）
+  status text not null default 'new' check (status in ('new', 'needs_source', 'accepted', 'declined', 'duplicate', 'done')),
+  merged_into bigint references public.feedback (id),
+  primary_checked boolean not null default false,
+  owner_note text,
+  resolution_url text,
+  faq boolean not null default false,
+  -- 掲示板（/board）に載せる文。運営が、質問の趣旨を自分の言葉で要約し、答えを添えて書く。原文は載せない
+  published boolean not null default false,
+  public_text text check (char_length(public_text) <= 1000),
+  updated_at timestamptz not null default now()
+);
+alter table public.feedback add column if not exists published boolean not null default false;
+alter table public.feedback add column if not exists public_text text check (char_length(public_text) <= 1000);
+
+-- 同じ接続元から1日5件まで、同じ本文は1日1回だけ（report_guard を「fb:」付きで使う。IP は残さない）
+create or replace function public.check_feedback() returns trigger
+language plpgsql security definer set search_path = public as $$
+declare
+  hdrs json := coalesce(current_setting('request.headers', true), '{}')::json;
+  ip text := coalesce(nullif(trim(hdrs ->> 'cf-connecting-ip'), ''),
+    trim(reverse(split_part(reverse(coalesce(hdrs ->> 'x-forwarded-for', '')), ',', 1))));
+  base text := 'fb:' || encode(sha256(convert_to(ip || '|' || current_date, 'utf8')), 'hex');
+  hash text := encode(sha256(convert_to(base || '|' || new.body, 'utf8')), 'hex');
+  n int;
+begin
+  new.channel := 'site';
+  new.status := 'new';
+  new.merged_into := null;
+  new.primary_checked := false;
+  new.owner_note := null;
+  new.resolution_url := null;
+  new.faq := false;
+  new.published := false;
+  new.public_text := null;
+  new.created_at := now();
+  new.updated_at := now();
+  delete from report_guard where day < current_date;
+  if exists (select 1 from report_guard where h = hash) then return null; end if;
+  select count(*) into n from report_guard where h like base || ':%';
+  if n >= 5 then raise exception 'too many feedback'; end if;
+  insert into report_guard (h) values (hash), (base || ':' || hash);
+  return new;
+end $$;
+
+drop trigger if exists check_feedback on public.feedback;
+create trigger check_feedback before insert on public.feedback for each row execute function public.check_feedback();
+
+-- 誰でも書き込めるが、だれも読めない（運営は Supabase の管理画面か、下のビューで見る）
+alter table public.feedback enable row level security;
+drop policy if exists "anyone can send feedback" on public.feedback;
+create policy "anyone can send feedback" on public.feedback for insert to anon with check (true);
+revoke all on public.feedback from anon, authenticated;
+grant insert (kind, theme, target, body, source_url) on public.feedback to anon;
+
+-- 運営が見るためのビュー（anon・authenticated には渡さない。管理画面の SQL エディタ・テーブルエディタから開く）
+create or replace view public.feedback_inbox as
+  select id, created_at, kind, theme, target, body, source_url
+  from public.feedback where status = 'new' order by created_at;
+-- 指摘が集まっている項目が上に来る
+create or replace view public.feedback_by_target as
+  select theme, target, count(*) as n, max(created_at) as latest
+  from public.feedback where status in ('new', 'needs_source', 'accepted') and target is not null
+  group by theme, target order by n desc, latest desc;
+create or replace view public.feedback_faq as
+  select id, theme, target, body, owner_note, resolution_url from public.feedback where faq order by created_at;
+revoke all on public.feedback_inbox, public.feedback_by_target, public.feedback_faq from anon, authenticated;
+
+-- 掲示板（/board）用：運営が published にして public_text を書いたものだけを、だれでも読める。
+-- 本文の原文・対象・根拠 URL は出さない。日付は日単位まで。
+create or replace view public.feedback_public as
+  select id, created_at::date as day, theme, kind, public_text
+  from public.feedback where published and public_text is not null order by created_at desc;
+revoke all on public.feedback_public from anon, authenticated;
+grant select on public.feedback_public to anon;
+```
+
+実行後の確認（SQL Editor で）：
+```sql
+select count(*) from public.feedback;            -- 0 と出ればテーブルができている
+select * from public.feedback_inbox limit 1;     -- エラーが出なければビューができている
+```
+その後、サイトの公開キーでの書き込み・読み取り（anon が insert だけできて、feedback を読めないこと）の確認は、フォームを `LIVE = true` にして1件送り、管理画面の Table Editor に入ることと、ブラウザからは読めないことで確かめる。
+
 - 2026-11-17 に、掲示板用の `feedback.published`・`public_text` 列と `feedback_public` ビュー（だれでも読める。運営が載せると決めたものだけ）を、同じ節に足した。上の SQL の実行は、この分も含めて1回でよい。
 - [ ] 掲示板に載せるとき：管理画面で、載せたい行の `published` を true にし、`public_text` に「質問の趣旨を自分の言葉で要約＋一次資料にもとづく答え」を書く（原文はそのまま写さない。氏名・住所・事件の内容は入れない）。反映したら、`site/js/board.js` の `LIVE` を true にする（私に伝えてくれれば直す）。
 - 公開したページ：[これからの予定](https://chinjo-action.vercel.app/roadmap)、[困っていること](https://chinjo-action.vercel.app/trouble)、[ご意見・追加してほしい項目](https://chinjo-action.vercel.app/feedback)（フォームは準備中の表示）。
