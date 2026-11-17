@@ -732,3 +732,6 @@ summary { cursor: pointer; font-weight: 700; }
 .status { display: inline-block; padding: 1px 8px; border-radius: 10px; border: 1px solid var(--main); font-size: 0.85rem; font-weight: 700; white-space: nowrap; color: var(--main-dark); }
 .plan-table { width: 100%; }
 .plan-table td, .plan-table th { vertical-align: top; }
+.board-list { list-style: none; padding: 0; }
+.board-list li { padding: 12px 16px; margin: 0 0 12px; border: 1px solid var(--field-line); border-radius: 6px; background: var(--surface); white-space: pre-wrap; }
+.board-list li p { margin: 0 0 6px; }
