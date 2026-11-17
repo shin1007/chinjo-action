@@ -962,7 +962,7 @@
     const id = e.target.dataset.report;
     if (!id) return;
     e.target.disabled = true;
-    const ok = await window.Report.report(id);
+    const ok = await window.Report.report(id, state.items.length);
     e.target.textContent = ok ? '✓ 提出を報告しました。ありがとうございます' : '送れませんでした。もう一度押してください';
     e.target.disabled = ok;
   });

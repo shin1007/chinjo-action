@@ -741,3 +741,11 @@ summary { cursor: pointer; font-weight: 700; }
 .board-list li p { margin: 0 0 6px; }
 .about blockquote { margin: 12px 0; padding: 10px 16px; border-left: 4px solid var(--main); background: var(--bg-alt); }
 .support-stages { padding-left: 1.4em; }
+
+/* トップページの「これまでの歩み」：控えめに、数字だけを並べる */
+.tally { padding: 18px 0 8px; border-bottom: 1px solid var(--line); }
+.tally-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 40px; margin: 0; text-align: center; }
+.tally-list dt { color: var(--muted); font-size: 0.85rem; }
+.tally-list dd { margin: 2px 0 0; font-size: 1.7rem; font-weight: 700; color: var(--main-dark); }
+.tally-list dd small { font-size: 0.8rem; font-weight: 400; color: var(--muted); margin-left: 3px; }
+.tally .small { text-align: center; margin: 8px 0 0; }
