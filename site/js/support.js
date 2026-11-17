@@ -6,7 +6,6 @@
     return node;
   };
   const yen = (n) => `${Number(n).toLocaleString('ja-JP')}円`;
-  const isAmount = (n) => typeof n === 'number' && Number.isFinite(n) && n >= 0;
 
   const renderMethods = (box, methods) => {
     const valid = methods.filter((m) => /^https:\/\//.test(m.url || ''));

@@ -3,7 +3,7 @@
   const URL = 'https://oquuysfeistgpgrpeswq.supabase.co';
   const KEY = 'sb_publishable_IAXFoFaXZ3bjk-49Z-pD9w_SQZEgzXE';
   // supabase/schema.sql の feedback と feedback_public を Supabase に反映して確かめたら true にする。false の間は「準備中」と表示する
-  const LIVE = false;
+  const LIVE = true;
   const THEMES = { kodomo: '子どもの権利', dansei: '男女平等', nihonjin: '日本人の権利', shiho: '司法への参加', kenko: '国民の健康', sonota: 'その他の陳情' };
 
   const pending = document.getElementById('board-pending');
