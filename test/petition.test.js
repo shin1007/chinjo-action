@@ -73,6 +73,34 @@ test('実施のイメージ（forStaff）は要望書にだけ入り、陳情書
   assert.ok(!w.Petition.build(form([it.id]), '横浜市議会', [it.id]).includes(it.forStaff));
 });
 
+test('どちらでも向きの項目は、要望書では要望書用の文（yoboText）、陳情書では陳情書用の文（text）になる', () => {
+  const it = w.ASKS.find((a) => a.scope === 'local' && a.route === 'both' && a.yoboText);
+  assert.ok(it, 'route が both の項目がない');
+  const fill = (s) => s.replaceAll('{宛先}', '横浜市');
+  const req = form([it.id]);
+  req.append('kind', 'request');
+  const r = w.Petition.build(req, '横浜市議会', [it.id]);
+  const p = w.Petition.build(form([it.id]), '横浜市議会', [it.id]);
+  assert.ok(r.includes(fill(it.yoboText)));
+  assert.ok(!r.includes(fill(it.text)));
+  assert.ok(p.includes(fill(it.text)));
+  assert.ok(!p.includes(fill(it.yoboText)));
+});
+
+test('陳情書で選べるのは陳情向け・どちらでも、要望書で選べるのは要望向け・どちらでも。国への意見書は陳情書だけ', () => {
+  const P = w.Petition;
+  const nat = w.ASKS.find((a) => a.scope === 'national');
+  assert.strictEqual(P.routeOf(nat), 'chinjo');
+  assert.ok(P.usableFor(nat, 'petition') && !P.usableFor(nat, 'request'));
+  for (const route of ['chinjo', 'yobo', 'both']) {
+    const it = { scope: 'local', route };
+    assert.strictEqual(P.usableFor(it, 'petition'), route !== 'yobo', `陳情書：${route}`);
+    assert.strictEqual(P.usableFor(it, 'request'), route !== 'chinjo', `要望書：${route}`);
+  }
+  // route が書いていない自治体あての項目は、どちらでも
+  assert.strictEqual(P.routeOf({ scope: 'local' }), 'both');
+});
+
 test('要望書の宛名は知事・市区町村長になり、宛先を替えると呼び方も替わる', () => {
   const k = w.ASKS.find((a) => a.scope === 'local').id;
   const fd = form([k], { story: '見聞きしたこと' });

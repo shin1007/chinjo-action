@@ -1,12 +1,14 @@
 // 陳情書の文面と、生成AIへの指示文を組み立てる。詳しい版（app.js）とかんたん作成（wizard.js）の両方が使う。
 // data には FormData（items・story・address・name・tel）を渡す。国あてか自治体あてかは、項目の scope で決まる。
-window.Petition = (() => {
+// テーマごとに asks と template が違うので、組み立てる道具は makePetition(asks, template) で作る。
+// 1つのテーマのページは、読み込んだ window.ASKS と window.TEMPLATE で作った window.Petition を使う。
+// 複数のテーマを1つのページで扱うページ（omakase.html）は、テーマごとに makePetition を呼ぶ（項目の id はテーマをまたぐと重なる）
+window.makePetition = (ASKS, TEMPLATE) => {
   const { BLANK_TEXT, DATE_BLANK } = window.Common;
 
   // 求める事項は data/asks-*.js、決まった文章は data/template.js にある
-  const TEMPLATE = window.TEMPLATE;
   const fill = window.fillTemplate;
-  const ITEMS = Object.fromEntries(window.ASKS.map((a) => [a.id, a]));
+  const ITEMS = Object.fromEntries(ASKS.map((a) => [a.id, a]));
 
   // 1つの議会に一度に多くの陳情を出すと、どれも重みが薄れるので、優先する項目に絞るよう促す
   const MANY = 3;
@@ -16,8 +18,15 @@ window.Petition = (() => {
   const selectedKeys = (data) => data.getAll('items').filter((k) => ITEMS[k]);
   // 国に意見書を出してもらう項目か（自治体が自分でできる項目は scope: 'local'）
   const isNational = (it) => it.scope !== 'local';
+  // 項目の出し先の向き。chinjo＝議会への陳情向け／yobo＝首長への要望書向け／both＝どちらでも
+  // 国への意見書を求める項目は、議会に出す陳情だけ。自治体あての項目で route がなければ、どちらでもとして扱う
+  const routeOf = (it) => (isNational(it) ? 'chinjo' : it.route || 'both');
+  // 陳情書（petition）・要望書（request）のそれぞれで選べる項目か
+  const usableFor = (it, kind) => (kind === 'request' ? routeOf(it) !== 'chinjo' : routeOf(it) !== 'yobo');
+  // 求める内容（記の下に書く文）。要望書では、どちらでも向きの項目は要望書用の文（yoboText）を使う
+  const askText = (it, isRequest) => (isRequest && it.yoboText) || it.text;
   // 選ぶ画面に並べる順。採択されやすい自治体あての項目を先にする
-  const ordered = () => [...window.ASKS].sort((a, b) => isNational(a) - isNational(b));
+  const ordered = () => [...ASKS].sort((a, b) => isNational(a) - isNational(b));
 
   // 要望書の宛先になる首長の呼び方（宮城県→知事、仙台市→市長、世田谷区→区長）。名前を空けた宛先は「市区町村長」
   const headOf = (place) => (/[都道府県]$/.test(place) ? '知事' : /区$/.test(place) ? '区長' : /町$/.test(place) ? '町長' : /村$/.test(place) ? '村長' : /市$/.test(place) ? '市長' : '市区町村長');
@@ -48,7 +57,7 @@ window.Petition = (() => {
     lines.push(`【${isRequest ? '要望' : '陳情'}の趣旨】`);
     lines.push(`　${fill(isIkensho ? T.purposeNational : T.purposeLocal, vars)}`);
     lines.push('', '記', '');
-    sel.forEach((it, i) => lines.push(`${kansuji[i]}　${fill(it.text, vars)}`));
+    sel.forEach((it, i) => lines.push(`${kansuji[i]}　${fill(askText(it, isRequest), vars)}`));
     lines.push('', `【${isRequest ? '要望' : '陳情'}の理由】`);
     // 要望書は役所の職員が読むので、実施のイメージ（forStaff）があれば理由のあとに足す
     sel.forEach((it, i) => lines.push(`${i + 1}．${it.title}`, `　${it.reason}`, ...(isRequest && it.forStaff ? [`　${it.forStaff}`] : []), ''));
@@ -93,7 +102,7 @@ window.Petition = (() => {
     if (mixed) L.push('求める事項ごとに、次のどちらかです（下の「求める事項」に書いてあります）。', `- 国：${KIND_NAT}`, `- 自治体：${KIND_LOC}`);
     else L.push(nat ? KIND_NAT : request ? 'その自治体が自ら実施できる施策を求める要望書。' : KIND_LOC);
     L.push('', '## 求める事項');
-    sel.forEach((it, i) => L.push(`${i + 1}. ${it.title}${mixed ? `（種類：${isNational(it) ? '国' : '自治体'}）` : ''}`, `   要望の例：${it.text.replaceAll('{宛先}', 'その自治体')}`, `   背景：${it.reason}`, ...(request && it.forStaff ? [`   実施のイメージ（役所の職員向けに、理由の最後に添える）：${it.forStaff}`] : [])));
+    sel.forEach((it, i) => L.push(`${i + 1}. ${it.title}${mixed ? `（種類：${isNational(it) ? '国' : '自治体'}）` : ''}`, `   要望の例：${askText(it, request).replaceAll('{宛先}', 'その自治体')}`, `   背景：${it.reason}`, ...(request && it.forStaff ? [`   実施のイメージ（役所の職員向けに、理由の最後に添える）：${it.forStaff}`] : [])));
     if (sel.length > 1) L.push('', `※求める事項ごとに、別々の陳情書を${sel.length}通作成してください。1通には1つの事項だけを書き、それぞれ件名・趣旨・理由をその事項に合わせてください。`);
     if (story) L.push('', '## 陳情者としての一言（陳情の理由の最後に、1〜2文で一般的な表現にして添えてください。日付・地名・相手方・裁判や調停の経過など、個人や事件を特定できる内容は書かないでください）', story);
     L.push('', '## 書き方のルール（採択されやすくするため、必ず守ってください）');
@@ -288,5 +297,7 @@ window.Petition = (() => {
     return fill(TEMPLATE.cover, { 日付: DATE_BLANK, 宛先: council, 差出人: from.join('\n'), 書類: list, 通数: String(docs.length) }).replaceAll('陳情書', documentLabel);
   }
 
-  return { headOf, build, withReply, ikensho, buildPrompt, sections, buildRewritePrompt, applyRewrite, rewritePlans, withSender, swapCouncil, cover, selectedKeys, isNational, ordered, ITEMS, MANY, SEP };
-})();
+  return { headOf, build, withReply, ikensho, buildPrompt, sections, buildRewritePrompt, applyRewrite, rewritePlans, withSender, swapCouncil, cover, selectedKeys, isNational, routeOf, usableFor, askText, ordered, ITEMS, MANY, SEP };
+};
+// 1つのテーマのページ（asks と template を先に読み込んでいるページ）では、そのまま使えるようにしておく
+if (window.ASKS && window.TEMPLATE) window.Petition = window.makePetition(window.ASKS, window.TEMPLATE);

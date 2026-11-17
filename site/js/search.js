@@ -5,6 +5,7 @@
   const count = document.getElementById('itemSearchCount');
   if (!input || !window.SEARCH_INDEX) return;
   const MAX = 20;
+  const ROUTE = { chinjo: '陳情向け', yobo: '要望向け', both: '陳情でも要望でも' };
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
   // 全角・半角と、カタカナ・ひらがなの違いを無視して比べる
   const norm = (s) => s.normalize('NFKC').toLowerCase().replace(/[\u30a1-\u30f6]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0x60));
@@ -30,7 +31,7 @@
       groups.get(k).list.push(a);
     });
     list.innerHTML = [...groups.values()].map((g) => `<li class="item-search-group"><p class="item-search-head"><b>${esc(g.themeName)}／${esc(g.category)}</b>${g.list.length > 1 ? `<a class="btn btn-small" href="/${g.theme}/make?item=${encodeURIComponent(g.list.map((a) => a.id).join(','))}">この${g.list.length}件をすべて選んでつくる</a>` : ''}</p>
-      <ul>${g.list.map((a) => `<li><a href="/${a.theme}/make?item=${encodeURIComponent(a.id)}"><b>${esc(a.label)}</b><small>${a.scope === 'local' ? '自治体の取り組み' : '国へ意見書'}</small></a></li>`).join('')}</ul></li>`).join('');
+      <ul>${g.list.map((a) => `<li><a href="/${a.theme}/make?item=${encodeURIComponent(a.id)}"><b>${esc(a.label)}</b><small>${a.scope === 'local' ? '自治体の取り組み' : '国へ意見書'}</small><small>${ROUTE[a.route] || ''}</small></a></li>`).join('')}</ul></li>`).join('');
   }
   input.addEventListener('input', render);
 })();

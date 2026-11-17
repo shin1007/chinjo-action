@@ -121,7 +121,10 @@ window.Common = (() => {
   }
 
   // 項目の名前の横に付ける、だれに求めるかの小さな印
-  const scopeTag = (a) => `<small class="ask-scope">${a.scope === 'local' ? '自治体の取り組み' : '国へ意見書'}</small>`;
+  // 出し先の向き：chinjo＝議会への陳情向け／yobo＝首長への要望書向け／both＝どちらでも。国への意見書は陳情向けだけ
+  const ROUTE_LABEL = { chinjo: '陳情向け', yobo: '要望向け', both: '陳情でも要望でも' };
+  const routeOf = (a) => (a.scope === 'local' ? (ROUTE_LABEL[a.route] ? a.route : 'both') : 'chinjo');
+  const scopeTag = (a) => `<small class="ask-scope">${a.scope === 'local' ? '自治体の取り組み' : '国へ意見書'}</small><small class="ask-route ask-route-${routeOf(a)}">${ROUTE_LABEL[routeOf(a)]}</small>`;
 
-  return { jstToday, BLANK_TEXT, esc, sender, bindSender, forgetSender, remembers, setRemember, flash, copy, printTexts, reiwaToday, DATE_BLANK, askGroups, scopeTag };
+  return { jstToday, BLANK_TEXT, esc, sender, bindSender, forgetSender, remembers, setRemember, flash, copy, printTexts, reiwaToday, DATE_BLANK, askGroups, scopeTag, routeOf, ROUTE_LABEL };
 })();

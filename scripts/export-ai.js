@@ -42,10 +42,13 @@ function collect() {
     const items = w.ASKS.map((a) => ({
       id: a.id,
       scope: a.scope,
+      // 出し先の向き：chinjo＝議会への陳情向け／yobo＝首長への要望書向け／both＝どちらでも（国への意見書は chinjo）
+      route: a.scope === 'local' ? a.route || 'both' : 'chinjo',
       category: a.category || null,
       label: a.label,
       title: a.title,
       wording: a.text,
+      ...(a.yoboText ? { wordingForRequest: a.yoboText } : {}),
       reason: a.reason,
       ...(a.forStaff ? { forStaff: a.forStaff } : {}),
       ...(a.template ? { templates: a.template } : {}),
@@ -94,6 +97,7 @@ function searchIndex(data) {
     themeName: SHORT[t.id] || t.name,
     id: a.id,
     scope: a.scope,
+    route: a.route,
     category: a.category,
     label: a.label,
     words: WORDS[`${t.id}/${a.id}`] || '',

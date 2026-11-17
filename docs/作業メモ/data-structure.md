@@ -26,6 +26,8 @@
 
 各テーマの `asks-national.js` と `asks-local.js` は、`window.ASKS` に項目オブジェクトを追加します。主な項目は `id`、`scope`、`category`、`label`、`title`、`text`、`reason`、`refs`、`recommended`、`defaultOn` です。`id` は保存データや画面処理から参照されるため変更しません。
 
+自治体あての項目（`asks-local.js`）には、出し先の向きを表す `route`（`chinjo`＝議会への陳情向け／`yobo`＝首長への要望書向け／`both`＝どちらでも）がある。`both` の項目は、要望書の「求める内容」の文 `yoboText` も持つ（陳情書は `text`）。国への意見書の項目は、陳情向けだけ。
+
 `template.js` は定型文、`theme.js` はテーマ設定、`shop.js` などはテーマ固有の表示・選択肢を持ちます。
 
 ## 作業時の最小単位

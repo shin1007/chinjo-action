@@ -34,6 +34,23 @@ for (const theme of THEMES) {
       assert.ok(['national', 'local'].includes(a.scope), `${a.id} の scope: ${a.scope}`);
     }
   });
+  test(`${theme}：陳情向け・要望向けの分け（route・yoboText）`, () => {
+    for (const a of items) {
+      if (a.scope === 'national') {
+        assert.strictEqual(a.route, undefined, `${a.id}：国への意見書の項目に route は書かない（陳情向けだけ）`);
+        assert.strictEqual(a.yoboText, undefined, `${a.id}：国への意見書の項目に yoboText は書かない`);
+        continue;
+      }
+      assert.ok(['chinjo', 'yobo', 'both'].includes(a.route), `${a.id} の route: ${a.route}`);
+      if (a.route === 'both') {
+        assert.ok(typeof a.yoboText === 'string' && a.yoboText.endsWith('こと。'), `${a.id}：どちらでも向きの項目には、「こと。」で終わる yoboText が要る`);
+        assert.notStrictEqual(a.yoboText, a.text, `${a.id}：yoboText は陳情書の text と別の文にする`);
+      } else {
+        assert.strictEqual(a.yoboText, undefined, `${a.id}：yoboText は route が both のときだけ`);
+      }
+      if (a.route !== 'chinjo') assert.ok(a.forStaff, `${a.id}：要望書でも使う項目には、実施のイメージ（forStaff）が要る`);
+    }
+  });
   test(`${theme}：refs の形と URL`, () => {
     for (const a of items) {
       if (a.refs === undefined) continue;
