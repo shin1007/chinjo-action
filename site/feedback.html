@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ご意見・追加してほしい項目｜権利を守る陳情アクション</title>
+<meta name="description" content="陳情アクションに追加してほしい項目や、文面の誤り・根拠の資料を教えてください。無料です。">
+<link rel="canonical" href="https://chinjo-action.vercel.app/feedback">
+<meta property="og:site_name" content="権利を守る陳情アクション">
+<meta property="og:title" content="ご意見・追加してほしい項目">
+<meta property="og:description" content="陳情アクションに追加してほしい項目や、文面の誤り・根拠の資料を教えてください。無料です。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://chinjo-action.vercel.app/feedback">
+<meta property="og:image" content="https://chinjo-action.vercel.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <details class="theme-menu">
+      <summary>テーマを選ぶ</summary>
+      <nav class="theme-nav" aria-label="陳情のテーマ">
+        <a href="/kodomo">子どもの権利</a>
+        <a href="/dansei">男女平等</a>
+        <a href="/nihonjin">日本人の権利</a>
+        <a href="/shiho">司法への参加</a>
+        <a href="/kenko">国民の健康</a>
+        <a href="/sonota">その他の陳情</a>
+      </nav>
+    </details>
+    <a href="/" class="logo">陳情アクション</a>
+  </div>
+</header>
+
+<main>
+<div class="wrap guide about">
+  <h1>ご意見・追加してほしい項目を教えてください（無料）</h1>
+  <p>陳情の項目に加えてほしい案、文面の誤りの指摘、根拠になる資料、議会ごとの手続きの違いを募集します。</p>
+  <ul>
+    <li><b>採否の決め方：</b>法令や公的な資料などの一次資料で確かめられるかどうかで決めます。送った方が誰か、応援の有無は関係しません。</li>
+    <li><b>お返事：</b>個別のお返事や、採用のお知らせはしないことがあります。</li>
+    <li><b>書かないでください：</b>ご自身や他の人の氏名・住所・連絡先、個別の事件の内容。</li>
+  </ul>
+  <p class="small">一般情報です。個別の事案は、弁護士や行政書士などの専門家にご相談ください。個別の事案への助言や、陳情書の添削・代筆はしていません。</p>
+  <p id="fb-pending" class="notice"><strong>準備中です。</strong>この入力欄は、受け取りの準備ができしだい使えるようになります。進み具合は<a href="/roadmap">これからの予定</a>で見られます。</p>
+  <form id="fb-form" class="gen-form" hidden>
+    <label>知らせたいこと
+      <select name="kind" required>
+        <option value="missing_item">陳情の項目に追加してほしい</option>
+        <option value="fact_error">文面・数字の誤りを指摘したい</option>
+        <option value="missing_source">根拠になる資料を知らせたい</option>
+        <option value="wording">言い回しを直してほしい</option>
+        <option value="council_procedure">議会ごとの手続きの違いを知らせたい</option>
+        <option value="question">サイトの使い方・手続きの一般的な質問</option>
+        <option value="other">そのほか</option>
+      </select>
+    </label>
+    <label>テーマ（分かれば）
+      <select name="theme">
+        <option value="">指定しない</option>
+        <option value="kodomo">子どもの権利</option>
+        <option value="dansei">男女平等</option>
+        <option value="nihonjin">日本人の権利</option>
+        <option value="shiho">司法への参加</option>
+        <option value="kenko">国民の健康</option>
+        <option value="sonota">その他の陳情</option>
+      </select>
+    </label>
+    <label>対象の項目・議会名（分かれば）<input name="target" maxlength="100" placeholder="例：項目の見出し、○○市議会"></label>
+    <label>内容（5〜1000字）<textarea name="body" rows="6" minlength="5" maxlength="1000" required></textarea></label>
+    <label>根拠の資料の URL（分かれば）<input type="url" name="source_url" maxlength="300" placeholder="https://"></label>
+    <label class="wz-hp" aria-hidden="true">空けておく<input name="website" tabindex="-1" autocomplete="off"></label>
+    <label><input type="checkbox" name="ok" required> 氏名・住所・連絡先・個別の事件の内容を書いていません</label>
+    <p><button type="submit" class="btn btn-primary">送る</button> <span id="fb-msg" role="status"></span></p>
+  </form>
+  <p class="small"><a href="/roadmap">これからの予定</a>　<a href="/trouble">困っていること</a></p>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="small">本サイトは市民による政策提言のための情報提供サイトです。法的助言を行うものではありません。</p>
+    <p class="small"><a href="/roadmap">これからの予定</a>　<a href="/trouble">困っていること</a>　<a href="/feedback">ご意見・追加してほしい項目</a>　<a href="/support">このサイトを支える</a></p>
+  </div>
+</footer>
+<script src="/js/feedback.js" defer></script>
+</body>
+</html>

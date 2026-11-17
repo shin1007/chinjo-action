@@ -121,3 +121,76 @@ drop policy if exists "anyone can tip" on public.council_tips;
 create policy "anyone can tip" on public.council_tips for insert to anon with check (true);
 revoke all on public.council_tips from anon, authenticated;
 grant insert (pref, council, mail, bring, online, online_url, deadline, copies, source_url, note) on public.council_tips to anon;
+
+-- 利用者のご意見（陳情の項目の追加案・誤りの指摘・根拠の資料・議会の手続きの違いなど）を受け取る。
+-- 氏名・住所・連絡先の列は作らない。支払いの有無の列も作らない（応援しても採否は変わらない）。
+-- 設計：docs/確認用/応援と運営費/ご意見データベースの設計.md
+create table if not exists public.feedback (
+  id bigint generated always as identity primary key,
+  created_at timestamptz not null default now(),
+  channel text not null default 'site' check (channel in ('site', 'paid_q', 'gift_msg', 'mail', 'x')),
+  kind text not null check (kind in ('fact_error', 'missing_source', 'wording', 'missing_item', 'council_procedure', 'question', 'other')),
+  theme text check (theme in ('kodomo', 'dansei', 'nihonjin', 'shiho', 'kenko', 'sonota')),
+  target text check (char_length(target) <= 100),
+  body text not null check (char_length(body) between 5 and 1000),
+  source_url text check (char_length(source_url) <= 300 and source_url ~ '^https?://'),
+  -- ここから下は運営だけが書く（トリガーで、利用者が入れた値は初期値に戻す）
+  status text not null default 'new' check (status in ('new', 'needs_source', 'accepted', 'declined', 'duplicate', 'done')),
+  merged_into bigint references public.feedback (id),
+  primary_checked boolean not null default false,
+  owner_note text,
+  resolution_url text,
+  faq boolean not null default false,
+  updated_at timestamptz not null default now()
+);
+
+-- 同じ接続元から1日5件まで、同じ本文は1日1回だけ（report_guard を「fb:」付きで使う。IP は残さない）
+create or replace function public.check_feedback() returns trigger
+language plpgsql security definer set search_path = public as $$
+declare
+  hdrs json := coalesce(current_setting('request.headers', true), '{}')::json;
+  ip text := coalesce(nullif(trim(hdrs ->> 'cf-connecting-ip'), ''),
+    trim(reverse(split_part(reverse(coalesce(hdrs ->> 'x-forwarded-for', '')), ',', 1))));
+  base text := 'fb:' || encode(sha256(convert_to(ip || '|' || current_date, 'utf8')), 'hex');
+  hash text := encode(sha256(convert_to(base || '|' || new.body, 'utf8')), 'hex');
+  n int;
+begin
+  new.channel := 'site';
+  new.status := 'new';
+  new.merged_into := null;
+  new.primary_checked := false;
+  new.owner_note := null;
+  new.resolution_url := null;
+  new.faq := false;
+  new.created_at := now();
+  new.updated_at := now();
+  delete from report_guard where day < current_date;
+  if exists (select 1 from report_guard where h = hash) then return null; end if;
+  select count(*) into n from report_guard where h like base || ':%';
+  if n >= 5 then raise exception 'too many feedback'; end if;
+  insert into report_guard (h) values (hash), (base || ':' || hash);
+  return new;
+end $$;
+
+drop trigger if exists check_feedback on public.feedback;
+create trigger check_feedback before insert on public.feedback for each row execute function public.check_feedback();
+
+-- 誰でも書き込めるが、だれも読めない（運営は Supabase の管理画面か、下のビューで見る）
+alter table public.feedback enable row level security;
+drop policy if exists "anyone can send feedback" on public.feedback;
+create policy "anyone can send feedback" on public.feedback for insert to anon with check (true);
+revoke all on public.feedback from anon, authenticated;
+grant insert (kind, theme, target, body, source_url) on public.feedback to anon;
+
+-- 運営が見るためのビュー（anon・authenticated には渡さない。管理画面の SQL エディタ・テーブルエディタから開く）
+create or replace view public.feedback_inbox as
+  select id, created_at, kind, theme, target, body, source_url
+  from public.feedback where status = 'new' order by created_at;
+-- 指摘が集まっている項目が上に来る
+create or replace view public.feedback_by_target as
+  select theme, target, count(*) as n, max(created_at) as latest
+  from public.feedback where status in ('new', 'needs_source', 'accepted') and target is not null
+  group by theme, target order by n desc, latest desc;
+create or replace view public.feedback_faq as
+  select id, theme, target, body, owner_note, resolution_url from public.feedback where faq order by created_at;
+revoke all on public.feedback_inbox, public.feedback_by_target, public.feedback_faq from anon, authenticated;
