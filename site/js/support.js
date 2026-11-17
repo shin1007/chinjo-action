@@ -25,23 +25,38 @@
   };
 
   const renderProgress = (box, data) => {
-    if (!isAmount(data.goal) || !data.goal || !isAmount(data.collected)) { box.hidden = true; return; }
-    const pct = Math.min(100, Math.round((data.collected / data.goal) * 100));
+    const p = window.SupportPlan.plan(data);
+    if (!p) { box.hidden = true; return false; }
     box.textContent = '';
     box.appendChild(el('h2', data.month ? `${data.month.replace('-', '年')}月の集まり具合` : '集まり具合'));
-    box.appendChild(el('p', `${yen(data.collected)} ／ 目標 ${yen(data.goal)}（${pct}%）`, 'support-total'));
-    const bar = el('div', null, 'wz-progress');
-    bar.setAttribute('role', 'progressbar');
-    bar.setAttribute('aria-valuemin', '0');
-    bar.setAttribute('aria-valuemax', '100');
-    bar.setAttribute('aria-valuenow', String(pct));
-    bar.setAttribute('aria-label', '応援の集まり具合');
-    const fill = el('div', null, 'support-fill');
-    fill.style.width = `${pct}%`;
-    bar.appendChild(fill);
-    box.appendChild(bar);
+    box.appendChild(el('p', `応援の合計：${yen(p.collected)}`, 'support-total'));
+    if (p.current) {
+      box.appendChild(el('p', `${p.current.name}　目標 ${yen(p.current.goal)} の ${p.pct}%（あと ${yen(p.remaining)}）`));
+      const bar = el('div', null, 'wz-progress');
+      bar.setAttribute('role', 'progressbar');
+      bar.setAttribute('aria-valuemin', '0');
+      bar.setAttribute('aria-valuemax', '100');
+      bar.setAttribute('aria-valuenow', String(p.pct));
+      bar.setAttribute('aria-label', `${p.current.name}の集まり具合`);
+      const fill = el('div', null, 'support-fill');
+      fill.style.width = `${p.pct}%`;
+      bar.appendChild(fill);
+      box.appendChild(bar);
+      if (p.next) box.appendChild(el('p', `次の目標（${p.next.name}）まで、あと ${yen(p.remainingNext)}`, 'small'));
+    } else {
+      box.appendChild(el('p', 'すべての目標に届きました。ありがとうございます。'));
+    }
+    const list = el('ol', null, 'support-stages');
+    for (const st of p.stages) {
+      const mark = st.state === 'done' ? '達成' : st.state === 'current' ? '目指している段階' : 'この次';
+      const li = el('li', `${st.name}　目標 ${yen(st.goal)}　［${mark}］`);
+      if (st.note) li.appendChild(el('span', `　${st.note}`, 'small'));
+      list.appendChild(li);
+    }
+    box.appendChild(list);
     if (data.updated) box.appendChild(el('p', `${data.updated.replace(/-/g, '/')} 時点（運営が各サービスの管理画面で確かめて更新しています）`, 'small'));
     box.hidden = false;
+    return true;
   };
 
   const renderSupporters = (box, supporters) => {
@@ -59,7 +74,10 @@
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const data = await response.json();
       renderMethods(document.getElementById('support-methods'), Array.isArray(data.methods) ? data.methods : []);
-      renderProgress(document.getElementById('support-progress'), data);
+      if (renderProgress(document.getElementById('support-progress'), data)) {
+        const note = document.getElementById('support-stages-note');
+        if (note) note.hidden = true;
+      }
       renderSupporters(document.getElementById('support-supporters'), data.supporters);
     } catch (error) {
       console.warn('応援の情報を読み込めませんでした。', error);
