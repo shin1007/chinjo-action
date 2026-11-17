@@ -726,3 +726,9 @@ summary { cursor: pointer; font-weight: 700; }
 .support-total { font-size: 1.2rem; font-weight: bold; margin: 8px 0; }
 .support-fill { height: 100%; background: var(--main); }
 #support-supporters ul { padding-left: 1.6em; }
+
+/* 予定・困りごと・ご意見のページ */
+.notice { padding: 12px 16px; border: 1px solid var(--main); border-radius: 6px; background: var(--bg-alt); }
+.status { display: inline-block; padding: 1px 8px; border-radius: 10px; border: 1px solid var(--main); font-size: 0.85rem; font-weight: 700; white-space: nowrap; color: var(--main-dark); }
+.plan-table { width: 100%; }
+.plan-table td, .plan-table th { vertical-align: top; }

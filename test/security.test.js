@@ -105,7 +105,8 @@ test('Supabase：テーブルは RLS を有効にし、anon に渡すのは決�
     'grant insert (pref, council) on public.reports to anon;',
     'grant select on public.council_counts to anon;',
     'grant insert (pref, council, mail, bring, online, online_url, deadline, copies, source_url, note) on public.council_tips to anon;',
+    'grant insert (kind, theme, target, body, source_url) on public.feedback to anon;',
   ]);
   assert.ok(!/to anon[^;]*\b(update|delete|all)\b/i.test(sql), 'anon に更新・削除を渡している');
-  for (const t of ['reports', 'council_tips']) assert.match(sql, new RegExp(`on public\\.${t} for insert to anon`), `${t} は insert だけ`);
+  for (const t of ['reports', 'council_tips', 'feedback']) assert.match(sql, new RegExp(`on public\\.${t} for insert to anon`), `${t} は insert だけ`);
 });

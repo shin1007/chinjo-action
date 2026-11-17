@@ -8,6 +8,12 @@
 - [ご意見データベースの設計](ご意見データベースの設計.md)：応援のメッセージ・有料質問・フォームのご意見を集める設計（まだ作っていない）
 - 関連（このフォルダの外）：[一次資料に当たれていない資料](../一次資料に当たれていない資料.md)の「応援の窓口の手数料・規約」と「応援の窓口・スポンサー枠・カスタム版」
 
+## 0. ご意見の受け付けを動かす（SQL の反映が必要。私は Supabase の鍵を使えない）
+- [ ] Supabase の管理画面（SQL Editor）で、`supabase/schema.sql` の末尾「利用者のご意見」の節（`create table if not exists public.feedback` から最後のビューまで）を実行する。
+- [ ] 動作を確かめる：匿名の接続（サイトのキー）から feedback に1件入れられること、読めないこと、`feedback_inbox` が管理画面で見えることを確かめる。
+- [ ] `site/js/feedback.js` の `const LIVE = false;` を `true` にして、/feedback のフォームから1件送って確かめる。（私に「反映した」と伝えてくれれば、`LIVE` を直して公開する）
+- 公開したページ：[これからの予定](https://chinjo-action.vercel.app/roadmap)、[困っていること](https://chinjo-action.vercel.app/trouble)、[ご意見・追加してほしい項目](https://chinjo-action.vercel.app/feedback)（フォームは準備中の表示）。
+
 ## A. 急ぐ：窓口を1つ確保する（ブラウザで確かめる）
 - [ ] **Buy Me a Coffee が 404（2026-11-15 も）**：ダッシュボードの「View page」の URL（ユーザー名が変わっていないか）、審査中の表示を見る。直らなければサポートに問い合わせる。直ったら `site/data/support.json` の `methods` に戻す。
 - [ ] BMC：2段階認証を有効にする。応援が来たときのメール通知をオンにする。Stripe の「サポート部門の電話番号」が領収書に出るかを確かめ、出したくなければ外す。
