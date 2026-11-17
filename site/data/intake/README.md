@@ -36,6 +36,13 @@
   "result_notice": "yes",         // 結果を知らせてくれるか ※陳情のみ
   "reply": "yes",                 // 回答をくれるか ※要望のみ
   "resubmit": "...",              // 同じ趣旨の出し直しの決まり
+  "nonresident_rule": {           // 住民以外（自治体の外の人）の陳情の扱いの決まり ※陳情のみ。node scripts/intake-nonresident.js で入れる
+    "who": "市外に住所がある人",    // 誰が対象か（「県外」「在住・在勤・在学していない人」など議会ごとに違う）
+    "methods": ["mail"],          // どの出し方に当てはまるか（"all" は出し方に関わらず）
+    "effect": "distribute",       // distribute 審査せず配付・回覧だけ／may_distribute 議長などの判断で審査しないことがある／as_request 要望書として扱う／no 出せない／same 住民と同じ扱い
+    "unless": "..."               // 例外（在勤・在学、市政に利害関係がある、など）
+  },
+  "anyone_can_submit": "yes",     // 案内に「どなたでも提出できます」とある（住民以外の陳情も審査するとは限らない）
   "unresolved": "...",            // 調べたが判定できなかった理由
   "note": "...",
   "sources": [                    // 根拠。値を unknown 以外にしたら必ず1つ以上
@@ -71,3 +78,8 @@
 
 機械の読み取りには間違いが混じる（例：住民の扱いだけ書いてあって住民以外は「?」のまま、内容の制限を受付の制限と取り違える）。原文を読んで確かめたら、その sources の confidence を confirmed にする。
 要望の「受け付けません」は営業・誹謗中傷など内容の制限がほとんどなので、読み取りでは「不可」にしない（「市民に限る」などの書き方だけ住民以外を「不可」にする）。
+
+## 住民以外の扱い（2026-11-17〜）
+- 根拠の一文と判断は scripts/intake-nonresident.jsonl に1行1議会で書き、`node scripts/intake-nonresident.js scripts/intake-nonresident.jsonl` で chinjo.jsonl に入れる（何度流しても同じ結果になる）。
+- `--anyone` を付けると、案内ページの本文（.intake-cache）に「どなたでも」「誰でも」とある議会に anyone_can_submit を付ける（confidence は likely）。
+- 案内ページに書いてなく、取扱基準・要綱のPDFに書いてある議会が多い。PDFは日本語を pdftotext で取れないので、PyMuPDF（python -E -P で使う。-I だと読み込めない）で読む。
