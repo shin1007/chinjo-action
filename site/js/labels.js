@@ -160,7 +160,13 @@
   }));
   $('lbShare').hidden = !window.PdfDoc.canShareFiles();
   $('lbShare').addEventListener('click', (e) => run(e.currentTarget, (bytes) => window.PdfDoc.shareFile(bytes, fileName())));
-  window.PdfDoc.preload();
+  // PDF の道具とフォント（約6MB）は、保存のボタンが画面に近づいたら読み始める。開いただけでは読まない（スマホの通信量を減らす）
+  const near = new IntersectionObserver((es) => {
+    if (!es.some((e) => e.isIntersecting)) return;
+    near.disconnect();
+    window.PdfDoc.preload();
+  }, { rootMargin: '400px' });
+  near.observe($('lbPdf'));
 
   render();
 })();
