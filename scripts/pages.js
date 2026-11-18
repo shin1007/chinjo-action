@@ -49,10 +49,20 @@ function render(page, theme) {
 // フッターの、ソースコードへの案内
 const GITHUB = '  <div class="wrap"><p class="small"><a href="https://github.com/shin1007/chinjo-action" target="_blank" rel="noopener">ソースコード（GitHub）</a>　このサイトの改善の提案（Issue・プルリクエスト）を歓迎します</p></div>';
 
+// テーマのページのヘッダーの右側（つくる・出し方）。いま開いているページに印を付ける
+const primaryNav = (themeId, page) => [
+  '    <nav class="primary-nav" aria-label="主要メニュー">',
+  `      <a href="/${themeId}/make"${page === 'make' ? ' aria-current="page"' : ''}>つくる</a>`,
+  `      <a href="/${themeId}/guide"${page === 'guide' ? ' aria-current="page"' : ''}>出し方</a>`,
+  '    </nav>',
+].join('\n');
+
 // 共通の部品を、決まった形に置き換える（部品がないページはそのまま）
-function withParts(html, themeId) {
+function withParts(html, themeId, page) {
+  const navRe = new RegExp(` {4}<nav(?: class="primary-nav" aria-label="主要メニュー")?>\\s*<a href="/${themeId}/make"[\\s\\S]*?</nav>`);
   return html
     .replace(/ {4}<details class="theme-menu">[\s\S]*?<\/details>/, () => themeNav(themeId))
+    .replace(navRe, () => primaryNav(themeId, page))
     .replace(/^ *<div class="wrap"><p class="small"><a href="https:\/\/github\.com\/shin1007\/chinjo-action"[^\n]*<\/div>$/m, () => GITHUB);
 }
 
@@ -63,11 +73,11 @@ const htmlFiles = (dir) => fs.readdirSync(dir, { withFileTypes: true }).flatMap(
 });
 
 function pages() {
-  const made = THEMES.flatMap((t) => PAGES.map((p) => ({ file: path.join(SITE, t.id, `${p}.html`), html: withParts(render(p, t), t.id) })));
+  const made = THEMES.flatMap((t) => PAGES.map((p) => ({ file: path.join(SITE, t.id, `${p}.html`), html: withParts(render(p, t), t.id, p) })));
   const done = new Set(made.map((m) => m.file));
   const rest = htmlFiles(SITE).filter((f) => !done.has(f)).map((file) => {
-    const theme = path.relative(SITE, file).split(path.sep)[0];
-    return { file, html: withParts(read(file), theme) };
+    const [theme, name] = path.relative(SITE, file).split(path.sep);
+    return { file, html: withParts(read(file), theme, (name || '').replace(/\.html$/, '')) };
   });
   return [...made, ...rest];
 }
