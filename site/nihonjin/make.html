@@ -103,9 +103,7 @@
         <div id="wzGlobalHits" class="wz-grid" aria-live="polite"></div>
         <div id="wzRecent" class="wz-recent" hidden></div>
         <p class="hint-sm">都道府県から選ぶこともできます。都道府県を選ぶと、その都道府県の自治体が下に出ます。</p>
-        <p class="center" data-petition-only><a href="/kakunin" class="btn btn-small">送りたい議会の郵送・持参の扱いがわからない</a></p>
         <p class="wz-picked" id="wzPrefPicked"></p>
-        <p class="wz-skip"><button type="button" id="wzSkip" class="btn btn-small">自治体を選ばずに作る</button> <span class="hint-sm">提出先を空けた文書ができます。出す先が決まったら手書きで入れてください。</span></p>
         <div id="wzPrefs"></div>
         <div class="wz-near">
           <button type="button" id="wzNearBtn" class="btn btn-small">📍 現在地から近い自治体を探す</button>
@@ -122,6 +120,9 @@
           <button type="button" id="wzMorePref" class="btn btn-small btn-ghost">＋ ほかの都道府県の議会も選ぶ（任意）</button>
           <div id="wzDeadline" class="wz-deadline" hidden></div>
         </div>
+        <!-- 自治体が決まらないとき（よく使う「探す」「都道府県から選ぶ」の後ろに置く） -->
+        <p class="wz-skip"><button type="button" id="wzSkip" class="btn btn-small">自治体を選ばずに作る</button> <span class="hint-sm">提出先を空けた文書ができます。出す先が決まったら手書きで入れてください。</span></p>
+        <p class="center" data-petition-only><a href="/kakunin" class="btn btn-small">送りたい議会の郵送・持参の扱いがわからない</a></p>
       </div>
 
       <div class="wz-step" data-step="you" hidden>

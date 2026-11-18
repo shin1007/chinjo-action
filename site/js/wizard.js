@@ -404,9 +404,9 @@
   // 押せない理由を［次へ］のそばに出す
   function whyNotNext() {
     const s = STEPS[state.step];
-    if (s === 'items' && !state.items.length) return '求める内容を1つ以上選んでください（3つまでがおすすめです）。';
-    if (s === 'council' && !state.councils.length) return '自治体を選ぶか、「自治体を選ばずに作る」を押してください。';
-    if (s === 'you' && !state.role) return '①あなたの立場を選んでください（住所・氏名は空のままでもかまいません）。';
+    if (s === 'items' && !state.items.length) return '求める内容を1つ以上選んでください';
+    if (s === 'council' && !state.councils.length) return '自治体を選ぶか「自治体を選ばずに作る」を押してください';
+    if (s === 'you' && !state.role) return '①あなたの立場を選んでください（住所・氏名は空でもかまいません）';
     return '';
   }
   // 内容を選んだ段階で、できあがる文面の見本を見せる（住所・氏名と提出先は空けたまま）
@@ -1248,6 +1248,8 @@
     } else if (!list.length) {
       html = '<li>出す先を決めたら、住んでいる議会に持参するのがいちばん確実です。郵送するときや審査まで確実にしたいときは、下の「電話で聞くこと」をその議会事務局に聞きます。</li>';
     } else {
+      // 1行目に結論（どう出すか）だけを書き、理由や確かめ方は「くわしく」を開いて読む（スマホで長い文のかたまりにしない）
+      const more = (t) => `<details class="wz-more"><summary>くわしく</summary>${t}</details>`;
       html = list.map((id) => {
         const info = infoOf(id);
         const r = mailRule(info);
@@ -1257,11 +1259,12 @@
           const sure = /公式案内で確認/.test(checkedOn(info)) && (!info.policy || info.policy.confidence === 'confirmed');
           const what = { none: '審査を求めるときは、紹介議員のいる請願にする方法があります。', jisan: '審査してもらうなら持参で出します。', outside: '住民でなければ、審査してもらうには持参で出します。' }[r.c] || '';
           const denshiNote = info.denshi ? '<b>電子申請でも出せるようです。それなら紙・封筒・切手は要りません。</b>' : '';
-          return `<li>${name}：${esc(r.label)}${checkedTag(info)}。${what}${denshiNote}${sure ? '議会の公式の案内で確かめてあります。そのあと変わることもあるので、締切を公式サイトで確かめるときに、あわせて見ておくと安心です。' : (/自動で読み取り/.test(checkedOn(info)) ? '公式ページから自動で読み取ったもので、人の目では確かめていません。このまま出してかまいません。審査まで確実にしたいときだけ、下の「電話で聞くこと」で確かめます。' : 'まだ確定していない情報です。このまま出してかまいません。審査まで確実にしたいときだけ、下の「電話で聞くこと」で確かめます。')}</li>`;
+          return `<li>${name}：<b>${esc(r.label)}</b>${info.denshi ? '（電子申請でも出せるようです）' : ''}${more(`${checkedTag(info)}${what}${denshiNote}${sure ? '議会の公式の案内で確かめてあります。そのあと変わることもあるので、締切を公式サイトで確かめるときに、あわせて見ておくと安心です。' : (/自動で読み取り/.test(checkedOn(info)) ? '公式ページから自動で読み取ったもので、人の目では確かめていません。このまま出してかまいません。審査まで確実にしたいときだけ、下の「電話で聞くこと」で確かめます。' : 'まだ確定していない情報です。このまま出してかまいません。審査まで確実にしたいときだけ、下の「電話で聞くこと」で確かめます。')}`)}</li>`;
         }
         const [pref, key] = officeKeys[id] || [];
         const denshi = info && info.denshi ? '<b>電子申請でも出せるようなので、それがいちばん手軽です。紙・封筒・切手は要りません</b>（出し方は下の「くわしい手順」の②）。' : '';
-        return `<li>${name}：郵送の扱いはまだ分かっていません。電話しなくても出せます。${denshi}住んでいる議会なら持参すると、審査される見込みがいちばん高くなります。郵送でも届きますが、議会によっては審査されず議員に配るだけになります。審査まで確実にしたいときは、下の「電話で聞くこと」を議会事務局に聞きます（数分）。${telHtml(pref, key, false)}</li>`;
+        const head = info && info.denshi ? '<b>電子申請で出すのがいちばん手軽です</b>（紙・封筒・切手は要りません）' : '<b>住んでいる議会なら、持参がいちばん確実です。</b>郵送でも届きます';
+        return `<li>${name}：${head}${more(`郵送の扱いはまだ分かっていません。電話しなくても出せます。${denshi}住んでいる議会なら持参すると、審査される見込みがいちばん高くなります。郵送でも届きますが、議会によっては審査されず議員に配るだけになります。審査まで確実にしたいときは、下の「電話で聞くこと」を議会事務局に聞きます（数分）。`)}${telHtml(pref, key, false)}</li>`;
       }).join('');
     }
     $('wzNowAsk').innerHTML = html;

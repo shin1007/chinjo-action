@@ -762,3 +762,11 @@ summary { cursor: pointer; font-weight: 700; }
 .tally-list dd { margin: 2px 0 0; font-size: 1.7rem; font-weight: 700; color: var(--main-dark); }
 .tally-list dd small { font-size: 0.8rem; font-weight: 400; color: var(--muted); margin-left: 3px; }
 .tally .small { text-align: center; margin: 8px 0 0; }
+
+/* 印刷・提出の「今やること」：結論の下の「くわしく」 */
+.wz-more, .wz-more[open] { margin: 2px 0 6px; padding: 0; border: 0; background: none; box-shadow: none; font-size: 0.9rem; }
+.wz-more summary { cursor: pointer; color: var(--main-dark); padding: 0; font-weight: 400; }
+@media (max-width: 800px) {
+  /* 「次へ」を押せない理由は、ボタンの横で折り返すと帯が高くなるので、上の段に1行で出す */
+  .wz-why { order: -1; flex: 0 0 100%; text-align: center; }
+}
