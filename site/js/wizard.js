@@ -62,7 +62,7 @@
     return window.Places.of(pref).map((pl) => {
       officeKeys[idOf(pref, pl.council)] = [pref, pl.key];
       // 読みも郡名（「…グン」）を外して、議会名と同じ範囲にする
-      const kana = (window.KANA[pref] || {})[pl.key] || '';
+      const kana = ((window.KANA || {})[pref] || {})[pl.key] || '';
       kanaOf[pl.council] = pl.gun && kana.includes('グン') ? kana.slice(kana.indexOf('グン') + 2) : kana;
       return pl.council;
     });
@@ -1443,6 +1443,21 @@
   // ---------- 全国の自治体から名前で探す ----------
   let allCouncils = null;
   const globalList = () => (allCouncils ||= window.PREFS.flatMap((p) => councilsOf(p).map((c) => idOf(p, c))));
+  // 読みがな（data/kana.js、全国分）は、名前で探す欄を使うときに初めて読み込む。届いたら、入っている言葉で探し直す
+  let kanaLoading = null;
+  function needKana(el) {
+    if (window.KANA || kanaLoading) return;
+    kanaLoading = new Promise((resolve) => {
+      const s = document.createElement('script');
+      s.src = '/data/kana.js';
+      s.onload = s.onerror = resolve;
+      document.head.append(s);
+    }).then(() => {
+      allCouncils = null;
+      if (el.value.trim()) el.dispatchEvent(new Event('input'));
+    });
+  }
+  ['wzGlobal', 'wzFilter'].forEach((id) => ['focus', 'input'].forEach((ev) => $(id).addEventListener(ev, () => needKana($(id)))));
   $('wzGlobal').addEventListener('input', () => {
     const q = $('wzGlobal').value.trim();
     if (!q) { $('wzGlobalHits').innerHTML = ''; return; }
