@@ -13,7 +13,7 @@ const DATA = path.join(__dirname, '..', 'site', 'data');
 const OUT = path.join(DATA, 'pref');
 
 // 都道府県 → 市区町村 の形のもの
-const NESTED = { SITES: 'sites.js', TEL: 'tel.js', OFFICES: 'offices.js', ACCESS: 'access.js', COUNCILS: 'councils.js' };
+const NESTED = { SITES: 'sites.js', TEL: 'tel.js', OFFICES: 'offices.js', ACCESS: 'access.js', COUNCILS: 'councils.js', MAIL: 'mail.js' };
 // "都道府県/市区町村" の鍵のもの
 const FLAT = { KAITO: 'kaito.js', REQUEST_PAGES: 'request-pages.js' };
 
@@ -49,10 +49,14 @@ function councilMail(w = load()) {
       if (Object.keys(pick).length) (out[pref] = out[pref] || {})[key] = pick;
     }
   }
+  // 公式サイトで確かめた郵送の扱い（data/mail.js）は、判定（ok・jisan など）だけを入れる。一文と URL は都道府県ごとのファイルにある
+  for (const [pref, rows] of Object.entries(w.MAIL)) {
+    for (const [key, r] of Object.entries(rows)) ((out[pref] = out[pref] || {})[key] = (out[pref] || {})[key] || {}).mail = r[0];
+  }
   return out;
 }
 const councilMailText = (d) => `// 自動で作ったファイル（node scripts/split-pref-data.js）。手で直さない
-// data/councils.js のうち、郵送についての一文だけ（全国分）。陳情書をつくる画面で、都道府県を選ぶ前の一覧に使う
+// data/councils.js の郵送についての一文と、data/mail.js の判定だけ（全国分）。陳情書をつくる画面で、都道府県を選ぶ前の一覧に使う
 window.COUNCILS_MAIL = ${JSON.stringify(d)};
 `;
 

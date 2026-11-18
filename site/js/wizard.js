@@ -1038,7 +1038,16 @@
     return true;
   }
 
-  $('wzSend').addEventListener('click', () => {
+  // QR コードを作る道具（vendor/qrcode.js）は、このボタンを押したときに初めて読み込む
+  const loadQr = () => (window.qrcode ? Promise.resolve() : new Promise((ok, ng) => {
+    const s = document.createElement('script');
+    s.src = '/vendor/qrcode.js';
+    s.onload = ok;
+    s.onerror = ng;
+    document.head.append(s);
+  }));
+  $('wzSend').addEventListener('click', async () => {
+    try { await loadQr(); } catch { flash('QRコードを作れませんでした。電波の良いところでもう一度押してください'); return; }
     const url = linkOf();
     const qr = window.qrcode(0, 'M');
     qr.addData(url);
