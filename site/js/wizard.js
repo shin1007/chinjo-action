@@ -84,7 +84,8 @@
     const s = STEPS[state.step];
     const el = $('wzCount');
     const n = state.items.length;
-    el.hidden = !((s === 'items' || s === 'council') && n);
+    // 自治体のステップで、まだ議会を選んでいないうちは通数を出さない（何もできていないのに「1通」と出て紛らわしい）
+    el.hidden = !((s === 'items' || (s === 'council' && real().length)) && n);
     if (el.hidden) return;
     const total = docKeys().length * Math.max(1, state.councils.length);
     el.classList.toggle('warn', n > MANY);
