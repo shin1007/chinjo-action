@@ -10,7 +10,7 @@
 ## フォルダ構成
 
 - `site/`：公開するものすべて（Vercel の outputDirectory）。URL は `site/` からの相対（例：`site/js/wizard.js` → `/js/wizard.js`）
-  - `site/*.html`・`site/<テーマ>/`：ページ（テーマのページのうち make・labels は `templates/` から `node scripts/pages.js` で作る）
+  - `site/*.html`・`site/<テーマ>/`：ページ（テーマのページのうち make・labels は `templates/` から `node scripts/pages.js` で作る。ヘッダーのテーマ切り替えとフッターの GitHub への案内も、全ページ分を同じスクリプトでそろえる）
   - `site/js/`：ページの JavaScript、`site/css/`：スタイル
   - `site/data/`：自治体・議会のデータ、`site/themes/`：テーマごとの文面・参考資料
   - `site/fonts/`・`site/vendor/`：PDF用のフォントとライブラリ

@@ -46,7 +46,7 @@ test('切手の目安は、重さの上限を超えると1つ上の料金にな�
   assert.strictEqual(estimate(1000).yen, 0);
 });
 
-test('テーマごとのページが templates/ と食い違わない（直したら node scripts/pages.js）', () => {
+test('テーマごとのページが templates/ と、全ページの共通部品が scripts/pages.js と食い違わない（直したら node scripts/pages.js）', () => {
   const read = (f) => fs.readFileSync(f, 'utf8').replace(/\r\n/g, '\n');
   for (const { file, html } of require('../scripts/pages.js').pages()) {
     assert.ok(read(file) === html, `${path.relative(ROOT, file)} が templates/ と違います`);

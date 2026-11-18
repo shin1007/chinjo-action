@@ -24,3 +24,6 @@ docs/非公開/
 
 # エディタ・エージェントの個人の設定
 .serena/
+
+# 速さの測定の結果（npm run speed）
+scripts/.speed/
