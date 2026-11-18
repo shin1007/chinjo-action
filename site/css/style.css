@@ -770,3 +770,5 @@ summary { cursor: pointer; font-weight: 700; }
   /* 「次へ」を押せない理由は、ボタンの横で折り返すと帯が高くなるので、上の段に1行で出す */
   .wz-why { order: -1; flex: 0 0 100%; text-align: center; }
 }
+/* ステップを切り替えたときなどに、上に固定したヘッダーの下に隠れないようにする */
+.wizard, .wz-council-box, #wzPrefs { scroll-margin-top: 72px; }
