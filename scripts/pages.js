@@ -1,5 +1,7 @@
-// templates/ のページから、テーマごとのページ（kodomo/labels.html など）を作る。
-// テーマの間で名前と URL しか違わないページだけをここで作る。index.html・guide.html・refs.html は中身がテーマごとに違うので、直接直す。
+// 1. templates/ のページから、テーマごとのページ（kodomo/labels.html など）を作る。
+//    テーマの間で名前と URL しか違わないページだけをここで作る。index.html・guide.html・refs.html は中身がテーマごとに違うので、直接直す。
+// 2. 全ページに共通の部品（ヘッダーのテーマ切り替えメニュー、フッターの GitHub への案内）を、ここに書いた1つの形にそろえる。
+//    部品を直すときは、このファイルの themeNav・GITHUB を直して実行する（HTML を1ページずつ直さない）。
 //   node scripts/pages.js         … 作り直して書き出す
 //   node scripts/pages.js --check … 書き出さずに、templates/ と食い違うページがあれば知らせる（npm test でも確かめる）
 const fs = require('fs');
@@ -20,9 +22,10 @@ const THEMES = [
 const PAGES = ['labels', 'make'];
 
 // ヘッダーの左上に出す、テーマを切り替えるドロップダウン
+// テーマのページの中では、そのテーマに印を付ける。テーマの外のページ（/about など）では「テーマを選ぶ」と出す
 const themeNav = (current) => [
   '    <details class="theme-menu">',
-  `      <summary>${THEMES.find((t) => t.id === current).label}</summary>`,
+  `      <summary>${(THEMES.find((t) => t.id === current) || { label: 'テーマを選ぶ' }).label}</summary>`,
   '      <nav class="theme-nav" aria-label="陳情のテーマ">',
   ...THEMES.map((t) => `        <a href="/${t.id}"${t.id === current ? ' aria-current="true"' : ''}>${t.label}</a>`),
   '      </nav>',
@@ -43,15 +46,37 @@ function render(page, theme) {
 ` : '');
 }
 
+// フッターの、ソースコードへの案内
+const GITHUB = '  <div class="wrap"><p class="small"><a href="https://github.com/shin1007/chinjo-action" target="_blank" rel="noopener">ソースコード（GitHub）</a>　このサイトの改善の提案（Issue・プルリクエスト）を歓迎します</p></div>';
+
+// 共通の部品を、決まった形に置き換える（部品がないページはそのまま）
+function withParts(html, themeId) {
+  return html
+    .replace(/ {4}<details class="theme-menu">[\s\S]*?<\/details>/, () => themeNav(themeId))
+    .replace(/^ *<div class="wrap"><p class="small"><a href="https:\/\/github\.com\/shin1007\/chinjo-action"[^\n]*<\/div>$/m, () => GITHUB);
+}
+
+const htmlFiles = (dir) => fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) => {
+  const f = path.join(dir, e.name);
+  if (e.isDirectory()) return ['data', 'vendor', 'fonts'].includes(e.name) ? [] : htmlFiles(f);
+  return e.name.endsWith('.html') ? [f] : [];
+});
+
 function pages() {
-  return THEMES.flatMap((t) => PAGES.map((p) => ({ file: path.join(SITE, t.id, `${p}.html`), html: render(p, t) })));
+  const made = THEMES.flatMap((t) => PAGES.map((p) => ({ file: path.join(SITE, t.id, `${p}.html`), html: withParts(render(p, t), t.id) })));
+  const done = new Set(made.map((m) => m.file));
+  const rest = htmlFiles(SITE).filter((f) => !done.has(f)).map((file) => {
+    const theme = path.relative(SITE, file).split(path.sep)[0];
+    return { file, html: withParts(read(file), theme) };
+  });
+  return [...made, ...rest];
 }
 
 if (require.main === module) {
   const check = process.argv.includes('--check');
   const stale = pages().filter(({ file, html }) => !fs.existsSync(file) || read(file) !== html);
   if (check) {
-    stale.forEach(({ file }) => console.error(`templates/ と違います：${path.relative(ROOT, file)}`));
+    stale.forEach(({ file }) => console.error(`templates/ か共通の部品（ヘッダーのテーマ切り替え・フッターの GitHub）と違います：${path.relative(ROOT, file)}`));
     process.exitCode = stale.length ? 1 : 0;
   } else {
     stale.forEach(({ file, html }) => fs.writeFileSync(file, html));

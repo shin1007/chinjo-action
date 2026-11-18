@@ -5,7 +5,8 @@
   "scripts": {
     "test": "node --test test/*.test.js",
     "lint": "eslint .",
-    "links": "node scripts/check-links.js"
+    "links": "node scripts/check-links.js",
+    "speed": "node scripts/speed.js"
   },
   "devDependencies": {
     "eslint": "^9.39.5",
