@@ -29,7 +29,7 @@ JSON の次の項目を読む。
    - 外すと `common.js` が「文面のデータを読み込めませんでした」と画面に出すことがある。データを使わないページは `<body data-skip-data-check="1">` にする（`test/pages-data.test.js` が見張る）。**画面の上に出る文言はコンソールのエラーにならないので、ブラウザで `.data-error` がないかも見る**
 2. **全国分のデータを、要る分だけにする。** 自治体ごとのデータは `site/data/pref/<番号>.js` に都道府県ごとに分けてあり、`site/js/pref-data.js` の `PrefData.load(pref)` で読む。新しい自治体ごとのデータを作ったら、`scripts/split-pref-data.js` に足す
 3. **使うときに読む。** ボタンや入力欄を触ったときに初めて要るデータは、そのときに `<script>` を足して読む（例：`wizard.js` の `needKana`）
-4. **ページ末尾の `<script>` に `defer` を付ける。** 順番は保たれる
+4. **ページ末尾の `<script>` に `defer` を付ける。** 順番は保たれる。量を減らすより効くことがある（/kodomo/make は defer だけで表示まで 4.7秒→1.2秒）。ただし `document.write` や、読み込んだ時点で後ろの HTML を探すスクリプトがないかは確かめる
 5. PDF 用のフォントなどは、PDF を作るときだけ読む（すでにそうなっている。崩さない）
 
 **しないこと**：インラインの `<script>`・`<style>`・`on*=` を書く（CSP で止まり、`npm test` も落ちる）。外部の CDN から読み込む。

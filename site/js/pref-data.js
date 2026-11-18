@@ -3,7 +3,7 @@
 // 全国分を一度に読むと重い（数百KB）ので、使う都道府県の分だけにしている。
 // 読み込んだ分は window.SITES などに入るので、使う側は前と同じように window.SITES[pref] を見ればよい。
 window.PrefData = (() => {
-  const GLOBALS = ['SITES', 'TEL', 'OFFICES', 'ACCESS', 'COUNCILS', 'KAITO', 'REQUEST_PAGES'];
+  const GLOBALS = ['SITES', 'TEL', 'OFFICES', 'ACCESS', 'COUNCILS', 'MAIL', 'KAITO', 'REQUEST_PAGES'];
   GLOBALS.forEach((g) => { window[g] = window[g] || {}; });
   window.INTAKE = window.INTAKE || { chinjo: {}, yobo: {} };
 
@@ -11,7 +11,7 @@ window.PrefData = (() => {
   const pending = {};
 
   function put(pref, d) {
-    ['SITES', 'TEL', 'OFFICES', 'ACCESS', 'COUNCILS'].forEach((g) => { window[g][pref] = d[g]; });
+    ['SITES', 'TEL', 'OFFICES', 'ACCESS', 'COUNCILS', 'MAIL'].forEach((g) => { window[g][pref] = d[g]; });
     ['KAITO', 'REQUEST_PAGES'].forEach((g) => Object.assign(window[g], d[g]));
     Object.entries(d.INTAKE).forEach(([kind, rows]) => Object.assign(window.INTAKE[kind] = window.INTAKE[kind] || {}, rows));
     loaded.add(pref);
