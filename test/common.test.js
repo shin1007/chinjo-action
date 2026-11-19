@@ -60,6 +60,13 @@ test('関連資料のページの項目ごとの資料が asks-*.js の refs と
   }
 });
 
+test('中学生にもわかる説明のページが、asks-*.js と easy.js から作り直してある（直したら node scripts/easy.js）', () => {
+  const read = (f) => fs.readFileSync(f, 'utf8').replace(/\r\n/g, '\n');
+  for (const { file, html } of require('../scripts/easy.js').all()) {
+    assert.ok(fs.existsSync(file) && read(file) === html, `${path.relative(ROOT, file)} が古くなっています`);
+  }
+});
+
 test('docs/見本/ の文面と出し方メモが、いまの文面と食い違わない（直したら node scripts/samples.js）', () => {
   const r = require('node:child_process').spawnSync(process.execPath, [path.join(ROOT, 'scripts', 'samples.js'), '--check'], { encoding: 'utf8' });
   assert.strictEqual(r.status, 0, r.stderr);
