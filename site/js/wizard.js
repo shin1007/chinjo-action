@@ -272,6 +272,8 @@
     if (d.reply === 'no') push('reply', '個別の回答はしないと案内されています。');
     if (d.anonymous_ok === 'no') push('anonymous_ok', '匿名では受け付けていません（住所・氏名を書きます）。');
     if (d.anonymous_ok === 'yes') push('anonymous_ok', '匿名でも受け付けますが、回答はもらえないことがあります。');
+    if (d.format_url) push('format_url', `📄 この議会は書式の例（様式・記入例）を出しています：${link(d.format_url, esc(d.format_title || '様式を開く'))}。このサイトの文面を、その様式に写して出すと確実です。`);
+    if (d.format) push('format', `書式：「${esc(clip(d.format))}」`);
     if (d.copies) push('copies', `部数：「${esc(clip(d.copies))}」`);
     // 機械で読み取っただけの項目には印を付ける
     const auto = new Set(d.auto || []);

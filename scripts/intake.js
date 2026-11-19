@@ -224,7 +224,7 @@ function stats() {
 // 「自動で読み取り」と分かる形で出す（auto に項目名を入れる）。利用者からの情報（user_tip）は出さない
 const SURE = new Set(['official_site', 'office_reply']);
 const EXPORT_FIELDS = {
-  chinjo: ['page_url', 'form_url', 'email_addr', 'deadline', 'copies', 'name_published', 'statement', 'result_notice'],
+  chinjo: ['page_url', 'form_url', 'email_addr', 'deadline', 'copies', 'format', 'format_url', 'format_title', 'name_published', 'statement', 'result_notice'],
   yobo: ['page_url', 'form_url', 'email_addr', 'reply', 'anonymous_ok'],
 };
 const newest = (list) => list.sort((x, y) => (y.checked_at || '').localeCompare(x.checked_at || ''))[0];
