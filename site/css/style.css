@@ -92,7 +92,7 @@ nav a[aria-current] { font-weight: 700; }
 .theme-menu .theme-nav a { margin: 0; padding: 6px 14px; font-size: 0.9rem; white-space: nowrap; }
 .theme-menu .theme-nav a[aria-current] { color: var(--main-dark); }
 /* 目次から飛んだ先の見出しが、上に貼りついたヘッダーに隠れないようにする */
-html { scroll-padding-top: 96px; }
+html { scroll-padding-top: 96px; scroll-padding-bottom: 140px; } /* 下に固定した帯（陳情書をつくる画面）に、キーボードで移った先が隠れないように */
 .page-nav { display: none; }
 .primary-nav { margin-left: auto; }
 .primary-nav a { margin-left: 16px; }

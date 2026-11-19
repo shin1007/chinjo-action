@@ -114,7 +114,7 @@
           <h4 id="wzCouncilTitle" class="wz-sub"></h4>
           <p class="hint-sm"><span id="wzCountHint" hidden>「出した人 ○人」はこのサイトで提出を報告した人の数です。まだ誰も出していない議会に出すと、全国に広がります。</span></p>
           <div id="wzMailOk" class="wz-mailok" hidden></div>
-          <input type="search" id="wzFilter" class="wz-filter" placeholder="自治体名で絞り込む（ひらがな・ローマ字でも）">
+          <input type="search" id="wzFilter" class="wz-filter" placeholder="自治体名で絞り込む（ひらがな・ローマ字でも）" aria-label="この都道府県の自治体を名前で絞り込む" autocomplete="off">
           <div id="wzCouncils" class="wz-grid wz-scroll"></div>
           <p class="wz-picked" id="wzPicked"></p>
           <button type="button" id="wzMorePref" class="btn btn-small btn-ghost">＋ ほかの都道府県の議会も選ぶ（任意）</button>
@@ -177,7 +177,7 @@
                 <textarea id="wzRwStory" rows="2" aria-label="ご自身が見聞きしたこと" placeholder="ご自身が見聞きしたこと（日付・地名・相手方・裁判の経過は書かない）"></textarea></li>
               <li><b>AIを開く</b><span class="hint-sm">　自治体の計画も探して結びつけるよう頼みます。検索できるPerplexityなどが向いています。</span>
                 <div class="ai-launch" data-source="wzRwPrompt" data-temporary data-compact></div>
-                <details class="wz-rw-prompt"><summary class="hint-sm">AIに渡す指示文を見る</summary><textarea id="wzRwPrompt" rows="8" readonly></textarea></details></li>
+                <details class="wz-rw-prompt"><summary class="hint-sm">AIに渡す指示文を見る</summary><textarea id="wzRwPrompt" rows="8" readonly aria-label="AIに渡す指示文"></textarea></details></li>
               <li><b>AIの答えを貼って入れる</b>
                 <textarea id="wzRwAnswer" rows="5" aria-label="AIの答え" placeholder="AIの答えを、そのまま全部貼り付けます"></textarea></li>
             </ol>
@@ -303,7 +303,7 @@
           </div>
           <div id="wzAiBox" hidden>
             <div class="ai-launch" data-source="wzPrompt"></div>
-            <textarea id="wzPrompt" rows="8" readonly></textarea>
+            <textarea id="wzPrompt" rows="8" readonly aria-label="AIに渡す指示文"></textarea>
           </div>
         </details>
 
@@ -338,7 +338,7 @@
     <p class="small credit">市区町村の一覧：<a href="https://github.com/geolonia/japanese-addresses" target="_blank" rel="noopener">Geolonia 住所データ</a>（<a href="https://creativecommons.org/licenses/by/4.0/deed.ja" target="_blank" rel="noopener">CC BY 4.0</a>）を加工して作成。最寄り駅：<a href="https://nlftp.mlit.go.jp/ksj/" target="_blank" rel="noopener">国土数値情報</a>（鉄道データ）（国土交通省）を加工して作成。位置：<a href="https://maps.gsi.go.jp/" target="_blank" rel="noopener">地理院地図</a>の住所検索</p></div>
   <div class="wrap"><p class="small"><a href="https://github.com/shin1007/chinjo-action" target="_blank" rel="noopener">ソースコード（GitHub）</a>　このサイトの改善の提案（Issue・プルリクエスト）を歓迎します</p></div>
 </footer>
-<p id="toast" class="toast" hidden>コピーしました</p>
+<p id="toast" class="toast" role="status" aria-live="polite" hidden>コピーしました</p>
 
 <script defer src="/themes/shiho/theme.js"></script>
 <script defer src="/data/prefs.js"></script>
