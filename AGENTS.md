@@ -18,6 +18,7 @@
 - `templates/`：テーマのページのひな形、`scripts/`：データやページを作る道具、`test/`：テスト
 - `ai/`：ほかの AI に渡すための文面データ（`node scripts/export-ai.js`）
 - `supabase/`：データベースの定義、`sources/`：保存した資料（Git に入れない）
+- `.claude/skills/`：Claude Code 用の手順。`jichitai-research`（議会・自治体の受け付け方を公式サイトで調べて足す）、`speed`（ページを軽く・速くする）
 - `docs/`：案内は [docs/README.md](./docs/README.md)。`設計/`（設計・方針・訳）、`調査/`（調べた結果と調べきれていない一覧）、`TODO/`、`見本/`（文面の見本）
 - `docs/非公開/`：運営者の手元だけに置くもの（Git に入れない）。運営費・スポンサーの検討、ほかの AI への依頼と返事、外部レビュー用の資料、投稿の下書き。公開してよいか迷う内部のメモはここに書く
 
