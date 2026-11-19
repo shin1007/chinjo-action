@@ -29,7 +29,8 @@
   "page_url": "...",              // 出し方の案内ページ（要望は page_title も）
   "form_url": "...", "email_addr": "...",                        // あれば
   "deadline": "...",              // 締切（案内の一文）
-  "copies": "...", "format": "...",                              // 部数、様式・署名か押印か
+  "copies": "...", "format": "...",                              // 部数、様式についての案内の一文（「様式は自由」など）
+  "format_url": "...", "format_title": "...",                 // 議会が出している陳情書の様式・記入例のファイル（なければ請願と共通のもの）と、そのリンクの名前
   "anonymous_ok": "no",           // 匿名で出せるか（yes/no/unknown）
   "name_published": "yes",        // 氏名が会議録・文書表などで公開されるか
   "statement": "yes",             // 陳情者が意見陳述（趣旨説明）できるか ※陳情のみ
