@@ -63,8 +63,18 @@ function withParts(html, themeId, page) {
   return html
     .replace(/ {4}<details class="theme-menu">[\s\S]*?<\/details>/, () => themeNav(themeId))
     .replace(navRe, () => primaryNav(themeId, page))
-    .replace(/^ *<div class="wrap"><p class="small"><a href="https:\/\/github\.com\/shin1007\/chinjo-action"[^\n]*<\/div>$/m, () => GITHUB);
+    .replace(/^ *<div class="wrap"><p class="small"><a href="https:\/\/github\.com\/shin1007\/chinjo-action"[^\n]*<\/div>$/m, () => GITHUB)
+    // 本文へ移動（キーボード・読み上げで使う人が、毎回ヘッダーを通らずに済むように。Tab を押したときだけ見える）
+    .replace(/(<body[^>]*>)\n(?:<a class="skip-link"[^\n]*\n)?/, (_, body) => `${body}\n${SKIP}\n`)
+    .replace(/<main(?! id="main")([^>]*)>/, '<main id="main"$1>')
+    // スマホのブラウザの上の帯の色を、ヘッダーと同じ色にする（明るい表示・暗い表示）
+    .replace(/(<meta name="viewport"[^>]*>)\n(?:<meta name="theme-color"[^\n]*\n)*/, (_, vp) => `${vp}\n${THEME_COLOR}\n`);
 }
+const SKIP = '<a class="skip-link" href="#main">本文へ移動</a>';
+const THEME_COLOR = [
+  '<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">',
+  '<meta name="theme-color" content="#252b2f" media="(prefers-color-scheme: dark)">',
+].join('\n');
 
 const htmlFiles = (dir) => fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) => {
   const f = path.join(dir, e.name);

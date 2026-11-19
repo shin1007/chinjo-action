@@ -27,7 +27,7 @@ npx serve site
 ### 画面・JavaScript
 - ビルドの道具は入れません。`site/` の中のファイルがそのまま配信されます。
 - `site/<テーマ>/make.html`・`labels.html` は `templates/` から作るファイルです。直すときは `templates/` を直して `node scripts/pages.js` を実行してください。
-- ヘッダーのテーマ切り替えメニューと、フッターの GitHub への案内は、全ページ共通の部品です。HTML を1ページずつ直さず、`scripts/pages.js` の `themeNav`・`primaryNav`（テーマのページの「つくる・出し方」）・`GITHUB` を直して `node scripts/pages.js` を実行してください（食い違うと `npm test` で分かります）。
+- ヘッダーのテーマ切り替えメニューと、フッターの GitHub への案内は、全ページ共通の部品です。HTML を1ページずつ直さず、`scripts/pages.js` の `themeNav`・`primaryNav`（テーマのページの「つくる・出し方」）・`GITHUB`・`SKIP`（本文へ移動）・`THEME_COLOR` を直して `node scripts/pages.js` を実行してください（食い違うと `npm test` で分かります）。
 - 外部のスクリプト・フォントは読み込みません（`vercel.json` の Content-Security-Policy で止めています）。
 
 ### 陳情の文面・数字・参考資料（`site/themes/*/asks-*.js`）
