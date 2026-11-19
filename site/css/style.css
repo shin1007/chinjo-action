@@ -772,3 +772,6 @@ summary { cursor: pointer; font-weight: 700; }
 }
 /* ステップを切り替えたときなどに、上に固定したヘッダーの下に隠れないようにする */
 .wizard, .wz-council-box, #wzPrefs { scroll-margin-top: 72px; }
+/* 本文へ移動：ふだんは画面の外に置き、Tab で移ったときだけ左上に出す */
+.skip-link { position: absolute; left: 8px; top: -60px; z-index: 100; padding: 8px 14px; background: var(--surface); color: var(--main-dark); border: 2px solid var(--main); border-radius: 6px; font-weight: 700; }
+.skip-link:focus { top: 8px; }
