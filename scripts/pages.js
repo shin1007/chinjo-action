@@ -104,4 +104,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { pages };
+module.exports = { pages, withParts };
