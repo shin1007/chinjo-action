@@ -849,6 +849,15 @@
       "localPath": null
     },
     {
+      "id": "src-4d741fb81e",
+      "title": "Sagar-Ouriaghli I ほか「Improving Mental Health Service Utilization Among Men: A Systematic Review and Synthesis of Behavior Change Techniques Within Interventions Targeting Help-Seeking」American Journal of Men’s Health 13(3)（2019年）",
+      "url": "https://doi.org/10.1177/1557988319857009",
+      "note": "要旨で確認。男性は女性より心の不調で助けを求めにくい。男性に向けた介入9件の系統的レビューで、身近な手本・心の健康の知識・窓口の案内・責任感や強さといった前向きな面に訴える内容が助けを求める態度や行動を改善",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-4df9b9b1b6",
       "title": "文部科学省「教師不足について」",
       "url": "https://www.mext.go.jp/a_menu/shotou/kyoin/mext_00004.html",
@@ -1844,6 +1853,15 @@
       "url": "https://www.mhlw.go.jp/toukei/saikin/hw/c-hoken/24/dl/R06gaikyo.pdf",
       "note": "令和5年度の市区町村のがん検診の精密検査受診率は、胃85.7％・肺82.7％・大腸71.1％・子宮頸78.0％",
       "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-b0e55b8e08",
+      "title": "Coenen P ほか「The effect of lifting during work on low back pain: a health impact assessment based on a meta-analysis」Occupational and Environmental Medicine 71(12): 871–877（2014年）",
+      "url": "https://doi.org/10.1136/oemed-2014-102346",
+      "note": "要旨で確認。縦断研究8件のメタ分析で、持ち上げる重さ10kgごとに腰痛の発生のオッズ比1.11、1日10回ごとに1.09。25kgを超える荷を持ち上げると腰痛の年間発生率が4.32%上がると推計",
+      "kind": "secondary",
       "fetchedAt": null,
       "localPath": null
     },
