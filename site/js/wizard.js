@@ -899,10 +899,15 @@
     const names = same.map((r) => `「${esc((window.Petition.ITEMS[r.ask.split('/')[1]] || {}).label || r.ask)}」（${r.n}件、最後は${esc(String(r.last || '').slice(0, 7))}）`).join('、');
     return `<span class="wz-row wz-same"><b>同じ内容</b>この議会には、${names}の提出の記録があります。同じ趣旨の陳情は、まとめて1件として扱われたり、すでに結論が出ていると審査されなかったりすることがあります。出す前に、議会事務局に扱いを確かめてください。</span>`;
   };
-  const reportBtn = (c) => `<button type="button" class="btn btn-small wz-report" data-report="${esc(c)}" ${window.Report.reported(c) ? 'disabled' : ''}>${window.Report.reported(c) ? `✓ ${esc(label(c))}への提出を記録しました` : `${esc(label(c))}に出した（記録する）`}</button>`;
+  // いたずら対策：この画面で PDF を開く・保存する・文面をコピーするまでは、記録のボタンを押せない
+  let printed = false;
+  const markPrinted = () => { if (!printed) { printed = true; renderReportBtns(); renderOffices(); } };
+  const reportBtn = (c) => !printed && !window.Report.reported(c)
+    ? `<button type="button" class="btn btn-small wz-report" disabled>${esc(label(c))}に出した（記録する）</button>`
+    : `<button type="button" class="btn btn-small wz-report" data-report="${esc(c)}" ${window.Report.reported(c) ? 'disabled' : ''}>${window.Report.reported(c) ? `✓ ${esc(label(c))}への提出を記録しました` : `${esc(label(c))}に出した（記録する）`}</button>`;
   function renderReportBtns() {
     if (!$('wzNowReportBtns')) return;
-    $('wzNowReportBtns').innerHTML = window.Report.enabled ? real().map(reportBtn).join(' ') : '<span class="wz-notfound">準備中です。記録を受け付けられるようになったら、ここにボタンが出ます。</span>';
+    $('wzNowReportBtns').innerHTML = window.Report.enabled ? real().map(reportBtn).join(' ') + (printed ? '' : '<span class="hint-sm">上の「印刷用のPDFを開く」「PDFを保存する」「文面をすべてコピー」のどれかを使うと、押せるようになります。</span>') : '<span class="wz-notfound">準備中です。記録を受け付けられるようになったら、ここにボタンが出ます。</span>';
   }
 
   function renderOffices() {
@@ -957,7 +962,7 @@
         ${badge ? telHtml(pref, key, !page) : ''}
         ${page ? '' : '<span>陳情の出し方のページが見つかりませんでした。小さな議会では案内ページを置いていないことも多いので、議会事務局に電話で出し方と締切を聞くのが確実です。</span>'}
         <span class="wz-links">${links}</span>
-        ${window.Report.enabled ? `<button type="button" class="btn btn-small wz-report" data-report="${esc(c)}" ${window.Report.reported(c) ? 'disabled' : ''}>${window.Report.reported(c) ? '✓ 提出を報告しました' : '出したら押す：この議会に提出した'}</button>` : ''}</li>`;
+        ${window.Report.enabled ? reportBtn(c) : ''}</li>`;
     }).join('');
     // ②の「議長の氏名を書き入れる」に、議会ごとの議長を調べるリンクを並べる
     $('wzChairLinks').innerHTML = real().map((c) => `<a href="https://www.google.com/search?q=${encodeURIComponent(`${search(c)} 議長`)}" target="_blank" rel="noopener">${esc(label(c))}の議長を調べる</a>`).join('　');
@@ -1427,6 +1432,7 @@
     }
     return doc.bytes();
   }
+  ['wzNowPdf', 'wzNowPdfSave', 'wzNowCopy'].forEach((id) => $(id).addEventListener('click', markPrinted));
   $('wzNowPdf').addEventListener('click', async (e) => {
     const btn = e.currentTarget;
     if (!PICKS.some(pick)) { flash('PDFに入れるものを選んでください'); return; }
