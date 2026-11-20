@@ -900,6 +900,7 @@
     return `<span class="wz-row wz-same"><b>同じ内容</b>この議会には、${names}の提出の記録があります。同じ趣旨の陳情は、まとめて1件として扱われたり、すでに結論が出ていると審査されなかったりすることがあります。出す前に、議会事務局に扱いを確かめてください。</span>`;
   };
   // いたずら対策：この画面で PDF を開く・保存する・文面をコピーするまでは、記録のボタンを押せない
+  // 印刷・コピーのあとで押せる。出し方メモの QR コードから来たときは、もう印刷してあるので最初から押せる
   let printed = false;
   const markPrinted = () => { if (!printed) { printed = true; renderReportBtns(); renderOffices(); } };
   const reportBtn = (c) => !printed && !window.Report.reported(c)
@@ -1055,6 +1056,7 @@
     const url = done ? linkOf() : location.pathname + location.search;
     history.replaceState({ step: state.step }, '', url);
   }
+  let fromMemo = false;
   function restore() {
     const m = location.hash.match(/^#w\?(.*)$/);
     if (!m) return false;
@@ -1068,7 +1070,10 @@
       .filter((c) => isNone(c) || (window.PREFS.includes(prefOf(c)) && councilsOf(prefOf(c)).includes(nameOf(c))));
     const role = q.get('r');
     if (!councils.length || !ROLES.some(([k]) => k === role)) return false;
-    Object.assign(state, { items, pref, councils, role, step: STEPS.indexOf('done') });
+    // s=send：出し方メモの QR コードから来たとき。出した議会を選んだまま「印刷・提出」の画面を開き、記録のボタンを押せるようにする
+    const toSend = q.get('s') === 'send';
+    Object.assign(state, { items, pref, councils, role, step: STEPS.indexOf(toSend ? 'send' : 'done') });
+    fromMemo = toSend;
     return true;
   }
 
@@ -1428,6 +1433,7 @@
         titles: docKeys().map(docLabel),
         councils: real().map((c) => memoCouncil(c, sheets.get(c))),
         figs: !!png,
+        recordUrl: window.Report.enabled && state.kind !== 'request' ? `${linkOf()}&s=send` : '',
       });
       doc.addDocument(text, png ? { send: await doc.embedImage(png) } : {});
     }
@@ -1607,6 +1613,7 @@
   }
 
   if (restore()) {
+    if (fromMemo) printed = true;
     show();
     $('wizard').scrollIntoView();
   } else {

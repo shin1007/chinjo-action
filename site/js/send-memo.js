@@ -7,7 +7,8 @@ window.SendMemo = (() => {
 
   // o：{ kind: 'petition' | 'request', count: 通数（議会1つあたり）, titles: 件名の並び, figs: 送り方の図を入れるか,
   //      councils: [{ name, page, mail, denshi, tel, address, access, deadline, sessions, stamp }] }
-  //      sessions：定例会の月（例：'3・6・9・12'。data/sessions.js）
+  //      recordUrl：出したら記録する画面のアドレス（なければ載せない）
+//      sessions：定例会の月（例：'3・6・9・12'。data/sessions.js）
   function build(o) {
     const request = o.kind === 'request';
     const doc = request ? '要望書' : '陳情書';
@@ -80,6 +81,12 @@ window.SendMemo = (() => {
         if (c.stamp && !request) L.push(`・切手の目安（角2封筒・定形外郵便）：${c.stamp}`);
         if (c.page) L.push(`・案内ページ：${c.page}`);
       });
+    }
+    // 出したら記録するページ（選んだ内容と議会を入れたアドレス）。PDF では QR コードが付く
+    if (o.recordUrl) {
+      L.push('', '【出したら記録する】',
+        '出したら、スマホでこのコードを読み取ってください。選んだ議会が入った記録の画面が開きます（送るのは議会名と選んだ内容だけです）。',
+        `　${o.recordUrl}`);
     }
     return L.join('\n');
   }
