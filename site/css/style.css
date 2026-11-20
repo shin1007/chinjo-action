@@ -25,6 +25,7 @@
   --neutral-bg: #e8ebed;
   --neutral: #3d474e;
   --info: #356b8f;
+  --link: #2f6690;
   --footer-bg: #252b2f;
   --footer-ink: #e5e9eb;
   --footer-link: #e3a284;
@@ -59,6 +60,7 @@
     --neutral-bg: #343c41;
     --neutral: #d0d7da;
     --info: #91c2df;
+    --link: #91c2df;
     --footer-bg: #15191b;
     --footer-ink: #d5dcdf;
     --footer-link: #e5a181;
@@ -72,7 +74,9 @@ body {
   line-height: 1.8;
   background: var(--bg);
 }
-a { color: var(--main-dark); }
+/* リンクは青系＋下線。オレンジは強調と見出しに使う */
+a { color: var(--link); text-decoration: underline; text-underline-offset: 2px; }
+a:hover { text-decoration-thickness: 2px; }
 .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
 
 .site-header { position: sticky; top: 0; background: var(--surface); border-bottom: 1px solid var(--line); z-index: 10; }
