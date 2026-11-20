@@ -111,7 +111,7 @@ html { scroll-padding-top: 96px; scroll-padding-bottom: 140px; } /* 下に固定
 .btn-primary:hover { background: var(--main-dark); border-color: var(--main-dark); }
 .hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; }
 .hero-sub { text-align: center; margin-top: 12px; }
-.lead-steps { margin: 12px 0 8px; padding-left: 1.5em; line-height: 1.8; }
+.lead-steps { display: table; margin: 12px auto 8px; padding-left: 1.5em; line-height: 1.8; text-align: left; }
 .lead-cost { margin: 0 0 12px; }
 .btn-ghost:hover, .btn-small:hover { background: var(--bg-alt); }
 .btn-small { padding: 6px 16px; font-size: 0.9rem; }
