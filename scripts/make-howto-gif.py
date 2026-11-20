@@ -133,9 +133,21 @@ LAYOUTS = {
     # トップページ（/）でその場で再生する横（PC）と縦（スマホ）。最後のコマは「▼ 下からテーマを選ぶ」
     'wide': dict(size=(960, 540), out=OUT, end='themes'),
     'tall': dict(size=(540, 960), out=OUT.with_name('mail-howto-tall.gif'), end='themes'),
-    # X（Twitter）に投稿する用。最後のコマはサイトのアドレス。サイトには置かない
-    'x': dict(size=(960, 540), out=OUT.parent.parent.parent / 'docs' / '見本' / '紹介GIF' / 'mail-howto-x.gif', end='url'),
+    # X（Twitter）などに投稿する紹介用。スマホで見る縦長で、最後のコマはサイトのアドレスとQRコード。サイトには置かない
+    'x': dict(size=(540, 960), out=OUT.parent.parent.parent / 'docs' / '見本' / '紹介GIF' / 'mail-howto-x.gif', end='url'),
 }
+
+
+SITE = 'https://chinjo-action.vercel.app/'
+
+
+def qr_image(px):
+    """サイトのアドレスのQRコードを px 四方で作る（pip install qrcode）"""
+    import qrcode
+    q = qrcode.QRCode(border=2, error_correction=qrcode.constants.ERROR_CORRECT_M)
+    q.add_data(SITE)
+    q.make(fit=True)
+    return q.make_image(fill_color=INK, back_color=PAPER).get_image().convert('RGB').resize((px, px), Image.NEAREST)
 
 
 def ending(d, w, y, end, size):
@@ -208,7 +220,20 @@ def summary(total, size, end):
     im = Image.new('RGB', size, BG)
     d = ImageDraw.Draw(im)
     parts = [f'{name} {yen}円' for name, yen in (('印刷', STEPS[2][3]), ('クリアファイル', STEPS[5][3]), ('封筒', STEPS[6][3]), ('切手', STEPS[7][3]))]
-    if tall:
+    if tall and end == 'url':
+        # 紹介用：金額をまとめたうえで、下半分にQRコードとアドレスを大きく出す
+        d.text((w // 2, 90), '陳情5件を郵送で、合わせて', font=f(30), fill=INK, anchor='mm')
+        d.text((w // 2, 185), f'約{round(total, -1)}円', font=f(96), fill=ACC, anchor='mm')
+        for k, t in enumerate(parts):
+            d.text((w // 2, 270 + k * 32), t, font=f(20, False), fill=INK, anchor='mm')
+        d.text((w // 2, 412), '電子申請で出せる議会なら、印刷も切手も要りません', font=f(18, False), fill=SUB, anchor='mm')
+        d.line((40, 448, w - 40, 448), fill=LINE, width=2)
+        d.text((w // 2, 488), 'スマホで読み取って、陳情書を作る', font=f(24), fill=INK, anchor='mm')
+        qpx = 280
+        im.paste(qr_image(qpx), ((w - qpx) // 2, 520))
+        ending(d, w, 838, end, 28)
+        d.multiline_text((w // 2, 905), NOTE.replace('目安。', '目安\n'), font=f(14, False), fill=SUB, anchor='mm', align='center', spacing=6)
+    elif tall:
         d.text((w // 2, 170), '陳情5件を郵送で', font=f(34), fill=INK, anchor='mm')
         d.text((w // 2, 220), '合わせて', font=f(34), fill=INK, anchor='mm')
         d.text((w // 2, 330), f'約{round(total, -1)}円', font=f(100), fill=ACC, anchor='mm')
