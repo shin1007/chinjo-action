@@ -121,6 +121,13 @@ html { scroll-padding-top: 96px; scroll-padding-bottom: 140px; } /* 下に固定
 .hero-sub { text-align: center; margin-top: 12px; }
 .lead-steps { display: table; margin: 12px auto 8px; padding-left: 1.5em; line-height: 1.8; text-align: left; }
 .lead-cost { margin: 0 0 12px; }
+/* 紹介GIFへのリンク：縦長の画面（スマホ）では縦長のGIF、それ以外は横長のGIFを開く */
+.lead-howto { margin: 0 0 12px; }
+.lead-howto .howto-tall { display: none; }
+@media (orientation: portrait) and (max-width: 700px) {
+  .lead-howto .howto-wide { display: none; }
+  .lead-howto .howto-tall { display: inline; }
+}
 .lead-cost summary { cursor: pointer; list-style: none; }
 .lead-cost summary::-webkit-details-marker { display: none; }
 .lead-cost-more { color: var(--main-dark); text-decoration: underline; }

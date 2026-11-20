@@ -1,10 +1,10 @@
-# 郵送で陳情書を出す流れを紹介する GIF を作る（docs/見本/紹介GIF/mail-howto.gif）。
+# 郵送で陳情書を出す流れを紹介する GIF を作る（site/img/mail-howto.gif と、スマホ用の縦長 mail-howto-tall.gif）。
 # 画面のスクリーンショットは使わず、手順と金額だけをイラストで見せる（サイトの作りが変わっても使えるように）。
 # 金額を変えるときは STEPS の cost と、下の NOTE を直して `python scripts/make-howto-gif.py` を実行する。
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
-OUT = Path(__file__).resolve().parent.parent / 'docs' / '見本' / '紹介GIF' / 'mail-howto.gif'
+OUT = Path(__file__).resolve().parent.parent / 'site' / 'img' / 'mail-howto.gif'  # トップページ（/）からリンクしている
 FONT_B = 'C:/Windows/Fonts/BIZ-UDGothicB.ttc'
 FONT_R = 'C:/Windows/Fonts/BIZ-UDGothicR.ttc'
 f = lambda size, bold=True: ImageFont.truetype(FONT_B if bold else FONT_R, size)
