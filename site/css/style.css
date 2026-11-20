@@ -270,9 +270,10 @@ summary { cursor: pointer; font-weight: 700; }
 .wz-cards { display: grid; gap: 8px; }
 .wz-card { display: flex; flex-direction: column; gap: 2px; text-align: left; border: 2px solid var(--line); background: var(--surface); border-radius: 10px; padding: 12px 14px; font: inherit; cursor: pointer; }
 .wz-card span { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
-.wz-item { display: flex; flex-direction: column; gap: 2px; }
-.wz-item[hidden] { display: none; }
-.wz-bg { align-self: flex-end; font-size: 0.8rem; padding: 2px 4px; }
+.wz-card .wz-card-row { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin-top: 4px; }
+.wz-card .wz-card-row .ask-tags { margin: 0; }
+.wz-card .wz-bg { margin-left: auto; font-size: 0.8rem; color: var(--main-dark); text-decoration: underline; padding: 2px 0; }
+.wz-card .wz-bg:hover { color: var(--main); }
 .wz-card .wz-pair { margin-top: 4px; font-size: 0.8rem; color: var(--main-dark); }
 .wz-small { padding: 12px 14px; }
 .wz-filter { width: 100%; padding: 8px 10px; border: 1px solid var(--field-line); border-radius: 6px; font: inherit; margin-bottom: 8px; }
