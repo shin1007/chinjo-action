@@ -780,6 +780,13 @@ summary { cursor: pointer; font-weight: 700; }
 .om-items li { margin: 4px 0; }
 .om-pre { white-space: pre-wrap; word-break: break-all; font: inherit; font-size: 0.85rem; line-height: 1.7; background: var(--bg-alt); border-radius: 8px; padding: 10px 12px; margin: 8px 0; }
 .support-stages { padding-left: 1.4em; }
+.cost-chart { margin: 1em 0; }
+.cost-bar { display: flex; height: 2em; border: 1px solid #888; border-radius: 4px; overflow: hidden; background: #fff; margin: .4em 0; }
+.cost-self { background: #2a5d9f; color: #fff; display: flex; align-items: center; padding-left: .6em; font-size: .9em; white-space: nowrap; }
+.cost-legend { list-style: none; padding: 0; display: flex; gap: 1.2em; flex-wrap: wrap; }
+.cost-key { display: inline-block; width: 1em; height: 1em; vertical-align: -.15em; margin-right: .3em; border: 1px solid #888; }
+.cost-key-self { background: #2a5d9f; }
+.cost-key-kanpa { background: #e8a33d; }
 
 /* トップページの「これまでの歩み」：控えめに、数字だけを並べる */
 .tally { padding: 18px 0 8px; border-bottom: 1px solid var(--line); }
