@@ -33,9 +33,22 @@
     const linked = firstItems().map((k) => window.ASKS.find((a) => a.id === k));
     return linked.length && linked.every((a) => !window.Petition.usableFor(a, 'petition')) ? 'request' : 'petition';
   };
-  const state = { step: 0, pref: '', councils: [], items: firstItems(), role: '', kind: startKind(), merge: false, reply: false };
+  // mode：何を作るか（petition＝陳情書だけ／request＝要望書だけ／both＝両方）。?kind=both で両方から始める
+  // kind：いま画面に出している文書。両方を作るときは、文面の画面で陳情書と要望書を切り替える
+  const state = { step: 0, pref: '', councils: [], items: firstItems(), role: '', kind: startKind(), mode: new URLSearchParams(location.search).get('kind') === 'both' ? 'both' : startKind(), merge: false, reply: false };
   const kindInputs = () => document.querySelectorAll('input[name="wzKind"]');
-  const setKindInputs = () => kindInputs().forEach((r) => { r.checked = r.value === state.kind; });
+  const setKindInputs = () => kindInputs().forEach((r) => { r.checked = r.value === state.mode; });
+  // 両方を作るときは、選んだ内容を向きで振り分ける。陳情向けは陳情書に、要望向けは要望書に、どちらでもよい内容は両方に入れる
+  const forKind = (kind) => (k) => !!window.Petition.ITEMS[k] && window.Petition.usableFor(window.Petition.ITEMS[k], kind);
+  const countOf = (kind) => state.items.filter(forKind(kind)).length;
+  // いま出している文書に入る内容
+  const cur = () => (state.mode === 'both' ? state.items.filter(forKind(state.kind)) : state.items);
+  // 両方を作るとき、いまの文書に入る内容がなければ、もう一方を出す
+  const fixKind = () => {
+    if (state.mode !== 'both') { state.kind = state.mode; return; }
+    if (!countOf(state.kind)) state.kind = state.kind === 'request' ? 'petition' : 'request';
+  };
+  const docNameOf = (kind) => (kind === 'request' ? '要望書' : '陳情書');
 
   // ---------- 選択肢の描画 ----------
   $('wzPrefs').innerHTML = REGIONS.map(([name, a, b]) => `
@@ -74,22 +87,30 @@
   // どちらかにそろっていて、記の項目が五までのときだけ
   const MERGE_MAX = 5;
   const isNat = (k) => window.Petition.ITEMS[k].scope !== 'local';
-  const canMerge = () => state.items.length >= 2 && state.items.length <= MERGE_MAX
-    && new Set(state.items.map(isNat)).size === 1;
+  const canMerge = () => cur().length >= 2 && cur().length <= MERGE_MAX
+    && new Set(cur().map(isNat)).size === 1;
   // 1通ごとの内容のキー。まとめるときは「a+b+c」の1つ
-  const docKeys = () => (state.merge && canMerge() ? [state.items.join('+')] : [...state.items]);
+  const docKeys = () => (state.merge && canMerge() ? [cur().join('+')] : [...cur()]);
   const keysOf = (k) => k.split('+');
   const docLabel = (k) => keysOf(k).map((x) => window.Petition.ITEMS[x].label).join('・');
   function renderCount() {
     const s = STEPS[state.step];
     const el = $('wzCount');
-    const n = state.items.length;
+    const n = cur().length;
     // 自治体のステップで、まだ議会を選んでいないうちは通数を出さない（何もできていないのに「1通」と出て紛らわしい）
     el.hidden = !((s === 'items' || (s === 'council' && real().length)) && n);
     if (el.hidden) return;
     const total = docKeys().length * Math.max(1, state.councils.length);
     el.classList.toggle('warn', n > MANY);
     el.classList.toggle('multi', total > 1);
+    if (state.mode === 'both') {
+      const m = Math.max(1, real().length);
+      const p = countOf('petition');
+      const r = countOf('request');
+      el.classList.toggle('warn', p > MANY || r > MANY);
+      el.textContent = `陳情書 ${p * m}通（議会あて）・要望書 ${r * m}通（知事・市区町村長あて）ができます${p && r ? '' : `。選んだ内容は${p ? 'どれも陳情書向けなので、要望書はできません' : 'どれも要望書向けなので、陳情書はできません'}`}`;
+      return;
+    }
     const destination = state.kind === 'request' ? '自治体' : '議会';
     const document = state.kind === 'request' ? '要望書' : '陳情書';
     // 分野（見出し）がばらばらだと1通にまとめにくく、伝わり方も散るので知らせる
@@ -267,6 +288,8 @@
     const link = (u, t) => `<a href="${esc(u)}" target="_blank" rel="noopener">${t}</a>`;
     if (d.form && d.form.some(OK)) push('form', `✅ Webフォーム・電子申請で出せます${viaText(d.form)}。${d.form_url ? link(d.form_url, 'フォームを開く') : '案内ページからフォームへ進みます'}（文面は「文面をすべてコピー」で貼り付けます）。`);
     if (d.email && d.email.some(OK)) push('email', `✅ メールで出せます${viaText(d.email)}${d.email_addr ? `：${esc(d.email_addr)}` : '（あて先は案内ページで確かめます）'}。`);
+    if (kind === 'yobo' && d.mail && d.mail.some(OK)) push('mail', `📮 郵送で出せます${viaText(d.mail)}${d.mail_address ? `。送り先：〒${esc(d.mail_zip || '')}　${esc(d.mail_address)}${d.mail_to ? `　${esc(d.mail_to)}` : ''}` : '（送り先の部署は案内ページで確かめます）'}。`);
+    if (kind === 'yobo' && d.mail && !d.mail.some(OK) && d.mail.includes('no')) push('mail', '郵送では受け付けていません。');
     if (d.form && !d.form.some(OK) && d.form.includes('no')) push('form', 'Webフォーム・電子申請では受け付けていません。');
     if (d.email && !d.email.some(OK) && d.email.includes('no')) push('email', 'メールでは受け付けていません。');
     if (d.name_published === 'yes') push('name_published', '⚠ 陳情者の氏名は、会議録や文書表などで公開されます。');
@@ -312,12 +335,20 @@
   const openCats = new Set();
   // 要望書は自治体あての文書なので、国への意見書を求める項目と、議会の判断が要る陳情向けの項目は選べない。
   // 陳情書では、役所の担当課が運用で対応できる要望向けの項目は選べない（要望書のほうで選ぶ）
-  const usable = (a) => window.Petition.usableFor(a, state.kind);
+  const usable = (a) => (state.mode === 'both'
+    ? window.Petition.usableFor(a, 'petition') || window.Petition.usableFor(a, 'request')
+    : window.Petition.usableFor(a, state.kind));
   // いまの出し方では選べない項目の数と、そちらに切り替えるボタン
   function renderRouteNote() {
     const other = state.kind === 'request' ? 'petition' : 'request';
     const n = window.ASKS.filter((a) => !usable(a)).length;
     const el = $('wzRouteNote');
+    if (state.mode === 'both') {
+      el.hidden = false;
+      $('wzRouteCount').textContent = `（陳情書に${countOf('petition')}つ・要望書に${countOf('request')}つ）`;
+      el.textContent = '選んだ内容は、向きで自動で振り分けます。国への意見書や、条例・予算など議会の判断が要る内容は陳情書に、役所の担当課が自分でできる内容は要望書に、どちらにも向く内容は両方に入ります。';
+      return;
+    }
     el.hidden = !n;
     $('wzRouteCount').textContent = n ? `（${state.kind === 'request' ? '陳情書' : '要望書'}なら、ほかに${n}件選べます）` : '';
     if (!n) return;
@@ -329,6 +360,7 @@
     const to = e.target.dataset && e.target.dataset.switchKind;
     if (!to) return;
     state.kind = to;
+    state.mode = to;
     setKindInputs();
     renderItems();
     updateNav();
@@ -399,7 +431,9 @@
   $('wzRoles').innerHTML = ROLES.map(([k, label]) => `<button type="button" class="wz-card wz-small" data-role="${k}"><b>${label}</b></button>`).join('');
   setKindInputs();
   kindInputs().forEach((r) => r.addEventListener('change', () => {
-    state.kind = r.value;
+    state.mode = r.value;
+    state.kind = r.value === 'both' ? 'petition' : r.value;
+    fixKind();
     if (state.step === 0) renderItems();
     updateNav();
     if (state.step >= ASK_STEPS) build();
@@ -441,13 +475,13 @@
   }
   function updateNav() {
     // 見出しとタブの題を、作る文書（陳情書・要望書）に合わせる
-    const heading = `${state.kind === 'request' ? '要望書' : '陳情書'}をつくる`;
+    const heading = state.mode === 'both' ? '陳情書・要望書をつくる' : `${state.kind === 'request' ? '要望書' : '陳情書'}をつくる`;
     document.querySelectorAll('#generator h1, .hero-crumb b').forEach((h) => { if (/をつくる$/.test(h.textContent)) h.textContent = heading; });
     document.title = document.title.replace(/^[^｜]*をつくる/, heading);
     document.querySelectorAll('[data-petition-only]').forEach((el) => { el.hidden = state.kind === 'request'; });
     renderKindText();
     const lead = document.querySelector('#generator .lead-sm');
-    if (lead) lead.textContent = state.kind === 'request' ? '選択肢を押していくだけで、市区町村長・知事に出せる要望書ができます。' : '選択肢を押していくだけで、議会に出せる陳情書ができます。';
+    if (lead) lead.textContent = state.mode === 'both' ? '選択肢を押していくだけで、議会に出す陳情書と、市区町村長・知事に出す要望書が両方できます。' : state.kind === 'request' ? '選択肢を押していくだけで、市区町村長・知事に出せる要望書ができます。' : '選択肢を押していくだけで、議会に出せる陳情書ができます。';
     $('wzNext').disabled = !canNext();
     // 選び終えたら［次へ］を目立たせて、押せばよいことが分かるようにする
     $('wzNext').classList.toggle('is-ready', !!canNext() && STEPS[state.step] !== 'done');
@@ -457,6 +491,7 @@
 
   function show() {
     const s = STEPS[state.step];
+    fixKind();
     // 自治体ごとのデータ（data/pref/*.js）は、選んだ都道府県の分だけ読み込む。届いたら描き直す
     const need = [state.pref, ...state.councils.map(prefOf)];
     if (!window.PrefData.has(need)) window.PrefData.load(need).then(show);
@@ -497,7 +532,7 @@
     }
     if (s === 'items') renderItems();
     if (s === 'done') $('wzCheck').open = true;
-    if (s === 'send') $('wzHotline').hidden = !state.items.some(isNat);
+    if (s === 'send') $('wzHotline').hidden = !cur().some(isNat);
     if (s === 'send') { renderCheckMail(); renderNow(); renderCheckLeft(); renderChairs(); }
     if (state.step >= ASK_STEPS) build();
     renderCount();
@@ -583,6 +618,7 @@
       cat.querySelector('.wz-cat-n').innerHTML = catCount(cat);
       renderItemsAll();
       renderCount();
+      if (state.mode === 'both') renderRouteNote();
       saveDraft();
       updateNav();
     } else if (d.role) {
@@ -636,7 +672,7 @@
 
   function formData() {
     const fd = new FormData();
-    state.items.forEach((k) => fd.append('items', k));
+    cur().forEach((k) => fd.append('items', k));
     fd.append('kind', state.kind);
     fd.append('story', (ROLES.find(([k]) => k === state.role) || [])[2] || '');
     ['address', 'name', 'tel'].forEach((k) => fd.append(k, ''));
@@ -661,6 +697,7 @@
     const fd = formData();
     renderMerge();
     renderReply();
+    renderKindTabs();
     const keys = docKeys();
     // 意見書の案は、国に意見書を求める陳情のときだけ選べる
     const P = window.Petition;
@@ -685,7 +722,7 @@
     areas().forEach((ta) => { fit(ta); docStat(ta); });
     const document = state.kind === 'request' ? '要望書' : '陳情書';
     $('wzSummary').textContent = real().length
-      ? `${state.councils.length}つの自治体 × ${keys.length === 1 && state.items.length > 1 ? `${state.items.length}つの内容をまとめた1通` : `${keys.length}つの内容`} ＝ ${document} ${state.councils.length * keys.length}通`
+      ? `${state.councils.length}つの自治体 × ${keys.length === 1 && cur().length > 1 ? `${cur().length}つの内容をまとめた1通` : `${keys.length}つの内容`} ＝ ${document} ${state.councils.length * keys.length}通`
       : `自治体名を空けた${document} ${keys.length}通（提出先が決まったら手書きで入れてください）`;
     renderMatrix();
     renderOffices();
@@ -705,7 +742,7 @@
 
   // まとめて1通にするかの切り替え。まとめられないときは理由を出す
   function renderMerge() {
-    const n = state.items.length;
+    const n = cur().length;
     const box = $('wzMerge');
     box.hidden = n < 2;
     if (box.hidden) return;
@@ -896,7 +933,7 @@
   }
 
   // 提出の記録：選んだ内容（「テーマ/項目id」）と、その議会に同じ内容の記録があるか
-  const askIds = () => [...new Set(state.items.flatMap(keysOf))].map((k) => `${window.THEME.id}/${k}`);
+  const askIds = () => [...new Set(cur().flatMap(keysOf))].map((k) => `${window.THEME.id}/${k}`);
   const sameAsks = (c) => {
     const mine = new Set(askIds());
     return window.Report.asked(c).filter((r) => mine.has(r.ask));
@@ -1035,7 +1072,7 @@
     if (!id) return;
     e.target.disabled = true;
     e.target.textContent = '送っています…（数秒かかります）';
-    const ok = await window.Report.report(id, state.items.length, askIds());
+    const ok = await window.Report.report(id, cur().length, askIds());
     e.target.textContent = ok ? '✓ 提出を報告しました。ありがとうございます' : '送れませんでした。もう一度押してください';
     e.target.disabled = ok;
     if (ok) { renderReportBtns(); }
@@ -1063,9 +1100,9 @@
     const codes = state.councils.map((c) => (pl(c) || {}).code);
     const pp = String(window.PREFS.indexOf(state.pref) + 1).padStart(2, '0');
     if (codes.every(Boolean) && window.PREFS.includes(state.pref)) {
-      return `${location.origin}${location.pathname}#w?i=${state.items.join('.')}&p=${pp}&c=${codes.join('.')}&r=${encodeURIComponent(state.role)}`;
+      return `${location.origin}${location.pathname}#w?i=${state.items.join('.')}&p=${pp}&c=${codes.join('.')}&r=${encodeURIComponent(state.role)}${state.mode === 'both' ? '&k=b' : ''}`;
     }
-    const q = new URLSearchParams({ i: state.items.join(','), p: state.pref, c: state.councils.join(','), r: state.role });
+    const q = new URLSearchParams({ i: state.items.join(','), p: state.pref, c: state.councils.join(','), r: state.role, ...(state.mode === 'both' ? { k: 'b' } : {}) });
     return `${location.origin}${location.pathname}#w?${q}`;
   }
   // 短い形式（数字のコード）の議会と都道府県を、名前に戻す
@@ -1091,7 +1128,7 @@
     if (!councils.length || !ROLES.some(([k]) => k === role)) return false;
     // s=send：出し方メモの QR コードから来たとき。出した議会を選んだまま「印刷・提出」の画面を開き、記録のボタンを押せるようにする
     const toSend = q.get('s') === 'send';
-    Object.assign(state, { items, pref, councils, role, step: STEPS.indexOf(toSend ? 'send' : 'done') });
+    Object.assign(state, { items, pref, councils, role, step: STEPS.indexOf(toSend ? 'send' : 'done'), ...(q.get('k') === 'b' ? { mode: 'both' } : {}) });
     fromMemo = toSend;
     return true;
   }
@@ -1255,39 +1292,52 @@
     document.querySelectorAll('[data-petition-only]').forEach((el) => { el.hidden = request; });
   }
 
-  // 陳情書を作ったついでに、同じ内容・同じ自治体あてで要望書も作る（議会と役所の両方に届く）
-  // 国への意見書を求める内容は要望書にできないので外す。陳情書に戻るときは、選んでいた内容を戻す
-  let petitionItems = null;
+  // 陳情書と要望書の両方を作るときは、ここで切り替える。片方だけのときは、両方を作る形に切り替えるボタンを出す
+  function kindTabs() {
+    return ['petition', 'request'].map((k) => {
+      const n = countOf(k);
+      const on = state.kind === k;
+      return `<button type="button" class="btn btn-small${on ? ' btn-primary' : ''}" aria-pressed="${on}" data-also-tab="${k}"${n ? '' : ' disabled'}>${docNameOf(k)}（内容${n}つ）${on ? '　表示中' : ''}</button>`;
+    }).join(' ');
+  }
+  function renderKindTabs() {
+    const box = $('wzKindTabs');
+    box.hidden = state.mode !== 'both';
+    if (box.hidden) return;
+    box.innerHTML = `<p><b>陳情書と要望書の両方を作っています。</b>いまは<b>${docNameOf(state.kind)}</b>を表示しています。もう一方は、下のボタンで切り替えて確かめます。</p><div class="out-toolbar">${kindTabs()}</div>`;
+  }
   function renderAlso() {
     const box = $('wzAlso');
-    if (state.kind === 'request') {
-      box.hidden = !petitionItems;
-      box.innerHTML = '<p>陳情書に戻るときは、下のボタンを押します。陳情書の文面と直したところは残っています。</p><button type="button" class="btn btn-small" data-also="petition">陳情書に戻る</button>';
+    box.hidden = false;
+    if (state.mode === 'both') {
+      const tabs = ['petition', 'request'].map((k) => {
+        const n = countOf(k);
+        const on = state.kind === k;
+        return `<button type="button" class="btn btn-small${on ? ' btn-primary' : ''}" aria-pressed="${on}" data-also-tab="${k}"${n ? '' : ' disabled'}>${docNameOf(k)}（内容${n}つ）${on ? '　表示中' : ''}</button>`;
+      }).join(' ');
+      box.innerHTML = `<p><b>陳情書と要望書の両方を作っています。</b>下のボタンで切り替えて、それぞれ確かめて印刷します。陳情書は議会（議長あて）、要望書は役所（知事・市区町村長あて）に出すので、<b>郵送するなら封筒を分けて、切手もそれぞれに貼ります</b>。</p><div class="out-toolbar">${tabs}</div>`;
       return;
     }
-    const ok = state.items.filter((k) => window.Petition.ITEMS[k] && window.Petition.usableFor(window.Petition.ITEMS[k], 'request'));
-    box.hidden = false;
-    box.innerHTML = `<p><b>同じ内容を、要望書として市区町村長・知事にも出せます。</b>陳情書は議会に、要望書は役所に届きます。両方出すと、議会と行政の両方に検討してもらえます。</p>
-      ${ok.length ? `${ok.length < state.items.length ? `<p class="hint-sm">国に意見書を求める内容や、議会の判断が要る陳情向けの内容（${state.items.length - ok.length}つ）は要望書にできないので、残りの${ok.length}つで作ります。</p>` : ''}<p class="hint-sm">先に陳情書を印刷しておくと安心です。あとで陳情書に戻ることもできます。</p><button type="button" class="btn btn-small" data-also="request">同じ内容で要望書も作る</button>`
-    : '<p class="hint-sm">いま選んでいる内容は、どれも国に意見書を求めるか、議会の判断が要る陳情向けのものなので、要望書にはできません。</p>'}`;
+    const other = state.kind === 'request' ? 'petition' : 'request';
+    const ok = state.items.filter(forKind(other)).length;
+    box.innerHTML = ok
+      ? `<p><b>同じ内容を、${other === 'request' ? '要望書として市区町村長・知事' : '陳情書として議会'}にも出せます。</b>陳情書は議会に、要望書は役所に届きます。両方出すと、議会と行政の両方に検討してもらえます。</p>${ok < state.items.length ? `<p class="hint-sm">選んだ内容のうち${ok}つが${docNameOf(other)}にできます。</p>` : ''}<button type="button" class="btn btn-small" data-also="both">陳情書と要望書の両方を作る</button>`
+      : `<p class="hint-sm">いま選んでいる内容は、どれも${docNameOf(other)}にはできないものです。</p>`;
   }
-  $('wzAlso').addEventListener('click', (e) => {
-    const to = e.target.dataset && e.target.dataset.also;
-    if (!to) return;
-    if (to === 'request') {
-      petitionItems = [...state.items];
-      state.items = state.items.filter((k) => window.Petition.ITEMS[k] && window.Petition.usableFor(window.Petition.ITEMS[k], 'request'));
-    } else {
-      state.items = petitionItems || state.items;
-      petitionItems = null;
-    }
-    state.kind = to;
+  const onKindClick = (e) => {
+    const b = e.target.closest('button');
+    if (!b) return;
+    if (b.dataset.also === 'both') state.mode = 'both';
+    else if (b.dataset.alsoTab) state.kind = b.dataset.alsoTab;
+    else return;
     setKindInputs();
-    go(STEPS.indexOf('done') - state.step);
-    saveDraft();
-  });
+    show();
+    e.currentTarget.scrollIntoView({ block: 'nearest' });
+  };
+  $('wzAlso').addEventListener('click', onKindClick);
+  $('wzKindTabs').addEventListener('click', onKindClick);
 
-  const reqNotes = (id) => { const n = [...intakeNotes(id, 'yobo'), ...kaitoNotes(id)]; return n.length ? `<ul class="wz-notes">${n.map((t) => `<li>${t}</li>`).join('')}</ul>` : ''; };
+  const reqNotes = (id) => { const n = [...intakeNotes(id, 'yobo'), ...((intakeOf(id, 'yobo') || {}).mail ? [] : ['📮 郵送で受け付けるかは、このサイトではまだ確かめられていません（準備中）。郵送するなら、上の案内ページか代表電話で確かめてください。']), ...kaitoNotes(id)]; return n.length ? `<ul class="wz-notes">${n.map((t) => `<li>${t}</li>`).join('')}</ul>` : ''; };
   // 「今やること」の1つ目：議会ごとに、分かっている扱いか、電話で聞くことを出す
   function renderNowAsk() {
     const list = real();
@@ -1347,7 +1397,7 @@
   };
   $('wzQrPreview').addEventListener('toggle', () => {
     if (!$('wzQrPreview').open) return;
-    const ids = [...new Set(state.items.flatMap(keysOf))].filter((k) => window.Petition.ITEMS[k]);
+    const ids = [...new Set(cur().flatMap(keysOf))].filter((k) => window.Petition.ITEMS[k]);
     $('wzQrList').innerHTML = ids.map((k) => `<li><a href="${esc(easyUrl(k).replace('https://chinjo-action.vercel.app', ''))}" target="_blank" rel="noopener">${esc(window.Petition.ITEMS[k].label)}</a></li>`).join('') || '<li>内容を選ぶと、ここにリンク先が出ます</li>';
   });
   const pickBoxes = () => PICKS.map($).filter((el) => !el.closest('label').hidden);
@@ -1439,11 +1489,16 @@
       sheets.set(c, n);
     }
     if ((labelsOnly || pick('wzWithLabels')) && real().length) {
+      const request = state.kind === 'request';
       const rows = real().map((c) => {
         const [pref, key] = officeKeys[c] || [];
-        return { council: nameOf(c), ...window.Places.office(pref, key) };
+        if (!request) return { council: nameOf(c), ...window.Places.office(pref, key) };
+        // 要望書は首長あて。送り先が分かっていればそれを、なければ役所の本庁舎（data/offices.js）にする
+        const y = intakeOf(c, 'yobo') || {};
+        const o = ((window.OFFICES || {})[pref] || {})[key] || [];
+        return { head: window.Petition.requestTo(municipalityName(c)), zip: y.mail_address ? y.mail_zip || '' : o[0] || '', address: `${y.mail_address || o[1] || ''}${y.mail_to ? `　${y.mail_to}` : ''}` };
       });
-      doc.addLabels(window.PdfDoc.SHEETS.plain, window.PdfDoc.labelItems(rows, sender, { to: 'chair', zaichu: true, from: true, back: true }));
+      doc.addLabels(window.PdfDoc.SHEETS.plain, window.PdfDoc.labelItems(rows, sender, { to: request ? 'head' : 'chair', zaichu: true, from: true, back: true }));
     }
     if (!labelsOnly && pick('wzWithMemo')) {
       const png = await figsPng().catch(() => null);
@@ -1491,7 +1546,7 @@
       const url = URL.createObjectURL(new Blob([await makePdf()], { type: 'application/pdf' }));
       const a = document.createElement('a');
       a.href = url;
-      a.download = `${state.kind === 'request' ? '要望書' : '陳情書'}.pdf`;
+      a.download = `${docNameOf(state.kind)}.pdf`;
       document.body.appendChild(a);
       a.click();
       a.remove();
@@ -1655,8 +1710,8 @@
     if (state.step >= ASK_STEPS) rememberCouncils();
     if (STEPS[state.step] === 'council') renderRecent();
     if (!state.items.length) return;
-    const { step, pref, councils, items, role, kind, merge, reply } = state;
-    try { localStorage.setItem(DRAFT_KEY, JSON.stringify({ step, pref, councils, items, role, kind, merge, reply })); } catch { /* 残せなくても作れる */ }
+    const { step, pref, councils, items, role, kind, mode, merge, reply } = state;
+    try { localStorage.setItem(DRAFT_KEY, JSON.stringify({ step, pref, councils, items, role, kind, mode, merge, reply })); } catch { /* 残せなくても作れる */ }
   }
   function clearDraft() {
     try { localStorage.removeItem(DRAFT_KEY); } catch { /* 残していない */ }
@@ -1673,7 +1728,7 @@
       let step = Math.max(0, Math.min(Number(d.step) || 0, STEPS.length - 1));
       if (!councils.length) step = Math.min(step, 1);
       else if (!role) step = Math.min(step, 2);
-      return { items, councils, role, step, pref: window.PREFS.includes(d.pref) ? d.pref : '', kind: d.kind === 'request' ? 'request' : 'petition', merge: !!d.merge, reply: !!d.reply };
+      return { items, councils, role, step, pref: window.PREFS.includes(d.pref) ? d.pref : '', kind: d.kind === 'request' ? 'request' : 'petition', mode: ['petition', 'request', 'both'].includes(d.mode) ? d.mode : (d.kind === 'request' ? 'request' : 'petition'), merge: !!d.merge, reply: !!d.reply };
     } catch { return null; }
   }
 
