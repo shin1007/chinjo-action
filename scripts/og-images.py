@@ -4,7 +4,7 @@
 import os
 from PIL import Image, ImageDraw, ImageFont
 
-ROOT = os.path.join(os.path.dirname(__file__), '..')
+ROOT = os.path.join(os.path.dirname(__file__), '..', 'site')
 FONTS = 'C:/Windows/Fonts'
 W, H = 1200, 630
 MAIN, MAIN_DARK, INK, MUTED = '#c96a3d', '#9f4f2c', '#20262b', '#65707a'
@@ -12,9 +12,6 @@ BG_FROM, BG_TO, SOFT, LINE = (244, 246, 247), (233, 237, 239), '#f7ede8', '#e4c4
 
 CARDS = [
     # (書き出す先, 上の小さな見出し, 大見出し（2行）, 下に並べる札)
-    ('og-image.png', '6つのテーマから選べます',
-     ['地方議会に、', '意見を正式な手続きで届ける。'],
-     ['陳情書', '要望書', '議員への手紙']),
     ('themes/kodomo/og-image.png', '子どもの権利を守る陳情',
      ['子どもが両方の親と関わり続け', 'られる制度を、地方議会に。'],
      ['実子誘拐の解決', '共同親権の原則化']),
@@ -76,7 +73,71 @@ def draw_card(out, crumb, title, tags):
     img.save(os.path.join(ROOT, out), optimize=True)
 
 
+# 手順とできあがる書類を見せるカード（トップ・おまかせ）
+STEP_CARDS = [
+    # (書き出す先, 上の小さな見出し, 大見出し, 手順, 自動でそろうもの)
+    ('og-image.png', '6つのテーマから選べます',
+     '地方議会への陳情書を、選ぶだけで。',
+     ['内容を選ぶ', '議会を選ぶ', 'PDFで印刷'],
+     ['陳情書', '送付状', '宛名', '出し方メモ', 'Word版も']),
+    ('omakase-og.png', 'おまかせで3つの議会に郵送する',
+     '押すのは2回。3議会ぶんを1つのPDFに。',
+     ['くじを引く', 'PDFを保存', '署名して郵送'],
+     ['陳情書', '送付状', '宛名ラベル', '意見書の案', '出し方メモ']),
+]
+
+
+def draw_steps(out, crumb, title, steps, outputs):
+    img = Image.new('RGB', (W, H))
+    d = ImageDraw.Draw(img)
+    for y in range(H):
+        t = y / H
+        d.line([(0, y), (W, y)], fill=tuple(round(a + (b - a) * t) for a, b in zip(BG_FROM, BG_TO)))
+    d.rectangle([0, 0, 16, H], fill=MAIN)
+    x0, y0 = 80, 56
+    d.rounded_rectangle([x0, y0, x0 + 64, y0 + 64], radius=14, fill=MAIN)
+    d.rectangle([x0 + 18, y0 + 13, x0 + 46, y0 + 51], fill='#fff')
+    for i, w in enumerate([20, 20, 13]):
+        d.rectangle([x0 + 23, y0 + 22 + i * 9, x0 + 23 + w, y0 + 25 + i * 9], fill=MAIN)
+    d.text((x0 + 84, y0 + 4), '陳情アクション', font=font('YuGothB.ttc', 26), fill=MAIN_DARK)
+    d.text((x0 + 84, y0 + 36), crumb, font=font('YuGothM.ttc', 22), fill=MUTED)
+
+    size = 60
+    while d.textlength(title, font=font('YuGothB.ttc', size)) > W - 160:
+        size -= 2
+    d.text((80, 165), title, font=font('YuGothB.ttc', size), fill=INK)
+
+    # 手順（番号つきの箱を矢印でつなぐ）
+    fs, fn = font('YuGothB.ttc', 30), font('YuGothB.ttc', 26)
+    bw, gap, top = 300, 50, 270
+    for i, s in enumerate(steps):
+        x = 80 + i * (bw + gap)
+        d.rounded_rectangle([x, top, x + bw, top + 96], radius=18, fill='#fff', outline=LINE, width=2)
+        cx, cy = x + 44, top + 48
+        d.ellipse([cx - 22, cy - 22, cx + 22, cy + 22], fill=MAIN)
+        d.text((cx, cy), str(i + 1), font=fn, fill='#fff', anchor='mm')
+        d.text((x + 80, cy), s, font=fs, fill=INK, anchor='lm')
+        if i < len(steps) - 1:
+            ax = x + bw + 12
+            d.polygon([(ax, cy - 13), (ax + 26, cy), (ax, cy + 13)], fill=MAIN)
+
+    # 自動でそろうもの
+    d.text((80, 418), '自動でそろうもの', font=font('YuGothB.ttc', 24), fill=MUTED)
+    ft, x = font('YuGothB.ttc', 26), 80
+    for s in outputs:
+        w = d.textlength(s, font=ft) + 44
+        d.rounded_rectangle([x, 456, x + w, 510], radius=27, fill=SOFT, outline=LINE, width=2)
+        d.text((x + 22, 483), s, font=ft, fill=MAIN_DARK, anchor='lm')
+        x += w + 14
+    d.text((80, 560), 'chinjo-action.vercel.app　登録不要・無料・住所氏名はサーバーに送りません',
+           font=font('YuGothM.ttc', 22), fill=MUTED)
+    img.save(os.path.join(ROOT, out), optimize=True)
+
+
 if __name__ == '__main__':
+    for card in STEP_CARDS:
+        draw_steps(*card)
+        print(card[0])
     for card in CARDS:
         draw_card(*card)
         print(card[0])
