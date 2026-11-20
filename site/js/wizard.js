@@ -702,6 +702,7 @@
     renderMerge();
     renderReply();
     renderKindTabs();
+    renderEligible();
     const keys = docKeys();
     // 意見書の案は、国に意見書を求める陳情のときだけ選べる
     const P = window.Petition;
@@ -792,7 +793,53 @@
   const areas = () => [...$('wzDocs').querySelectorAll('textarea')];
   const docFor = (ta, c) => replied(withChair(withSender(edits[ek(ta.dataset.key)] ? forCouncil(ta.value, c)
     : window.Petition.build(formData(), nameOf(c), keysOf(ta.dataset.key)), sender), c)).trim();
-  const allDocs = () => state.councils.flatMap((c) => areas().map((ta) => docFor(ta, c)));
+  // ---------- 要望書を出せる人（住民だけ・市に関わりのある人だけ）と、差出人の住所 ----------
+  // eligible：resident＝住民だけ／related＝在住・在勤・在学など市に関わりのある人だけ（公式サイトで確かめた自治体だけ。data/intake/yobo.jsonl）
+  const eligibleOf = (c) => (isNone(c) ? '' : (intakeOf(c, 'yobo') || {}).eligible || '');
+  // 差出人の住所がその自治体の中か。住所が空なら null（判断しない）
+  const livesIn = (c) => {
+    const a = (sender.address || '').replace(/\s/g, '');
+    if (!a) return null;
+    const name = municipalityName(c);
+    if (name === prefOf(c)) return a.startsWith(name) || !window.PREFS.some((p) => a.startsWith(p));
+    return a.includes(name.replace(/^.*郡/, ''));
+  };
+  // 在勤・在学などで市に関わりがあると答えた自治体
+  const related = new Set();
+  const reqBlocked = (c) => {
+    if (state.kind !== 'request') return false;
+    const el = eligibleOf(c);
+    if (!el || livesIn(c) !== false) return false;
+    return el === 'resident' || !related.has(c);
+  };
+  // 文書を作る宛先。要望書では、出す資格のない自治体を外す
+  const targets = () => state.councils.filter((c) => !reqBlocked(c));
+  function renderEligible() {
+    const box = $('wzEligible');
+    const head = (c) => window.Petition.requestTo(municipalityName(c));
+    const rows = state.kind !== 'request' ? [] : real().map((c) => {
+      const el = eligibleOf(c);
+      const lives = livesIn(c);
+      const town = municipalityName(c);
+      const who = el === 'resident' ? `${town}に住んでいる人だけ` : `${town}に住んでいる人・通勤や通学をしている人など、${town}に関わりのある人だけ`;
+      const page = (intakeOf(c, 'yobo') || {}).page_url;
+      const src = page ? `（<a href="${esc(page)}" target="_blank" rel="noopener">公式の案内</a>による）` : '（公式の案内による）';
+      if (!el) return lives === false ? `<li>${esc(town)}：差出人の住所が${esc(town)}ではありません。${esc(head(c))}あての要望を、住民以外からも受け付けるかは、このサイトではまだ確かめられていません。出す前に案内ページで確かめてください。</li>` : '';
+      if (lives === null) return `<li>${esc(head(c))}への要望を出せるのは、<b>${esc(who)}</b>です${src}。下の「差出人」に住所を入れると、出せるかを確かめます。</li>`;
+      if (lives) return '';
+      if (el === 'resident') return `<li class="warn">⛔ <b>${esc(head(c))}への要望を出せるのは、${esc(who)}です</b>${src}。差出人の住所が${esc(town)}ではないので、${esc(town)}あての要望書は作りません。議会あての陳情書なら、住所に関係なく受け付ける議会もあります。</li>`;
+      return `<li class="${related.has(c) ? '' : 'warn'}">${related.has(c) ? '' : '⛔ '}<b>${esc(head(c))}への要望を出せるのは、${esc(who)}です</b>${src}。差出人の住所が${esc(town)}ではありません。${related.has(c) ? `${esc(town)}に関わりがあるとのことなので、${esc(town)}あての要望書も作ります。` : `このままでは${esc(town)}あての要望書は作りません。`}<br><label><input type="checkbox" data-related="${esc(c)}"${related.has(c) ? ' checked' : ''}> ${esc(town)}に通勤・通学している（または${esc(town)}にある団体として出す）</label>${related.has(c) ? '<span class="hint-sm">要望書の中で、どう関わっているか（勤め先・学校など）を一言書き添えると伝わります。</span>' : ''}</li>`;
+    }).filter(Boolean);
+    box.hidden = !rows.length;
+    box.innerHTML = rows.length ? `<p><b>この要望書を出せる人</b></p><ul>${rows.join('')}</ul>${real().length && !targets().filter((c) => !isNone(c)).length ? '<p class="warn">選んだ自治体には、いまの住所では要望書を出せません。</p>' : ''}` : '';
+  }
+  $('wzEligible').addEventListener('change', (e) => {
+    const c = e.target.dataset && e.target.dataset.related;
+    if (!c) return;
+    if (e.target.checked) related.add(c); else related.delete(c);
+    build();
+  });
+  const allDocs = () => targets().flatMap((c) => areas().map((ta) => docFor(ta, c)));
   $('wzDocs').addEventListener('input', (e) => {
     const k = e.target.dataset.key;
     if (!k) return;
@@ -1057,6 +1104,8 @@
   // 差出人（あなた）の住所・氏名。入れるとすぐ、下の文面の住所・氏名の行に入る
   const sender = window.Common.bindSender($('wzSender'), () => {
     areas().forEach((ta) => { ta.value = withSender(ta.value, sender); });
+    // 住所が変わると、要望書を出せる自治体が変わる
+    if (state.kind === 'request' && real().some(eligibleOf)) renderEligible();
   });
   $('wzRemember').checked = window.Common.remembers();
   $('wzRemember').addEventListener('change', (e) => {
@@ -1417,7 +1466,7 @@
   PICKS.forEach((id) => $(id).addEventListener('change', renderPickAll));
 
   // 議会ごとに、封筒に入れる文書（送付状と陳情書）をまとめる。keys は参考図表の別紙を選ぶのに使う
-  const envelopes = () => state.councils.map((c) => {
+  const envelopes = () => targets().map((c) => {
     const docs = areas().map((ta) => (pick('wzQrLink') ? withQrLinks(docFor(ta, c), keysOf(ta.dataset.key)) : docFor(ta, c)));
     const cover = pick('wzCover') && !isNone(c) ? [window.Petition.cover(nameOf(c), docs, sender)] : [];
     // 国に意見書を求める陳情には、意見書の案を別紙で添えられる（その陳情書のすぐ後ろに入れる）
@@ -1494,7 +1543,7 @@
     }
     if ((labelsOnly || pick('wzWithLabels')) && real().length) {
       const request = state.kind === 'request';
-      const rows = real().map((c) => {
+      const rows = real().filter((c) => !reqBlocked(c)).map((c) => {
         const [pref, key] = officeKeys[c] || [];
         if (!request) return { council: nameOf(c), ...window.Places.office(pref, key) };
         // 要望書は首長あて。送り先が分かっていればそれを、なければ役所の本庁舎（data/offices.js）にする
@@ -1510,7 +1559,7 @@
         kind: state.kind,
         count: docKeys().length,
         titles: docKeys().map(docLabel),
-        councils: real().map((c) => memoCouncil(c, sheets.get(c))),
+        councils: real().filter((c) => !reqBlocked(c)).map((c) => memoCouncil(c, sheets.get(c))),
         figs: !!png,
         recordUrl: window.Report.enabled && state.kind !== 'request' ? `${linkOf()}&s=send` : '',
       });
