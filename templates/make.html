@@ -206,6 +206,8 @@
                 <legend>PDFに入れるもの <button type="button" id="wzPickAll" class="btn btn-small">すべて選ぶ</button></legend>
                 <label><input type="checkbox" id="wzBody" checked> <span data-doc-name>陳情書</span>（出すもの）</label>
                 <label hidden><input type="checkbox" id="wzIkensho" checked> 意見書の案（別紙。国に意見書を求める陳情の後ろに添える。議会が意見書を書くときのたたき台になります）</label>
+                <label><input type="checkbox" id="wzQrLink"> 説明のページのQRコード（陳情書の最後に「この陳情の説明」として、内容ごとの説明のページのアドレスとQRコードを付けます）</label>
+                <details id="wzQrPreview" class="hint-sm"><summary>QRコードのリンク先を確かめる</summary><ul id="wzQrList"></ul><p>議員や職員がスマホで読み取ると、この説明のページが開きます。付けるかどうかは、リンク先を見てから決めてください。</p></details>
                 <label data-petition-only><input type="checkbox" id="wzCover" checked> 送付状（郵送するとき、いちばん上に重ねる1枚）</label>
                 <label data-petition-only><input type="checkbox" id="wzWithLabels" checked> 宛名・差出人の用紙（封筒の表と裏に、切って貼る）</label>
                 <label><input type="checkbox" id="wzWithMemo" checked> 出し方メモ（手元に残す。やることにチェックを付けながら進められます）</label>
