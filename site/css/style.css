@@ -838,3 +838,8 @@ summary { cursor: pointer; font-weight: 700; }
 .hero-themes .theme-omakase small { display: block; font-weight: 400; font-size: 0.72rem; color: var(--muted); }
 .hero-themes .theme-omakase { grid-column: 1 / -1; }
 .wz-kind > p { grid-column: 1 / -1; margin: 0; }
+.recent-fold > summary { cursor: pointer; }
+.recent-fold > summary h2 { display: inline; }
+.consult { margin-top: 12px; }
+.consult > summary { cursor: pointer; font-size: .92rem; }
+.consult ul { margin: 8px 0 0 1.2em; } .consult li { margin-bottom: 6px; }

@@ -74,8 +74,8 @@ function itemPage(theme, a, e) {
 // 内容の札（site/js/common.js の tagsOf と同じ決め方）
 const tagsOf = (a) => [
   (a.refs || []).some((r) => r.secondary) && ['research', '研究の裏づけあり'],
-  a.precedent && ['precedent', `実施例あり（${a.precedent}）`],
-  a.lowcost && ['lowcost', '費用が少ない'],
+  a.precedent && ['precedent', `他自治体で実例あり（${a.precedent}）`],
+  a.lowcost && ['lowcost', '低予算で実現可能'],
 ].filter(Boolean);
 
 function indexPage(theme, asks, easy) {
@@ -83,7 +83,7 @@ function indexPage(theme, asks, easy) {
   const nat = asks.filter((a) => a.scope === 'national').length;
   const L = [`  <h1>陳情の内容のあらまし</h1>`,
     `  <p>「${esc(LABEL[theme])}」について出せる陳情の内容を、1ページにまとめました。全${asks.length}件（国への意見書を求めるもの${nat}件、自治体の取り組みを求めるもの${asks.length - nat}件）で、1件が1通の陳情書になります。議員・自治体の職員の方が全体を短い時間で見られるよう、それぞれ「何をお願いしているか」を一文で書き、詳しい説明・数字・資料へのリンクを付けています。</p>`,
-    '  <p class="hint-sm">札の意味：<span class="ask-tag ask-tag-research">研究の裏づけあり</span>論文や公的機関の報告がある　<span class="ask-tag ask-tag-precedent">実施例あり</span>ほかの自治体ですでに行っている　<span class="ask-tag ask-tag-lowcost">費用が少ない</span>予算がほとんど要らない。印刷するときは、ブラウザの印刷を使ってください。</p>'];
+    '  <p class="hint-sm">札の意味：<span class="ask-tag ask-tag-research">研究の裏づけあり</span>論文や公的機関の報告がある　<span class="ask-tag ask-tag-precedent">他自治体で実例あり</span>ほかの自治体ですでに行っている　<span class="ask-tag ask-tag-lowcost">低予算で実現可能</span>予算がほとんど要らない。印刷するときは、ブラウザの印刷を使ってください。</p>'];
   const cats = [...new Set(asks.map((a) => a.category || 'そのほか'))];
   for (const c of cats) {
     L.push(`  <h2>${esc(c)}</h2>`);

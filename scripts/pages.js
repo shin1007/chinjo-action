@@ -60,9 +60,12 @@ const primaryNav = (themeId, page) => [
 ].join('\n');
 
 // 共通の部品を、決まった形に置き換える（部品がないページはそのまま）
+// 「出す前に知っておいてほしいこと」（トップと /about で同じものを出す）。templates/parts/before.html を直して実行する
+const BEFORE = () => read(path.join(ROOT, 'templates', 'parts', 'before.html')).trimEnd();
 function withParts(html, themeId, page) {
   const navRe = new RegExp(` {4}<nav(?: class="primary-nav" aria-label="主要メニュー")?>\\s*<a href="/${themeId}/make"[\\s\\S]*?</nav>`);
   return html
+    .replace(/<!-- part:before[\s\S]*?<!-- \/part:before -->/, () => BEFORE())
     .replace(/ {4}<details class="theme-menu">[\s\S]*?<\/details>/, () => themeNav(themeId))
     .replace(navRe, () => primaryNav(themeId, page))
     .replace(/^ *<div class="wrap"><p class="small"><a href="https:\/\/github\.com\/shin1007\/chinjo-action"[^\n]*<\/div>$/m, () => GITHUB)
