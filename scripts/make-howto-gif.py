@@ -133,8 +133,10 @@ LAYOUTS = {
     # トップページ（/）でその場で再生する横（PC）と縦（スマホ）。最後のコマは「▼ 下からテーマを選ぶ」
     'wide': dict(size=(960, 540), out=OUT, end='themes'),
     'tall': dict(size=(540, 960), out=OUT.with_name('mail-howto-tall.gif'), end='themes'),
-    # X（Twitter）などに投稿する紹介用。スマホで見る縦長で、最後のコマはサイトのアドレスとQRコード。サイトには置かない
-    'x': dict(size=(540, 960), out=OUT.parent.parent.parent / 'docs' / '見本' / '紹介GIF' / 'mail-howto-x.gif', end='url'),
+    # X（Twitter）などに投稿する紹介用。サイトには置かない。
+    # タイムラインで切れずに見えるよう 4:5 にし、最初のコマはトップのカード（site/og-image.png）と同じ内容と費用の目安、
+    # 最後のコマはサイトのアドレスとQRコードにする
+    'x': dict(size=(600, 750), out=OUT.parent.parent.parent / 'docs' / '見本' / '紹介GIF' / 'mail-howto-x.gif', end='url'),
 }
 
 
@@ -170,6 +172,29 @@ def frame(i, total, safe, size):
     im = Image.new('RGB', size, BG)
     d = ImageDraw.Draw(im)
     lines = sub.split('\n')
+    if h * 4 == w * 5:
+        # X用（4:5）。下の「ここまで」の行に注記を入れる余裕がないので、注記は最後のコマだけに出す
+        d.text((w // 2, 36), '陳情書を郵送で出すまで', font=f(22), fill=SUB, anchor='mm')
+        x0 = (w - (len(STEPS) * 36 - 14)) // 2
+        for k in range(len(STEPS)):
+            d.ellipse((x0 + k * 36, 62, x0 + k * 36 + 22, 84), fill=ACC if k <= i else LINE)
+        icon(d, kind, w // 2, 225)
+        d.text((40, 362), f'{i + 1}', font=f(56), fill=ACC)
+        d.text((100, 372), title, font=f(34 if len(title) <= 10 else 30), fill=INK)
+        y = 448
+        for line in lines:
+            d.ellipse((42, y + 7, 52, y + 17), fill=ACC)
+            d.text((64, y), line, font=f(19 if len(line) <= 24 else 17, False), fill=INK)
+            y += 34
+        if cost:
+            fnt = f(24)
+            tw = d.textlength(cost, font=fnt)
+            d.rounded_rectangle((w - 40 - tw - 36, 300, w - 40, 346), 23, fill='#fde7dc')
+            d.text((w - 40 - 18, 323), cost, font=fnt, fill=ACC, anchor='rm')
+        fy = h - 40
+        d.line((40, fy - 30, w - 40, fy - 30), fill=LINE, width=2)
+        d.text((40, fy), 'ここまで ' + total_text(total, safe), font=f(24), fill=INK, anchor='lm')
+        return im
     if tall:
         d.text((w // 2, 44), '陳情書を郵送で出すまで', font=f(24), fill=SUB, anchor='mm')
         x0 = (w - (len(STEPS) * 36 - 14)) // 2
@@ -214,13 +239,104 @@ def frame(i, total, safe, size):
     return im
 
 
+def petition_strip(row, w, hgt):
+    """カードの上下に置く、小さな陳情書を斜めに並べた帯（トップのヒーローにあった飾りと同じ見た目）。
+    各テーマの asks-*.js の label から件名を取る。row は 0（上）か 1（下）"""
+    import re
+    root = OUT.parent.parent
+    themes = [('kodomo', '子どもの権利', 20), ('dansei', '男女平等', 200), ('nihonjin', '日本人の権利', 350),
+              ('shiho', '司法への参加', 260), ('kenko', '国民の健康', 150), ('sonota', 'その他の陳情', 40)]
+    lists = []
+    for key, name, hue in themes:
+        src = ''.join((root / 'themes' / key / fn).read_text(encoding='utf-8')
+                      for fn in ('asks-national.js', 'asks-local.js') if (root / 'themes' / key / fn).exists())
+        lists.append([(name, re.sub(r'（[^）]*）', '', m), hue) for m in re.findall(r"label:\s*'([^']+)'", src)[:6]])
+    mixed = [c[i] for i in range(6) for c in lists if i < len(c)]
+    cards = mixed[row::2][:8] if row == 0 else mixed[row::2][3:11]
+    import colorsys
+    hsl = lambda h, s, l: '#%02x%02x%02x' % tuple(round(v * 255) for v in colorsys.hls_to_rgb(h / 360, l, s))
+    cw, ch, gap = 210, 120, 18
+    strip = Image.new('RGBA', (len(cards) * (cw + gap), ch + 40), (0, 0, 0, 0))
+    d = ImageDraw.Draw(strip)
+    for k, (theme, label, hue) in enumerate(cards):
+        x, y = k * (cw + gap), 14
+        d.rounded_rectangle((x + 2, y + 6, x + cw + 2, y + ch + 6), 10, fill=(20, 30, 40, 22))  # 影
+        d.rounded_rectangle((x, y, x + cw, y + ch), 10, fill=PAPER, outline=LINE, width=1)
+        d.rectangle((x + 6, y, x + cw - 6, y + 3), fill=hsl(hue, 0.55, 0.55))
+        tf = f(12)
+        tw = d.textlength(theme, font=tf)
+        d.rounded_rectangle((x + 12, y + 12, x + 12 + tw + 16, y + 32), 10, fill=hsl(hue, 0.6, 0.94))
+        d.text((x + 20, y + 22), theme, font=tf, fill=hsl(hue, 0.55, 0.38), anchor='lm')
+        title = label + 'を求める陳情'
+        lines, cur = [], ''
+        for c in title:
+            if d.textlength(cur + c, font=f(14)) > cw - 24:
+                lines.append(cur)
+                cur = c
+            else:
+                cur += c
+        lines.append(cur)
+        if len(lines) > 2:
+            lines = [lines[0], lines[1][:-1] + '…']
+        for j, t in enumerate(lines):
+            d.text((x + 12, y + 40 + j * 20), t, font=f(14), fill=INK)
+        d.rounded_rectangle((x + 12, y + 90, x + cw - 12, y + 95), 3, fill=LINE)
+        d.rounded_rectangle((x + 12, y + 102, x + 12 + (cw - 24) * 0.62, y + 107), 3, fill=LINE)
+    strip = strip.rotate(2, resample=Image.BICUBIC, expand=True)
+    sx = (strip.width - w) // 2 + (60 if row else -60)
+    strip = strip.crop((sx, (strip.height - hgt) // 2, sx + w, (strip.height - hgt) // 2 + hgt))
+    # 両端をぼかして消し、全体を少し薄くする
+    a = strip.getchannel('A')
+    fade = Image.new('L', (w, 1))
+    for x in range(w):
+        t = min(x, w - 1 - x) / (w * 0.15)
+        fade.putpixel((x, 0), round(255 * min(1, t) * 0.45))
+    from PIL import ImageChops
+    strip.putalpha(ImageChops.multiply(a, fade.resize((w, hgt))))
+    return strip
+
+
+def cover(total, size):
+    """X用の最初のコマ。トップのカード（site/og-image.png。scripts/og-images.py で作る）をそのまま、幅いっぱいに置く。
+    上下はカードの背景と同じ色で埋め、左の帯もつなげる。カードの文言や金額は og-images.py の側で直す"""
+    w, h = size
+    card = Image.open(OUT.parent.parent / 'og-image.png').convert('RGB')
+    ch = round(card.height * w / card.width)
+    card = card.resize((w, ch), Image.LANCZOS)
+    y0 = (h - ch) // 2
+    im = Image.new('RGB', size)
+    d = ImageDraw.Draw(im)
+    d.rectangle((0, 0, w, y0), fill=card.getpixel((w // 2, 0)))
+    d.rectangle((0, y0 + ch, w, h), fill=card.getpixel((w // 2, ch - 1)))
+    bar = card.crop((0, ch // 2, 12, ch // 2 + 1))  # 左の帯（縮めたときのにじみごと）を上下に伸ばす
+    im.paste(bar.resize((12, y0)), (0, 0))
+    im.paste(bar.resize((12, h - y0 - ch)), (0, y0 + ch))
+    im.paste(card, (0, y0))
+    for row, y in ((0, 0), (1, y0 + ch)):
+        hgt = y0 if row == 0 else h - y0 - ch
+        im.paste(petition_strip(row, w, hgt), (0, y), petition_strip(row, w, hgt))
+    return im
+
+
 def summary(total, size, end):
     w, h = size
     tall = h > w
     im = Image.new('RGB', size, BG)
     d = ImageDraw.Draw(im)
     parts = [f'{name} {yen}円' for name, yen in (('印刷', STEPS[2][3]), ('クリアファイル', STEPS[5][3]), ('封筒', STEPS[6][3]), ('切手', STEPS[7][3]))]
-    if tall and end == 'url':
+    if h * 4 == w * 5:
+        d.text((w // 2, 50), '陳情5件を郵送で、合わせて', font=f(28), fill=INK, anchor='mm')
+        d.text((w // 2, 125), f'約{round(total, -1)}円', font=f(80), fill=ACC, anchor='mm')
+        d.text((w // 2, 192), ' ＋ '.join(parts[:2]), font=f(18, False), fill=INK, anchor='mm')
+        d.text((w // 2, 220), ' ＋ '.join(parts[2:]), font=f(18, False), fill=INK, anchor='mm')
+        d.text((w // 2, 256), '電子申請で出せる議会なら、印刷も切手も要りません', font=f(17, False), fill=SUB, anchor='mm')
+        d.line((40, 285, w - 40, 285), fill=LINE, width=2)
+        d.text((w // 2, 318), 'スマホで読み取って、陳情書を作る', font=f(24), fill=INK, anchor='mm')
+        qpx = 270
+        im.paste(qr_image(qpx), ((w - qpx) // 2, 345))
+        ending(d, w, 652, end, 28)
+        d.multiline_text((w // 2, 705), NOTE.replace('目安。', '目安\n'), font=f(14, False), fill=SUB, anchor='mm', align='center', spacing=6)
+    elif tall and end == 'url':
         # 紹介用：金額をまとめたうえで、下半分にQRコードとアドレスを大きく出す
         d.text((w // 2, 90), '陳情5件を郵送で、合わせて', font=f(30), fill=INK, anchor='mm')
         d.text((w // 2, 185), f'約{round(total, -1)}円', font=f(96), fill=ACC, anchor='mm')
@@ -263,6 +379,9 @@ def main():
             total += s[3]
             frames.append(frame(i, total, s[4] in ('stamp', 'post'), size))
             durs.append(3500 + 1200 * s[1].count('\n'))  # 説明の項目が多いコマほど長く見せる
+        if lay['end'] == 'url':  # X用は、費用の目安を見せるカードから始める
+            frames.insert(0, cover(sum(s[3] for s in STEPS), size))
+            durs.insert(0, 5000)
         frames.append(summary(total, size, lay['end']))
         durs.append(7000)
         out.parent.mkdir(parents=True, exist_ok=True)

@@ -225,7 +225,7 @@ function stats() {
 const SURE = new Set(['official_site', 'office_reply']);
 const EXPORT_FIELDS = {
   chinjo: ['page_url', 'form_url', 'email_addr', 'deadline', 'copies', 'format', 'format_url', 'format_title', 'name_published', 'statement', 'result_notice'],
-  yobo: ['page_url', 'form_url', 'email_addr', 'reply', 'anonymous_ok', 'pubcom_url'],
+  yobo: ['page_url', 'form_url', 'email_addr', 'reply', 'anonymous_ok', 'pubcom_url', 'mail_to', 'mail_zip', 'mail_address', 'eligible'],
 };
 const newest = (list) => list.sort((x, y) => (y.checked_at || '').localeCompare(x.checked_at || ''))[0];
 function sourceFor(r, field) {
@@ -257,7 +257,8 @@ function exportData() {
         const hit = sourceFor(r, f) || (f === 'page_url' && urlSrc ? { s: urlSrc, auto: false } : null);
         if (hit) use(f, v, hit);
       }
-      for (const m of ['email', 'form']) {
+      // 要望の郵送の扱いも出す（陳情の郵送は mail-policy.js から出すので、ここでは要望だけ）
+      for (const m of kind === 'yobo' ? ['email', 'form', 'mail'] : ['email', 'form']) {
         const hit = sourceFor(r, `methods.${m}`);
         const v = r.methods[m];
         if (hit && (v.resident !== 'unknown' || v.nonresident !== 'unknown')) use(m, [v.resident, v.nonresident], hit);

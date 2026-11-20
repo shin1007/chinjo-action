@@ -297,7 +297,7 @@ window.makePetition = (ASKS, TEMPLATE) => {
     return fill(TEMPLATE.cover, { 日付: DATE_BLANK, 宛先: council, 差出人: from.join('\n'), 書類: list, 通数: String(docs.length) }).replaceAll('陳情書', documentLabel);
   }
 
-  return { headOf, build, withReply, ikensho, buildPrompt, sections, buildRewritePrompt, applyRewrite, rewritePlans, withSender, swapCouncil, cover, selectedKeys, isNational, routeOf, usableFor, askText, ordered, ITEMS, MANY, SEP };
+  return { headOf, requestTo, build, withReply, ikensho, buildPrompt, sections, buildRewritePrompt, applyRewrite, rewritePlans, withSender, swapCouncil, cover, selectedKeys, isNational, routeOf, usableFor, askText, ordered, ITEMS, MANY, SEP };
 };
 // 1つのテーマのページ（asks と template を先に読み込んでいるページ）では、そのまま使えるようにしておく
 if (window.ASKS && window.TEMPLATE) window.Petition = window.makePetition(window.ASKS, window.TEMPLATE);

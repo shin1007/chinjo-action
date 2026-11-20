@@ -88,6 +88,7 @@
           <p class="hint-sm">迷ったら陳情書のままで大丈夫です。どれがいちばん効く、というものではありません（<a href="/#compare">違いの表</a>）。</p>
           <label><input type="radio" name="wzKind" value="petition" checked> <b>議会に話し合ってほしい：陳情書</b><span class="hint-sm">議会で審査されるか、議員に配られます。国へ意見書を出すよう求める内容と、条例・予算など議会の判断が要る内容が向いています。</span></label>
           <label><input type="radio" name="wzKind" value="request"> <b>市区町村長・知事・役所に動いてほしい：要望書</b><span class="hint-sm">行政に直接、検討や説明を求めます。通知・窓口・研修・公表など、担当課が自分の判断でできる内容が向いています。</span></label>
+          <label><input type="radio" name="wzKind" value="both"> <b>両方に動いてほしい：陳情書と要望書</b><span class="hint-sm">選んだ内容を向きで振り分けて、議会あての陳情書と、知事・市区町村長あての要望書を一度に作ります。どちらにも向く内容は両方に入ります。郵送するなら封筒は2つに分けます。</span></label>
           <a class="wz-kind-link" href="/letter?theme=sonota"><b>地元の特定の議員に知ってほしい：議員への手紙</b><span class="hint-sm">公開されません。陳情書に書けない事情を伝えたり、紹介議員をお願いしたりするときに。別の画面で作ります。</span></a>
           <a class="wz-kind-link" href="https://form.cao.go.jp/kokumin_koe/opinion-0016.html" target="_blank" rel="noopener"><b>国（省庁）に規制を見直してほしい：国への提案 ↗</b><span class="hint-sm">押すと、内閣府の「規制改革・行政改革ホットライン」のフォームが開きます（このサイトでは作りません）。回答は内閣府のサイトで公開されます。地元の議会に「国へ意見書を出してほしい」という陳情を出すこともできます。</span></a>
         </fieldset>
@@ -159,6 +160,8 @@
 
       <div class="wz-step" data-step="done" hidden>
         <h3>できあがりました</h3>
+        <div id="wzKindTabs" class="wz-also" hidden></div>
+        <div id="wzEligible" class="wz-also" hidden></div>
         <div id="wzMerge" class="wz-merge" hidden>
           <fieldset class="wz-merge-pick">
             <legend id="wzMergeLabel"></legend>
@@ -233,10 +236,10 @@
                 <label><input type="checkbox" id="wzQrLink"> 説明のページのQRコード（陳情書の最後に「この陳情の説明」として、内容ごとの説明のページのアドレスとQRコードを付けます）</label>
                 <details id="wzQrPreview" class="hint-sm"><summary>QRコードのリンク先を確かめる</summary><ul id="wzQrList"></ul><p>議員や職員がスマホで読み取ると、この説明のページが開きます。付けるかどうかは、リンク先を見てから決めてください。</p></details>
                 <label data-petition-only><input type="checkbox" id="wzCover" checked> 送付状（郵送するとき、いちばん上に重ねる1枚）</label>
-                <label data-petition-only><input type="checkbox" id="wzWithLabels" checked> 宛名・差出人の用紙（封筒の表と裏に、切って貼る）</label>
+                <label><input type="checkbox" id="wzWithLabels" checked> 宛名・差出人の用紙（封筒の表と裏に、切って貼る）</label>
                 <label><input type="checkbox" id="wzWithMemo" checked> 出し方メモ（手元に残す。やることにチェックを付けながら進められます）</label>
               </fieldset>
-              <div class="out-toolbar"><button type="button" id="wzNowPdf" class="btn btn-primary">印刷用のPDFを開く</button> <button type="button" id="wzNowPdfSave" class="btn btn-primary">PDFを保存する（コンビニ印刷・USB用）</button> <button type="button" id="wzNowLabelsSave" class="btn btn-small" data-petition-only>宛名・差出人だけを別のPDFで保存</button> <button type="button" id="wzNowCopy" class="btn btn-small">文面をすべてコピー</button></div>
+              <div class="out-toolbar"><button type="button" id="wzNowPdf" class="btn btn-primary">印刷用のPDFを開く</button> <button type="button" id="wzNowPdfSave" class="btn btn-primary">PDFを保存する（コンビニ印刷・USB用）</button> <button type="button" id="wzNowLabelsSave" class="btn btn-small">宛名・差出人だけを別のPDFで保存</button> <button type="button" id="wzNowCopy" class="btn btn-small">文面をすべてコピー</button></div>
               <p class="hint-sm">ふつうは「PDFを保存する」で全部を1つのPDFにして、コンビニで印刷します。ネットプリント（スマホから登録）はA4白黒1枚20円、USBメモリーやSDカードに入れて持っていくと、セブン‐イレブン・ローソン・ファミリーマートで1枚10円です（2026年11月時点）。宛名・差出人は普通紙に印刷されるので、切り取り線で切ってのりで貼ります。ラベル用紙に印刷したいときは、<a href="/sonota/labels">宛名ラベルのページ</a>で用紙を選べます。電子申請で出すなら、印刷も封筒も切手も要りません。</p></li>
             <li><b>手書きで署名する</b>1通ごとに氏名を署名します（住所を空けたなら住所も）。</li>
             <li><span id="wzNowHow"></span></li>
