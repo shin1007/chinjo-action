@@ -30,6 +30,11 @@
   ],
   "redirects": [
     {
+      "source": "/board",
+      "destination": "/feedback#board",
+      "permanent": true
+    },
+    {
       "source": "/support",
       "destination": "/trouble#support",
       "permanent": true

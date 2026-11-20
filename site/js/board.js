@@ -1,4 +1,4 @@
-// 質問と答えの掲示板（/board）。運営が載せると決めたもの（feedback_public ビュー）だけを読む。書き込みはしない。
+// 質問と答えの掲示板（/feedback#board）。運営が載せると決めたもの（feedback_public ビュー）だけを読む。書き込みはしない。
 (() => {
   const URL = 'https://oquuysfeistgpgrpeswq.supabase.co';
   const KEY = 'sb_publishable_IAXFoFaXZ3bjk-49Z-pD9w_SQZEgzXE';
