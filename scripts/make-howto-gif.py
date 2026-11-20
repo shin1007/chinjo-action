@@ -239,6 +239,63 @@ def frame(i, total, safe, size):
     return im
 
 
+def petition_strip(row, w, hgt):
+    """カードの上下に置く、小さな陳情書を斜めに並べた帯（トップのヒーローにあった飾りと同じ見た目）。
+    各テーマの asks-*.js の label から件名を取る。row は 0（上）か 1（下）"""
+    import re
+    root = OUT.parent.parent
+    themes = [('kodomo', '子どもの権利', 20), ('dansei', '男女平等', 200), ('nihonjin', '日本人の権利', 350),
+              ('shiho', '司法への参加', 260), ('kenko', '国民の健康', 150), ('sonota', 'その他の陳情', 40)]
+    lists = []
+    for key, name, hue in themes:
+        src = ''.join((root / 'themes' / key / fn).read_text(encoding='utf-8')
+                      for fn in ('asks-national.js', 'asks-local.js') if (root / 'themes' / key / fn).exists())
+        lists.append([(name, re.sub(r'（[^）]*）', '', m), hue) for m in re.findall(r"label:\s*'([^']+)'", src)[:6]])
+    mixed = [c[i] for i in range(6) for c in lists if i < len(c)]
+    cards = mixed[row::2][:8] if row == 0 else mixed[row::2][3:11]
+    import colorsys
+    hsl = lambda h, s, l: '#%02x%02x%02x' % tuple(round(v * 255) for v in colorsys.hls_to_rgb(h / 360, l, s))
+    cw, ch, gap = 210, 120, 18
+    strip = Image.new('RGBA', (len(cards) * (cw + gap), ch + 40), (0, 0, 0, 0))
+    d = ImageDraw.Draw(strip)
+    for k, (theme, label, hue) in enumerate(cards):
+        x, y = k * (cw + gap), 14
+        d.rounded_rectangle((x + 2, y + 6, x + cw + 2, y + ch + 6), 10, fill=(20, 30, 40, 22))  # 影
+        d.rounded_rectangle((x, y, x + cw, y + ch), 10, fill=PAPER, outline=LINE, width=1)
+        d.rectangle((x + 6, y, x + cw - 6, y + 3), fill=hsl(hue, 0.55, 0.55))
+        tf = f(12)
+        tw = d.textlength(theme, font=tf)
+        d.rounded_rectangle((x + 12, y + 12, x + 12 + tw + 16, y + 32), 10, fill=hsl(hue, 0.6, 0.94))
+        d.text((x + 20, y + 22), theme, font=tf, fill=hsl(hue, 0.55, 0.38), anchor='lm')
+        title = label + 'を求める陳情'
+        lines, cur = [], ''
+        for c in title:
+            if d.textlength(cur + c, font=f(14)) > cw - 24:
+                lines.append(cur)
+                cur = c
+            else:
+                cur += c
+        lines.append(cur)
+        if len(lines) > 2:
+            lines = [lines[0], lines[1][:-1] + '…']
+        for j, t in enumerate(lines):
+            d.text((x + 12, y + 40 + j * 20), t, font=f(14), fill=INK)
+        d.rounded_rectangle((x + 12, y + 90, x + cw - 12, y + 95), 3, fill=LINE)
+        d.rounded_rectangle((x + 12, y + 102, x + 12 + (cw - 24) * 0.62, y + 107), 3, fill=LINE)
+    strip = strip.rotate(4, resample=Image.BICUBIC, expand=True)
+    sx = (strip.width - w) // 2 + (60 if row else -60)
+    strip = strip.crop((sx, (strip.height - hgt) // 2, sx + w, (strip.height - hgt) // 2 + hgt))
+    # 両端をぼかして消し、全体を少し薄くする
+    a = strip.getchannel('A')
+    fade = Image.new('L', (w, 1))
+    for x in range(w):
+        t = min(x, w - 1 - x) / (w * 0.15)
+        fade.putpixel((x, 0), round(255 * min(1, t) * 0.75))
+    from PIL import ImageChops
+    strip.putalpha(ImageChops.multiply(a, fade.resize((w, hgt))))
+    return strip
+
+
 def cover(total, size):
     """X用の最初のコマ。トップのカード（site/og-image.png。scripts/og-images.py で作る）をそのまま、幅いっぱいに置く。
     上下はカードの背景と同じ色で埋め、左の帯もつなげる。カードの文言や金額は og-images.py の側で直す"""
@@ -255,6 +312,9 @@ def cover(total, size):
     im.paste(bar.resize((12, y0)), (0, 0))
     im.paste(bar.resize((12, h - y0 - ch)), (0, y0 + ch))
     im.paste(card, (0, y0))
+    for row, y in ((0, 0), (1, y0 + ch)):
+        hgt = y0 if row == 0 else h - y0 - ch
+        im.paste(petition_strip(row, w, hgt), (0, y), petition_strip(row, w, hgt))
     return im
 
 
