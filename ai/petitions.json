@@ -544,7 +544,7 @@
           "label": "離婚前の関係修復支援（夫婦カウンセリング）",
           "title": "離婚前の夫婦関係修復支援",
           "wording": "DV・虐待のない夫婦が、離婚の前に夫婦カウンセリングや関係修復支援を受けられる公的な仕組みを整備すること。",
-          "reason": "離婚は、子どもにとって生活の大きな変化をもたらします。DV・虐待がある場合は安全の確保が最優先ですが、そうでない夫婦の中には、一時的な不和やすれ違いから離婚を選び、適切な支援があれば関係を修復できた例も少なくないと考えられます。海外では、離婚の前に夫婦カウンセリングや親としての教育プログラムの受講を促す制度を設けている国や地域もあります。わが国では、離婚の前に夫婦が関係の修復について相談できる公的な仕組みはほとんどなく、費用の負担も大きいのが実情です。DV・虐待のない夫婦が、離婚の前に専門家の支援を受けられる仕組みを整えることは、子どもが両親のいる家庭で育つ機会を守ることにつながります。",
+          "reason": "離婚は、子どもにとって生活の大きな変化をもたらします。DV・虐待がある場合は安全の確保が最優先ですが、そうでない夫婦の中には、一時的な不和やすれ違いから離婚を選び、適切な支援があれば関係を修復できた例も少なくないと考えられます。離婚に至る前の婚姻中の支援が大切です。子どもへの影響が大きいのは、離婚という形だけでなく、父母の関係の質や対立が続くことです。英国政府の依頼による総説は、父母の関係の質が、同居・別居のどちらの家庭でも子の幸福に大きく影響するとしています。英国では、国の事業として、対立のある父母に関係と子育ての支援を行い、父母の関係と子の心の健康の改善がみられたと報告されています。海外では、離婚の前に夫婦カウンセリングや親としての教育プログラムの受講を促す制度を設けている国や地域もあります。わが国では、離婚の前に夫婦が関係の修復について相談できる公的な仕組みはほとんどなく、費用の負担も大きいのが実情です。DV・虐待のない夫婦が、離婚の前に専門家の支援を受けられる仕組みを整えることは、子どもが両親のいる家庭で育つ機会を守ることにつながります。",
           "references": [
             {
               "sourceId": "src-8375bc0678",
@@ -565,6 +565,16 @@
               "sourceId": "src-534c042e3b",
               "title": "Markman HJ, Hawkins AJ, Stanley SM ほか (2022) Helping couples achieve relationship success: A decade of progress in couple relationship education research and practice, 2010-2019. Journal of Marital and Family Therapy 48(1): 251-282（査読のある系統的レビュー）",
               "note": "厳密な評価研究34件を検討。夫婦関係教育は関係の質だけでなく、心身の健康・共同養育・子どもの健やかさにも効果があり、リスクの高い夫婦ほど効果が大きいことが多い。本文では、地域ぐるみで夫婦関係教育を広めたフロリダ州ジャクソンビルで、比べた郡より離婚率が大きく下がったとする準実験研究も紹介している"
+            },
+            {
+              "sourceId": "src-e73ce6a726",
+              "title": "Harold, G., Acquah, D., Sellers, R. & Chowdry, H.（Early Intervention Foundation）「What works to enhance inter-parental relationships and improve outcomes for children」DWP ad hoc research report no.32（英国雇用年金省、2016）",
+              "note": "本文で確認：英国雇用年金省の依頼による総説。離婚そのものも子に不利になり得るが、父母の関係の質、親のストレス、家族の機能も、同居・別居のどちらの家庭でも子の幸福に大きく影響する"
+            },
+            {
+              "sourceId": "src-2a8b944128",
+              "title": "英国雇用年金省「Reducing Parental Conflict programme 2018-2022: an evaluation of the effects of interventions on parental relationships and children」（2023）",
+              "note": "本文で確認：国の事業として、対立のある父母（DV・虐待のない家庭）に関係と子育ての支援を行い、3,810家族を評価。父母の関係と、2〜17歳の子の心の健康に統計的に有意な改善がみられ、父母がそろって参加したときに改善が大きかった。ただし対照群のない前後比較"
             }
           ]
         },
@@ -1134,7 +1144,7 @@
           "label": "夫婦関係修復相談・カウンセリング費用の助成",
           "title": "夫婦関係修復のための相談支援",
           "wording": "DV・虐待のない夫婦を対象に、夫婦関係の修復に向けた相談窓口の設置やカウンセリング費用の助成を行うこと。",
-          "reason": "離婚は、子どもにとって住まいや学校、家族との関係など、生活の大きな変化をもたらします。DV・虐待がある場合は安全の確保が最優先ですが、そうでない夫婦の中には、育児の負担や一時的なすれ違いから離婚を選び、適切な支援があれば関係を修復できた例も少なくないと考えられます。しかし、夫婦関係の修復について相談できる公的な窓口はほとんどなく、民間のカウンセリングは費用の負担が大きいため、利用をためらう家庭が多いのが実情です。父母の関係が安定することは、子どもの心身の健やかな成長を支えます。また、離婚に伴う生活の困窮を未然に防ぐことにもつながります。DV・虐待のない夫婦を対象に、関係修復のための相談窓口を設け、カウンセリング費用の一部を助成することは、子どもの最善の利益にかなう予防的な支援です。",
+          "reason": "離婚は、子どもにとって住まいや学校、家族との関係など、生活の大きな変化をもたらします。DV・虐待がある場合は安全の確保が最優先ですが、そうでない夫婦の中には、育児の負担や一時的なすれ違いから離婚を選び、適切な支援があれば関係を修復できた例も少なくないと考えられます。しかし、夫婦関係の修復について相談できる公的な窓口はほとんどなく、民間のカウンセリングは費用の負担が大きいため、利用をためらう家庭が多いのが実情です。子どもへの影響が大きいのは、離婚という形だけでなく、父母の関係の質や対立が続くことです。英国政府の依頼による総説は、父母の関係の質が、同居・別居のどちらの家庭でも子の幸福に大きく影響するとしています。英国では、国の事業として、対立のある父母に関係と子育ての支援を行い、父母の関係と子の心の健康の改善がみられたと報告されています。父母の関係が安定することは、子どもの心身の健やかな成長を支えます。また、離婚に伴う生活の困窮を未然に防ぐことにもつながります。DV・虐待のない夫婦を対象に、関係修復のための相談窓口を設け、カウンセリング費用の一部を助成することは、子どもの最善の利益にかなう予防的な支援です。",
           "forStaff": "実施にあたっては、既存の家庭相談や男女共同参画センターの相談の中で夫婦関係の修復を相談の対象として案内し、DV・虐待がないことを確認したうえで、家庭裁判所の夫婦関係調整調停（円満）や民間のカウンセリングを紹介する方法から始められます。費用の助成は、対象と上限額を定めて試行することで、財政の負担を見込みやすくできます。",
           "references": [
             {
@@ -1146,6 +1156,16 @@
               "sourceId": "src-cd3d741e12",
               "title": "Alan J. Hawkins・Tamara A. Fackrell「Does Relationship and Marriage Education for Lower-Income Couples Work? A Meta-Analysis of Emerging Research」Journal of Couple & Relationship Therapy 9: 181-191（2010年）",
               "note": "米国で所得の低いカップル向けの関係教育15事業の評価をまとめ、対照群のある3研究で効果量 d=.250、事前と事後を比べた12研究で d=.293 の小〜中程度の効果があったとする"
+            },
+            {
+              "sourceId": "src-e73ce6a726",
+              "title": "Harold, G., Acquah, D., Sellers, R. & Chowdry, H.（Early Intervention Foundation）「What works to enhance inter-parental relationships and improve outcomes for children」DWP ad hoc research report no.32（英国雇用年金省、2016）",
+              "note": "本文で確認：英国雇用年金省の依頼による総説。離婚そのものも子に不利になり得るが、父母の関係の質、親のストレス、家族の機能も、同居・別居のどちらの家庭でも子の幸福に大きく影響する"
+            },
+            {
+              "sourceId": "src-2a8b944128",
+              "title": "英国雇用年金省「Reducing Parental Conflict programme 2018-2022: an evaluation of the effects of interventions on parental relationships and children」（2023）",
+              "note": "本文で確認：国の事業として、対立のある父母（DV・虐待のない家庭）に関係と子育ての支援を行い、3,810家族を評価。父母の関係と、2〜17歳の子の心の健康に統計的に有意な改善がみられ、父母がそろって参加したときに改善が大きかった。ただし対照群のない前後比較"
             }
           ]
         },
@@ -1157,7 +1177,7 @@
           "label": "乳幼児健診などの機会に、夫婦関係・家庭環境の相談を案内する",
           "title": "乳幼児健診等の機会を活用した家庭環境の改善支援",
           "wording": "乳幼児健診、新生児訪問、こども家庭センターでの相談等の機会に、夫婦関係・家族関係の相談窓口やカウンセリング、父母がともに子育てに関わるための講座を案内し、DV・虐待が疑われる場合の安全確保と併せて、家庭環境の改善を支援すること。",
-          "reason": "出産・子育ての時期は、育児の負担や睡眠不足、働き方の変化などから、夫婦の関係が揺らぎやすい時期です。この時期の不和が、その後の別居や離婚につながることも少なくありません。乳幼児健診は母子保健法に基づき、ほぼすべての子育て家庭が受ける機会であり、新生児訪問や、2024年4月から市町村での設置が進められているこども家庭センターでの相談も、多くの家庭と接点を持つ場です。こうした機会に、夫婦関係・家族関係の相談窓口やカウンセリング、父母がともに子育てに関わるための講座を案内することは、関係が深刻になる前の早い段階での支援につながります。新たな施設を設ける必要はなく、既存の機会での案内から始められます。DV・虐待が疑われる場合には安全確保を優先しつつ、父母の不和を和らげることは、子どもの健やかな育ちを支えることになります。",
+          "reason": "出産・子育ての時期は、育児の負担や睡眠不足、働き方の変化などから、夫婦の関係が揺らぎやすい時期です。この時期の不和が、その後の別居や離婚につながることも少なくありません。乳幼児健診は母子保健法に基づき、ほぼすべての子育て家庭が受ける機会であり、新生児訪問や、2024年4月から市町村での設置が進められているこども家庭センターでの相談も、多くの家庭と接点を持つ場です。こうした機会に、夫婦関係・家族関係の相談窓口やカウンセリング、父母がともに子育てに関わるための講座を案内することは、関係が深刻になる前の早い段階での支援につながります。米国で、初めての子を待つ夫婦を無作為に分けて調べた研究では、妊娠中と出産後に父母がともに子育てに関わるための講座を受けた夫婦は、受けなかった夫婦より、子育ての協力や親の心の健康、子の適応、家庭内暴力の多くの指標で良い結果でした。新たな施設を設ける必要はなく、既存の機会での案内から始められます。DV・虐待が疑われる場合には安全確保を優先しつつ、父母の不和を和らげることは、子どもの健やかな育ちを支えることになります。",
           "forStaff": "実施にあたっては、母子保健法第12条の乳幼児健診や新生児訪問の際に配る資料に、夫婦・家族関係の相談窓口と父母向けの講座の案内を加え、児童福祉法第10条の2のこども家庭センターへつなぐ手順を定める方法が考えられます。既存の健診・訪問の機会を使うため、新たな事業を設ける必要はありません。",
           "references": [
             {
@@ -1179,6 +1199,16 @@
               "sourceId": "src-534c042e3b",
               "title": "Markman HJ, Hawkins AJ, Stanley SM ほか (2022) Helping couples achieve relationship success: A decade of progress in couple relationship education research and practice, 2010-2019. Journal of Marital and Family Therapy 48(1): 251-282（査読のある系統的レビュー）",
               "note": "厳密な評価研究34件を検討。夫婦関係教育は関係の質だけでなく、心身の健康・共同養育・子どもの健やかさにも効果があり、リスクの高い夫婦ほど効果が大きいことが多い。本文では、地域ぐるみで夫婦関係教育を広めたフロリダ州ジャクソンビルで、比べた郡より離婚率が大きく下がったとする準実験研究も紹介している"
+            },
+            {
+              "sourceId": "src-f8a08d168f",
+              "title": "Feinberg, M. E. ほか「Couple-Focused Prevention at the Transition to Parenthood, a Randomized Trial: Effects on Coparenting, Parenting, Family Violence, and Parent and Child Adjustment」Prevention Science 17(6) pp.751-764（2016）",
+              "note": "本文（要旨）で確認：初めての子を待つ399組の夫婦を無作為に分けたランダム化比較試験。妊娠中5回・出産後4回の講座を受けた夫婦は、生後10か月の時点で、共同養育・親の心の健康・子育て・子の適応・家庭内暴力の指標の3分の2以上で対照群より良かった"
+            },
+            {
+              "sourceId": "src-e73ce6a726",
+              "title": "Harold, G., Acquah, D., Sellers, R. & Chowdry, H.（Early Intervention Foundation）「What works to enhance inter-parental relationships and improve outcomes for children」DWP ad hoc research report no.32（英国雇用年金省、2016）",
+              "note": "本文で確認：英国雇用年金省の依頼による総説。離婚そのものも子に不利になり得るが、父母の関係の質、親のストレス、家族の機能も、同居・別居のどちらの家庭でも子の幸福に大きく影響する"
             }
           ]
         },
@@ -4881,6 +4911,13 @@
       "kind": "law"
     },
     {
+      "id": "src-2a8b944128",
+      "title": "英国雇用年金省「Reducing Parental Conflict programme 2018-2022: an evaluation of the effects of interventions on parental relationships and children」（2023）",
+      "url": "https://www.gov.uk/government/publications/reducing-parental-conflict-programme-2018-to-2022-an-evaluation-of-the-effects-of-interventions",
+      "note": "本文で確認：国の事業として、対立のある父母（DV・虐待のない家庭）に関係と子育ての支援を行い、3,810家族を評価。父母の関係と、2〜17歳の子の心の健康に統計的に有意な改善がみられ、父母がそろって参加したときに改善が大きかった。ただし対照群のない前後比較",
+      "kind": "secondary"
+    },
+    {
       "id": "src-2a8e6e0162",
       "title": "文部科学省「令和9年度大学入学者選抜実施要項」（令和8年5月27日）",
       "url": "https://www.mext.go.jp/content/20260529-mxt_daigakuc02-000005144_1.pdf",
@@ -6547,6 +6584,13 @@
       "kind": "research"
     },
     {
+      "id": "src-e73ce6a726",
+      "title": "Harold, G., Acquah, D., Sellers, R. & Chowdry, H.（Early Intervention Foundation）「What works to enhance inter-parental relationships and improve outcomes for children」DWP ad hoc research report no.32（英国雇用年金省、2016）",
+      "url": "https://www.gov.uk/government/publications/what-works-to-enhance-inter-parental-relationships-and-improve-outcomes-for-children",
+      "note": "本文で確認：英国雇用年金省の依頼による総説。離婚そのものも子に不利になり得るが、父母の関係の質、親のストレス、家族の機能も、同居・別居のどちらの家庭でも子の幸福に大きく影響する",
+      "kind": "secondary"
+    },
+    {
       "id": "src-e8b083994e",
       "title": "東村翔吾「年金制度改正法案をめぐる国会論議－被用者保険の適用拡大、基礎年金の給付水準の底上げ等－」『立法と調査』第478号（参議院、2025年9月）",
       "url": "https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2025pdf/20250929079.pdf",
@@ -6650,6 +6694,13 @@
       "url": "https://laws.e-gov.go.jp/law/324CO0000000006",
       "note": "除かれる者：臨時的に任用された者、会計年度任用職員など",
       "kind": "law"
+    },
+    {
+      "id": "src-f8a08d168f",
+      "title": "Feinberg, M. E. ほか「Couple-Focused Prevention at the Transition to Parenthood, a Randomized Trial: Effects on Coparenting, Parenting, Family Violence, and Parent and Child Adjustment」Prevention Science 17(6) pp.751-764（2016）",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10351206/",
+      "note": "本文（要旨）で確認：初めての子を待つ399組の夫婦を無作為に分けたランダム化比較試験。妊娠中5回・出産後4回の講座を受けた夫婦は、生後10か月の時点で、共同養育・親の心の健康・子育て・子の適応・家庭内暴力の指標の3分の2以上で対照群より良かった",
+      "kind": "secondary"
     },
     {
       "id": "src-f8e023d237",
