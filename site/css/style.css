@@ -820,6 +820,7 @@ summary { cursor: pointer; font-weight: 700; }
   .hero-flow-row li { opacity: 0.35; box-shadow: none; }
   .hero-flow-row span { color: hsl(var(--h) 70% 75%); background: hsl(var(--h) 30% 22%); }
 }
+.hf-kodomo { --h: 20; } .hf-dansei { --h: 200; } .hf-nihonjin { --h: 350; } .hf-shiho { --h: 260; } .hf-kenko { --h: 150; } .hf-sonota { --h: 40; }
 @keyframes hero-flow { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .hero-flow-row { animation: none; } }
 @media (max-width: 640px) { .hero-flow-row li { width: 190px; opacity: 0.4; } }
