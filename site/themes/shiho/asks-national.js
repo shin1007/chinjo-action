@@ -6,21 +6,23 @@
 //   text        … 「記」の下に書く、求める内容。1つの文で、最後は「こと。」で終える
 //   reason      … 【陳情の理由】に書く説明
 //   refs        … 参考資料（{ t: 題名, url, note: どこを読むか, secondary: true（信頼のおける二次資料のとき） }）。陳情書の【参考資料】と関連資料のページに出る（直したら node scripts/refs.js）
-//   recommended … true にすると、かんたん作成で★が付く
+//   precedent   … ほかの自治体で実施している例があるとき、その自治体名（例：'明石市'）。refs にその自治体の資料を入れる。「実施例あり（明石市）」の札が付く
+//   lowcost     … true にすると「費用が少ない」の札が付く（reason に、予算がほとんど要らない理由を書いたときだけ）
+//   （「研究の裏づけあり」の札は、refs に secondary: true があれば自動で付く）
 // 文中の {宛先} は、提出先の自治体名（例：横浜市）に置き換わります。
 // 1件で1通の陳情書になるので、ほかの項目に頼らず1件だけで意味が通るように書きます。
 // 意見書は国会と政府に出すものなので、裁判所に命じる形ではなく、法整備や検討を求める形で書く。
 // 個別の裁判や裁判官には触れない（裁判官の独立を守ったうえでの制度の話として書く）。
 // 項目を増やすときは、{ ... }, のかたまりを丸ごとコピーして、id を新しいものにします。
 window.ASKS = (window.ASKS || []).concat([
-  { id: 'n_family_open', scope: 'national', recommended: true, defaultOn: true, label: '家庭裁判所の審理の取材と、匿名にした公開',
+  { id: 'n_family_open', scope: 'national', defaultOn: true, label: '家庭裁判所の審理の取材と、匿名にした公開',
     refs: [{ t: '家事事件手続法 第33条（手続の非公開）', url: 'https://laws.e-gov.go.jp/law/423AC0000000052' },
       { t: 'Courts and Tribunals Judiciary「Open reporting provisions extended to all family courts」（2025年1月27日、英国）', url: 'https://www.judiciary.uk/open-reporting-provisions-extended-to-all-family-courts-in-watershed-moment-for-family-justice/' },
       { t: 'Sir Andrew McFarlane（家事部長官）「Confidence and Confidentiality: Transparency in the Family Courts」（2021年10月、英国）', url: 'https://www.judiciary.uk/wp-content/uploads/2021/10/Confidence-and-Confidentiality-Transparency-in-the-Family-Courts-final.pdf', note: '家庭裁判所への信頼と当事者の秘密の両立を検討した報告', secondary: true }],
     title: '家庭裁判所の手続の透明化',
     reason: '家事事件手続法第33条は、家事事件の手続を公開しないと定めています。当事者と子のプライバシーを守るための定めですが、その結果、離婚に伴う親権・監護者の指定、面会交流、養育費、子の引渡しなど、多くの家庭の暮らしを左右する判断が、どのような審理と基準で行われているのかを、国民が知る手段はほとんどありません。審判書の多くは公表されず、判断の当否を社会が検証することもできません。イギリス（イングランド・ウェールズ）では、2023年に3つの地域で始めた試行を経て、2025年1月から全ての家庭裁判所で、認められた記者や法律ブロガーが審理を傍聴し、子と家族を匿名にすることを条件に報道できるようになりました。試行の間、子の匿名が破られた例は知られていないとされています。日本でも、子と当事者のプライバシーを確実に守りながら、家庭裁判所の手続を国民が検証できる仕組みを整えることが、司法への信頼を高めることにつながります。',
     text: '家庭裁判所の家事事件の手続について、子と当事者を匿名にすることを条件に、報道機関等による審理の傍聴と報道を認める仕組みや、審判書を匿名にして公表する仕組みを、諸外国の例も踏まえて検討し、必要な法整備を行うこと。' },
-  { id: 'n_family_stats', scope: 'national', recommended: true, defaultOn: true, label: '家庭裁判所の判断の結果を、詳しい統計で公表',
+  { id: 'n_family_stats', scope: 'national', defaultOn: true, label: '家庭裁判所の判断の結果を、詳しい統計で公表',
     refs: [{ t: '法務省「民法等の一部を改正する法律（父母の離婚後等の子の養育に関する見直し）について」', url: 'https://www.moj.go.jp/MINJI/minji07_00357.html' },
       { t: '民法 第819条（離婚の場合の親権者）', url: 'https://laws.e-gov.go.jp/law/129AC0000000089' },
       { t: '厚生労働省「人口動態統計月報（概数）（令和8年4月分）」', url: 'https://www.mhlw.go.jp/toukei/saikin/hw/jinkou/geppo/m2026/04.html', note: '親権の種類別の子の数' },
@@ -36,7 +38,7 @@ window.ASKS = (window.ASKS || []).concat([
     title: '刑事裁判の量刑に関する男女別の統計の公表',
     reason: '刑事裁判の結果は、最高裁判所の司法統計年報（刑事編）で毎年公表されています。令和7年の刑事編には81の統計表があり、通常第一審で有罪となった人の刑期を罪名別に示す表（第34表）や、外国人の被告人について国籍別に終局の区分を示す表（第54表）もあります。ところが、被告人の性別による区分の表は一つもありません。そのため、同じ罪で裁かれた男性と女性の間で、執行猶予が付く割合や刑の重さに差があるのかどうかを、国民が確かめる手段がありません。差があるとすれば、それが事件の内容の違いによるものか、性別による扱いの違いによるものかは、統計を詳しく分析して初めて検討できることです。法の下の平等（日本国憲法第14条）が裁判で実際に守られているかを国民が確かめられるよう、量刑を男女別に集計して公表することが求められます。',
     text: '刑事裁判の第一審の結果について、罪名別の刑期・罰金額・執行猶予の有無などを被告人の男女別に集計した統計を毎年公表するよう、政府が裁判所と協議し、必要な措置を講じること。' },
-  { id: 'n_appointment', scope: 'national', recommended: true, defaultOn: true, label: '最高裁判所の裁判官の選び方の公開',
+  { id: 'n_appointment', scope: 'national', defaultOn: true, label: '最高裁判所の裁判官の選び方の公開',
     refs: [{ t: '日本国憲法 第6条第2項・第79条第1項', url: 'https://laws.e-gov.go.jp/law/321CONSTITUTION' },
       { t: '最高裁判所「下級裁判所裁判官指名諮問委員会」', url: 'https://www.courts.go.jp/saikosai/iinkai/kakyusaibansyo/index.html' },
       { t: '英国 2005年憲法改革法 第61条（裁判官任命委員会）', url: 'https://www.legislation.gov.uk/ukpga/2005/4/section/61' },
@@ -44,7 +46,7 @@ window.ASKS = (window.ASKS || []).concat([
     title: '最高裁判所の裁判官の選考の過程の透明化',
     reason: '憲法は、最高裁判所の長官を内閣の指名に基づいて天皇が任命し（第6条第2項）、そのほかの裁判官を内閣が任命すると定めています（第79条第1項）。しかし、どのような人が候補となり、どのような基準と手続で選ばれたのかは公開されていません。下級裁判所の裁判官については、2003年に最高裁判所に下級裁判所裁判官指名諮問委員会が置かれ、外部の委員が指名の適否に意見を述べる仕組みができましたが、最高裁判所の裁判官にはこうした仕組みがありません。イギリスでは2005年の憲法改革法により、独立した裁判官任命委員会が公募と選考を担うようになり、アメリカの連邦最高裁判所の裁判官は、上院の公開の公聴会を経て任命されます。最高裁判所の裁判官は、憲法の判断を最終的に下す重い職責を担います。国民審査で国民が判断するためにも、選考の過程と理由が国民に示されることが求められます。',
     text: '最高裁判所の裁判官の任命について、選考の基準と過程、任命の理由を国民に公表するとともに、外部の有識者が意見を述べる諮問の仕組みを設けることを検討すること。' },
-  { id: 'n_review', scope: 'national', recommended: true, defaultOn: true, label: '国民審査の判断材料の充実と、制度の見直し',
+  { id: 'n_review', scope: 'national', defaultOn: true, label: '国民審査の判断材料の充実と、制度の見直し',
     refs: [{ t: '最高裁判所裁判官国民審査法 第15条（投票の方法）', url: 'https://laws.e-gov.go.jp/law/322AC1000000136' },
       { t: '総務省「令和6年10月27日執行 最高裁判所裁判官国民審査結果調」', url: 'https://www.soumu.go.jp/main_content/000979139.pdf' },
       { t: '総務省「第51回衆議院議員総選挙・最高裁判所裁判官国民審査結果調」（令和8年2月13日）', url: 'https://www.soumu.go.jp/main_content/001061492.pdf' },

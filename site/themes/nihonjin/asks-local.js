@@ -3,7 +3,7 @@
 //   yoboText    … route が 'both' のとき、要望書の「記」に書く求める内容。担当課が既存の事業の中で始められる形で書く（陳情書では text を使う）
 // 文中の {宛先} は、提出先の自治体名（例：横浜市）に置き換わります。
 window.ASKS = (window.ASKS || []).concat([
-  { id: 'l_welfare', scope: 'local', route: 'yobo', recommended: true, defaultOn: true, label: '外国人への生活保護の状況の公表',
+  { id: 'l_welfare', scope: 'local', route: 'yobo', defaultOn: true, label: '外国人への生活保護の状況の公表',
     refs: [{ t: '厚生労働省「外国人の生活保護に関するよくあるご意見・ご質問」', url: 'https://www.mhlw.go.jp/content/001684938.pdf' },
       { t: '厚生省社会局長通知（昭和29年5月8日）', url: 'https://www.mhlw.go.jp/web/t_doc?dataId=00ta1609&dataType=1&pageNo=1' },
       { t: '安藤結香子「外国人政策と政府の対応策」『立法と調査』第483号（参議院、2026年4月）', url: 'https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2026pdf/20260430125.pdf', note: '関係閣僚会議での指示（国民健康保険料・医療費等の制度の適正化、不法滞在者ゼロプランなど）と総合的対応策', secondary: true }],
@@ -11,7 +11,7 @@ window.ASKS = (window.ASKS || []).concat([
     title: '外国人に対する生活保護の実施状況の公表',
     reason: '外国人に対する生活保護は、生活保護法によるものではなく、1954年の厚生省の通知に基づく行政措置として、各自治体が実施しています。最高裁判所も2014年7月18日の判決で、外国人には生活保護法に基づく受給権はなく、行政措置による事実上の保護の対象となり得るにとどまると判断しました。法律に基づかない措置であるからこそ、その実施状況は住民に明らかにされるべきです。ところが、自治体ごとの受給世帯数や支給額は、住民が知ることのできる形で公表されていないことが多く、正確な情報がないまま、誤った数字が広まることもあります。国籍別の受給世帯数・人員・支給総額などを毎年公表し、事実に基づいて議論できるようにすることが求められます。',
     text: '{宛先}が行政措置として実施している外国人に対する生活保護について、受給世帯数・人員・国籍別の内訳・支給総額等を毎年度公表すること。' },
-  { id: 'l_insurance', scope: 'local', route: 'both', recommended: true, defaultOn: true, label: '外国人の国民健康保険料の徴収の強化',
+  { id: 'l_insurance', scope: 'local', route: 'both', defaultOn: true, label: '外国人の国民健康保険料の徴収の強化',
     refs: [{ t: '厚生労働省保険局国民健康保険課 説明会資料（在留外国人の医療保険適用の課題と対応）', url: 'https://www.mhlw.go.jp/content/12401000/001616165.pdf', note: '令和9年6月から在留審査で国保の収納情報を連携' },
       { t: '安藤結香子「外国人政策と政府の対応策」『立法と調査』第483号（参議院、2026年4月）', url: 'https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2026pdf/20260430125.pdf', note: '関係閣僚会議での指示（国民健康保険料・医療費等の制度の適正化、不法滞在者ゼロプランなど）と総合的対応策', secondary: true }],
     forStaff: '実施にあたっては、国民健康保険の賦課・収納のシステムにある国籍の情報を使って、外国人世帯主の世帯の収納率を集計し、公表する方法が考えられます。厚生労働省の説明会資料によれば、国は外国人の収納状況の全国的な把握と在留審査との情報連携を進めており、その準備とあわせて対応できます。',
@@ -36,7 +36,7 @@ window.ASKS = (window.ASKS || []).concat([
     title: '水源地等の重要な土地の取引の把握',
     reason: '水道の水源となる森林や、防衛関係施設・重要なインフラの周辺の土地は、住民の生活と安全に深く関わっています。国の重要土地等調査法の対象は一部の区域に限られ、水源地などは十分に対象とされていません。北海道をはじめ、水源地域の土地を取引する際に事前の届出を求める条例を定めている自治体もあり、取引の状況を早くつかむことは、自治体にもできる対策です。土地の所有者が分からなくなったり、利用目的が分からないまま取得が進んだりすれば、後から対応することは困難です。水源地などの重要な土地について、事前の届出を求める条例の制定を含め、取引と所有の状況を把握する仕組みを整えることが求められます。',
     text: '{宛先}において、水源地や重要な施設の周辺など住民の生活と安全に関わる土地について、事前の届出を求める条例の制定を含め、取引と所有の状況を把握する仕組みを整えること。' },
-  { id: 'l_rules', scope: 'local', route: 'both', label: '外国人住民への生活ルールの周知と指導',
+  { id: 'l_rules', precedent: '千葉市', scope: 'local', route: 'both', label: '外国人住民への生活ルールの周知と指導',
     refs: [{ t: '出入国在留管理庁「令和7年末現在における在留外国人数について」（令和8年3月27日）', url: 'https://www.moj.go.jp/isa/publications/press/13_00062.html', note: '412万5,395人' },
       { t: '千葉市「家庭ごみと資源物の出し方一覧表、外国人市民向けのごみ出しに関する動画」', url: 'https://www.city.chiba.jp/kankyo/junkan/shushugyomu/gomidasiitiranhyo.html', note: 'ごみの出し方を多言語で案内している例' },
       { t: 'European Migration Network「Civic orientation courses or training offered to groups of third-country nationals in the EU」EMN Inform（2024年）', url: 'https://emn.ie/wp-content/uploads/2024/10/EMN_INFORM_Civic-training.pdf', note: 'EUの国々が移住者に行う市民オリエンテーションの講座の目的・内容・評価。権利と義務のほか、日常生活の実際の情報（practical information）を扱う', secondary: true }],
@@ -66,7 +66,7 @@ window.ASKS = (window.ASKS || []).concat([
     title: '公権力の行使や政策の決定に関わる管理職への任用を日本国籍を有する者に限ること',
     reason: '国家公務員の採用試験は、人事院規則八―一八第9条により、日本の国籍を有しない者は受けることができないとされています。一方、地方公務員法の欠格条項（第16条）には国籍の定めがなく、職員の採用や管理職への登用で国籍をどう扱うかは、自治体ごとの判断に委ねられています。住民に義務を課し、権利を制限する処分を行い、地域の政策の決定に関わる管理職は、住民の生活に直接の影響を与える立場です。国民主権の下で、こうした職は日本の国籍を持つ人が担うべきものです。自治体においても、公権力の行使や重要な政策の決定に関わる管理職への任用は日本の国籍を有する職員に限ることを、任用の基準として明確に定めることが求められます。',
     text: '{宛先}の職員のうち、公権力の行使又は重要な政策の決定に関わる管理職への任用は、日本の国籍を有する者に限ることを、任用の基準として明確に定めること。' },
-  { id: 'l_tsusho', scope: 'local', route: 'yobo', label: '外国人住民の通称（通名）の記載の審査の厳格化',
+  { id: 'l_tsusho', precedent: '豊中市', scope: 'local', route: 'yobo', label: '外国人住民の通称（通名）の記載の審査の厳格化',
     refs: [{ t: '住民基本台帳法施行令 第30条の16（通称の記載）・第30条の17（通称の記載及び削除に関する事項）', url: 'https://laws.e-gov.go.jp/law/342CO0000000292' },
       { t: '豊中市「外国人住民の通称に関する届出取扱要綱」', url: 'https://www.city.toyonaka.osaka.jp/joho/reiki/youkou/shiminkyoudou/youkou5.files/gaikokujinnjyuuminn.pdf', note: '第3条：通称の表記が分かる書類2点を添えて申し出ることとしている例' }],
     forStaff: '実施にあたっては、豊中市の要綱のように、通称の記載の申出の際に確かめる資料の種類と、記載と削除を繰り返す申出への対応を要綱に定める方法が考えられます。住民基本台帳法施行令第30条の16に基づく既存の事務の手順の明確化で対応できます。',

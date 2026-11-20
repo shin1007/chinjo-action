@@ -91,8 +91,8 @@
     return out;
   }
 
-  // 陳情の内容。おすすめ（recommended）の項目は出やすくする
-  const drawItems = (t, n, avoid = []) => sample(t.pool.filter((a) => !avoid.includes(a.id)), n, (a) => (a.recommended ? 3 : 1)).map((a) => a.id);
+  // 陳情の内容。札（研究の裏づけ・実施例・費用が少ない）の多い項目ほど出やすくする
+  const drawItems = (t, n, avoid = []) => sample(t.pool.filter((a) => !avoid.includes(a.id)), n, (a) => 1 + window.Common.tagsOf(a).length).map((a) => a.id);
 
   const state = { councils: [], sets: [] }; // sets：{ theme：テーマの id, items：項目の id の並び }
 
@@ -139,7 +139,7 @@
         <p>テーマ：<b>${esc(t.name)}</b>　<button type="button" class="btn btn-small" data-redraw-set="${i}">このセットを引き直す</button></p>
         <ol class="om-items">${set.items.map((k, j) => {
           const a = t.P.ITEMS[k];
-          return `<li><b>${esc(a.label)}</b>${window.Common.scopeTag(a)} <button type="button" class="btn btn-small" data-swap="${i},${j}">別の内容に</button></li>`;
+          return `<li><b>${esc(a.label)}</b>${window.Common.scopeTag(a)}${window.Common.askTags(a)} <button type="button" class="btn btn-small" data-swap="${i},${j}">別の内容に</button></li>`;
         }).join('')}</ol>
         <details class="om-texts"><summary>文面を見る（3通）</summary><div data-texts="${i}"></div></details>
       </li>`;

@@ -126,5 +126,12 @@ window.Common = (() => {
   const routeOf = (a) => (a.scope === 'local' ? (ROUTE_LABEL[a.route] ? a.route : 'both') : 'chinjo');
   const scopeTag = (a) => `<small class="ask-scope">${a.scope === 'local' ? '自治体の取り組み' : '国へ意見書'}</small><small class="ask-route ask-route-${routeOf(a)}">${ROUTE_LABEL[routeOf(a)]}</small>`;
 
-  return { jstToday, BLANK_TEXT, esc, sender, bindSender, forgetSender, remembers, setRemember, flash, copy, printTexts, reiwaToday, DATE_BLANK, askGroups, scopeTag, routeOf, ROUTE_LABEL };
+  // 内容の札：研究の裏づけ（refs の secondary）・ほかの自治体の実施例（precedent）・費用が少ない（lowcost）
+  const tagsOf = (a) => [
+    (a.refs || []).some((r) => r.secondary) && ['research', '研究の裏づけあり'],
+    a.precedent && ['precedent', `実施例あり（${a.precedent}）`],
+    a.lowcost && ['lowcost', '費用が少ない'],
+  ].filter(Boolean);
+  const askTags = (a) => tagsOf(a).map(([k, t]) => `<small class="ask-tag ask-tag-${k}">${esc(t)}</small>`).join('');
+  return { jstToday, BLANK_TEXT, esc, sender, bindSender, forgetSender, remembers, setRemember, flash, copy, printTexts, reiwaToday, DATE_BLANK, askGroups, scopeTag, tagsOf, askTags, routeOf, ROUTE_LABEL };
 })();
