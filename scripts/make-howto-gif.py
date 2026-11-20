@@ -240,24 +240,21 @@ def frame(i, total, safe, size):
 
 
 def cover(total, size):
-    """X用の最初のコマ。自動再生される前の止まった絵にもなるので、これだけで何のサイトかと費用がわかるようにする"""
+    """X用の最初のコマ。トップのカード（site/og-image.png。scripts/og-images.py で作る）をそのまま、幅いっぱいに置く。
+    上下はカードの背景と同じ色で埋め、左の帯もつなげる。カードの文言や金額は og-images.py の側で直す"""
     w, h = size
-    im = Image.new('RGB', size, BG)
+    card = Image.open(OUT.parent.parent / 'og-image.png').convert('RGB')
+    ch = round(card.height * w / card.width)
+    card = card.resize((w, ch), Image.LANCZOS)
+    y0 = (h - ch) // 2
+    im = Image.new('RGB', size)
     d = ImageDraw.Draw(im)
-    d.rectangle((0, 0, 12, h), fill=ACC)
-    d.text((48, 50), '陳情アクション', font=f(26), fill=ACC)
-    d.text((48, 120), '地方議会への陳情書を、', font=f(44), fill=INK)
-    d.text((48, 178), '選ぶだけで。', font=f(44), fill=INK)
-    for k, t in enumerate(('内容を選ぶ', '議会を選ぶ', 'PDFで印刷して郵送')):
-        y = 262 + k * 78
-        d.rounded_rectangle((48, y, w - 48, y + 62), 16, fill=PAPER, outline=LINE, width=2)
-        d.ellipse((66, y + 13, 102, y + 49), fill=ACC)
-        d.text((84, y + 31), str(k + 1), font=f(22), fill='#fff', anchor='mm')
-        d.text((120, y + 31), t, font=f(28), fill=INK, anchor='lm')
-    d.rounded_rectangle((48, 505, w - 48, 650), 20, fill='#fde7dc')
-    d.text((w // 2, 540), '陳情5件を1つの議会に郵送して', font=f(26), fill=INK, anchor='mm')
-    d.text((w // 2, 605), f'約{round(total, -1)}円', font=f(64), fill=ACC, anchor='mm')
-    d.text((w // 2, 690), '登録不要・無料　chinjo-action.vercel.app', font=f(20, False), fill=SUB, anchor='mm')
+    d.rectangle((0, 0, w, y0), fill=card.getpixel((w // 2, 0)))
+    d.rectangle((0, y0 + ch, w, h), fill=card.getpixel((w // 2, ch - 1)))
+    bar = card.crop((0, ch // 2, 12, ch // 2 + 1))  # 左の帯（縮めたときのにじみごと）を上下に伸ばす
+    im.paste(bar.resize((12, y0)), (0, 0))
+    im.paste(bar.resize((12, h - y0 - ch)), (0, y0 + ch))
+    im.paste(card, (0, y0))
     return im
 
 
@@ -324,7 +321,7 @@ def main():
             durs.append(3500 + 1200 * s[1].count('\n'))  # 説明の項目が多いコマほど長く見せる
         if lay['end'] == 'url':  # X用は、費用の目安を見せるカードから始める
             frames.insert(0, cover(sum(s[3] for s in STEPS), size))
-            durs.insert(0, 4000)
+            durs.insert(0, 5000)
         frames.append(summary(total, size, lay['end']))
         durs.append(7000)
         out.parent.mkdir(parents=True, exist_ok=True)
