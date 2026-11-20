@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#252b2f" media="(prefers-color-scheme: dark)">
+<title>人口カバー率：やり方がわかっている自治体｜権利を守る陳情アクション</title>
+<meta name="description" content="陳情・要望・パブリックコメントの出し方がわかっている自治体を、人口でみた割合で示し、まだわからない自治体の確認をお願いしています。">
+<link rel="canonical" href="https://chinjo-action.vercel.app/coverage">
+<meta property="og:site_name" content="権利を守る陳情アクション">
+<meta property="og:title" content="人口カバー率：やり方がわかっている自治体">
+<meta property="og:description" content="陳情・要望・パブリックコメントの出し方がわかっている自治体の人口カバー率と、確認のお願い。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://chinjo-action.vercel.app/coverage">
+<meta property="og:image" content="https://chinjo-action.vercel.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">本文へ移動</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <details class="theme-menu">
+      <summary>テーマを選ぶ</summary>
+      <nav class="theme-nav" aria-label="陳情のテーマ">
+        <a href="/kodomo/make">子どもの権利</a>
+        <a href="/dansei/make">男女平等</a>
+        <a href="/nihonjin/make">日本人の権利</a>
+        <a href="/shiho/make">司法への参加</a>
+        <a href="/kenko/make">国民の健康</a>
+        <a href="/sonota/make">その他の陳情</a>
+      </nav>
+    </details>
+    <a href="/" class="logo">陳情アクション</a>
+
+    <nav class="primary-nav" aria-label="主要メニュー"><a href="/#themes">つくる</a><a href="/about">しくみ</a><a href="/trouble#support">支える</a></nav>
+  </div>
+</header>
+
+<main id="main">
+<div class="wrap guide about">
+  <p class="hero-crumb"><a href="/">陳情アクション</a> ＞ <a href="/trouble">運営が困っていること</a> ＞ <b>人口カバー率</b></p>
+  <h1>やり方がわかっている自治体（人口カバー率）</h1>
+  <p>陳情（議会あて）・要望（知事・市区町村長あて）・パブリックコメント（意見募集）について、出し方を公式サイトで確かめられた自治体が、人口でみてどれだけを占めるかです。住民の多い自治体から順に調べています。</p>
+  <p id="cov-asof" class="small">読み込んでいます…</p>
+
+  <h2 id="rate">いまのカバー率</h2>
+  <div id="cov-table"><p class="small">JavaScript を有効にすると表示されます。</p></div>
+  <ul class="small">
+    <li><b>出し方までわかる：</b>持参・郵送・メール・電子申請・FAX のどれかの扱いを、公式サイトか事務局の回答で確かめた自治体です。</li>
+    <li><b>案内ページはある：</b>出し方の案内ページは見つかっているが、扱いまでは読み取れていない自治体を含みます。</li>
+    <li><b>パブリックコメント：</b>意見募集の一覧・案内のページが見つかっている自治体です。</li>
+    <li>人口は総務省「住民基本台帳に基づく人口」（令和8年1月1日現在）。市区町村の割合は、全市区町村の人口の合計に対する割合です（東京23区は区ごとに数えます）。</li>
+  </ul>
+
+  <h2 id="ask">まだわからない自治体の確認をお願いします</h2>
+  <p>お住まいの自治体や、送りたい議会が下の一覧にあれば、公式サイトの案内ページを探して、URL を教えてください。運営が原文を読んで確かめてから反映します。</p>
+  <ol class="small">
+    <li>一覧の「知らせる」を押すと、<a href="/feedback#send-h">ご意見のページ</a>の入力欄に自治体名が入った状態で開きます。</li>
+    <li>見つけた案内ページの URL を「根拠の資料の URL」に入れて送ってください。わかる範囲で、郵送・メール・電子申請で受け付けるか、住民以外も出せるかを書き添えてもらえると助かります。</li>
+    <li>議会に電話で確かめた場合は、<a href="/kakunin">議会への出し方を確かめるページ</a>からも送れます。</li>
+  </ol>
+  <p class="small">氏名・住所・連絡先は書かないでください。</p>
+  <div class="gen-form">
+    <label>都道府県 <select id="cov-pref"><option value="">全国</option></select></label>
+    <label>わからないもの
+      <select id="cov-kind">
+        <option value="c">陳情（議会）の出し方</option>
+        <option value="y">要望（知事・市区町村長）の出し方</option>
+        <option value="p">パブリックコメントのページ</option>
+      </select>
+    </label>
+  </div>
+  <p id="cov-count" class="small" role="status"></p>
+  <table class="cost-table" id="cov-list"><thead><tr><th>自治体</th><th>人口</th><th>わかっていること</th><th></th></tr></thead><tbody></tbody></table>
+  <p><button id="cov-more" class="btn btn-small" type="button" hidden>もっと見る</button></p>
+  <p class="small"><a href="/trouble">運営が困っていること</a>に戻る</p>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="small">本サイトは市民による政策提言のための情報提供サイトです。法的助言を行うものではありません。</p>
+    <p class="small"><a href="/trouble">困っていること</a>　<a href="/feedback">ご意見・質問</a></p>
+  </div>
+  <div class="wrap"><p class="small"><a href="https://github.com/shin1007/chinjo-action" target="_blank" rel="noopener">ソースコード（GitHub）</a>　このサイトの改善の提案（Issue・プルリクエスト）を歓迎します</p></div>
+</footer>
+<script defer src="/js/coverage.js"></script>
+</body>
+</html>

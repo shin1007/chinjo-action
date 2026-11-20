@@ -6,7 +6,8 @@
     "test": "node --test test/*.test.js",
     "lint": "eslint .",
     "links": "node scripts/check-links.js",
-    "speed": "node scripts/speed.js"
+    "speed": "node scripts/speed.js",
+    "adopted": "python scripts/adopted-scan.py"
   },
   "devDependencies": {
     "eslint": "^9.39.5",
