@@ -19,11 +19,16 @@
     return v && (v[2] || v[0]);
   };
   const council = (pref, muni) => (muni === '@' ? `${pref}議会` : `${pref}${muni.replace(/^.+?郡/, '')}議会`);
-  const card = (pref, muni) => {
+  // 議員名簿の公式のページ（scripts/roster-find.js で探したもの）
+  let roster;
+  const loadRoster = () => (roster ||= fetch('/data/roster.json').then((r) => (r.ok ? r.json() : {})).catch(() => ({})));
+  const card = (pref, muni, ros) => {
     const name = council(pref, muni);
     const off = site(pref, muni);
+    const meibo = (ros[`${pref}/${muni}`] || {}).url;
     return `<li><b>${esc(name)}</b>
       <a class="btn btn-small btn-primary" href="${ai(askLocal(name))}" target="_blank" rel="noopener noreferrer">GoogleのAIに議員の一覧を聞く ↗</a>
+      ${meibo ? `<a class="btn btn-small" href="${esc(meibo)}" target="_blank" rel="noopener noreferrer">議員名簿（公式）↗</a>` : ''}
       <a class="btn btn-small" href="${g(`${name} 議員名簿`)}" target="_blank" rel="noopener noreferrer">ふつうに検索 ↗</a>
       ${off ? `<a class="btn btn-small" href="${esc(off)}" target="_blank" rel="noopener noreferrer">公式サイト ↗</a>` : ''}
       <button type="button" class="btn btn-small" data-council="${esc(name)}">宛先の議会名に入れる</button></li>`;
@@ -36,11 +41,12 @@
     const v = (await cache[head])[zip.slice(3)];
     if (!v) { out.innerHTML = '<p class="hint-sm">この郵便番号に当てはまる自治体が見つかりません。郵便番号をお確かめください。</p>'; return; }
     const keys = v.split('|');
+    const ros = await loadRoster();
     const prefs = [...new Set(keys.map((k) => k.split('/')[0]))];
-    out.innerHTML = `<ul class="zip-councils">${keys.map((k) => card(...k.split('/'))).join('')}${prefs.map((p) => card(p, '@')).join('')}
+    out.innerHTML = `<ul class="zip-councils">${keys.map((k) => card(...k.split('/'), ros)).join('')}${prefs.map((p) => card(p, '@', ros)).join('')}
       <li><b>国会議員（あなたの地域の衆議院・参議院）</b>
       <a class="btn btn-small btn-primary" href="${ai(askDiet(zip))}" target="_blank" rel="noopener noreferrer">GoogleのAIに議員の一覧を聞く ↗</a></li></ul>
-      <p class="hint-sm">「GoogleのAIに聞く」を押すと、Google の AI モードが、議員の一覧・所属政党・連絡先・力を入れている政策・SNS を表にまとめて答えます（Google にログインしていないと AI モードが使えないことがあります。そのときは「ふつうに検索」を）。手紙の送り先は、多くの議員が議会事務局あて（「○○議員 様」と書く）です。AI の答えは間違うことがあるので、送る前に議会の公式サイトの議員名簿で確かめてください。</p>`;
+      <p class="hint-sm">「GoogleのAIに聞く」を押すと、Google の AI モードが、議員の一覧・所属政党・連絡先・力を入れている政策・SNS を表にまとめて答えます（Google にログインしていないと AI モードが使えないことがあります。そのときは「ふつうに検索」を）。手紙の送り先は、多くの議員が議会事務局あて（「○○議員 様」と書く）です。AI の答えは間違うことがあるので、送る前に「議員名簿（公式）」（見つかっている議会だけ出ます）か、議会の公式サイトで確かめてください。</p>`;
   }
   input.addEventListener('input', run);
   out.addEventListener('click', (e) => {
