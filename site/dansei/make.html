@@ -99,6 +99,13 @@
       <div class="wz-step" data-step="council" hidden>
         <h3>どの自治体にしますか？</h3>
         <p class="hint-sm"><b>住んでいる自治体の議会を1つ選ぶのが、いちばん確実です。</b>ほかの議会にも出したいときは、あとから書き足せます。</p>
+        <div class="wz-near">
+          <button type="button" id="wzNearBtn" class="btn btn-small">📍 現在地から近い自治体を探す</button>
+          <span class="hint-sm">持参して出すときに。現在地はこの端末の中だけで使い、送信しません。</span>
+          <div id="wzNear" class="wz-grid" hidden></div>
+        </div>
+        <!-- 自治体が決まらないとき（探す欄より上に置き、決まっていない人がすぐ見つけられるように） -->
+        <p class="wz-skip"><button type="button" id="wzSkip" class="btn btn-small">自治体を選ばずに作る</button> <span class="hint-sm">提出先を空けた文書ができます。出す先が決まったら手書きで入れてください。</span></p>
         <label class="wz-global">自治体名か郵便番号で探す
           <input type="search" id="wzGlobal" class="wz-filter" placeholder="例：せたがや、船橋、sapporo、郵便番号（100-0001）" autocomplete="off">
         </label>
@@ -107,11 +114,6 @@
         <p class="hint-sm">都道府県から選ぶこともできます。都道府県を選ぶと、その都道府県の自治体が下に出ます。</p>
         <p class="wz-picked" id="wzPrefPicked"></p>
         <div id="wzPrefs"></div>
-        <div class="wz-near">
-          <button type="button" id="wzNearBtn" class="btn btn-small">📍 現在地から近い自治体を探す</button>
-          <span class="hint-sm">持参して出すときに。現在地はこの端末の中だけで使い、送信しません。</span>
-          <div id="wzNear" class="wz-grid" hidden></div>
-        </div>
         <div id="wzCouncilBox" class="wz-council-box" hidden>
           <h4 id="wzCouncilTitle" class="wz-sub"></h4>
           <p class="hint-sm"><span id="wzCountHint" hidden>「出した人 ○人」はこのサイトで提出を報告した人の数です。まだ誰も出していない議会に出すと、全国に広がります。</span></p>
@@ -122,8 +124,6 @@
           <button type="button" id="wzMorePref" class="btn btn-small btn-ghost">＋ ほかの都道府県の議会も選ぶ（任意）</button>
           <div id="wzDeadline" class="wz-deadline" hidden></div>
         </div>
-        <!-- 自治体が決まらないとき（よく使う「探す」「都道府県から選ぶ」の後ろに置く） -->
-        <p class="wz-skip"><button type="button" id="wzSkip" class="btn btn-small">自治体を選ばずに作る</button> <span class="hint-sm">提出先を空けた文書ができます。出す先が決まったら手書きで入れてください。</span></p>
         <p class="center" data-petition-only><a href="/kakunin" class="btn btn-small">送りたい議会の郵送・持参の扱いがわからない</a></p>
       </div>
 
