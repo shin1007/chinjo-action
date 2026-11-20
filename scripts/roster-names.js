@@ -57,22 +57,23 @@ const STOP = /名前|ふりがな|フリガナ|よみがな|議員|議長|委員
 // 表の見出し（「氏　名」「住　所」）や住所（「新宮町 上府北」）を名前とみなさない
 // 名字は漢字だけ・ひらがなだけ・カタカナだけのどれか（「裕う」のように混ざるのは PDF の文字の並びが崩れたもの）
 const oneScript = (x) => new RegExp(`^[${KANJI}ヶノ之]+$`).test(x) || /^[ぁ-ん]+$/.test(x) || /^[ァ-ヶー]+$/.test(x);
-const isName = (m) => oneScript(m[1]) && !/(課|係|局)$/.test(m[1]) && !/(課|係|室|局)$/.test(m[2]) && !STOP.test(`${m[1]}${m[2]}`) && !STOP.test(m[0]) && !/(都|道|府|県|市|町|村|区|郡)$/.test(m[1]) && !(m[1].length === 1 && m[2].length === 1 && /^(氏名|住所|党派|欠員|備考|写真|役職|期数|議席|年齢|性別|職業|現職|新人|定数|会長|議長|職名|期別|役職|会派|当選|回数|順位)$/.test(m[1] + m[2]));
+const isName = (m) => oneScript(m[1]) && !/及/.test(m[0]) && !/(郡|市)$/.test(m[2]) && !/(会|党|団)$/.test(m[1]) && !/(選出|会派)$/.test(m[2]) && !/(課|係|局)$/.test(m[1]) && !/(課|係|室|局)$/.test(m[2]) && !STOP.test(`${m[1]}${m[2]}`) && !STOP.test(m[0]) && !/(都|道|府|県|市|町|村|区|郡)$/.test(m[1]) && !(m[1].length === 1 && m[2].length === 1 && /^(氏名|住所|党派|欠員|備考|写真|役職|期数|議席|年齢|性別|職業|現職|新人|定数|会長|議長|職名|期別|役職|会派|当選|回数|順位)$/.test(m[1] + m[2]));
 // よみがなを別の要素に書いている名簿では、ひらがなだけの名前と漢字の名前が同じ数ずつ取れる。そのときはひらがなだけのほうを落とす
 const dropReadings = (names) => {
-  const kana = names.filter((n) => /^[ぁ-んー ]+$/.test(n));
+  const kana = names.filter((n) => /^[ぁ-んー ]+$/.test(n) || /^[ァ-ヶー ]+$/.test(n));
   const other = names.length - kana.length;
   return kana.length >= 3 && other >= 3 && kana.length / other > 0.6 && kana.length / other < 1.4 ? names.filter((n) => !kana.includes(n)) : names;
 };
 // 空白なしの名前を見分けるための名字の一覧。これまでに「姓 名」の形で取れた名前と、国会議員の名簿から作る
-const SURNAMES = new Set(fs.readFileSync(path.join(__dirname, 'surnames.txt'), 'utf8').split('\n').filter((x) => x && !x.startsWith('#')));
+const SURNAMES = new Set(fs.readFileSync(path.join(__dirname, 'surnames.txt'), 'utf8').split(/\r?\n/).filter((x) => x && !x.startsWith('#')));
 const hasSurname = (flat) => [4, 3, 2, 1].some((k) => flat.length - k >= 1 && flat.length - k <= 4 && SURNAMES.has(flat.slice(0, k)));
 const MENU = /選出|について|情報|手続|結果|取り組み|取組|標準|拡大|縮小|中文|隠す|English|한국|閉じる|戻る|もっと|詳細|お知らせ|新着|募集|申請|案内|制度|計画|予算|子育て|健康|医療|防災|観光|文化|環境|税|ごみ|住まい|仕事|施設|地図|リンク|イベント|カレンダー|サイト|ログイン|一覧|名簿|紹介/;
 const clean = (s) => s.replace(/<rt>[\s\S]*?<\/rt>|<rp>[\s\S]*?<\/rp>/gi, '').replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]+>/g, '').replace(/&nbsp;|&#160;/g, ' ').replace(/&amp;/g, '&')
   .replace(/[（(][^）)]*[）)]/g, '').replace(/(議員|君|さん|氏)$/, '').trim();
+const YOMI = new RegExp(`(?:^|[ 、|｜])([${KANJI}][${KANJI}ぁ-んァ-ヶー]{0,4}(?: [${KANJI}ぁ-んァ-ヶー]{1,4})?) ?[（(] ?([ぁ-んー]+ [ぁ-んー]+) ?[)）]`, 'g');
 const join = (m) => `${m[1]} ${m[2]}`.normalize('NFC');
 
-function extract(page) {
+function extract(page, min = 2) {
   const h = page.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<!--[\s\S]*?-->/gi, ' ');
   // 頭のメニュー・足もとは落とす（main があれば main だけ）
   const body = (h.match(/<main[\s\S]*?<\/main>/i) || h.match(/<div[^>]+id=["'](?:main|contents?|tmp_contents|content-main|mainContents)["'][\s\S]*/i) || [h])[0];
@@ -80,7 +81,7 @@ function extract(page) {
   const take = (key, re) => {
     for (const m of body.matchAll(re)) {
       for (const line of clean(m[1]).split(/\n/)) {
-        const t = line.trim().normalize('NFC');
+        const t = line.trim().normalize('NFC').replace(/^(氏[ 　]*名|名[ 　]*前|議員名)[ 　:：]+/, '');
         const sp = t.match(SPACED);
         if (sp && isName(sp)) groups[key].push(join(sp));
       }
@@ -115,6 +116,11 @@ function extract(page) {
     }
   }
   groups.col = col;
+  // 名前のすぐ後ろに（よみがな）が付いた書き方（例：赤木一雄（あかぎ かずお））
+  // ruby のよみがな（<rt>）は（よみがな）として残す
+  const plainBody = body.replace(/<rp>[\s\S]*?<\/rp>/gi, '').replace(/<rt>([\s\S]*?)<\/rt>/gi, '($1)').replace(/<[^>]+>/g, ' ').replace(/&nbsp;|&#160;/g, ' ').normalize('NFC').replace(/[\s　]+/g, ' ');
+  groups.yomi = [...plainBody.matchAll(YOMI)].map((m) => m[1].trim().replace(/^\S+(区|市|郡|党|会) /, ''))
+    .filter((t) => { const f = t.replace(/ /g, ''); return f.length >= 2 && f.length <= 8 && !STOP.test(f) && !MENU.test(f) && !/(都|道|府|県|市|町|村|区|郡|課|係|室|局)$/.test(f); });
   // 一人ずつのページへのリンクが同じ場所（同じフォルダ）に並んでいる名簿：リンクの文字が名前（空白なしでもよい）
   const byDir = {};
   for (const m of body.matchAll(/<a\s[^>]*href=["']([^"'#]+)["'][^>]*>([\s\S]*?)<\/a>/gi)) {
@@ -136,8 +142,12 @@ function extract(page) {
   };
   // 並びごとに集め、名前の多い並びから順に合わせる（名簿が表と箇条書きに分かれていることがある）。
   // 2人未満しか集まらない並びは、見出しなどの拾いすぎとみて使わない
-  const ranked = Object.entries(groups).map(([key, xs]) => [key, uniq(xs)]).filter(([, u]) => u.length >= 2).sort((a, b) => b[1].length - a[1].length);
-  return { key: ranked.map(([k]) => k).join('+') || null, names: dropReadings(uniq(ranked.flatMap(([, u]) => u))) };
+  const ranked = Object.entries(groups).map(([key, xs]) => [key, uniq(xs)]).filter(([, u]) => u.length >= min).sort((a, b) => b[1].length - a[1].length);
+  // 「いそべ 尚哉」の「尚哉」だけのように、ほかの名前の後ろの部分だけのものは落とす
+  const all = uniq(ranked.flatMap(([, u]) => u));
+  const flat = all.map((x) => x.replace(/ /g, ''));
+  const names = all.filter((x, i) => x.includes(' ') || !flat.some((y, j) => j !== i && y.length > flat[i].length && y.endsWith(flat[i])));
+  return { key: ranked.map(([k]) => k).join('+') || null, names: dropReadings(names) };
 }
 
 function extractText(text) {
@@ -162,17 +172,48 @@ const seats = (t) => {
   const cur = ns.find(([k]) => k !== '定数');
   return cur ? cur[1] : ns.length ? ns[0][1] : null;
 };
+// 名簿の入口のページでは名前が取れず、名前が並ぶページが別にある議会（目で見て確かめたもの）
+// 文字列はそのページを読む。{ url, follow } は、そのページの follow に合う文字のリンク（会派別・選挙区別など）を全部開いて合わせる
+const PAGES = {
+  '東京都/@': 'https://www.gikai.metro.tokyo.lg.jp/membership/',
+  '新潟県/新潟市': 'https://www.city.niigata.lg.jp/shigikai/index_meibo/meibo_02kaihabetsu.html',
+  '大阪府/大阪市': { url: 'https://www.city.osaka.lg.jp/shikai/page/0000002245.html', follow: /議員団$/ },
+  '宮城県/仙台市': { url: 'https://www.gikai.city.sendai.jp/list/district/index.html', follow: /^(青葉|宮城野|若林|太白|泉)区$/ },
+  '北海道/@': { url: 'https://www.gikai.pref.hokkaido.lg.jp/meibo/pdf-index.html', follow: /^[あかさたなはまやらわ]～/ },
+  '神奈川県/横浜市': 'https://www.city.yokohama.lg.jp/shikai/giin/50on.html',
+  '京都府/京都市': 'https://www2.city.kyoto.lg.jp/shikai/meibo/gojuon.html',
+  '岡山県/岡山市': 'https://www.city.okayama.jp/gikai/0000015787.html',
+  '大阪府/@': 'https://www.pref.osaka.lg.jp/o170010/gikai_somu/sugatami20/index50.html',
+  '神奈川県/@': { url: 'https://www.pref.kanagawa.jp/gikai/p80275.html', seats: 105 },  // 選挙区ごとの「定数N人」しか書いてない
+};
+async function readMerged({ url, follow }) {
+  const p = await html(url);
+  if (!p.html) return { names: [], error: p.error || '開けない' };
+  const links = [...new Set([...p.html.matchAll(/<a\s[^>]*href=["']([^"'#]+)["'][^>]*>([\s\S]*?)<\/a>/gi)]
+    .filter(([, , t]) => follow.test(t.replace(/<[^>]+>/g, '').trim())).map(([, h]) => new URL(h, url).href))];
+  const all = [];
+  for (const l of links.slice(0, 40)) {
+    const q = await html(l);
+    const c = q.text != null ? extractText(q.text) : q.html ? extract(q.html, 1) : { names: [] };
+    all.push(...c.names);
+  }
+  return { key: `merge${links.length}`, names: [...new Set(all)], url, seats: seats(p.html) };
+}
 // 目で見て名前でないものを拾うとわかった議会（読み方を直すまで使わない）
 const SKIP = { '千葉県/匝瑳市': '名前でないもの（地名）を拾う' };
 // 一文字ずつの「姓 名」は表の見出しや言葉のことが多い。言葉の一覧にあるものは落とし、3つ以上あれば名簿ごと使わない
 const WORDS = /^(欠員|欠番|会計|団長|代表|幹事|農業|無職|顧問|派遣|銀座|清住|本陣|新風|会長|理事|監事|委員|議員|職名|期別|回数|氏名|住所|党派|備考|写真|役職|期数|議席|年齢|性別|職業|定数|議長|一般質問|承認|選任|適任|許可|決定)$/;
 const tidy = (r) => {
-  r.names = r.names.filter((x) => !WORDS.test(x.replace(/ /g, '')));
+  r.names = r.names.filter((x) => !WORDS.test(x.replace(/ /g, '')) && !/及|職業|視察|状況|執行|交際費|(郡|市|区|町|村)$/.test(x));
+  // 空白なしの名前が「姓 名」の名前と混じっているときは、名字の一覧にある名字で始まるものだけ残す（「圭二」のような下の名前だけ・地名を落とす）
+  if (r.names.some((x) => x.includes(' '))) r.names = r.names.filter((x) => x.includes(' ') || [4, 3, 2].some((k) => x.length - k >= 1 && SURNAMES.has(x.slice(0, k))));
   if (r.names.filter((x) => /^. .$/.test(x) && !SURNAMES.has(x[0])).length >= 2 || r.names.filter((x) => /^. .$/.test(x)).length >= 3) r.error = '一文字ずつの言葉を拾っている';
   return r;
 };
 async function read(url, lo, hi) {
-  const r = tidy(await readRaw(url, lo, hi));
+  const r = tidy(typeof url !== 'object' ? await readRaw(url, lo, hi) : url.follow ? await readMerged(url) : await readRaw(url.url, lo, hi));
+  // ページの人数の書き方が読めない議会は、PAGES に書いた現員を使う
+  if (typeof url === 'object' && url.seats) r.seats = url.seats;
   if (r.error) return r;
   const n = r.seats;
   // 書いてある人数より多いときは、よみがなが混じっているとみて、ひらがなだけの名前を落としてみる
@@ -184,6 +225,8 @@ async function read(url, lo, hi) {
   // 名字の一覧にある名字で始まるものが半分に届かなければ、名前でないもの（地名・課の名前など）を拾っているとみる
   const known = r.names.filter((x) => { const f = x.replace(/ /g, ''); return /^[ぁ-んァ-ヶー ]+$/.test(x) || (x.includes(' ') ? (x.split(' ')[0].length >= 2 && /[一-龥々]/.test(x)) || SURNAMES.has(x.split(' ')[0]) : hasSurname(f)); }).length;
   if (r.names.length && SURNAMES.size > 500 && known / r.names.length < 0.5) return { ...r, error: '名前でないものを拾っている' };
+  // 人数が書いてないときに8人に届かないのは、委員会など一部の名簿を拾っている見込みが高い
+  if (!n && r.names.length < 8) return { ...r, error: `${r.names.length}人しか取れない（人数が書いてない）` };
   if (n && r.names.length < Math.floor(n * 0.9)) return { ...r, error: `${n}人のうち${r.names.length}人しか取れない` };
   if (n && r.names.length > n) return { ...r, error: `${n}人のはずが${r.names.length}人取れた（名前でないものが混じっている）` };
   return r;
@@ -237,8 +280,9 @@ async function main() {
   if (opt('--show').length) {
     const id = opt('--show')[0];
     const [lo, hi] = range(level[id]);
-    const b = await read(roster[id].url, lo, hi);
-    console.log(b.url || roster[id].url, b.error || '', '定数など:', b.seats, b.key, b.names.length, b.names.join('、'));
+    const u = opt('--url')[0] || PAGES[id] || roster[id].url;
+    const b = await read(u, lo, hi);
+    console.log(b.url || u, b.error || '', '定数など:', b.seats, b.key, b.names.length, b.names.join('、'));
     return;
   }
   fs.mkdirSync(OUT, { recursive: true });
@@ -257,7 +301,7 @@ async function main() {
   await Promise.all(Array.from({ length: 8 }, async () => {
     for (let id; (id = queue.shift());) {
       const pref = id.split('/')[0];
-      const url = roster[id].url;
+      const url = PAGES[id] || roster[id].url;
       const [lo, hi] = range(level[id]);
       const b = SKIP[id] ? { names: [], error: SKIP[id] } : await read(url, lo, hi);
       if (!b.error && b.names.length >= lo && b.names.length <= hi) {
@@ -265,7 +309,7 @@ async function main() {
         delete failed[id];
       } else {
         delete load(pref)[id];
-        failed[id] = { url, reason: b.error || (b.names.length ? `${b.names.length}人しか（または${b.names.length}人も）取れない` : '名前の形のものが見つからない'), checked_at: today() };
+        failed[id] = { url: url.url || url, reason: b.error || (b.names.length ? `${b.names.length}人しか（または${b.names.length}人も）取れない` : '名前の形のものが見つからない'), checked_at: today() };
       }
       if (++done % 50 === 0) console.error(`${done}/${todo.length}`);
     }
