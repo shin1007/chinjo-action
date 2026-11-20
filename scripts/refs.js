@@ -41,7 +41,7 @@ function block(theme) {
     for (const a of list) {
       L.push(`  <details class="ask-refs" id="${a.id}">`, `    <summary>${esc(a.label)}</summary>`, '    <ul>');
       a.refs.forEach((r) => L.push(item(r)));
-      L.push('    </ul>', `    <p class="hint-sm"><a href="/${theme}/easy/${a.id}">この陳情の意義を、中学生にもわかる言葉で読む</a></p>`, '  </details>');
+      L.push('    </ul>', `    <p class="hint-sm"><a href="/${theme}/easy/${a.id}">この陳情の意義を、わかりやすい言葉で読む</a></p>`, '  </details>');
     }
   }
   L.push(`  ${END}`);

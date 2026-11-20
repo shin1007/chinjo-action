@@ -1,4 +1,4 @@
-// 陳情の項目ごとに、中学生にもわかる「この陳情の意義」のページを作る。
+// テーマごとの「陳情の内容のあらまし」（議員・職員・住民が短時間で全体を見られる一覧）と、項目ごとのわかりやすい説明のページを作る。
 // 説明は site/themes/<テーマ>/easy.js（書き方は .claude/skills/easy-explainer/SKILL.md）。
 // 事実・数字・資料は asks-*.js の reason・figs・refs をそのまま使い、easy.js には言いかえた説明だけを書く。
 //   node scripts/easy.js         … /<テーマ>/easy と /<テーマ>/easy/<項目id> を作り直す
@@ -42,14 +42,14 @@ const scopeText = (a) => (a.scope === 'national' ? '議会から国に意見書�
 
 function itemPage(theme, a, e) {
   const url = `/${theme}/easy/${a.id}`;
-  const L = [`  <p class="hint-sm"><a href="/${theme}/easy">← 中学生にもわかる説明の一覧</a></p>`, `  <h1>${esc(a.label)}</h1>`, `  <p class="hint-sm">${scopeText(a)}</p>`];
+  const L = [`  <p class="hint-sm"><a href="/${theme}/easy">← 陳情の内容のあらまし（一覧）</a></p>`, `  <h1>${esc(a.label)}</h1>`, `  <p class="hint-sm">${scopeText(a)}</p>`];
   if (e) {
     L.push('  <h2>この陳情でお願いすること</h2>', `  <p>${esc(e.what)}</p>`,
       '  <h2>いまは、どうなっている？</h2>', `  <p>${esc(e.now)}</p>`,
       '  <h2>どうして大事なの？</h2>', `  <p>${esc(e.why)}</p>`,
       '  <h2>変わると、どうなる？</h2>', `  <p>${esc(e.after)}</p>`);
   } else {
-    L.push('  <p class="wz-notfound">中学生向けの説明は準備中です。下の「陳情の理由（原文）」をご覧ください。</p>');
+    L.push('  <p class="wz-notfound">説明は準備中です。下の「陳情の理由（原文）」をご覧ください。</p>');
   }
   if (a.figs && a.figs.length) {
     L.push('  <h2>数字で見ると</h2>');
@@ -67,19 +67,35 @@ function itemPage(theme, a, e) {
   }
   L.push(`  <p><a class="btn" href="/${theme}/make">この陳情書をつくる</a></p>`);
   const desc = e ? e.what : `${a.label}を求める陳情の説明`;
-  return { file: path.join(SITE, theme, 'easy', `${a.id}.html`), html: withParts(shell(theme, { title: `${a.label}（中学生にもわかる説明）｜${siteName(theme)}`, desc, url, main: L.join('\n') }), theme, 'easy') };
+  return { file: path.join(SITE, theme, 'easy', `${a.id}.html`), html: withParts(shell(theme, { title: `${a.label}（陳情の説明）｜${siteName(theme)}`, desc, url, main: L.join('\n') }), theme, 'easy') };
 }
 
+// 内容の札（site/js/common.js の tagsOf と同じ決め方）
+const tagsOf = (a) => [
+  (a.refs || []).some((r) => r.secondary) && ['research', '研究の裏づけあり'],
+  a.precedent && ['precedent', `実施例あり（${a.precedent}）`],
+  a.lowcost && ['lowcost', '費用が少ない'],
+].filter(Boolean);
+
 function indexPage(theme, asks, easy) {
-  const groups = [['national', '国への意見書を求める陳情'], ['local', '自治体の施策を求める陳情']];
-  const L = ['  <h1>中学生にもわかる、陳情の説明</h1>',
-    '  <p>このテーマで出せる陳情の一つひとつについて、「何をお願いしているのか」「いまはどうなっているのか」「どうして大事なのか」を、やさしい言葉で説明します。数字や資料は、陳情書と同じ公的な資料からとっています。</p>'];
-  for (const [scope, label] of groups) {
-    const list = asks.filter((a) => a.scope === scope);
-    if (!list.length) continue;
-    L.push(`  <h2>${label}</h2>`, '  <ul>', ...list.map((a) => `    <li><a href="/${theme}/easy/${a.id}">${esc(a.label)}</a>${easy[a.id] ? '' : '<span class="hint-sm">（説明は準備中）</span>'}</li>`), '  </ul>');
+  const name = siteName(theme);
+  const nat = asks.filter((a) => a.scope === 'national').length;
+  const L = [`  <h1>陳情の内容のあらまし</h1>`,
+    `  <p>${esc(name.replace(/陳情アクション$/, ''))}ために出せる陳情の内容を、1ページにまとめました。全${asks.length}件（国への意見書を求めるもの${nat}件、自治体の取り組みを求めるもの${asks.length - nat}件）で、1件が1通の陳情書になります。議員・自治体の職員の方が全体を短い時間で見られるよう、それぞれ「何をお願いしているか」を一文で書き、詳しい説明・数字・資料へのリンクを付けています。</p>`,
+    '  <p class="hint-sm">札の意味：<span class="ask-tag ask-tag-research">研究の裏づけあり</span>論文や公的機関の報告がある　<span class="ask-tag ask-tag-precedent">実施例あり</span>ほかの自治体ですでに行っている　<span class="ask-tag ask-tag-lowcost">費用が少ない</span>予算がほとんど要らない。印刷するときは、ブラウザの印刷を使ってください。</p>'];
+  const cats = [...new Set(asks.map((a) => a.category || 'そのほか'))];
+  for (const c of cats) {
+    L.push(`  <h2>${esc(c)}</h2>`);
+    for (const a of asks.filter((x) => (x.category || 'そのほか') === c)) {
+      const tags = tagsOf(a).map(([k, t]) => `<small class="ask-tag ask-tag-${k}">${esc(t)}</small>`).join('');
+      const what = easy[a.id] ? easy[a.id].what : a.text.replace(/{宛先}/g, '提出先の自治体');
+      L.push('  <section class="sum-item">',
+        `    <h3><a href="/${theme}/easy/${a.id}">${esc(a.label)}</a> <small class="ask-scope">${a.scope === 'national' ? '国へ意見書' : '自治体の取り組み'}</small></h3>`,
+        `    <p>${esc(what)}</p>`, tags ? `    <p class="ask-tags">${tags}</p>` : '', '  </section>');
+    }
   }
-  return { file: path.join(SITE, theme, 'easy.html'), html: withParts(shell(theme, { title: `中学生にもわかる、陳情の説明｜${siteName(theme)}`, desc: 'このテーマの陳情の一つひとつを、中学生にもわかる言葉で説明します。', url: `/${theme}/easy`, main: L.join('\n') }), theme, 'easy') };
+  L.push(`  <p><a class="btn" href="/${theme}/make">陳情書をつくる</a>　<a href="/${theme}/refs">関連資料の一覧</a></p>`);
+  return { file: path.join(SITE, theme, 'easy.html'), html: withParts(shell(theme, { title: `陳情の内容のあらまし｜${name}`, desc: 'このテーマで出せる陳情の内容を1ページにまとめ、何をお願いしているかを一文で説明します。', url: `/${theme}/easy`, main: L.filter(Boolean).join('\n') }), theme, 'easy') };
 }
 
 function all() {
