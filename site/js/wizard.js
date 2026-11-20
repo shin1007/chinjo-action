@@ -1578,7 +1578,18 @@
     if (!q) { setZipPrefs(null); $('wzGlobalHits').innerHTML = ''; return; }
     const zip = q.replace(/[０-９]/g, (d) => String.fromCharCode(d.charCodeAt(0) - 0xFEE0)).replace(/^〒|[-－ー‐\s]/g, '');
     if (/^\d{1,7}$/.test(zip)) {
-      if (zip.length < 3) { setZipPrefs(null); $('wzGlobalHits').innerHTML = '<p class="wz-wide hint-sm">郵便番号は3けた以上入れると、当てはまる自治体と郵送の扱いの一覧が絞られます（例：100-0001）。</p>'; return; }
+      if (zip.length < 2) { setZipPrefs(null); $('wzGlobalHits').innerHTML = '<p class="wz-wide hint-sm">郵便番号は2けた以上入れると郵送の扱いの一覧が、3けた以上で当てはまる自治体が絞られます（例：100-0001）。</p>'; return; }
+      if (zip.length === 2) {
+        // 2けたでは都道府県だけを引き、郵送の扱いの一覧を絞る（表は data/zip/p2.json、scripts/zip.js で作る）
+        zipCache.p2 ||= fetch('/data/zip/p2.json').then((r) => (r.ok ? r.json() : {})).catch(() => ({}));
+        const prefs = (await zipCache.p2)[zip];
+        if ($('wzGlobal').value.trim() !== q) return;
+        setZipPrefs(prefs);
+        $('wzGlobalHits').innerHTML = prefs
+          ? `<p class="wz-wide hint-sm">〒${zip}で始まる地域は${esc(prefs.join('・'))}です。下の郵送の扱いの一覧を絞りました。あと1けた入れると自治体が出ます。</p>`
+          : `<p class="wz-wide hint-sm">〒${zip}で始まる郵便番号は見つかりません。</p>`;
+        return;
+      }
       const ids = await zipHits(zip);
       if ($('wzGlobal').value.trim() !== q) return;
       const shown = zip.length > 3 ? `${zip.slice(0, 3)}-${zip.slice(3)}` : zip;
