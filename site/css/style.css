@@ -100,6 +100,10 @@ html { scroll-padding-top: 96px; scroll-padding-bottom: 140px; } /* 下に固定
 .eyebrow { color: var(--main-dark); font-weight: 700; }
 .hero-crumb { color: var(--muted); font-size: 0.9rem; }
 .hero-crumb a { color: inherit; }
+/* 強調は太字に加えて色も付ける（個別の指定があればそちらが優先） */
+:where(strong, b) { color: var(--main-dark); }
+:where(a, .btn, button, .site-footer, .wz-card, .notice, .warn-box) :where(strong, b) { color: inherit; }
+@media print { :where(strong, b) { color: inherit; } }
 .hero-crumb b { color: var(--main-dark); }
 .hero h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); line-height: 1.35; margin: 12px 0 20px; }
 .lead { max-width: 720px; margin: 0 auto 28px; }
