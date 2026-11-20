@@ -282,7 +282,7 @@ def petition_strip(row, w, hgt):
             d.text((x + 12, y + 40 + j * 20), t, font=f(14), fill=INK)
         d.rounded_rectangle((x + 12, y + 90, x + cw - 12, y + 95), 3, fill=LINE)
         d.rounded_rectangle((x + 12, y + 102, x + 12 + (cw - 24) * 0.62, y + 107), 3, fill=LINE)
-    strip = strip.rotate(4, resample=Image.BICUBIC, expand=True)
+    strip = strip.rotate(2, resample=Image.BICUBIC, expand=True)
     sx = (strip.width - w) // 2 + (60 if row else -60)
     strip = strip.crop((sx, (strip.height - hgt) // 2, sx + w, (strip.height - hgt) // 2 + hgt))
     # 両端をぼかして消し、全体を少し薄くする
@@ -290,7 +290,7 @@ def petition_strip(row, w, hgt):
     fade = Image.new('L', (w, 1))
     for x in range(w):
         t = min(x, w - 1 - x) / (w * 0.15)
-        fade.putpixel((x, 0), round(255 * min(1, t) * 0.75))
+        fade.putpixel((x, 0), round(255 * min(1, t) * 0.45))
     from PIL import ImageChops
     strip.putalpha(ImageChops.multiply(a, fade.resize((w, hgt))))
     return strip
