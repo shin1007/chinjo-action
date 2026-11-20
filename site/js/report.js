@@ -34,13 +34,27 @@ window.Report = (() => {
       .catch(() => asksMap);
   const asked = (id) => asksMap.get(id) || [];
 
+  // いたずら対策の計算：sha256(都道府県|議会名|UTCの日付|答え) の16進の頭が 0000 になる答えを探す（ふつうは1〜3秒）
+  async function solve(pref, council) {
+    const day = new Date().toISOString().slice(0, 10);
+    const enc = new TextEncoder();
+    for (let i = 0; i < 5000000; i += 1) {
+      const s = i.toString(36);
+      const h = new Uint8Array(await crypto.subtle.digest('SHA-256', enc.encode(`${pref}|${council}|${day}|${s}`)));
+      if (h[0] === 0 && h[1] === 0) return s;
+    }
+    return null;
+  }
+
   async function report(id, items, asks = []) {
     if (!enabled) return false;
     if (reported(id)) return true;
     const i = id.indexOf('/');
+    const pow = await solve(id.slice(0, i), id.slice(i + 1));
+    if (!pow) return false;
     const r = await fetch(`${URL}/rest/v1/reports`, {
       method: 'POST', headers: { ...headers, Prefer: 'return=minimal' },
-      body: JSON.stringify({ pref: id.slice(0, i), council: id.slice(i + 1), ...(Number.isInteger(items) && items >= 1 && items <= 50 ? { items } : {}), ...(ASKS_LIVE && asks.length ? { asks: asks.filter((a) => ASK_RE.test(a)).slice(0, 10) } : {}) }),
+      body: JSON.stringify({ pref: id.slice(0, i), council: id.slice(i + 1), ...(Number.isInteger(items) && items >= 1 && items <= 50 ? { items } : {}), ...(ASKS_LIVE && asks.length ? { asks: asks.filter((a) => ASK_RE.test(a)).slice(0, 10) } : {}), pow }),
     }).catch(() => null);
     if (!r || !r.ok) return false;
     counts.set(id, (counts.get(id) || 0) + 1);

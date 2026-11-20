@@ -896,7 +896,7 @@
   const sameHtml = (c) => {
     const same = sameAsks(c);
     if (!same.length) return '';
-    const names = same.map((r) => `「${esc((window.Petition.ITEMS[r.ask.split('/')[1]] || {}).label || r.ask)}」（${r.n}件、最後は${esc(String(r.last || '').slice(0, 7))}）`).join('、');
+    const names = same.map((r) => `「${esc((window.Petition.ITEMS[r.ask.split('/')[1]] || {}).label || r.ask)}」（最後は${esc(String(r.last || '').slice(0, 7))}）`).join('、');
     return `<span class="wz-row wz-same"><b>同じ内容</b>この議会には、${names}の提出の記録があります。同じ趣旨の陳情は、まとめて1件として扱われたり、すでに結論が出ていると審査されなかったりすることがあります。出す前に、議会事務局に扱いを確かめてください。</span>`;
   };
   // いたずら対策：この画面で PDF を開く・保存する・文面をコピーするまでは、記録のボタンを押せない
@@ -1025,6 +1025,7 @@
     const id = e.target.dataset.report;
     if (!id) return;
     e.target.disabled = true;
+    e.target.textContent = '送っています…（数秒かかります）';
     const ok = await window.Report.report(id, state.items.length, askIds());
     e.target.textContent = ok ? '✓ 提出を報告しました。ありがとうございます' : '送れませんでした。もう一度押してください';
     e.target.disabled = ok;

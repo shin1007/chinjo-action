@@ -22,6 +22,12 @@ create table if not exists public.councils (
 );
 alter table public.councils enable row level security;
 
+-- いたずら対策（2026-11-20）
+-- pow：送る前にブラウザでする計算の答え。sha256(都道府県|議会名|UTCの日付|pow) の16進の頭が 0000 になるものだけ受け付ける（保存はしない）
+-- hidden：運営がいたずらと判断した記録に印を付ける（Supabase の画面で true にする）。集計からは除く。anon は書けない
+alter table public.reports add column if not exists pow text check (char_length(pow) <= 40);
+alter table public.reports add column if not exists hidden boolean not null default false;
+
 -- 同じ接続元から同じ議会への報告は1日1件、全体でも1日20件まで。
 -- 接続元の IP は残さず、日付と混ぜたハッシュだけを持つ（翌日以降は消してよい）
 create table if not exists public.report_guard (
@@ -45,6 +51,15 @@ begin
   if not exists (select 1 from councils where pref = new.pref and council = new.council) then
     raise exception 'unknown council';
   end if;
+  -- 計算の答えを確かめる（日付の変わり目に送った人のため、前日の日付でも受け付ける）
+  if new.pow is null or not exists (
+    select 1 from unnest(array[(now() at time zone 'utc')::date, (now() at time zone 'utc')::date - 1]) as d
+    where left(encode(sha256(convert_to(new.pref || '|' || new.council || '|' || d::text || '|' || new.pow, 'utf8')), 'hex'), 4) = '0000'
+  ) then
+    raise exception 'bad pow';
+  end if;
+  new.pow := null;
+  new.hidden := false;
   delete from report_guard where day < current_date;
   -- 同じ議会への二度目は、エラーにせず数えないだけにする（利用者には報告できたように見える）
   if exists (select 1 from report_guard where h = hash) then return null; end if;
@@ -64,19 +79,19 @@ create policy "anyone can report" on public.reports for insert to anon with chec
 -- 書き込めるのは都道府県と議会名だけ（created_at を偽って「最後の報告日」を変えられないように）
 -- Supabase は public のテーブルに anon・authenticated の全権限を最初から付けるので、使うものだけを残す
 revoke all on public.reports, public.councils, public.report_guard from anon, authenticated;
-grant insert (pref, council, items, asks) on public.reports to anon;
+grant insert (pref, council, items, asks, pow) on public.reports to anon;
 
 -- 読めるのは議会ごとの件数だけ
 create or replace view public.council_counts as
   select pref, council, count(*)::int as n, max(created_at)::date as last
-  from public.reports group by pref, council;
+  from public.reports where not hidden group by pref, council;
 revoke all on public.council_counts from anon, authenticated;
 grant select on public.council_counts to anon;
 
 -- 議会ごと・内容ごとの提出の記録の数と、最後の記録の日（1件ずつの行は読めない）
 create or replace view public.council_asks as
   select pref, council, ask, count(*)::int as n, max(created_at)::date as last
-  from public.reports, unnest(asks) as ask group by pref, council, ask;
+  from public.reports, unnest(asks) as ask where not hidden group by pref, council, ask;
 revoke all on public.council_asks from anon, authenticated;
 grant select on public.council_asks to anon;
 
@@ -85,7 +100,7 @@ create or replace view public.action_totals as
   select count(distinct (pref, council))::int as councils,
          coalesce(sum(coalesce(items, 1)), 0)::int as items,
          count(*)::int as reports
-  from public.reports;
+  from public.reports where not hidden;
 revoke all on public.action_totals from anon, authenticated;
 grant select on public.action_totals to anon;
 

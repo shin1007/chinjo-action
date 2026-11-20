@@ -102,7 +102,7 @@ test('Supabase：テーブルは RLS を有効にし、anon に渡すのは決�
   for (const t of tables) assert.match(sql, new RegExp(`alter table public\\.${t} enable row level security`), `${t} の RLS`);
   const grants = [...sql.matchAll(/^grant .*$/gm)].map((m) => m[0].replace(/\s+/g, ' '));
   assert.deepStrictEqual(grants, [
-    'grant insert (pref, council, items, asks) on public.reports to anon;',
+    'grant insert (pref, council, items, asks, pow) on public.reports to anon;',
     'grant select on public.council_counts to anon;',
     'grant select on public.council_asks to anon;',
     'grant select on public.action_totals to anon;',
