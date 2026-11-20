@@ -5,7 +5,7 @@
 - X の1件の投稿に付けられるのは、画像なら4枚まで、GIF なら1つだけ（画像と一緒には付けられない）。なので GIF は1件目に単独で付け、テーマの画像は1件に3枚ずつ付ける。
 - 文字数は全角140字（半角280字）まで。URL は長さにかかわらず半角23字ぶんとして数えられる。下の文は、どれもその中に収まる長さにしてある。
 - 金額（約480円）は、トップ（/）の「費用の目安」の表と同じ。料金が変わったら、ここも画像も直す。
-- 呼びかけの調子にしている（2026-11-21）。ハッシュタグは付けていない（付けるなら1件目に1〜2個まで。「#拡散希望」は効果が確かめられていないので使わない）。
+- 呼びかけの調子にしている（2026-11-21）。ハッシュタグは、1件目は「#陳情 #地方議会」、2〜7件目はテーマに合うものを2つずつ（その話題を探す人が使いそうな言葉）。どのタグがよく使われているかは確かめていない。「#拡散希望」は効果が確かめられていないので使わない。
 - 画像の説明（代替テキスト）は、X の「説明を追加」に、画像に書いてある件名をそのまま入れる。
 
 ## 1件目（GIF：mail-howto-x.gif）
@@ -18,6 +18,7 @@
 登録不要・無料・住所氏名はサーバーに送りません。
 
 https://chinjo-action.vercel.app/
+#陳情 #地方議会
 ```
 
 ## 2件目（画像：kodomo-1, kodomo-2, kodomo-3）
@@ -28,6 +29,7 @@ https://chinjo-action.vercel.app/
 子どもと親が会えなくなる仕組みを、変えていきませんか。
 
 https://chinjo-action.vercel.app/kodomo
+#共同親権 #実子誘拐
 ```
 
 ## 3件目（画像：dansei-1, dansei-2, dansei-3）
@@ -38,6 +40,7 @@ https://chinjo-action.vercel.app/kodomo
 男女どちらにも公平な制度を、議会に求めましょう。
 
 https://chinjo-action.vercel.app/dansei
+#男女平等 #DV
 ```
 
 ## 4件目（画像：nihonjin-1, nihonjin-2, nihonjin-3）
@@ -48,6 +51,7 @@ https://chinjo-action.vercel.app/dansei
 気になる項目があれば、議会に声を届けましょう。
 
 https://chinjo-action.vercel.app/nihonjin
+#外国人政策 #生活保護
 ```
 
 ## 5件目（画像：shiho-1, shiho-2, shiho-3）
@@ -58,6 +62,7 @@ https://chinjo-action.vercel.app/nihonjin
 裁判所を、もっと見えるものにしませんか。
 
 https://chinjo-action.vercel.app/shiho
+#家庭裁判所 #国民審査
 ```
 
 ## 6件目（画像：kenko-1, kenko-2, kenko-3）
@@ -68,6 +73,7 @@ https://chinjo-action.vercel.app/shiho
 健康を守る政策を、あなたの町から。
 
 https://chinjo-action.vercel.app/kenko
+#たばこ税 #がん検診
 ```
 
 ## 7件目（画像：sonota-1, sonota-2, sonota-3）
@@ -78,4 +84,5 @@ https://chinjo-action.vercel.app/kenko
 
 気になる陳情を選んで、あなたの町の議会にまとめて出してみませんか。
 https://chinjo-action.vercel.app/sonota
+#宗教法人 #NPO法人
 ```
