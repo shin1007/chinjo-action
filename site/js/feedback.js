@@ -1,13 +1,17 @@
-// ご意見・追加してほしい項目の受け付け（/feedback）。Supabase の feedback テーブルに書き込むだけ（anon は読めない）。
+// ご意見・質問（/feedback）。送るのは feedback テーブルへの書き込みだけ（anon は読めない）。
+// 寄せられたご意見と答えは、運営が載せると決めたもの（feedback_public ビュー）だけを読む。
 // 送るのは種類・テーマ・対象・本文・根拠 URL だけ。氏名・住所・連絡先の欄は持たない。
 (() => {
   const URL = 'https://oquuysfeistgpgrpeswq.supabase.co';
   const KEY = 'sb_publishable_IAXFoFaXZ3bjk-49Z-pD9w_SQZEgzXE';
-  // supabase/schema.sql の feedback を Supabase に反映して動作を確かめたら true にする。
+  const THEMES = { kodomo: '子どもの権利', dansei: '男女平等', nihonjin: '日本人の権利', shiho: '司法への参加', kenko: '国民の健康', sonota: 'その他の陳情' };
+  // supabase/schema.sql の feedback・feedback_public を Supabase に反映して動作を確かめたら true にする。
   // false の間は入力欄を出さず「準備中」と表示する（書き込みが失敗する欄を見せないため）
   const LIVE = true;
   // schema.sql の「grant insert (...) on public.feedback to anon」と同じ列だけを送る（test/feedback.test.js が突き合わせる）
   const FIELDS = ['kind', 'theme', 'target', 'body', 'source_url'];
+
+  if (LIVE) showAnswers();
 
   const form = document.getElementById('fb-form');
   const pending = document.getElementById('fb-pending');
@@ -46,4 +50,34 @@
     button.disabled = ok;
     if (ok) form.querySelectorAll('input, textarea, select').forEach((el) => { el.disabled = true; });
   });
+
+  function showAnswers() {
+    const boardPending = document.getElementById('board-pending');
+    const list = document.getElementById('board-list');
+    const empty = document.getElementById('board-empty');
+    if (!boardPending || !list) return;
+
+    (async () => {
+      try {
+        const r = await fetch(`${URL}/rest/v1/feedback_public?select=id,day,theme,public_text&order=day.desc&limit=50`, { headers: { apikey: KEY } });
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        const rows = await r.json();
+        boardPending.hidden = true;
+        if (!rows.length) { empty.hidden = false; return; }
+        for (const row of rows) {
+          const li = document.createElement('li');
+          const meta = document.createElement('p');
+          meta.className = 'small';
+          meta.textContent = `${String(row.day).replace(/-/g, '/')}${row.theme && THEMES[row.theme] ? `　${THEMES[row.theme]}` : ''}`;
+          const text = document.createElement('p');
+          text.textContent = row.public_text;
+          li.append(meta, text);
+          list.appendChild(li);
+        }
+        list.hidden = false;
+      } catch (error) {
+        console.warn('掲示板を読み込めませんでした。', error);
+      }
+    })();
+  }
 })();

@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#252b2f" media="(prefers-color-scheme: dark)">
-<title>ご意見・追加してほしい項目｜権利を守る陳情アクション</title>
+<title>ご意見・質問｜権利を守る陳情アクション</title>
 <meta name="description" content="陳情アクションに追加してほしい項目や、文面の誤り・根拠の資料を教えてください。無料です。">
 <link rel="canonical" href="https://chinjo-action.vercel.app/feedback">
 <meta property="og:site_name" content="権利を守る陳情アクション">
-<meta property="og:title" content="ご意見・追加してほしい項目">
+<meta property="og:title" content="ご意見・質問">
 <meta property="og:description" content="陳情アクションに追加してほしい項目や、文面の誤り・根拠の資料を教えてください。無料です。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://chinjo-action.vercel.app/feedback">
@@ -44,28 +44,14 @@
 
 <main id="main">
 <div class="wrap guide about">
-  <h1>ご意見・追加してほしい項目を教えてください（無料）</h1>
-  <nav class="small" aria-label="このページの中"><a href="#board">質問と答え</a>　<a href="#send">ご意見を送る</a></nav>
-
-  <section id="board" aria-labelledby="board-h">
-  <h2 id="board-h">質問と答え</h2>
-  <p>送る前に、同じ質問への答えがないか見てください。送っていただいた中から、多くの方の役に立つものを、運営が<b>一次資料で確かめて、質問の趣旨を要約し、答えを添えて</b>載せています。原文や送った方の情報は載せません。</p>
-  <p class="small">だれでも書き込めてすぐ表示される掲示板ではありません。個人情報の書き込みや誹謗中傷、個別の事案へのやりとりを防ぎ、載せる内容の根拠を確かめるためです。</p>
-  <p id="board-pending" class="notice"><strong>準備中です。</strong>受け取りの準備ができしだい、ここに載せていきます。</p>
-  <ul id="board-list" class="board-list" hidden></ul>
-  <p id="board-empty" class="small" hidden>まだ載せたものはありません。</p>
-  </section>
-
-  <section id="send" aria-labelledby="send-h">
-  <h2 id="send-h">ご意見を送る</h2>
-  <p>陳情の項目に加えてほしい案、文面の誤りの指摘、根拠になる資料、議会ごとの手続きの違いを募集します。</p>
+  <h1>ご意見・質問（無料）</h1>
+  <p>陳情の項目に加えてほしい案、文面の誤りの指摘、根拠になる資料、議会ごとの手続きの違い、サイトの使い方や手続きの一般的な質問を受け付けます。送っていただいた中から、多くの方の役に立つものは、運営が<b>一次資料で確かめて要約し、答えを添えて</b>、このページの下の<a href="#answers">寄せられたご意見と答え</a>に載せます。</p>
   <ul>
     <li><b>採否の決め方：</b>法令や公的な資料などの一次資料で確かめられるかどうかで決めます。送った方が誰か、応援の有無は関係しません。</li>
-    <li><b>お返事：</b>個別のお返事や、採用のお知らせはしないことがあります。</li>
+    <li><b>お返事：</b>個別のお返事はしません。答えは、載せるときにこのページに書きます。原文や送った方の情報は載せません。</li>
     <li><b>書かないでください：</b>ご自身や他の人の氏名・住所・連絡先、個別の事件の内容。</li>
   </ul>
-  <p class="small">一般情報です。個別の事案は、弁護士や行政書士などの専門家にご相談ください。個別の事案への助言や、陳情書の添削・代筆はしていません（<a href="/horitsu">個別の相談や代筆をしない理由</a>）。</p>
-  <p class="small">多くの方の役に立つものは、要約して答えを添え、上の<a href="#board">質問と答え</a>に載せることがあります。</p>
+  <p class="small">送られた内容がすぐ表示されるしくみではありません。個人情報や誹謗中傷を防ぎ、根拠を確かめてから載せるためです。一般情報です。個別の事案は、弁護士や行政書士などの専門家にご相談ください。個別の事案への助言や、陳情書の添削・代筆はしていません（<a href="/horitsu">個別の相談や代筆をしない理由</a>）。</p>
   <p id="fb-pending" class="notice"><strong>準備中です。</strong>この入力欄は、受け取りの準備ができしだい使えるようになります。</p>
   <form id="fb-form" class="gen-form" hidden>
     <label>知らせたいこと
@@ -97,18 +83,21 @@
     <label><input type="checkbox" name="ok" required> 氏名・住所・連絡先・個別の事件の内容を書いていません</label>
     <p><button type="submit" class="btn btn-primary">送る</button> <span id="fb-msg" role="status"></span></p>
   </form>
-  </section>
+
+  <h2 id="answers">寄せられたご意見と答え</h2>
+  <p id="board-pending" class="notice"><strong>準備中です。</strong>受け取りの準備ができしだい、ここに載せていきます。</p>
+  <ul id="board-list" class="board-list" hidden></ul>
+  <p id="board-empty" class="small" hidden>まだ載せたものはありません。</p>
   <p class="small"><a href="/trouble">困っていること</a></p>
 </div>
 </main>
 <footer class="site-footer">
   <div class="wrap">
     <p class="small">本サイトは市民による政策提言のための情報提供サイトです。法的助言を行うものではありません。</p>
-    <p class="small"><a href="/trouble">困っていること</a>　<a href="/feedback">ご意見・追加してほしい項目</a>　<a href="/feedback#board">質問と答え</a></p>
+    <p class="small"><a href="/trouble">困っていること</a>　<a href="/feedback">ご意見・質問</a></p>
   </div>
   <div class="wrap"><p class="small"><a href="https://github.com/shin1007/chinjo-action" target="_blank" rel="noopener">ソースコード（GitHub）</a>　このサイトの改善の提案（Issue・プルリクエスト）を歓迎します</p></div>
 </footer>
-<script defer src="/js/board.js"></script>
 <script defer src="/js/feedback.js"></script>
 </body>
 </html>

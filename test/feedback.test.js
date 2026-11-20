@@ -44,9 +44,10 @@ test('困りごと・ご意見のページがあり、トップ・about・troubl
 });
 
 test('掲示板：読むのは feedback_public ビューだけで、書き込まない。原文・対象・根拠 URL・状態は出さない', () => {
-  const boardJs = fs.readFileSync(path.join(ROOT, 'site/js/board.js'), 'utf8');
+  const boardJs = fs.readFileSync(path.join(ROOT, 'site/js/feedback.js'), 'utf8');
   assert.match(boardJs, /const LIVE = (true|false);/);
-  assert.ok(!/method:\s*'(POST|PATCH|DELETE|PUT)'/.test(boardJs));
+  assert.match(boardJs, /rest\/v1\/feedback_public\?select=id,day,theme,public_text&/);
+  assert.ok(!/method:\s*'(PATCH|DELETE|PUT)'/.test(boardJs));
   const view = sql.match(/create or replace view public\.feedback_public as([\s\S]*?);/)[1];
   assert.match(view, /where published and public_text is not null/);
   for (const col of ['body', 'target', 'source_url', 'status', 'owner_note']) assert.ok(!new RegExp(`\\b${col}\\b`).test(view), `${col} を出している`);
@@ -54,15 +55,15 @@ test('掲示板：読むのは feedback_public ビューだけで、書き込ま
   assert.match(sql, /new\.public_text := null;/);
 });
 
-test('質問と答えは /feedback の中にあり（送る欄より上）、準備中の表示と、フッターからのリンクがある。/board は転送する', () => {
+test('ご意見と答えは /feedback の1つの機能（送る欄の下に答えの一覧）で、/board は転送する', () => {
   const fb = read('site/feedback.html');
   assert.match(fb, /id="board-pending"/);
-  assert.match(fb, /src="\/js\/board\.js"/);
-  assert.ok(fb.indexOf('id="board"') < fb.indexOf('id="fb-form"'), '質問と答えが送る欄より上');
+  assert.ok(!/board\.js/.test(fb));
+  assert.ok(fb.indexOf('id="fb-form"') < fb.indexOf('id="answers"'));
   assert.ok(!fs.existsSync(path.join(ROOT, 'site/board.html')));
-  assert.match(read('vercel.json'), /"source": "\/board",\s*"destination": "\/feedback#board"/);
-  for (const page of ['index', 'about', 'trouble']) assert.match(read(`site/${page}.html`), /href="\/feedback#board"/, `${page} から /feedback#board`);
-});
+  assert.ok(!fs.existsSync(path.join(ROOT, 'site/js/board.js')));
+  assert.match(read('vercel.json'), /"source": "\/board",\s*"destination": "\/feedback#answers"/);
+})
 
 test('非弁行為の説明ページ（/horitsu）：弁護士法第72条・行政書士法第19条の原文の引用と e-Gov へのリンクがあり、関連ページからたどれる', () => {
   const page = read('site/horitsu.html');

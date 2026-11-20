@@ -31,7 +31,7 @@
   "redirects": [
     {
       "source": "/board",
-      "destination": "/feedback#board",
+      "destination": "/feedback#answers",
       "permanent": true
     },
     {
