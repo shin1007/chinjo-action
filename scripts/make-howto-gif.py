@@ -13,18 +13,18 @@ f = lambda size, bold=True: ImageFont.truetype(FONT_B if bold else FONT_R, size)
 BG, INK, SUB, ACC, LINE = '#fbf8f2', '#2b2b2b', '#6b6b6b', '#d9653b', '#e6dfd2'
 PAPER, BLUE, GREEN = '#ffffff', '#3b6fb6', '#4a8f5a'
 
-NOTE = '金額は陳情書1件（3枚）＋送付状を郵送するときの目安。2026年11月時点'
+NOTE = '金額は陳情書5件（1件3枚）＋送付状を1通で郵送するときの目安。2026年11月時点'
 
 # 手順：（見出し、補足、金額の表示、合計に足す円、絵）
 STEPS = [
     ('サイトで入力する', '求めることと出す先の議会を選び、住所・氏名を入れる', '無料', 0, 'screen'),
     ('PDFを保存する', 'USBメモリーに入れる（スマホからネットプリントでもよい）', '無料', 0, 'usb'),
-    ('コンビニで印刷する', 'USBから白黒A4・1枚10円（ネットプリントは20円）\n陳情書3枚・送付状1枚・宛名の用紙1枚', '5枚 50円', 50, 'printer'),
+    ('コンビニで印刷する', 'USBから白黒A4・1枚10円（ネットプリントは20円）\n陳情書15枚・送付状1枚・宛名の用紙1枚', '17枚 170円', 170, 'printer'),
     ('署名する', '空けた住所・氏名を手書きし、日付を入れる\n押印は議会によって要らない', '', 0, 'pen'),
     ('宛名と差出人を切る', '切り取り線で切る（ラベル用紙なら はがすだけ）', '', 0, 'scissors'),
     ('クリアファイルに入れる', '全部をまとめて1枚に', '約11円', 11, 'file'),
     ('角2封筒に入れる', 'A4を折らずに入れる', '約10円', 10, 'envelope'),
-    ('宛名と切手を貼る', '宛名は表、差出人は裏に のりで貼る\n4枚とクリアファイルなら100gまで', '切手 180円', 180, 'stamp'),
+    ('宛名と切手を貼る', '宛名は表、差出人は裏に のりで貼る\n16枚とクリアファイルで100gぎりぎり\n心配なら270円分を貼る', '切手 180円', 180, 'stamp'),
     ('ポストに出す', '締切の1週間前には届くように', '', 0, 'post'),
 ]
 
@@ -44,12 +44,19 @@ def icon(d, kind, cx, cy):
         d.rectangle((cx + 5, cy - 82, cx + 15, cy - 68), fill=INK)
         d.text((cx, cy + 30), 'PDF', font=f(30), fill='#fff', anchor='mm')
     elif kind == 'printer':
-        d.rectangle((cx - 60, cy - 100, cx + 60, cy - 40), fill=PAPER, outline=INK, width=4)
-        d.rounded_rectangle((cx - 105, cy - 45, cx + 105, cy + 45), 14, fill='#8a8f98', outline=INK, width=5)
-        d.rectangle((cx - 65, cy + 20, cx + 65, cy + 100), fill=PAPER, outline=INK, width=4)
+        # コンビニのマルチコピー機：背の高い本体、上に原稿台、前に操作パネル（画面・お金の入口）、横に排紙トレイ
+        d.rectangle((cx - 95, cy - 70, cx + 75, cy + 110), fill='#e9ebee', outline=INK, width=5)
+        d.rectangle((cx - 100, cy - 95, cx + 80, cy - 70), fill='#c9ccd1', outline=INK, width=5)
+        d.polygon([(cx - 60, cy - 30), (cx + 50, cy - 30), (cx + 60, cy + 10), (cx - 70, cy + 10)], fill='#8a8f98', outline=INK)
+        d.rectangle((cx - 50, cy - 24, cx + 5, cy + 4), fill='#9fd0f0', outline=INK, width=2)
+        d.rectangle((cx + 18, cy - 22, cx + 42, cy - 14), fill=INK)
+        d.ellipse((cx + 24, cy - 8, cx + 36, cy + 4), fill='#e0b030')
         for i in range(3):
-            d.line((cx - 45, cy + 42 + i * 18, cx + 45, cy + 42 + i * 18), fill=LINE, width=6)
-        d.ellipse((cx + 70, cy - 25, cx + 86, cy - 9), fill=GREEN)
+            d.line((cx - 80, cy + 35 + i * 22, cx + 60, cy + 35 + i * 22), fill='#b8bcc3', width=3)
+        d.rectangle((cx + 75, cy - 20, cx + 125, cy - 5), fill='#c9ccd1', outline=INK, width=3)
+        d.rectangle((cx + 82, cy - 45, cx + 118, cy - 18), fill=PAPER, outline=INK, width=2)
+        d.rounded_rectangle((cx - 135, cy - 40, cx - 108, cy + 2), 4, fill=BLUE)
+        d.line((cx - 108, cy - 20, cx - 95, cy - 20), fill=INK, width=4)
     elif kind == 'pen':
         d.rectangle((cx - 85, cy - 100, cx + 70, cy + 100), fill=PAPER, outline=INK, width=4)
         for i in range(5):
@@ -77,17 +84,20 @@ def icon(d, kind, cx, cy):
         for i in range(5):
             d.line((cx - 50, cy - 60 + i * 26, cx + 50, cy - 60 + i * 26), fill=LINE, width=6)
     elif kind == 'envelope':
-        d.rectangle((cx - 80, cy - 115, cx + 80, cy + 40), fill=PAPER, outline=BLUE, width=4)
-        d.rectangle((cx - 100, cy - 60, cx + 100, cy + 110), fill='#d8b37c', outline=INK, width=5)
-        d.polygon([(cx - 100, cy - 60), (cx, cy - 10), (cx + 100, cy - 60)], fill='#caa168', outline=INK)
-        d.text((cx, cy + 55), '角2', font=f(34), fill=INK, anchor='mm')
+        # 角2は縦長。口は上。A4を折らずに上から入れる
+        d.rectangle((cx - 55, cy - 125, cx + 55, cy + 20), fill=PAPER, outline=BLUE, width=4)
+        d.rectangle((cx - 75, cy - 80, cx + 75, cy + 120), fill='#d8b37c', outline=INK, width=5)
+        d.polygon([(cx - 75, cy - 80), (cx - 75, cy - 110), (cx + 75, cy - 110), (cx + 75, cy - 80)], fill='#caa168', outline=INK)
+        d.text((cx, cy + 50), '角2', font=f(34), fill=INK, anchor='mm')
     elif kind == 'stamp':
-        d.rectangle((cx - 110, cy - 90, cx + 110, cy + 100), fill='#d8b37c', outline=INK, width=5)
-        d.rectangle((cx + 45, cy - 75, cx + 95, cy - 20), fill='#f3d3c4', outline=ACC, width=4)
-        d.text((cx + 70, cy - 47), '切手', font=f(16), fill=ACC, anchor='mm')
-        d.rectangle((cx - 70, cy - 25, cx + 60, cy + 70), fill=PAPER, outline=INK, width=3)
-        d.text((cx - 5, cy + 5), '〇〇議会', font=f(22), fill=INK, anchor='mm')
-        d.text((cx - 5, cy + 40), '議長 様', font=f(22), fill=INK, anchor='mm')
+        # 縦長の封筒：切手は左上、宛名は中央に縦長のラベル
+        d.rectangle((cx - 75, cy - 110, cx + 75, cy + 110), fill='#d8b37c', outline=INK, width=5)
+        d.rectangle((cx - 65, cy - 100, cx - 25, cy - 52), fill='#f3d3c4', outline=ACC, width=4)
+        d.text((cx - 45, cy - 76), '切手', font=f(14), fill=ACC, anchor='mm')
+        d.rectangle((cx - 50, cy - 35, cx + 55, cy + 95), fill=PAPER, outline=INK, width=3)
+        d.text((cx + 2, cy - 5), '〇〇議会', font=f(20), fill=INK, anchor='mm')
+        d.text((cx + 2, cy + 25), '議長 様', font=f(20), fill=INK, anchor='mm')
+        d.text((cx + 2, cy + 65), '陳情書在中', font=f(14), fill=ACC, anchor='mm')
     elif kind == 'post':
         d.rounded_rectangle((cx - 70, cy - 100, cx + 70, cy + 70), 30, fill='#d23b2f', outline=INK, width=5)
         d.rectangle((cx - 45, cy - 60, cx + 45, cy - 45), fill=INK)
@@ -121,9 +131,9 @@ def frame(i, total):
 def summary(total):
     im = Image.new('RGB', (W, H), BG)
     d = ImageDraw.Draw(im)
-    d.text((W // 2, 120), '郵送なら、合わせて', font=f(36), fill=INK, anchor='mm')
+    d.text((W // 2, 120), '陳情5件を郵送で、合わせて', font=f(36), fill=INK, anchor='mm')
     d.text((W // 2, 230), f'約{round(total, -1)}円', font=f(110), fill=ACC, anchor='mm')
-    d.text((W // 2, 330), '印刷 50円 ＋ クリアファイル 11円 ＋ 封筒 10円 ＋ 切手 180円', font=f(22, False), fill=INK, anchor='mm')
+    d.text((W // 2, 330), '印刷 170円 ＋ クリアファイル 11円 ＋ 封筒 10円 ＋ 切手 180円', font=f(22, False), fill=INK, anchor='mm')
     d.text((W // 2, 375), '電子申請で出せる議会なら、印刷も切手も要りません', font=f(22, False), fill=SUB, anchor='mm')
     d.text((W // 2, 470), 'chinjo-action.vercel.app', font=f(30), fill=BLUE, anchor='mm')
     d.text((W - 40, 515), NOTE, font=f(14, False), fill=SUB, anchor='rm')
