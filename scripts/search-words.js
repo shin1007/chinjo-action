@@ -110,6 +110,7 @@ module.exports = {
   'sonota/n_media_correction': '誤報 訂正 謝罪 おわび 報道 テレビ 新聞 マスコミ',
   'sonota/n_vehicle_noise': '騒音 うるさい マフラー バイク 暴走族 空ぶかし 改造 車検',
   'sonota/n_vehicle_light': 'ライト まぶしい 眩しい ヘッドライト 前照灯 LED ハイビーム 車検 バイク',
+  'sonota/l_light_campaign': 'ライト まぶしい ヘッドライト ハイビーム ロービーム 交通安全 点検',
   'sonota/l_public_school': '公立高校 統廃合 学校 廃校',
   'sonota/l_npo_open': 'NPO 会計 公開 委託 補助金',
   'sonota/l_cleanup': 'ごみ拾い ゴミ ポイ捨て 清掃 除草 草刈り ボランティア フレイル 高齢者',
