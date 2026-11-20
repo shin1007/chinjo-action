@@ -798,14 +798,28 @@ summary { cursor: pointer; font-weight: 700; }
 .skip-link:focus { top: 8px; }
 
 /* トップのヒーローの背景に流す、陳情の内容のカード（飾り。scripts/hero-cards.js） */
-.hero { position: relative; overflow: hidden; padding: 112px 0; }
-@media (max-width: 640px) { .hero { padding: 96px 0; } }
+.hero { position: relative; overflow: hidden; padding: 120px 0; isolation: isolate; }
+@media (max-width: 640px) { .hero { padding: 104px 0; } }
 .hero > .wrap { position: relative; z-index: 1; }
-.hero-flow { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; padding: 16px 0; opacity: 0.16; pointer-events: none; user-select: none; }
-.hero-flow-row { display: flex; gap: 14px; width: max-content; margin: 0; padding: 0; list-style: none; animation: hero-flow 140s linear infinite; }
-.hero-flow-row + .hero-flow-row { animation-direction: reverse; animation-duration: 170s; }
-.hero-flow-row li { flex: none; padding: 8px 16px; border: 1px solid currentColor; border-radius: 12px; font-size: 0.85rem; line-height: 1.45; text-align: left; white-space: nowrap; }
-.hero-flow-row span { display: block; font-size: 0.72rem; font-weight: 700; opacity: 0.8; }
+.hero-flow { position: absolute; inset: -24px -10%; z-index: 0; display: flex; flex-direction: column; justify-content: space-between; padding: 24px 0; transform: rotate(-4deg); pointer-events: none; user-select: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent); mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent); }
+/* 本文の後ろを背景の色で覆い、カードは周りにだけ見せる */
+.hero::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(ellipse 46% 52% at 50% 50%, var(--hero-from) 55%, transparent 100%); }
+.hero-flow-row { display: flex; gap: 18px; width: max-content; margin: 0; padding: 0; list-style: none; animation: hero-flow 150s linear infinite; }
+.hero-flow-row + .hero-flow-row { animation-direction: reverse; animation-duration: 180s; }
+.hero-flow-row li { flex: none; width: 230px; padding: 12px 14px 14px; border-radius: 10px; text-align: left; white-space: normal;
+  background: var(--surface); border: 1px solid var(--line); border-top: 3px solid hsl(var(--h) 55% 55%);
+  box-shadow: 0 10px 24px rgba(20, 30, 40, 0.10); opacity: 0.55; }
+.hero-flow-row span { display: inline-block; padding: 1px 8px; border-radius: 99px; font-size: 0.68rem; font-weight: 700;
+  color: hsl(var(--h) 55% 38%); background: hsl(var(--h) 60% 94%); }
+.hero-flow-row b { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin: 6px 0 8px; font-size: 0.8rem; line-height: 1.45; color: var(--ink); }
+.hero-flow-row i { display: block; height: 5px; margin-top: 5px; border-radius: 3px; background: var(--line); }
+.hero-flow-row i + i { width: 62%; }
+@media (prefers-color-scheme: dark) {
+  .hero-flow-row li { opacity: 0.35; box-shadow: none; }
+  .hero-flow-row span { color: hsl(var(--h) 70% 75%); background: hsl(var(--h) 30% 22%); }
+}
 @keyframes hero-flow { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .hero-flow-row { animation: none; } }
-@media (max-width: 640px) { .hero-flow { opacity: 0.09; } }
+@media (max-width: 640px) { .hero-flow-row li { width: 190px; opacity: 0.4; } }
