@@ -11,7 +11,7 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const OUT = path.join(__dirname, '.speed');
 const PORT = 8799;
-const PAGES = ['/', '/letter', '/kodomo', '/kodomo/make', '/kodomo/guide', '/support', '/feedback', '/roadmap'];
+const PAGES = ['/', '/letter', '/kodomo', '/kodomo/make', '/kodomo/guide', '/support', '/feedback'];
 const npx = process.platform === 'win32' ? 'npx.cmd' : 'npx';
 
 const pages = process.argv.slice(2).map((a) => `/${a.replace(/^\/+/, '')}`.replace(/^\/index$/, '/'));

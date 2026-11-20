@@ -30,6 +30,11 @@
   ],
   "redirects": [
     {
+      "source": "/roadmap",
+      "destination": "/trouble",
+      "permanent": true
+    },
+    {
       "source": "/guide",
       "destination": "/kodomo/guide",
       "permanent": true
