@@ -11,7 +11,7 @@
   // schema.sql の「grant insert (...) on public.feedback to anon」と同じ列だけを送る（test/feedback.test.js が突き合わせる）
   const FIELDS = ['kind', 'theme', 'target', 'body', 'source_url', 'file_path'];
   // 資料のファイルを添える欄。schema.sql の feedback.file_path 列と Storage の sources バケットを反映して確かめたら true にする
-  const FILES_LIVE = false;
+  const FILES_LIVE = true;
   const FILE_TYPES = { 'application/pdf': 'pdf', 'image/jpeg': 'jpg', 'image/png': 'png' };
   const FILE_MAX = 10 * 1024 * 1024;
 
