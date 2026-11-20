@@ -210,6 +210,15 @@
       "localPath": null
     },
     {
+      "id": "src-156831e145",
+      "title": "米国マサチューセッツ州会計検査院「Audit of the Secretary of the Commonwealth of Massachusetts」（2025年11月10日）",
+      "url": "https://www.mass.gov/audit/audit-of-the-secretary-of-the-commonwealth-of-massachusetts-november-10-2025",
+      "note": "本文で確認：住所秘匿制度（ACP）の登録は4年で、再登録の手続きで延長できる。行政機関に住所の閲覧を認めたときは、参加者に知らせる",
+      "kind": "research",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-1650ae466f",
       "title": "原田綾子「家族関係の再編成の観点から見た家事調停の現状と課題――未成年の子がいる夫婦の離婚事件の処理に焦点を当てて――」『家族社会学研究』29(1)（日本家族社会学会、2017年）49-62頁",
       "url": "https://doi.org/10.4234/jjoffamilysociology.29.49",
@@ -750,6 +759,15 @@
       "localPath": null
     },
     {
+      "id": "src-459845984b",
+      "title": "米国連邦緊急事態管理庁（FEMA）・保健福祉省・米国赤十字社・全米行方不明・被搾取児童センター「Post-Disaster Reunification of Children: A Nationwide Approach」（2013年11月）",
+      "url": "https://www.caloes.ca.gov/wp-content/uploads/AFN/Documents/General/PostDisasterReunificationofChildren-ANationwideApproach.pdf",
+      "note": "本文で確認：「研究では、63％の親が避難の指示を無視して子の学校へ直接向かう」。学校・保育施設は、引き渡しの前に迎えの大人の本人確認と監護の権利を確かめ、確かめた親または法定の後見人に引き渡す。（fema.gov の原本は削除されているため、カリフォルニア州防災局の写し）",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-46050a4ae7",
       "title": "アルコール健康障害対策基本法 第16条",
       "url": "https://laws.e-gov.go.jp/law/425AC1000000109",
@@ -989,6 +1007,15 @@
       "url": "https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2018pdf/20180508016s.pdf",
       "note": "2・4・5：受動喫煙の状況、学校・児童福祉施設等の第一種施設の規制と特定屋外喫煙場所をめぐる論点",
       "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-562adbf4ad",
+      "title": "米国バージニア州司法長官室「Evaluation of the Address Confidentiality Program」（2007年12月）",
+      "url": "https://rga.lis.virginia.gov/Published/2008/RD2/PDF",
+      "note": "本文で確認：住所秘匿制度の認定は1年で、申請の情報が虚偽のときは認定を取り消せる。申請書では、故意に虚偽の情報を出すことはバージニア州法 §18.2-434 などで罰せられると申請者が確認し、偽証の罰を前提に署名する",
+      "kind": "law",
       "fetchedAt": null,
       "localPath": null
     },
