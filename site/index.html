@@ -61,6 +61,7 @@
         <li><a href="/shiho/make">司法への参加</a></li>
         <li><a href="/kenko/make">国民の健康</a></li>
         <li><a href="/sonota/make">その他（税・教育）</a></li>
+        <li class="theme-omakase"><a href="/omakase">おまかせ<small>テーマ・陳情・議会を3つずつ自動で</small></a></li>
       </ul>
       <div class="item-search">
         <label for="itemSearch">どのテーマか分からないときは、言葉でさがす</label>
@@ -68,7 +69,7 @@
         <p id="itemSearchCount" class="hint-sm" aria-live="polite"></p>
         <ul id="itemSearchResults" class="item-search-results"></ul>
       </div>
-      <p class="hero-sub small">テーマを1つに決めて、とくに伝えたい内容に絞るのがおすすめです。選ぶのが大変なら<a href="/omakase">おまかせ</a>／陳情書でいいか迷ったら<a href="#shindan">2つの質問で確かめる</a></p>
+      <p class="hero-sub small">テーマを1つに決めて、とくに伝えたい内容に絞るのがおすすめです。陳情書のほかに、要望書・議員への手紙にも作成画面で切り替えられます（<a href="#compare">違い</a>）。</p>
     </div>
   </div>
 </section>
@@ -92,28 +93,6 @@
       <li><b>出し方を確かめて出す</b> ― 署名して、郵送・持参・電子申請で出します。</li>
     </ol>
     <p class="omakase-line">選ぶのが大変なら、<a href="/omakase"><b>おまかせ</b></a>で、テーマ3つ・陳情3つ・郵送でも審査される議会3つを自動で選び、封筒に入れる分を1つのPDFにまとめて保存できます。</p>
-  </div>
-</section>
-<section id="shindan" class="section shindan">
-  <div class="wrap">
-    <details class="shindan-fold">
-    <summary><h2>陳情書でいいか、2つの質問で確かめる</h2></summary>
-    <p class="lead-sm">迷ったら陳情書で大丈夫です。ほかの届け方（要望書・請願・議員への手紙・国への提案）は、だれに動いてほしいかで選びます。どれがいちばん効く、というものではありません。</p>
-    <fieldset class="shindan-q" data-q="who">
-      <legend>Q1. だれに動いてほしいですか</legend>
-      <button type="button" class="wz-card" data-a="council"><b>議会</b><span>議会で話し合ってほしい・国に意見書を出してほしい</span></button>
-      <button type="button" class="wz-card" data-a="exec"><b>市区町村長・知事</b><span>役所に取り組みや説明をしてほしい</span></button>
-      <button type="button" class="wz-card" data-a="member"><b>地元の特定の議員</b><span>議員に知ってほしい・議会で取り上げてほしい</span></button>
-      <button type="button" class="wz-card" data-a="nation"><b>国（省庁）</b><span>国の法律・省令などの規制を見直してほしい</span></button>
-      <button type="button" class="wz-card" data-a="unknown"><b>まだわからない</b><span>まずしくみを知りたい</span></button>
-    </fieldset>
-    <fieldset class="shindan-q" data-q="intro" hidden>
-      <legend>Q2. 請願の「紹介議員」になってくれる議員はいますか</legend>
-      <button type="button" class="wz-card" data-a="yes"><b>いる</b><span>相談できる議員がいる</span></button>
-      <button type="button" class="wz-card" data-a="no"><b>いない・わからない</b><span>紹介議員なしで出したい</span></button>
-    </fieldset>
-    <div id="shindanResult" class="shindan-result" aria-live="polite" hidden></div>
-    </details>
   </div>
 </section>
 <section id="before" class="section">
