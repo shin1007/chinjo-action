@@ -787,6 +787,10 @@ summary { cursor: pointer; font-weight: 700; }
 .cost-key { display: inline-block; width: 1em; height: 1em; vertical-align: -.15em; margin-right: .3em; border: 1px solid #888; }
 .cost-key-self { background: #2a5d9f; }
 .cost-key-kanpa { background: #e8a33d; }
+.cost-key-short, .cost-short { background: repeating-linear-gradient(45deg, #fff, #fff 4px, #eee 4px, #eee 8px); }
+.cost-short { flex: 1; display: flex; align-items: center; justify-content: center; color: #555; font-size: .9em; }
+.cost-scale { position: relative; display: flex; justify-content: space-between; height: 1.4em; }
+.cost-pro { position: absolute; transform: translateX(-50%); }
 
 /* トップページの「これまでの歩み」：控えめに、数字だけを並べる */
 .tally { padding: 18px 0 8px; border-bottom: 1px solid var(--line); }
