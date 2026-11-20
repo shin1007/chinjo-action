@@ -186,6 +186,8 @@ create table if not exists public.feedback (
 );
 alter table public.feedback add column if not exists published boolean not null default false;
 alter table public.feedback add column if not exists public_text text check (char_length(public_text) <= 1000);
+-- 添えられた資料のファイル（開示請求で得た文書・公式の資料の写しなど）の、Storage の sources バケットでの名前
+alter table public.feedback add column if not exists file_path text check (file_path ~ '^[0-9a-f-]{36}\.(pdf|jpg|png)$');
 
 -- 同じ接続元から1日5件まで、同じ本文は1日1回だけ（report_guard を「fb:」付きで使う。IP は残さない）
 create or replace function public.check_feedback() returns trigger
@@ -225,7 +227,16 @@ alter table public.feedback enable row level security;
 drop policy if exists "anyone can send feedback" on public.feedback;
 create policy "anyone can send feedback" on public.feedback for insert to anon with check (true);
 revoke all on public.feedback from anon, authenticated;
-grant insert (kind, theme, target, body, source_url) on public.feedback to anon;
+grant insert (kind, theme, target, body, source_url, file_path) on public.feedback to anon;
+
+-- 資料のファイルの置き場所（Storage）。非公開のバケットで、anon は置けるだけ（読めない・上書きできない・消せない）。
+-- PDF・JPEG・PNG だけ、1つ10MBまで。運営が中身を確かめ、個人情報を除いてから使う。ファイルそのものは公開しない
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values ('sources', 'sources', false, 10485760, array['application/pdf', 'image/jpeg', 'image/png'])
+on conflict (id) do update set public = false, file_size_limit = excluded.file_size_limit, allowed_mime_types = excluded.allowed_mime_types;
+drop policy if exists "anyone can add source files" on storage.objects;
+create policy "anyone can add source files" on storage.objects for insert to anon
+  with check (bucket_id = 'sources' and name ~ '^[0-9a-f-]{36}\.(pdf|jpg|png)$');
 
 -- 運営が見るためのビュー（anon・authenticated には渡さない。管理画面の SQL エディタ・テーブルエディタから開く）
 create or replace view public.feedback_inbox as

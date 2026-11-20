@@ -9,7 +9,11 @@
   // false の間は入力欄を出さず「準備中」と表示する（書き込みが失敗する欄を見せないため）
   const LIVE = true;
   // schema.sql の「grant insert (...) on public.feedback to anon」と同じ列だけを送る（test/feedback.test.js が突き合わせる）
-  const FIELDS = ['kind', 'theme', 'target', 'body', 'source_url'];
+  const FIELDS = ['kind', 'theme', 'target', 'body', 'source_url', 'file_path'];
+  // 資料のファイルを添える欄。schema.sql の feedback.file_path 列と Storage の sources バケットを反映して確かめたら true にする
+  const FILES_LIVE = false;
+  const FILE_TYPES = { 'application/pdf': 'pdf', 'image/jpeg': 'jpg', 'image/png': 'png' };
+  const FILE_MAX = 10 * 1024 * 1024;
 
   if (LIVE) showAnswers();
 
@@ -19,6 +23,10 @@
   if (!LIVE) return;
   pending.hidden = true;
   form.hidden = false;
+  if (FILES_LIVE) {
+    document.getElementById('fb-file-pending').hidden = true;
+    document.getElementById('fb-file-label').hidden = false;
+  }
 
   // /coverage などから ?kind=…&target=… で開いたときは、その値を入れておく
   const q = new URLSearchParams(location.search);
@@ -40,10 +48,29 @@
       if (v) fields[k] = v;
     }
     if (!fields.body || fields.body.length < 5) { msg.textContent = '内容を5字以上で入れてください。'; return; }
+    const file = FILES_LIVE ? data.get('file') : null;
+    const hasFile = file && file.size > 0;
+    if (hasFile && !FILE_TYPES[file.type]) { msg.textContent = 'ファイルは PDF・JPEG・PNG にしてください。'; return; }
+    if (hasFile && file.size > FILE_MAX) { msg.textContent = 'ファイルは10MBまでにしてください。'; return; }
     const button = form.querySelector('button[type="submit"]');
     button.disabled = true;
     msg.textContent = '送っています…';
     let ok = bot;
+    if (!bot && hasFile) {
+      const name = `${crypto.randomUUID()}.${FILE_TYPES[file.type]}`;
+      msg.textContent = 'ファイルを送っています…';
+      const up = await fetch(`${URL}/storage/v1/object/sources/${name}`, {
+        method: 'POST',
+        headers: { apikey: KEY, 'Content-Type': file.type },
+        body: file,
+      }).catch(() => null);
+      if (!up || !up.ok) {
+        msg.textContent = 'ファイルを送れませんでした。時間をおいて、もう一度押してください。';
+        button.disabled = false;
+        return;
+      }
+      fields.file_path = name;
+    }
     if (!bot) {
       const r = await fetch(`${URL}/rest/v1/feedback`, {
         method: 'POST',
