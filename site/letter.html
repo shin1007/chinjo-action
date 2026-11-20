@@ -47,15 +47,14 @@
     <p class="lead-sm">制度や運用の課題を、地域の議員へ丁寧に伝える手紙です。陳情書とは別に、かんたんに作成できます。</p>
     <p class="privacy">🔒 入力内容はこのサイトのサーバーに送信・保存されません。</p>
 
-    <div class="gen-step letter-zip">
-      <h2><span class="step-badge">0</span>送りたい議員を探す</h2>
-      <label>あなたの郵便番号<input id="letterZip" inputmode="numeric" autocomplete="postal-code" placeholder="例：100-0001"></label>
-      <p class="hint-sm">住んでいる市区町村・都道府県の議会と、国会議員（その地域の選挙区）を調べるボタンが出ます。郵便番号はこのサイトのサーバーに送りません。</p>
-      <div id="letterZipHits" aria-live="polite"></div>
-    </div>
-
     <div class="letter-layout">
       <form id="letterForm" class="gen-form letter-form">
+        <div class="gen-step letter-zip">
+          <h2><span class="step-badge">0</span>送りたい議員を探す</h2>
+          <label>あなたの郵便番号<input id="letterZip" inputmode="numeric" autocomplete="postal-code" placeholder="例：100-0001"></label>
+          <p class="hint-sm">住んでいる市区町村・都道府県の議会と、国会議員（その地域の選挙区）を調べるボタンが出ます。郵便番号はこのサイトのサーバーに送りません。</p>
+          <div id="letterZipHits" aria-live="polite"></div>
+        </div>
         <div class="gen-step">
           <h2><span class="step-badge">1</span>テーマ</h2>
           <label>テーマ<select id="letterTheme" name="theme"></select></label>
