@@ -471,6 +471,15 @@
       "localPath": null
     },
     {
+      "id": "src-2a8b944128",
+      "title": "英国雇用年金省「Reducing Parental Conflict programme 2018-2022: an evaluation of the effects of interventions on parental relationships and children」（2023）",
+      "url": "https://www.gov.uk/government/publications/reducing-parental-conflict-programme-2018-to-2022-an-evaluation-of-the-effects-of-interventions",
+      "note": "本文で確認：国の事業として、対立のある父母（DV・虐待のない家庭）に関係と子育ての支援を行い、3,810家族を評価。父母の関係と、2〜17歳の子の心の健康に統計的に有意な改善がみられ、父母がそろって参加したときに改善が大きかった。ただし対照群のない前後比較",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-2a8e6e0162",
       "title": "文部科学省「令和9年度大学入学者選抜実施要項」（令和8年5月27日）",
       "url": "https://www.mext.go.jp/content/20260529-mxt_daigakuc02-000005144_1.pdf",
@@ -2613,6 +2622,15 @@
       "localPath": null
     },
     {
+      "id": "src-e73ce6a726",
+      "title": "Harold, G., Acquah, D., Sellers, R. & Chowdry, H.（Early Intervention Foundation）「What works to enhance inter-parental relationships and improve outcomes for children」DWP ad hoc research report no.32（英国雇用年金省、2016）",
+      "url": "https://www.gov.uk/government/publications/what-works-to-enhance-inter-parental-relationships-and-improve-outcomes-for-children",
+      "note": "本文で確認：英国雇用年金省の依頼による総説。離婚そのものも子に不利になり得るが、父母の関係の質、親のストレス、家族の機能も、同居・別居のどちらの家庭でも子の幸福に大きく影響する",
+      "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-e8b083994e",
       "title": "東村翔吾「年金制度改正法案をめぐる国会論議－被用者保険の適用拡大、基礎年金の給付水準の底上げ等－」『立法と調査』第478号（参議院、2025年9月）",
       "url": "https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2025pdf/20250929079.pdf",
@@ -2744,6 +2762,15 @@
       "url": "https://laws.e-gov.go.jp/law/324CO0000000006",
       "note": "除かれる者：臨時的に任用された者、会計年度任用職員など",
       "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-f8a08d168f",
+      "title": "Feinberg, M. E. ほか「Couple-Focused Prevention at the Transition to Parenthood, a Randomized Trial: Effects on Coparenting, Parenting, Family Violence, and Parent and Child Adjustment」Prevention Science 17(6) pp.751-764（2016）",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10351206/",
+      "note": "本文（要旨）で確認：初めての子を待つ399組の夫婦を無作為に分けたランダム化比較試験。妊娠中5回・出産後4回の講座を受けた夫婦は、生後10か月の時点で、共同養育・親の心の健康・子育て・子の適応・家庭内暴力の指標の3分の2以上で対照群より良かった",
+      "kind": "secondary",
       "fetchedAt": null,
       "localPath": null
     },
