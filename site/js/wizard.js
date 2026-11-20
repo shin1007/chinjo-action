@@ -1473,9 +1473,34 @@
     });
   }
   ['wzGlobal', 'wzFilter'].forEach((id) => ['focus', 'input'].forEach((ev) => $(id).addEventListener(ev, () => needKana($(id)))));
-  $('wzGlobal').addEventListener('input', () => {
+  // 郵便番号（7けた）から自治体を引く。表は data/zip/<上3けた>.json（scripts/zip.js で日本郵便のデータから作る）
+  const zipCache = {};
+  const chip = (id) => `<button type="button" class="wz-chip" data-global="${esc(id)}">${esc(municipalityName(id))}<small class="wz-n">${esc(prefOf(id))}</small>${state.kind === 'petition' ? chipMail(id) : ''}</button>`;
+  async function zipHits(zip) {
+    const head = zip.slice(0, 3);
+    zipCache[head] ||= fetch(`/data/zip/${head}.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({}));
+    const v = (await zipCache[head])[zip.slice(3)];
+    if (!v) return null;
+    return v.split('|').flatMap((pk) => {
+      const pref = prefOf(pk);
+      councilsOf(pref);
+      const pl = window.Places.of(pref).find((p) => p.key === nameOf(pk));
+      return pl ? [idOf(pref, pl.council)] : [];
+    });
+  }
+  $('wzGlobal').addEventListener('input', async () => {
     const q = $('wzGlobal').value.trim();
     if (!q) { $('wzGlobalHits').innerHTML = ''; return; }
+    const zip = q.replace(/[０-９]/g, (d) => String.fromCharCode(d.charCodeAt(0) - 0xFEE0)).replace(/^〒|[-－ー‐\s]/g, '');
+    if (/^\d{3,7}$/.test(zip)) {
+      if (zip.length < 7) { $('wzGlobalHits').innerHTML = '<p class="wz-wide hint-sm">郵便番号は7けたで入れてください（例：100-0001）。</p>'; return; }
+      const ids = await zipHits(zip);
+      if ($('wzGlobal').value.trim() !== q) return;
+      $('wzGlobalHits').innerHTML = ids && ids.length
+        ? `<p class="wz-wide hint-sm">〒${zip.slice(0, 3)}-${zip.slice(3)} の自治体と、その都道府県の議会です。</p>${[...new Set(ids.flatMap((id) => [id, idOf(prefOf(id), `${prefOf(id)}議会`)]))].map(chip).join('')}`
+        : `<div class="wz-wide wz-nohit"><p>〒${zip.slice(0, 3)}-${zip.slice(3)} に当てはまる自治体が見つかりません。</p><p class="hint-sm">郵便番号をお確かめのうえ、自治体名で探すか、<button type="button" class="btn btn-small" data-to-prefs>都道府県から選ぶ</button>を使ってください。</p></div>`;
+      return;
+    }
     // 名前がそのまま一致する自治体を先に（「大分市」で大分県議会が先に出ないように）
     const rank = (id) => { const n = municipalityName(id); return n === q ? 0 : n.startsWith(q) ? 1 : 2; };
     const hits = window.Yomi.filter(globalList(), q, (id) => kanaOf[nameOf(id)])

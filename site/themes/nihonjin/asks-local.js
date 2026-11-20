@@ -59,7 +59,7 @@ window.ASKS = (window.ASKS || []).concat([
     refs: [{ t: '地方公務員法 第16条（欠格条項）', url: 'https://laws.e-gov.go.jp/law/325AC0000000261' },
       { t: '人事院規則八―一八（採用試験）第9条', url: 'https://laws.e-gov.go.jp/law/423RJNJ08018023', note: '国家公務員の採用試験は日本の国籍を有しない者は受けられない' },
       { t: '最高裁判所大法廷 平成17年1月26日判決（平成10(行ツ)93、民集59巻1号128頁、東京都管理職選考事件）', url: 'https://www.courts.go.jp/hanrei/52248/detail2/index.html', note: '公権力の行使に当たる職を含む一体的な管理職の任用制度で、昇任を日本国民の職員に限る措置は、労働基準法3条・憲法14条1項に違反しない' },
-      { t: '市民的及び政治的権利に関する国際規約 第25条（参政権・公務に携わる権利）', url: 'https://treaties.un.org/doc/Publication/UNTS/Volume%20999/volume-999-I-14668-English.pdf', note: '英語正文：「Every citizen shall have the right and the opportunity ...」として、(b) 選挙で投票し選ばれること、(c)「To have access, on general terms of equality, to public service in his country」を、市民（citizen）の権利として定める。国連条約集の英語正文で確認' },
+      { t: '市民的及び政治的権利に関する国際規約 第25条（参政権・公務に携わる権利）', url: 'https://www.mofa.go.jp/mofaj/gaiko/kiyaku/2c_004.html', note: '外務省の公定訳：「すべての市民は、第二条に規定するいかなる差別もなく、かつ、不合理な制限なしに、次のことを行う権利及び機会を有する。」として、(b)「投票し及び選挙されること」、(c)「一般的な平等条件の下で自国の公務に携わること」を、市民の権利として定める（英語正文では citizen）' },
       { t: 'あらゆる形態の人種差別の撤廃に関する国際条約 第1条第2項（1996年に日本について効力発生）', url: 'https://treaties.un.org/doc/Publication/UNTS/Volume%20660/volume-660-I-9464-English.pdf', note: '英語正文：「This Convention shall not apply to distinctions, exclusions, restrictions or preferences made by a State Party to this Convention between citizens and non-citizens.」（この条約は、締約国が市民と市民でない者との間に設ける区別、排除、制限又は優先については、適用しない。仮訳）。国連条約集の英語正文で確認' }],
     forStaff: '実施にあたっては、職員の任用の基準や管理職の選考の要綱に、公権力の行使又は重要な政策の決定に関わる管理職への任用は日本の国籍を有する者に限ることを明記する方法が考えられます。最高裁判所大法廷の平成17年1月26日判決は、このような任用の制度を設けることを適法としています。',
     yoboText: '{宛先}の職員の任用の基準や管理職の選考の要綱に、公権力の行使又は重要な政策の決定に関わる管理職への任用は日本の国籍を有する者に限ることを明記すること。',
