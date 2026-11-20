@@ -314,6 +314,7 @@
     const n = window.ASKS.filter((a) => !usable(a)).length;
     const el = $('wzRouteNote');
     el.hidden = !n;
+    $('wzRouteCount').textContent = n ? `（${state.kind === 'request' ? '陳情書' : '要望書'}なら、ほかに${n}件選べます）` : '';
     if (!n) return;
     el.innerHTML = state.kind === 'request'
       ? `要望書では、役所の担当課が自分の判断でできることを選べます。国への意見書や、条例・予算など議会の判断が要る内容（${n}件）は、陳情書のほうにあります。<button type="button" class="btn btn-small" data-switch-kind="${other}">陳情書で選ぶ</button>`

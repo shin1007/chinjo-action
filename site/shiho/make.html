@@ -73,12 +73,6 @@
         <li data-progress-step="send">印刷・提出</li>
       </ol>
       <p class="wz-stepno" id="wzStepNo"></p>
-      <details class="wz-privacy hint-sm"><summary>入力した内容はどこに行く？（このサイトのサーバーには送りません）</summary>
-        <dl>
-          <dt>このサイトに送るもの</dt><dd>ありません。例外は、自分で押したときの「提出を報告」（議会名だけ）と「分かったことを共有する」（議会の扱いだけ）です。文面・住所・氏名は送りません。</dd>
-          <dt>この端末のブラウザに残るもの</dt><dd>選んだ内容・自治体・立場と、直した文面。住所・氏名は「覚えておく」にチェックしたときだけ残ります。</dd>
-          <dt>消し方</dt><dd>「最初からやり直す」で選んだ内容と文面が、「この端末から消す」で住所・氏名が消えます。</dd>
-        </dl></details>
       <div id="wzResume" class="wz-resume" hidden>
         <p>前に選んだ内容が、この端末に残っています。</p>
         <button type="button" id="wzResumeYes" class="btn btn-small btn-primary">続きから再開する</button>
@@ -87,7 +81,8 @@
 
       <div class="wz-step" data-step="items">
         <h3>求める内容を選んでください</h3>
-        <details class="wz-kindbox"><summary>出す先：<b data-doc-name>陳情書</b>　<span class="wz-kindbox-change">変える・迷ったら</span></summary>
+        <details class="wz-kindbox"><summary>出す先：<b data-doc-name>陳情書</b>　<span id="wzRouteCount" class="hint-sm"></span>　<span class="wz-kindbox-change">変える・迷ったら</span></summary>
+        <p id="wzRouteNote" class="hint-sm wz-routenote" hidden></p>
         <fieldset class="wz-kind">
           <legend>だれに動いてほしいですか</legend>
           <p class="hint-sm">迷ったら陳情書のままで大丈夫です。どれがいちばん効く、というものではありません（<a href="/#compare">違いの表</a>）。</p>
@@ -98,12 +93,10 @@
         </fieldset>
         <p class="hint-sm wz-seigan"><b>紹介議員になってくれる議員がいるなら、請願にもできます。</b>請願にしたいときも、まずここで陳情書を作り、その文面を持って議員に紹介をお願いします（<a href="/letter">議員への手紙</a>）。請願書は紹介議員が要るので、このサイトでは作りません。</p>
         </details>
-        <p class="hint-sm"><b>とくに伝えたい内容を、3つまで選ぶのがおすすめです。</b>選んだ内容1つにつき1通ずつできあがります。</p>
-        <details class="hint-sm wz-fold"><summary>いくつも選ぶとき・1通にまとめたいとき</summary>
+        <details class="hint-sm wz-fold"><summary><b>とくに伝えたい内容を、3つまで選ぶのがおすすめです。</b>選んだ内容1つにつき1通ずつできあがります（くわしく）</summary>
           <p>多くの議会は「1件に1つの求めること（趣旨）」で分けて出すよう求めているので、ふつうは1通ずつ出します（<a href="/shiho/guide#split">1件ずつ分ける理由</a>）。ただし、1つの議会に一度に出すのは2〜3件までが目安です。出しすぎると1件ずつの審査が浅くなり、かえって通りにくくなります（<a href="/shiho/guide#toomany">出しすぎない理由</a>）。いくつも選ぶなら、同じ分野（下の見出し）の中から選ぶほうが伝わります。同じ分野の内容を1通にまとめたいときは、文面確認の画面で「まとめて1通にする」を選べます。その議会が分けて出すよう求めていないか、先に確かめてください。<a href="/#compare">陳情書・要望書・請願・手紙の違い</a></p>
         </details>
         <input type="search" id="wzItemFilter" class="wz-filter" placeholder="キーワードで内容を絞り込む" aria-label="キーワードで内容を絞り込む">
-        <p id="wzRouteNote" class="hint-sm wz-routenote" hidden></p>
         <p class="wz-bulk"><button type="button" id="wzItemsAll" class="btn btn-small">見えている内容をすべて選ぶ</button> <span id="wzItemsAllNote" class="hint-sm"></span></p>
         <div id="wzItems" class="wz-cards"></div>
         <details id="wzPreview" class="wz-preview" hidden><summary id="wzPreviewTitle">文面の見本を見る</summary>

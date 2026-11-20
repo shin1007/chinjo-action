@@ -671,11 +671,6 @@ summary { cursor: pointer; font-weight: 700; }
 .wz-now-ask { margin: 4px 0 0; padding-left: 1.2em; font-size: 0.95rem; }
 .wz-merge { border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; margin: 8px 0; background: var(--surface); }
 .wz-merge .hint-sm { margin: 4px 0 0; }
-.wz-privacy { margin: 4px 0 8px; }
-.wz-privacy summary { cursor: pointer; }
-.wz-privacy dl { margin: 6px 0 0; }
-.wz-privacy dt { font-weight: 700; margin-top: 4px; }
-.wz-privacy dd { margin: 0 0 0 1em; }
 .guide-must { border: 2px solid var(--main); border-radius: 10px; background: var(--accent-soft); padding: 10px 16px; margin: 12px 0; }
 .guide-must h2 { font-size: 1.05rem; margin: 0 0 4px; }
 .guide-must ul { margin: 0; padding-left: 1.2em; }
@@ -782,7 +777,7 @@ summary { cursor: pointer; font-weight: 700; }
 .support-stages { padding-left: 1.4em; }
 .cost-chart { margin: 1em 0; }
 .cost-bar { display: flex; height: 2em; border: 1px solid #888; border-radius: 4px; overflow: hidden; background: #fff; margin: .4em 0; }
-.cost-self { background: #2a5d9f; color: #fff; display: flex; align-items: center; padding-left: .6em; font-size: .9em; white-space: nowrap; }
+.cost-self { width: 20%; background: #2a5d9f; color: #fff; display: flex; align-items: center; padding-left: .6em; font-size: .9em; white-space: nowrap; }
 .cost-legend { list-style: none; padding: 0; display: flex; gap: 1.2em; flex-wrap: wrap; }
 .cost-key { display: inline-block; width: 1em; height: 1em; vertical-align: -.15em; margin-right: .3em; border: 1px solid #888; }
 .cost-key-self { background: #2a5d9f; }
@@ -790,7 +785,7 @@ summary { cursor: pointer; font-weight: 700; }
 .cost-key-short, .cost-short { background: repeating-linear-gradient(45deg, #fff, #fff 4px, #eee 4px, #eee 8px); }
 .cost-short { flex: 1; display: flex; align-items: center; justify-content: center; color: #555; font-size: .9em; }
 .cost-scale { position: relative; display: flex; justify-content: space-between; height: 1.4em; }
-.cost-pro { position: absolute; transform: translateX(-50%); }
+.cost-pro { position: absolute; left: 20%; transform: translateX(-50%); }
 
 /* トップページの「これまでの歩み」：控えめに、数字だけを並べる */
 .tally { padding: 18px 0 8px; border-bottom: 1px solid var(--line); }
