@@ -4,6 +4,7 @@
 //   node scripts/intake-verify.js                  … 全部の出典を取り直して照合する（取ってから30日以内のものは取り直さない）
 //   node scripts/intake-verify.js --refetch        … 全部取り直す
 //   node scripts/intake-verify.js --limit 50       … 試しに50件だけ
+//   node scripts/intake-verify.js --only 東京都 --only 大阪府/堺市  … 改選のあった自治体だけ取り直す（ほかは前に取った本文で照合し直す）
 //   node scripts/intake-verify.js --file <URL> <保存したHTMLかテキスト>  … 自動で取れなかったページを、手で保存したファイルで照合する
 // 結果：
 //   site/data/intake/verify.json … URL ごとの照合の結果（公開）
@@ -29,8 +30,15 @@ const cacheOf = (url) => path.join(CACHE, crypto.createHash('sha1').update(url).
 const ent = (s) => String(s).replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(+n)).replace(/&#x([\da-f]+);/gi, (_, n) => String.fromCodePoint(parseInt(n, 16)));
 const norm = (s) => ent(s).normalize('NFKC').replace(/[\s、。，．・「」『』（）()［］\[\]【】〈〉《》"'“”‘’:：;；!！?？\-‐－―ー〜~…]/g, '');
 // 「…」で省いた引用は、かたまりごとに全部載っていれば一致とみなす
-const found = (quote, text) => {
-  const t = norm(text);
+// c は取ったページ（text・hrefs・hasForm）。機械で付けた「（このページに入力フォームがある）」「（フォームへのリンク：URL）」はページの作りで確かめる
+const found = (quote, c) => {
+  const q = String(quote);
+  if (/^（このページに入力フォームがある）$/.test(q)) return !!c.hasForm;
+  const link = q.match(/^（フォームへのリンク[:：]\s*(\S+?)）$/);
+  if (link) return (c.hrefs || '').split(' ').includes(link[1]);
+  const t = norm(`${c.text} ${c.hrefs || ''} ${c.linkText || ''}`);
+  // 途中で切れた文字参照（&#105 など）は落とす
+  quote = q.replace(/&#x?[\da-f]*$/i, '');
   // 「リンク：〇〇」はリンクの文字（またはメールアドレス）を引いたもの
   const parts = String(quote).replace(/^リンク[:：]\s*/, '').split(/…|\.\.\.|（略）|〔略〕/).map(norm).filter((p) => p.length >= 4);
   return parts.length > 0 && parts.every((p) => t.includes(p));
@@ -48,7 +56,11 @@ async function fetchText(url) {
     const cs = (ct.match(/charset=([\w-]+)/i) || buf.subarray(0, 3000).toString('latin1').match(/<meta[^>]+charset=["']?([\w-]+)/i) || [])[1] || 'utf-8';
     let html;
     try { html = new TextDecoder(/s(hift)?[-_]?jis/i.test(cs) ? 'shift_jis' : /euc/i.test(cs) ? 'euc-jp' : cs.toLowerCase()).decode(buf); } catch { html = buf.toString('utf8'); }
-    return { status: r.status, text: strip(html), hrefs: [...html.matchAll(/href=["']mailto:([^"'?]+)/gi)].map((m) => m[1]).join(' ') };
+    return { status: r.status, text: strip(html),
+      hrefs: [...html.matchAll(/href=["']([^"']+)["']/gi)].map((m) => { try { return /^mailto:/i.test(m[1]) ? m[1].slice(7).split('?')[0] : new URL(ent(m[1]), r.url).href; } catch { return ''; } }).join(' '),
+      // リンクの文字（画像の alt も含む）
+      linkText: [...html.matchAll(/<a\s[^>]*>([\s\S]*?)<\/a>/gi)].map((m) => strip(m[1].replace(/<img[^>]*alt=["']([^"']*)["'][^>]*>/gi, '$1'))).join(' '),
+      hasForm: /<form[\s>][\s\S]*?<(textarea|input)/i.test(html) };
   } catch (e) {
     return { status: 0, error: String((e.cause && e.cause.code) || e.name || e) };
   } finally { clearTimeout(timer); }
@@ -89,9 +101,11 @@ async function main() {
   const limit = li >= 0 ? Number(args[li + 1]) : Infinity;
   const items = load();
   const urls = [...items.keys()].slice(0, limit);
-  const todo = urls.filter((u) => {
+  const only = args.flatMap((a, i) => (args[i - 1] === '--only' ? [a] : []));
+  const hit = (u) => !only.length || items.get(u).some((q) => only.some((o) => q.id === o || q.id.startsWith(o.includes('/') ? o : `${o}/`)));
+  const todo = urls.filter(hit).filter((u) => {
     const c = readCache(u);
-    return refetch || !c || (c.via !== 'manual' && (c.error || Date.now() - Date.parse(c.fetched_at) > MAX_AGE));
+    return refetch || (only.length && c && c.via !== 'manual') || !c || (c.via !== 'manual' && (c.error || Date.now() - Date.parse(c.fetched_at) > MAX_AGE));
   });
   console.error(`出典 ${urls.length} 件のうち ${todo.length} 件を取る`);
   // 同じサイトに続けて行かないよう、ホストごとに順番に、全体は並行で
@@ -119,7 +133,7 @@ async function main() {
       failed.fetch.push({ url: u, error: c.error, qs });
       continue;
     }
-    const miss = qs.filter((q) => !found(q.quote, `${c.text} ${c.hrefs || ''}`));
+    const miss = qs.filter((q) => !found(q.quote, c));
     result[u] = { checked_at: c.fetched_at, ok: miss.length === 0, quotes: qs.length, missing: miss.length, via: c.via };
     if (miss.length) failed.quote.push({ url: u, qs: miss });
   }
