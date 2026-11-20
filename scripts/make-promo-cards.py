@@ -1,7 +1,7 @@
 # サイト紹介用の画像（X などに投稿する。600×750 の 4:5。サイトには置かない）を、テーマごとに3枚ずつ作る。
 #   python scripts/make-promo-cards.py  → docs/見本/紹介画像/<テーマ>-<番号>.png
-# 各テーマの国あての陳情の最初の3件について、件名と「いま」の説明（easy.js。一次資料で確かめた文）を載せる。
-# 文や項目を直したら作り直す。
+# 1枚に同じテーマの陳情を何件も並べる。1・2枚目は国に求める陳情（最初の12件を半分ずつ）、3枚目は自治体に求める陳情。
+# 項目を直したら作り直す。
 import json
 import re
 import subprocess
@@ -26,8 +26,14 @@ JS = r'''
 const vm = require('vm'), fs = require('fs'), path = require('path');
 const dir = process.argv[1];
 const window = {};
-for (const f of ['asks-national.js', 'easy.js']) vm.runInNewContext(fs.readFileSync(path.join(dir, f), 'utf8'), { window });
-process.stdout.write(JSON.stringify(window.ASKS.filter((a) => window.EASY[a.id]).map((a) => ({ id: a.id, label: a.label, ...window.EASY[a.id] }))));
+const out = {};
+for (const f of ['asks-national.js', 'asks-local.js']) {
+  if (!fs.existsSync(path.join(dir, f))) continue;
+  window.ASKS = [];
+  vm.runInNewContext(fs.readFileSync(path.join(dir, f), 'utf8'), { window });
+  out[f] = window.ASKS.map((a) => a.label);
+}
+process.stdout.write(JSON.stringify(out));
 '''
 
 
@@ -71,61 +77,61 @@ def sentences(text, d, font, width, max_lines):
     return wrap(d, ''.join(take), font, width)
 
 
-def card(key, theme, hue, n, total, a):
+def card(key, theme, hue, n, heading, count, labels):
     im = Image.new('RGB', (W, H), BG)
     d = ImageDraw.Draw(im)
     main, dark, soft = hsl(hue, 0.55, 0.55), hsl(hue, 0.55, 0.36), hsl(hue, 0.6, 0.94)
     d.rectangle((0, 0, 12, H), fill=main)
-    # テーマの札と通し番号
     tf = f(22)
     tw = d.textlength(theme, font=tf)
-    d.rounded_rectangle((44, 40, 44 + tw + 36, 80), 20, fill=soft)
-    d.text((62, 60), theme, font=tf, fill=dark, anchor='lm')
-    d.text((W - 44, 60), f'{n}/{total}', font=f(20, False), fill=SUB, anchor='rm')
-    # 小さな陳情書に見立てた白い紙に、件名を大きく
-    d.rounded_rectangle((46, 108, W - 38, 300), 14, fill=(232, 226, 214))
-    d.rounded_rectangle((40, 102, W - 44, 294), 14, fill=PAPER, outline=LINE, width=2)
-    d.rectangle((52, 102, W - 56, 107), fill=main)
-    label = re.sub(r'（[^）]*）', '', a['label'])
-    title = label + ('することを求める陳情' if label.endswith('に') else 'を求める陳情')
-    for size in (36, 33, 30, 27, 24):
-        lines = wrap(d, title, f(size), W - 132)
-        if len(lines) <= 3 and len(lines[-1]) > 2:  # 最後の行が「情」だけのようにならない大きさにする
-            break
-    ty = 198 - len(lines) * size * 0.7
-    for k, t in enumerate(lines):
-        d.text((66, ty + k * size * 1.4), t, font=f(size), fill=INK)
-    # いま、どうなっているか（easy.js の now）と、なぜ必要か（why）。入るところまで文の切れ目で取る
-    bf, y = f(20, False), 326
-    left = 9
-    for head, key2 in (('いま、どうなっているか', 'now'), ('なぜ必要か', 'why')):
-        if left < 2:
-            break
-        lines = sentences(a[key2], d, bf, W - 88, left)
-        if key2 == 'why' and lines[-1].endswith('…'):
-            break  # 文の途中で切れるなら「なぜ」は載せない（切った文は意味が変わりうる）
-        d.text((44, y), head, font=f(22), fill=dark)
-        y += 40
-        for t in lines:
-            d.text((44, y), t, font=bf, fill=INK)
-            y += 31
-        y += 16
-        left -= len(lines) + 2
-    # 下：費用と行き先
+    d.rounded_rectangle((44, 36, 44 + tw + 36, 76), 20, fill=soft)
+    d.text((62, 56), theme, font=tf, fill=dark, anchor='lm')
+    d.text((W - 44, 56), f'{n}/3', font=f(20, False), fill=SUB, anchor='rm')
+    d.text((44, 100), heading, font=f(30), fill=INK)
+    d.text((44, 146), f'このテーマには{count}件あります。選んで出せます', font=f(17, False), fill=SUB)
+    # 小さな陳情書に見立てた紙を、件名ごとに1枚ずつ重ねて並べる
+    top, bottom, gap = 184, 652, 12
+    # 件数が少ない画像は、紙と字を大きくして余白を埋める
+    fs, pad = (26, 40) if len(labels) <= 3 else (23, 32) if len(labels) <= 4 else (19, 24)
+    lh = round(fs * 1.37)
+    lf = f(fs)
+    items = []
+    for t in labels:
+        t = re.sub(r'（[^）]*）', '', t)
+        lines = wrap(d, t, lf, W - 150)
+        if len(lines) > 2:
+            lines = [lines[0], lines[1][:-1] + '…']
+        items.append(lines)
+    hs = [pad + lh * len(x) for x in items]
+    y = top + max(0, (bottom - top - sum(hs) - gap * (len(hs) - 1)) // 2)
+    for lines, h in zip(items, hs):
+        d.rounded_rectangle((44, y + 3, W - 40, y + h + 3), 10, fill=(232, 226, 214))
+        d.rounded_rectangle((40, y, W - 44, y + h), 10, fill=PAPER, outline=LINE, width=1)
+        d.rectangle((40, y + 8, 45, y + h - 8), fill=main)
+        d.text((66, y + h // 2), '✓', font=f(fs + 1), fill=main, anchor='mm')
+        for k, t in enumerate(lines):
+            d.text((88, y + pad // 2 + k * lh), t, font=lf, fill=INK)
+        y += h + gap
     d.line((44, 668, W - 44, 668), fill=LINE, width=2)
     d.text((44, 692), '陳情書は選ぶだけで作れます　陳情5件を郵送して約480円', font=f(18), fill=ACC, anchor='lm')
-    d.text((44, 720), f'{SITE}/{key}/easy/{a["id"]}', font=f(16, False), fill=SUB, anchor='lm')
+    d.text((44, 720), f'{SITE}/{key}', font=f(16, False), fill=SUB, anchor='lm')
     return im
 
 
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     for key, theme, hue in THEMES:
-        asks = load(key)[:PER]
-        for n, a in enumerate(asks, 1):
+        data = load(key)
+        nat, loc = data.get('asks-national.js', []), data.get('asks-local.js', [])
+        first = nat[:12]
+        half = (len(first) + 1) // 2
+        pages = [('国に求める陳情', len(nat), first[:half]),
+                 ('国に求める陳情（つづき）', len(nat), first[half:]),
+                 ('自治体に求める陳情', len(loc), loc[:6])]
+        for n, (heading, count, labels) in enumerate(pages, 1):
             p = OUT / f'{key}-{n}.png'
-            card(key, theme, hue, n, len(asks), a).save(p, optimize=True)
-            print(p.name, a['label'])
+            card(key, theme, hue, n, heading, count, labels).save(p, optimize=True)
+            print(p.name, len(labels))
 
 
 if __name__ == '__main__':
