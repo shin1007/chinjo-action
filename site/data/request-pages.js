@@ -73,7 +73,7 @@ window.REQUEST_PAGES = {
   "東京都/世田谷区": ["https://www.city.setagaya.lg.jp/02002/7775.html","区長へのメール（区政へのご意見）"],
   "東京都/練馬区": ["https://www.city.nerima.tokyo.jp/kusei/goiken/goiken.html","区政へのご意見：練馬区公式ホームページ"],
   "東京都/大田区": ["https://www.city.ota.tokyo.jp/kuseijoho/kuminnokoe/index.html","大田区ホームページ：区民の声"],
-  "東京都/足立区": ["https://www.city.adachi.tokyo.jp/k-hinkon/survey-index.html","きかせて！みんなのこえ"],
+  "東京都/足立区": ["https://shinsei.city.adachi.tokyo.jp/apply/guide/402","区長へのメール（ご意見・ご提案、ご要望）"],
   "東京都/江戸川区": ["https://www.city.edogawa.tokyo.jp/e004/kuseijoho/kohokocho/goiken/kuminnokoe/index.html","区民の声（区長への手紙） 江戸川区ホームページ"],
   "千葉県/船橋市": ["https://www.city.funabashi.lg.jp/other/0002/p011407.html","お問い合わせ・ご意見・ご要望"],
   "鹿児島県/鹿児島市": ["https://www.city.kagoshima.lg.jp/soumu/soumu/jousys/soshiki/iken.html","ご意見・お問い合わせ"],
