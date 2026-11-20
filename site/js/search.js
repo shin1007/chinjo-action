@@ -11,8 +11,12 @@
   const norm = (s) => s.normalize('NFKC').toLowerCase().replace(/[\u30a1-\u30f6]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0x60));
   const rows = window.SEARCH_INDEX.map((a) => ({ ...a, head: norm(`${a.label} ${a.category || ''} ${a.words || ''}`), body: norm(a.text) }));
 
+  const allBtn = document.getElementById('itemListAll');
+  let showAll = false;
+
   function render() {
     const words = norm(input.value).split(/\s+/).filter(Boolean);
+    if (!words.length && showAll) return draw(rows, rows.length, `全部で${rows.length}件。押すと、その内容を選んだ状態で作成画面が開きます。`);
     if (!words.length) { list.innerHTML = ''; count.textContent = ''; return; }
     const hits = rows
       .filter((r) => words.every((w) => r.head.includes(w) || r.body.includes(w)))
@@ -23,9 +27,14 @@
     count.textContent = hits.length
       ? `${hits.length}件${hits.length > MAX ? `（はじめの${MAX}件を表示）` : ''}。押すと、その内容を選んだ状態で作成画面が開きます。`
       : '見つかりませんでした。言葉を短くするか、下のテーマから選んでください。';
+    draw(hits, MAX, count.textContent);
+  }
+
+  function draw(hits, max, msg) {
+    count.textContent = msg;
     // 同じテーマ・同じ見出しのものをまとめて出す（見出しの順は、当てはまりのよいものが先）
     const groups = new Map();
-    hits.slice(0, MAX).forEach((a) => {
+    hits.slice(0, max).forEach((a) => {
       const k = `${a.theme}	${a.category || 'そのほか'}`;
       if (!groups.has(k)) groups.set(k, { theme: a.theme, themeName: a.themeName, category: a.category || 'そのほか', list: [] });
       groups.get(k).list.push(a);
@@ -34,4 +43,11 @@
       <ul>${g.list.map((a) => `<li><a href="/${a.theme}/make?item=${encodeURIComponent(a.id)}"><b>${esc(a.label)}</b><small>${a.scope === 'local' ? '自治体の取り組み' : '国へ意見書'}</small><small>${ROUTE[a.route] || ''}</small></a></li>`).join('')}</ul></li>`).join('');
   }
   input.addEventListener('input', render);
+  if (allBtn) allBtn.addEventListener('click', () => {
+    showAll = !showAll;
+    allBtn.setAttribute('aria-expanded', String(showAll));
+    allBtn.textContent = showAll ? '一覧を閉じる' : '陳情内容の一覧を見る';
+    if (showAll) input.value = '';
+    render();
+  });
 })();
