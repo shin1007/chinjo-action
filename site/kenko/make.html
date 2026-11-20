@@ -94,7 +94,7 @@
           <label><input type="radio" name="wzKind" value="petition" checked> <b>議会に話し合ってほしい：陳情書</b><span class="hint-sm">議会で審査されるか、議員に配られます。国へ意見書を出すよう求める内容と、条例・予算など議会の判断が要る内容が向いています。</span></label>
           <label><input type="radio" name="wzKind" value="request"> <b>市区町村長・知事・役所に動いてほしい：要望書</b><span class="hint-sm">行政に直接、検討や説明を求めます。通知・窓口・研修・公表など、担当課が自分の判断でできる内容が向いています。</span></label>
           <a class="wz-kind-link" href="/letter?theme=kenko"><b>地元の特定の議員に知ってほしい：議員への手紙</b><span class="hint-sm">公開されません。陳情書に書けない事情を伝えたり、紹介議員をお願いしたりするときに。別の画面で作ります。</span></a>
-          <a class="wz-kind-link" href="https://form.cao.go.jp/kokumin_koe/opinion-0016.html" target="_blank" rel="noopener"><b>国（省庁）に規制を見直してほしい：国への提案</b><span class="hint-sm">内閣府の「規制改革・行政改革ホットライン」のフォームから直接出します（このサイトでは作りません）。回答は内閣府のサイトで公開されます。地元の議会に「国へ意見書を出してほしい」という陳情を出すこともできます。</span></a>
+          <a class="wz-kind-link" href="https://form.cao.go.jp/kokumin_koe/opinion-0016.html" target="_blank" rel="noopener"><b>国（省庁）に規制を見直してほしい：国への提案 ↗</b><span class="hint-sm">押すと、内閣府の「規制改革・行政改革ホットライン」のフォームが開きます（このサイトでは作りません）。回答は内閣府のサイトで公開されます。地元の議会に「国へ意見書を出してほしい」という陳情を出すこともできます。</span></a>
         </fieldset>
         <p class="hint-sm wz-seigan"><b>紹介議員になってくれる議員がいるなら、請願にもできます。</b>請願にしたいときも、まずここで陳情書を作り、その文面を持って議員に紹介をお願いします（<a href="/letter">議員への手紙</a>）。請願書は紹介議員が要るので、このサイトでは作りません。</p>
         </details>
@@ -210,6 +210,10 @@
 
       <div class="wz-step" data-step="send" hidden>
         <h3>署名して出す</h3>
+        <div id="wzHotline" class="wz-hotline" hidden>
+          <p><b>国にも直接届けられます。</b>選んだ内容には、国の法律や省令を変えるものがあります。陳情書とは別に、内閣府の「規制改革・行政改革ホットライン」のフォームから、個人で国に直接提案できます。所管の省庁が検討し、回答が<a href="https://www8.cao.go.jp/kisei-kaikaku/kisei/hotline/h_index.html" target="_blank" rel="noopener">内閣府のサイト</a>で公開されます（氏名は公表されません）。陳情書の文面をそのまま貼り付けて使えます。</p>
+          <a class="btn btn-primary" href="https://form.cao.go.jp/kokumin_koe/opinion-0016.html" target="_blank" rel="noopener">国への提案のフォームを開く ↗</a>
+        </div>
         <section class="wz-now" aria-labelledby="wzNowH">
           <h4 id="wzNowH">今やること</h4>
           <ol class="wz-now-steps">
@@ -330,7 +334,6 @@
           <summary><b>提出したあとにできること</b>（ほかの議会にも出す・審査を見届ける・広める）</summary>
           <ul>
           <li><b>ほかの議会にも出す：</b>同じ内容のまま、近くの議会や別の都道府県の議会を書き足せます。同じ地域でまとめて出すと、採択につながりやすくなります。<button type="button" id="wzOther" class="btn btn-small">ほかの議会を選ぶ</button></li>
-          <li id="wzHotline" hidden><b>国に直接提案する：</b>国の法律や省令を変える内容は、内閣府の<a href="https://form.cao.go.jp/kokumin_koe/opinion-0016.html" target="_blank" rel="noopener">規制改革・行政改革ホットライン</a>にも個人で出せます。所管の省庁が検討し、回答が<a href="https://www8.cao.go.jp/kisei-kaikaku/kisei/hotline/h_index.html" target="_blank" rel="noopener">内閣府のサイト</a>で公開されます。氏名は公表されません。<a href="/#compare">ほかの手段</a></li>
           <li><b>議員に手紙を出す：</b>陳情書に書けない事情は、公開されない手紙で伝えます。紹介議員のお願いにもなります。<a href="/letter?theme=kenko">議員への手紙をつくる</a></li>
           <li><b>審査を見届ける：</b>1週間ほどしたら議会事務局に受理と審査の日程を確かめ、できれば委員会を傍聴します。<a href="/kenko/guide#flow">提出までの流れ</a></li>
           <li><b>広める：</b>結果が出たら、ほかの地域の人の後押しになるよう共有してください。<a id="wzShareX" target="_blank" rel="noopener">Xで共有</a>／<a id="wzShareLine" target="_blank" rel="noopener">LINEで共有</a></li>
