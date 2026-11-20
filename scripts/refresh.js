@@ -4,7 +4,7 @@
 //   npm run refresh -- --only 東京都          … 改選のあった都道府県（その中の市区町村も）の出典だけ取り直す。--only はいくつでも
 //   npm run refresh -- --only 大阪府/堺市     … 市区町村ひとつだけ
 //   npm run refresh -- --no-diet              … 国会議員の名簿は取り直さない（地方選挙のあとなど）
-//   npm run refresh -- --roster --only 東京都 … 議員名簿のページ（site/data/roster.json）も探し直す（改選でページが移ることがある）
+//   npm run refresh -- --roster --only 東京都 … 議員名簿のページ（site/data/roster.json）と、そこからの議員の名前（site/data/roster/）も取り直す（改選のあとに）
 //   npm run refresh -- --pr                   … 終わったらブランチを切ってコミットし、プルリクエストを作る
 // 国会議員の名簿は公式の一覧を丸ごと取っても十数ページなので、選挙区で絞らない。
 'use strict';
@@ -15,10 +15,14 @@ const ROOT = path.join(__dirname, '..');
 const args = process.argv.slice(2);
 const run = (cmd, a) => execFileSync(cmd, a, { cwd: ROOT, stdio: 'inherit' });
 const out = (cmd, a) => execFileSync(cmd, a, { cwd: ROOT, encoding: 'utf8' }).trim();
-const FILES = ['site/data/diet-members.js', 'site/data/roster.json', 'docs/調査/議員名簿のページが見つからない議会.md', 'site/data/intake/verify.json', 'site/data/verify-summary.json', 'docs/調査/出典を確かめられなかったもの.md'];
+const FILES = ['site/data/diet-members.js', 'site/data/roster.json', 'site/data/roster', 'docs/調査/議員の名前を抜き出せなかった議会.md', 'docs/調査/議員名簿のページが見つからない議会.md', 'site/data/intake/verify.json', 'site/data/verify-summary.json', 'docs/調査/出典を確かめられなかったもの.md'];
 
 if (!args.includes('--no-diet')) run(process.execPath, ['scripts/diet-members.js']);
-if (args.includes('--roster')) run(process.execPath, ['scripts/roster-find.js', ...args.filter((a, i) => a === '--only' || args[i - 1] === '--only')]);
+if (args.includes('--roster')) {
+  const o = args.filter((a, i) => a === '--only' || args[i - 1] === '--only');
+  run(process.execPath, ['scripts/roster-find.js', ...o]);
+  run(process.execPath, ['scripts/roster-names.js', ...(o.length ? o : ['--next', '0'])]);
+}
 run(process.execPath, ['scripts/intake-verify.js', ...args.filter((a, i) => a === '--only' || args[i - 1] === '--only' || a === '--refetch')]);
 
 if (args.includes('--pr')) {
