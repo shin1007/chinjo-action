@@ -231,6 +231,10 @@ summary { cursor: pointer; font-weight: 700; }
 .wz-mk.jisan, .wz-mk.none { color: var(--muted); }
 .wz-n { display: block; font-size: 0.72rem; font-weight: 400; color: var(--muted); }
 .ask-scope { display: inline-block; margin-left: 6px; padding: 0 6px; border: 1px solid var(--line); border-radius: 4px; font-size: 0.72rem; font-weight: 400; color: var(--muted); vertical-align: 1px; }
+.sum-item { padding: 10px 0; border-bottom: 1px solid var(--line); }
+.sum-item h3 { margin: 0 0 4px; font-size: 1rem; }
+.sum-item p { margin: 0 0 4px; }
+@media print { .site-header, .page-nav, footer, .btn { display: none !important; } .sum-item { break-inside: avoid; } a { color: inherit; text-decoration: none; } }
 .ask-tags { display: block; margin-top: 4px; }
 .ask-tag { display: inline-block; margin: 0 4px 2px 0; padding: 0 6px; border-radius: 4px; font-size: 0.72rem; font-weight: 400; }
 .ask-tag-research { background: #e8f0fb; color: #1d4f91; }
