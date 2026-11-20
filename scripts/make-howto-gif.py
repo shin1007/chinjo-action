@@ -23,7 +23,7 @@ STEPS = [
     ('宛名と差出人を切る', '切り取り線で切る\nラベル用紙なら、はがすだけ', '', 0, 'scissors'),
     ('クリアファイルに入れる', '全部をまとめて1枚に入れる', '約11円', 11, 'file'),
     ('角2封筒に入れる', 'A4を折らずに入れる', '約10円', 10, 'envelope'),
-    ('宛名と切手を貼る', '宛名は表に、差出人は裏に、のりで貼る\n16枚とクリアファイルで100gぎりぎり\n心配なら270円分を貼る', '切手 180円（心配なら270円）', 180, 'stamp'),
+    ('宛名と切手を貼る', '宛名は表に、差出人は裏に、のりで貼る\n16枚とクリアファイルで約100g\n厚手の紙や封筒でも150gまで届く270円', '切手 270円', 270, 'stamp'),
     ('ポストに出す', '締切の1週間前には届くように出す', '', 0, 'post'),
 ]
 
@@ -128,7 +128,7 @@ def icon(d, kind, cx, cy):
         d.rectangle((cx - 30, cy - 85, cx + 30, cy - 65), fill='#d8b37c', outline=INK, width=3)
 
 
-SAFE = 90  # 心配な人が1つ上の料金（270円）の切手を貼るときに足す額
+
 LAYOUTS = {
     # トップページ（/）でその場で再生する横（PC）と縦（スマホ）。最後のコマは「▼ 下からテーマを選ぶ」
     'wide': dict(size=(960, 540), out=OUT, end='themes'),
@@ -148,7 +148,7 @@ def ending(d, w, y, end, size):
 
 
 def total_text(total, safe):
-    return f'約{total}円' + (f'（心配なら約{total + SAFE}円）' if safe else '')
+    return f'約{total}円' 
 
 
 def frame(i, total, safe, size):
@@ -212,7 +212,7 @@ def summary(total, size, end):
         d.text((w // 2, 170), '陳情5件を郵送で', font=f(34), fill=INK, anchor='mm')
         d.text((w // 2, 220), '合わせて', font=f(34), fill=INK, anchor='mm')
         d.text((w // 2, 330), f'約{round(total, -1)}円', font=f(100), fill=ACC, anchor='mm')
-        d.text((w // 2, 430), f'切手を心配して270円にしても 約{round(total + SAFE, -1)}円', font=f(20), fill=ACC, anchor='mm')
+        d.text((w // 2, 430), '厚手の紙・封筒にしても、切手270円で150gまで届きます', font=f(20), fill=ACC, anchor='mm')
         for k, t in enumerate(parts):
             d.text((w // 2, 510 + k * 36), t, font=f(22, False), fill=INK, anchor='mm')
         d.text((w // 2, 690), '電子申請で出せる議会なら', font=f(20, False), fill=SUB, anchor='mm')
@@ -222,7 +222,7 @@ def summary(total, size, end):
     else:
         d.text((w // 2, 100), '陳情5件を郵送で、合わせて', font=f(36), fill=INK, anchor='mm')
         d.text((w // 2, 205), f'約{round(total, -1)}円', font=f(110), fill=ACC, anchor='mm')
-        d.text((w // 2, 290), f'切手を心配して270円にしても 約{round(total + SAFE, -1)}円', font=f(24), fill=ACC, anchor='mm')
+        d.text((w // 2, 290), '厚手の紙・封筒にしても、切手270円で150gまで届きます', font=f(24), fill=ACC, anchor='mm')
         d.text((w // 2, 345), ' ＋ '.join(parts), font=f(22, False), fill=INK, anchor='mm')
         d.text((w // 2, 390), '電子申請で出せる議会なら、印刷も切手も要りません', font=f(22, False), fill=SUB, anchor='mm')
         ending(d, w, 462, end, 28)
