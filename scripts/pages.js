@@ -27,7 +27,8 @@ const themeNav = (current) => [
   '    <details class="theme-menu">',
   `      <summary>${(THEMES.find((t) => t.id === current) || { label: 'テーマを選ぶ' }).label}</summary>`,
   '      <nav class="theme-nav" aria-label="陳情のテーマ">',
-  ...THEMES.map((t) => `        <a href="/${t.id}"${t.id === current ? ' aria-current="true"' : ''}>${t.label}</a>`),
+  // テーマを選んだら、すぐ作成の画面へ（テーマの説明は作成画面の上の「説明」から）
+  ...THEMES.map((t) => `        <a href="/${t.id}/make"${t.id === current ? ' aria-current="true"' : ''}>${t.label}</a>`),
   '      </nav>',
   '    </details>',
 ].join('\n');
@@ -54,6 +55,7 @@ const primaryNav = (themeId, page) => [
   '    <nav class="primary-nav" aria-label="主要メニュー">',
   `      <a href="/${themeId}/make"${page === 'make' ? ' aria-current="page"' : ''}>つくる</a>`,
   `      <a href="/${themeId}/guide"${page === 'guide' ? ' aria-current="page"' : ''}>出し方</a>`,
+  `      <a href="/${themeId}"${page === 'index' ? ' aria-current="page"' : ''}>説明</a>`,
   '    </nav>',
 ].join('\n');
 
