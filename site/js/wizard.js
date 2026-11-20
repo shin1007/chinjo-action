@@ -280,6 +280,9 @@
     const mark = (t, f) => (auto.has(f) ? `${t}<small class="wz-checked">（公式ページから自動で読み取り）</small>` : t);
     const out = n.map((t, i) => mark(t, fieldOf[i]));
     if (d.page_url && !(kind === 'yobo' && requestLinks(id).page === d.page_url)) out.push(`${link(d.page_url, '公式の案内ページを開く')}<small class="wz-checked">（${esc(ymd(d.at))}に確認）</small>`);
+    // パブリックコメント（制度の案への意見募集）の一覧。自治体（首長部局）のページなので、要望の側のデータから出す
+    const pc = (intakeOf(id, 'yobo') || {}).pubcom_url;
+    if (pc) out.push(`📝 この自治体は、計画や条例の案への意見募集（パブリックコメント）もしています：${link(pc, '意見募集のページを開く')}`);
     if (isStale(d.at)) out.push(`⚠ このサイトで確かめたのは${esc(ymd(d.at))}で、3か月以上たっています。変わっていることがあるので、出す前に公式の案内ページで確かめてください。`);
     return out;
   }
