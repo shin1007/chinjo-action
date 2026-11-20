@@ -139,7 +139,7 @@ window.REQUEST_PAGES = {
   "青森県/青森市": ["https://www.city.aomori.aomori.jp/shisei/kouchou/1008273.html","市民の声 ご意見応募フォーム │ 青森市"],
   "大阪府/八尾市": ["https://www.city.yao.osaka.jp/shisei/kouchou/1015460.html","ご意見・お問合せ"],
   "神奈川県/平塚市": ["https://www.city.hiratsuka.kanagawa.jp/kocho/page-c_01456.html","市長への手紙"],
-  "埼玉県/草加市": ["https://www.city.soka.saitama.jp/li/060/050/index.html","広聴・市民の声"],
+  "埼玉県/草加市": ["https://www.city.soka.saitama.jp/cont/s1002/070/a04/PAGE000000000000049840.html","市への意見・問い合わせ"],
   "新潟県/長岡市": ["https://www.city.nagaoka.niigata.jp/shisei/cate07/index.html","市民の声・市政への参加"],
   "福井県/福井市": ["https://www.city.fukui.lg.jp/sisei/kotyou/request/i-asking.html","市政へのご意見・ご提案"],
   "神奈川県/大和市": ["https://www.city.yamato.lg.jp/gyosei/shiseijoho/kocho/shihenogoteian_goiken/shichohenotegami/7597.html","市長への手紙／大和市"],
