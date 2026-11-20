@@ -20,6 +20,14 @@
   pending.hidden = true;
   form.hidden = false;
 
+  // /coverage などから ?kind=…&target=… で開いたときは、その値を入れておく
+  const q = new URLSearchParams(location.search);
+  for (const k of ['kind', 'target']) {
+    const v = q.get(k);
+    const input = form.elements[k];
+    if (v && input && (input.tagName !== 'SELECT' || [...input.options].some((o) => o.value === v))) input.value = v.slice(0, 100);
+  }
+
   const msg = document.getElementById('fb-msg');
   form.addEventListener('submit', async (e) => {
     e.preventDefault();

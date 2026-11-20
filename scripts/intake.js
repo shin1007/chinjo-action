@@ -296,7 +296,46 @@ function todo(topic, pref) {
 }
 const EXPORT_FILE = path.join(DATA, 'intake.js');
 
-module.exports = { checkKind, METHODS, FILES, exportText, EXPORT_FILE };
+// 人口カバー率（/coverage）。出し方（持参・郵送・メール・電子申請・FAX）のどれかを公式サイト・事務局の回答で確かめた自治体を
+// 「わかる」、案内ページだけ見つかっている自治体を「案内だけ」と数える。パブリックコメントは一覧のページが見つかっているか
+const COVERAGE_FILE = path.join(DATA, 'coverage.json');
+function level(r) {
+  const known = METHODS.some((m) => r.methods[m].resident !== 'unknown' || r.methods[m].nonresident !== 'unknown');
+  const sure = r.sources.some((s) => SURE.has(s.route) && s.fields.some((f) => f.startsWith('methods.')));
+  if (known && sure) return 2;
+  return r.page_url ? 1 : 0;
+}
+function coverageData() {
+  const ch = readJsonl(FILES.chinjo);
+  const yo = new Map(readJsonl(FILES.yobo).map((r) => [r.id, r]));
+  const rows = ch.map((r) => {
+    const y = yo.get(r.id);
+    return { id: r.id, pref: r.pref, name: r.name, level: r.level, pop: r.population || 0,
+      c: level(r), y: y ? level(y) : 0, p: y && y.pubcom_url ? 1 : 0 };
+  });
+  const sum = (list, k, min) => {
+    const total = list.reduce((a, r) => a + r.pop, 0);
+    const hit = list.filter((r) => r[k] >= min);
+    return { n: hit.length, of: list.length, pop: hit.reduce((a, r) => a + r.pop, 0), total };
+  };
+  const by = (lv) => rows.filter((r) => r.level === lv);
+  const kinds = {};
+  for (const lv of ['pref', 'municipality']) {
+    kinds[lv] = {
+      chinjo: { known: sum(by(lv), 'c', 2), page: sum(by(lv), 'c', 1) },
+      yobo: { known: sum(by(lv), 'y', 2), page: sum(by(lv), 'y', 1) },
+      pubcom: { page: sum(by(lv), 'p', 1) },
+    };
+  }
+  const dates = [...ch, ...yo.values()].flatMap((r) => r.sources.map((s) => s.checked_at || '')).sort();
+  return { asOf: dates[dates.length - 1], population_as_of: ch[0].population_as_of, kinds,
+    prefs: ch.filter((r) => r.level === 'pref').map((r) => r.pref),
+    // 人口の多い順。c・y は 0 なし／1 案内だけ／2 出し方まで、p は 0/1
+    rows: rows.sort((a, b) => b.pop - a.pop).map(({ id, pop, c, y, p }) => [id, pop, c, y, p]) };
+}
+const coverageText = () => JSON.stringify(coverageData()) + '\n';
+
+module.exports = { checkKind, METHODS, FILES, exportText, EXPORT_FILE, coverageText, COVERAGE_FILE };
 
 if (require.main === module) {
   const [cmd, opt] = process.argv.slice(2);
@@ -307,5 +346,6 @@ if (require.main === module) {
   else if (cmd === 'report') require('./intake-report.js')();
   else if (cmd === 'todo') todo(opt, process.argv[4]);
   else if (cmd === 'export') { fs.writeFileSync(EXPORT_FILE, exportText()); console.log('書いた', path.relative(ROOT, EXPORT_FILE)); }
-  else { console.error('使い方: node scripts/intake.js migrate|check|population|stats|report|todo|export'); process.exit(1); }
+  else if (cmd === 'coverage') { fs.writeFileSync(COVERAGE_FILE, coverageText()); console.log('書いた', path.relative(ROOT, COVERAGE_FILE)); }
+  else { console.error('使い方: node scripts/intake.js migrate|check|population|stats|report|todo|export|coverage'); process.exit(1); }
 }
