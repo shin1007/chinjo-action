@@ -99,7 +99,7 @@ window.REQUEST_PAGES = {
   "大阪府/豊中市": ["https://www.city.toyonaka.osaka.jp/joho/sanka/koe/index.html","市民の声 豊中市"],
   "富山県/富山市": ["https://www.city.toyama.lg.jp/shisei/koho/1010862/1012156/index.html","市民の声（市へのご意見・ご要望）"],
   "岐阜県/岐阜市": ["https://www.city.gifu.lg.jp/info/kouchou/1008456/1008457/index.html","市長への手紙（市政への提言など）"],
-  "宮崎県/宮崎市": ["https://www.city.miyazaki.miyazaki.jp/city/public_relations/hearing/contact.html","ご意見・お問い合わせ"],
+  "宮崎県/宮崎市": ["https://www.city.miyazaki.miyazaki.jp/city/public_relations/hearing/316864.html","市長ホットライン"],
   "大阪府/枚方市": ["https://www.city.hirakata.osaka.jp/0000000324.html","市民の声【言エルバ】"],
   "大阪府/吹田市": ["https://www.city.suita.osaka.jp/shisei/1018939/index.html","市民の声・広聴"],
   "長崎県/長崎市": ["https://www.city.nagasaki.lg.jp/page/3204.html","市政への提案"],
