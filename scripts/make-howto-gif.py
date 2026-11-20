@@ -4,7 +4,6 @@
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
-W, H = 960, 540
 OUT = Path(__file__).resolve().parent.parent / 'docs' / '見本' / '紹介GIF' / 'mail-howto.gif'
 FONT_B = 'C:/Windows/Fonts/BIZ-UDGothicB.ttc'
 FONT_R = 'C:/Windows/Fonts/BIZ-UDGothicR.ttc'
@@ -19,12 +18,12 @@ NOTE = '金額は陳情書5件（1件3枚）＋送付状を1通で郵送する�
 STEPS = [
     ('サイトで入力する', '求めることを選ぶ\n出す先の議会を選ぶ\n住所・氏名を入れる（空けて手書きでもよい）', '無料', 0, 'screen'),
     ('PDFを保存する', '全部が1つのPDFになる\nUSBメモリーに入れる\nスマホからネットプリントに登録してもよい', '無料', 0, 'usb'),
-    ('コンビニで印刷する', 'USBから白黒A4・1枚10円\nネットプリントなら1枚20円\n陳情書15枚・送付状1枚・宛名の用紙1枚', '17枚 170円', 170, 'printer'),
+    ('コンビニで印刷する', 'USBから白黒A4・1枚10円（ネットプリントは20円）\n陳情書15枚・送付状1枚・宛名の用紙1枚\n出し方メモ2枚（スマホで見るなら要らない）', '19枚 190円', 190, 'printer'),
     ('日付を書いて署名する', '日付は空欄なので、出す日を手書きする\n住所・氏名を空けたなら、それも手書きする\n押印は議会によって要らない', '', 0, 'pen'),
     ('宛名と差出人を切る', '切り取り線で切る\nラベル用紙なら、はがすだけ', '', 0, 'scissors'),
     ('クリアファイルに入れる', '全部をまとめて1枚に入れる', '約11円', 11, 'file'),
     ('角2封筒に入れる', 'A4を折らずに入れる', '約10円', 10, 'envelope'),
-    ('宛名と切手を貼る', '宛名は表に、差出人は裏に、のりで貼る\n16枚とクリアファイルで100gぎりぎり\n心配なら270円分を貼る', '切手 180円', 180, 'stamp'),
+    ('宛名と切手を貼る', '宛名は表に、差出人は裏に、のりで貼る\n16枚とクリアファイルで100gぎりぎり\n心配なら270円分を貼る', '切手 180円（心配なら270円）', 180, 'stamp'),
     ('ポストに出す', '締切の1週間前には届くように出す', '', 0, 'post'),
 ]
 
@@ -106,56 +105,111 @@ def icon(d, kind, cx, cy):
         d.rectangle((cx - 30, cy - 85, cx + 30, cy - 65), fill='#d8b37c', outline=INK, width=3)
 
 
-def frame(i, total):
+SAFE = 90  # 心配な人が1つ上の料金（270円）の切手を貼るときに足す額
+LAYOUTS = {
+    # 横（PC・SNSの投稿向け）と縦（スマホ向け）
+    'wide': dict(size=(960, 540), out=OUT),
+    'tall': dict(size=(540, 960), out=OUT.with_name('mail-howto-tall.gif')),
+}
+
+
+def total_text(total, safe):
+    return f'約{total}円' + (f'（心配なら約{total + SAFE}円）' if safe else '')
+
+
+def frame(i, total, safe, size):
     title, sub, cost, _, kind = STEPS[i]
-    im = Image.new('RGB', (W, H), BG)
+    w, h = size
+    tall = h > w
+    im = Image.new('RGB', size, BG)
     d = ImageDraw.Draw(im)
-    d.text((40, 32), '陳情書を郵送で出すまで', font=f(24), fill=SUB)
-    # 進み具合
-    for k in range(len(STEPS)):
-        x = 600 + k * 36
-        d.ellipse((x, 34, x + 22, 56), fill=ACC if k <= i else LINE)
-    icon(d, kind, 230, 290)
-    d.text((440, 150), f'{i + 1}', font=f(64), fill=ACC)
-    d.text((520, 160), title, font=f(38 if len(title) <= 10 else 32), fill=INK)
-    # 説明は1行ずつ箇条書きにする（STEPS の改行が項目の区切り）
-    for k, line in enumerate(sub.split('\n')):
-        y = 240 + k * 38
-        d.ellipse((444, y + 8, 454, y + 18), fill=ACC)
-        d.text((466, y), line, font=f(22, False), fill=INK)
+    lines = sub.split('\n')
+    if tall:
+        d.text((w // 2, 44), '陳情書を郵送で出すまで', font=f(24), fill=SUB, anchor='mm')
+        x0 = (w - (len(STEPS) * 36 - 14)) // 2
+        for k in range(len(STEPS)):
+            d.ellipse((x0 + k * 36, 80, x0 + k * 36 + 22, 102), fill=ACC if k <= i else LINE)
+        icon(d, kind, w // 2, 270)
+        d.text((40, 430), f'{i + 1}', font=f(60), fill=ACC)
+        d.text((100, 440), title, font=f(34 if len(title) <= 10 else 30), fill=INK)
+        y = 530
+        for line in lines:
+            d.ellipse((42, y + 7, 52, y + 17), fill=ACC)
+            d.text((64, y), line, font=f(19, False), fill=INK)
+            y += 40
+        y += 20
+        bx = 40
+    else:
+        d.text((40, 32), '陳情書を郵送で出すまで', font=f(24), fill=SUB)
+        for k in range(len(STEPS)):
+            x = 600 + k * 36
+            d.ellipse((x, 34, x + 22, 56), fill=ACC if k <= i else LINE)
+        icon(d, kind, 230, 290)
+        d.text((440, 150), f'{i + 1}', font=f(64), fill=ACC)
+        d.text((520, 160), title, font=f(38 if len(title) <= 10 else 32), fill=INK)
+        # 説明は1行ずつ箇条書きにする（STEPS の改行が項目の区切り）
+        for k, line in enumerate(lines):
+            y = 240 + k * 38
+            d.ellipse((444, y + 8, 454, y + 18), fill=ACC)
+            d.text((466, y), line, font=f(22, False), fill=INK)
+        y, bx = 378, 440
     if cost:
-        d.rounded_rectangle((440, 386, 440 + 24 * len(cost) + 40, 438), 26, fill='#fde7dc')
-        d.text((460, 412), cost, font=f(28), fill=ACC, anchor='lm')
-    d.line((40, 468, W - 40, 468), fill=LINE, width=2)
-    d.text((40, 498), f'ここまで 約{total}円', font=f(26), fill=INK, anchor='lm')
-    d.text((W - 40, 498), NOTE, font=f(14, False), fill=SUB, anchor='rm')
+        fnt = f(26)
+        tw = d.textlength(cost, font=fnt)
+        d.rounded_rectangle((bx, y, bx + tw + 40, y + 52), 26, fill='#fde7dc')
+        d.text((bx + 20, y + 26), cost, font=fnt, fill=ACC, anchor='lm')
+    fy = h - 58 if not tall else h - 110
+    d.line((40, fy - 30, w - 40, fy - 30), fill=LINE, width=2)
+    d.text((40, fy), 'ここまで ' + total_text(total, safe), font=f(24), fill=INK, anchor='lm')
+    if tall:
+        d.multiline_text((40, fy + 30), NOTE.replace('目安。', '目安\n'), font=f(14, False), fill=SUB, spacing=6)
+    else:
+        d.text((w - 40, fy + 34), NOTE, font=f(14, False), fill=SUB, anchor='rm')
     return im
 
 
-def summary(total):
-    im = Image.new('RGB', (W, H), BG)
+def summary(total, size):
+    w, h = size
+    tall = h > w
+    im = Image.new('RGB', size, BG)
     d = ImageDraw.Draw(im)
-    d.text((W // 2, 120), '陳情5件を郵送で、合わせて', font=f(36), fill=INK, anchor='mm')
-    d.text((W // 2, 230), f'約{round(total, -1)}円', font=f(110), fill=ACC, anchor='mm')
-    d.text((W // 2, 330), '印刷 170円 ＋ クリアファイル 11円 ＋ 封筒 10円 ＋ 切手 180円', font=f(22, False), fill=INK, anchor='mm')
-    d.text((W // 2, 375), '電子申請で出せる議会なら、印刷も切手も要りません', font=f(22, False), fill=SUB, anchor='mm')
-    d.text((W // 2, 470), 'chinjo-action.vercel.app', font=f(30), fill=BLUE, anchor='mm')
-    d.text((W - 40, 515), NOTE, font=f(14, False), fill=SUB, anchor='rm')
+    parts = [f'{name} {yen}円' for name, yen in (('印刷', STEPS[2][3]), ('クリアファイル', STEPS[5][3]), ('封筒', STEPS[6][3]), ('切手', STEPS[7][3]))]
+    if tall:
+        d.text((w // 2, 170), '陳情5件を郵送で', font=f(34), fill=INK, anchor='mm')
+        d.text((w // 2, 220), '合わせて', font=f(34), fill=INK, anchor='mm')
+        d.text((w // 2, 330), f'約{round(total, -1)}円', font=f(100), fill=ACC, anchor='mm')
+        d.text((w // 2, 430), f'切手を心配して270円にしても 約{round(total + SAFE, -1)}円', font=f(20), fill=ACC, anchor='mm')
+        for k, t in enumerate(parts):
+            d.text((w // 2, 510 + k * 36), t, font=f(22, False), fill=INK, anchor='mm')
+        d.text((w // 2, 690), '電子申請で出せる議会なら', font=f(20, False), fill=SUB, anchor='mm')
+        d.text((w // 2, 720), '印刷も切手も要りません', font=f(20, False), fill=SUB, anchor='mm')
+        d.text((w // 2, 810), 'chinjo-action.vercel.app', font=f(28), fill=BLUE, anchor='mm')
+        d.multiline_text((w // 2, 890), NOTE.replace('目安。', '目安\n'), font=f(14, False), fill=SUB, anchor='mm', align='center', spacing=6)
+    else:
+        d.text((w // 2, 100), '陳情5件を郵送で、合わせて', font=f(36), fill=INK, anchor='mm')
+        d.text((w // 2, 205), f'約{round(total, -1)}円', font=f(110), fill=ACC, anchor='mm')
+        d.text((w // 2, 290), f'切手を心配して270円にしても 約{round(total + SAFE, -1)}円', font=f(24), fill=ACC, anchor='mm')
+        d.text((w // 2, 345), ' ＋ '.join(parts), font=f(22, False), fill=INK, anchor='mm')
+        d.text((w // 2, 390), '電子申請で出せる議会なら、印刷も切手も要りません', font=f(22, False), fill=SUB, anchor='mm')
+        d.text((w // 2, 470), 'chinjo-action.vercel.app', font=f(30), fill=BLUE, anchor='mm')
+        d.text((w - 40, 515), NOTE, font=f(14, False), fill=SUB, anchor='rm')
     return im
 
 
 def main():
-    frames, durs, total = [], [], 0
-    for i, s in enumerate(STEPS):
-        total += s[3]
-        frames.append(frame(i, total))
-        durs.append(3500 + 1200 * s[1].count('\n'))  # 説明の項目が多いコマほど長く見せる
-    frames.append(summary(total))
-    durs.append(7000)
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    pal = [fr.convert('P', palette=Image.ADAPTIVE, colors=64) for fr in frames]
-    pal[0].save(OUT, save_all=True, append_images=pal[1:], duration=durs, loop=0, optimize=True)
-    print(OUT, f'{OUT.stat().st_size // 1024}KB', f'合計 {total}円')
+    for lay in LAYOUTS.values():
+        size, out = lay['size'], lay['out']
+        frames, durs, total = [], [], 0
+        for i, s in enumerate(STEPS):
+            total += s[3]
+            frames.append(frame(i, total, s[4] in ('stamp', 'post'), size))
+            durs.append(3500 + 1200 * s[1].count('\n'))  # 説明の項目が多いコマほど長く見せる
+        frames.append(summary(total, size))
+        durs.append(7000)
+        out.parent.mkdir(parents=True, exist_ok=True)
+        pal = [fr.convert('P', palette=Image.ADAPTIVE, colors=64) for fr in frames]
+        pal[0].save(out, save_all=True, append_images=pal[1:], duration=durs, loop=0, optimize=True)
+        print(out.name, f'{out.stat().st_size // 1024}KB', f'合計 {total}円')
 
 
 if __name__ == '__main__':
