@@ -412,13 +412,13 @@ window.PdfDoc = (() => {
   };
 
   // 宛先（{ council：議会名, zip, address }）と差出人（Common.sender の形）から、ラベルの中身を作る
-  // opts：{ to：'office'|'chair', zaichu, from：宛名の下に差出人を入れるか, back：裏に貼る差出人のラベルも作るか }
+  // opts：{ to：'office'|'chair'|'head'（首長あて。rows の head に「宮城県知事」などを入れる）, zaichu, from：宛名の下に差出人を入れるか, back：裏に貼る差出人のラベルも作るか }
   function labelItems(rows, s, opts) {
     const from = [s.zip && `〒${s.zip}`, s.address, s.name].filter(Boolean).join('　');
     const items = rows.map((r) => ({
       zip: r.zip,
       address: r.address,
-      to: opts.to === 'chair' ? `${r.council}議長　　　　　様` : `${r.council}事務局　御中`,
+      to: opts.to === 'head' ? `${r.head}　　　　　様` : opts.to === 'chair' ? `${r.council}議長　　　　　様` : `${r.council}事務局　御中`,
       zaichu: opts.zaichu,
       from: opts.from && from ? `差出人：${from}` : '',
     }));
