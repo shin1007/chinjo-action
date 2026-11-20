@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // 都道府県・政令市のパブリックコメント（意見募集）の案内ページを、公式サイトのトップのリンクから探す。
-//   node scripts/intake-pubcom.js            # 探して scripts/.intake-cache/pubcom.json に書く（公開しない）
+//   node scripts/intake-pubcom.js            # 都道府県・政令市を探して scripts/.intake-cache/pubcom.json に書く（公開しない）
+//   node scripts/intake-pubcom.js --next 30  # まだ pubcom_url がない市区町村を、人口の多い順に30件
 // 見つけたものは人が開いて確かめてから yobo.jsonl の pubcom_url に入れる。
 'use strict';
 const fs = require('fs');
@@ -29,14 +30,19 @@ const BAD = /結果|終了|実施状況|一覧（過去|過去の/;
 (async () => {
   const out = [];
   const targets = [];
-  for (const p of Object.keys(SITES)) { targets.push([p, '@']); for (const c of CITIES[p] || []) targets.push([p, c]); }
+  const ni = process.argv.indexOf('--next');
+  if (ni > 0) {
+    const rows = fs.readFileSync(path.join(ROOT, 'site/data/intake/yobo.jsonl'), 'utf8').trim().split(/\r?\n/).map(JSON.parse);
+    rows.filter((r) => r.level === 'municipality' && !r.pubcom_url).sort((a, b) => (b.population || 0) - (a.population || 0))
+      .slice(0, +process.argv[ni + 1] || 30).forEach((r) => targets.push([r.pref, r.name]));
+  } else for (const p of Object.keys(SITES)) { targets.push([p, '@']); for (const c of CITIES[p] || []) targets.push([p, c]); }
   for (const [p, c] of targets) {
     const top = (SITES[p][c] || [])[0];
     const g = top ? await get(top) : { err: 'no top' };
     let hits = (g.links || []).filter((l) => PC.test(l.text) && !BAD.test(l.text));
     let via = 'top';
     if (!hits.length && g.links) { // 1段だけ「市政・県政」系のページをたどる
-      for (const l of g.links.filter((l) => /(市政|県政|府政|都政|道政)(情報)?$|広聴|意見・提案|ご意見/.test(l.text)).slice(0, 3)) {
+      for (const l of g.links.filter((l) => /(市政|区政|県政|府政|都政|道政)(情報)?$|広聴|意見・提案|ご意見|参加|参画/.test(l.text)).slice(0, 3)) {
         const g2 = await get(l.href); const h = (g2.links || []).filter((x) => PC.test(x.text) && !BAD.test(x.text));
         if (h.length) { hits = h; via = l.href; break; }
       }
