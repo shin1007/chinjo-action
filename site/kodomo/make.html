@@ -52,6 +52,7 @@
     <p class="hero-crumb"><a href="/">陳情アクション</a> ＞ <a href="/kodomo">子どもの権利</a> ＞ <b>陳情書をつくる</b></p>
     <h1>陳情書をつくる</h1>
     <p class="lead-sm">選択肢を押していくだけで、議会に出せる陳情書ができます。</p>
+    <p class="hint-sm center"><a href="/kodomo">このテーマについて（ほかの届け方・相談窓口）</a></p>
 
     <div id="wizard" class="wizard">
       <div class="wz-progress" id="wzProgress" role="progressbar" aria-label="文書作成の進捗">
@@ -78,7 +79,8 @@
       </div>
 
       <div class="wz-step" data-step="items">
-        <h3>出し方と、求める内容を選んでください</h3>
+        <h3>求める内容を選んでください</h3>
+        <details class="wz-kindbox"><summary>出す先：<b data-doc-name>陳情書</b>　<span class="wz-kindbox-change">変える</span></summary>
         <fieldset class="wz-kind">
           <legend>どこに出しますか</legend>
           <label><input type="radio" name="wzKind" value="petition" checked> <b>議会に出す（陳情書）</b><span class="hint-sm">議会で審査されるか、議員に配られます。国へ意見書を出すよう求める内容と、条例・予算など議会の判断が要る内容が向いています。</span></label>
@@ -86,7 +88,9 @@
           <a class="wz-kind-link" href="/letter?theme=kodomo"><b>地元の議員に手紙を書く</b><span class="hint-sm">公開されません。陳情書に書けない事情を伝えたり、紹介議員をお願いしたりするときに。別の画面で作ります。</span></a>
         </fieldset>
         <p class="hint-sm wz-seigan">請願にしたいときも、まずここで陳情書を作り、その文面を持って議員に紹介をお願いします（<a href="/letter">議員への手紙</a>）。請願書は紹介議員が要るので、このサイトでは作りません。</p>
-        <p class="hint-sm"><b>とくに伝えたい内容を、3つまで選ぶのがおすすめです。</b>選んだ内容1つにつき1通ずつできあがります。内容によっては札が付いています。<span class="ask-tag ask-tag-research">研究の裏づけあり</span>は論文や公的機関の報告があるもの、<span class="ask-tag ask-tag-precedent">実施例あり</span>はほかの自治体ですでに行っているもの、<span class="ask-tag ask-tag-lowcost">費用が少ない</span>は予算がほとんど要らないものです。</p>
+        </details>
+        <p class="hint-sm"><b>とくに伝えたい内容を、3つまで選ぶのがおすすめです。</b>選んだ内容1つにつき1通ずつできあがります。</p>
+        <details class="hint-sm wz-fold"><summary>内容に付いている札の意味</summary><p><span class="ask-tag ask-tag-research">研究の裏づけあり</span>は論文や公的機関の報告があるもの、<span class="ask-tag ask-tag-precedent">実施例あり</span>はほかの自治体ですでに行っているもの、<span class="ask-tag ask-tag-lowcost">費用が少ない</span>は予算がほとんど要らないものです。</p></details>
         <details class="hint-sm wz-fold"><summary>いくつも選ぶとき・1通にまとめたいとき</summary>
           <p>多くの議会は「1件に1つの求めること（趣旨）」で分けて出すよう求めているので、ふつうは1通ずつ出します（<a href="/kodomo/guide#split">1件ずつ分ける理由</a>）。いくつも選ぶなら、同じ分野（下の見出し）の中から選ぶほうが伝わります。同じ分野の内容を1通にまとめたいときは、文面確認の画面で「まとめて1通にする」を選べます。その議会が分けて出すよう求めていないか、先に確かめてください。<a href="/#compare">陳情書・要望書・請願・手紙の違い</a></p>
         </details>

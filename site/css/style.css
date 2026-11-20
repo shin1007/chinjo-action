@@ -556,6 +556,10 @@ summary { cursor: pointer; font-weight: 700; }
 .wz-kind-link b::after { content: " →"; }
 .wz-kind input { margin: 0 0 4px; }
 .wz-kind input:focus-visible { outline: 2px solid var(--main); outline-offset: 2px; }
+.wz-kindbox { margin: 0 0 12px; }
+.wz-kindbox > summary { cursor: pointer; padding: 8px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+.wz-kindbox-change { color: var(--main-dark); text-decoration: underline; font-size: 0.9rem; }
+.wz-kindbox[open] > summary { margin-bottom: 10px; }
 .wz-cat { border: 1px solid var(--line); border-radius: 10px; margin: 8px 0; background: var(--surface); }
 .wz-cat > summary { display: flex; justify-content: space-between; gap: 8px; padding: 10px 14px; font-weight: 700; cursor: pointer; }
 .wz-cat > summary small { font-weight: 400; color: var(--muted); }
