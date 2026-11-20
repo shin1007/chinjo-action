@@ -70,7 +70,7 @@ const hasSurname = (flat) => [4, 3, 2, 1].some((k) => flat.length - k >= 1 && fl
 const MENU = /選出|について|情報|手続|結果|取り組み|取組|標準|拡大|縮小|中文|隠す|English|한국|閉じる|戻る|もっと|詳細|お知らせ|新着|募集|申請|案内|制度|計画|予算|子育て|健康|医療|防災|観光|文化|環境|税|ごみ|住まい|仕事|施設|地図|リンク|イベント|カレンダー|サイト|ログイン|一覧|名簿|紹介/;
 const clean = (s) => s.replace(/<rt>[\s\S]*?<\/rt>|<rp>[\s\S]*?<\/rp>/gi, '').replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]+>/g, '').replace(/&nbsp;|&#160;/g, ' ').replace(/&amp;/g, '&')
   .replace(/[（(][^）)]*[）)]/g, '').replace(/(議員|君|さん|氏)$/, '').trim();
-const YOMI = new RegExp(`(?:^|[ 、|｜])([${KANJI}][${KANJI}ぁ-んァ-ヶー]{0,4}(?: [${KANJI}ぁ-んァ-ヶー]{1,4})?) ?[（(] ?([ぁ-んー]+ [ぁ-んー]+) ?[)）]`, 'g');
+const YOMI = new RegExp(`(?:^|[ 、|｜.．0-9０-９])([${KANJI}][${KANJI}ぁ-んァ-ヶー]{0,4}(?: [${KANJI}ぁ-んァ-ヶー]{1,4})?) ?[（(] ?([ぁ-んー]+ [ぁ-んー]+) ?[)）]`, 'g');
 const join = (m) => `${m[1]} ${m[2]}`.normalize('NFC');
 
 function extract(page, min = 2) {
@@ -123,15 +123,15 @@ function extract(page, min = 2) {
     .filter((t) => { const f = t.replace(/ /g, ''); return f.length >= 2 && f.length <= 8 && !STOP.test(f) && !MENU.test(f) && !/(都|道|府|県|市|町|村|区|郡|課|係|室|局)$/.test(f); });
   // 一人ずつのページへのリンクが同じ場所（同じフォルダ）に並んでいる名簿：リンクの文字が名前（空白なしでもよい）
   const byDir = {};
-  for (const m of body.matchAll(/<a\s[^>]*href=["']([^"'#]+)["'][^>]*>([\s\S]*?)<\/a>/gi)) {
+  for (const m of body.matchAll(/<a\s[^>]*href=["']([^"'#]+)[^"']*["'][^>]*>([\s\S]*?)<\/a>/gi)) {
     const t = clean(m[2]).replace(/[\s　]+/g, ' ').trim();
     const flat = t.replace(/ /g, '');
     if (flat.length < 2 || flat.length > 8 || !NOSPACE.test(flat) || STOP.test(flat) || MENU.test(flat) || /(都|道|府|県|市|町|村|区|郡|行|課|室|会|党|局|館|所|園|表|書|集|版|式|案|法|等|中)$/.test(flat)) continue;
     const dir = m[1].replace(/[^/]*$/, '');
     (byDir[dir] ||= []).push(t);
   }
-  // 名字の一覧にある名字で始まるものが8割以上の並びだけを名簿とみなす
-  const prof = Object.values(byDir).map((xs) => [...new Set(xs)]).filter((xs) => xs.filter((x) => x.includes(' ') || hasSurname(x)).length >= xs.length * 0.8)
+  // 名字の一覧にある名字で始まるものが7割以上の並びだけを名簿とみなす
+  const prof = Object.values(byDir).map((xs) => [...new Set(xs)]).filter((xs) => xs.filter((x) => x.includes(' ') || hasSurname(x)).length >= xs.length * 0.7)
     .sort((a, b) => b.length - a.length)[0] || [];
   if (prof.length >= 5) groups.prof = prof;
   // 「中川 崇」と「中川崇」は同じ人。空白のあるほうを残す
@@ -183,6 +183,17 @@ const PAGES = {
   '神奈川県/横浜市': 'https://www.city.yokohama.lg.jp/shikai/giin/50on.html',
   '京都府/京都市': 'https://www2.city.kyoto.lg.jp/shikai/meibo/gojuon.html',
   '岡山県/岡山市': 'https://www.city.okayama.jp/gikai/0000015787.html',
+  '埼玉県/@': 'https://www.pref.saitama.lg.jp/e1601/gikai-member-50on.html',
+  '福岡県/@': 'https://www.gikai.pref.fukuoka.lg.jp/site/giin/all.html',
+  '沖縄県/@': 'https://www.pref.okinawa.jp/kensei/gikai/1017039/1029763/1029769.html',
+  '石川県/@': 'https://www.pref.ishikawa.lg.jp/gikai/meibo/20150430.html',
+  '兵庫県/@': 'https://web.pref.hyogo.lg.jp/gikai/giinshokai/shokai/50on/50on_ichiran23.html',
+  // ページの「11人」は会派の人数なので、定数を書く
+  '佐賀県/@': { url: 'https://www.pref.saga.lg.jp/gikai/kiji00366725/index.html', seats: 38 },
+  '群馬県/@': 'https://www.pref.gunma.jp/site/gikai/25703.html',
+  '宮崎県/宮崎市': 'https://www.city.miyazaki.miyazaki.jp/fs/8/8/7/1/8/7/_/______R8.7.1___.pdf',
+  '神奈川県/相模原市': 'https://www.sagamihara-shigikai.jp/doc/2013122400014/',
+  '東京都/足立区': 'https://www.gikai-adachi.jp/g07_giinlist.asp?Hmode=20',
   '大阪府/@': 'https://www.pref.osaka.lg.jp/o170010/gikai_somu/sugatami20/index50.html',
   '神奈川県/@': { url: 'https://www.pref.kanagawa.jp/gikai/p80275.html', seats: 105 },  // 選挙区ごとの「定数N人」しか書いてない
 };
@@ -204,7 +215,9 @@ const SKIP = { '千葉県/匝瑳市': '名前でないもの（地名）を拾�
 // 一文字ずつの「姓 名」は表の見出しや言葉のことが多い。言葉の一覧にあるものは落とし、3つ以上あれば名簿ごと使わない
 const WORDS = /^(欠員|欠番|会計|団長|代表|幹事|農業|無職|顧問|派遣|銀座|清住|本陣|新風|会長|理事|監事|委員|議員|職名|期別|回数|氏名|住所|党派|備考|写真|役職|期数|議席|年齢|性別|職業|定数|議長|一般質問|承認|選任|適任|許可|決定)$/;
 const tidy = (r) => {
-  r.names = r.names.filter((x) => !WORDS.test(x.replace(/ /g, '')) && !/及|職業|視察|状況|執行|交際費|(郡|市|区|町|村)$/.test(x));
+  // 「亀 田 尚 之」のように一文字ずつ空いているものはつなげる
+  r.names = [...new Set(r.names.map((x) => (/^(\S )+\S$/.test(x) && x.split(' ').length >= 3 ? x.replace(/ /g, '') : x)))];
+  r.names = r.names.filter((x) => !WORDS.test(x.replace(/ /g, '')) && !/及|職業|視察|状況|執行|交際費|議席|役場|学校|病院|センター|(郡|市|区|町|村|署|家|館)$/.test(x));
   // 空白なしの名前が「姓 名」の名前と混じっているときは、名字の一覧にある名字で始まるものだけ残す（「圭二」のような下の名前だけ・地名を落とす）
   if (r.names.some((x) => x.includes(' '))) r.names = r.names.filter((x) => x.includes(' ') || [4, 3, 2].some((k) => x.length - k >= 1 && SURNAMES.has(x.slice(0, k))));
   if (r.names.filter((x) => /^. .$/.test(x) && !SURNAMES.has(x[0])).length >= 2 || r.names.filter((x) => /^. .$/.test(x)).length >= 3) r.error = '一文字ずつの言葉を拾っている';
@@ -223,7 +236,7 @@ async function read(url, lo, hi) {
   const kana = r.names.filter((x) => /^[ぁ-んァ-ヶー ]+$/.test(x)).length;
   if (r.names.length && kana / r.names.length > 0.3) return { ...r, error: 'よみがなを拾っている' };
   // 名字の一覧にある名字で始まるものが半分に届かなければ、名前でないもの（地名・課の名前など）を拾っているとみる
-  const known = r.names.filter((x) => { const f = x.replace(/ /g, ''); return /^[ぁ-んァ-ヶー ]+$/.test(x) || (x.includes(' ') ? (x.split(' ')[0].length >= 2 && /[一-龥々]/.test(x)) || SURNAMES.has(x.split(' ')[0]) : hasSurname(f)); }).length;
+  const known = r.names.filter((x) => { const f = x.replace(/ /g, ''); return /^[ぁ-んァ-ヶー ]+$/.test(x) || (x.includes(' ') ? (x.split(' ')[0].length >= 2 && /[一-龥々]/.test(x)) || SURNAMES.has(x.split(' ')[0]) : [4, 3, 2].some((k) => f.length - k >= 1 && SURNAMES.has(f.slice(0, k)))); }).length;
   if (r.names.length && SURNAMES.size > 500 && known / r.names.length < 0.5) return { ...r, error: '名前でないものを拾っている' };
   // 人数が書いてないときに8人に届かないのは、委員会など一部の名簿を拾っている見込みが高い
   if (!n && r.names.length < 8) return { ...r, error: `${r.names.length}人しか取れない（人数が書いてない）` };
@@ -332,4 +345,5 @@ async function main() {
   ].join('\n'));
   console.error(`名前を抜き出せた議会：${all} 件・抜き出せなかった：${Object.keys(failed).length} 件`);
 }
-main();
+if (require.main === module) main();
+module.exports = { read, html, extract };
