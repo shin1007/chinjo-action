@@ -22,7 +22,17 @@
   // 議員名簿の公式のページ（scripts/roster-find.js で探したもの）
   let roster;
   const loadRoster = () => (roster ||= fetch('/data/roster.json').then((r) => (r.ok ? r.json() : {})).catch(() => ({})));
-  const card = (pref, muni, ros) => {
+  // 議員の名前（scripts/roster-names.js で公式の名簿から抜き出したもの）。都道府県ごとのファイル
+  const namesCache = {};
+  const loadNames = (pref) => (namesCache[pref] ||= fetch(`/data/roster/${encodeURIComponent(pref)}.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({})));
+  const list = (name, n) => {
+    if (!n || !n.names || !n.names.length) return '';
+    const [y, m, d] = n.checked_at.split('-').map(Number);
+    return `<details class="zip-names"><summary>議員の名前（${n.names.length}人・${y}年${m}月${d}日に公式の名簿から）</summary>
+      <p class="hint-sm">押すと、宛先の議会名と議員名に入ります。名前は名簿のページから機械で抜き出したものです。送る前に<a href="${esc(n.url)}" target="_blank" rel="noopener noreferrer">名簿のページ</a>で確かめてください。</p>
+      <p>${n.names.map((x) => `<button type="button" class="btn btn-small" data-council="${esc(name)}" data-member="${esc(x)}">${esc(x)}</button>`).join(' ')}</p></details>`;
+  };
+  const card = (pref, muni, ros, nm) => {
     const name = council(pref, muni);
     const off = site(pref, muni);
     const meibo = (ros[`${pref}/${muni}`] || {}).url;
@@ -31,7 +41,8 @@
       ${meibo ? `<a class="btn btn-small" href="${esc(meibo)}" target="_blank" rel="noopener noreferrer">議員名簿（公式）↗</a>` : ''}
       <a class="btn btn-small" href="${g(`${name} 議員名簿`)}" target="_blank" rel="noopener noreferrer">ふつうに検索 ↗</a>
       ${off ? `<a class="btn btn-small" href="${esc(off)}" target="_blank" rel="noopener noreferrer">公式サイト ↗</a>` : ''}
-      <button type="button" class="btn btn-small" data-council="${esc(name)}">宛先の議会名に入れる</button></li>`;
+      <button type="button" class="btn btn-small" data-council="${esc(name)}">宛先の議会名に入れる</button>
+      ${list(name, (nm[pref] || {})[`${pref}/${muni}`])}</li>`;
   };
   async function run() {
     const zip = input.value.normalize('NFKC').replace(/\D/g, '');
@@ -42,8 +53,10 @@
     if (!v) { out.innerHTML = '<p class="hint-sm">この郵便番号に当てはまる自治体が見つかりません。郵便番号をお確かめください。</p>'; return; }
     const keys = v.split('|');
     const ros = await loadRoster();
+    const nm = {};
+    await Promise.all([...new Set(keys.map((k) => k.split('/')[0]))].map(async (p) => { nm[p] = await loadNames(p); }));
     const prefs = [...new Set(keys.map((k) => k.split('/')[0]))];
-    out.innerHTML = `<ul class="zip-councils">${keys.map((k) => card(...k.split('/'), ros)).join('')}${prefs.map((p) => card(p, '@', ros)).join('')}
+    out.innerHTML = `<ul class="zip-councils">${keys.map((k) => card(...k.split('/'), ros, nm)).join('')}${prefs.map((p) => card(p, '@', ros, nm)).join('')}
       <li><b>国会議員（あなたの地域の衆議院・参議院）</b>
       <a class="btn btn-small btn-primary" href="${ai(askDiet(zip))}" target="_blank" rel="noopener noreferrer">GoogleのAIに議員の一覧を聞く ↗</a></li></ul>
       <p class="hint-sm">「GoogleのAIに聞く」を押すと、Google の AI モードが、議員の一覧・所属政党・連絡先・力を入れている政策・SNS を表にまとめて答えます（Google にログインしていないと AI モードが使えないことがあります。そのときは「ふつうに検索」を）。手紙の送り先は、多くの議員が議会事務局あて（「○○議員 様」と書く）です。AI の答えは間違うことがあるので、送る前に「議員名簿（公式）」（見つかっている議会だけ出ます）か、議会の公式サイトで確かめてください。</p>`;
@@ -54,5 +67,7 @@
     if (!b) return;
     const f = document.querySelector('#letterForm input[name="council"]');
     if (f) { f.value = b.dataset.council; f.dispatchEvent(new Event('input', { bubbles: true })); }
+    const mb = document.querySelector('#letterForm input[name="member"]');
+    if (mb && b.dataset.member) { mb.value = b.dataset.member; mb.dispatchEvent(new Event('input', { bubbles: true })); }
   });
 })();
