@@ -796,3 +796,16 @@ summary { cursor: pointer; font-weight: 700; }
 /* 本文へ移動：ふだんは画面の外に置き、Tab で移ったときだけ左上に出す */
 .skip-link { position: absolute; left: 8px; top: -60px; z-index: 100; padding: 8px 14px; background: var(--surface); color: var(--main-dark); border: 2px solid var(--main); border-radius: 6px; font-weight: 700; }
 .skip-link:focus { top: 8px; }
+
+/* トップのヒーローの背景に流す、陳情の内容のカード（飾り。scripts/hero-cards.js） */
+.hero { position: relative; overflow: hidden; padding: 112px 0; }
+@media (max-width: 640px) { .hero { padding: 96px 0; } }
+.hero > .wrap { position: relative; z-index: 1; }
+.hero-flow { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; padding: 16px 0; opacity: 0.16; pointer-events: none; user-select: none; }
+.hero-flow-row { display: flex; gap: 14px; width: max-content; margin: 0; padding: 0; list-style: none; animation: hero-flow 140s linear infinite; }
+.hero-flow-row + .hero-flow-row { animation-direction: reverse; animation-duration: 170s; }
+.hero-flow-row li { flex: none; padding: 8px 16px; border: 1px solid currentColor; border-radius: 12px; font-size: 0.85rem; line-height: 1.45; text-align: left; white-space: nowrap; }
+.hero-flow-row span { display: block; font-size: 0.72rem; font-weight: 700; opacity: 0.8; }
+@keyframes hero-flow { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .hero-flow-row { animation: none; } }
+@media (max-width: 640px) { .hero-flow { opacity: 0.09; } }
