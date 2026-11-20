@@ -1,0 +1,35 @@
+# 国会議員の名簿を公式サイトから取り直し（scripts/diet-members.js）、受け付け方の出典の一文が、いまも公式サイトに載っているかを照合する（scripts/intake-verify.js）。
+# 毎月1日に自動で走る。議員の改選のあとは Actions の画面から手で走らせる（workflow_dispatch）。
+# 結果はプルリクエストにする（中身を見てから取り込む）。
+name: intake-verify
+on:
+  schedule:
+    - cron: '0 18 1 * *'   # 毎月2日 3:00（日本時間）
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/diet-members.js
+      - run: node scripts/intake-verify.js --refetch
+      - name: プルリクエストにする
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git diff --quiet && exit 0
+          b="verify/$(date +%Y-%m-%d)"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$b"
+          git add site/data/diet-members.js site/data/intake/verify.json site/data/verify-summary.json "docs/調査/出典を確かめられなかったもの.md"
+          git commit -m "出典の照合（$(date +%Y-%m-%d)）"
+          git push -u origin "$b"
+          gh pr create --fill --body "scripts/intake-verify.js の定期の照合の結果。一文が見つからなかったもの・開けなかったものは docs/調査/出典を確かめられなかったもの.md にある。"

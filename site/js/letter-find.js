@@ -24,11 +24,21 @@
       return (!nameQuery || nameText.includes(nameQuery)) && (!districtQuery || districtText.includes(districtQuery));
     });
     dietList.replaceChildren();
+    if (!nameQuery && !districtQuery) {
+      dietList.textContent = `衆議院・参議院の議員 ${window.DIET_MEMBERS.length} 人から探せます。氏名か、選挙区・会派を入れてください。`;
+      return;
+    }
     if (!members.length) {
       dietList.textContent = '条件に一致する議員はいません。公式議員情報も確認してください。';
       return;
     }
-    members.forEach((member) => {
+    if (members.length > 30) {
+      const more = document.createElement('p');
+      more.className = 'hint-sm';
+      more.textContent = `${members.length} 人が当てはまります。はじめの30人を出しています。条件を足して絞ってください。`;
+      dietList.append(more);
+    }
+    members.slice(0, 30).forEach((member) => {
       const item = document.createElement('article');
       item.className = 'find-result';
       const heading = document.createElement('h4');
@@ -53,6 +63,11 @@
   }
   dietNameFilter.addEventListener('input', renderDietMembers);
   dietDistrictFilter.addEventListener('input', renderDietMembers);
+  const asOf = document.getElementById('dietAsOf');
+  if (asOf && window.DIET_MEMBERS_AS_OF) {
+    const [y, m, d] = window.DIET_MEMBERS_AS_OF.split('-').map(Number);
+    asOf.textContent = `衆議院・参議院の公式サイトの議員一覧から作った名簿です（${y}年${m}月${d}日に取得）。改選・補欠選挙のあとと、毎月に取り直します。`;
+  }
   renderDietMembers();
 
 })();
