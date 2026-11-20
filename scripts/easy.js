@@ -10,6 +10,7 @@ const { withParts } = require('./pages');
 const ROOT = path.join(__dirname, '..');
 const SITE = path.join(ROOT, 'site');
 const ORIGIN = 'https://chinjo-action.vercel.app';
+const LABEL = { kodomo: '子どもの権利', dansei: '男女平等', nihonjin: '日本人の権利', shiho: '司法への国民の声', kenko: '国民の健康', sonota: '税の公平と教育など' };
 const THEMES = ['kodomo', 'dansei', 'nihonjin', 'shiho', 'kenko', 'sonota'];
 
 const read = (file) => fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n');
@@ -81,7 +82,7 @@ function indexPage(theme, asks, easy) {
   const name = siteName(theme);
   const nat = asks.filter((a) => a.scope === 'national').length;
   const L = [`  <h1>陳情の内容のあらまし</h1>`,
-    `  <p>${esc(name.replace(/陳情アクション$/, ''))}ために出せる陳情の内容を、1ページにまとめました。全${asks.length}件（国への意見書を求めるもの${nat}件、自治体の取り組みを求めるもの${asks.length - nat}件）で、1件が1通の陳情書になります。議員・自治体の職員の方が全体を短い時間で見られるよう、それぞれ「何をお願いしているか」を一文で書き、詳しい説明・数字・資料へのリンクを付けています。</p>`,
+    `  <p>「${esc(LABEL[theme])}」について出せる陳情の内容を、1ページにまとめました。全${asks.length}件（国への意見書を求めるもの${nat}件、自治体の取り組みを求めるもの${asks.length - nat}件）で、1件が1通の陳情書になります。議員・自治体の職員の方が全体を短い時間で見られるよう、それぞれ「何をお願いしているか」を一文で書き、詳しい説明・数字・資料へのリンクを付けています。</p>`,
     '  <p class="hint-sm">札の意味：<span class="ask-tag ask-tag-research">研究の裏づけあり</span>論文や公的機関の報告がある　<span class="ask-tag ask-tag-precedent">実施例あり</span>ほかの自治体ですでに行っている　<span class="ask-tag ask-tag-lowcost">費用が少ない</span>予算がほとんど要らない。印刷するときは、ブラウザの印刷を使ってください。</p>'];
   const cats = [...new Set(asks.map((a) => a.category || 'そのほか'))];
   for (const c of cats) {
