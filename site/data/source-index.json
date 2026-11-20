@@ -597,6 +597,15 @@
       "localPath": null
     },
     {
+      "id": "src-3283cdacae",
+      "title": "大阪市ヘイトスピーチへの対処に関する条例（平成28年大阪市条例第1号）",
+      "url": "https://www.city.osaka.lg.jp/shimin/cmsfiles/contents/0000339/339043/170601zyourei.pdf",
+      "note": "第5条（拡散を防ぐ措置と、行った者の氏名又は名称の公表）",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-32b621602f",
       "title": "出入国在留管理庁「令和5年改正入管法の運用状況について」（令和7年3月14日）",
       "url": "https://www.moj.go.jp/isa/content/001434961.pdf",
@@ -948,6 +957,15 @@
       "localPath": null
     },
     {
+      "id": "src-51bdb994ac",
+      "title": "本邦外出身者に対する不当な差別的言動の解消に向けた取組の推進に関する法律（ヘイトスピーチ解消法）第2条",
+      "url": "https://laws.e-gov.go.jp/law/428AC0100000068",
+      "note": "対象を「専ら本邦の域外にある国若しくは地域の出身である者又はその子孫であって適法に居住するもの」に限っている",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-52dafa271b",
       "title": "最高裁判所事務総局「令和7年 司法統計年報 3 家事編」第15表 婚姻関係事件数（終局区分別申立人及び申立ての趣旨別）",
       "url": "https://www.courts.go.jp/saikosai/vc-files/saikosai/toukei/toukei-pdf-16677.pdf",
@@ -1250,6 +1268,15 @@
       "url": "https://www.courts.go.jp/assets/db2026_all.pdf",
       "note": "家事調停官89人（令和7年12月1日現在）。家事調停委員11,742人のうち弁護士1,731人・14.7％（令和8年4月1日現在）",
       "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-71adfc75a6",
+      "title": "東京都暴力団排除条例（平成23年東京都条例第54号）第7条",
+      "url": "https://www.keishicho.metro.tokyo.lg.jp/kurashi/anzen/tsuiho/haijo_seitei/haijo_q_a.files/jourei.pdf",
+      "note": "都の契約の相手方が暴力団関係者と判明したときに契約を解除し、都の契約に関与させない特約を定める（公金の使い道から特定の者を外す仕組みの例）",
+      "kind": "law",
       "fetchedAt": null,
       "localPath": null
     },
@@ -2118,6 +2145,15 @@
       "localPath": null
     },
     {
+      "id": "src-bf53682b98",
+      "title": "最高裁判所第三小法廷 令和4年2月15日判決（令和3年(行ツ)第54号）",
+      "url": "https://www.courts.go.jp/hanrei/90920/detail2/index.html",
+      "note": "大阪市の条例の第2条・第5条〜第10条は憲法第21条第1項に違反しない。対象が過激で悪質性の高い差別的言動に限られ、制裁もないことから、制限は合理的で必要やむを得ない限度にとどまるとした",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-bfe71791af",
       "title": "住民基本台帳法施行令 第30条の16（通称の記載）・第30条の17（通称の記載及び削除に関する事項）",
       "url": "https://laws.e-gov.go.jp/law/342CO0000000292",
@@ -2559,6 +2595,15 @@
       "localPath": null
     },
     {
+      "id": "src-e1134c5c98",
+      "title": "法務省「ヘイトスピーチ、許さない。」（附帯決議の説明）",
+      "url": "https://www.moj.go.jp/JINKEN/jinken04_00108.html",
+      "note": "「本邦外出身者」に対するものであるか否かを問わず、国籍、人種、民族等を理由として、差別意識を助長し又は誘発する目的で行われる排他的言動は決してあってはならない",
+      "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-e17dcad4be",
       "title": "裁判官弾劾法 第2条・第15条",
       "url": "https://laws.e-gov.go.jp/law/322AC1000000137",
@@ -2573,6 +2618,15 @@
       "url": "https://www.gender.go.jp/research/kenkyu/pdf/seibetsu_r04/02.pdf",
       "note": "男性は仕事をして家計を支えるべきだ 男性48.7％・女性44.9％、デートや食事のお金は男性が負担すべきだ 34.0％・21.5％、女性はか弱い存在なので守られなければならない 33.1％・23.4％。ページを画像にして読み取った",
       "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-e1b15ecbb8",
+      "title": "川崎市差別のない人権尊重のまちづくり条例（令和元年川崎市条例第35号）",
+      "url": "https://reiki.city.kawasaki.jp/kawasaki/d1w_reiki/H501901010035/H501901010035_j.html",
+      "note": "第5条（信条などを理由とする不当な差別的取扱いの禁止）、第12条〜第15条（禁止・勧告・命令・氏名の公表）、第16条（公の施設の利用許可の基準）、第18条（審査会）、第20条（表現の自由への配慮）、第23条（50万円以下の罰金）",
+      "kind": "law",
       "fetchedAt": null,
       "localPath": null
     },
