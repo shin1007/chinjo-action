@@ -2,6 +2,7 @@
 // キー：都道府県/市区町村（"@" は都道府県）→ [URL, 題]
 module.exports = {
   // 2026-11-20 に公式サイトで出し方を読んで確かめたページ
+  '宮崎県/宮崎市': ['https://www.city.miyazaki.miyazaki.jp/city/public_relations/hearing/316864.html', '市長ホットライン'],
   '東京都/足立区': ['https://shinsei.city.adachi.tokyo.jp/apply/guide/402', '区長へのメール（ご意見・ご提案、ご要望）'],
   '茨城県/つくば市': ['https://www.city.tsukuba.lg.jp/soshikikarasagasu/shichokoshitsukochoshitsu/gyomuannai/2/1002673.html', '市長へのたより・メール'],
   '埼玉県/川口市': ['https://www.city.kawaguchi.lg.jp/soshiki/01010/010/38156.html', '市長への手紙'],
