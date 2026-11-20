@@ -17,15 +17,15 @@ NOTE = '金額は陳情書5件（1件3枚）＋送付状を1通で郵送する�
 
 # 手順：（見出し、補足、金額の表示、合計に足す円、絵）
 STEPS = [
-    ('サイトで入力する', '求めることと出す先の議会を選び、住所・氏名を入れる', '無料', 0, 'screen'),
-    ('PDFを保存する', 'USBメモリーに入れる（スマホからネットプリントでもよい）', '無料', 0, 'usb'),
-    ('コンビニで印刷する', 'USBから白黒A4・1枚10円（ネットプリントは20円）\n陳情書15枚・送付状1枚・宛名の用紙1枚', '17枚 170円', 170, 'printer'),
+    ('サイトで入力する', '求めることを選ぶ\n出す先の議会を選ぶ\n住所・氏名を入れる（空けて手書きでもよい）', '無料', 0, 'screen'),
+    ('PDFを保存する', '全部が1つのPDFになる\nUSBメモリーに入れる\nスマホからネットプリントに登録してもよい', '無料', 0, 'usb'),
+    ('コンビニで印刷する', 'USBから白黒A4・1枚10円\nネットプリントなら1枚20円\n陳情書15枚・送付状1枚・宛名の用紙1枚', '17枚 170円', 170, 'printer'),
     ('日付を書いて署名する', '日付は空欄なので、出す日を手書きする\n住所・氏名を空けたなら、それも手書きする\n押印は議会によって要らない', '', 0, 'pen'),
-    ('宛名と差出人を切る', '切り取り線で切る（ラベル用紙なら はがすだけ）', '', 0, 'scissors'),
-    ('クリアファイルに入れる', '全部をまとめて1枚に', '約11円', 11, 'file'),
+    ('宛名と差出人を切る', '切り取り線で切る\nラベル用紙なら、はがすだけ', '', 0, 'scissors'),
+    ('クリアファイルに入れる', '全部をまとめて1枚に入れる', '約11円', 11, 'file'),
     ('角2封筒に入れる', 'A4を折らずに入れる', '約10円', 10, 'envelope'),
-    ('宛名と切手を貼る', '宛名は表、差出人は裏に のりで貼る\n16枚とクリアファイルで100gぎりぎり\n心配なら270円分を貼る', '切手 180円', 180, 'stamp'),
-    ('ポストに出す', '締切の1週間前には届くように', '', 0, 'post'),
+    ('宛名と切手を貼る', '宛名は表に、差出人は裏に、のりで貼る\n16枚とクリアファイルで100gぎりぎり\n心配なら270円分を貼る', '切手 180円', 180, 'stamp'),
+    ('ポストに出す', '締切の1週間前には届くように出す', '', 0, 'post'),
 ]
 
 
@@ -118,10 +118,14 @@ def frame(i, total):
     icon(d, kind, 230, 290)
     d.text((440, 150), f'{i + 1}', font=f(64), fill=ACC)
     d.text((520, 160), title, font=f(38 if len(title) <= 10 else 32), fill=INK)
-    d.multiline_text((442, 240), sub, font=f(22, False), fill=INK, spacing=12)
+    # 説明は1行ずつ箇条書きにする（STEPS の改行が項目の区切り）
+    for k, line in enumerate(sub.split('\n')):
+        y = 240 + k * 38
+        d.ellipse((444, y + 8, 454, y + 18), fill=ACC)
+        d.text((466, y), line, font=f(22, False), fill=INK)
     if cost:
-        d.rounded_rectangle((440, 360, 440 + 24 * len(cost) + 40, 412), 26, fill='#fde7dc')
-        d.text((460, 386), cost, font=f(28), fill=ACC, anchor='lm')
+        d.rounded_rectangle((440, 386, 440 + 24 * len(cost) + 40, 438), 26, fill='#fde7dc')
+        d.text((460, 412), cost, font=f(28), fill=ACC, anchor='lm')
     d.line((40, 468, W - 40, 468), fill=LINE, width=2)
     d.text((40, 498), f'ここまで 約{total}円', font=f(26), fill=INK, anchor='lm')
     d.text((W - 40, 498), NOTE, font=f(14, False), fill=SUB, anchor='rm')
@@ -145,9 +149,9 @@ def main():
     for i, s in enumerate(STEPS):
         total += s[3]
         frames.append(frame(i, total))
-        durs.append(2600 if s[1].count('\n') else 2200)
+        durs.append(3500 + 1200 * s[1].count('\n'))  # 説明の項目が多いコマほど長く見せる
     frames.append(summary(total))
-    durs.append(4000)
+    durs.append(7000)
     OUT.parent.mkdir(parents=True, exist_ok=True)
     pal = [fr.convert('P', palette=Image.ADAPTIVE, colors=64) for fr in frames]
     pal[0].save(OUT, save_all=True, append_images=pal[1:], duration=durs, loop=0, optimize=True)
