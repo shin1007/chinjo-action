@@ -9,6 +9,10 @@ create table if not exists public.reports (
   created_at timestamptz not null default now()
 );
 alter table public.reports add column if not exists items smallint check (items between 1 and 50);
+-- そのとき出した陳情の内容（「テーマ/項目id」。例 kodomo/n_counsel）。次に同じ議会へ出す人に「同じ内容がもう出ているか」を知らせるのに使う。
+-- 氏名・住所・文面は入れない。古い報告は null
+alter table public.reports add column if not exists asks text[]
+  check (asks is null or (cardinality(asks) between 1 and 10 and array_to_string(asks, ',') ~ '^[a-z]+/[a-z0-9_]+(,[a-z]+/[a-z0-9_]+)*$'));
 
 -- 報告を受け付ける議会の一覧（中身は councils.sql で入れる）。ここにない議会への報告は断る
 create table if not exists public.councils (
@@ -60,7 +64,7 @@ create policy "anyone can report" on public.reports for insert to anon with chec
 -- 書き込めるのは都道府県と議会名だけ（created_at を偽って「最後の報告日」を変えられないように）
 -- Supabase は public のテーブルに anon・authenticated の全権限を最初から付けるので、使うものだけを残す
 revoke all on public.reports, public.councils, public.report_guard from anon, authenticated;
-grant insert (pref, council, items) on public.reports to anon;
+grant insert (pref, council, items, asks) on public.reports to anon;
 
 -- 読めるのは議会ごとの件数だけ
 create or replace view public.council_counts as
@@ -68,6 +72,13 @@ create or replace view public.council_counts as
   from public.reports group by pref, council;
 revoke all on public.council_counts from anon, authenticated;
 grant select on public.council_counts to anon;
+
+-- 議会ごと・内容ごとの提出の記録の数と、最後の記録の日（1件ずつの行は読めない）
+create or replace view public.council_asks as
+  select pref, council, ask, count(*)::int as n, max(created_at)::date as last
+  from public.reports, unnest(asks) as ask group by pref, council, ask;
+revoke all on public.council_asks from anon, authenticated;
+grant select on public.council_asks to anon;
 
 -- トップページの数字用：陳情を出した自治体の数と、要望の件数（項目数×議会数）の合計。1行だけ返す
 create or replace view public.action_totals as
