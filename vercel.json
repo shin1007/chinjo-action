@@ -30,6 +30,11 @@
   ],
   "redirects": [
     {
+      "source": "/support",
+      "destination": "/trouble#support",
+      "permanent": true
+    },
+    {
       "source": "/roadmap",
       "destination": "/trouble",
       "permanent": true
