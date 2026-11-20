@@ -58,6 +58,26 @@
       "source": "/contribute",
       "destination": "/kakunin",
       "permanent": true
+    },
+    {
+      "source": "/kodomo/easy/n_fee",
+      "destination": "/kodomo/easy/n_lawyer",
+      "permanent": true
+    },
+    {
+      "source": "/kodomo/easy/n_reunite",
+      "destination": "/kodomo/easy/n_counsel",
+      "permanent": true
+    },
+    {
+      "source": "/kodomo/easy/l_reunite",
+      "destination": "/kodomo/easy/l_counsel",
+      "permanent": true
+    },
+    {
+      "source": "/kodomo/easy/l_urgent",
+      "destination": "/kodomo/easy/l_training",
+      "permanent": true
     }
   ]
 }
