@@ -165,7 +165,7 @@ window.REQUEST_PAGES = {
   "東京都/西東京市": ["https://www.city.nishitokyo.lg.jp/siseizyoho/mayor/ask/tegami.html","市長への手紙（お問い合わせ） 西東京市Web"],
   "兵庫県/伊丹市": ["https://www.city.itami.lg.jp/SOSIKI/SHIMIN/SHIMINSOUDAN/21319.html","「市民の声」意見・質問など／伊丹市"],
   "東京都/小平市": ["https://www.city.kodaira.tokyo.jp/kurashi/003/003445.html","市政についてのご意見・お問い合わせ"],
-  "三重県/鈴鹿市": ["https://www.city.suzuka.lg.jp/kosodate/kosodateshien/1015306.html","すずっこオンライン意見箱（いけんばこ）"],
+  "三重県/鈴鹿市": ["https://www.city.suzuka.lg.jp/shisei/kohokocho/1006414/1010044.html","市への意見・質問"],
   "島根県/松江市": ["https://www.city.matsue.lg.jp/soshikikarasagasu/matsueshiyakusho/2806.html","ご意見・お問い合わせ／松江市ホームページ"],
   "広島県/東広島市": ["https://www.city.higashihiroshima.lg.jp/toiawase.html","ご意見・お問い合わせ／東広島市ホームページ"],
   "東京都/三鷹市": ["https://www.city.mitaka.lg.jp/c_service/002/002981.html","市へのご意見・ご要望"],
