@@ -824,3 +824,15 @@ summary { cursor: pointer; font-weight: 700; }
 @keyframes hero-flow { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .hero-flow-row { animation: none; } }
 @media (max-width: 640px) { .hero-flow-row li { width: 190px; opacity: 0.4; } }
+
+/* トップ：テーマの選択を最初の画面に入れる */
+.hero-themes { max-width: 760px; margin: 28px auto 0; }
+.hero-themes h2 { font-size: 1.15rem; margin: 0 0 12px; }
+.hero-themes .theme-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 0; max-width: none; }
+.hero-themes .theme-list li { padding: 0; border: 0; }
+.hero-themes .theme-list a { display: block; padding: 14px 8px; border-radius: 8px; background: var(--main); color: var(--on-main); font-weight: 700; text-decoration: none; box-shadow: 0 2px 6px rgb(0 0 0 / 0.15); }
+.hero-themes .theme-list a:hover, .hero-themes .theme-list a:focus-visible { background: var(--main-dark); }
+.hero-themes .item-search { margin-top: 18px; text-align: left; }
+.hero-themes .item-search label { font-size: 0.92rem; }
+.hero-themes .item-search-results:not(:empty) { margin-top: 6px; padding: 4px 10px; border-radius: 8px; background: var(--surface); border: 1px solid var(--line); max-height: 60vh; overflow: auto; }
+@media (max-width: 640px) { .hero-themes .theme-list { grid-template-columns: repeat(2, 1fr); } }

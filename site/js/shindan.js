@@ -53,7 +53,8 @@
 (() => {
   const open = () => {
     if (location.hash !== '#compare' && location.hash !== '#shindan') return;
-    const d = document.querySelector(`${location.hash} details`);
+    const t = document.querySelector(location.hash);
+    const d = t && (t.matches('details') ? t : t.querySelector('details'));
     if (d) d.open = true;
   };
   open();
