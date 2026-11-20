@@ -121,7 +121,7 @@ window.REQUEST_PAGES = {
   "群馬県/前橋市": ["https://www.city.maebashi.gunma.jp/gyosei/1/12/14158.html","「前橋市への提案・意見」を出す"],
   "沖縄県/那覇市": ["https://www.city.naha.okinawa.jp/about/1005987.html","ご意見・お問合わせ"],
   "北海道/旭川市": ["https://www.city.asahikawa.hokkaido.jp/1600/1601/p004483.html","市政へのご意見"],
-  "福島県/郡山市": ["https://www.city.koriyama.lg.jp/soshiki/23/3484.html","市政に関して意見や提案などを行ないたいときは"],
+  "福島県/郡山市": ["https://www.city.koriyama.lg.jp/site/minasannokoe/","みなさんの声"],
   "高知県/高知市": ["https://www.city.kochi.kochi.jp/soshiki/80/shiminnokoe.html","要望・意見（市民の声）"],
   "兵庫県/明石市": ["https://www.city.akashi.lg.jp/seisaku/soudan_shitsu/shise/kocho/shokai/goiken.html","市民提案箱／明石市"],
   "三重県/四日市市": ["https://www.city.yokkaichi.lg.jp/www/genre/1487120327829/index.html","広聴（市民の声）"],
