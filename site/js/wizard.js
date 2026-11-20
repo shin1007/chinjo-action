@@ -1417,7 +1417,7 @@
       access: a ? `${a[2]}駅（${a[3]}）から${a[4] <= 2500 ? `徒歩約${Math.ceil((a[4] * 1.3) / 80)}分` : `約${km(a[4])}。バスかタクシーが便利`}` : '',
       deadline: info.deadline ? clip(info.deadline) : '',
       sessions: ((((window.SESSIONS || {})[pref] || {})[key]) || [])[0] || '',
-      stamp: p ? (p.yen ? `${sheets}枚・約${p.g}g → ${p.yen}円${p.safe ? `（心配なら${p.safe}円）` : ''}` : `${sheets}枚・約${p.g}g → 郵便局の窓口で出す`) : '',
+      stamp: p ? (p.yen ? `${sheets}枚・約${p.g}g → ${p.safe ? `${p.safe}円（${p.yen}円の境目に近いので1つ上の料金）` : `${p.yen}円`}` : `${sheets}枚・約${p.g}g → 郵便局の窓口で出す`) : '',
     };
   }
 
