@@ -1276,7 +1276,25 @@
   // ---------- 印刷用のPDF（陳情書・送付状・宛名・出し方メモ） ----------
   // 要望書は議会に出さないので、送付状と宛名の用紙は入れない
   const pick = (id) => $(id).checked && !$(id).closest('label').hidden;
-  const PICKS = ['wzBody', 'wzIkensho', 'wzCover', 'wzWithLabels', 'wzWithMemo'];
+  const PICKS = ['wzBody', 'wzIkensho', 'wzQrLink', 'wzCover', 'wzWithLabels', 'wzWithMemo'];
+  // 説明のページ（/<テーマ>/easy/<項目>）のアドレス。PDF では URL の行に QR コードが付く
+  const easyUrl = (k) => `https://chinjo-action.vercel.app/${window.THEME.id}/easy/${k}`;
+  const withQrLinks = (text, keys) => {
+    const items = keys.map((k) => window.Petition.ITEMS[k]).filter(Boolean);
+    if (!items.length) return text;
+    const add = ['【この陳情の説明】', '　内容の説明・数字・資料をまとめたページです（スマホで読み取れます）。',
+      ...items.flatMap((it) => [`　${it.title}`, `　　${easyUrl(it.id)}`]), ''];
+    const lines = text.split('\n');
+    const end = lines.lastIndexOf('以上');
+    if (end < 0) return [text, '', ...add].join('\n');
+    lines.splice(end, 0, ...add);
+    return lines.join('\n');
+  };
+  $('wzQrPreview').addEventListener('toggle', () => {
+    if (!$('wzQrPreview').open) return;
+    const ids = [...new Set(state.items.flatMap(keysOf))].filter((k) => window.Petition.ITEMS[k]);
+    $('wzQrList').innerHTML = ids.map((k) => `<li><a href="${esc(easyUrl(k).replace('https://chinjo-action.vercel.app', ''))}" target="_blank" rel="noopener">${esc(window.Petition.ITEMS[k].label)}</a></li>`).join('') || '<li>内容を選ぶと、ここにリンク先が出ます</li>';
+  });
   const pickBoxes = () => PICKS.map($).filter((el) => !el.closest('label').hidden);
   function renderPickAll() {
     const all = pickBoxes().every((el) => el.checked);
@@ -1291,7 +1309,7 @@
 
   // 議会ごとに、封筒に入れる文書（送付状と陳情書）をまとめる。keys は参考図表の別紙を選ぶのに使う
   const envelopes = () => state.councils.map((c) => {
-    const docs = areas().map((ta) => docFor(ta, c));
+    const docs = areas().map((ta) => (pick('wzQrLink') ? withQrLinks(docFor(ta, c), keysOf(ta.dataset.key)) : docFor(ta, c)));
     const cover = pick('wzCover') && !isNone(c) ? [window.Petition.cover(nameOf(c), docs, sender)] : [];
     // 国に意見書を求める陳情には、意見書の案を別紙で添えられる（その陳情書のすぐ後ろに入れる）
     const iken = areas().map((ta) => (pick('wzIkensho') && !isNone(c) ? window.Petition.ikensho(nameOf(c), keysOf(ta.dataset.key)) : ''));
