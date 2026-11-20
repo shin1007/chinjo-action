@@ -41,7 +41,6 @@
     <nav class="primary-nav" aria-label="主要メニュー">
       <a href="/dansei/make" aria-current="page">つくる</a>
       <a href="/dansei/guide">出し方</a>
-      <a href="/dansei">説明</a>
     </nav>
   </div>
 </header>
@@ -49,10 +48,10 @@
 <main id="main">
 <section id="generator" class="section alt">
   <div class="wrap">
-    <p class="hero-crumb"><a href="/">陳情アクション</a> ＞ <a href="/dansei">男女平等</a> ＞ <b>陳情書をつくる</b></p>
+    <p class="hero-crumb"><a href="/">陳情アクション</a> ＞ 男女平等 ＞ <b>陳情書をつくる</b></p>
     <h1>陳情書をつくる</h1>
     <p class="lead-sm">選択肢を押していくだけで、議会に出せる陳情書ができます。</p>
-    <p class="hint-sm center"><a href="/dansei">このテーマについて（ほかの届け方・相談窓口）</a></p>
+    <p class="theme-intro"><b>性別にかかわらず相談先と避難先がある制度を、地方議会に求める。</b> 性別で対象を限った施策の見直し、男性も使える相談窓口、男性のDV被害者の避難先、買う側だけを罰する売買春の規制への反対。</p>
 
     <div id="wizard" class="wizard">
       <div class="wz-progress" id="wzProgress" role="progressbar" aria-label="文書作成の進捗">
@@ -87,12 +86,11 @@
           <label><input type="radio" name="wzKind" value="petition" checked> <b>議会に話し合ってほしい：陳情書</b><span class="hint-sm">議会で審査されるか、議員に配られます。国へ意見書を出すよう求める内容と、条例・予算など議会の判断が要る内容が向いています。</span></label>
           <label><input type="radio" name="wzKind" value="request"> <b>市区町村長・知事・役所に動いてほしい：要望書</b><span class="hint-sm">行政に直接、検討や説明を求めます。通知・窓口・研修・公表など、担当課が自分の判断でできる内容が向いています。</span></label>
           <a class="wz-kind-link" href="/letter?theme=dansei"><b>地元の特定の議員に知ってほしい：議員への手紙</b><span class="hint-sm">公開されません。陳情書に書けない事情を伝えたり、紹介議員をお願いしたりするときに。別の画面で作ります。</span></a>
-          <a class="wz-kind-link" href="https://form.cao.go.jp/kokumin_koe/opinion-0016.html" target="_blank" rel="noopener"><b>国（省庁）に規制を見直してほしい：国への提案</b><span class="hint-sm">内閣府の「規制改革・行政改革ホットライン」のフォームから直接出します（このサイトでは作りません）。回答は内閣府のサイトで公開されます。地元の議会に「国へ意見書を出してほしい」という陳情を出すこともできます。</span></a>
+          <a class="wz-kind-link" href="https://form.cao.go.jp/kokumin_koe/opinion-0016.html" target="_blank" rel="noopener"><b>国（省庁）に規制を見直してほしい：国への提案 ↗</b><span class="hint-sm">押すと、内閣府の「規制改革・行政改革ホットライン」のフォームが開きます（このサイトでは作りません）。回答は内閣府のサイトで公開されます。地元の議会に「国へ意見書を出してほしい」という陳情を出すこともできます。</span></a>
         </fieldset>
         <p class="hint-sm wz-seigan"><b>紹介議員になってくれる議員がいるなら、請願にもできます。</b>請願にしたいときも、まずここで陳情書を作り、その文面を持って議員に紹介をお願いします（<a href="/letter">議員への手紙</a>）。請願書は紹介議員が要るので、このサイトでは作りません。</p>
         </details>
         <p class="hint-sm"><b>とくに伝えたい内容を、3つまで選ぶのがおすすめです。</b>選んだ内容1つにつき1通ずつできあがります。</p>
-        <details class="hint-sm wz-fold"><summary>内容に付いている札の意味</summary><p><span class="ask-tag ask-tag-research">研究の裏づけあり</span>は論文や公的機関の報告があるもの、<span class="ask-tag ask-tag-precedent">実施例あり</span>はほかの自治体ですでに行っているもの、<span class="ask-tag ask-tag-lowcost">費用が少ない</span>は予算がほとんど要らないものです。</p></details>
         <details class="hint-sm wz-fold"><summary>いくつも選ぶとき・1通にまとめたいとき</summary>
           <p>多くの議会は「1件に1つの求めること（趣旨）」で分けて出すよう求めているので、ふつうは1通ずつ出します（<a href="/dansei/guide#split">1件ずつ分ける理由</a>）。ただし、1つの議会に一度に出すのは2〜3件までが目安です。出しすぎると1件ずつの審査が浅くなり、かえって通りにくくなります（<a href="/dansei/guide#toomany">出しすぎない理由</a>）。いくつも選ぶなら、同じ分野（下の見出し）の中から選ぶほうが伝わります。同じ分野の内容を1通にまとめたいときは、文面確認の画面で「まとめて1通にする」を選べます。その議会が分けて出すよう求めていないか、先に確かめてください。<a href="/#compare">陳情書・要望書・請願・手紙の違い</a></p>
         </details>
@@ -204,6 +202,10 @@
 
       <div class="wz-step" data-step="send" hidden>
         <h3>署名して出す</h3>
+        <div id="wzHotline" class="wz-hotline" hidden>
+          <p><b>国にも直接届けられます。</b>選んだ内容には、国の法律や省令を変えるものがあります。陳情書とは別に、内閣府の「規制改革・行政改革ホットライン」のフォームから、個人で国に直接提案できます。所管の省庁が検討し、回答が<a href="https://www8.cao.go.jp/kisei-kaikaku/kisei/hotline/h_index.html" target="_blank" rel="noopener">内閣府のサイト</a>で公開されます（氏名は公表されません）。陳情書の文面をそのまま貼り付けて使えます。</p>
+          <a class="btn btn-primary" href="https://form.cao.go.jp/kokumin_koe/opinion-0016.html" target="_blank" rel="noopener">国への提案のフォームを開く ↗</a>
+        </div>
         <section class="wz-now" aria-labelledby="wzNowH">
           <h4 id="wzNowH">今やること</h4>
           <ol class="wz-now-steps">
@@ -324,7 +326,6 @@
           <summary><b>提出したあとにできること</b>（ほかの議会にも出す・審査を見届ける・広める）</summary>
           <ul>
           <li><b>ほかの議会にも出す：</b>同じ内容のまま、近くの議会や別の都道府県の議会を書き足せます。同じ地域でまとめて出すと、採択につながりやすくなります。<button type="button" id="wzOther" class="btn btn-small">ほかの議会を選ぶ</button></li>
-          <li id="wzHotline" hidden><b>国に直接提案する：</b>国の法律や省令を変える内容は、内閣府の<a href="https://form.cao.go.jp/kokumin_koe/opinion-0016.html" target="_blank" rel="noopener">規制改革・行政改革ホットライン</a>にも個人で出せます。所管の省庁が検討し、回答が<a href="https://www8.cao.go.jp/kisei-kaikaku/kisei/hotline/h_index.html" target="_blank" rel="noopener">内閣府のサイト</a>で公開されます。氏名は公表されません。<a href="/#compare">ほかの手段</a></li>
           <li><b>議員に手紙を出す：</b>陳情書に書けない事情は、公開されない手紙で伝えます。紹介議員のお願いにもなります。<a href="/letter?theme=dansei">議員への手紙をつくる</a></li>
           <li><b>審査を見届ける：</b>1週間ほどしたら議会事務局に受理と審査の日程を確かめ、できれば委員会を傍聴します。<a href="/dansei/guide#flow">提出までの流れ</a></li>
           <li><b>広める：</b>結果が出たら、ほかの地域の人の後押しになるよう共有してください。<a id="wzShareX" target="_blank" rel="noopener">Xで共有</a>／<a id="wzShareLine" target="_blank" rel="noopener">LINEで共有</a></li>
@@ -343,12 +344,24 @@
 
   </div>
 </section>
+<section id="theme-faq" class="section">
+  <div class="wrap">
+    <h2>このテーマのよくある質問</h2>
+    <details><summary>女性への支援に反対しているのですか？</summary><p>いいえ。女性への支援を減らすことは求めていません。困りごとの中身が性別で変わらないのに、男性であるために支援を受けられない人がいる、という制度の偏りを直すことを求めています。</p></details>
+  </div>
+</section>
+<section id="shop" class="section alt">
+  <div class="wrap">
+    <h2>関連する本・グッズ</h2>
+    <div data-shop></div>
+  </div>
+</section>
 </main>
 
 <footer class="site-footer">
   <div class="wrap">
     <p>男女平等を求める陳情アクション</p>
-    <p class="small"><a href="/dansei">トップページ</a>　｜　<a href="/dansei/guide">陳情の出し方ガイド</a></p>
+    <p class="small"><a href="/">トップページ</a>　｜　<a href="/dansei/guide">陳情の出し方ガイド</a></p>
     <p class="small credit">市区町村の一覧：<a href="https://github.com/geolonia/japanese-addresses" target="_blank" rel="noopener">Geolonia 住所データ</a>（<a href="https://creativecommons.org/licenses/by/4.0/deed.ja" target="_blank" rel="noopener">CC BY 4.0</a>）を加工して作成。最寄り駅：<a href="https://nlftp.mlit.go.jp/ksj/" target="_blank" rel="noopener">国土数値情報</a>（鉄道データ）（国土交通省）を加工して作成。位置：<a href="https://maps.gsi.go.jp/" target="_blank" rel="noopener">地理院地図</a>の住所検索</p></div>
   <div class="wrap"><p class="small"><a href="https://github.com/shin1007/chinjo-action" target="_blank" rel="noopener">ソースコード（GitHub）</a>　このサイトの改善の提案（Issue・プルリクエスト）を歓迎します</p></div>
 </footer>
@@ -377,5 +390,7 @@
 <script defer src="/js/wizard.js"></script>
 <script defer src="/js/ai-launch.js"></script>
 <script defer src="/js/send-figs.js"></script>
+<script defer src="/themes/dansei/shop.js"></script>
+<script defer src="/js/shop.js"></script>
 </body>
 </html>

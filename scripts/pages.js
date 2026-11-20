@@ -43,6 +43,8 @@ function render(page, theme) {
     .replaceAll('{{site}}', theme.site ?? `${theme.label}を守る陳情アクション`)
     .replaceAll('{{label}}', theme.label)
     .replaceAll('{{ogAlt}}', theme.ogAlt)
+    .replace('{{themeTop}}', () => read(path.join(ROOT, 'templates', 'parts', 'theme', `${theme.id}-top.html`)))
+    .replace('{{themeBottom}}', () => read(path.join(ROOT, 'templates', 'parts', 'theme', `${theme.id}-bottom.html`)))
     .replace('{{letterLink}}', `          <li><b>議員に手紙を出す：</b>陳情書に書けない事情は、公開されない手紙で伝えます。紹介議員のお願いにもなります。<a href="/letter?theme=${theme.id}">議員への手紙をつくる</a></li>
 `);
 }
@@ -55,14 +57,16 @@ const primaryNav = (themeId, page) => [
   '    <nav class="primary-nav" aria-label="主要メニュー">',
   `      <a href="/${themeId}/make"${page === 'make' ? ' aria-current="page"' : ''}>つくる</a>`,
   `      <a href="/${themeId}/guide"${page === 'guide' ? ' aria-current="page"' : ''}>出し方</a>`,
-  `      <a href="/${themeId}"${page === 'index' ? ' aria-current="page"' : ''}>説明</a>`,
   '    </nav>',
 ].join('\n');
 
 // 共通の部品を、決まった形に置き換える（部品がないページはそのまま）
+// 「出す前に知っておいてほしいこと」（トップと /about で同じものを出す）。templates/parts/before.html を直して実行する
+const BEFORE = () => read(path.join(ROOT, 'templates', 'parts', 'before.html')).trimEnd();
 function withParts(html, themeId, page) {
   const navRe = new RegExp(` {4}<nav(?: class="primary-nav" aria-label="主要メニュー")?>\\s*<a href="/${themeId}/make"[\\s\\S]*?</nav>`);
   return html
+    .replace(/<!-- part:before[\s\S]*?<!-- \/part:before -->/, () => BEFORE())
     .replace(/ {4}<details class="theme-menu">[\s\S]*?<\/details>/, () => themeNav(themeId))
     .replace(navRe, () => primaryNav(themeId, page))
     .replace(/^ *<div class="wrap"><p class="small"><a href="https:\/\/github\.com\/shin1007\/chinjo-action"[^\n]*<\/div>$/m, () => GITHUB)

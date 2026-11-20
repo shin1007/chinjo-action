@@ -36,12 +36,12 @@
     },
     {
       "source": "/builder",
-      "destination": "/kodomo",
+      "destination": "/kodomo/make",
       "permanent": true
     },
     {
       "source": "/:theme/builder",
-      "destination": "/:theme",
+      "destination": "/:theme/make",
       "permanent": true
     },
     {
@@ -78,6 +78,11 @@
       "source": "/kodomo/easy/l_urgent",
       "destination": "/kodomo/easy/l_training",
       "permanent": true
+    },
+    {
+      "source": "/:theme(kodomo|dansei|nihonjin|shiho|kenko|sonota)",
+      "destination": "/:theme/make",
+      "permanent": false
     }
   ]
 }

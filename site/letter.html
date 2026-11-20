@@ -47,6 +47,13 @@
     <p class="lead-sm">制度や運用の課題を、地域の議員へ丁寧に伝える手紙です。陳情書とは別に、かんたんに作成できます。</p>
     <p class="privacy">🔒 入力内容はこのサイトのサーバーに送信・保存されません。</p>
 
+    <div class="gen-step letter-zip">
+      <h2><span class="step-badge">0</span>送りたい議員を探す</h2>
+      <label>あなたの郵便番号<input id="letterZip" inputmode="numeric" autocomplete="postal-code" placeholder="例：100-0001"></label>
+      <p class="hint-sm">住んでいる市区町村と都道府県の議会が出ます。郵便番号はこのサイトのサーバーに送りません。</p>
+      <div id="letterZipHits" aria-live="polite"></div>
+    </div>
+
     <div class="letter-layout">
       <form id="letterForm" class="gen-form letter-form">
         <div class="gen-step">
@@ -86,7 +93,7 @@
     </div>
 
     <section class="letter-find" aria-labelledby="letterFindTitle">
-      <h2 id="letterFindTitle">届け先を探す</h2>
+      <h2 id="letterFindTitle">国会議員に送るとき</h2>
       <p class="lead-sm">手紙の内容はサーバーに送信されません。公開されている公式情報だけを使って、届け先を探せます。</p>
       <div class="find-grid">
         <section class="find-card" aria-labelledby="dietFindTitle">
@@ -99,40 +106,6 @@
           <p class="find-links"><a href="https://www.shugiin.go.jp/internet/itdb_giinprof.nsf/html/index.htm" target="_blank" rel="noopener noreferrer">衆議院議員情報</a>・<a href="https://www.sangiin.go.jp/japanese/joho1/kousei/giin/00giin.htm" target="_blank" rel="noopener noreferrer">参議院議員情報</a>・<a href="https://kokkaimap.jp/" target="_blank" rel="noopener noreferrer">国会議員マップ</a></p>
         </section>
 
-        <section class="find-card" aria-labelledby="prefFindTitle">
-          <h3 id="prefFindTitle">都道府県議</h3>
-          <label>都道府県<select id="prefAssemblySelect"><option value="">選択してください</option></select></label>
-          <p id="prefAssemblyNote" class="hint-sm">都道府県を選ぶと、公式サイトの議員名簿を開けます。</p>
-          <a id="prefAssemblyLink" class="btn btn-small" href="#" target="_blank" rel="noopener noreferrer" hidden>県議会 議員名簿を開く</a>
-          <p class="hint-sm">名簿で住所・電話・FAXを確認し、手紙をコピーして使ってください。</p>
-        </section>
-
-        <section class="find-card" aria-labelledby="localFindTitle">
-          <h3 id="localFindTitle">市区町村議（検索）</h3>
-          <label>自治体名<input id="municipalityName" list="municipalityOptions" placeholder="例：横浜市" autocomplete="address-level2"></label>
-          <datalist id="municipalityOptions"></datalist>
-          <div class="find-actions">
-            <a id="municipalityOfficialLink" class="btn btn-small" href="#" target="_blank" rel="noopener noreferrer" hidden>市議会の公式ページを開く</a>
-            <a id="municipalitySearchLink" class="btn btn-small" href="#" target="_blank" rel="noopener noreferrer">議員名簿を検索</a>
-            <a id="municipalityPetitionLink" class="btn btn-small" href="#" target="_blank" rel="noopener noreferrer">陳情を検索</a>
-          </div>
-          <p class="hint-sm">名簿に電話・FAX・住所が載っていることが多くあります。メール・Xは各議員が公式公開している場合のみ利用してください。</p>
-        </section>
-
-        <section class="find-card" aria-labelledby="xFindTitle">
-          <h3 id="xFindTitle">Xで探す</h3>
-          <div class="find-filters">
-            <label>氏名（必須に近い）<input id="xMemberName" type="search" placeholder="例：○○太郎" autocomplete="name"></label>
-            <label>自治体名・議会名（任意）<input id="xCouncilName" type="search" placeholder="例：○○市議会"></label>
-          </div>
-          <div id="xMemberMatches" class="find-results"></div>
-          <a id="xSearchLink" class="btn btn-small" href="https://x.com/search" target="_blank" rel="noopener noreferrer">Xでユーザー検索</a>
-          <ul class="find-notice">
-            <li>公式・本人公開のアカウントのみ利用してください。</li>
-            <li>検索結果が本人とは限らないため、プロフィールを確認してください。</li>
-            <li>非公開情報の収集・推測は行いません。</li>
-          </ul>
-        </section>
       </div>
       <div class="find-guide">
         <h3>共通の届け方</h3>
@@ -147,9 +120,9 @@
 <script defer src="/data/prefs.js"></script>
 <script defer src="/data/municipalities.js"></script>
 <script defer src="/data/sites.js"></script>
-<script defer src="/data/pref-assembly-urls.js"></script>
 <script defer src="/data/diet-members.js"></script>
 <script defer src="/js/letter.js"></script>
 <script defer src="/js/letter-find.js"></script>
+<script defer src="/js/letter-zip.js"></script>
 </body>
 </html>
