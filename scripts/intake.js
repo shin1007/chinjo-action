@@ -217,6 +217,12 @@ function stats() {
     const routes = {};
     for (const r of rows) for (const s of r.sources) routes[s.route] = (routes[s.route] || 0) + 1;
     console.log('根拠の経路', routes, '判定できず', rows.filter((r) => r.unresolved).length);
+    // 確かめ直しの目安：公式サイト・事務局の回答で確かめた日のうち、いちばん新しい日から3か月を過ぎた行（古い順に確かめ直す）
+    const limit = new Date(); limit.setMonth(limit.getMonth() - 3);
+    const cut = limit.toISOString().slice(0, 10);
+    const last = (r) => r.sources.filter((x) => SURE.has(x.route) && x.checked_at).map((x) => x.checked_at).sort().pop();
+    const old = rows.map((r) => [r, last(r)]).filter(([, d]) => d && d < cut).sort((a, b) => a[1].localeCompare(b[1]));
+    console.log(`確かめてから3か月を過ぎた行（${cut} より前）`, old.length, old.slice(0, 10).map(([r, d]) => `${r.id}(${d})`).join(' '));
   }
 }
 
