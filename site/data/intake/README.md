@@ -86,3 +86,8 @@
 - 根拠の一文と判断は scripts/intake-nonresident.jsonl に1行1議会で書き、`node scripts/intake-nonresident.js scripts/intake-nonresident.jsonl` で chinjo.jsonl に入れる（何度流しても同じ結果になる）。
 - `--anyone` を付けると、案内ページの本文（.intake-cache）に「どなたでも」「誰でも」とある議会に anyone_can_submit を付ける（confidence は likely）。
 - 案内ページに書いてなく、取扱基準・要綱のPDFに書いてある議会が多い。PDFは日本語を pdftotext で取れないので、PyMuPDF（python -E -P で使う。-I だと読み込めない）で読む。
+
+## 出典の照合（2026-11-20〜）
+
+`node scripts/intake-verify.js` で、`sources` の `quote` が `url` のページにいまも載っているかを機械で確かめる（空白・句読点・全角半角の違いは無視する。「…」で省いた引用は、かたまりごとに確かめる）。毎月（.github/workflows/intake-verify.yml）と、議員の改選のあと（同じワークフローを手で走らせる）に行う。
+結果は `verify.json`（URL ごと）と `../verify-summary.json`（/coverage に出す件数）。確かめられなかったものは docs/調査/出典を確かめられなかったもの.md に、直リンクと一文を検索するリンクつきで並べる。手で保存したページは `--file <URL> <ファイル>` で登録する。PDF の出典はまだ照合できない。
