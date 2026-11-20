@@ -350,7 +350,7 @@
       const open = openCats.has(cat) || list.some((a) => state.items.includes(a.id)) || (gi === 0 && !openCats.size);
       return `<details class="wz-cat" data-cat="${esc(cat)}"${open ? ' open' : ''}><summary><span>${esc(cat)}</span><small class="wz-cat-n"></small></summary><div class="wz-cards">${list.map((a) => {
         const on = state.items.includes(a.id);
-        return `<button type="button" class="wz-card ${on ? 'on' : ''}" data-item="${a.id}" aria-pressed="${on}" data-text="${esc(a.label + a.reason)}"><b>${a.label}${window.Common.scopeTag(a)}</b><span>${a.reason.split('。')[0]}。</span>${window.Common.askTags(a) ? `<span class="ask-tags">${window.Common.askTags(a)}</span>` : ''}${a.pair && window.Petition.ITEMS[a.pair] ? `<small class="wz-pair">あわせて出すのがおすすめ：${esc(window.Petition.ITEMS[a.pair].label)}</small>` : ''}</button>`;
+        return `<div class="wz-item"><button type="button" class="wz-card ${on ? 'on' : ''}" data-item="${a.id}" aria-pressed="${on}" data-text="${esc(a.label + a.reason)}"><b>${a.label}${window.Common.scopeTag(a)}</b><span>${a.reason.split('。')[0]}。</span>${window.Common.askTags(a) ? `<span class="ask-tags">${window.Common.askTags(a)}</span>` : ''}${a.pair && window.Petition.ITEMS[a.pair] ? `<small class="wz-pair">あわせて出すのがおすすめ：${esc(window.Petition.ITEMS[a.pair].label)}</small>` : ''}</button><a class="wz-bg" aria-label="${esc(a.label)}の背景を読む（新しいタブで開きます）" href="/${window.THEME.id}/easy/${a.id}" target="_blank" rel="noopener">この陳情の背景（なぜ必要か）を読む</a></div>`;
       }).join('')}</div></details>`;
     }).join('');
     document.querySelectorAll('#wzItems .wz-cat').forEach((cat) => { cat.querySelector('.wz-cat-n').innerHTML = catCount(cat); });
@@ -362,7 +362,7 @@
     const q = $('wzItemFilter').value.trim();
     document.querySelectorAll('#wzItems .wz-cat').forEach((d) => {
       let hit = 0;
-      d.querySelectorAll('[data-item]').forEach((el) => { const ok = !q || el.dataset.text.includes(q); el.hidden = !ok; hit += ok; });
+      d.querySelectorAll('[data-item]').forEach((el) => { const ok = !q || el.dataset.text.includes(q); el.hidden = !ok; el.parentElement.hidden = !ok; hit += ok; });
       d.hidden = !hit;
       if (q && hit) d.open = true;
     });
