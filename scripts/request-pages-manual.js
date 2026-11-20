@@ -1,6 +1,15 @@
 // 自動で見つけたページが違っていた・見つからなかったときに、手で確かめたページ（2026-11-11 に開いて題を確かめた）。
 // キー：都道府県/市区町村（"@" は都道府県）→ [URL, 題]
 module.exports = {
+  // 2026-11-20 に公式サイトで出し方を読んで確かめたページ
+  '茨城県/つくば市': ['https://www.city.tsukuba.lg.jp/soshikikarasagasu/shichokoshitsukochoshitsu/gyomuannai/2/1002673.html', '市長へのたより・メール'],
+  '埼玉県/川口市': ['https://www.city.kawaguchi.lg.jp/soshiki/01010/010/38156.html', '市長への手紙'],
+  '埼玉県/上尾市': ['https://www.city.ageo.lg.jp/page/4-hagaki.html', '政策提言、お問い合わせ、ご相談、ご指摘'],
+  '東京都/品川区': ['https://www.city.shinagawa.tokyo.jp/contact/', '区政に関するご意見'],
+  '神奈川県/茅ヶ崎市': ['https://www.city.chigasaki.kanagawa.jp/1052150/soudan/1003933.html', 'わたしの提案'],
+  '兵庫県/加古川市': ['https://www.city.kakogawa.lg.jp/shiseijoho/shichonopeji/1456460531295.html', '市長への手紙'],
+  '山口県/下関市': ['https://www.city.shimonoseki.lg.jp/soshiki/2/4715.html', '下関市の広聴制度を紹介します'],
+  '愛媛県/松山市': ['https://www.city.matsuyama.ehime.jp/wagamachi/okuru.html', '市長へのわがまちメール'],
   '東京都/@': ['https://www.metro.tokyo.lg.jp/tosei/iken-sodan/sodan/koe', '都民の声窓口'],
   '神奈川県/@': ['https://www.pref.kanagawa.jp/docs/h3e/cnt/f3492/', 'わたしの提案（神奈川県への提言）'],
   '千葉県/@': ['https://www.pref.chiba.lg.jp/kouhou/goiken/chiji.html', 'わたしの提言'],
