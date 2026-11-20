@@ -130,10 +130,21 @@ def icon(d, kind, cx, cy):
 
 SAFE = 90  # 心配な人が1つ上の料金（270円）の切手を貼るときに足す額
 LAYOUTS = {
-    # 横（PC・SNSの投稿向け）と縦（スマホ向け）
-    'wide': dict(size=(960, 540), out=OUT),
-    'tall': dict(size=(540, 960), out=OUT.with_name('mail-howto-tall.gif')),
+    # トップページ（/）でその場で再生する横（PC）と縦（スマホ）。最後のコマは「▼ 下からテーマを選ぶ」
+    'wide': dict(size=(960, 540), out=OUT, end='themes'),
+    'tall': dict(size=(540, 960), out=OUT.with_name('mail-howto-tall.gif'), end='themes'),
+    # X（Twitter）に投稿する用。最後のコマはサイトのアドレス。サイトには置かない
+    'x': dict(size=(960, 540), out=OUT.parent.parent.parent / 'docs' / '見本' / '紹介GIF' / 'mail-howto-x.gif', end='url'),
 }
+
+
+def ending(d, w, y, end, size):
+    if end == 'url':
+        d.text((w // 2, y), 'chinjo-action.vercel.app', font=f(size), fill=BLUE, anchor='mm')
+    else:
+        tw = d.textlength('▼ 下からテーマを選ぶ', font=f(size))
+        d.rounded_rectangle((w // 2 - tw / 2 - 28, y - size, w // 2 + tw / 2 + 28, y + size), size, fill=ACC)
+        d.text((w // 2, y), '▼ 下からテーマを選ぶ', font=f(size), fill='#fff', anchor='mm')
 
 
 def total_text(total, safe):
@@ -191,7 +202,7 @@ def frame(i, total, safe, size):
     return im
 
 
-def summary(total, size):
+def summary(total, size, end):
     w, h = size
     tall = h > w
     im = Image.new('RGB', size, BG)
@@ -206,7 +217,7 @@ def summary(total, size):
             d.text((w // 2, 510 + k * 36), t, font=f(22, False), fill=INK, anchor='mm')
         d.text((w // 2, 690), '電子申請で出せる議会なら', font=f(20, False), fill=SUB, anchor='mm')
         d.text((w // 2, 720), '印刷も切手も要りません', font=f(20, False), fill=SUB, anchor='mm')
-        d.text((w // 2, 810), 'chinjo-action.vercel.app', font=f(28), fill=BLUE, anchor='mm')
+        ending(d, w, 810, end, 28)
         d.multiline_text((w // 2, 890), NOTE.replace('目安。', '目安\n'), font=f(14, False), fill=SUB, anchor='mm', align='center', spacing=6)
     else:
         d.text((w // 2, 100), '陳情5件を郵送で、合わせて', font=f(36), fill=INK, anchor='mm')
@@ -214,7 +225,7 @@ def summary(total, size):
         d.text((w // 2, 290), f'切手を心配して270円にしても 約{round(total + SAFE, -1)}円', font=f(24), fill=ACC, anchor='mm')
         d.text((w // 2, 345), ' ＋ '.join(parts), font=f(22, False), fill=INK, anchor='mm')
         d.text((w // 2, 390), '電子申請で出せる議会なら、印刷も切手も要りません', font=f(22, False), fill=SUB, anchor='mm')
-        d.text((w // 2, 470), 'chinjo-action.vercel.app', font=f(30), fill=BLUE, anchor='mm')
+        ending(d, w, 462, end, 28)
         d.text((w - 40, 515), NOTE, font=f(14, False), fill=SUB, anchor='rm')
     return im
 
@@ -227,7 +238,7 @@ def main():
             total += s[3]
             frames.append(frame(i, total, s[4] in ('stamp', 'post'), size))
             durs.append(3500 + 1200 * s[1].count('\n'))  # 説明の項目が多いコマほど長く見せる
-        frames.append(summary(total, size))
+        frames.append(summary(total, size, lay['end']))
         durs.append(7000)
         out.parent.mkdir(parents=True, exist_ok=True)
         pal = [fr.convert('P', palette=Image.ADAPTIVE, colors=64) for fr in frames]
