@@ -36,17 +36,11 @@ test('送り先のテーブルが Supabase に反映されるまで（LIVE が f
   assert.match(html, /id="fb-pending"/);
 });
 
-test('予定・困りごと・ご意見のページがあり、トップ・about・support のフッターからたどれる', () => {
-  for (const f of ['roadmap', 'trouble', 'feedback']) {
+test('困りごと・ご意見のページがあり、トップ・about・support のフッターからたどれる', () => {
+  for (const f of ['trouble', 'feedback']) {
     assert.ok(fs.existsSync(path.join(ROOT, `site/${f}.html`)), `${f}.html`);
     for (const page of ['index', 'about', 'support']) assert.match(read(`site/${page}.html`), new RegExp(`href="/${f}"`), `${page} から ${f}`);
   }
-});
-
-test('予定のページは、各項目に「出てくる場所」を書いている', () => {
-  const rows = read('site/roadmap.html').match(/<tbody>([\s\S]*?)<\/tbody>/)[1].match(/<tr>[\s\S]*?<\/tr>/g);
-  assert.ok(rows.length >= 4);
-  for (const r of rows) assert.strictEqual((r.match(/<td>/g) || []).length, 3, r.slice(0, 80));
 });
 
 test('掲示板：読むのは feedback_public ビューだけで、書き込まない。原文・対象・根拠 URL・状態は出さない', () => {
@@ -63,7 +57,7 @@ test('掲示板：読むのは feedback_public ビューだけで、書き込ま
 test('掲示板のページがあり、準備中の表示と、フッターからのリンクがある', () => {
   const board = fs.readFileSync(path.join(ROOT, 'site/board.html'), 'utf8');
   assert.match(board, /id="board-pending"/);
-  for (const page of ['index', 'about', 'support', 'roadmap', 'trouble', 'feedback']) assert.match(read(`site/${page}.html`), /href="\/board"/, `${page} から /board`);
+  for (const page of ['index', 'about', 'support', 'trouble', 'feedback']) assert.match(read(`site/${page}.html`), /href="\/board"/, `${page} から /board`);
 });
 
 test('非弁行為の説明ページ（/horitsu）：弁護士法第72条・行政書士法第19条の原文の引用と e-Gov へのリンクがあり、関連ページからたどれる', () => {
@@ -72,5 +66,5 @@ test('非弁行為の説明ページ（/horitsu）：弁護士法第72条・行�
   assert.match(page, /報酬を得て、業として第一条の三に規定する業務を行うことができない/);
   assert.match(page, /https:\/\/laws\.e-gov\.go\.jp\/law\/324AC1000000205/);
   assert.match(page, /https:\/\/laws\.e-gov\.go\.jp\/law\/326AC1000000004/);
-  for (const f of ['feedback', 'board', 'roadmap', 'trouble']) assert.match(read(`site/${f}.html`), /href="\/horitsu"/, `${f} から /horitsu`);
+  for (const f of ['feedback', 'board', 'trouble']) assert.match(read(`site/${f}.html`), /href="\/horitsu"/, `${f} から /horitsu`);
 });

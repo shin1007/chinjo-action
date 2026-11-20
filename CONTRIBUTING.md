@@ -5,7 +5,7 @@ Issue・プルリクエストを歓迎します。日本語で書いてくださ
 ## 何から手を付けるか
 
 - [good first issue](https://github.com/shin1007/chinjo-action/labels/good%20first%20issue) の印が付いた Issue
-- サイトの [これからの予定](https://chinjo-action.vercel.app/roadmap) と [困っていること](https://chinjo-action.vercel.app/trouble)
+- サイトの [困っていること](https://chinjo-action.vercel.app/trouble)
 - **自治体の受け付け方を調べる**（郵送・電子申請・住民以外の扱いなど）。手順は [docs/調査/受け付け方の調べ方.md](docs/調査/受け付け方の調べ方.md)。コードを書かなくても手伝えます
 - 調べきれていない自治体・資料の一覧：[docs/調査/](docs/調査/)（たとえば [陳情の案内ページが見つからない議会](docs/調査/陳情の案内ページが見つからない議会.md)、[一次資料に当たれていない資料](docs/調査/一次資料に当たれていない資料.md)）
 
