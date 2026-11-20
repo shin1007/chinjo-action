@@ -548,10 +548,12 @@ summary { cursor: pointer; font-weight: 700; }
 }
 
 /* 作成画面：出し方の2択・見出しごとの折りたたみ・下書き・提出前の確認 */
-.wz-kind { border: 0; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.wz-kind { border: 0; padding: 0; margin: 0 0 12px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
 .wz-kind legend { font-weight: 700; margin-bottom: 6px; }
-.wz-kind label { display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 2px; border: 2px solid var(--line); border-radius: 10px; padding: 10px 12px; cursor: pointer; background: var(--surface); }
+.wz-kind label, .wz-kind-link { display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 2px; border: 2px solid var(--line); border-radius: 10px; padding: 10px 12px; cursor: pointer; background: var(--surface); }
 .wz-kind label:has(input:checked) { border-color: var(--main); background: var(--accent-soft); }
+.wz-kind-link { color: inherit; text-decoration: none; border-style: dashed; }
+.wz-kind-link b::after { content: " →"; }
 .wz-kind input { margin: 0 0 4px; }
 .wz-kind input:focus-visible { outline: 2px solid var(--main); outline-offset: 2px; }
 .wz-cat { border: 1px solid var(--line); border-radius: 10px; margin: 8px 0; background: var(--surface); }
