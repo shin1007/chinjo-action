@@ -133,8 +133,10 @@ LAYOUTS = {
     # トップページ（/）でその場で再生する横（PC）と縦（スマホ）。最後のコマは「▼ 下からテーマを選ぶ」
     'wide': dict(size=(960, 540), out=OUT, end='themes'),
     'tall': dict(size=(540, 960), out=OUT.with_name('mail-howto-tall.gif'), end='themes'),
-    # X（Twitter）などに投稿する紹介用。スマホで見る縦長で、最後のコマはサイトのアドレスとQRコード。サイトには置かない
-    'x': dict(size=(540, 960), out=OUT.parent.parent.parent / 'docs' / '見本' / '紹介GIF' / 'mail-howto-x.gif', end='url'),
+    # X（Twitter）などに投稿する紹介用。サイトには置かない。
+    # タイムラインで切れずに見えるよう 4:5 にし、最初のコマはトップのカード（site/og-image.png）と同じ内容と費用の目安、
+    # 最後のコマはサイトのアドレスとQRコードにする
+    'x': dict(size=(600, 750), out=OUT.parent.parent.parent / 'docs' / '見本' / '紹介GIF' / 'mail-howto-x.gif', end='url'),
 }
 
 
@@ -170,6 +172,29 @@ def frame(i, total, safe, size):
     im = Image.new('RGB', size, BG)
     d = ImageDraw.Draw(im)
     lines = sub.split('\n')
+    if h * 4 == w * 5:
+        # X用（4:5）。下の「ここまで」の行に注記を入れる余裕がないので、注記は最後のコマだけに出す
+        d.text((w // 2, 36), '陳情書を郵送で出すまで', font=f(22), fill=SUB, anchor='mm')
+        x0 = (w - (len(STEPS) * 36 - 14)) // 2
+        for k in range(len(STEPS)):
+            d.ellipse((x0 + k * 36, 62, x0 + k * 36 + 22, 84), fill=ACC if k <= i else LINE)
+        icon(d, kind, w // 2, 225)
+        d.text((40, 362), f'{i + 1}', font=f(56), fill=ACC)
+        d.text((100, 372), title, font=f(34 if len(title) <= 10 else 30), fill=INK)
+        y = 448
+        for line in lines:
+            d.ellipse((42, y + 7, 52, y + 17), fill=ACC)
+            d.text((64, y), line, font=f(19 if len(line) <= 24 else 17, False), fill=INK)
+            y += 34
+        if cost:
+            fnt = f(24)
+            tw = d.textlength(cost, font=fnt)
+            d.rounded_rectangle((w - 40 - tw - 36, 300, w - 40, 346), 23, fill='#fde7dc')
+            d.text((w - 40 - 18, 323), cost, font=fnt, fill=ACC, anchor='rm')
+        fy = h - 40
+        d.line((40, fy - 30, w - 40, fy - 30), fill=LINE, width=2)
+        d.text((40, fy), 'ここまで ' + total_text(total, safe), font=f(24), fill=INK, anchor='lm')
+        return im
     if tall:
         d.text((w // 2, 44), '陳情書を郵送で出すまで', font=f(24), fill=SUB, anchor='mm')
         x0 = (w - (len(STEPS) * 36 - 14)) // 2
@@ -214,13 +239,47 @@ def frame(i, total, safe, size):
     return im
 
 
+def cover(total, size):
+    """X用の最初のコマ。自動再生される前の止まった絵にもなるので、これだけで何のサイトかと費用がわかるようにする"""
+    w, h = size
+    im = Image.new('RGB', size, BG)
+    d = ImageDraw.Draw(im)
+    d.rectangle((0, 0, 12, h), fill=ACC)
+    d.text((48, 50), '陳情アクション', font=f(26), fill=ACC)
+    d.text((48, 120), '地方議会への陳情書を、', font=f(44), fill=INK)
+    d.text((48, 178), '選ぶだけで。', font=f(44), fill=INK)
+    for k, t in enumerate(('内容を選ぶ', '議会を選ぶ', 'PDFで印刷して郵送')):
+        y = 262 + k * 78
+        d.rounded_rectangle((48, y, w - 48, y + 62), 16, fill=PAPER, outline=LINE, width=2)
+        d.ellipse((66, y + 13, 102, y + 49), fill=ACC)
+        d.text((84, y + 31), str(k + 1), font=f(22), fill='#fff', anchor='mm')
+        d.text((120, y + 31), t, font=f(28), fill=INK, anchor='lm')
+    d.rounded_rectangle((48, 505, w - 48, 650), 20, fill='#fde7dc')
+    d.text((w // 2, 540), '陳情5件を1つの議会に郵送して', font=f(26), fill=INK, anchor='mm')
+    d.text((w // 2, 605), f'約{round(total, -1)}円', font=f(64), fill=ACC, anchor='mm')
+    d.text((w // 2, 690), '登録不要・無料　chinjo-action.vercel.app', font=f(20, False), fill=SUB, anchor='mm')
+    return im
+
+
 def summary(total, size, end):
     w, h = size
     tall = h > w
     im = Image.new('RGB', size, BG)
     d = ImageDraw.Draw(im)
     parts = [f'{name} {yen}円' for name, yen in (('印刷', STEPS[2][3]), ('クリアファイル', STEPS[5][3]), ('封筒', STEPS[6][3]), ('切手', STEPS[7][3]))]
-    if tall and end == 'url':
+    if h * 4 == w * 5:
+        d.text((w // 2, 50), '陳情5件を郵送で、合わせて', font=f(28), fill=INK, anchor='mm')
+        d.text((w // 2, 125), f'約{round(total, -1)}円', font=f(80), fill=ACC, anchor='mm')
+        d.text((w // 2, 192), ' ＋ '.join(parts[:2]), font=f(18, False), fill=INK, anchor='mm')
+        d.text((w // 2, 220), ' ＋ '.join(parts[2:]), font=f(18, False), fill=INK, anchor='mm')
+        d.text((w // 2, 256), '電子申請で出せる議会なら、印刷も切手も要りません', font=f(17, False), fill=SUB, anchor='mm')
+        d.line((40, 285, w - 40, 285), fill=LINE, width=2)
+        d.text((w // 2, 318), 'スマホで読み取って、陳情書を作る', font=f(24), fill=INK, anchor='mm')
+        qpx = 270
+        im.paste(qr_image(qpx), ((w - qpx) // 2, 345))
+        ending(d, w, 652, end, 28)
+        d.multiline_text((w // 2, 705), NOTE.replace('目安。', '目安\n'), font=f(14, False), fill=SUB, anchor='mm', align='center', spacing=6)
+    elif tall and end == 'url':
         # 紹介用：金額をまとめたうえで、下半分にQRコードとアドレスを大きく出す
         d.text((w // 2, 90), '陳情5件を郵送で、合わせて', font=f(30), fill=INK, anchor='mm')
         d.text((w // 2, 185), f'約{round(total, -1)}円', font=f(96), fill=ACC, anchor='mm')
@@ -263,6 +322,9 @@ def main():
             total += s[3]
             frames.append(frame(i, total, s[4] in ('stamp', 'post'), size))
             durs.append(3500 + 1200 * s[1].count('\n'))  # 説明の項目が多いコマほど長く見せる
+        if lay['end'] == 'url':  # X用は、費用の目安を見せるカードから始める
+            frames.insert(0, cover(sum(s[3] for s in STEPS), size))
+            durs.insert(0, 4000)
         frames.append(summary(total, size, lay['end']))
         durs.append(7000)
         out.parent.mkdir(parents=True, exist_ok=True)
