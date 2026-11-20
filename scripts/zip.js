@@ -36,5 +36,9 @@ fs.mkdirSync(OUT, { recursive: true });
 const files = {};
 for (const [zip, s] of [...map].sort()) (files[zip.slice(0, 3)] ||= {})[zip.slice(3)] = [...s].join('|');
 for (const [k, o] of Object.entries(files)) fs.writeFileSync(path.join(OUT, `${k}.json`), JSON.stringify(o));
+// 頭2けた → 都道府県（郵便番号を2けた入れた段階で郵送の扱いの一覧を絞るため）
+const p2 = {};
+for (const [k, o] of Object.entries(files)) for (const v of Object.values(o)) for (const pk of v.split('|')) (p2[k.slice(0, 2)] ||= new Set()).add(pk.split('/')[0]);
+fs.writeFileSync(path.join(OUT, 'p2.json'), JSON.stringify(Object.fromEntries(Object.entries(p2).sort().map(([k, s]) => [k, [...s]]))));
 console.log(`${map.size}件の郵便番号を${Object.keys(files).length}ファイルに書き出しました`);
 if (miss.size) console.log(`自治体の一覧にない市区町村（${miss.size}）：${[...miss].join('、')}`);
