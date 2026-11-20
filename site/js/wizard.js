@@ -1048,10 +1048,21 @@
   $('wzCopy').addEventListener('click', () => copy(allDocs().join(`\n\n${window.Petition.SEP}\n\n`)));
 
   // ---------- 選んだ内容をリンクに残す（再読み込み・スマホへの受け渡し用。個人情報は入れない） ----------
+  // 共有リンク。議会は全国地方公共団体コード（5桁）、区切りは「.」にして、日本語を % で書き換えずに済むようにする
+  // （QR コードが小さくなる）。コードが分からない議会（「国あてだけ」など）があるときは、前の形式の名前で書く
   function linkOf() {
+    const pl = (c) => (isNone(c) ? null : window.Places.of(prefOf(c)).find((x) => x.council === nameOf(c)));
+    const codes = state.councils.map((c) => (pl(c) || {}).code);
+    const pp = String(window.PREFS.indexOf(state.pref) + 1).padStart(2, '0');
+    if (codes.every(Boolean) && window.PREFS.includes(state.pref)) {
+      return `${location.origin}${location.pathname}#w?i=${state.items.join('.')}&p=${pp}&c=${codes.join('.')}&r=${encodeURIComponent(state.role)}`;
+    }
     const q = new URLSearchParams({ i: state.items.join(','), p: state.pref, c: state.councils.join(','), r: state.role });
     return `${location.origin}${location.pathname}#w?${q}`;
   }
+  // 短い形式（数字のコード）の議会と都道府県を、名前に戻す
+  const fromCode = (c) => { const pl = /^\d{5}$/.test(c) && window.Places.byCode(c); return pl ? idOf(pl.pref, pl.council) : c; };
+  const prefFrom = (p) => (/^\d{2}$/.test(p || '') ? window.PREFS[Number(p) - 1] || '' : p);
   function saveLink(done) {
     const url = done ? linkOf() : location.pathname + location.search;
     history.replaceState({ step: state.step }, '', url);
@@ -1062,11 +1073,11 @@
     if (!m) return false;
     const q = new URLSearchParams(m[1]);
     // 前の形式のリンクに付いている t（国か自治体か）は、項目から分かるので読まない
-    const items = (q.get('i') || '').split(',').filter((k) => window.ASKS.some((a) => a.id === k));
-    const pref = q.get('p');
+    const items = (q.get('i') || '').split(/[.,]/).filter((k) => window.ASKS.some((a) => a.id === k));
+    const pref = prefFrom(q.get('p'));
     if (!items.length || !(window.PREFS.includes(pref) || q.get('c') === NONE)) return false;
     // 前の形式のリンク（議会名だけ）は、p の都道府県の議会として読む
-    const councils = (q.get('c') || '').split(',').map((c) => (c.includes('/') ? c : idOf(pref, c)))
+    const councils = (q.get('c') || '').split(/[.,]/).map(fromCode).map((c) => (c.includes('/') ? c : idOf(pref, c)))
       .filter((c) => isNone(c) || (window.PREFS.includes(prefOf(c)) && councilsOf(prefOf(c)).includes(nameOf(c))));
     const role = q.get('r');
     if (!councils.length || !ROLES.some(([k]) => k === role)) return false;
