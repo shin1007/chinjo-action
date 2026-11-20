@@ -7,8 +7,11 @@
     location.replace(`${location.pathname.replace(/\/(index(\.html)?)?$/, '')}/make${location.hash.startsWith('#w?') ? location.hash : ''}`);
     return;
   }
-  // かんたん作成のページから「議員への手紙をつくる」で来たら、閉じてある手紙の欄を開く
-  if (location.hash === '#letter') document.getElementById('letterFold')?.setAttribute('open', '');
+  // 議員への手紙は /letter にまとめた。前に配ったリンク（#letter）はそちらへ送る
+  if (location.hash === '#letter') {
+    location.replace(`/letter?theme=${encodeURIComponent(window.THEME?.id || '')}`);
+    return;
+  }
 
   document.querySelectorAll('[data-template="mp"]').forEach((b) =>
     b.addEventListener('click', () => copy(window.THEME.mpTemplate, '文例をコピーしました'))
