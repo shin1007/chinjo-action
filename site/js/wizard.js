@@ -1421,9 +1421,10 @@
     };
   }
 
-  async function makePdf() {
+  // labelsOnly：宛名・差出人の用紙だけの PDF（書類とは別に印刷したいとき）
+  async function makePdf({ labelsOnly = false } = {}) {
     const doc = await window.PdfDoc.create();
-    const envs = envelopes();
+    const envs = labelsOnly ? [] : envelopes();
     const sheets = new Map();
     for (const { c, cover, docs, iken, keys } of envs) {
       let n = 0;
@@ -1437,14 +1438,14 @@
       }
       sheets.set(c, n);
     }
-    if (pick('wzWithLabels') && real().length) {
+    if ((labelsOnly || pick('wzWithLabels')) && real().length) {
       const rows = real().map((c) => {
         const [pref, key] = officeKeys[c] || [];
         return { council: nameOf(c), ...window.Places.office(pref, key) };
       });
       doc.addLabels(window.PdfDoc.SHEETS.plain, window.PdfDoc.labelItems(rows, sender, { to: 'chair', zaichu: true, from: true, back: true }));
     }
-    if (pick('wzWithMemo')) {
+    if (!labelsOnly && pick('wzWithMemo')) {
       const png = await figsPng().catch(() => null);
       const text = window.SendMemo.build({
         kind: state.kind,
@@ -1495,6 +1496,22 @@
       a.click();
       a.remove();
       setTimeout(() => URL.revokeObjectURL(url), 10000);
+    } catch (err) {
+      flash(`PDFを作れませんでした（${err.message}）。通信のよい所でもう一度試してください。`, 5000);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = text;
+    }
+  });
+  // 宛名・差出人の用紙だけを別の PDF で保存する
+  $('wzNowLabelsSave').addEventListener('click', async (e) => {
+    const btn = e.currentTarget;
+    if (!real().length) { flash('宛先の議会を選んでください'); return; }
+    const text = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'PDFを作っています…';
+    try {
+      window.PdfDoc.download(await makePdf({ labelsOnly: true }), '宛名と差出人.pdf');
     } catch (err) {
       flash(`PDFを作れませんでした（${err.message}）。通信のよい所でもう一度試してください。`, 5000);
     } finally {

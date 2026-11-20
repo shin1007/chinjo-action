@@ -116,7 +116,7 @@
       summary();
     });
   });
-  const sheet = () => SHEETS[$('lbSheet').value] || SHEETS.a4_8;
+  const sheet = () => SHEETS[$('lbSheet').value] || SHEETS.plain;
   const skip = () => Math.max(0, Math.floor(Number($('lbSkip').value) || 0));
 
   const labelOpts = () => ({ to: $('lbTo').value, zaichu: $('lbZaichu').checked, from: $('lbFrom').checked, back: $('lbBack').checked });
