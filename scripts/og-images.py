@@ -79,7 +79,9 @@ STEP_CARDS = [
     ('og-image.png', '6つのテーマから選べます',
      '地方議会への陳情書を、選ぶだけで。',
      ['内容を選ぶ', '議会を選ぶ', 'PDFで印刷'],
-     ['陳情書', '送付状', '宛名', '出し方メモ', 'Word版も']),
+     ['陳情書', '送付状', '宛名', '出し方メモ', 'Word版も'],
+     # 金額は index.html の「費用の目安」の表と合わせる
+     '費用の目安：陳情5件を1つの議会に郵送して約480円（印刷・封筒・切手こみ）'),
     ('omakase-og.png', 'おまかせで3つの議会に郵送する',
      '押すのは2回。3議会ぶんを1つのPDFに。',
      ['くじを引く', 'PDFを保存', '署名して郵送'],
@@ -87,7 +89,8 @@ STEP_CARDS = [
 ]
 
 
-def draw_steps(out, crumb, title, steps, outputs):
+def draw_steps(out, crumb, title, steps, outputs, cost=None):
+    k = 22 if cost else 0  # 費用の行を入れるときは、手順から下を少し上に詰める
     img = Image.new('RGB', (W, H))
     d = ImageDraw.Draw(img)
     for y in range(H):
@@ -109,7 +112,7 @@ def draw_steps(out, crumb, title, steps, outputs):
 
     # 手順（番号つきの箱を矢印でつなぐ）
     fs, fn = font('YuGothB.ttc', 30), font('YuGothB.ttc', 26)
-    bw, gap, top = 300, 50, 270
+    bw, gap, top = 300, 50, 270 - k
     for i, s in enumerate(steps):
         x = 80 + i * (bw + gap)
         d.rounded_rectangle([x, top, x + bw, top + 96], radius=18, fill='#fff', outline=LINE, width=2)
@@ -122,14 +125,16 @@ def draw_steps(out, crumb, title, steps, outputs):
             d.polygon([(ax, cy - 13), (ax + 26, cy), (ax, cy + 13)], fill=MAIN)
 
     # 自動でそろうもの
-    d.text((80, 418), '自動でそろうもの', font=font('YuGothB.ttc', 24), fill=MUTED)
+    d.text((80, 418 - 2 * k), '自動でそろうもの', font=font('YuGothB.ttc', 24), fill=MUTED)
     ft, x = font('YuGothB.ttc', 26), 80
     for s in outputs:
         w = d.textlength(s, font=ft) + 44
-        d.rounded_rectangle([x, 456, x + w, 510], radius=27, fill=SOFT, outline=LINE, width=2)
-        d.text((x + 22, 483), s, font=ft, fill=MAIN_DARK, anchor='lm')
+        d.rounded_rectangle([x, 456 - 2 * k, x + w, 510 - 2 * k], radius=27, fill=SOFT, outline=LINE, width=2)
+        d.text((x + 22, 483 - 2 * k), s, font=ft, fill=MAIN_DARK, anchor='lm')
         x += w + 14
-    d.text((80, 560), 'chinjo-action.vercel.app　登録不要・無料・住所氏名はサーバーに送りません',
+    if cost:
+        d.text((80, 498), cost, font=font('YuGothB.ttc', 28), fill=MAIN_DARK)
+    d.text((80, 560 + k), 'chinjo-action.vercel.app　登録不要・無料・住所氏名はサーバーに送りません',
            font=font('YuGothM.ttc', 22), fill=MUTED)
     img.save(os.path.join(ROOT, out), optimize=True)
 
