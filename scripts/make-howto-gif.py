@@ -28,6 +28,29 @@ STEPS = [
 ]
 
 
+def mail_stats():
+    """受け付け方のDB（site/data/intake/chinjo.jsonl）から、郵送で出せるとわかっている議会の数と人口の割合を数える。
+    議員に配るだけ（distribute）の議会も、郵送で受け取るので数に入れる"""
+    import json
+    root = Path(__file__).resolve().parent.parent
+    acc = {'municipality': [0, 0, 0], 'pref': [0, 0, 0]}  # [議会の数, その人口, 全体の人口]
+    for line in open(root / 'site' / 'data' / 'intake' / 'chinjo.jsonl', encoding='utf-8'):
+        r = json.loads(line)
+        a, pop = acc[r['level']], r.get('population') or 0
+        a[2] += pop
+        if r['methods']['mail']['resident'] in ('review', 'accept', 'distribute'):
+            a[0] += 1
+            a[1] += pop
+    pct = lambda a: round(a[1] / a[2] * 100)
+    m, p = acc['municipality'], acc['pref']
+    return (f'郵送で出せるとわかっている議会 {m[0] + p[0]}か所', f'市区町村議会 {m[0]}（人口の約{pct(m)}%）',
+            f'都道府県議会 {p[0]}（人口の約{pct(p)}%）')
+
+
+_post = STEPS[-1]
+STEPS[-1] = (_post[0], '\n'.join((_post[1],) + mail_stats()), *_post[2:])
+
+
 def icon(d, kind, cx, cy):
     """手順の絵を、(cx, cy) を中心に描く（およそ 220×220）"""
     if kind == 'screen':
