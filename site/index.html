@@ -49,9 +49,8 @@
     <p class="lead">テーマと内容を選び、住所・氏名を入れると、そのまま印刷して出せる文面になります。紹介議員（議会に取り次いでくれる議員）はいりません。費用は、陳情3件をまとめて郵送して約460円、持参なら約230円が目安です。入力した住所・氏名や文面は、このサイトのサーバーに送られません。</p>
     <div class="hero-actions">
       <a class="btn btn-primary" href="#themes">テーマを選んでつくる</a>
-      <a class="btn btn-ghost" href="#shindan">陳情書でいいか迷ったら（質問2つ）</a>
-      <a class="btn btn-ghost" href="/omakase">内容を選ぶのが大変なら、おまかせ</a>
     </div>
+    <p class="hero-sub small">内容を選ぶのが大変なら<a href="/omakase">おまかせ</a>／陳情書でいいか迷ったら<a href="#shindan">2つの質問で確かめる</a></p>
   </div>
 </section>
 <section id="tally" class="tally" aria-label="これまでの歩み">
@@ -88,18 +87,13 @@
       <li><b>つくる</b> ― 内容と出す先を選び、住所・氏名を入れると文面ができます。</li>
       <li><b>出し方を確かめて出す</b> ― 署名して、郵送・持参・電子申請で出します。</li>
     </ol>
-  </div>
-</section>
-<section id="omakase" class="section">
-  <div class="wrap">
-    <h2>選ぶのが大変なら、おまかせで3つの議会に郵送する</h2>
-    <p class="lead-sm">テーマを3つ、それぞれから陳情を3つ引き、<b>郵送でも審査される、人口の多い議会</b>を3つ自動で選びます。封筒に入れる分（送付状・陳情書・宛名ラベル・出し方メモ）を、1つのPDFにまとめて保存できます。引き直しも、1つずつの入れ替えもできます。</p>
-    <p class="center"><a class="btn btn-primary" href="/omakase">おまかせの画面を開く</a></p>
+    <p class="omakase-line">選ぶのが大変なら、<a href="/omakase"><b>おまかせ</b></a>で、テーマ3つ・陳情3つ・郵送でも審査される議会3つを自動で選び、封筒に入れる分を1つのPDFにまとめて保存できます。</p>
   </div>
 </section>
 <section id="shindan" class="section shindan">
   <div class="wrap">
-    <h2>陳情書でいいか、2つの質問で確かめる</h2>
+    <details class="shindan-fold">
+    <summary><h2>陳情書でいいか、2つの質問で確かめる</h2></summary>
     <p class="lead-sm">迷ったら陳情書で大丈夫です。ほかの届け方（要望書・請願・議員への手紙・国への提案）は、だれに動いてほしいかで選びます。どれがいちばん効く、というものではありません。</p>
     <fieldset class="shindan-q" data-q="who">
       <legend>Q1. だれに動いてほしいですか</legend>
@@ -115,6 +109,7 @@
       <button type="button" class="wz-card" data-a="no"><b>いない・わからない</b><span>紹介議員なしで出したい</span></button>
     </fieldset>
     <div id="shindanResult" class="shindan-result" aria-live="polite" hidden></div>
+    </details>
   </div>
 </section>
 <section id="compare" class="section alt">

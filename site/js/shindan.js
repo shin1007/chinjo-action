@@ -49,11 +49,11 @@
   });
 })();
 
-// 「比較表」へのリンク（/#compare）で来たときは、折りたたんだ表を開く
+// 「比較表」（/#compare）・「2つの質問」（/#shindan）へのリンクで来たときは、折りたたんだ中身を開く
 (() => {
   const open = () => {
-    if (location.hash !== '#compare') return;
-    const d = document.querySelector('#compare details');
+    if (location.hash !== '#compare' && location.hash !== '#shindan') return;
+    const d = document.querySelector(`${location.hash} details`);
     if (d) d.open = true;
   };
   open();

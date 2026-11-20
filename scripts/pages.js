@@ -12,7 +12,7 @@ const SITE = path.join(ROOT, 'site');
 const THEMES = [
   // ogAlt：リンクカードの画像（themes/<id>/og-image.png、scripts/og-images.py で作る）の大見出し
   // letter：かんたん作成のできあがりの画面に出す、議員への手紙（トップページにある）への案内
-  { id: 'kodomo', label: '子どもの権利', site: '子どもの権利を守る陳情アクション', ogAlt: '子どもが両方の親と関わり続けられる制度を、地方議会に。', letter: true },
+  { id: 'kodomo', label: '子どもの権利', site: '子どもの権利を守る陳情アクション', ogAlt: '子どもが両方の親と関わり続けられる制度を、地方議会に。' },
   { id: 'dansei', label: '男女平等', site: '男女平等を求める陳情アクション', ogAlt: '性別にかかわらず相談先と避難先がある制度を、地方議会に。' },
   { id: 'nihonjin', label: '日本人の権利', ogAlt: '税と社会保障のルールの見直しを、地方議会に。' },
   { id: 'shiho', label: '司法への参加', site: '司法に国民の声を届ける陳情アクション', ogAlt: '司法に国民の声が届く仕組みを、地方議会から国に。' },
@@ -42,8 +42,8 @@ function render(page, theme) {
     .replaceAll('{{site}}', theme.site ?? `${theme.label}を守る陳情アクション`)
     .replaceAll('{{label}}', theme.label)
     .replaceAll('{{ogAlt}}', theme.ogAlt)
-    .replace('{{letterLink}}', theme.letter ? `          <li><b>議員に手紙を出す：</b>陳情書に書けない事情は、公開されない手紙で伝えます。紹介議員のお願いにもなります。<a href="/${theme.id}#letter">議員への手紙をつくる</a></li>
-` : '');
+    .replace('{{letterLink}}', `          <li><b>議員に手紙を出す：</b>陳情書に書けない事情は、公開されない手紙で伝えます。紹介議員のお願いにもなります。<a href="/letter?theme=${theme.id}">議員への手紙をつくる</a></li>
+`);
 }
 
 // フッターの、ソースコードへの案内
