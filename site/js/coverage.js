@@ -58,7 +58,7 @@
         const known = ['c', 'y', 'p'].map((k, j) => `${LABEL[k]}：${k === 'p' ? (r[4] ? 'ある' : 'まだ') : STATE[r[2 + j]]}`).join('／');
         const a = el('a', '知らせる');
         const target = kind === 'c' ? `${nm === '@' ? pf : nm}議会` : kind === 'y' ? `${nm === '@' ? pf + '知事' : nm + '長'}あての要望` : `${nm === '@' ? pf : nm}のパブリックコメント`;
-        a.href = `/feedback?kind=council_procedure&target=${encodeURIComponent(name + '：' + target)}#send-h`;
+        a.href = `/feedback?kind=council_procedure&target=${encodeURIComponent(name + '：' + target)}#fb-form`;
         tr.append(el('td', name), el('td', fmt(r[1])), el('td', known, 'small'));
         const td = el('td'); td.append(a); tr.append(td);
         tb.append(tr);
