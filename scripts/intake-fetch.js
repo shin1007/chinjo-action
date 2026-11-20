@@ -86,4 +86,5 @@ async function main() {
   fs.writeFileSync(log, re.test(old) ? old.replace(re, section.trimEnd() + '\n') : old + section);
   console.error(`取れなかった：${failed.length} 件（${path.relative(ROOT, log)}）`);
 }
-main();
+if (require.main === module) main();
+module.exports = { get, strip };

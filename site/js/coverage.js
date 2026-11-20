@@ -14,6 +14,11 @@
     setupList(d.rows, d.prefs);
   }).catch(() => { $('cov-asof').textContent = '読み込めませんでした。時間をおいて開き直してください。'; });
 
+  fetch('/data/verify-summary.json').then((r) => r.json()).then((v) => {
+    const [y, m, dd] = v.checked_at.split('-').map(Number);
+    $('cov-verify').textContent = `出典の照合（${y}年${m}月${dd}日）：根拠にした公式サイトのページ ${v.total.toLocaleString('ja-JP')} 件のうち、${v.ok.toLocaleString('ja-JP')} 件で根拠の一文がいまも載っていることを機械で確かめました。一文が見つからなかったもの ${v.missing} 件・ページを開けなかったもの ${v.unreachable} 件は、調べ直しています。毎月と、議員の改選のあとに確かめ直します。`;
+  }).catch(() => {});
+
   function cell(x) {
     const td = el('td');
     const m = el('meter'); m.min = 0; m.max = 100; m.value = Number(pct(x));
