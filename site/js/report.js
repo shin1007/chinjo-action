@@ -4,12 +4,12 @@ window.Report = (() => {
   const URL = 'https://oquuysfeistgpgrpeswq.supabase.co';
   const KEY = 'sb_publishable_IAXFoFaXZ3bjk-49Z-pD9w_SQZEgzXE';
   // 制作中は止めておく（いたずらで件数が増えないように）。公開するときに false にする
-  const PAUSED = true;
+  const PAUSED = false;
   const enabled = !PAUSED && !!(URL && KEY);
   const headers = { apikey: KEY, 'Content-Type': 'application/json' };
   // 出した陳情の内容（「テーマ/項目id」）も送り、議会ごとに「同じ内容がもう出ているか」を出す。
   // supabase/schema.sql の reports.asks 列と council_asks ビューを反映してから true にする
-  const ASKS_LIVE = false;
+  const ASKS_LIVE = true;
   const ASK_RE = /^[a-z]+\/[a-z0-9_]+$/;
 
   // 「都道府県/議会名」→ 件数。読めなかったときは空のまま（報告の数が出ないだけ）
