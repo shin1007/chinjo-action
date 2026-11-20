@@ -727,6 +727,9 @@ summary { cursor: pointer; font-weight: 700; }
 }
 .item-search-group { border-bottom: 0 !important; margin-bottom: 12px; }
 .item-search-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px; margin: 8px 0 4px; padding: 4px 8px; background: var(--bg-alt); border-radius: 6px; }
+.item-theme-nav { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 16px 0 4px; padding: 6px 0; border-bottom: 2px solid var(--line) !important; scroll-margin-top: 70px; }
+.item-theme-nav b { font-size: 1.05em; }
+.item-theme-jump { min-width: 44px; min-height: 36px; }
 .item-search-group ul { list-style: none; padding: 0; margin: 0; }
 .item-search-group ul li { border-bottom: 1px solid var(--line); }
 
