@@ -41,7 +41,6 @@
     <nav class="primary-nav" aria-label="主要メニュー">
       <a href="/shiho/make" aria-current="page">つくる</a>
       <a href="/shiho/guide">出し方</a>
-      <a href="/shiho">説明</a>
     </nav>
   </div>
 </header>
@@ -49,10 +48,10 @@
 <main id="main">
 <section id="generator" class="section alt">
   <div class="wrap">
-    <p class="hero-crumb"><a href="/">陳情アクション</a> ＞ <a href="/shiho">司法への参加</a> ＞ <b>陳情書をつくる</b></p>
+    <p class="hero-crumb"><a href="/">陳情アクション</a> ＞ 司法への参加 ＞ <b>陳情書をつくる</b></p>
     <h1>陳情書をつくる</h1>
     <p class="lead-sm">選択肢を押していくだけで、議会に出せる陳情書ができます。</p>
-    <p class="hint-sm center"><a href="/shiho">このテーマについて（ほかの届け方・相談窓口）</a></p>
+    <p class="theme-intro"><b>司法に国民の声が届く仕組みを、地方議会から国に求める。</b> 家庭裁判所の手続の透明化、裁判官の選び方の公開、国民審査の見直し、裁判への国民の参加。</p>
 
     <div id="wizard" class="wizard">
       <div class="wz-progress" id="wzProgress" role="progressbar" aria-label="文書作成の進捗">
@@ -342,12 +341,25 @@
 
   </div>
 </section>
+<section id="theme-faq" class="section">
+  <div class="wrap">
+    <h2>このテーマのよくある質問</h2>
+    <details><summary>裁判官の独立を損なうのではありませんか？</summary><p>いいえ。個別の裁判の結論に口を出すことや、特定の裁判官を辞めさせることは求めていません。憲法第76条第3項の裁判官の独立を守ったうえで、判断の過程を国民が検証できるようにし、裁判官の選び方や国民審査を通じて、国民が司法に意思を示せる場を増やすことを求めています。</p></details>
+    <details><summary>自分の裁判のことを陳情に書いてもいいですか？</summary><p>書かないでください。係争中・調停中の事件に関わる陳情は、司法権の独立を侵すおそれがあるとして、審査の対象から外す議会が多くあります。陳情書は制度の話だけにして、詳しい事情は議員への手紙や面談で伝えましょう（<a href="/shiho/guide#personal">詳しく</a>）。</p></details>
+  </div>
+</section>
+<section id="shop" class="section alt">
+  <div class="wrap">
+    <h2>関連する本・グッズ</h2>
+    <div data-shop></div>
+  </div>
+</section>
 </main>
 
 <footer class="site-footer">
   <div class="wrap">
     <p>司法に国民の声を届ける陳情アクション</p>
-    <p class="small"><a href="/shiho">トップページ</a>　｜　<a href="/shiho/guide">陳情の出し方ガイド</a></p>
+    <p class="small"><a href="/">トップページ</a>　｜　<a href="/shiho/guide">陳情の出し方ガイド</a></p>
     <p class="small credit">市区町村の一覧：<a href="https://github.com/geolonia/japanese-addresses" target="_blank" rel="noopener">Geolonia 住所データ</a>（<a href="https://creativecommons.org/licenses/by/4.0/deed.ja" target="_blank" rel="noopener">CC BY 4.0</a>）を加工して作成。最寄り駅：<a href="https://nlftp.mlit.go.jp/ksj/" target="_blank" rel="noopener">国土数値情報</a>（鉄道データ）（国土交通省）を加工して作成。位置：<a href="https://maps.gsi.go.jp/" target="_blank" rel="noopener">地理院地図</a>の住所検索</p></div>
   <div class="wrap"><p class="small"><a href="https://github.com/shin1007/chinjo-action" target="_blank" rel="noopener">ソースコード（GitHub）</a>　このサイトの改善の提案（Issue・プルリクエスト）を歓迎します</p></div>
 </footer>
@@ -376,5 +388,7 @@
 <script defer src="/js/wizard.js"></script>
 <script defer src="/js/ai-launch.js"></script>
 <script defer src="/js/send-figs.js"></script>
+<script defer src="/themes/shiho/shop.js"></script>
+<script defer src="/js/shop.js"></script>
 </body>
 </html>

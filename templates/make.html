@@ -35,11 +35,10 @@
 <main>
 <section id="generator" class="section alt">
   <div class="wrap">
-    <p class="hero-crumb"><a href="/">陳情アクション</a> ＞ <a href="/{{id}}">{{label}}</a> ＞ <b>陳情書をつくる</b></p>
+    <p class="hero-crumb"><a href="/">陳情アクション</a> ＞ {{label}} ＞ <b>陳情書をつくる</b></p>
     <h1>陳情書をつくる</h1>
     <p class="lead-sm">選択肢を押していくだけで、議会に出せる陳情書ができます。</p>
-    <p class="hint-sm center"><a href="/{{id}}">このテーマについて（ほかの届け方・相談窓口）</a></p>
-
+{{themeTop}}
     <div id="wizard" class="wizard">
       <div class="wz-progress" id="wzProgress" role="progressbar" aria-label="文書作成の進捗">
         <div class="wz-bar" id="wzBar"></div>
@@ -327,12 +326,12 @@
 
   </div>
 </section>
-</main>
+{{themeBottom}}</main>
 
 <footer class="site-footer">
   <div class="wrap">
     <p>{{site}}</p>
-    <p class="small"><a href="/{{id}}">トップページ</a>　｜　<a href="/{{id}}/guide">陳情の出し方ガイド</a></p>
+    <p class="small"><a href="/">トップページ</a>　｜　<a href="/{{id}}/guide">陳情の出し方ガイド</a></p>
     <p class="small credit">市区町村の一覧：<a href="https://github.com/geolonia/japanese-addresses" target="_blank" rel="noopener">Geolonia 住所データ</a>（<a href="https://creativecommons.org/licenses/by/4.0/deed.ja" target="_blank" rel="noopener">CC BY 4.0</a>）を加工して作成。最寄り駅：<a href="https://nlftp.mlit.go.jp/ksj/" target="_blank" rel="noopener">国土数値情報</a>（鉄道データ）（国土交通省）を加工して作成。位置：<a href="https://maps.gsi.go.jp/" target="_blank" rel="noopener">地理院地図</a>の住所検索</p></div>
   <div class="wrap"><p class="small"><a href="https://github.com/shin1007/chinjo-action" target="_blank" rel="noopener">ソースコード（GitHub）</a>　このサイトの改善の提案（Issue・プルリクエスト）を歓迎します</p></div>
 </footer>
@@ -361,5 +360,7 @@
 <script defer src="/js/wizard.js"></script>
 <script defer src="/js/ai-launch.js"></script>
 <script defer src="/js/send-figs.js"></script>
+<script defer src="/themes/{{id}}/shop.js"></script>
+<script defer src="/js/shop.js"></script>
 </body>
 </html>

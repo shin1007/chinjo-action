@@ -41,7 +41,6 @@
     <nav class="primary-nav" aria-label="主要メニュー">
       <a href="/sonota/make" aria-current="page">つくる</a>
       <a href="/sonota/guide">出し方</a>
-      <a href="/sonota">説明</a>
     </nav>
   </div>
 </header>
@@ -49,10 +48,18 @@
 <main id="main">
 <section id="generator" class="section alt">
   <div class="wrap">
-    <p class="hero-crumb"><a href="/">陳情アクション</a> ＞ <a href="/sonota">その他の陳情</a> ＞ <b>陳情書をつくる</b></p>
+    <p class="hero-crumb"><a href="/">陳情アクション</a> ＞ その他の陳情 ＞ <b>陳情書をつくる</b></p>
     <h1>陳情書をつくる</h1>
     <p class="lead-sm">選択肢を押していくだけで、議会に出せる陳情書ができます。</p>
-    <p class="hint-sm center"><a href="/sonota">このテーマについて（ほかの届け方・相談窓口）</a></p>
+    <p class="theme-intro"><b>税の公平と、公立の学校を守る施策を、地方議会に求める。</b> 学校法人・宗教法人への課税の見直し、私立高校無償化の撤廃、NPO法人の会計の厳格化。</p>
+    <details id="adopted" class="theme-adopted">
+      <summary>陳情が採択された例</summary>
+      <p class="lead-sm">市民が出した1枚の陳情が、議会で認められた例です。</p>
+      <ul class="adopted-list">
+        <li><b>秋田市議会（令和5年6月定例会）</b>：「豊かな学びの実現、教職員定数改善及び義務教育費国庫負担割合引上げに関する意見書の提出について」（陳情3）が、教育産業委員会で審査され、<b>採択</b>（賛成多数）されました（<a href="https://www.city.akita.lg.jp/shigikai/nittei/1036226/1038826/1038830.html" target="_blank" rel="noopener">秋田市議会の請願・陳情一覧表</a>）。</li>
+      </ul>
+      <p class="hint-sm">採択は、議会がその内容を認めたという意味で、そのとおりに国や自治体の施策が決まるとは限りません。</p>
+    </details>
 
     <div id="wizard" class="wizard">
       <div class="wz-progress" id="wzProgress" role="progressbar" aria-label="文書作成の進捗">
@@ -342,12 +349,25 @@
 
   </div>
 </section>
+<section id="theme-faq" class="section">
+  <div class="wrap">
+    <h2>このテーマのよくある質問</h2>
+    <details><summary>信教の自由や私立学校の自由を損なうのではありませんか？</summary><p>いいえ。宗教の教えや活動の中身、私立学校の教育の中身には立ち入りません。収益を生む事業や本来の用に供しない資産への課税と、公費による支援の配分が公平かどうかという、税と財政の仕組みを問うものです。私立高校で学ぶ自由も否定しません。</p></details>
+    <details><summary>私立高校の支援をなくすと、家計が苦しい家庭が困りませんか？</summary><p>陳情は、公立高校の授業料相当額（年11万8800円）までの支援は残し、それを超える私立への上乗せを撤廃して、その財源を地域の公立高校の維持に充てることを求めています。家計の苦しい家庭への給付の在り方は、議員と話すときに、地域の事情に合わせて相談するとよいでしょう。</p></details>
+  </div>
+</section>
+<section id="shop" class="section alt">
+  <div class="wrap">
+    <h2>関連する本・グッズ</h2>
+    <div data-shop></div>
+  </div>
+</section>
 </main>
 
 <footer class="site-footer">
   <div class="wrap">
     <p>税の公平と教育を守る陳情アクション</p>
-    <p class="small"><a href="/sonota">トップページ</a>　｜　<a href="/sonota/guide">陳情の出し方ガイド</a></p>
+    <p class="small"><a href="/">トップページ</a>　｜　<a href="/sonota/guide">陳情の出し方ガイド</a></p>
     <p class="small credit">市区町村の一覧：<a href="https://github.com/geolonia/japanese-addresses" target="_blank" rel="noopener">Geolonia 住所データ</a>（<a href="https://creativecommons.org/licenses/by/4.0/deed.ja" target="_blank" rel="noopener">CC BY 4.0</a>）を加工して作成。最寄り駅：<a href="https://nlftp.mlit.go.jp/ksj/" target="_blank" rel="noopener">国土数値情報</a>（鉄道データ）（国土交通省）を加工して作成。位置：<a href="https://maps.gsi.go.jp/" target="_blank" rel="noopener">地理院地図</a>の住所検索</p></div>
   <div class="wrap"><p class="small"><a href="https://github.com/shin1007/chinjo-action" target="_blank" rel="noopener">ソースコード（GitHub）</a>　このサイトの改善の提案（Issue・プルリクエスト）を歓迎します</p></div>
 </footer>
@@ -376,5 +396,7 @@
 <script defer src="/js/wizard.js"></script>
 <script defer src="/js/ai-launch.js"></script>
 <script defer src="/js/send-figs.js"></script>
+<script defer src="/themes/sonota/shop.js"></script>
+<script defer src="/js/shop.js"></script>
 </body>
 </html>

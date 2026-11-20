@@ -843,3 +843,6 @@ summary { cursor: pointer; font-weight: 700; }
 .consult { margin-top: 12px; }
 .consult > summary { cursor: pointer; font-size: .92rem; }
 .consult ul { margin: 8px 0 0 1.2em; } .consult li { margin-bottom: 6px; }
+.theme-intro { margin: 8px auto 12px; max-width: 46em; font-size: .95rem; }
+.theme-adopted { margin: 0 auto 16px; max-width: 46em; }
+.theme-adopted > summary { cursor: pointer; font-weight: 600; color: var(--main-dark); }

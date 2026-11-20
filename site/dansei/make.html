@@ -41,7 +41,6 @@
     <nav class="primary-nav" aria-label="主要メニュー">
       <a href="/dansei/make" aria-current="page">つくる</a>
       <a href="/dansei/guide">出し方</a>
-      <a href="/dansei">説明</a>
     </nav>
   </div>
 </header>
@@ -49,10 +48,10 @@
 <main id="main">
 <section id="generator" class="section alt">
   <div class="wrap">
-    <p class="hero-crumb"><a href="/">陳情アクション</a> ＞ <a href="/dansei">男女平等</a> ＞ <b>陳情書をつくる</b></p>
+    <p class="hero-crumb"><a href="/">陳情アクション</a> ＞ 男女平等 ＞ <b>陳情書をつくる</b></p>
     <h1>陳情書をつくる</h1>
     <p class="lead-sm">選択肢を押していくだけで、議会に出せる陳情書ができます。</p>
-    <p class="hint-sm center"><a href="/dansei">このテーマについて（ほかの届け方・相談窓口）</a></p>
+    <p class="theme-intro"><b>性別にかかわらず相談先と避難先がある制度を、地方議会に求める。</b> 性別で対象を限った施策の見直し、男性も使える相談窓口、男性のDV被害者の避難先、買う側だけを罰する売買春の規制への反対。</p>
 
     <div id="wizard" class="wizard">
       <div class="wz-progress" id="wzProgress" role="progressbar" aria-label="文書作成の進捗">
@@ -342,12 +341,24 @@
 
   </div>
 </section>
+<section id="theme-faq" class="section">
+  <div class="wrap">
+    <h2>このテーマのよくある質問</h2>
+    <details><summary>女性への支援に反対しているのですか？</summary><p>いいえ。女性への支援を減らすことは求めていません。困りごとの中身が性別で変わらないのに、男性であるために支援を受けられない人がいる、という制度の偏りを直すことを求めています。</p></details>
+  </div>
+</section>
+<section id="shop" class="section alt">
+  <div class="wrap">
+    <h2>関連する本・グッズ</h2>
+    <div data-shop></div>
+  </div>
+</section>
 </main>
 
 <footer class="site-footer">
   <div class="wrap">
     <p>男女平等を求める陳情アクション</p>
-    <p class="small"><a href="/dansei">トップページ</a>　｜　<a href="/dansei/guide">陳情の出し方ガイド</a></p>
+    <p class="small"><a href="/">トップページ</a>　｜　<a href="/dansei/guide">陳情の出し方ガイド</a></p>
     <p class="small credit">市区町村の一覧：<a href="https://github.com/geolonia/japanese-addresses" target="_blank" rel="noopener">Geolonia 住所データ</a>（<a href="https://creativecommons.org/licenses/by/4.0/deed.ja" target="_blank" rel="noopener">CC BY 4.0</a>）を加工して作成。最寄り駅：<a href="https://nlftp.mlit.go.jp/ksj/" target="_blank" rel="noopener">国土数値情報</a>（鉄道データ）（国土交通省）を加工して作成。位置：<a href="https://maps.gsi.go.jp/" target="_blank" rel="noopener">地理院地図</a>の住所検索</p></div>
   <div class="wrap"><p class="small"><a href="https://github.com/shin1007/chinjo-action" target="_blank" rel="noopener">ソースコード（GitHub）</a>　このサイトの改善の提案（Issue・プルリクエスト）を歓迎します</p></div>
 </footer>
@@ -376,5 +387,7 @@
 <script defer src="/js/wizard.js"></script>
 <script defer src="/js/ai-launch.js"></script>
 <script defer src="/js/send-figs.js"></script>
+<script defer src="/themes/dansei/shop.js"></script>
+<script defer src="/js/shop.js"></script>
 </body>
 </html>
