@@ -231,6 +231,11 @@ summary { cursor: pointer; font-weight: 700; }
 .wz-mk.jisan, .wz-mk.none { color: var(--muted); }
 .wz-n { display: block; font-size: 0.72rem; font-weight: 400; color: var(--muted); }
 .ask-scope { display: inline-block; margin-left: 6px; padding: 0 6px; border: 1px solid var(--line); border-radius: 4px; font-size: 0.72rem; font-weight: 400; color: var(--muted); vertical-align: 1px; }
+.ask-tags { display: block; margin-top: 4px; }
+.ask-tag { display: inline-block; margin: 0 4px 2px 0; padding: 0 6px; border-radius: 4px; font-size: 0.72rem; font-weight: 400; }
+.ask-tag-research { background: #e8f0fb; color: #1d4f91; }
+.ask-tag-precedent { background: #e9f6ec; color: #1f6b35; }
+.ask-tag-lowcost { background: #fdf3e1; color: #7a4b00; }
 .wz-report { margin-top: 6px; }
 .wz-chip.on, .wz-card.on { border-color: var(--main); background: var(--accent-soft); font-weight: 700; box-shadow: 0 0 0 1px var(--main); }
 .wz-chip.on::before, .wz-card.on b::before { content: "✓ "; color: var(--main-dark); }

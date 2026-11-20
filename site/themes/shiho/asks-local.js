@@ -4,7 +4,7 @@
 // 文中の {宛先} は、提出先の自治体名（例：横浜市）に置き換わります。
 // 裁判所は国の機関なので、自治体には、住民が司法を知り、意見を示せるようにする取り組みを求めます。
 window.ASKS = (window.ASKS || []).concat([
-  { id: 'l_review_info', scope: 'local', route: 'yobo', recommended: true, defaultOn: true, label: '国民審査の判断材料を住民に届ける',
+  { id: 'l_review_info', scope: 'local', route: 'yobo', defaultOn: true, label: '国民審査の判断材料を住民に届ける',
     refs: [{ t: '総務省「国民審査 制度のポイントを知ろう！」', url: 'https://www.soumu.go.jp/senkyo/kokuminshinsa/seido_point.html' },
       { t: '最高裁判所裁判官国民審査法 第15条', url: 'https://laws.e-gov.go.jp/law/322AC1000000136' },
       { t: '皆川健一「最高裁判所裁判官国民審査法の改正－在外邦人にも国民審査が可能に－」『立法と調査』第452号（参議院、2022年12月）', url: 'https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2022pdf/20221216017-1.pdf', note: '国民審査の制度の概要と国会審議の論点', secondary: true }],

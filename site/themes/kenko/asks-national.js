@@ -3,7 +3,7 @@
 // 税率・数値は、法令の原文と官公庁・国際機関の公表資料で確かめたものだけを書く（確かめた資料は refs に）。
 // たばこ・お酒・砂糖の4件は「その他の陳情」から移したもの。id は変えていない。
 window.ASKS = (window.ASKS || []).concat([
-  { id: 'n_tobacco', scope: 'national', category: 'たばこ・お酒・砂糖', recommended: true, defaultOn: true, label: 'たばこ税の引上げ（WHOの勧める水準へ）',
+  { id: 'n_tobacco', scope: 'national', category: 'たばこ・お酒・砂糖', defaultOn: true, label: 'たばこ税の引上げ（WHOの勧める水準へ）',
     refs: [{ t: 'WHO「Tobacco」（ファクトシート）', url: 'https://www.who.int/news-room/fact-sheets/detail/tobacco', note: '小売価格の少なくとも75％を税とする水準を勧めている' },
       { t: '財務省「たばこ税等に関する資料」', url: 'https://www.mof.go.jp/tax_policy/summary/consumption/d09.htm', note: '令和9年4月から3段階の引上げ、税収はおおむね2兆円' },
       { t: 'IARC Handbooks of Cancer Prevention Vol.14「Effectiveness of Tax and Price Policies for Tobacco Control」（2011年、WHO国際がん研究機関）', url: 'https://publications.iarc.who.int/384', note: '25人の専門家による、たばこの税・価格の政策の効果の評価', secondary: true }],
@@ -37,7 +37,7 @@ window.ASKS = (window.ASKS || []).concat([
     title: '国民の健康を守るための砂糖の多い食品と飲料への課税の導入',
     reason: '世界保健機関（WHO）は、遊離糖類（食品や飲料に加えられた砂糖など）の摂取を、1日の総エネルギー摂取量の10％未満に抑え、さらに5％以下に抑えるとより健康によいとしています（WHO「Healthy diet」）。砂糖の多い飲料は、肥満や2型糖尿病、むし歯の原因の一つとされ、WHOは2016年、砂糖の多い飲料の小売価格を20％以上上げる課税を行えば、消費がそれに比例して減るとして、各国に課税を呼びかけました。イギリスでは、2018年4月6日から、清涼飲料に含まれる糖分の量に応じて、100mlあたり5g以上8g未満と8g以上の2段階で、製造者や輸入者に課税する清涼飲料業界税（Soft Drinks Industry Levy）を導入しています（英国歳入関税庁）。糖分の多さに応じて税が重くなる仕組みは、メーカーが糖分を減らした商品を作る後押しにもなります。ただし、遊離糖類は飲料だけでなく、菓子や加工食品などからも多くとられており、飲料だけに課税すると、ほかの甘い食品に消費が移るおそれがあります。WHOは2022年、健康によくない食品と飲料への課税と、健康によい食品と飲料への補助を各国に呼びかけています（WHO「Fiscal policies to promote healthy diets」）。日本には、砂糖の多い食品や飲料に特に課税する仕組みはありません。子供の肥満や生活習慣病を防ぎ、医療費の増加を抑えるため、飲料に限らず食品全体を対象に、糖分の量に応じた課税の導入を検討し、その税収を子供の健康づくりなどに充てることが求められます。',
     text: '国民、特に子供の肥満と生活習慣病を防ぐため、諸外国の例も踏まえ、清涼飲料に限らず、菓子や加工食品を含む食品全体を対象に、砂糖などの糖分の量に応じて課税できる仕組みの導入を検討し、その税収を健康づくりの施策に充てること。' },
-  { id: 'n_pachinko', scope: 'national', category: 'ギャンブル依存', recommended: true, label: 'パチンコ店の依存症対策の強化（本人・家族の申告による入店制限の義務付けなど）',
+  { id: 'n_pachinko', scope: 'national', category: 'ギャンブル依存', label: 'パチンコ店の依存症対策の強化（本人・家族の申告による入店制限の義務付けなど）',
     refs: [{ t: '久里浜医療センター「令和5年度 ギャンブル障害およびギャンブル関連問題の実態調査 報告書概要」（厚生労働省の依存症に関する調査研究事業）', url: 'https://ncasa-japan.jp/pdf/document97.pdf', note: '(2)PGSI8点以上の割合と最もお金を使ったギャンブル、(7)対策の認知度' }, { t: 'ギャンブル等依存症対策基本法 第2条・第6条・第13条〜第15条・第17条', url: 'https://laws.e-gov.go.jp/law/430AC1000000074' },
       { t: '藤原夏人「韓国のギャンブル依存症対策」『外国の立法』第269号（国立国会図書館、2016年9月）', url: 'https://dl.ndl.go.jp/view/download/digidepo_10193088_po_02690004.pdf?contentNo=1', note: 'Ⅲ3・表4：江原ランド（カジノ）の本人・家族の要請による入場制限と、解除の際の義務カウンセリング', secondary: true }],
     title: 'ぱちんこ屋におけるギャンブル等依存症対策の強化',
