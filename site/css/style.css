@@ -241,6 +241,8 @@ summary { cursor: pointer; font-weight: 700; }
 .ask-tag-precedent { background: #e9f6ec; color: #1f6b35; }
 .ask-tag-lowcost { background: #fdf3e1; color: #7a4b00; }
 .wz-report { margin-top: 6px; }
+.wz-report-btns { margin: 6px 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.wz-same { background: #fdf3e1; padding: 4px 6px; border-radius: 4px; }
 .wz-chip.on, .wz-card.on { border-color: var(--main); background: var(--accent-soft); font-weight: 700; box-shadow: 0 0 0 1px var(--main); }
 .wz-chip.on::before, .wz-card.on b::before { content: "✓ "; color: var(--main-dark); }
 .wz-wide { grid-column: 1 / -1; }

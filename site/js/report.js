@@ -7,6 +7,10 @@ window.Report = (() => {
   const PAUSED = true;
   const enabled = !PAUSED && !!(URL && KEY);
   const headers = { apikey: KEY, 'Content-Type': 'application/json' };
+  // 出した陳情の内容（「テーマ/項目id」）も送り、議会ごとに「同じ内容がもう出ているか」を出す。
+  // supabase/schema.sql の reports.asks 列と council_asks ビューを反映してから true にする
+  const ASKS_LIVE = false;
+  const ASK_RE = /^[a-z]+\/[a-z0-9_]+$/;
 
   // 「都道府県/議会名」→ 件数。読めなかったときは空のまま（報告の数が出ないだけ）
   let counts = new Map();
@@ -21,13 +25,22 @@ window.Report = (() => {
   const done = () => { try { return JSON.parse(localStorage.getItem(DONE_KEY)) || []; } catch { return []; } };
   const reported = (id) => done().includes(id);
 
-  async function report(id, items) {
+  // 「都道府県/議会名」→ [{ ask: 'テーマ/項目id', n, last }]
+  const asksMap = new Map();
+  const asksLoaded = !(enabled && ASKS_LIVE) ? Promise.resolve(asksMap)
+    : fetch(`${URL}/rest/v1/council_asks?select=pref,council,ask,n,last`, { headers })
+      .then((r) => (r.ok ? r.json() : []))
+      .then((rows) => { rows.forEach((r) => { const k = `${r.pref}/${r.council}`; asksMap.set(k, [...(asksMap.get(k) || []), r]); }); return asksMap; })
+      .catch(() => asksMap);
+  const asked = (id) => asksMap.get(id) || [];
+
+  async function report(id, items, asks = []) {
     if (!enabled) return false;
     if (reported(id)) return true;
     const i = id.indexOf('/');
     const r = await fetch(`${URL}/rest/v1/reports`, {
       method: 'POST', headers: { ...headers, Prefer: 'return=minimal' },
-      body: JSON.stringify({ pref: id.slice(0, i), council: id.slice(i + 1), ...(Number.isInteger(items) && items >= 1 && items <= 50 ? { items } : {}) }),
+      body: JSON.stringify({ pref: id.slice(0, i), council: id.slice(i + 1), ...(Number.isInteger(items) && items >= 1 && items <= 50 ? { items } : {}), ...(ASKS_LIVE && asks.length ? { asks: asks.filter((a) => ASK_RE.test(a)).slice(0, 10) } : {}) }),
     }).catch(() => null);
     if (!r || !r.ok) return false;
     counts.set(id, (counts.get(id) || 0) + 1);
@@ -48,5 +61,5 @@ window.Report = (() => {
     return !!(r && r.ok);
   }
 
-  return { enabled, tipsEnabled, tip, loaded, count: (id) => counts.get(id) || 0, prefCount: (pref) => [...counts].filter(([k]) => k.startsWith(`${pref}/`)).length, reported, report };
+  return { enabled, asksLive: enabled && ASKS_LIVE, asksLoaded, asked, tipsEnabled, tip, loaded, count: (id) => counts.get(id) || 0, prefCount: (pref) => [...counts].filter(([k]) => k.startsWith(`${pref}/`)).length, reported, report };
 })();

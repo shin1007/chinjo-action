@@ -887,7 +887,26 @@
         ${ask ? '<span class="hint-sm">電話では「陳情を出したいので、出し方と次の締切、郵送でも審査されるか教えてください」と聞けば足ります。平日の昼間につながります。</span>' : ''}`;
   }
 
+  // 提出の記録：選んだ内容（「テーマ/項目id」）と、その議会に同じ内容の記録があるか
+  const askIds = () => [...new Set(state.items.flatMap(keysOf))].map((k) => `${window.THEME.id}/${k}`);
+  const sameAsks = (c) => {
+    const mine = new Set(askIds());
+    return window.Report.asked(c).filter((r) => mine.has(r.ask));
+  };
+  const sameHtml = (c) => {
+    const same = sameAsks(c);
+    if (!same.length) return '';
+    const names = same.map((r) => `「${esc((window.Petition.ITEMS[r.ask.split('/')[1]] || {}).label || r.ask)}」（${r.n}件、最後は${esc(String(r.last || '').slice(0, 7))}）`).join('、');
+    return `<span class="wz-row wz-same"><b>同じ内容</b>この議会には、${names}の提出の記録があります。同じ趣旨の陳情は、まとめて1件として扱われたり、すでに結論が出ていると審査されなかったりすることがあります。出す前に、議会事務局に扱いを確かめてください。</span>`;
+  };
+  const reportBtn = (c) => `<button type="button" class="btn btn-small wz-report" data-report="${esc(c)}" ${window.Report.reported(c) ? 'disabled' : ''}>${window.Report.reported(c) ? `✓ ${esc(label(c))}への提出を記録しました` : `${esc(label(c))}に出した（記録する）`}</button>`;
+  function renderReportBtns() {
+    if (!$('wzNowReportBtns')) return;
+    $('wzNowReportBtns').innerHTML = window.Report.enabled ? real().map(reportBtn).join(' ') : '<span class="wz-notfound">準備中です。記録を受け付けられるようになったら、ここにボタンが出ます。</span>';
+  }
+
   function renderOffices() {
+    renderReportBtns();
     if (state.kind === 'request') {
       $('wzOffices').innerHTML = real().map((c) => {
         const [pref, key] = officeKeys[c] || [];
@@ -934,6 +953,7 @@
         ${badge ? '' : `<span class="wz-check-how">確認方法</span><ul class="wz-check-list">${check}</ul>`}
         ${accessHtml(pref, key) && `<span class="wz-row"><b>持参</b></span>${accessHtml(pref, key)}`}
         ${notes(info)}
+        ${sameHtml(c)}
         ${badge ? telHtml(pref, key, !page) : ''}
         ${page ? '' : '<span>陳情の出し方のページが見つかりませんでした。小さな議会では案内ページを置いていないことも多いので、議会事務局に電話で出し方と締切を聞くのが確実です。</span>'}
         <span class="wz-links">${links}</span>
@@ -996,14 +1016,19 @@
   });
 
   // 提出の報告：議会ごとの件数を集めて、まだ誰も出していない議会に人を向ける
-  $('wzOffices').addEventListener('click', async (e) => {
+  const onReport = async (e) => {
     const id = e.target.dataset.report;
     if (!id) return;
     e.target.disabled = true;
-    const ok = await window.Report.report(id, state.items.length);
+    const ok = await window.Report.report(id, state.items.length, askIds());
     e.target.textContent = ok ? '✓ 提出を報告しました。ありがとうございます' : '送れませんでした。もう一度押してください';
     e.target.disabled = ok;
-  });
+    if (ok) { renderReportBtns(); }
+  };
+  $('wzOffices').addEventListener('click', onReport);
+  $('wzNowReportBtns').addEventListener('click', onReport);
+  // 同じ内容の記録が届いたら、議会の案内に出し直す
+  window.Report.asksLoaded.then(() => { if (window.Report.asksLive) renderOffices(); });
   // 件数が届いたら、議会・都道府県の選択肢に反映する
   $('wzCountHint').hidden = !window.Report.enabled;
   window.Report.loaded.then(() => {
@@ -1192,7 +1217,7 @@
     const request = state.kind === 'request';
     $('wzNowChairItem').hidden = request;
     $('wzNowAskH').textContent = request ? '出し方のページを開く' : '出し方を決める';
-    $('wzNowReport').hidden = request || !window.Report.enabled;
+    $('wzNowReport').hidden = request;
     $('wzNowHow').innerHTML = request
       ? '<b>出す</b>上で開いたページに書かれた方法（窓口・郵送・メール・フォームなど）で出します。宛名の知事・市区町村長と「様」のあいだは、氏名を書き入れても空けたままでも構いません。メールやフォームで出すときは、「文面をすべてコピー」した文を貼り付けます。'
       : '<b>出す</b>持参・郵送・電子申請。議会ごとの出し方は、下の「くわしい手順」の②にあります。締切を過ぎても、次の定例会で扱われます。';
