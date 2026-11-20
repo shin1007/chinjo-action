@@ -218,7 +218,7 @@
       access: '',
       deadline: '',
       sessions: ((((window.SESSIONS || {})[c.pref] || {})[c.key]) || [])[0] || '',
-      stamp: p.yen ? `${pagesN}枚・約${p.g}g → ${p.yen}円${p.safe ? `（心配なら${p.safe}円）` : ''}` : `${pagesN}枚・約${p.g}g → 郵便局の窓口で出す`,
+      stamp: p.yen ? `${pagesN}枚・約${p.g}g → ${p.safe ? `${p.safe}円（${p.yen}円の境目に近いので1つ上の料金）` : `${p.yen}円`}` : `${pagesN}枚・約${p.g}g → 郵便局の窓口で出す`,
     };
   }
 
