@@ -19,11 +19,13 @@
       [pref, '都道府県議会'],
       ...names.map((name) => [pref, name]),
     ]);
+  // 「東京都都道府県議会」ではなく「東京都議会」と見せる（値は pref|都道府県議会 のまま）
+  const councilLabel = (pref, name) => (name === '都道府県議会' ? `${pref}議会` : `${pref}${name}`);
   let populations = new Map();
   const renderCouncils = () => {
     const query = $('councilSearch').value.trim();
     const councils = allCouncils
-      .filter(([pref, name]) => !query || `${pref}${name}`.includes(query))
+      .filter(([pref, name]) => !query || `${pref}${name}`.includes(query) || councilLabel(pref, name).includes(query))
       .sort(([prefA, nameA], [prefB, nameB]) => {
         const populationA = populations.get(`${prefA}|${nameA}`);
         const populationB = populations.get(`${prefB}|${nameB}`);
@@ -33,7 +35,7 @@
         return populationB - populationA;
       });
     $('council').innerHTML = `<option value="">選んでください</option>${councils.map(([pref, name]) =>
-      `<option value="${esc(`${pref}|${name}`)}">${esc(`${pref}${name}`)}${populations.has(`${pref}|${name}`) ? `（人口 約${populations.get(`${pref}|${name}`).toLocaleString()}人）` : '（人口データ未登録）'}</option>`,
+      `<option value="${esc(`${pref}|${name}`)}">${esc(councilLabel(pref, name))}${populations.has(`${pref}|${name}`) ? `（人口 約${populations.get(`${pref}|${name}`).toLocaleString()}人）` : '（人口データ未登録）'}</option>`,
     ).join('')}`;
   };
   renderCouncils();
