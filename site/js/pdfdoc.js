@@ -402,12 +402,13 @@ window.PdfDoc = (() => {
   // ---------- 宛名ラベルの用紙と中身 ----------
   // よく売られている A4 のラベル用紙。寸法は mm（top・left は用紙の端から最初の面まで）
   // 角2封筒（240×332mm・A4を折らずに入れる）にはどれでも貼れる。長4封筒（90×205mm）は幅 90mm 未満のものだけ
+  // ふつうはコンビニ印刷を前提に、普通紙（切って貼る）を先に並べる。ラベル用紙は持っている人向けのオプション
   const SHEETS = {
-    a4_8: { label: 'A4 8面（105×74.2mm・余白なし）', cols: 2, rows: 4, w: 105, h: 74.25, top: 0, left: 0, envs: ['kaku2'] },
-    a4_10: { label: 'A4 10面（86.4×50.8mm）', cols: 2, rows: 5, w: 86.4, h: 50.8, top: 21.5, left: 18.6, envs: ['kaku2', 'naga4'] },
-    a4_12: { label: 'A4 12面（86.4×42.3mm）', cols: 2, rows: 6, w: 86.4, h: 42.3, top: 21.5, left: 18.6, envs: ['kaku2', 'naga4'] },
-    plain: { label: '普通紙（切って貼る・1枚に8枚）', cols: 2, rows: 4, w: 105, h: 74.25, top: 0, left: 0, cut: true, envs: ['kaku2'] },
-    plain_n: { label: '普通紙（切って貼る・1枚に10枚）', cols: 2, rows: 5, w: 80, h: 55, top: 11, left: 25, cut: true, envs: ['naga4'] },
+    plain: { label: '普通紙（コンビニ印刷など・切ってのりで貼る・1枚に8枚）', cols: 2, rows: 4, w: 105, h: 74.25, top: 0, left: 0, cut: true, envs: ['kaku2'] },
+    plain_n: { label: '普通紙（コンビニ印刷など・切ってのりで貼る・1枚に10枚）', cols: 2, rows: 5, w: 80, h: 55, top: 11, left: 25, cut: true, envs: ['naga4'] },
+    a4_8: { label: 'ラベル用紙 A4 8面（105×74.2mm・余白なし）', cols: 2, rows: 4, w: 105, h: 74.25, top: 0, left: 0, envs: ['kaku2'] },
+    a4_10: { label: 'ラベル用紙 A4 10面（86.4×50.8mm）', cols: 2, rows: 5, w: 86.4, h: 50.8, top: 21.5, left: 18.6, envs: ['kaku2', 'naga4'] },
+    a4_12: { label: 'ラベル用紙 A4 12面（86.4×42.3mm）', cols: 2, rows: 6, w: 86.4, h: 42.3, top: 21.5, left: 18.6, envs: ['kaku2', 'naga4'] },
   };
 
   // 宛先（{ council：議会名, zip, address }）と差出人（Common.sender の形）から、ラベルの中身を作る
