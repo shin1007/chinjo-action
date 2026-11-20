@@ -126,21 +126,26 @@
   ].map((x) => { const el = document.createElement('details'); el.className = `wz-mailok ${x[1]}`; $('wzPrefs').before(el); return [el, ...x]; });
   const ids0 = (groups) => groups.flatMap(([, ids]) => ids);
   const allOn = (ids) => ids.every((id) => state.councils.includes(id));
+  let zipPrefs = null;
   function renderMailAll() {
     // 要望書は議会に出さないので、郵送の扱いの一覧も都道府県のボタンの印も出さない
     document.querySelectorAll('[data-pref] .wz-mk').forEach((m) => { m.hidden = state.kind === 'request'; });
     if (state.kind === 'request') { MAIL_BOXES.forEach(([box]) => { box.hidden = true; }); return; }
     MAIL_BOXES.forEach(([box, list, c, badge, title, note]) => {
       box.hidden = false;
-      const groups = window.PREFS.map((p) => [p, list(p)]).filter(([, ids]) => ids.length);
-      const n = groups.reduce((a, [, ids]) => a + ids.length, 0);
+      const allGroups = window.PREFS.map((p) => [p, list(p)]).filter(([, ids]) => ids.length);
       document.querySelectorAll('[data-pref]').forEach((b) => {
-        const k = (groups.find(([p]) => p === b.dataset.pref) || [])[1];
+        const k = (allGroups.find(([p]) => p === b.dataset.pref) || [])[1];
         if (k && !b.querySelector(`.wz-mk.${c}`)) b.insertAdjacentHTML('beforeend', `<small class="wz-mk ${c}">${badge} ${k.length}</small>`);
       });
+      // 郵便番号を3けた以上入れると、その地域の都道府県だけに絞る
+      const groups = zipPrefs ? allGroups.filter(([p]) => zipPrefs.includes(p)) : allGroups;
+      const n = groups.reduce((a, [, ids]) => a + ids.length, 0);
+      const area = zipPrefs ? zipPrefs.join('・') : '全国';
+      box.hidden = !!zipPrefs && !n;
       const open = box.open;
-      box.innerHTML = `<summary><b>${title}（全国${n}）</b></summary><p class="hint-sm">${note}押すと選ばれ、下にその都道府県の議会の一覧が出ます。まだ調べきれていない議会も多いので、ここにない議会のほうが多くあります。</p>
-        <p><button type="button" class="btn btn-small" data-mail-box="${esc(ids0(groups).join(','))}">${allOn(ids0(groups)) ? `全国の${n}議会の選択をすべて外す` : `全国の${n}議会をすべて選ぶ`}</button></p>
+      box.innerHTML = `<summary><b>${title}（${esc(area)}${n}）</b></summary><p class="hint-sm">${zipPrefs ? `郵便番号から${esc(area)}に絞っています（欄を空にすると全国に戻ります）。` : ''}${note}押すと選ばれ、下にその都道府県の議会の一覧が出ます。まだ調べきれていない議会も多いので、ここにない議会のほうが多くあります。</p>
+        <p><button type="button" class="btn btn-small" data-mail-box="${esc(ids0(groups).join(','))}">${allOn(ids0(groups)) ? `${esc(area)}の${n}議会の選択をすべて外す` : `${esc(area)}の${n}議会をすべて選ぶ`}</button></p>
         ${groups.map(([p, ids]) => `<div class="wz-region"><span>${esc(p)} <button type="button" class="btn btn-small wz-region-all" data-mail-box="${esc(ids.join(','))}">${allOn(ids) ? '外す' : 'すべて選ぶ'}</button></span><div class="wz-grid">${ids.map((id) => { const on = state.councils.includes(id); return `<button type="button" class="wz-chip ${on ? 'on' : ''}" data-mail-pick="${esc(id)}" aria-pressed="${on}">${esc(nameOf(id))}${c === 'ok' ? '' : chipMail(id)}</button>`; }).join('')}</div></div>`).join('')}`;
       box.open = open;
     });
@@ -1547,12 +1552,15 @@
   // 郵便番号（7けた）から自治体を引く。表は data/zip/<上3けた>.json（scripts/zip.js で日本郵便のデータから作る）
   const zipCache = {};
   const chip = (id) => `<button type="button" class="wz-chip" data-global="${esc(id)}">${esc(municipalityName(id))}<small class="wz-n">${esc(prefOf(id))}</small>${state.kind === 'petition' ? chipMail(id) : ''}</button>`;
+  // 郵便番号の先頭（3〜7けた）に当てはまる自治体をすべて引く
   async function zipHits(zip) {
     const head = zip.slice(0, 3);
     zipCache[head] ||= fetch(`/data/zip/${head}.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({}));
-    const v = (await zipCache[head])[zip.slice(3)];
-    if (!v) return null;
-    return v.split('|').flatMap((pk) => {
+    const table = await zipCache[head];
+    const rest = zip.slice(3);
+    const pks = [...new Set(Object.keys(table).filter((k) => k.startsWith(rest)).flatMap((k) => table[k].split('|')))];
+    if (!pks.length) return null;
+    return pks.flatMap((pk) => {
       const pref = prefOf(pk);
       councilsOf(pref);
       const pl = window.Places.of(pref).find((p) => p.key === nameOf(pk));
@@ -1561,17 +1569,32 @@
   }
   $('wzGlobal').addEventListener('input', async () => {
     const q = $('wzGlobal').value.trim();
-    if (!q) { $('wzGlobalHits').innerHTML = ''; return; }
+    const setZipPrefs = (prefs) => {
+      const next = prefs && prefs.length ? prefs : null;
+      if (String(next) === String(zipPrefs)) return;
+      zipPrefs = next;
+      renderMailAll();
+    };
+    if (!q) { setZipPrefs(null); $('wzGlobalHits').innerHTML = ''; return; }
     const zip = q.replace(/[０-９]/g, (d) => String.fromCharCode(d.charCodeAt(0) - 0xFEE0)).replace(/^〒|[-－ー‐\s]/g, '');
-    if (/^\d{3,7}$/.test(zip)) {
-      if (zip.length < 7) { $('wzGlobalHits').innerHTML = '<p class="wz-wide hint-sm">郵便番号は7けたで入れてください（例：100-0001）。</p>'; return; }
+    if (/^\d{1,7}$/.test(zip)) {
+      if (zip.length < 3) { setZipPrefs(null); $('wzGlobalHits').innerHTML = '<p class="wz-wide hint-sm">郵便番号は3けた以上入れると、当てはまる自治体と郵送の扱いの一覧が絞られます（例：100-0001）。</p>'; return; }
       const ids = await zipHits(zip);
       if ($('wzGlobal').value.trim() !== q) return;
-      $('wzGlobalHits').innerHTML = ids && ids.length
-        ? `<p class="wz-wide hint-sm">〒${zip.slice(0, 3)}-${zip.slice(3)} の自治体と、その都道府県の議会です。</p>${[...new Set(ids.flatMap((id) => [id, idOf(prefOf(id), `${prefOf(id)}議会`)]))].map(chip).join('')}`
-        : `<div class="wz-wide wz-nohit"><p>〒${zip.slice(0, 3)}-${zip.slice(3)} に当てはまる自治体が見つかりません。</p><p class="hint-sm">郵便番号をお確かめのうえ、自治体名で探すか、<button type="button" class="btn btn-small" data-to-prefs>都道府県から選ぶ</button>を使ってください。</p></div>`;
+      const shown = zip.length > 3 ? `${zip.slice(0, 3)}-${zip.slice(3)}` : zip;
+      const part = zip.length < 7 ? 'で始まる地域' : '';
+      setZipPrefs(ids && [...new Set(ids.map(prefOf))]);
+      if (ids && ids.length) {
+        const uniq = [...new Set(ids)];
+        const list = [...new Set(uniq.flatMap((id) => [id, idOf(prefOf(id), `${prefOf(id)}議会`)]))];
+        const more = list.length > 40 ? `<p class="wz-wide hint-sm">ほかにも${list.length - 40}あります。続けて入れると絞れます。</p>` : '';
+        $('wzGlobalHits').innerHTML = `<p class="wz-wide hint-sm">〒${shown}${part} の自治体と、その都道府県の議会です。</p>${list.slice(0, 40).map(chip).join('')}${more}`;
+      } else {
+        $('wzGlobalHits').innerHTML = `<div class="wz-wide wz-nohit"><p>〒${shown}${part} に当てはまる自治体が見つかりません。</p><p class="hint-sm">郵便番号をお確かめのうえ、自治体名で探すか、<button type="button" class="btn btn-small" data-to-prefs>都道府県から選ぶ</button>を使ってください。</p></div>`;
+      }
       return;
     }
+    setZipPrefs(null);
     // 名前がそのまま一致する自治体を先に（「大分市」で大分県議会が先に出ないように）
     const rank = (id) => { const n = municipalityName(id); return n === q ? 0 : n.startsWith(q) ? 1 : 2; };
     const hits = window.Yomi.filter(globalList(), q, (id) => kanaOf[nameOf(id)])
