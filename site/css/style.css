@@ -849,3 +849,6 @@ summary { cursor: pointer; font-weight: 700; }
 .letter-zip { margin: 0; }
 .zip-councils { list-style: none; padding: 0; margin: 10px 0; }
 .zip-councils li { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line); }
+.zip-names { flex-basis: 100%; }
+.zip-names summary { cursor: pointer; font-weight: 600; }
+.zip-names .btn { margin: 2px 0; }
