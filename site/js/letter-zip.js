@@ -29,7 +29,7 @@
     if (!n || !n.names || !n.names.length) return '';
     const [y, m, d] = n.checked_at.split('-').map(Number);
     return `<details class="zip-names"><summary>議員の名前（${n.names.length}人・${y}年${m}月${d}日に公式の名簿から）</summary>
-      <p class="hint-sm">押すと、宛先の議会名と議員名に入ります。名前は名簿のページから機械で抜き出したものです。送る前に<a href="${esc(n.url)}" target="_blank" rel="noopener noreferrer">名簿のページ</a>で確かめてください。</p>
+      <p class="hint-sm">押すと、宛先の議会名と議員名に入ります。名前は名簿のページから機械で抜き出したもので、抜けや誤りがあることもあります。送る前に<a href="${esc(n.url)}" target="_blank" rel="noopener noreferrer">名簿のページ</a>で確かめてください。</p>
       <p>${n.names.map((x) => `<button type="button" class="btn btn-small" data-council="${esc(name)}" data-member="${esc(x)}">${esc(x)}</button>`).join(' ')}</p></details>`;
   };
   const card = (pref, muni, ros, nm) => {

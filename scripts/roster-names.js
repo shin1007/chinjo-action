@@ -3,6 +3,7 @@
 //   node scripts/roster-names.js                … 人口の多い順に、まだ抜き出していない議会を100件
 //   node scripts/roster-names.js --next 2000    … 件数を変える
 //   node scripts/roster-names.js --only 東京都  … その都道府県（と中の市区町村）だけやり直す
+//   node scripts/roster-names.js --retry --next 600 … 前に抜き出せなかった議会もやり直す
 //   node scripts/roster-names.js --show 東京都/墨田区  … 1件だけ抜き出して見せる（書かない）
 // 結果：site/data/roster/<都道府県>.json（{ "<id>": {names:[...], url, checked_at} }。/letter の郵便番号の結果に出す）
 // 抜き出せなかった・人数がおかしいもの：docs/調査/議員の名前を抜き出せなかった議会.md
@@ -51,19 +52,25 @@ const SPACED = new RegExp(`^(${SEI})[\\s　]+(${MEI})$`);
 const NOSPACE = new RegExp(`^[${KANJI}][${KANJI}ぁ-んァ-ヶー]{1,7}$`);
 const KANA = /^[ぁ-んァ-ヶー\s　]{3,20}$/;
 // 名前ではない言葉（役職・会派・見出し）
-const STOP = /議員|議長|委員|会派|名簿|紹介|一覧|選挙|定数|任期|氏名|住所|電話|所属|当選|年齢|生年|期数|地区|議会|自民|公明|共産|立憲|維新|民主|無所属|クラブ|会$|党$|市$|町$|村$|区$|県$|都$|府$|道$|事務局|ページ|トップ|ホーム|お問い合わせ|サイト|検索|メニュー|政策|活動|報告|日程|本会議|常任|特別|予算|決算|総務|文教|厚生|建設|経済|環境|福祉|産業|交通|教育|農林|観光|広報|議事|請願|陳情|会議録|中継|映像/;
+const STOP = /名前|ふりがな|フリガナ|よみがな|議員|議長|委員|会派|名簿|紹介|一覧|選挙|定数|任期|氏名|住所|電話|所属|当選|年齢|生年|期数|地区|議会|自民|公明|共産|立憲|維新|民主|無所属|クラブ|会$|党$|市$|町$|村$|区$|県$|都$|府$|道$|事務局|ページ|トップ|ホーム|お問い合わせ|サイト|検索|メニュー|政策|活動|報告|日程|本会議|常任|特別|予算|決算|総務|文教|厚生|建設|経済|環境|福祉|産業|交通|教育|農林|観光|広報|議事|請願|陳情|会議録|中継|映像/;
 
 // 表の見出し（「氏　名」「住　所」）や住所（「新宮町 上府北」）を名前とみなさない
-const isName = (m) => !STOP.test(`${m[1]}${m[2]}`) && !STOP.test(m[0]) && !/(都|道|府|県|市|町|村|区|郡)$/.test(m[1]) && !(m[1].length === 1 && m[2].length === 1 && /^(氏名|住所|党派|欠員|備考|写真|役職|期数|議席|年齢|性別|職業|現職|新人|定数|会長|議長)$/.test(m[1] + m[2]));
+// 名字は漢字だけ・ひらがなだけ・カタカナだけのどれか（「裕う」のように混ざるのは PDF の文字の並びが崩れたもの）
+const oneScript = (x) => new RegExp(`^[${KANJI}ヶノ之]+$`).test(x) || /^[ぁ-ん]+$/.test(x) || /^[ァ-ヶー]+$/.test(x);
+const isName = (m) => oneScript(m[1]) && !/(課|係|局)$/.test(m[1]) && !/(課|係|室|局)$/.test(m[2]) && !STOP.test(`${m[1]}${m[2]}`) && !STOP.test(m[0]) && !/(都|道|府|県|市|町|村|区|郡)$/.test(m[1]) && !(m[1].length === 1 && m[2].length === 1 && /^(氏名|住所|党派|欠員|備考|写真|役職|期数|議席|年齢|性別|職業|現職|新人|定数|会長|議長|職名|期別|役職|会派|当選|回数|順位)$/.test(m[1] + m[2]));
 // よみがなを別の要素に書いている名簿では、ひらがなだけの名前と漢字の名前が同じ数ずつ取れる。そのときはひらがなだけのほうを落とす
 const dropReadings = (names) => {
   const kana = names.filter((n) => /^[ぁ-んー ]+$/.test(n));
   const other = names.length - kana.length;
   return kana.length >= 3 && other >= 3 && kana.length / other > 0.6 && kana.length / other < 1.4 ? names.filter((n) => !kana.includes(n)) : names;
 };
+// 空白なしの名前を見分けるための名字の一覧。これまでに「姓 名」の形で取れた名前と、国会議員の名簿から作る
+const SURNAMES = new Set(fs.readFileSync(path.join(__dirname, 'surnames.txt'), 'utf8').split('\n').filter((x) => x && !x.startsWith('#')));
+const hasSurname = (flat) => [4, 3, 2, 1].some((k) => flat.length - k >= 1 && flat.length - k <= 4 && SURNAMES.has(flat.slice(0, k)));
+const MENU = /選出|について|情報|手続|結果|取り組み|取組|標準|拡大|縮小|中文|隠す|English|한국|閉じる|戻る|もっと|詳細|お知らせ|新着|募集|申請|案内|制度|計画|予算|子育て|健康|医療|防災|観光|文化|環境|税|ごみ|住まい|仕事|施設|地図|リンク|イベント|カレンダー|サイト|ログイン|一覧|名簿|紹介/;
 const clean = (s) => s.replace(/<rt>[\s\S]*?<\/rt>|<rp>[\s\S]*?<\/rp>/gi, '').replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]+>/g, '').replace(/&nbsp;|&#160;/g, ' ').replace(/&amp;/g, '&')
   .replace(/[（(][^）)]*[）)]/g, '').replace(/(議員|君|さん|氏)$/, '').trim();
-const join = (m) => `${m[1]} ${m[2]}`;
+const join = (m) => `${m[1]} ${m[2]}`.normalize('NFC');
 
 function extract(page) {
   const h = page.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<!--[\s\S]*?-->/gi, ' ');
@@ -73,7 +80,7 @@ function extract(page) {
   const take = (key, re) => {
     for (const m of body.matchAll(re)) {
       for (const line of clean(m[1]).split(/\n/)) {
-        const t = line.trim();
+        const t = line.trim().normalize('NFC');
         const sp = t.match(SPACED);
         if (sp && isName(sp)) groups[key].push(join(sp));
       }
@@ -94,7 +101,39 @@ function extract(page) {
     }
   }
   groups.kana = kanaPair;
-  const uniq = (xs) => [...new Set(xs.map((x) => x.replace(/[\s　]+/g, ' ')))];
+  // 見出しが「氏名」「名前」「議員名」の列（空白なしの名前でもよい）
+  const col = [];
+  for (const [table] of body.matchAll(/<table[\s\S]*?<\/table>/gi)) {
+    const trs = [...table.matchAll(/<tr[\s\S]*?<\/tr>/gi)].map(([tr]) => [...tr.matchAll(/<t[dh][^>]*>([\s\S]*?)<\/t[dh]>/gi)].map((m) => clean(m[1]).replace(/[\s　]+/g, ' ').trim()));
+    const hi = trs.findIndex((r) => r.some((c) => /^(氏 ?名|名 ?前|議員名|議員氏名)$/.test(c)));
+    if (hi < 0) continue;
+    const ci = trs[hi].findIndex((c) => /^(氏 ?名|名 ?前|議員名|議員氏名)$/.test(c));
+    for (const r of trs.slice(hi + 1)) {
+      const t = (r[ci] || '').split(' ').length > 2 ? '' : (r[ci] || '');
+      const flat = t.replace(/ /g, '');
+      if (flat.length >= 2 && flat.length <= 8 && NOSPACE.test(flat) && !STOP.test(flat) && !MENU.test(flat) && !/(都|道|府|県|市|町|村|区|郡|課|係|室|局)$/.test(flat) && (t.includes(' ') || hasSurname(flat))) col.push(t);
+    }
+  }
+  groups.col = col;
+  // 一人ずつのページへのリンクが同じ場所（同じフォルダ）に並んでいる名簿：リンクの文字が名前（空白なしでもよい）
+  const byDir = {};
+  for (const m of body.matchAll(/<a\s[^>]*href=["']([^"'#]+)["'][^>]*>([\s\S]*?)<\/a>/gi)) {
+    const t = clean(m[2]).replace(/[\s　]+/g, ' ').trim();
+    const flat = t.replace(/ /g, '');
+    if (flat.length < 2 || flat.length > 8 || !NOSPACE.test(flat) || STOP.test(flat) || MENU.test(flat) || /(都|道|府|県|市|町|村|区|郡|行|課|室|会|党|局|館|所|園|表|書|集|版|式|案|法|等|中)$/.test(flat)) continue;
+    const dir = m[1].replace(/[^/]*$/, '');
+    (byDir[dir] ||= []).push(t);
+  }
+  // 名字の一覧にある名字で始まるものが8割以上の並びだけを名簿とみなす
+  const prof = Object.values(byDir).map((xs) => [...new Set(xs)]).filter((xs) => xs.filter((x) => x.includes(' ') || hasSurname(x)).length >= xs.length * 0.8)
+    .sort((a, b) => b.length - a.length)[0] || [];
+  if (prof.length >= 5) groups.prof = prof;
+  // 「中川 崇」と「中川崇」は同じ人。空白のあるほうを残す
+  const uniq = (xs) => {
+    const m = new Map();
+    for (const x of xs.map((y) => y.replace(/[\s　]+/g, ' ').trim())) { const k = x.replace(/ /g, ''); if (!m.has(k) || (x.includes(' ') && !m.get(k).includes(' '))) m.set(k, x); }
+    return [...m.values()];
+  };
   // 並びごとに集め、名前の多い並びから順に合わせる（名簿が表と箇条書きに分かれていることがある）。
   // 2人未満しか集まらない並びは、見出しなどの拾いすぎとみて使わない
   const ranked = Object.entries(groups).map(([key, xs]) => [key, uniq(xs)]).filter(([, u]) => u.length >= 2).sort((a, b) => b[1].length - a[1].length);
@@ -105,7 +144,7 @@ function extractText(text) {
   const names = [];
   for (const line of text.split(/\n/)) {
     for (const cell of line.split(/\s{2,}|\t|　{2,}/)) {
-      const t = cell.replace(/[（(][^）)]*[）)]/g, '').replace(/(議員|君)$/, '').trim();
+      const t = cell.normalize('NFC').replace(/[（(][^）)]*[）)]/g, '').replace(/(議員|君)$/, '').trim();
       const sp = t.match(SPACED);
       if (sp && isName(sp)) names.push(join(sp));
     }
@@ -123,15 +162,28 @@ const seats = (t) => {
   const cur = ns.find(([k]) => k !== '定数');
   return cur ? cur[1] : ns.length ? ns[0][1] : null;
 };
+// 目で見て名前でないものを拾うとわかった議会（読み方を直すまで使わない）
+const SKIP = { '千葉県/匝瑳市': '名前でないもの（地名）を拾う' };
+// 一文字ずつの「姓 名」は表の見出しや言葉のことが多い。言葉の一覧にあるものは落とし、3つ以上あれば名簿ごと使わない
+const WORDS = /^(欠員|欠番|会計|団長|代表|幹事|農業|無職|顧問|派遣|銀座|清住|本陣|新風|会長|理事|監事|委員|議員|職名|期別|回数|氏名|住所|党派|備考|写真|役職|期数|議席|年齢|性別|職業|定数|議長|一般質問|承認|選任|適任|許可|決定)$/;
+const tidy = (r) => {
+  r.names = r.names.filter((x) => !WORDS.test(x.replace(/ /g, '')));
+  if (r.names.filter((x) => /^. .$/.test(x) && !SURNAMES.has(x[0])).length >= 2 || r.names.filter((x) => /^. .$/.test(x)).length >= 3) r.error = '一文字ずつの言葉を拾っている';
+  return r;
+};
 async function read(url, lo, hi) {
-  const r = await readRaw(url, lo, hi);
+  const r = tidy(await readRaw(url, lo, hi));
+  if (r.error) return r;
   const n = r.seats;
   // 書いてある人数より多いときは、よみがなが混じっているとみて、ひらがなだけの名前を落としてみる
   if (n && r.names.length > n) r.names = r.names.filter((x) => !/^[ぁ-んー ]+$/.test(x));
   // 書いてある人数の9割に届かなければ、一部しか取れていないとみる（欠員があるので少しの差は認める）
   // ひらがなだけの名前が多いのは、よみがなを拾っている見込みが高い（宛名に使えない）
   const kana = r.names.filter((x) => /^[ぁ-んァ-ヶー ]+$/.test(x)).length;
-  if (r.names.length && kana / r.names.length > 0.35) return { ...r, error: 'よみがなを拾っている' };
+  if (r.names.length && kana / r.names.length > 0.3) return { ...r, error: 'よみがなを拾っている' };
+  // 名字の一覧にある名字で始まるものが半分に届かなければ、名前でないもの（地名・課の名前など）を拾っているとみる
+  const known = r.names.filter((x) => { const f = x.replace(/ /g, ''); return /^[ぁ-んァ-ヶー ]+$/.test(x) || (x.includes(' ') ? (x.split(' ')[0].length >= 2 && /[一-龥々]/.test(x)) || SURNAMES.has(x.split(' ')[0]) : hasSurname(f)); }).length;
+  if (r.names.length && SURNAMES.size > 500 && known / r.names.length < 0.5) return { ...r, error: '名前でないものを拾っている' };
   if (n && r.names.length < Math.floor(n * 0.9)) return { ...r, error: `${n}人のうち${r.names.length}人しか取れない` };
   if (n && r.names.length > n) return { ...r, error: `${n}人のはずが${r.names.length}人取れた（名前でないものが混じっている）` };
   return r;
@@ -147,12 +199,27 @@ async function readRaw(url, lo, hi) {
     .map(([, h, t]) => { try { return { href: new URL(h, url).href, text: t.replace(/<[^>]+>/g, '').trim() }; } catch { return null; } })
     .filter((l) => l && SUB.test(l.text) && !/歴代|元議員|報酬|政務活動|資産|委員会/.test(l.text) && l.href !== url && !/twitter|x\.com|facebook|instagram|youtube|line\.me/.test(l.href));
   let best = { ...b, url };
-  for (const l of [...new Map(subs.map((x) => [x.href, x])).values()].slice(0, 3)) {
+  const pages = [[url, p.html]];
+  for (const l of [...new Map(subs.map((x) => [x.href, x])).values()].sort((a, b) => /50音|五十音|一覧/.test(b.text) - /50音|五十音|一覧/.test(a.text)).slice(0, 6)) {
     const q = await html(l.href);
+    if (q.html) pages.push([l.href, q.html]);
     const c = q.text != null ? extractText(q.text) : q.html ? extract(q.html) : { names: [] };
     const ok = (x) => x.names.length >= lo && x.names.length <= hi;
     c.seats = (q.html || q.text) ? seats(q.html || q.text) || b.seats : b.seats;
     if (ok(c) && (!ok(best) || c.names.length > best.names.length)) best = { ...c, url: l.href };
+  }
+  // 「あ行」「か行」…に分かれた名簿は、全部の行を開いて合わせる
+  if (!(best.names.length >= lo && best.names.length <= hi)) {
+    const raw = pages.flatMap(([base, h]) => [...h.matchAll(/<a\s[^>]*href=["']([^"'#]*)[^"']*["'][^>]*>([\s\S]*?)<\/a>/gi)]
+      .map(([, x, t]) => [x, t.replace(/<[^>]+>/g, '').trim()]).filter(([, t]) => /^[あかさたなはまやらわ](行|ぎょう)$/.test(t))
+      .map(([x]) => { try { return new URL(x || base, base).href; } catch { return null; } }).filter(Boolean));
+    const rows = raw.length >= 3 ? [...new Set(raw)] : [];
+    if (rows.length) {
+      const all = [];
+      for (const h of rows.slice(0, 10)) { const q = await html(h); if (q.html) all.push(...extract(q.html).names); }
+      const u = [...new Set(all)];
+      if (u.length > best.names.length) best = { key: 'gyo', names: u, url: rows.length === 1 ? rows[0] : url, seats: b.seats };
+    }
   }
   return best;
 }
@@ -183,7 +250,7 @@ async function main() {
   const inOnly = (id) => only.some((o) => id === o || id.startsWith(o.includes('/') ? o : `${o}/`));
   const next = Number(opt('--next')[0] || 100);
   const ids = Object.keys(roster).filter((id) => roster[id].url).sort((a, b) => pop[b] - pop[a]);
-  const todo = only.length ? ids.filter(inOnly) : ids.filter((id) => !(id in load(id.split('/')[0])) && !(id in failed)).slice(0, next);
+  const todo = only.length ? ids.filter(inOnly) : ids.filter((id) => !(id in load(id.split('/')[0])) && (args.includes('--retry') || !(id in failed))).slice(0, next);
   console.error(`${todo.length} 件の名簿を読む`);
   const queue = [...todo];
   let done = 0;
@@ -192,7 +259,7 @@ async function main() {
       const pref = id.split('/')[0];
       const url = roster[id].url;
       const [lo, hi] = range(level[id]);
-      const b = await read(url, lo, hi);
+      const b = SKIP[id] ? { names: [], error: SKIP[id] } : await read(url, lo, hi);
       if (!b.error && b.names.length >= lo && b.names.length <= hi) {
         load(pref)[id] = { names: b.names, url: b.url, seats: b.seats || null, checked_at: today() };
         delete failed[id];
