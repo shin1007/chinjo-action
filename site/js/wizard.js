@@ -1633,6 +1633,12 @@
     $('wizard').scrollIntoView();
   } else {
     const draft = loadDraft();
+    // ?item= で内容を選んで来たときは、内容を選ぶ画面を飛ばして議会を選ぶ画面から始める（戻るで内容の画面に戻れる）
+    if (state.items.length) {
+      history.replaceState({ step: 0 }, '', location.pathname + location.search);
+      state.step = STEPS.indexOf('council');
+      history.pushState({ step: state.step }, '', location.pathname + location.search);
+    }
     show();
     if (state.items.length) $('wizard').scrollIntoView();
     if (draft) {

@@ -39,9 +39,29 @@
       if (!groups.has(k)) groups.set(k, { theme: a.theme, themeName: a.themeName, category: a.category || 'そのほか', list: [] });
       groups.get(k).list.push(a);
     });
-    list.innerHTML = [...groups.values()].map((g) => `<li class="item-search-group"><p class="item-search-head"><b>${esc(g.themeName)}／${esc(g.category)}</b>${g.list.length > 1 ? `<a class="btn btn-small" href="/${g.theme}/make?item=${encodeURIComponent(g.list.map((a) => a.id).join(','))}">この${g.list.length}件をすべて選んでつくる</a>` : ''}</p>
+    // テーマの切れ目ごとに ◀▶ を付けて、前後のテーマへ飛べるようにする
+    const gs = [...groups.values()];
+    const themes = [...new Set(gs.map((g) => g.theme))];
+    const nav = (g, i) => {
+      if (themes.length < 2 || (i > 0 && gs[i - 1].theme === g.theme)) return '';
+      const t = themes.indexOf(g.theme);
+      const btn = (to, mark, word) => (to >= 0 && to < themes.length
+        ? `<button type="button" class="btn btn-small item-theme-jump" data-theme-to="${esc(themes[to])}" aria-label="${word}のテーマ（${esc(gs.find((x) => x.theme === themes[to]).themeName)}）へ">${mark}</button>`
+        : `<span class="item-theme-jump" aria-hidden="true"></span>`);
+      return `<li class="item-theme-nav" id="theme-${esc(g.theme)}">${btn(t - 1, '◀', '前')}<b>${esc(g.themeName)}</b>${btn(t + 1, '▶', '次')}</li>`;
+    };
+    list.innerHTML = gs.map((g, i) => `${nav(g, i)}<li class="item-search-group"><p class="item-search-head"><b>${esc(g.themeName)}／${esc(g.category)}</b>${g.list.length > 1 ? `<a class="btn btn-small" href="/${g.theme}/make?item=${encodeURIComponent(g.list.map((a) => a.id).join(','))}">この${g.list.length}件をすべて選んでつくる</a>` : ''}</p>
       <ul>${g.list.map((a) => `<li><a href="/${a.theme}/make?item=${encodeURIComponent(a.id)}"><b>${esc(a.label)}</b><small>${a.scope === 'local' ? '自治体の取り組み' : '国へ意見書'}</small><small>${ROUTE[a.route] || ''}</small></a></li>`).join('')}</ul></li>`).join('');
   }
+  list.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-theme-to]');
+    if (!b) return;
+    const to = document.getElementById(`theme-${b.dataset.themeTo}`);
+    if (!to) return;
+    to.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const f = to.querySelector('button');
+    if (f) f.focus({ preventScroll: true });
+  });
   input.addEventListener('input', render);
   if (allBtn) allBtn.addEventListener('click', () => {
     showAll = !showAll;
