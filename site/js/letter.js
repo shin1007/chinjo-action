@@ -84,6 +84,7 @@
     know: '提出した陳情の背景を知っておいていただければ幸いです',
   };
   const form = document.getElementById('letterForm');
+  form.addEventListener('submit', (e) => e.preventDefault());
   const themeSelect = document.getElementById('letterTheme');
   const issueBox = document.getElementById('letterIssues');
   const purposeBox = document.getElementById('letterPurposes');
