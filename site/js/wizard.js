@@ -350,7 +350,8 @@
       const open = openCats.has(cat) || list.some((a) => state.items.includes(a.id)) || (gi === 0 && !openCats.size);
       return `<details class="wz-cat" data-cat="${esc(cat)}"${open ? ' open' : ''}><summary><span>${esc(cat)}</span><small class="wz-cat-n"></small></summary><div class="wz-cards">${list.map((a) => {
         const on = state.items.includes(a.id);
-        return `<button type="button" class="wz-card ${on ? 'on' : ''}" data-item="${a.id}" aria-pressed="${on}" data-text="${esc(a.label + a.reason)}"><b>${a.label}${window.Common.scopeTag(a)}</b><span>${a.reason.split('。')[0]}。</span>${window.Common.askTags(a) ? `<span class="ask-tags">${window.Common.askTags(a)}</span>` : ''}${a.pair && window.Petition.ITEMS[a.pair] ? `<small class="wz-pair">あわせて出すのがおすすめ：${esc(window.Petition.ITEMS[a.pair].label)}</small>` : ''}<span class="wz-bg" data-easy="/${window.THEME.id}/easy/${a.id}" title="なぜこの陳情が必要か・どう役立つか（新しいタブで開きます）">この陳情の意義 ↗</span></button>`;
+        const doc = state.kind === 'request' ? '要望' : '陳情';
+        return `<button type="button" class="wz-card ${on ? 'on' : ''}" data-item="${a.id}" aria-pressed="${on}" data-text="${esc(a.label + a.reason)}"><b>${a.label}${window.Common.scopeTag(a)}</b><span>${a.reason.split('。')[0]}。</span><span class="wz-card-row">${window.Common.askTags(a) ? `<span class="ask-tags">${window.Common.askTags(a)}</span>` : ''}<span class="wz-bg" data-easy="/${window.THEME.id}/easy/${a.id}" title="なぜこの${doc}が必要か・どう役立つか（新しいタブで開きます）">この${doc}の意義 ↗</span></span>${a.pair && window.Petition.ITEMS[a.pair] ? `<small class="wz-pair">あわせて出すのがおすすめ：${esc(window.Petition.ITEMS[a.pair].label)}</small>` : ''}</button>`;
       }).join('')}</div></details>`;
     }).join('');
     document.querySelectorAll('#wzItems .wz-cat').forEach((cat) => { cat.querySelector('.wz-cat-n').innerHTML = catCount(cat); });
