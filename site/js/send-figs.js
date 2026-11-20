@@ -23,7 +23,7 @@ document.querySelectorAll('[data-send-figs]').forEach((box, n) => {
     </figure>
     <figure>
       <svg viewBox="0 0 200 250" role="img" aria-labelledby="fig${n}FrontTitle">
-        <title id="fig${n}FrontTitle">封筒の表：左上に180円分の切手、真ん中に宛名のラベル、左下に赤い陳情書在中</title>
+        <title id="fig${n}FrontTitle">封筒の表：左上に270円分の切手、真ん中に宛名のラベル、左下に赤い陳情書在中</title>
         <rect x="35" y="10" width="130" height="230" rx="3" fill="#f3e3c3" stroke="#b8a27a"/>
         <rect x="44" y="20" width="26" height="32" fill="#fff" stroke="#c00" stroke-dasharray="3 2"/>
         <text x="57" y="34" font-size="8" text-anchor="middle" fill="#c00">切手</text>
@@ -36,7 +36,7 @@ document.querySelectorAll('[data-send-figs]').forEach((box, n) => {
         <rect x="44" y="196" width="50" height="16" fill="none" stroke="#c00"/>
         <text x="69" y="208" font-size="9" text-anchor="middle" fill="#c00">陳情書在中</text>
       </svg>
-      <figcaption><b>② 封筒の表（角2・縦長）</b><br>切手は<b>左上に180円分</b>（紙16枚・陳情書6件ほどまでなら、これで足ります。それより多いときは<a href="guide#stamp">切手の表</a>を見てください）。宛名のラベルは真ん中に。ラベルに「陳情書在中」が入っていなければ、左下に赤で書きます。</figcaption>
+      <figcaption><b>② 封筒の表（角2・縦長）</b><br>切手は<b>左上に270円分</b>（150gまで。陳情書5件と送付状なら、厚手の紙やしっかりした封筒でも、ふつうはこれで足ります。それより多いときは<a href="guide#stamp">切手の表</a>を見てください）。宛名のラベルは真ん中に。ラベルに「陳情書在中」が入っていなければ、左下に赤で書きます。</figcaption>
     </figure>
     <figure>
       <svg viewBox="0 0 200 250" role="img" aria-labelledby="fig${n}BackTitle">
