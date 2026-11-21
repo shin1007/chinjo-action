@@ -1339,7 +1339,7 @@
     const list = real();
     $('wzChairs').innerHTML = list.map((c) => {
       const a = chairAuto[c];
-      const note = a && chairs[c] === a.chair ? `<small class="wz-checked">（${esc(ymd(a.chair_checked_at))}に<a href="${esc(a.url)}" target="_blank" rel="noopener">議会の公式の議員名簿</a>から自動で読み取りました。議長は交代することがあるので、確かめてください）</small>` : '';
+      const note = a && chairs[c] === a.chair ? `<small class="wz-checked">（${esc(ymd(a.chair_checked_at))}に<a href="${esc(a.url)}" target="_blank" rel="noopener">議会の公式の議員名簿</a>から自動で読み取りました）</small>` : '';
       return `<label>${esc(label(c))}の議長の氏名
       <input data-chair="${esc(c)}" value="${esc(chairs[c] || '')}" maxlength="20" autocomplete="off" placeholder="例：山田 太郎">
       <a href="https://www.google.com/search?q=${encodeURIComponent(`${label(c)} 議長`)}" target="_blank" rel="noopener">議長を調べる</a>${note}</label>`;
