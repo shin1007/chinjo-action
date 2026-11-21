@@ -50,7 +50,7 @@ function render(page, theme) {
 }
 
 // フッターの、ソースコードへの案内
-const GITHUB = '  <div class="wrap"><p class="small"><a href="https://github.com/shin1007/chinjo-action" target="_blank" rel="noopener">ソースコード（GitHub）</a>　このサイトの改善の提案（Issue・プルリクエスト）を歓迎します</p></div>';
+const GITHUB = '  <div class="wrap"><p class="small"><a href="/privacy">サイトの情報の扱い（外部送信・Cookie）</a>　<a href="https://github.com/shin1007/chinjo-action" target="_blank" rel="noopener">ソースコード（GitHub）</a>　このサイトの改善の提案（Issue・プルリクエスト）を歓迎します</p></div>';
 
 // テーマのページのヘッダーの右側（つくる・出し方）。いま開いているページに印を付ける
 const primaryNav = (themeId, page) => [

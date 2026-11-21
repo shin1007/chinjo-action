@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#252b2f" media="(prefers-color-scheme: dark)">
+<title>サイトの情報の扱い（外部送信・Cookie）｜権利を守る陳情アクション</title>
+<meta name="description" content="陳情アクションが、見に来た人の端末から外部へ送っている情報と、端末に残しているものの一覧です。">
+<link rel="canonical" href="https://chinjo-action.vercel.app/privacy">
+<meta property="og:site_name" content="権利を守る陳情アクション">
+<meta property="og:title" content="サイトの情報の扱い（外部送信・Cookie）">
+<meta property="og:description" content="見た人の端末から外へ送られる情報の一覧">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://chinjo-action.vercel.app/privacy">
+<meta property="og:image" content="https://chinjo-action.vercel.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">本文へ移動</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <details class="theme-menu">
+      <summary>テーマを選ぶ</summary>
+      <nav class="theme-nav" aria-label="陳情のテーマ">
+        <a href="/kodomo/make">子どもの権利</a>
+        <a href="/dansei/make">男女平等</a>
+        <a href="/nihonjin/make">日本人の権利</a>
+        <a href="/shiho/make">司法への参加</a>
+        <a href="/kenko/make">国民の健康</a>
+        <a href="/sonota/make">その他の陳情</a>
+      </nav>
+    </details>
+    <a href="/" class="logo">陳情アクション</a>
+
+    <nav class="primary-nav" aria-label="主要メニュー"><a href="/#themes">つくる</a><a href="/about">しくみ</a><a href="/trouble#support">支える</a></nav>
+  </div>
+</header>
+
+<main id="main">
+<div class="wrap guide about">
+  <h1>サイトの情報の扱い（外部送信・Cookie）</h1>
+  <p>このサイトを見たとき、あなたの端末から<b>運営以外の会社のサーバーへ送られる情報</b>と、<b>端末に残る情報</b>を、ここにまとめます。2026年11月21日時点。</p>
+
+  <h2>いつも言えること</h2>
+  <ul>
+    <li><b>アクセス解析・広告のプログラムは入れていません。</b>閲覧数や行動を調べるための外部のサービス（Google アナリティクスなど）は使っていません。このサイトのページは、自分のサイトのプログラム以外を読み込まない設定にしています。</li>
+    <li><b>Cookie は使っていません。</b></li>
+    <li>住所・氏名・陳情の文面は、あなたの端末の中だけで文書にします。運営のサーバーにも、下の会社にも送りません。</li>
+  </ul>
+
+  <h2>外の会社のサーバーへ通信するところ</h2>
+  <p>ページを開く、または画面で操作すると、次の通信が起きます。どれも、通信の相手には、通信のしくみ上かならず届く情報（あなたの IP アドレス、ブラウザの種類、見ているサイトの名前）が届きます。</p>
+  <table>
+    <tr><th scope="row">どこで</th><th scope="row">送る先</th><th scope="row">送る情報と、使いみち</th></tr>
+    <tr><td>トップページ（<a href="/">/</a>）を開いたとき</td><td>Supabase（データベースの会社）</td><td>こちらから送る内容はありません。「これまでの歩み」の数（提出の報告の件数）を読み出すだけです。</td></tr>
+    <tr><td>各テーマの作成画面（例：<a href="/kodomo/make">/kodomo/make</a>）で、議会・自治体を選ぶ画面</td><td>Supabase</td><td>こちらから送る内容はありません。ほかの人が報告した、議会ごとの提出の数と、寄せられた情報を読み出します。「出したら押す」を押したときだけ、押した議会・件数・（任意で）項目の報告を送ります。氏名・住所は送りません。</td></tr>
+    <tr><td><a href="/feedback">/feedback</a>（ご意見のページ）</td><td>Supabase</td><td>開いたとき：公開している質問と答えを読み出します。送信ボタンを押したとき：書いたご意見（と、付けた資料）を送ります。</td></tr>
+    <tr><td>各テーマの作成画面の、関連の本・グッズの欄</td><td>Amazon（商品の画像の配信元）</td><td>欄が表示されると、本の表紙画像を Amazon から読み込みます。こちらから送る内容はありませんが、通信の相手の Amazon には上の基本の情報が届きます。Amazon 側での扱いは、Amazon のプライバシーの案内によります。リンクを押して Amazon へ移ったあとは、Amazon のサイトの扱いになります。</td></tr>
+  </table>
+  <p class="small">上の会社への通信は、あなたの端末に残っている Cookie や ID を取り出して送るものではありません。このサイトが指定していない情報（ログイン情報など）も送りません。</p>
+
+  <h2>あなたの端末に残るもの（外へは送りません）</h2>
+  <p>このサイトは、ブラウザの「ローカルストレージ」に、次のものを残します。外部には送りません。ブラウザの設定で消せます。</p>
+  <ul>
+    <li>作成画面の入力の途中（下書き）、文面の手直し、最近選んだ議会</li>
+    <li>「住所・氏名を覚えておく」にチェックしたときの住所・氏名（初めは覚えません）</li>
+    <li>「出したら押す」を押した議会の目印（二重に押さないため）</li>
+    <li>使う生成 AI の選択（おまかせ画面）</li>
+  </ul>
+
+  <h2>確かめられていないこと</h2>
+  <ul>
+    <li>電気通信事業法の「外部送信規律」（第27条の12）は、電気通信事業を営む人が一定のサービスで情報を外へ送るときに、通知か公表を求めるものです。総務省のFAQ（問1-8）は、電気通信事業を営んでいない場合は対象にならないとしています。<b>このサイトの運営が対象に当たるかは、まだ確かめられていません。</b>当たるかどうかにかかわらず、利用者にわかるよう、この一覧を載せています。</li>
+    <li>上の「どこで」の一覧は、運営がサイトのプログラムを確かめたものです。ご覧のブラウザの拡張機能などが足す通信は、ここには含みません。</li>
+  </ul>
+
+  <h2>変えるとき</h2>
+  <p>アクセス解析などを入れるときは、入れる前に、この一覧に書き足します。気づいた点は <a href="/feedback">ご意見のページ</a>から教えてください。</p>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="small">本サイトは市民による政策提言のための情報提供サイトです。法的助言を行うものではありません。</p>
+    <p class="small"><a href="/trouble">運営が困っていること</a>（<a href="/trouble#support">このサイトを支える</a>）</p>
+  </div>
+  <div class="wrap"><p class="small"><a href="/privacy">サイトの情報の扱い（外部送信・Cookie）</a>　<a href="https://github.com/shin1007/chinjo-action" target="_blank" rel="noopener">ソースコード（GitHub）</a>　このサイトの改善の提案（Issue・プルリクエスト）を歓迎します</p></div>
+</footer>
+</body>
+</html>
