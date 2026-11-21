@@ -201,7 +201,7 @@
     if (state.kind === 'request') { el.hidden = true; return; }
     el.hidden = !state.councils.length;
     if (el.hidden) return;
-    el.innerHTML = `<p><b>出し方と締切の目安</b>：締切は定例会（多くは2〜3月・6月・9月・12月）の1〜2週間前が多く、過ぎると次の定例会に回ります。住んでいない自治体の議会や郵送の陳情は、審査されず議員に配るだけになることがあります。</p>
+    el.innerHTML = `<p><b>出し方と締切の目安</b>：締切は定例会（多くは2〜3月・6月・9月・12月）の1〜2週間前が多く、過ぎると次の定例会に回ります。住んでいない自治体の議会や郵送の陳情は、審査ではなく議員への配付になることがあります（配付でも議員には読んでもらえます）。</p>
       <ul>${state.councils.map((c) => {
         const i = intakeOf(c, 'chinjo');
         const d = clip((i && i.deadline) || infoOf(c).deadline || '');
@@ -216,22 +216,24 @@
   // 案内ページの一文から、郵送で出して審査してもらえるかを分ける。読み取れた議会だけで、書いていない議会は出さない
   // ok：郵送で出せる／jisan：審査してもらうには持参が必要／outside：住民以外の郵送は議員に配るだけ／none：出し方に関わらず議員に配るだけ
   function mailRule(info) {
-    const fixed = { ok: '📮 郵送でも審査されます', jisan: '🚶 審査してもらうには持参が必要です（郵送は議員に配るだけ）', outside: '🚶 住民以外が審査してもらうには持参が必要です（郵送は議員に配るだけ）', none: '持参でも郵送でも、陳情は審査されず議員に配るだけです' };
+    const fixed = { ok: '📮 郵送でも審査されます', jisan: '🚶 審査してもらうには持参が必要です（郵送すると議員に配付されます）', outside: '🚶 住民以外が審査してもらうには持参が必要です（郵送すると議員に配付されます）', none: 'この議会の陳情は、持参でも郵送でも議員に配付されます（委員会の審査はありません）' };
     if (info.policy) {
       const { mail_resident: resident, mail_nonresident: nonresident } = info.policy;
       if (resident === 'distribute' && nonresident === 'distribute') return { c: 'none', label: fixed.none };
       if (resident === 'distribute') return { c: 'jisan', label: fixed.jisan };
       if (resident === 'ok' && nonresident === 'distribute') return { c: 'outside', label: fixed.outside };
       if (resident === 'ok' && nonresident === 'ok') return { c: 'ok', label: fixed.ok };
-      return { c: 'unknown', label: '郵送時の扱いは未確認です（公式案内を確認してください）' };
+      if (resident === 'ok') return { c: 'unknown', label: '📮 住民の郵送は審査されます（住民以外の郵送の扱いは、まだ確かめられていません）' };
+      if (nonresident === 'distribute') return { c: 'unknown', label: '住民以外の郵送は議員に配付されます（住民の郵送の扱いは、まだ確かめられていません）' };
+      return { c: 'unknown', label: '郵送したときの扱いは、まだ確かめられていません' };
     }
     if (info.mail) return { c: info.mail === 'outside' ? 'jisan' : info.mail, label: fixed[info.mail] };
     const t = [info.yusoNote, info.outsideNote].filter((x) => x && /郵送/.test(x)).join(' ');
     if (!t) return null;
-    if (/関わらず|持参（または郵送）/.test(t)) return { c: 'none', label: '持参でも郵送でも、陳情は審査されず議員に配るだけのようです' };
+    if (/関わらず|持参（または郵送）/.test(t)) return { c: 'none', label: 'この議会の陳情は、持参でも郵送でも議員に配付されるようです（委員会の審査はありません）' };
     if (/郵送[^。]{0,8}可/.test(t)) return { c: 'ok', label: '📮 郵送で出せます' };
-    if (/(市|町|村)外[^。]{0,12}郵送|外に住所[^。]{0,12}郵送/.test(t)) return { c: 'jisan', label: '🚶 住民以外が審査してもらうには持参が必要です（郵送は議員に配るだけ）' };
-    if (/配布|配付|参考|審議[はを]?行わ|審査[はを]?行わ|報告はありません|持参してください/.test(t)) return { c: 'jisan', label: '🚶 審査してもらうには持参が必要です（郵送は議員に配るだけ）' };
+    if (/(市|町|村)外[^。]{0,12}郵送|外に住所[^。]{0,12}郵送/.test(t)) return { c: 'jisan', label: '🚶 住民以外が審査してもらうには持参が必要です（郵送すると議員に配付されます）' };
+    if (/配布|配付|参考|審議[はを]?行わ|審査[はを]?行わ|報告はありません|持参してください/.test(t)) return { c: 'jisan', label: '🚶 審査してもらうには持参が必要です（郵送すると議員に配付されます）' };
     return { c: 'ok', label: '📮 郵送でも受け付けます' };
   }
   // 扱いを最後に確かめた日。data/mail-policy.js は1件ごとの確認日、旧 data/mail.js から移した分はファイルの確認日（11/5・11/6）、
@@ -254,6 +256,8 @@
   function howTo(info, id) {
     const n = [];
     if (mailRule(info)) n.push(mailBadge(info));
+    // 扱いが分からない議会も多いので、分からないことを控えめに伝える（出すのをためらわせないよう、警告の形にはしない）
+    else n.push('<span class="wz-mail unknown">郵送や、住民以外が出した陳情の扱いは、まだこのサイトで確かめられていません。審査されず議員に配付される議会もあるので、気になるときは議会事務局に聞いてみてください。</span>');
     if (info.denshi) n.push('✅ 電子申請でも出せるようです（紙・封筒・切手は要りません）。');
     if (info.policy) {
       const q = clip(info.policy.source_quote);
@@ -264,9 +268,9 @@
       if (info.policy.confidence !== 'confirmed') n.push('⚠ この情報は確定情報ではありません。提出前に議会事務局へ確認してください。');
     } else {
       const y = info.yusoNote && clip(info.yusoNote);
-      if (y) n.push(`${ONLY_HANDOUT.test(y) ? '⚠ 郵送だと審査されないようです' : '郵送について'}：「${esc(y)}」`);
+      if (y) n.push(`${ONLY_HANDOUT.test(y) ? '郵送だと議員に配付される（審査はされない）ようです' : '郵送について'}：「${esc(y)}」`);
       const o = info.outsideNote && clip(info.outsideNote);
-      if (o) n.push(`⚠ 住民以外の陳情について：「${esc(o)}」`);
+      if (o) n.push(`住民以外の陳情について：「${esc(o)}」`);
     }
     if (id) n.push(...intakeNotes(id, 'chinjo'), ...kaitoNotes(id));
     return n.length ? `<ul class="wz-notes">${n.map((t) => `<li>${t}</li>`).join('')}</ul>` : '';
