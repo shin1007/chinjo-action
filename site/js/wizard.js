@@ -1315,12 +1315,37 @@
     const name = chairs[c];
     return name ? text.replace(chairRe, `$1　${name}　様`) : text;
   }
-  function renderChairs() {
+  // 公式の議員名簿から読み取った議長（scripts/roster-chairs.js）。入っていない欄にだけ入れ、読み取ったことを添える
+  const rosterCache = {};
+  const chairAuto = {};
+  const loadRosterPref = (pref) => (rosterCache[pref] ||= fetch(`/data/roster/${encodeURIComponent(pref)}.json`).then((r) => (r.ok ? r.json() : {})).catch(() => ({})));
+  async function fillChairs(list) {
+    let changed = false;
+    for (const c of list) {
+      const [pref, key] = officeKeys[c] || [];
+      if (!pref || chairs[c]) continue;
+      const r = (await loadRosterPref(pref))[`${pref}/${key}`];
+      if (r && r.chair) { chairs[c] = r.chair; chairAuto[c] = r; changed = true; }
+    }
+    if (changed && STEPS[state.step] === 'send') {
+      renderChairs(true);
+      const all = real().every((id) => chairs[id]);
+      if ($('wzChkChair').checked !== all) { $('wzChkChair').checked = all; renderCheckLeft(); }
+      const c0 = state.councils[0];
+      if (chairs[c0]) areas().forEach((ta) => { ta.value = ta.value.replace(chairRe, `$1　${chairs[c0]}　様`); });
+    }
+  }
+  function renderChairs(filled) {
     const list = real();
-    $('wzChairs').innerHTML = list.map((c, i) => `<label>${esc(label(c))}の議長の氏名
+    $('wzChairs').innerHTML = list.map((c) => {
+      const a = chairAuto[c];
+      const note = a && chairs[c] === a.chair ? `<small class="wz-checked">（${esc(ymd(a.chair_checked_at))}に<a href="${esc(a.url)}" target="_blank" rel="noopener">議会の公式の議員名簿</a>から自動で読み取りました。議長は交代することがあるので、確かめてください）</small>` : '';
+      return `<label>${esc(label(c))}の議長の氏名
       <input data-chair="${esc(c)}" value="${esc(chairs[c] || '')}" maxlength="20" autocomplete="off" placeholder="例：山田 太郎">
-      <a href="https://www.google.com/search?q=${encodeURIComponent(`${label(c)} 議長`)}" target="_blank" rel="noopener">議長を調べる</a></label>`).join('');
+      <a href="https://www.google.com/search?q=${encodeURIComponent(`${label(c)} 議長`)}" target="_blank" rel="noopener">議長を調べる</a>${note}</label>`;
+    }).join('');
     $('wzChairBox').hidden = !list.length || state.kind === 'request';
+    if (!filled && state.kind !== 'request') fillChairs(list);
   }
   $('wzChairs').addEventListener('input', (e) => {
     const c = e.target.dataset.chair;
