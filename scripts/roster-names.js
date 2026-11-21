@@ -282,6 +282,36 @@ async function readRaw(url, lo, hi) {
 
 const range = (level) => (level === 'pref' ? [30, 130] : [5, 110]);
 
+// 名簿のページからは名前の形が読めない議会は、ほかで集めた名前の候補（scripts/roster-candidates.js）を、
+// 名簿のページ（と、そこからの名簿らしいリンク・PDF）の文字の中に探す。書いてあった名前だけを使う
+const CAND_FILE = path.join(__dirname, 'roster-candidates', 'discussvision.json');
+const CAND = fs.existsSync(CAND_FILE) ? JSON.parse(fs.readFileSync(CAND_FILE, 'utf8')).councils : {};
+const flat = (s) => s.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/gi, '').replace(/<rt>[\s\S]*?<\/rt>/gi, '').replace(/<[^>]+>/g, '').replace(/&nbsp;|&#160;/g, '')
+  .replace(/[\s　]+/g, '').replace(/[﨑]/g, '崎').replace(/[髙]/g, '高').replace(/󠄀/g, '');
+async function confirm(id, url, lo) {
+  const c = CAND[id];
+  if (!c) return null;
+  const u = url.url || url;
+  const p = await html(u);
+  if (p.error) return null;
+  const texts = [flat(p.text != null ? p.text : p.html)];
+  if (p.html) {
+    const subs = [...p.html.matchAll(/<a\s[^>]*href=["']([^"'#]+)["'][^>]*>([\s\S]*?)<\/a>/gi)]
+      .map(([, h, t]) => { try { return { href: new URL(h, u).href, text: t.replace(/<[^>]+>/g, '').trim() }; } catch { return null; } })
+      .filter((l) => l && (SUB.test(l.text) || /名簿|議員|一覧|会派/.test(l.text)) && !/歴代|元議員|報酬|政務活動|資産|委員会|会議録|中継/.test(l.text) && l.href !== u);
+    for (const l of [...new Map(subs.map((x) => [x.href, x])).values()].slice(0, 6)) {
+      const q = await html(l.href);
+      if (q.html || q.text) texts.push(flat(q.text != null ? q.text : q.html));
+    }
+  }
+  const all = texts.join('|');
+  const names = [...new Set(c.names.filter((n) => all.includes(flat(n))))];
+  const seats_ = seats(p.text != null ? p.text : p.html);
+  if (names.length < Math.max(lo, 8)) return null;
+  if (seats_ ? names.length < Math.floor(seats_ * 0.9) || names.length > seats_ : names.length < c.names.length * 0.5) return null;
+  return { key: 'dv', names, url: u, seats: seats_ || null, via: `議会中継の発言者の一覧（tenant ${c.tenant}）の名前を、名簿のページで確かめた` };
+}
+
 async function main() {
   const args = process.argv.slice(2);
   const opt = (k) => args.flatMap((a, i) => (args[i - 1] === k ? [a] : []));
@@ -316,9 +346,10 @@ async function main() {
       const pref = id.split('/')[0];
       const url = PAGES[id] || roster[id].url;
       const [lo, hi] = range(level[id]);
-      const b = SKIP[id] ? { names: [], error: SKIP[id] } : await read(url, lo, hi);
+      let b = SKIP[id] ? { names: [], error: SKIP[id] } : await read(url, lo, hi);
+      if (!SKIP[id] && (b.error || b.names.length < lo || b.names.length > hi)) b = (await confirm(id, url, lo)) || b;
       if (!b.error && b.names.length >= lo && b.names.length <= hi) {
-        load(pref)[id] = { names: b.names, url: b.url, seats: b.seats || null, checked_at: today() };
+        load(pref)[id] = { names: b.names, url: b.url, seats: b.seats || null, ...(b.via ? { via: b.via } : {}), checked_at: today() };
         delete failed[id];
       } else {
         delete load(pref)[id];
