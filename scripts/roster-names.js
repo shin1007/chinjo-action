@@ -376,7 +376,11 @@ async function main() {
         if (c && (b.error || c.names.length > b.names.length)) b = c;
       }
       if (!b.error && b.names.length >= lo && b.names.length <= hi) {
-        load(pref)[id] = { names: b.names.map((x) => x.replace(/[\u{E0100}-\u{E01EF}︀-️]/gu, '')), url: b.url, seats: b.seats || null, ...(b.via ? { via: b.via } : {}), checked_at: today() };
+        const names = b.names.map((x) => x.replace(/[\u{E0100}-\u{E01EF}︀-️]/gu, ''));
+        // scripts/roster-chairs.js で読み取った議長は、名簿にまだその人がいれば残す
+        const old = load(pref)[id] || {};
+        const chair = old.chair && names.includes(old.chair) ? { chair: old.chair, chair_checked_at: old.chair_checked_at } : {};
+        load(pref)[id] = { names, url: b.url, seats: b.seats || null, ...(b.via ? { via: b.via } : {}), checked_at: today(), ...chair };
         delete failed[id];
       } else {
         delete load(pref)[id];
