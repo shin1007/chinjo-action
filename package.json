@@ -8,7 +8,8 @@
     "links": "node scripts/check-links.js",
     "speed": "node scripts/speed.js",
     "adopted": "python scripts/adopted-scan.py",
-    "refresh": "node scripts/refresh.js"
+    "refresh": "node scripts/refresh.js",
+    "asks-audit": "node scripts/asks-audit.js"
   },
   "devDependencies": {
     "eslint": "^9.39.5",
