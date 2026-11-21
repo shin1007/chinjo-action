@@ -14,11 +14,6 @@
   "reason": "38人のうち7人しか取れない",
   "checked_at": "2026-11-21"
  },
- "兵庫県/尼崎市": {
-  "url": "https://www.city.amagasaki.hyogo.jp/gikai/1001056/index.html",
-  "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-21"
- },
  "長崎県/長崎市": {
   "url": "https://www.city.nagasaki.lg.jp/site/gikai/list41-196.html",
   "reason": "0人しか取れない（人数が書いてない）",
@@ -341,7 +336,7 @@
  },
  "徳島県/鳴門市": {
   "url": "https://www.city.naruto.lg.jp/category/gikai/meibo/",
-  "reason": "AbortError",
+  "reason": "0人しか取れない（人数が書いてない）",
   "checked_at": "2026-11-21"
  },
  "島根県/益田市": {
@@ -937,11 +932,6 @@
  "長野県/下伊那郡松川町": {
   "url": "https://www.town.matsukawa.lg.jp/choseijoho/matsukawamachigikai/gikaikosei/11759.html",
   "reason": "一文字ずつの言葉を拾っている",
-  "checked_at": "2026-11-21"
- },
- "千葉県/長生郡一宮町": {
-  "url": "https://www.town.ichinomiya.chiba.jp/info/gikai/7/",
-  "reason": "0人しか取れない（人数が書いてない）",
   "checked_at": "2026-11-21"
  },
  "岡山県/苫田郡鏡野町": {
@@ -1622,6 +1612,11 @@
  "秋田県/北秋田市": {
   "url": "https://www.city.kitaakita.akita.jp/genre/shigikai/giinmeibo",
   "reason": "7人しか取れない（人数が書いてない）",
+  "checked_at": "2026-11-21"
+ },
+ "千葉県/長生郡一宮町": {
+  "url": "https://www.town.ichinomiya.chiba.jp/info/gikai/7/",
+  "reason": "2026年11月の選挙で議員が入れ替わり、議会中継の候補が古い（名簿は文字の PDF だが、よみがなと混じって読めない）",
   "checked_at": "2026-11-21"
  }
 }

@@ -9,7 +9,7 @@
 'use strict';
 const fs = require('fs');
 const path = require('path');
-const { html } = require('./roster-names.js');
+const { html, baseOf } = require('./roster-names.js');
 
 const ROOT = path.join(__dirname, '..');
 const DATA = path.join(ROOT, 'site', 'data');
@@ -55,7 +55,7 @@ async function find(id) {
       const label = txt.replace(/<[^>]+>/g, '').trim();
       if (!FOLLOW.test(label) || NOT.test(label)) continue;
       let v;
-      try { v = new URL(h.replace(/&amp;/g, '&'), u); } catch { continue; }
+      try { v = new URL(h.replace(/&amp;/g, '&'), baseOf(p.html, u)); } catch { continue; }
       if (!/^https?:$/.test(v.protocol) || !v.host.replace(/^www\./, '').endsWith(base)) continue;
       if (!seen.has(v.href)) queue.push({ u: v.href, d: d + 1, pri: PRIOR.test(label) ? 2 : /議員/.test(label) ? 1 : 0 });
     }
