@@ -40,7 +40,13 @@ function pdf(buf) {
   const f = path.join(os.tmpdir(), `roster-${process.pid}-${Math.random().toString(36).slice(2)}.pdf`);
   try {
     fs.writeFileSync(f, buf);
-    const t = execFileSync('pdftotext', ['-layout', '-enc', 'UTF-8', f, '-'], { encoding: 'utf8', timeout: 30000 });
+    let t = '';
+    try { t = execFileSync('pdftotext', ['-layout', '-enc', 'UTF-8', f, '-'], { encoding: 'utf8', timeout: 30000, stdio: ['ignore', 'pipe', 'ignore'] }); } catch { /* 下で PyMuPDF を試す */ }
+    // 日本語の字体の表（CMap）が入っていない pdftotext では、日本語の PDF が文字にならない。PyMuPDF があればそちらで読む
+    if (!/[一-龥ぁ-ん]/.test(t)) {
+      try { t = execFileSync('python', ['-I', '-c', 'import sys,fitz\nd=fitz.open(sys.argv[1])\nsys.stdout.buffer.write("\\n".join(p.get_text() for p in d).encode("utf-8"))', f], { encoding: 'utf8', timeout: 30000, stdio: ['ignore', 'pipe', 'ignore'] }); } catch { /* なし */ }
+    }
+    if (!t.trim()) return { error: 'PDF（文字にできない）' };
     return { text: t };
   } catch { return { error: 'PDF（文字にできない）' }; } finally { try { fs.unlinkSync(f); } catch { /* なし */ } }
 }
@@ -95,9 +101,13 @@ function extract(page, min = 2) {
   const cells = [...body.matchAll(/<t[dh][^>]*>([\s\S]*?)<\/t[dh]>/gi)].map((m) => clean(m[1]).replace(/\s+/g, ' ').trim());
   const kanaPair = [];
   for (let i = 0; i + 1 < cells.length; i++) {
-    const n = cells[i].replace(/[\s　]+/g, '');
-    if (NOSPACE.test(n) && !STOP.test(n) && KANA.test(cells[i + 1]) && n.length >= 2) {
-      const sp = cells[i].match(SPACED);
+    // 「藤川隆夫 |（注1）| フジカワ タカオ」のような注のセルは飛ばす
+    const note = /^([（(]注\d*[)）]|※\d*)$/;
+    const c0 = cells[i].replace(/[（(]注\d*[)）]|※\d*/g, '').trim();
+    const n = c0.replace(/[\s　]+/g, '');
+    const next = note.test(cells[i + 1]) ? cells[i + 2] || '' : cells[i + 1];
+    if (NOSPACE.test(n) && !STOP.test(n) && KANA.test(next) && n.length >= 2) {
+      const sp = c0.match(SPACED);
       kanaPair.push(sp ? join(sp) : n);
     }
   }
@@ -147,7 +157,7 @@ function extract(page, min = 2) {
   const all = uniq(ranked.flatMap(([, u]) => u));
   const flat = all.map((x) => x.replace(/ /g, ''));
   const names = all.filter((x, i) => x.includes(' ') || !flat.some((y, j) => j !== i && y.length > flat[i].length && y.endsWith(flat[i])));
-  return { key: ranked.map(([k]) => k).join('+') || null, names: dropReadings(names) };
+  return { key: ranked.map(([k]) => k).join('+') || null, names: dropReadings(names), withReading: new Set(groups.kana || []) };
 }
 
 function extractText(text) {
@@ -195,6 +205,8 @@ const PAGES = {
   '神奈川県/相模原市': 'https://www.sagamihara-shigikai.jp/doc/2013122400014/',
   '東京都/足立区': 'https://www.gikai-adachi.jp/g07_giinlist.asp?Hmode=20',
   '大阪府/@': 'https://www.pref.osaka.lg.jp/o170010/gikai_somu/sugatami20/index50.html',
+  '熊本県/@': 'https://www.pref.kumamoto.jp/site/gikai/51859.html',  // 全議員名簿（会派別）
+  '栃木県/@':'https://www.pref.tochigi.lg.jp/p01/assembly/giin/meibo/giinmeibokaihayobi.html',  // 50音別は画像。会派別は文字
   '神奈川県/@': { url: 'https://www.pref.kanagawa.jp/gikai/p80275.html', seats: 105 },  // 選挙区ごとの「定数N人」しか書いてない
 };
 async function readMerged({ url, follow }) {
@@ -219,7 +231,7 @@ const tidy = (r) => {
   r.names = [...new Set(r.names.map((x) => (/^(\S )+\S$/.test(x) && x.split(' ').length >= 3 ? x.replace(/ /g, '') : x)))];
   r.names = r.names.filter((x) => !WORDS.test(x.replace(/ /g, '')) && !/及|職業|視察|状況|執行|交際費|議席|役場|学校|病院|センター|(郡|市|区|町|村|署|家|館)$/.test(x));
   // 空白なしの名前が「姓 名」の名前と混じっているときは、名字の一覧にある名字で始まるものだけ残す（「圭二」のような下の名前だけ・地名を落とす）
-  if (r.names.some((x) => x.includes(' '))) r.names = r.names.filter((x) => x.includes(' ') || [4, 3, 2].some((k) => x.length - k >= 1 && SURNAMES.has(x.slice(0, k))));
+  if (r.names.some((x) => x.includes(' '))) r.names = r.names.filter((x) => x.includes(' ') || (r.withReading && r.withReading.has(x)) || [4, 3, 2].some((k) => x.length - k >= 1 && SURNAMES.has(x.slice(0, k))));
   if (r.names.filter((x) => /^. .$/.test(x) && !SURNAMES.has(x[0])).length >= 2 || r.names.filter((x) => /^. .$/.test(x)).length >= 3) r.error = '一文字ずつの言葉を拾っている';
   return r;
 };
@@ -349,7 +361,7 @@ async function main() {
       let b = SKIP[id] ? { names: [], error: SKIP[id] } : await read(url, lo, hi);
       if (!SKIP[id] && (b.error || b.names.length < lo || b.names.length > hi)) b = (await confirm(id, url, lo)) || b;
       if (!b.error && b.names.length >= lo && b.names.length <= hi) {
-        load(pref)[id] = { names: b.names, url: b.url, seats: b.seats || null, ...(b.via ? { via: b.via } : {}), checked_at: today() };
+        load(pref)[id] = { names: b.names.map((x) => x.replace(/[\u{E0100}-\u{E01EF}︀-️]/gu, '')), url: b.url, seats: b.seats || null, ...(b.via ? { via: b.via } : {}), checked_at: today() };
         delete failed[id];
       } else {
         delete load(pref)[id];
