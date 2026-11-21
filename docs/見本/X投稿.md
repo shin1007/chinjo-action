@@ -86,3 +86,8 @@ https://chinjo-action.vercel.app/kenko
 https://chinjo-action.vercel.app/sonota
 #宗教法人 #NPO法人
 ```
+
+## 音声つきの紹介動画（試作・2026-11-21）
+- [docs/見本/紹介動画/](紹介動画/) の mail-howto-goki.mp4（後鬼）、mail-howto-no7.mp4（No.7）、mail-howto-yurei.mp4（ユーレイちゃん）。作り方は `python scripts/make-promo-video.py`。
+- 投稿の文にも、使った声のクレジットを書く（例「VOICEVOX:後鬼」「VOICEVOX:No.7」「VOICEVOX:ユーレイちゃん(CV:神崎零)」）。
+- 規約は docs/調査/宣伝動画の合成音声の規約.md。
