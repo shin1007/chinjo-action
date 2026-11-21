@@ -51,9 +51,37 @@ function pdf(buf) {
         if (ja(u) > ja(t)) t = u;
       } catch { /* なし */ }
     }
-    if (!t.trim()) return { error: 'PDF（文字にできない）' };
-    return { text: t };
+    // それでも日本語にならない（画像だけの PDF・字体の表が壊れた PDF）ときは、OCR した文字を ocr に付ける。
+    // OCR の文字は読み違いがあるので名前の抜き出しには使わず、候補の名前を確かめるとき（confirm）だけに使う
+    const o = ja(t) < 0.2 ? ocrPdf(f) : '';
+    if (!t.trim() || ja(t) < 0.05) return { error: 'PDF（文字にできない）', ocr: o };
+    return { text: t, ocr: o };
   } catch { return { error: 'PDF（文字にできない）' }; } finally { try { fs.unlinkSync(f); } catch { /* なし */ } }
+}
+
+// OCR：PyMuPDF で PDF の各ページを画像にし、Tesseract（日本語）で文字にする。どちらかがなければ空
+function ocrPdf(f) {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'roster-ocr-'));
+  try {
+    execFileSync('python', ['-I', '-c', 'import sys,fitz\nd=fitz.open(sys.argv[1])\nfor i,p in enumerate(d):\n  if i>=8: break\n  p.get_pixmap(dpi=250).save(sys.argv[2]+"/p%02d.png"%i)', f, dir], { timeout: 60000, stdio: 'ignore' });
+    return fs.readdirSync(dir).sort().map((x) => ocrFile(path.join(dir, x))).join('\n');
+  } catch { return ''; } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+}
+function ocrFile(img) {
+  try { return execFileSync('tesseract', [img, 'stdout', '-l', 'jpn', '--psm', '6'], { encoding: 'utf8', timeout: 60000, stdio: ['ignore', 'pipe', 'ignore'] }); } catch { return ''; }
+}
+async function ocrImage(url) {
+  const ctl = new AbortController();
+  const timer = setTimeout(() => ctl.abort(), 20000);
+  const f = path.join(os.tmpdir(), `roster-img-${process.pid}-${Math.random().toString(36).slice(2)}.png`);
+  try {
+    const r = await fetch(url, { signal: ctl.signal, headers: { 'User-Agent': 'Mozilla/5.0 (compatible; petition-guide-checker)' } });
+    if (!r.ok) return '';
+    const buf = Buffer.from(await r.arrayBuffer());
+    if (buf.length < 15000) return ''; // 小さい画像（アイコン・ボタン）は読まない
+    fs.writeFileSync(f, buf);
+    return ocrFile(f);
+  } catch { return ''; } finally { clearTimeout(timer); try { fs.unlinkSync(f); } catch { /* なし */ } }
 }
 
 const KANJI = '一-龥々〆ヶ㐀-䶵豐﨑髙';
@@ -174,6 +202,17 @@ function extractText(text) {
       if (sp && isName(sp)) names.push(join(sp));
     }
   }
+  // 「姓 名」の形がほとんどない PDF（「福田正明」のように空白なし）は、名字の一覧にある名字で始まる漢字だけのセルを拾う
+  if (names.length < 10) {
+    const ns = [];
+    for (const line of text.split(/\n/)) {
+      for (const cell of line.split(/\s+/)) {
+        const t = cell.normalize('NFC').trim();
+        if (new RegExp(`^[${KANJI}]{3,5}$`).test(t) && !STOP.test(t) && !WORDS.test(t) && !/(都|道|府|県|市|区|町|村|郡|課|係|室|局|会|党|部|号|番地|丁目)$/.test(t) && [3, 2].some((k) => t.length - k >= 1 && SURNAMES.has(t.slice(0, k)))) ns.push(t);
+      }
+    }
+    if (ns.length > names.length * 2) return { key: 'pdf-nospace', names: dropReadings([...new Set([...names, ...ns])]) };
+  }
   return { key: 'pdf', names: dropReadings([...new Set(names)]) };
 }
 
@@ -212,6 +251,7 @@ const PAGES = {
   '大阪府/@': 'https://www.pref.osaka.lg.jp/o170010/gikai_somu/sugatami20/index50.html',
   '石川県/金沢市': { url: 'https://www4.city.kanazawa.lg.jp/soshikikarasagasu/gikaijimukyokugijichosaka/gyomuannai/1/5/3800.html', seats: 38 },  // 会派等別。五十音順は画像
   '香川県/@': 'https://www.pref.kagawa.lg.jp/gikai/meibo/50onjun_ketu1.html',  // 名前は画像の代わりの文字（alt）だけ
+  '兵庫県/尼崎市': { url: 'https://www.city.amagasaki.hyogo.jp/gikai/1001056/1001211/index.html', follow: /行）50音別/ },
   '茨城県/@': 'https://www.pref.ibaraki.jp/gikai/meibo/meibo_1.htm',
   '徳島県/@': 'https://www.pref.tokushima.lg.jp/gikai/giin/kaihabetu/',
   '鹿児島県/@': { url: 'https://www.pref.kagoshima.jp/ha01/gikai/giin/profile/utokeiko.html', seats: 51 },  // 名簿のページは顔写真だけ。議員ごとのページの横に全員の名前の一覧がある
@@ -223,7 +263,7 @@ async function readMerged({ url, follow }) {
   const p = await html(url);
   if (!p.html) return { names: [], error: p.error || '開けない' };
   const links = [...new Set([...p.html.matchAll(/<a\s[^>]*href=["']([^"'#]+)["'][^>]*>([\s\S]*?)<\/a>/gi)]
-    .filter(([, , t]) => follow.test(t.replace(/<[^>]+>/g, '').trim())).map(([, h]) => new URL(h, url).href))];
+    .filter(([, , t]) => follow.test(t.replace(/<[^>]+>/g, '').trim())).map(([, h]) => new URL(h, baseOf(p.html, url)).href))];
   const all = [];
   for (const l of links.slice(0, 40)) {
     const q = await html(l);
@@ -233,7 +273,7 @@ async function readMerged({ url, follow }) {
   return { key: `merge${links.length}`, names: [...new Set(all)], url, seats: seats(p.html) };
 }
 // 目で見て名前でないものを拾うとわかった議会（読み方を直すまで使わない）
-const SKIP = { '千葉県/匝瑳市': '名前でないもの（地名）を拾う' };
+const SKIP = { '千葉県/匝瑳市': '名前でないもの（地名）を拾う', '千葉県/長生郡一宮町': '2026年11月の選挙で議員が入れ替わり、議会中継の候補が古い（名簿は文字の PDF だが、よみがなと混じって読めない）' };
 // 一文字ずつの「姓 名」は表の見出しや言葉のことが多い。言葉の一覧にあるものは落とし、3つ以上あれば名簿ごと使わない
 const WORDS = /^(欠員|欠番|会計|団長|代表|幹事|農業|無職|顧問|派遣|銀座|清住|本陣|新風|会長|理事|監事|委員|議員|職名|期別|回数|氏名|住所|党派|備考|写真|役職|期数|議席|年齢|性別|職業|定数|議長|一般質問|承認|選任|適任|許可|決定)$/;
 const tidy = (r) => {
@@ -276,7 +316,7 @@ async function readRaw(url, lo, hi) {
   b.seats = seats(p.html);
   if (b.names.length >= lo && b.names.length <= hi) return { ...b, url };
   const subs = [...p.html.matchAll(/<a\s[^>]*href=["']([^"'#]+)["'][^>]*>([\s\S]*?)<\/a>/gi)]
-    .map(([, h, t]) => { try { return { href: new URL(h, url).href, text: t.replace(/<[^>]+>/g, '').trim() }; } catch { return null; } })
+    .map(([, h, t]) => { try { return { href: new URL(h, baseOf(p.html, url)).href, text: t.replace(/<[^>]+>/g, '').trim() }; } catch { return null; } })
     .filter((l) => l && SUB.test(l.text) && !/歴代|元議員|報酬|政務活動|資産|委員会/.test(l.text) && l.href !== url && !/twitter|x\.com|facebook|instagram|youtube|line\.me/.test(l.href));
   let best = { ...b, url };
   const pages = [[url, p.html]];
@@ -304,6 +344,8 @@ async function readRaw(url, lo, hi) {
   return best;
 }
 
+// <base href> があるページは、相対のリンクをそこから読む
+const baseOf = (h, url) => { const m = (h || '').match(/<base[^>]+href=["']([^"']+)["']/i); try { return m ? new URL(m[1], url).href : url; } catch { return url; } };
 const range = (level) => (level === 'pref' ? [30, 130] : [5, 110]);
 
 // 名簿のページからは名前の形が読めない議会は、ほかで集めた名前の候補（scripts/roster-candidates.js）を、
@@ -333,28 +375,50 @@ async function confirm(id, url, lo) {
   if (!c) return null;
   const u = url.url || url;
   const p = await html(u);
-  if (p.error) return null;
-  const texts = [flat(p.text != null ? p.text : p.html)];
+  if (p.error && !p.ocr) return null;
+  const texts = [flat(p.text != null ? p.text : p.html || '')];
+  const ocrs = [p.ocr || ''];
+  const pages = p.html ? [[u, p.html]] : [];
   if (p.html) {
     const subs = [...p.html.matchAll(/<a\s[^>]*href=["']([^"'#]+)["'][^>]*>([\s\S]*?)<\/a>/gi)]
-      .map(([, h, t]) => { try { return { href: new URL(h, u).href, text: t.replace(/<[^>]+>/g, '').trim() }; } catch { return null; } })
+      .map(([, h, t]) => { try { return { href: new URL(h, baseOf(p.html, u)).href, text: t.replace(/<[^>]+>/g, '').trim() }; } catch { return null; } })
       .filter((l) => l && (SUB.test(l.text) || /名簿|議員|一覧|会派/.test(l.text)) && !/歴代|元議員|報酬|政務活動|資産|委員会|会議録|中継/.test(l.text) && l.href !== u);
     for (const l of [...new Map(subs.map((x) => [x.href, x])).values()].slice(0, 6)) {
       const q = await html(l.href);
       if (q.html || q.text) texts.push(flat(q.text != null ? q.text : q.html));
+      if (q.ocr) ocrs.push(q.ocr);
+      if (q.html) pages.push([l.href, q.html]);
     }
   }
-  const all = texts.join('|');
-  let names = [...new Set(c.names.filter((n) => all.includes(flat(n))))];
-  // ほかの名前の一部になっているもの（「田中太」と「田中太郎」）は落とす
-  names = names.filter((n) => !names.some((m) => m !== n && flat(m).length > flat(n).length && flat(m).includes(flat(n))));
   // 読み取った人数が議会の定数としてありえない（都道府県で30人より少ないなど）ときは、選挙区など一部の人数とみて使わない
-  const seen = seats(p.text != null ? p.text : p.html);
+  const seen = seats(p.text != null ? p.text : p.html || '');
   const seats_ = (typeof url === 'object' && url.seats) || (seen && seen >= lo ? seen : null);
-  if (names.length < Math.max(lo, 8)) return null;
-  if (c.onlyElection && !seats_) return null;
-  if (seats_ ? names.length < Math.floor(seats_ * 0.9) || names.length > seats_ : names.length < c.dvCount * 0.5) return null;
-  return { key: 'cand', names, url: u, seats: seats_ || null, via: c.via };
+  const pick = (all) => {
+    let names = [...new Set(c.names.filter((n) => all.includes(flat(n))))];
+    // ほかの名前の一部になっているもの（「田中太」と「田中太郎」）は落とす
+    names = names.filter((n) => !names.some((m) => m !== n && flat(m).length > flat(n).length && flat(m).includes(flat(n))));
+    if (names.length < Math.max(lo, 8)) return null;
+    if (c.onlyElection && !seats_) return null;
+    if (seats_ ? names.length < Math.floor(seats_ * 0.9) || names.length > seats_ : names.length < c.dvCount * 0.5) return null;
+    return names;
+  };
+  let names = pick(texts.join('|'));
+  let via = c.via;
+  if (!names) {
+    // 名簿が画像・画像だけの PDF のときは OCR した文字の中も探す（本文の中の大きい画像を8枚まで）
+    for (const [base, h] of pages) {
+      const main = (h.match(/<main[\s\S]*?<\/main>/i) || h.match(/<div[^>]+id=["'](?:main|contents?|tmp_contents|content-main|mainContents)["'][\s\S]*/i) || [h])[0];
+      const imgs = [...new Set([...main.matchAll(/<img[^>]+src=["']([^"']+\.(?:png|jpe?g|gif))["']/gi)].map(([, s]) => { try { return new URL(s, baseOf(h, base)).href; } catch { return null; } }).filter(Boolean))];
+      for (const im of imgs.slice(0, 8)) ocrs.push(await ocrImage(im));
+    }
+    const o = ocrs.map((x) => flat(x || '')).join('|');
+    if (o) {
+      names = pick(`${texts.join('|')}|${o}`);
+      via = `${c.via}（画像・PDF の文字は OCR で読んだ）`;
+    }
+  }
+  if (!names) return null;
+  return { key: 'cand', names, url: u, seats: seats_ || null, via };
 }
 
 async function main() {
@@ -431,4 +495,4 @@ async function main() {
   console.error(`名前を抜き出せた議会：${all} 件・抜き出せなかった：${Object.keys(failed).length} 件`);
 }
 if (require.main === module) main();
-module.exports = { read, html, extract };
+module.exports = { read, html, extract, baseOf };
