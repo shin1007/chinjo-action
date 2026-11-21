@@ -371,6 +371,14 @@ def summary(total, size, end):
     return im
 
 
+def read_ms(step):
+    # X用：タイムラインでは全文を読まず、見出しと金額を拾って補足を流し読みする。
+    # 見出しに目を向けて読むまで約1.8秒、補足は1字あたり0.03秒を足す（拾い読み）。
+    # 2.5〜4.5秒に収め、もとの1コマ3.5〜5.9秒より3割ほど速くする。全体は約40秒（もとは約60秒）。
+    n = len(step[0] + step[1].replace(chr(10), '') + step[2])
+    return max(2500, min(4500, 1800 + 30 * n))
+
+
 def main():
     for lay in LAYOUTS.values():
         size, out = lay['size'], lay['out']
@@ -378,12 +386,12 @@ def main():
         for i, s in enumerate(STEPS):
             total += s[3]
             frames.append(frame(i, total, s[4] in ('stamp', 'post'), size))
-            durs.append(3500 + 1200 * s[1].count('\n'))  # 説明の項目が多いコマほど長く見せる
+            durs.append(read_ms(s) if lay['end'] == 'url' else 3500 + 1200 * s[1].count('\n'))  # 説明の項目が多いコマほど長く見せる
         if lay['end'] == 'url':  # X用は、費用の目安を見せるカードから始める
             frames.insert(0, cover(sum(s[3] for s in STEPS), size))
-            durs.insert(0, 5000)
+            durs.insert(0, 3000)  # 最初の約3秒で読むかどうかが決まるので、表紙は短く
         frames.append(summary(total, size, lay['end']))
-        durs.append(7000)
+        durs.append(6000 if lay['end'] == 'url' else 7000)  # 最後は金額とURLを読み取れるよう長めに
         out.parent.mkdir(parents=True, exist_ok=True)
         pal = [fr.convert('P', palette=Image.ADAPTIVE, colors=64) for fr in frames]
         pal[0].save(out, save_all=True, append_images=pal[1:], duration=durs, loop=0, optimize=True)
