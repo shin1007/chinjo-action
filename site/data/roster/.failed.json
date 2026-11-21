@@ -17,25 +17,20 @@
  "栃木県/@": {
   "url": "https://www.pref.tochigi.lg.jp/p01/kengikai/kouhou/giinshokai.html",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
+  "checked_at": "2026-11-21"
  },
  "秋田県/@": {
   "url": "https://pref.akita.gsl-service.net/doc/2018042300017/",
   "reason": "12人のうち9人しか取れない",
-  "checked_at": "2026-11-20"
+  "checked_at": "2026-11-21"
  },
  "香川県/@": {
   "url": "https://www.pref.kagawa.lg.jp/gikai/meibo/index.html",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
+  "checked_at": "2026-11-21"
  },
  "鹿児島県/@": {
   "url": "https://www.pref.kagoshima.jp/gikai/giin/index.html",
-  "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
- },
- "福岡県/北九州市": {
-  "url": "https://www.city.kitakyushu.lg.jp/sigikai/menu11_0002.html",
   "reason": "0人しか取れない（人数が書いてない）",
   "checked_at": "2026-11-20"
  },
@@ -52,21 +47,16 @@
  "兵庫県/尼崎市": {
   "url": "https://www.city.amagasaki.hyogo.jp/gikai/1001056/index.html",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
+  "checked_at": "2026-11-21"
  },
  "東京都/北区": {
   "url": "https://www.city.kita.lg.jp/assembly/members/index.html",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
+  "checked_at": "2026-11-21"
  },
  "長崎県/長崎市": {
   "url": "https://www.city.nagasaki.lg.jp/site/gikai/list41-196.html",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
- },
- "東京都/新宿区": {
-  "url": "https://www.city.shinjuku.lg.jp/kusei/gikai01_000112.html",
-  "reason": "38人のうち30人しか取れない",
   "checked_at": "2026-11-20"
  },
  "大阪府/高槻市": {
@@ -107,7 +97,7 @@
  "神奈川県/小田原市": {
   "url": "https://www.city.odawara.kanagawa.jp/faq/p38912.html",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
+  "checked_at": "2026-11-21"
  },
  "岐阜県/大垣市": {
   "url": "https://www.city.ogaki.lg.jp/gikai/category/10-6-0-0-0.html",
@@ -117,7 +107,7 @@
  "兵庫県/川西市": {
   "url": "https://www.city.kawanishi.hyogo.jp/gikai/1025847.html",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
+  "checked_at": "2026-11-21"
  },
  "埼玉県/狭山市": {
   "url": "https://www.city.sayama.saitama.jp/gikai/meibo/index.html",
@@ -142,7 +132,7 @@
  "千葉県/成田市": {
   "url": "https://www.city.narita.chiba.jp/gikai/index0083.html",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
+  "checked_at": "2026-11-21"
  },
  "千葉県/木更津市": {
   "url": "https://www.city.kisarazu.lg.jp/gyoseijoho/shigikai/giinshoukai/index.html",
@@ -167,7 +157,7 @@
  "大阪府/松原市": {
   "url": "https://www.city.matsubara.lg.jp/docs/page3829.html",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
+  "checked_at": "2026-11-21"
  },
  "愛知県/半田市": {
   "url": "https://www.city.handa.lg.jp/shisei/gikai/1004472/index.html",
@@ -177,12 +167,12 @@
  "静岡県/掛川市": {
   "url": "https://www.city.kakegawa.shizuoka.jp/gyosei/shisei/shigikai/giin/",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
+  "checked_at": "2026-11-21"
  },
  "千葉県/印西市": {
   "url": "https://www.city.inzai.lg.jp/category/6-5-0-0-0.html",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
+  "checked_at": "2026-11-21"
  },
  "佐賀県/唐津市": {
   "url": "https://www.city.karatsu.lg.jp/site/shigikai/list135.html",
@@ -202,17 +192,7 @@
  "静岡県/三島市": {
   "url": "https://www.city.mishima.shizuoka.jp/site/gikai/list217-544.html",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
- },
- "岩手県/一関市": {
-  "url": "https://www.city.ichinoseki.iwate.jp/genre/shisei-jouhou/shigikai/giin-shoukai",
-  "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
- },
- "埼玉県/坂戸市": {
-  "url": "https://www.city.sakado.lg.jp/site/sakadogikai/156.html",
-  "reason": "20人のうち0人しか取れない",
-  "checked_at": "2026-11-20"
+  "checked_at": "2026-11-21"
  },
  "長野県/佐久市": {
   "url": "https://www.city.saku.nagano.jp/shigikai/giinnoshokai/index.html",
@@ -229,11 +209,6 @@
   "reason": "0人しか取れない（人数が書いてない）",
   "checked_at": "2026-11-20"
  },
- "埼玉県/和光市": {
-  "url": "https://www.city.wako.lg.jp/shisei/1006222/1006464/1006466/index.html",
-  "reason": "18人のうち15人しか取れない",
-  "checked_at": "2026-11-20"
- },
  "茨城県/牛久市": {
   "url": "https://www.city.ushiku.lg.jp/shisei/senkyo-gikai/gikai/giinmeibo/",
   "reason": "0人しか取れない（人数が書いてない）",
@@ -241,11 +216,6 @@
  },
  "滋賀県/近江八幡市": {
   "url": "https://www.city.omihachiman.lg.jp/soshiki/gikai/shigikai/1059.html",
-  "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
- },
- "埼玉県/志木市": {
-  "url": "https://www.city.shiki.lg.jp/site/gikai/1276.html",
   "reason": "0人しか取れない（人数が書いてない）",
   "checked_at": "2026-11-20"
  },
@@ -312,12 +282,7 @@
  "熊本県/合志市": {
   "url": "https://www.city.koshi.lg.jp/gikai/list00712.html",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
- },
- "沖縄県/糸満市": {
-  "url": "https://www.city.itoman.lg.jp/soshiki/37/1168.html",
-  "reason": "よみがなを拾っている",
-  "checked_at": "2026-11-20"
+  "checked_at": "2026-11-21"
  },
  "愛知県/長久手市": {
   "url": "https://www.city.nagakute.lg.jp/gyosei/gikai/6333.html",
@@ -367,7 +332,7 @@
  "岐阜県/美濃加茂市": {
   "url": "https://www.city.minokamo.lg.jp/site/gikai/list31.html",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
+  "checked_at": "2026-11-21"
  },
  "山口県/下松市": {
   "url": "https://www.city.kudamatsu.lg.jp/gikai/documents/r8611aa22ki-photo.pdf",
@@ -376,11 +341,6 @@
  },
  "北海道/北広島市": {
   "url": "https://www.city.kitahiroshima.hokkaido.jp/hotnews/category/200.html",
-  "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
- },
- "千葉県/東金市": {
-  "url": "https://www.city.togane.chiba.jp/0000001443.html",
   "reason": "0人しか取れない（人数が書いてない）",
   "checked_at": "2026-11-20"
  },
@@ -394,11 +354,6 @@
   "reason": "名前でないものを拾っている",
   "checked_at": "2026-11-20"
  },
- "埼玉県/日高市": {
-  "url": "https://www.city.hidaka.lg.jp/hidakacity_parliament/introduction/index.html",
-  "reason": "8人のはずが16人取れた（名前でないものが混じっている）",
-  "checked_at": "2026-11-20"
- },
  "宮城県/気仙沼市": {
   "url": "https://www.kesennuma.miyagi.jp/li/shisei/160/030/index.html",
   "reason": "0人しか取れない（人数が書いてない）",
@@ -406,16 +361,6 @@
  },
  "岐阜県/土岐市": {
   "url": "https://www.city.toki.lg.jp/shisei/gikai/1004937/1002195.html",
-  "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
- },
- "埼玉県/白岡市": {
-  "url": "https://www.city.shiraoka.lg.jp/soshiki/gikaijimukyoku/1/155.html",
-  "reason": "名前でないものを拾っている",
-  "checked_at": "2026-11-20"
- },
- "千葉県/富里市": {
-  "url": "https://www.city.tomisato.lg.jp/category/2-3-11-0-0-0-0-0-0-0.html",
   "reason": "0人しか取れない（人数が書いてない）",
   "checked_at": "2026-11-20"
  },
@@ -427,20 +372,10 @@
  "埼玉県/幸手市": {
   "url": "https://www.city.satte.lg.jp/parliament/3/index.html",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
+  "checked_at": "2026-11-21"
  },
  "福岡県/糟屋郡粕屋町": {
   "url": "https://www.town.kasuya.fukuoka.jp/li/080/020/index.html",
-  "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
- },
- "茨城県/小美玉市": {
-  "url": "https://gikai.city.omitama.ibaraki.jp/0058/info-0000010246-4.html",
-  "reason": "よみがなを拾っている",
-  "checked_at": "2026-11-20"
- },
- "群馬県/みどり市": {
-  "url": "https://www.city.midori.gunma.jp/shisei/1001670/1003207/index.html",
   "reason": "0人しか取れない（人数が書いてない）",
   "checked_at": "2026-11-20"
  },
@@ -459,16 +394,6 @@
   "reason": "0人しか取れない（人数が書いてない）",
   "checked_at": "2026-11-20"
  },
- "熊本県/菊池市": {
-  "url": "https://www.city.kikuchi.lg.jp/article/view/1418/1039.html",
-  "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
- },
- "群馬県/富岡市": {
-  "url": "https://www.city.tomioka.lg.jp/www/contents/1682918665200/index.html",
-  "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
- },
  "山梨県/北杜市": {
   "url": "https://www.city.hokuto.yamanashi.jp/life/hokuto/gikai/kousei_meibo/",
   "reason": "0人しか取れない（人数が書いてない）",
@@ -477,26 +402,16 @@
  "徳島県/鳴門市": {
   "url": "https://www.city.naruto.lg.jp/category/gikai/meibo/",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
- },
- "埼玉県/北葛飾郡杉戸町": {
-  "url": "https://www.town.sugito.lg.jp/site/gikai/6153.html",
-  "reason": "15人のうち11人しか取れない",
-  "checked_at": "2026-11-20"
+  "checked_at": "2026-11-21"
  },
  "島根県/益田市": {
   "url": "https://www.city.masuda.lg.jp/shiseijoho/masudashigikai/giinnoshokai/index.html",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
+  "checked_at": "2026-11-21"
  },
  "愛知県/新城市": {
   "url": "https://www.city.shinshiro.lg.jp/shigikai/gikai/giinnmeibo.html",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
- },
- "沖縄県/島尻郡南風原町": {
-  "url": "https://www.town.haebaru.lg.jp/site/gikai/2024.html",
-  "reason": "16人のうち0人しか取れない",
   "checked_at": "2026-11-20"
  },
  "兵庫県/洲本市": {
@@ -507,7 +422,7 @@
  "茨城県/かすみがうら市": {
   "url": "https://www.city.kasumigaura.lg.jp/page/dir003425.html",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
+  "checked_at": "2026-11-21"
  },
  "神奈川県/南足柄市": {
   "url": "https://www.city.minamiashigara.kanagawa.jp/gikai/giin/p07342.html",
@@ -522,7 +437,7 @@
  "茨城県/那珂郡東海村": {
   "url": "https://www.vill.tokai.ibaraki.jp/tokaimuragikai/giin/index.html",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
+  "checked_at": "2026-11-21"
  },
  "富山県/黒部市": {
   "url": "https://www.city.kurobe.toyama.jp/category/menu.aspx?ctgcd=166",
@@ -552,7 +467,7 @@
  "大分県/臼杵市": {
   "url": "https://www.city.usuki.oita.jp/categories/shimin/shigikai/giin/",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
+  "checked_at": "2026-11-21"
  },
  "千葉県/いすみ市": {
   "url": "https://www.city.isumi.lg.jp/soshikikarasagasu/gikaijimukyoku/shiseijoho/1/1/1417.html",
@@ -572,7 +487,7 @@
  "千葉県/匝瑳市": {
   "url": "https://www.city.sosa.lg.jp/page/dir001438.html",
   "reason": "名前でないもの（地名）を拾う",
-  "checked_at": "2026-11-20"
+  "checked_at": "2026-11-21"
  },
  "大分県/由布市": {
   "url": "https://www.city.yufu.oita.jp/article_link/shigikaigiinmeibo-2",
@@ -597,21 +512,11 @@
  "岩手県/紫波郡紫波町": {
   "url": "https://www.town.shiwa.iwate.jp/chosei/1/2/",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
+  "checked_at": "2026-11-21"
  },
  "北海道/網走市": {
   "url": "https://www.city.abashiri.hokkaido.jp/site/gikai/1559.html",
   "reason": "14人のうち0人しか取れない",
-  "checked_at": "2026-11-20"
- },
- "埼玉県/大里郡寄居町": {
-  "url": "https://www.town.yorii.saitama.jp/site/gikai/gikaimeibo.html",
-  "reason": "よみがなを拾っている",
-  "checked_at": "2026-11-20"
- },
- "福岡県/朝倉郡筑前町": {
-  "url": "https://www.town.chikuzen.fukuoka.jp/li/100/010/index.html",
-  "reason": "よみがなを拾っている",
   "checked_at": "2026-11-20"
  },
  "茨城県/行方市": {
@@ -621,11 +526,6 @@
  },
  "京都府/綾部市": {
   "url": "https://www.city.ayabe.lg.jp/category/7-23-2-0-0-0-0-0-0-0.html",
-  "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
- },
- "埼玉県/児玉郡上里町": {
-  "url": "https://www.town.kamisato.saitama.jp/1794.htm",
   "reason": "0人しか取れない（人数が書いてない）",
   "checked_at": "2026-11-20"
  },
@@ -667,7 +567,7 @@
  "宮崎県/西都市": {
   "url": "https://www.city.saito.lg.jp/shiseigyosei/shigikai/post_474",
   "reason": "HTTP 404",
-  "checked_at": "2026-11-20"
+  "checked_at": "2026-11-21"
  },
  "兵庫県/朝来市": {
   "url": "https://www.city.asago.hyogo.jp/site/gikai/list54-160.html",
@@ -697,11 +597,6 @@
  "佐賀県/三養基郡みやき町": {
   "url": "https://www.town.miyaki.lg.jp/chosei/gikai/_1649.html",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
- },
- "群馬県/邑楽郡邑楽町": {
-  "url": "https://www.town.ora.gunma.jp/s049/070/080/giinmeibo.html",
-  "reason": "14人のうち6人しか取れない",
   "checked_at": "2026-11-20"
  },
  "鹿児島県/いちき串木野市": {
@@ -752,7 +647,7 @@
  "栃木県/那須郡那須町": {
   "url": "https://www.town.nasu.lg.jp/0245/genre2-1-001.html",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
+  "checked_at": "2026-11-21"
  },
  "栃木県/那須烏山市": {
   "url": "https://www.city.nasukarasuyama.lg.jp/city-council/members/",
@@ -842,7 +737,7 @@
  "埼玉県/比企郡川島町": {
   "url": "https://www.town.kawajima.saitama.jp/2236.htm",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
+  "checked_at": "2026-11-21"
  },
  "佐賀県/西松浦郡有田町": {
   "url": "https://www.town.arita.lg.jp/gikai/list00414.html",
@@ -904,11 +799,6 @@
   "reason": "よみがなを拾っている",
   "checked_at": "2026-11-20"
  },
- "山形県/西村山郡河北町": {
-  "url": "https://www.town.kahoku.yamagata.jp/gyouseizyouhou/kahokutyougikai/7440.html",
-  "reason": "一文字ずつの言葉を拾っている",
-  "checked_at": "2026-11-20"
- },
  "石川県/鹿島郡中能登町": {
   "url": "https://www.town.nakanoto.ishikawa.jp/soshiki/gikaijimukyoku/1/9/index.html",
   "reason": "0人しか取れない（人数が書いてない）",
@@ -947,11 +837,6 @@
  "鳥取県/八頭郡八頭町": {
   "url": "https://www.town.yazu.tottori.jp/site/gikai/1343.html",
   "reason": "7人のはずが14人取れた（名前でないものが混じっている）",
-  "checked_at": "2026-11-20"
- },
- "岩手県/胆沢郡金ケ崎町": {
-  "url": "https://www.town.kanegasaki.iwate.jp/gikai/files/meibo.pdf",
-  "reason": "よみがなを拾っている",
   "checked_at": "2026-11-20"
  },
  "北海道/白老郡白老町": {
@@ -1022,7 +907,7 @@
  "熊本県/球磨郡あさぎり町": {
   "url": "https://www.town.asagiri.lg.jp/list00296.html",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
+  "checked_at": "2026-11-21"
  },
  "長野県/埴科郡坂城町": {
   "url": "https://www.town.sakaki.nagano.jp/site/gikai/list8-21.html",
@@ -1062,11 +947,6 @@
  "兵庫県/赤穂郡上郡町": {
   "url": "https://www.town.kamigori.hyogo.jp/tyoseizyoho/gikai/2890.html",
   "reason": "10人のうち0人しか取れない",
-  "checked_at": "2026-11-20"
- },
- "福岡県/三潴郡大木町": {
-  "url": "http://www.town.ooki.lg.jp/soshiki/gikai/gikai/giinsyoukai/index.html",
-  "reason": "0人しか取れない（人数が書いてない）",
   "checked_at": "2026-11-20"
  },
  "山口県/大島郡周防大島町": {
@@ -1142,7 +1022,7 @@
  "千葉県/長生郡一宮町": {
   "url": "https://www.town.ichinomiya.chiba.jp/info/gikai/7/",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
+  "checked_at": "2026-11-21"
  },
  "岡山県/苫田郡鏡野町": {
   "url": "https://www.town.kagamino.lg.jp/site/gikai/1114.html",
@@ -1206,11 +1086,6 @@
  },
  "千葉県/長生郡白子町": {
   "url": "https://www.town.shirako.lg.jp/category/11-12-0-0-0-0-0-0-0-0.html",
-  "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
- },
- "埼玉県/比企郡ときがわ町": {
-  "url": "https://www.town.tokigawa.lg.jp/info/781",
   "reason": "0人しか取れない（人数が書いてない）",
   "checked_at": "2026-11-20"
  },
@@ -1294,11 +1169,6 @@
   "reason": "0人しか取れない（人数が書いてない）",
   "checked_at": "2026-11-20"
  },
- "三重県/多気郡大台町": {
-  "url": "https://www.odaitown.jp/soshiki/yakuba/3/4/797.html",
-  "reason": "よみがなを拾っている",
-  "checked_at": "2026-11-20"
- },
  "岩手県/九戸郡軽米町": {
   "url": "https://www.town.karumai.iwate.jp/article/.assets/2026%E7%89%88_%E8%AD%B0%E5%93%A1%E5%90%8D%E7%B0%BF.pdf",
   "reason": "12人のうち7人しか取れない",
@@ -1347,7 +1217,7 @@
  "沖縄県/島尻郡久米島町": {
   "url": "https://www.town.kumejima.okinawa.jp/docs/2017072600135/",
   "reason": "5人のはずが13人取れた（名前でないものが混じっている）",
-  "checked_at": "2026-11-20"
+  "checked_at": "2026-11-21"
  },
  "北海道/三笠市": {
   "url": "https://www.city.mikasa.hokkaido.jp/assembly/detail/00001695.html",
@@ -1364,18 +1234,8 @@
   "reason": "14人のはずが15人取れた（名前でないものが混じっている）",
   "checked_at": "2026-11-20"
  },
- "岩手県/西磐井郡平泉町": {
-  "url": "https://www.town.hiraizumi.iwate.jp/%E8%AD%B0%E5%93%A1%E5%90%8D%E7%B0%BF-21008/",
-  "reason": "一文字ずつの言葉を拾っている",
-  "checked_at": "2026-11-20"
- },
  "北海道/久遠郡せたな町": {
   "url": "https://www.town.setana.lg.jp/gikai/meibo/",
-  "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
- },
- "千葉県/長生郡睦沢町": {
-  "url": "https://www.town.mutsuzawa.chiba.jp/kurashi/gikai/giinmeibo.html",
   "reason": "0人しか取れない（人数が書いてない）",
   "checked_at": "2026-11-20"
  },
@@ -1407,11 +1267,6 @@
  "千葉県/長生郡長柄町": {
   "url": "https://www.town.nagara.chiba.jp/site/gikai/23.html",
   "reason": "一文字ずつの言葉を拾っている",
-  "checked_at": "2026-11-20"
- },
- "福島県/西白河郡泉崎村": {
-  "url": "https://www.vill.izumizaki.fukushima.jp/muragikai/page000127.html",
-  "reason": "0人しか取れない（人数が書いてない）",
   "checked_at": "2026-11-20"
  },
  "群馬県/吾妻郡草津町": {
@@ -1462,7 +1317,7 @@
  "高知県/高岡郡中土佐町": {
   "url": "https://www.town.nakatosa.lg.jp/giin/",
   "reason": "6人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
+  "checked_at": "2026-11-21"
  },
  "北海道/松前郡松前町": {
   "url": "https://www.town.matsumae.hokkaido.jp/hotnews/detail/00000542.html",
@@ -1552,11 +1407,6 @@
  "長野県/東筑摩郡朝日村": {
   "url": "https://www.vill.asahi.nagano.jp/special/asahimuragikai/seifukugicho_giinshokai/index.html",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
- },
- "愛知県/北設楽郡設楽町": {
-  "url": "https://www.town.shitara.lg.jp/soshiki/9/1228.html",
-  "reason": "よみがなを拾っている",
   "checked_at": "2026-11-20"
  },
  "島根県/邑智郡美郷町": {
@@ -1682,7 +1532,7 @@
  "東京都/新島村": {
   "url": "https://www.niijima.com/gikai/shoukai/meibo1.html",
   "reason": "3人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-20"
+  "checked_at": "2026-11-21"
  },
  "京都府/相楽郡南山城村": {
   "url": "https://www.vill.minamiyamashiro.lg.jp/0000003083.html",
@@ -1843,5 +1693,10 @@
   "url": "https://www.town.kinko.lg.jp/gikai-h/chose/gikai/mebo/mebo.html",
   "reason": "一文字ずつの言葉を拾っている",
   "checked_at": "2026-11-20"
+ },
+ "埼玉県/比企郡ときがわ町": {
+  "url": "https://www.town.tokigawa.lg.jp/info/781",
+  "reason": "0人しか取れない（人数が書いてない）",
+  "checked_at": "2026-11-21"
  }
 }
