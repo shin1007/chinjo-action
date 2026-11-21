@@ -21,7 +21,7 @@ const SITES = window.SITES;
 const have = {};
 for (const f of fs.readdirSync(path.join(DATA, 'roster'))) if (!f.startsWith('.')) Object.assign(have, JSON.parse(fs.readFileSync(path.join(DATA, 'roster', f), 'utf8')));
 
-const flat = (s) => s.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/gi, '').replace(/<rt>[\s\S]*?<\/rt>/gi, '').replace(/<[^>]+>/g, '').replace(/&nbsp;|&#160;/g, '')
+const flat = (s) => s.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/gi, '').replace(/<rt>[\s\S]*?<\/rt>/gi, '').replace(/<img[^>]*\balt=["']([^"']+)["'][^>]*>/gi, '|$1|').replace(/<[^>]+>/g, '').replace(/&nbsp;|&#160;/g, '')
   .replace(/[\s　]+/g, '').replace(/[﨑]/g, '崎').replace(/[髙]/g, '高').replace(/󠄀/g, '');
 const FOLLOW = /議員|名簿|会派|議会|議席|紹介/;
 const NOT = /会議録|中継|映像|報酬|政務活動|資産|歴代|元議員|選挙|英語|English|中文|한국|委員会/;

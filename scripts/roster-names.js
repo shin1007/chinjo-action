@@ -205,8 +205,13 @@ const PAGES = {
   '神奈川県/相模原市': 'https://www.sagamihara-shigikai.jp/doc/2013122400014/',
   '東京都/足立区': 'https://www.gikai-adachi.jp/g07_giinlist.asp?Hmode=20',
   '大阪府/@': 'https://www.pref.osaka.lg.jp/o170010/gikai_somu/sugatami20/index50.html',
+  '石川県/金沢市': { url: 'https://www4.city.kanazawa.lg.jp/soshikikarasagasu/gikaijimukyokugijichosaka/gyomuannai/1/5/3800.html', seats: 38 },  // 会派等別。五十音順は画像
+  '香川県/@': 'https://www.pref.kagawa.lg.jp/gikai/meibo/50onjun_ketu1.html',  // 名前は画像の代わりの文字（alt）だけ
+  '茨城県/@': 'https://www.pref.ibaraki.jp/gikai/meibo/meibo_1.htm',
+  '徳島県/@': 'https://www.pref.tokushima.lg.jp/gikai/giin/kaihabetu/',
+  '鹿児島県/@': { url: 'https://www.pref.kagoshima.jp/ha01/gikai/giin/profile/utokeiko.html', seats: 51 },  // 名簿のページは顔写真だけ。議員ごとのページの横に全員の名前の一覧がある
   '熊本県/@': 'https://www.pref.kumamoto.jp/site/gikai/51859.html',  // 全議員名簿（会派別）
-  '栃木県/@':'https://www.pref.tochigi.lg.jp/p01/assembly/giin/meibo/giinmeibokaihayobi.html',  // 50音別は画像。会派別は文字
+  '栃木県/@': 'https://www.pref.tochigi.lg.jp/p01/assembly/giin/meibo/giinmeibokaihayobi.html',  // 50音別は画像。会派別は文字
   '神奈川県/@': { url: 'https://www.pref.kanagawa.jp/gikai/p80275.html', seats: 105 },  // 選挙区ごとの「定数N人」しか書いてない
 };
 async function readMerged({ url, follow }) {
@@ -228,8 +233,10 @@ const SKIP = { '千葉県/匝瑳市': '名前でないもの（地名）を拾�
 const WORDS = /^(欠員|欠番|会計|団長|代表|幹事|農業|無職|顧問|派遣|銀座|清住|本陣|新風|会長|理事|監事|委員|議員|職名|期別|回数|氏名|住所|党派|備考|写真|役職|期数|議席|年齢|性別|職業|定数|議長|一般質問|承認|選任|適任|許可|決定)$/;
 const tidy = (r) => {
   // 「亀 田 尚 之」のように一文字ずつ空いているものはつなげる
+  // 「会長嘉見 博之」のように会派の役職が前に付いたものは役職を落とす
+  r.names = r.names.map((x) => x.replace(/^(相談役|顧問|会長代行|副会長|会長|副幹事長|幹事長|政調会長|政務調査会長|会計|会員|副代表|代表|副団長|団長|幹事|監事)(?=\S+ \S+$)/, ''));
   r.names = [...new Set(r.names.map((x) => (/^(\S )+\S$/.test(x) && x.split(' ').length >= 3 ? x.replace(/ /g, '') : x)))];
-  r.names = r.names.filter((x) => !WORDS.test(x.replace(/ /g, '')) && !/及|職業|視察|状況|執行|交際費|議席|役場|学校|病院|センター|(郡|市|区|町|村|署|家|館)$/.test(x));
+  r.names = r.names.filter((x) => !WORDS.test(x.replace(/ /g, '')) && !/及|職業|視察|状況|執行|交際費|議席|役場|学校|病院|センター|役に立|見つけ|わかりやす|分かりやす|読みやす|(郡|市|区|町|村|署|家|館)$/.test(x));
   // 空白なしの名前が「姓 名」の名前と混じっているときは、名字の一覧にある名字で始まるものだけ残す（「圭二」のような下の名前だけ・地名を落とす）
   if (r.names.some((x) => x.includes(' '))) r.names = r.names.filter((x) => x.includes(' ') || (r.withReading && r.withReading.has(x)) || [4, 3, 2].some((k) => x.length - k >= 1 && SURNAMES.has(x.slice(0, k))));
   if (r.names.filter((x) => /^. .$/.test(x) && !SURNAMES.has(x[0])).length >= 2 || r.names.filter((x) => /^. .$/.test(x)).length >= 3) r.error = '一文字ずつの言葉を拾っている';
@@ -298,7 +305,8 @@ const range = (level) => (level === 'pref' ? [30, 130] : [5, 110]);
 // 名簿のページ（と、そこからの名簿らしいリンク・PDF）の文字の中に探す。書いてあった名前だけを使う
 const CAND_FILE = path.join(__dirname, 'roster-candidates', 'discussvision.json');
 const CAND = fs.existsSync(CAND_FILE) ? JSON.parse(fs.readFileSync(CAND_FILE, 'utf8')).councils : {};
-const flat = (s) => s.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/gi, '').replace(/<rt>[\s\S]*?<\/rt>/gi, '').replace(/<[^>]+>/g, '').replace(/&nbsp;|&#160;/g, '')
+// 名前が画像の代わりの文字（<img alt="植田真紀">）にしかない名簿もある
+const flat = (s) => s.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/gi, '').replace(/<rt>[\s\S]*?<\/rt>/gi, '').replace(/<img[^>]*\balt=["']([^"']+)["'][^>]*>/gi, '|$1|').replace(/<[^>]+>/g, '').replace(/&nbsp;|&#160;/g, '')
   .replace(/[\s　]+/g, '').replace(/[﨑]/g, '崎').replace(/[髙]/g, '高').replace(/󠄀/g, '');
 async function confirm(id, url, lo) {
   const c = CAND[id];
@@ -318,7 +326,9 @@ async function confirm(id, url, lo) {
   }
   const all = texts.join('|');
   const names = [...new Set(c.names.filter((n) => all.includes(flat(n))))];
-  const seats_ = seats(p.text != null ? p.text : p.html);
+  // 読み取った人数が議会の定数としてありえない（都道府県で30人より少ないなど）ときは、選挙区など一部の人数とみて使わない
+  const seen = seats(p.text != null ? p.text : p.html);
+  const seats_ = (typeof url === 'object' && url.seats) || (seen && seen >= lo ? seen : null);
   if (names.length < Math.max(lo, 8)) return null;
   if (seats_ ? names.length < Math.floor(seats_ * 0.9) || names.length > seats_ : names.length < c.names.length * 0.5) return null;
   return { key: 'dv', names, url: u, seats: seats_ || null, via: `議会中継の発言者の一覧（tenant ${c.tenant}）の名前を、名簿のページで確かめた` };
@@ -359,7 +369,12 @@ async function main() {
       const url = PAGES[id] || roster[id].url;
       const [lo, hi] = range(level[id]);
       let b = SKIP[id] ? { names: [], error: SKIP[id] } : await read(url, lo, hi);
-      if (!SKIP[id] && (b.error || b.names.length < lo || b.names.length > hi)) b = (await confirm(id, url, lo)) || b;
+      // 読めなかったとき、または候補の人数の8割に届かない（一部しか読めていない見込み）とき、候補を名簿のページで確かめる
+      const few = CAND[id] && b.names.length < CAND[id].names.length * 0.8;
+      if (!SKIP[id] && (b.error || b.names.length < lo || b.names.length > hi || few)) {
+        const c = await confirm(id, url, lo);
+        if (c && (b.error || c.names.length > b.names.length)) b = c;
+      }
       if (!b.error && b.names.length >= lo && b.names.length <= hi) {
         load(pref)[id] = { names: b.names.map((x) => x.replace(/[\u{E0100}-\u{E01EF}︀-️]/gu, '')), url: b.url, seats: b.seats || null, ...(b.via ? { via: b.via } : {}), checked_at: today() };
         delete failed[id];
