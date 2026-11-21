@@ -4,16 +4,6 @@
   "reason": "0人しか取れない（人数が書いてない）",
   "checked_at": "2026-11-21"
  },
- "秋田県/@": {
-  "url": "https://pref.akita.gsl-service.net/doc/2018042300017/",
-  "reason": "12人のうち9人しか取れない",
-  "checked_at": "2026-11-21"
- },
- "香川県/@": {
-  "url": "https://www.pref.kagawa.lg.jp/gikai/meibo/index.html",
-  "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-21"
- },
  "千葉県/船橋市": {
   "url": "https://www.city.funabashi.lg.jp/assembly/012/p022018_d/fil/255-1.mp3",
   "reason": "0人しか取れない（人数が書いてない）",
@@ -351,7 +341,7 @@
  },
  "徳島県/鳴門市": {
   "url": "https://www.city.naruto.lg.jp/category/gikai/meibo/",
-  "reason": "0人しか取れない（人数が書いてない）",
+  "reason": "AbortError",
   "checked_at": "2026-11-21"
  },
  "島根県/益田市": {

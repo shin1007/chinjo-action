@@ -205,6 +205,8 @@ const PAGES = {
   '神奈川県/相模原市': 'https://www.sagamihara-shigikai.jp/doc/2013122400014/',
   '東京都/足立区': 'https://www.gikai-adachi.jp/g07_giinlist.asp?Hmode=20',
   '大阪府/@': 'https://www.pref.osaka.lg.jp/o170010/gikai_somu/sugatami20/index50.html',
+  '石川県/金沢市': { url: 'https://www4.city.kanazawa.lg.jp/soshikikarasagasu/gikaijimukyokugijichosaka/gyomuannai/1/5/3800.html', seats: 38 },  // 会派等別。五十音順は画像
+  '香川県/@': 'https://www.pref.kagawa.lg.jp/gikai/meibo/50onjun_ketu1.html',  // 名前は画像の代わりの文字（alt）だけ
   '茨城県/@': 'https://www.pref.ibaraki.jp/gikai/meibo/meibo_1.htm',
   '徳島県/@': 'https://www.pref.tokushima.lg.jp/gikai/giin/kaihabetu/',
   '鹿児島県/@': { url: 'https://www.pref.kagoshima.jp/ha01/gikai/giin/profile/utokeiko.html', seats: 51 },  // 名簿のページは顔写真だけ。議員ごとのページの横に全員の名前の一覧がある
@@ -303,7 +305,8 @@ const range = (level) => (level === 'pref' ? [30, 130] : [5, 110]);
 // 名簿のページ（と、そこからの名簿らしいリンク・PDF）の文字の中に探す。書いてあった名前だけを使う
 const CAND_FILE = path.join(__dirname, 'roster-candidates', 'discussvision.json');
 const CAND = fs.existsSync(CAND_FILE) ? JSON.parse(fs.readFileSync(CAND_FILE, 'utf8')).councils : {};
-const flat = (s) => s.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/gi, '').replace(/<rt>[\s\S]*?<\/rt>/gi, '').replace(/<[^>]+>/g, '').replace(/&nbsp;|&#160;/g, '')
+// 名前が画像の代わりの文字（<img alt="植田真紀">）にしかない名簿もある
+const flat = (s) => s.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/gi, '').replace(/<rt>[\s\S]*?<\/rt>/gi, '').replace(/<img[^>]*\balt=["']([^"']+)["'][^>]*>/gi, '|$1|').replace(/<[^>]+>/g, '').replace(/&nbsp;|&#160;/g, '')
   .replace(/[\s　]+/g, '').replace(/[﨑]/g, '崎').replace(/[髙]/g, '高').replace(/󠄀/g, '');
 async function confirm(id, url, lo) {
   const c = CAND[id];
@@ -323,7 +326,9 @@ async function confirm(id, url, lo) {
   }
   const all = texts.join('|');
   const names = [...new Set(c.names.filter((n) => all.includes(flat(n))))];
-  const seats_ = seats(p.text != null ? p.text : p.html);
+  // 読み取った人数が議会の定数としてありえない（都道府県で30人より少ないなど）ときは、選挙区など一部の人数とみて使わない
+  const seen = seats(p.text != null ? p.text : p.html);
+  const seats_ = (typeof url === 'object' && url.seats) || (seen && seen >= lo ? seen : null);
   if (names.length < Math.max(lo, 8)) return null;
   if (seats_ ? names.length < Math.floor(seats_ * 0.9) || names.length > seats_ : names.length < c.names.length * 0.5) return null;
   return { key: 'dv', names, url: u, seats: seats_ || null, via: `議会中継の発言者の一覧（tenant ${c.tenant}）の名前を、名簿のページで確かめた` };
