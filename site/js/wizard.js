@@ -253,9 +253,31 @@
   const checkedTag = (info) => { const t = checkedOn(info); return t ? `<small class="wz-checked">（${esc(t)}${isStale(checkedDate(info)) ? '。3か月以上前なので、出す前に公式の案内で確かめてください' : ''}）</small>` : ''; };
   const mailBadge = (info) => { const r = mailRule(info); return r ? `<span class="wz-mail ${r.c === 'ok' ? 'ok' : r.c === 'none' ? 'none' : r.c === 'unknown' ? 'unknown' : 'jisan'}">${esc(r.label)}</span>${r.c === 'unknown' ? '' : checkedTag(info)}` : ''; };
   const ONLY_HANDOUT = /配布|配付|参考資料/;
+  // 受け付け方のデータベース（data/intake.js）の陳情の郵送の扱い。mail.js・mail-policy.js にない議会で使う
+  // 値：review 審査する／distribute 配付だけ／accept 受け付けるが扱いは書いていない／no 受け付けない／unknown
+  function intakeMail(id) {
+    const d = intakeOf(id, 'chinjo');
+    if (!d || !d.mail) return '';
+    const [r, o] = d.mail;
+    const NOT_YET = '、まだこのサイトで確かめられていません';
+    let t = '';
+    if (r === 'review' && o === 'review') t = '📮 郵送でも審査されます';
+    else if (r === 'review' && o === 'distribute') t = '📮 住民の郵送は審査されます（住民以外の郵送は議員に配付されます）';
+    else if (r === 'distribute' && o === 'distribute') t = '郵送した陳情は議員に配付されます（審査してもらうには持参します）';
+    else if (r === 'no' && o === 'no') t = '郵送では受け付けていません（持参で出します）';
+    else if (r === 'review') t = `📮 住民の郵送は審査されます（住民以外の郵送の扱いは${NOT_YET}）`;
+    else if (r === 'accept') t = `📮 郵送で出せます（審査されるか、議員への配付になるかは${NOT_YET}）`;
+    else if (o === 'distribute') t = `住民以外の郵送は議員に配付されます（住民の郵送の扱いは${NOT_YET}）`;
+    else if (o === 'no') t = `住民以外は郵送では出せません（住民の郵送の扱いは${NOT_YET}）`;
+    if (!t) return '';
+    const auto = (d.auto || []).includes('mail') ? '<small class="wz-checked">（公式ページから自動で読み取り）</small>' : '<small class="wz-checked">（議会の公式案内で確認）</small>';
+    return `<span class="wz-mail ${r === 'review' && o === 'review' ? 'ok' : 'unknown'}">${t}</span>${auto}`;
+  }
   function howTo(info, id) {
     const n = [];
+    const im = !mailRule(info) && id ? intakeMail(id) : '';
     if (mailRule(info)) n.push(mailBadge(info));
+    else if (im) n.push(im);
     // 扱いが分からない議会も多いので、分からないことを控えめに伝える（出すのをためらわせないよう、警告の形にはしない）
     else n.push('<span class="wz-mail unknown">郵送や、住民以外が出した陳情の扱いは、まだこのサイトで確かめられていません。審査されず議員に配付される議会もあるので、気になるときは議会事務局に聞いてみてください。</span>');
     if (info.denshi) n.push('✅ 電子申請でも出せるようです（紙・封筒・切手は要りません）。');

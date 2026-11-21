@@ -263,8 +263,8 @@ function exportData() {
         const hit = sourceFor(r, f) || (f === 'page_url' && urlSrc ? { s: urlSrc, auto: false } : null);
         if (hit) use(f, v, hit);
       }
-      // 要望の郵送の扱いも出す（陳情の郵送は mail-policy.js から出すので、ここでは要望だけ）
-      for (const m of kind === 'yobo' ? ['email', 'form', 'mail'] : ['email', 'form']) {
+      // 郵送の扱いも出す（陳情は mail.js・mail-policy.js にない議会のときだけ作成画面で使う）
+      for (const m of ['email', 'form', 'mail']) {
         const hit = sourceFor(r, `methods.${m}`);
         const v = r.methods[m];
         if (hit && (v.resident !== 'unknown' || v.nonresident !== 'unknown')) use(m, [v.resident, v.nonresident], hit);
