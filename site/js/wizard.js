@@ -137,13 +137,10 @@
     renderCount();
   }
 
-  // 郵送でも審査される議会と、郵送だと議員に配付される議会は、都道府県を選ぶ前に全国分を見せる
-  // （家から出せる議会を先に知ってもらう。議員に配るだけでも議員に読んでもらえる）
+  // 郵送でも審査される議会は、都道府県を選ぶ前に全国分を見せる（家から出せる議会を先に知ってもらう）
   // 一覧は長いので、都道府県のボタンの上に折りたたんで置く
-  const mailHandout = (pref) => councilsOf(pref).map((c) => idOf(pref, c)).filter((id) => { const r = mailRule(infoOf(id)); return r && r.c !== 'ok'; });
   const MAIL_BOXES = [
     [(p) => mailOk(p), 'ok', '📮 郵送で審査', '📮 郵送でも審査されるとわかっている議会', '家から送るだけで審査してもらえます。'],
-    [mailHandout, 'jisan', '📮 郵送で配付', '📮 郵送すると議員に配付される議会', '審査はされなくても、陳情書の写しが議員に配られて読んでもらえます。持参すれば審査される議会や、住民なら審査される議会もあります（議会を選ぶ画面で議会ごとに出ます）。'],
   ].map((x) => { const el = document.createElement('details'); el.className = `wz-mailok ${x[1]}`; $('wzPrefs').before(el); return [el, ...x]; });
   const ids0 = (groups) => groups.flatMap(([, ids]) => ids);
   const allOn = (ids) => ids.every((id) => state.councils.includes(id));
@@ -177,8 +174,9 @@
     const info = infoOf(id);
     const r = mailRule(info);
     if (!r) return '';
-    const t = r.c === 'ok' ? '📮 郵送で審査' : /住民以外/.test(r.label) ? '📮 住民以外の郵送は配付' : r.c === 'none' ? '📮 郵送で配付（審査なし）' : '📮 郵送は配付（審査は持参）';
-    return `<small class="wz-mk ${r.c}">${t}</small>`;
+    // 配付になることは、議会を選んだあとの「出し方と締切の目安」で控えめに伝える。選ぶ前の一覧では、郵送で審査される議会だけに印を付ける
+    if (r.c !== 'ok') return '';
+    return '<small class="wz-mk ok">📮 郵送で審査</small>';
   }
 
   // 郵送でも審査される議会は家から出せて行動しやすいので、都道府県ごとにまとめて勧める
@@ -1383,6 +1381,16 @@
   }
 
 
+  // 持参・郵送の送り先（議会事務局の住所）を、出す段落に1行ずつ出す。宛名の用紙と同じ住所
+  function sendTo() {
+    const rows = real().map((c) => {
+      const [pref, key] = officeKeys[c] || [];
+      const o = pref ? window.Places.office(pref, key) : {};
+      return o.address ? `<li>${esc(label(c))}：〒${esc(o.zip)}　${esc(o.address)}${o.main ? '<small class="wz-checked">（役所の本庁舎。議会事務局が別の建物のこともあります）</small>' : ''}</li>` : '';
+    }).filter(Boolean);
+    return rows.length ? `<br>送り先・持っていく先：<ul class="wz-notes">${rows.join('')}</ul>` : '';
+  }
+
   // 要望書は議会に出すものではないので、議長・締切・郵送の審査・提出報告など議会の手続の欄は出さない
   function renderKindParts() {
     const request = state.kind === 'request';
@@ -1391,7 +1399,7 @@
     $('wzNowReport').hidden = request;
     $('wzNowHow').innerHTML = request
       ? '<b>出す</b>上で開いたページに書かれた方法（窓口・郵送・メール・フォームなど）で出します。宛名の知事・市区町村長と「様」のあいだは、氏名を書き入れても空けたままでも構いません。メールやフォームで出すときは、「文面をすべてコピー」した文を貼り付けます。'
-      : '<b>出す</b>持参・郵送・電子申請。議会ごとの出し方は、下の「くわしい手順」の②にあります。締切を過ぎても、次の定例会で扱われます。';
+      : `<b>出す</b>持参・郵送・電子申請。議会ごとの出し方は、下の「くわしい手順」の②にあります。締切を過ぎても、次の定例会で扱われます。${sendTo()}`;
     renderAlso();
     document.querySelectorAll('[data-petition-only]').forEach((el) => { el.hidden = request; });
   }

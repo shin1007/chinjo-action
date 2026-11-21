@@ -854,3 +854,6 @@ summary { cursor: pointer; font-weight: 700; }
 .zip-names { flex-basis: 100%; }
 .zip-names summary { cursor: pointer; font-weight: 600; }
 .zip-names .btn { margin: 2px 0; }
+/* 関連する本・グッズは、作業の邪魔にならないよう折りたたむ */
+.shop-fold > summary { cursor: pointer; list-style: revert; }
+.shop-fold > summary h2 { display: inline; margin: 0; }
