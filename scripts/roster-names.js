@@ -43,8 +43,13 @@ function pdf(buf) {
     let t = '';
     try { t = execFileSync('pdftotext', ['-layout', '-enc', 'UTF-8', f, '-'], { encoding: 'utf8', timeout: 30000, stdio: ['ignore', 'pipe', 'ignore'] }); } catch { /* 下で PyMuPDF を試す */ }
     // 日本語の字体の表（CMap）が入っていない pdftotext では、日本語の PDF が文字にならない。PyMuPDF があればそちらで読む
-    if (!/[一-龥ぁ-ん]/.test(t)) {
-      try { t = execFileSync('python', ['-I', '-c', 'import sys,fitz\nd=fitz.open(sys.argv[1])\nsys.stdout.buffer.write("\\n".join(p.get_text() for p in d).encode("utf-8"))', f], { encoding: 'utf8', timeout: 30000, stdio: ['ignore', 'pipe', 'ignore'] }); } catch { /* なし */ }
+    // 文字化けして日本語がほとんどないときも同じ
+    const ja = (s) => (s.match(/[一-龥ぁ-んァ-ヶ]/g) || []).length / Math.max(1, s.replace(/\s/g, '').length);
+    if (ja(t) < 0.2) {
+      try {
+        const u = execFileSync('python', ['-I', '-c', 'import sys,fitz\nd=fitz.open(sys.argv[1])\nsys.stdout.buffer.write("\\n".join(p.get_text() for p in d).encode("utf-8"))', f], { encoding: 'utf8', timeout: 30000, stdio: ['ignore', 'pipe', 'ignore'] });
+        if (ja(u) > ja(t)) t = u;
+      } catch { /* なし */ }
     }
     if (!t.trim()) return { error: 'PDF（文字にできない）' };
     return { text: t };
@@ -305,11 +310,26 @@ const range = (level) => (level === 'pref' ? [30, 130] : [5, 110]);
 // 名簿のページ（と、そこからの名簿らしいリンク・PDF）の文字の中に探す。書いてあった名前だけを使う
 const CAND_FILE = path.join(__dirname, 'roster-candidates', 'discussvision.json');
 const CAND = fs.existsSync(CAND_FILE) ? JSON.parse(fs.readFileSync(CAND_FILE, 'utf8')).councils : {};
+// 選挙管理委員会の選挙結果から集めた候補（scripts/roster-candidates-election.js）。落選者やほかの言葉も混じるので、
+// 名前の形のもの（「姓 名」か、名字の一覧にある名字で始まるもの）だけを使い、名簿のページに定数が書いてあるときだけ使う
+const ELEC_FILE = path.join(__dirname, 'roster-candidates', 'election.json');
+const ELEC = fs.existsSync(ELEC_FILE) ? JSON.parse(fs.readFileSync(ELEC_FILE, 'utf8')).councils : {};
+const nameish = (n) => !STOP.test(n.replace(/ /g, '')) && !WORDS.test(n.replace(/ /g, '')) && (/^\S+ \S+$/.test(n) ? n.split(' ')[0].length + n.split(' ')[1].length >= 3 : [4, 3, 2].some((k) => n.length - k >= 1 && SURNAMES.has(n.slice(0, k))));
+function candidates(id) {
+  const dv = CAND[id];
+  const el = ELEC[id];
+  if (!dv && !el) return null;
+  const names = [...(dv ? dv.names : []), ...(el ? el.names.filter(nameish) : [])];
+  const seen = new Set();
+  const list = names.filter((n) => { const f = flat(n); if (seen.has(f)) return false; seen.add(f); return true; });
+  const via = [dv && `議会中継の発言者の一覧（tenant ${dv.tenant}）`, el && `選挙管理委員会の選挙結果（${el.source.join('、')}）`].filter(Boolean).join('と');
+  return { names: list, onlyElection: !dv, dvCount: dv ? dv.names.length : 0, via: `${via}の名前を、名簿のページで確かめた` };
+}
 // 名前が画像の代わりの文字（<img alt="植田真紀">）にしかない名簿もある
 const flat = (s) => s.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/gi, '').replace(/<rt>[\s\S]*?<\/rt>/gi, '').replace(/<img[^>]*\balt=["']([^"']+)["'][^>]*>/gi, '|$1|').replace(/<[^>]+>/g, '').replace(/&nbsp;|&#160;/g, '')
   .replace(/[\s　]+/g, '').replace(/[﨑]/g, '崎').replace(/[髙]/g, '高').replace(/󠄀/g, '');
 async function confirm(id, url, lo) {
-  const c = CAND[id];
+  const c = candidates(id);
   if (!c) return null;
   const u = url.url || url;
   const p = await html(u);
@@ -325,13 +345,16 @@ async function confirm(id, url, lo) {
     }
   }
   const all = texts.join('|');
-  const names = [...new Set(c.names.filter((n) => all.includes(flat(n))))];
+  let names = [...new Set(c.names.filter((n) => all.includes(flat(n))))];
+  // ほかの名前の一部になっているもの（「田中太」と「田中太郎」）は落とす
+  names = names.filter((n) => !names.some((m) => m !== n && flat(m).length > flat(n).length && flat(m).includes(flat(n))));
   // 読み取った人数が議会の定数としてありえない（都道府県で30人より少ないなど）ときは、選挙区など一部の人数とみて使わない
   const seen = seats(p.text != null ? p.text : p.html);
   const seats_ = (typeof url === 'object' && url.seats) || (seen && seen >= lo ? seen : null);
   if (names.length < Math.max(lo, 8)) return null;
-  if (seats_ ? names.length < Math.floor(seats_ * 0.9) || names.length > seats_ : names.length < c.names.length * 0.5) return null;
-  return { key: 'dv', names, url: u, seats: seats_ || null, via: `議会中継の発言者の一覧（tenant ${c.tenant}）の名前を、名簿のページで確かめた` };
+  if (c.onlyElection && !seats_) return null;
+  if (seats_ ? names.length < Math.floor(seats_ * 0.9) || names.length > seats_ : names.length < c.dvCount * 0.5) return null;
+  return { key: 'cand', names, url: u, seats: seats_ || null, via: c.via };
 }
 
 async function main() {
