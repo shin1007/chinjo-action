@@ -4,11 +4,6 @@
   "reason": "0人しか取れない（人数が書いてない）",
   "checked_at": "2026-11-21"
  },
- "徳島県/@": {
-  "url": "https://www.pref.tokushima.lg.jp/gikai/giin/",
-  "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-21"
- },
  "秋田県/@": {
   "url": "https://pref.akita.gsl-service.net/doc/2018042300017/",
   "reason": "12人のうち9人しか取れない",
@@ -16,11 +11,6 @@
  },
  "香川県/@": {
   "url": "https://www.pref.kagawa.lg.jp/gikai/meibo/index.html",
-  "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-21"
- },
- "鹿児島県/@": {
-  "url": "https://www.pref.kagoshima.jp/gikai/giin/index.html",
   "reason": "0人しか取れない（人数が書いてない）",
   "checked_at": "2026-11-21"
  },
@@ -36,11 +26,6 @@
  },
  "兵庫県/尼崎市": {
   "url": "https://www.city.amagasaki.hyogo.jp/gikai/1001056/index.html",
-  "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-21"
- },
- "東京都/北区": {
-  "url": "https://www.city.kita.lg.jp/assembly/members/index.html",
   "reason": "0人しか取れない（人数が書いてない）",
   "checked_at": "2026-11-21"
  },
@@ -1642,6 +1627,11 @@
  "長野県/下高井郡野沢温泉村": {
   "url": "https://www.vill.nozawaonsen.nagano.jp/www/contents/1050000000269/index.html",
   "reason": "7人のはずが8人取れた（名前でないものが混じっている）",
+  "checked_at": "2026-11-21"
+ },
+ "秋田県/北秋田市": {
+  "url": "https://www.city.kitaakita.akita.jp/genre/shigikai/giinmeibo",
+  "reason": "7人しか取れない（人数が書いてない）",
   "checked_at": "2026-11-21"
  }
 }
