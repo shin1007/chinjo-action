@@ -109,9 +109,11 @@ test('Supabase：テーブルは RLS を有効にし、anon に渡すのは決�
     'grant insert (pref, council, mail, bring, online, online_url, deadline, copies, source_url, note) on public.council_tips to anon;',
     'grant insert (kind, theme, target, body, source_url, file_path) on public.feedback to anon;',
     'grant select on public.feedback_public to anon;',
+    'grant insert (pref, council, stage, result) on public.outcomes to anon;',
+    'grant select on public.outcome_totals to anon;',
   ]);
   assert.ok(!/to anon[^;]*\b(update|delete|all)\b/i.test(sql), 'anon に更新・削除を渡している');
-  for (const t of ['reports', 'council_tips', 'feedback']) assert.match(sql, new RegExp(`on public\\.${t} for insert to anon`), `${t} は insert だけ`);
+  for (const t of ['reports', 'council_tips', 'feedback', 'outcomes']) assert.match(sql, new RegExp(`on public\\.${t} for insert to anon`), `${t} は insert だけ`);
 });
 
 test('Supabase：資料のファイルの置き場所は非公開で、anon は置けるだけ', () => {

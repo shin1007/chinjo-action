@@ -59,6 +59,7 @@ window.Report = (() => {
     if (!r || !r.ok) return false;
     counts.set(id, (counts.get(id) || 0) + 1);
     try { localStorage.setItem(DONE_KEY, JSON.stringify([...done(), id])); } catch { /* 覚えられなくても報告はできている */ }
+    if (window.Followup) window.Followup.add(id, asks.filter((x) => ASK_RE.test(x)), items);
     return true;
   }
 
