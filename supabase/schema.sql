@@ -258,3 +258,57 @@ create or replace view public.feedback_public as
   from public.feedback where published and public_text is not null order by created_at desc;
 revoke all on public.feedback_public from anon, authenticated;
 grant select on public.feedback_public to anon;
+
+-- 出したあとの結果の報告（2026-11-22）。氏名・住所・文面・メールアドレスの列は作らない。
+-- 端末に残した提出の記録をもとに、1週間後・1か月後・3か月後の問いに答えた人が「集計に加える」を選んだときだけ送られる。
+-- 公開するのは結果ごとの合計（outcome_totals）だけ。議会ごとの結果は公開しない（決まったら別の view を足す）。
+-- 反映するまで site/js/followup.js の OUTCOME_LIVE は false のままにしておく（「準備中」）。
+create table if not exists public.outcomes (
+  id bigint generated always as identity primary key,
+  pref text not null check (char_length(pref) between 2 and 4),
+  council text not null check (char_length(council) between 3 and 30 and council like '%議会'),
+  -- 1：1週間後、2：1か月後、3：3か月後の問い
+  stage smallint not null check (stage between 1 and 3),
+  result text not null check (result in ('received', 'distributed', 'reviewing', 'adopted', 'not_adopted', 'not_accepted', 'unknown')),
+  hidden boolean not null default false,
+  created_at timestamptz not null default now()
+);
+
+-- 同じ接続元から同じ議会・同じ段階への報告は1日1件、全体でも1日20件まで（report_guard を「out:」付きで使う）
+create or replace function public.check_outcome() returns trigger
+language plpgsql security definer set search_path = public as $$
+declare
+  hdrs json := coalesce(current_setting('request.headers', true), '{}')::json;
+  ip text := coalesce(nullif(trim(hdrs ->> 'cf-connecting-ip'), ''),
+    trim(reverse(split_part(reverse(coalesce(hdrs ->> 'x-forwarded-for', '')), ',', 1))));
+  base text := 'out:' || encode(sha256(convert_to(ip || '|' || current_date, 'utf8')), 'hex');
+  hash text := encode(sha256(convert_to(base || '|' || new.pref || '/' || new.council || '/' || new.stage, 'utf8')), 'hex');
+  n int;
+begin
+  if not exists (select 1 from councils where pref = new.pref and council = new.council) then
+    raise exception 'unknown council';
+  end if;
+  new.hidden := false;
+  new.created_at := now();
+  delete from report_guard where day < current_date;
+  if exists (select 1 from report_guard where h = hash) then return null; end if;
+  select count(*) into n from report_guard where h like base || ':%';
+  if n >= 20 then raise exception 'too many outcomes'; end if;
+  insert into report_guard (h) values (hash), (base || ':' || hash);
+  return new;
+end $$;
+
+drop trigger if exists check_outcome on public.outcomes;
+create trigger check_outcome before insert on public.outcomes for each row execute function public.check_outcome();
+
+alter table public.outcomes enable row level security;
+drop policy if exists "anyone can report outcome" on public.outcomes;
+create policy "anyone can report outcome" on public.outcomes for insert to anon with check (true);
+revoke all on public.outcomes from anon, authenticated;
+grant insert (pref, council, stage, result) on public.outcomes to anon;
+
+-- 読めるのは結果ごとの合計だけ（議会ごとの行は読めない）
+create or replace view public.outcome_totals as
+  select result, count(*)::int as n from public.outcomes where not hidden group by result;
+revoke all on public.outcome_totals from anon, authenticated;
+grant select on public.outcome_totals to anon;

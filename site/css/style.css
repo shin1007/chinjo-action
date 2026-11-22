@@ -857,3 +857,10 @@ summary { cursor: pointer; font-weight: 700; }
 /* 関連する本・グッズは、作業の邪魔にならないよう折りたたむ */
 .shop-fold > summary { cursor: pointer; list-style: revert; }
 .shop-fold > summary h2 { display: inline; margin: 0; }
+
+/* 提出したあとの確認（followup.js） */
+.followup { background: var(--bg-alt); border-bottom: 1px solid var(--line); padding: 14px 0; }
+.followup-q { margin: 0 0 8px; }
+.followup-choices { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+.followup-share { display: block; font-size: 0.9rem; margin-bottom: 6px; }
+.followup-note { margin: 0; }

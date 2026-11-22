@@ -1152,7 +1152,11 @@
     const ok = await window.Report.report(id, cur().length, askIds());
     e.target.textContent = ok ? '✓ 提出を報告しました。ありがとうございます' : '送れませんでした。もう一度押してください';
     e.target.disabled = ok;
-    if (ok) { renderReportBtns(); }
+    if (ok) {
+      renderReportBtns();
+      const ics = window.Followup && window.Followup.icsLink(id);
+      if (ics) $('wzNowReportBtns').append(' ', ics);
+    }
   };
   $('wzOffices').addEventListener('click', onReport);
   $('wzNowReportBtns').addEventListener('click', onReport);
