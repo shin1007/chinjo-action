@@ -8,6 +8,8 @@ window.makePetition = (ASKS, TEMPLATE) => {
 
   // 求める事項は data/asks-*.js、決まった文章は data/template.js にある
   const fill = window.fillTemplate;
+  // 決まった言い回しの揺らぎ（site/js/variants.js を読み込んだページだけ。ないときは元の言い方のまま）
+  const vary = (kind, text) => (window.Variants ? window.Variants[kind](text) : text);
   const ITEMS = Object.fromEntries(ASKS.map((a) => [a.id, a]));
 
   // 1つの議会に一度に多くの陳情を出すと、どれも重みが薄れるので、優先する項目に絞るよう促す
@@ -55,14 +57,14 @@ window.makePetition = (ASKS, TEMPLATE) => {
     if (data.get('tel').trim()) lines.push(`電話　${data.get('tel').trim()}`);
     lines.push('', `件名　${subject}`, '');
     lines.push(`【${isRequest ? '要望' : '陳情'}の趣旨】`);
-    lines.push(`　${fill(isIkensho ? T.purposeNational : T.purposeLocal, vars)}`);
+    lines.push(`　${vary('purpose', fill(isIkensho ? T.purposeNational : T.purposeLocal, vars))}`);
     lines.push('', '記', '');
     sel.forEach((it, i) => lines.push(`${kansuji[i]}　${fill(askText(it, isRequest), vars)}`));
     lines.push('', `【${isRequest ? '要望' : '陳情'}の理由】`);
     // 要望書は役所の職員が読むので、実施のイメージ（forStaff）があれば理由のあとに足す
     sel.forEach((it, i) => lines.push(`${i + 1}．${it.title}`, `　${it.reason}`, ...(isRequest && it.forStaff ? [`　${it.forStaff}`] : []), ''));
     if (story) lines.push(`（${isRequest ? '要望者' : '陳情者'}として）`, `　${story.replace(/\n/g, '\n　')}`, '');
-    lines.push(`　${T.closing}`);
+    lines.push(`　${vary('closing', T.closing)}`);
     // 選んだ項目の一次資料。添付できる議会では、この一覧の資料を印刷して添える
     const refs = sel.flatMap((it) => it.refs || []);
     if (refs.length) {
@@ -294,7 +296,7 @@ window.makePetition = (ASKS, TEMPLATE) => {
     const list = subjects.length
       ? subjects.map((t, i) => `${KANSUJI[i] || i + 1}　${documentLabel}「${t}」　1通`).join('\n')
       : `一　${documentLabel}　${docs.length}通`;
-    return fill(TEMPLATE.cover, { 日付: DATE_BLANK, 宛先: council, 差出人: from.join('\n'), 書類: list, 通数: String(docs.length) }).replaceAll('陳情書', documentLabel);
+    return vary('cover', fill(TEMPLATE.cover, { 日付: DATE_BLANK, 宛先: council, 差出人: from.join('\n'), 書類: list, 通数: String(docs.length) })).replaceAll('陳情書', documentLabel);
   }
 
   return { headOf, requestTo, build, withReply, ikensho, buildPrompt, sections, buildRewritePrompt, applyRewrite, rewritePlans, withSender, swapCouncil, cover, selectedKeys, isNational, routeOf, usableFor, askText, ordered, ITEMS, MANY, SEP };
