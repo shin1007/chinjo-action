@@ -1,0 +1,925 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//chinjo-action//x-schedule//JA
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:陳情アクション X投稿予定
+X-WR-TIMEZONE:Asia/Tokyo
+BEGIN:VEVENT
+UID:x-20261124T0730@chinjo-action
+DTSTAMP:20261123T124451Z
+DTSTART:20261123T223000Z
+DTEND:20261123T224500Z
+SUMMARY:X投稿：A 入口｜陳情は、500円足らずで出せます。
+DESCRIPTION:【本文（そのままコピーして X に貼る）】\n陳
+ 情は、500円足らずで出せます。\n5件まとめて郵送して
+ も約480円（コンビニの印刷代と切手270円）。\n登録不要
+ ・無料。入力した住所と氏名は、サーバーに送られま
+ せん。\nhttps://chinjo-action.vercel.app/\n#陳情 #地方議会\n\n型
+ ：A 入口\nリンク先：/\n画像：なし\n投稿前の確認：約48
+ 0円の内訳（印刷代＋切手270円）が、トップの「費用の
+ 目安」と同じか。
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の15分前
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の時刻
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:x-20261125T1215@chinjo-action
+DTSTAMP:20261123T124451Z
+DTSTART:20261125T031500Z
+DTEND:20261125T033000Z
+SUMMARY:X投稿：C 知識｜陳情に、議員の紹介はいりません
+ 。
+DESCRIPTION:【本文（そのままコピーして X に貼る）】\n陳
+ 情に、議員の紹介はいりません。\n請願か陳情かで採択
+ のされやすさは変わらず、署名の数の基準もないと、
+ 柏崎市議会のQ&Aにあります。\n陳情のしくみを、図で。
+ \nhttps://chinjo-action.vercel.app/about\n#陳情\n\n型：C 知識\nリ
+ ンク先：/about\n画像：なし\n投稿前の確認：柏崎市議会
+ のQ&Aの記述が、いまも /about に載っているか。
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の15分前
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の時刻
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:x-20261126T0730@chinjo-action
+DTSTAMP:20261123T124451Z
+DTSTART:20261125T223000Z
+DTEND:20261125T224500Z
+SUMMARY:X投稿：A 入口｜「住所や氏名をサイトに入れるの
+ が心配」という方へ。
+DESCRIPTION:【本文（そのままコピーして X に貼る）】\n「
+ 住所や氏名をサイトに入れるのが心配」という方へ。\n
+ 陳情書の作成は、すべてお使いのブラウザの中で行い
+ ます。入力した個人情報は、このサイトのサーバーに
+ は送信も保存もされません。\nhttps://chinjo-action.vercel.app/
+ \n#陳情\n\n型：A 入口\nリンク先：/\n画像：なし\n投稿前
+ の確認：「サーバーに送らない」の記述が、トップのFA
+ Qと同じか。
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の15分前
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の時刻
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:x-20261127T1215@chinjo-action
+DTSTAMP:20261123T124451Z
+DTSTART:20261127T031500Z
+DTEND:20261127T033000Z
+SUMMARY:X投稿：C 知識｜SNSは「言う」場所。
+DESCRIPTION:【本文（そのままコピーして X に貼る）】\nSNS
+ は「言う」場所。\n陳情は「決める人に、決める場で、
+ 記録に残して」届ける手続です。\nSNSに書くのと、陳情
+ を出すのは、何が違うのか。\nhttps://chinjo-action.vercel.app/
+ about\n#陳情\n\n型：C 知識\nリンク先：/about\n画像：なし\n
+ 投稿前の確認：引用した一文が /about にあるか。
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の15分前
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の時刻
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:x-20261128T0900@chinjo-action
+DTSTAMP:20261123T124451Z
+DTSTART:20261128T000000Z
+DTEND:20261128T001500Z
+SUMMARY:X投稿：A 入口（動画）｜陳情書を郵送で出すまで
+ を、約50秒の動画にしました。
+DESCRIPTION:【本文（そのままコピーして X に貼る）】\n陳
+ 情書を郵送で出すまでを、約50秒の動画にしました。\n
+ サイトで入力 → PDF → コンビニで印刷 → 署名 → 封筒
+ に入れて切手を貼り、ポストへ。金額つきです。\nhttps:
+ //chinjo-action.vercel.app/\n#陳情\n\n型：A 入口（動画）\nリン
+ ク先：/\n画像：docs/見本/紹介GIF/mail-howto-x.gif\n投稿前の
+ 確認：動画の金額が、トップの費用の目安と同じか。GI
+ F は1つだけ付ける（画像とは一緒に付けられない）。
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の15分前
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の時刻
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:x-20261130T0730@chinjo-action
+DTSTAMP:20261123T124451Z
+DTSTART:20261129T223000Z
+DTEND:20261129T224500Z
+SUMMARY:X投稿：C 知識｜地方議会の陳情が、国につながる
+ ことがあります。
+DESCRIPTION:【本文（そのままコピーして X に貼る）】\n地
+ 方議会の陳情が、国につながることがあります。\n国へ
+ の意見書を求める陳情が採択されると、議会が意見書
+ を可決して、国に送ります（岩倉市議会の案内）。\nhtt
+ ps://chinjo-action.vercel.app/about\n#陳情 #意見書\n\n型：C 知識\
+ nリンク先：/about\n画像：なし\n投稿前の確認：岩倉市議
+ 会の記述が /about に載っているか。
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の15分前
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の時刻
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:x-20261201T2030@chinjo-action
+DTSTAMP:20261123T124451Z
+DTSTART:20261201T113000Z
+DTEND:20261201T114500Z
+SUMMARY:X投稿：B 項目｜がん検診と精密検査の受診率は、
+ あなたの町で上がっていますか？
+DESCRIPTION:【本文（そのままコピーして X に貼る）】\nが
+ ん検診と精密検査の受診率は、あなたの町で上がって
+ いますか？\n受診率の向上を議会に求める陳情の項目を
+ 、やさしい説明つきで載せています。\nhttps://chinjo-action
+ .vercel.app/kenko/easy/l_cancer_screening\n#がん検診\n\n型：B 項目
+ \nリンク先：/kenko/easy/l_cancer_screening\n画像：docs/見本/紹
+ 介画像/kenko-1.png\n投稿前の確認：意義のページ /kenko/easy
+ /l_cancer_screening の題と、本文の言い回しが合っているか
+ 。
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の15分前
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の時刻
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:x-20261202T2030@chinjo-action
+DTSTAMP:20261123T124451Z
+DTSTART:20261202T113000Z
+DTEND:20261202T114500Z
+SUMMARY:X投稿：B 項目｜学校行事や学校からの連絡は、両
+ 方の親に届いていますか？
+DESCRIPTION:【本文（そのままコピーして X に貼る）】\n学
+ 校行事や学校からの連絡は、両方の親に届いています
+ か？\n学校行事への参加と、学校から両方の親への情報
+ 提供を求める陳情の項目。やさしい説明つき。\nhttps://c
+ hinjo-action.vercel.app/kodomo/easy/l_school\n#子どもの権利\n\n型
+ ：B 項目\nリンク先：/kodomo/easy/l_school\n画像：docs/見本/
+ 紹介画像/kodomo-1.png\n投稿前の確認：意義のページ /kodomo
+ /easy/l_school の題と、本文の言い回しが合っているか。
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の15分前
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の時刻
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:x-20261203T2030@chinjo-action
+DTSTAMP:20261123T124451Z
+DTSTART:20261203T113000Z
+DTEND:20261203T114500Z
+SUMMARY:X投稿：B 項目｜男性が悩みを話せる相談窓口は、
+ あなたの町にありますか？
+DESCRIPTION:【本文（そのままコピーして X に貼る）】\n男
+ 性が悩みを話せる相談窓口は、あなたの町にあります
+ か？\n男性向けの相談窓口の設置を求める陳情の項目を
+ 、やさしい説明つきで。\nhttps://chinjo-action.vercel.app/dansei
+ /easy/l_consult\n#男女平等\n\n型：B 項目\nリンク先：/dansei/e
+ asy/l_consult\n画像：docs/見本/紹介画像/dansei-1.png\n投稿前
+ の確認：意義のページ /dansei/easy/l_consult の題と、本文
+ の言い回しが合っているか。
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の15分前
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の時刻
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:x-20261204T2030@chinjo-action
+DTSTAMP:20261123T124451Z
+DTSTART:20261204T113000Z
+DTEND:20261204T114500Z
+SUMMARY:X投稿：B 項目｜家庭裁判所の判断の結果は、どこ
+ まで公表されていますか？
+DESCRIPTION:【本文（そのままコピーして X に貼る）】\n家
+ 庭裁判所の判断の結果は、どこまで公表されています
+ か？\n詳しい統計での公表を、国に求める陳情の項目で
+ す。やさしい説明つき。\nhttps://chinjo-action.vercel.app/shiho/
+ easy/n_family_stats\n#家庭裁判所\n\n型：B 項目\nリンク先：/s
+ hiho/easy/n_family_stats\n画像：docs/見本/紹介画像/shiho-1.png\n
+ 投稿前の確認：意義のページ /shiho/easy/n_family_stats の題
+ と、本文の言い回しが合っているか。
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の15分前
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の時刻
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:x-20261205T2100@chinjo-action
+DTSTAMP:20261123T124451Z
+DTSTART:20261205T120000Z
+DTEND:20261205T121500Z
+SUMMARY:X投稿：F 海外｜英国議会の電子請願は、署名が1万
+ に届くと政府が回答し、10万に届くと議会で討論される
+ ことがあります（英
+DESCRIPTION:【本文（そのままコピーして X に貼る）】\n英
+ 国議会の電子請願は、署名が1万に届くと政府が回答し
+ 、10万に届くと議会で討論されることがあります（英国
+ 議会の公式ページ）。\n日本の自治体の陳情には、署名
+ の数の基準はないとされています。制度が違うので、
+ 数字だけでは比べられません。\nhttps://chinjo-action.vercel.a
+ pp/about\n\n型：F 海外\nリンク先：/about\n画像：なし\n投稿
+ 前の確認：英国議会の公式ページ（https://petition.parliamen
+ t.uk/help）で、1万・10万の記述がいまも同じか。日本の
+ 側は、To Do の 19a（請願法・憲法16条）を確かめてから
+ 出す。
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の15分前
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の時刻
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:x-20261207T2030@chinjo-action
+DTSTAMP:20261123T124451Z
+DTSTART:20261207T113000Z
+DTEND:20261207T114500Z
+SUMMARY:X投稿：B 項目｜お酒の容器に、純アルコール量を
+ 書いてほしい。
+DESCRIPTION:【本文（そのままコピーして X に貼る）】\nお
+ 酒の容器に、純アルコール量を書いてほしい。\n容器へ
+ の純アルコール量と飲酒量の目安の表示の義務付けを
+ 、国に求める陳情の項目です。\nhttps://chinjo-action.vercel.a
+ pp/kenko/easy/n_alcohol_label\n#飲酒 #健康\n\n型：B 項目\nリン
+ ク先：/kenko/easy/n_alcohol_label\n画像：docs/見本/紹介画像/ke
+ nko-2.png\n投稿前の確認：意義のページ /kenko/easy/n_alcohol_l
+ abel の題と、本文の言い回しが合っているか。
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の15分前
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の時刻
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:x-20261208T0730@chinjo-action
+DTSTAMP:20261123T124451Z
+DTSTART:20261207T223000Z
+DTEND:20261207T224500Z
+SUMMARY:X投稿：E 運営の透明性｜このサイトには、まだ確
+ かめられていないことが、いくつもあります。
+DESCRIPTION:【本文（そのままコピーして X に貼る）】\nこ
+ のサイトには、まだ確かめられていないことが、いく
+ つもあります。\n「ここまでは確かめた／ここからは確
+ かめられていない」を、運営者が公開しています。\nhtt
+ ps://chinjo-action.vercel.app/trouble\n#陳情\n\n型：E 運営の透明
+ 性\nリンク先：/trouble\n画像：なし\n投稿前の確認：/troub
+ le の記述が最新か。
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の15分前
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の時刻
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:x-20261208T2030@chinjo-action
+DTSTAMP:20261123T124451Z
+DTSTART:20261208T113000Z
+DTEND:20261208T114500Z
+SUMMARY:X投稿：B 項目｜別居した親と子どもが会う、親子
+ 交流の支援は、あなたの町にありますか？
+DESCRIPTION:【本文（そのままコピーして X に貼る）】\n別
+ 居した親と子どもが会う、親子交流の支援は、あなた
+ の町にありますか？\n親子交流（面会交流）の支援事業
+ を求める陳情の項目。やさしい説明つき。\nhttps://chinjo-
+ action.vercel.app/kodomo/easy/l_visit\n#親子交流\n\n型：B 項目\n
+ リンク先：/kodomo/easy/l_visit\n画像：docs/見本/紹介画像/kod
+ omo-2.png\n投稿前の確認：意義のページ /kodomo/easy/l_visit 
+ の題と、本文の言い回しが合っているか。
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の15分前
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の時刻
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:x-20261209T0730@chinjo-action
+DTSTAMP:20261123T124451Z
+DTSTART:20261208T223000Z
+DTEND:20261208T224500Z
+SUMMARY:X投稿：D 調査の知らせ｜陳情の出し方（持参・郵
+ 送・メールなど）を、公式サイトか事務局の回答で確
+ かめた議会は、都道府県で
+DESCRIPTION:【本文（そのままコピーして X に貼る）】\n陳
+ 情の出し方（持参・郵送・メールなど）を、公式サイ
+ トか事務局の回答で確かめた議会は、都道府県で47のう
+ ち40、市区町村で1\,740のうち353（人口でみて約56%）です
+ （2026年11月23日時点）。\n確かめられていない議会は、
+ 一覧に出しています。\nhttps://chinjo-action.vercel.app/coverage\
+ n\n型：D 調査の知らせ\nリンク先：/coverage\n画像：なし\n
+ 投稿前の確認：数字（都道府県40/47、市区町村353/1\,740
+ ・人口で約56%、2026-11-23時点）を、/coverage の最新の値に
+ 直す。
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の15分前
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の時刻
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:x-20261209T2030@chinjo-action
+DTSTAMP:20261123T124451Z
+DTSTART:20261209T113000Z
+DTEND:20261209T114500Z
+SUMMARY:X投稿：B 項目｜DVを受けた男性が、逃げ込める場
+ 所はありますか？
+DESCRIPTION:【本文（そのままコピーして X に貼る）】\nDV
+ を受けた男性が、逃げ込める場所はありますか？\n男性
+ のDV被害者の避難先の確保を求める陳情の項目を、やさ
+ しい説明つきで。\nhttps://chinjo-action.vercel.app/dansei/easy/l_s
+ helter\n#男女平等 #DV\n\n型：B 項目\nリンク先：/dansei/easy/l
+ _shelter\n画像：docs/見本/紹介画像/dansei-2.png\n投稿前の確
+ 認：意義のページ /dansei/easy/l_shelter の題と、本文の言
+ い回しが合っているか。
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の15分前
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の時刻
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:x-20261210T0730@chinjo-action
+DTSTAMP:20261123T124451Z
+DTSTART:20261209T223000Z
+DTEND:20261209T224500Z
+SUMMARY:X投稿：C 知識｜議会に出すのが「陳情」、役所に
+ 出すのが「要望書」です。
+DESCRIPTION:【本文（そのままコピーして X に貼る）】\n議
+ 会に出すのが「陳情」、役所に出すのが「要望書」で
+ す。\n陳情は議長あて、要望書は市区町村長や担当課あ
+ て。議員個人への手紙もあります。\nどれがよいかは、
+ 内容と相手で変わります。違いの表はこちら。\nhttps://c
+ hinjo-action.vercel.app/#compare\n#陳情\n\n型：C 知識\nリンク先
+ ：/#compare\n画像：なし\n投稿前の確認：トップの「選べ
+ る手段」の表の記述と合っているか。
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の15分前
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の時刻
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:x-20261210T2030@chinjo-action
+DTSTAMP:20261123T124451Z
+DTSTART:20261210T113000Z
+DTEND:20261210T114500Z
+SUMMARY:X投稿：B 項目｜公立高校をなくす前に、地域への
+ 影響は調べられていますか？
+DESCRIPTION:【本文（そのままコピーして X に貼る）】\n公
+ 立高校をなくす前に、地域への影響は調べられていま
+ すか？\n統廃合の前に、影響を調べて公表することを求
+ める陳情の項目です。\nhttps://chinjo-action.vercel.app/sonota/ea
+ sy/l_public_school\n#公立高校\n\n型：B 項目\nリンク先：/sonot
+ a/easy/l_public_school\n画像：docs/見本/紹介画像/sonota-1.png\n
+ 投稿前の確認：意義のページ /sonota/easy/l_public_school の
+ 題と、本文の言い回しが合っているか。
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の15分前
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の時刻
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:x-20261211T0730@chinjo-action
+DTSTAMP:20261123T124451Z
+DTSTART:20261210T223000Z
+DTEND:20261210T224500Z
+SUMMARY:X投稿：A 入口｜内容を選ぶのが大変なときの「お
+ まかせ」です。
+DESCRIPTION:【本文（そのままコピーして X に貼る）】\n内
+ 容を選ぶのが大変なときの「おまかせ」です。\nテーマ
+ を3つ、それぞれから陳情を3つ引き、郵送でも審査され
+ る人口の多い議会を3つ選びます。審査されても、採択
+ されるとは限りません。\nhttps://chinjo-action.vercel.app/omakas
+ e\n#陳情\n\n型：A 入口\nリンク先：/omakase\n画像：なし\n
+ 投稿前の確認：/omakase の説明と合っているか。
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の15分前
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の時刻
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:x-20261211T2030@chinjo-action
+DTSTAMP:20261123T124451Z
+DTSTART:20261211T113000Z
+DTEND:20261211T114500Z
+SUMMARY:X投稿：B 項目｜最高裁判所の裁判官の国民審査。
+ 判断の材料は足りていますか？
+DESCRIPTION:【本文（そのままコピーして X に貼る）】\n最
+ 高裁判所の裁判官の国民審査。判断の材料は足りてい
+ ますか？\n国民審査の判断材料の充実と、制度の見直し
+ を、国に求める陳情の項目です。\nhttps://chinjo-action.verce
+ l.app/shiho/easy/n_review\n#国民審査\n\n型：B 項目\nリンク先
+ ：/shiho/easy/n_review\n画像：docs/見本/紹介画像/shiho-2.png\n
+ 投稿前の確認：意義のページ /shiho/easy/n_review の題と、
+ 本文の言い回しが合っているか。
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の15分前
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の時刻
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:x-20261212T0730@chinjo-action
+DTSTAMP:20261123T124451Z
+DTSTART:20261211T223000Z
+DTEND:20261211T224500Z
+SUMMARY:X投稿：A 入口（議員への手紙）｜陳情書には書き
+ にくい個人的な事情を、議員に手紙で伝えたいときは
+ 。
+DESCRIPTION:【本文（そのままコピーして X に貼る）】\n陳
+ 情書には書きにくい個人的な事情を、議員に手紙で伝
+ えたいときは。\n「議員への手紙」をつくれます（議員
+ 個人あてで、議会の正式な手続ではありません）。\nhtt
+ ps://chinjo-action.vercel.app/letter\n\n型：A 入口（議員への手
+ 紙）\nリンク先：/letter\n画像：なし\n投稿前の確認：/let
+ ter の説明と、正式な手続ではない旨が合っているか。
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の15分前
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の時刻
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:x-20261212T2030@chinjo-action
+DTSTAMP:20261123T124451Z
+DTSTART:20261212T113000Z
+DTEND:20261212T114500Z
+SUMMARY:X投稿：B 項目｜外国人への生活保護は、どのくら
+ い支給されていますか？
+DESCRIPTION:【本文（そのままコピーして X に貼る）】\n外
+ 国人への生活保護は、どのくらい支給されていますか
+ ？\n自治体に、その状況の公表を求める陳情の項目です
+ 。やさしい説明つき。\nhttps://chinjo-action.vercel.app/nihonjin/
+ easy/l_welfare\n#生活保護\n\n型：B 項目\nリンク先：/nihonjin/
+ easy/l_welfare\n画像：docs/見本/紹介画像/nihonjin-1.png\n投稿
+ 前の確認：意義のページ /nihonjin/easy/l_welfare の題と、本
+ 文の言い回しが合っているか。
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の15分前
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の時刻
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:x-20261213T0900@chinjo-action
+DTSTAMP:20261123T124451Z
+DTSTART:20261213T000000Z
+DTEND:20261213T001500Z
+SUMMARY:X投稿：C 知識｜陳情を出すと、どうなるの？
+DESCRIPTION:【本文（そのままコピーして X に貼る）】\n陳
+ 情を出すと、どうなるの？\n審査されれば、採択か不採
+ 択かが、議会の決定として出ます。意見書として国に
+ 届くことも。審査せず、議員に配るだけの議会もあり
+ ます。\nhttps://chinjo-action.vercel.app/about\n#陳情\n\n型：C 知
+ 識\nリンク先：/about\n画像：なし\n投稿前の確認：/about 
+ の「結果は？」と同じか。
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の15分前
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の時刻
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:x-20261215T1215@chinjo-action
+DTSTAMP:20261123T124451Z
+DTSTART:20261215T031500Z
+DTEND:20261215T033000Z
+SUMMARY:X投稿：B 項目｜親の別居や離婚のとき、子どもの
+ 意見は聞かれていますか？
+DESCRIPTION:【本文（そのままコピーして X に貼る）】\n親
+ の別居や離婚のとき、子どもの意見は聞かれています
+ か？\n子どもの意見表明の保障を、国に求める陳情の項
+ 目です。やさしい説明つき。\nhttps://chinjo-action.vercel.app/
+ kodomo/easy/n_voice\n#子どもの権利\n\n型：B 項目\nリンク先
+ ：/kodomo/easy/n_voice\n画像：docs/見本/紹介画像/kodomo-3.png\n
+ 投稿前の確認：意義のページ /kodomo/easy/n_voice の題と、
+ 本文の言い回しが合っているか。
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の15分前
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の時刻
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:x-20261215T2230@chinjo-action
+DTSTAMP:20261123T124451Z
+DTSTART:20261215T133000Z
+DTEND:20261215T134500Z
+SUMMARY:X投稿：B 項目｜父親も、子育て支援の対象にして
+ ほしい。
+DESCRIPTION:【本文（そのままコピーして X に貼る）】\n父
+ 親も、子育て支援の対象にしてほしい。\n両親学級の休
+ 日開催や、父親の産後うつ対策を求める陳情の項目で
+ す。\nhttps://chinjo-action.vercel.app/dansei/easy/l_father\n#男女平
+ 等 #子育て\n\n型：B 項目\nリンク先：/dansei/easy/l_father\n
+ 画像：docs/見本/紹介画像/dansei-3.png\n投稿前の確認：意
+ 義のページ /dansei/easy/l_father の題と、本文の言い回しが
+ 合っているか。
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の15分前
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の時刻
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:x-20261216T1215@chinjo-action
+DTSTAMP:20261123T124451Z
+DTSTART:20261216T031500Z
+DTEND:20261216T033000Z
+SUMMARY:X投稿：D 調査の知らせ｜議員への手紙の宛先を選
+ ぶ画面に、議員名簿（公式）のボタンを出している議
+ 会は1\,321。そのうち
+DESCRIPTION:【本文（そのままコピーして X に貼る）】\n議
+ 員への手紙の宛先を選ぶ画面に、議員名簿（公式）の
+ ボタンを出している議会は1\,321。そのうち999の議会は
+ 、名簿から議員の名前を取り込み、押すと宛先に入り
+ ます（2026年11月22日時点）。\n抜けや誤りが残っている
+ ことがあります。\nhttps://chinjo-action.vercel.app/letter\n\n型
+ ：D 調査の知らせ\nリンク先：/letter\n画像：なし\n投稿
+ 前の確認：数字（議員名簿の公式ボタン1\,321議会、名
+ 前を取り込んだ999議会。2026-11-22時点）を、/trouble の「
+ 準備中のこと」の最新の値に直す。
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の15分前
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の時刻
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:x-20261216T2230@chinjo-action
+DTSTAMP:20261123T124451Z
+DTSTART:20261216T133000Z
+DTEND:20261216T134500Z
+SUMMARY:X投稿：B 項目｜子どもが集まる場所で、受動喫煙
+ は防がれていますか？
+DESCRIPTION:【本文（そのままコピーして X に貼る）】\n子
+ どもが集まる場所で、受動喫煙は防がれていますか？\n
+ 子供の集まる場所での受動喫煙の防止を、議会に求め
+ る陳情の項目です。\nhttps://chinjo-action.vercel.app/kenko/easy/l
+ _smoke_free\n#受動喫煙\n\n型：B 項目\nリンク先：/kenko/easy/l
+ _smoke_free\n画像：docs/見本/紹介画像/kenko-3.png\n投稿前の
+ 確認：意義のページ /kenko/easy/l_smoke_free の題と、本文の
+ 言い回しが合っているか。
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の15分前
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の時刻
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:x-20261217T1215@chinjo-action
+DTSTAMP:20261123T124451Z
+DTSTART:20261217T031500Z
+DTEND:20261217T033000Z
+SUMMARY:X投稿：C 知識｜住んでいない自治体の議会にも、
+ 陳情は出せますか？
+DESCRIPTION:【本文（そのままコピーして X に貼る）】\n住
+ んでいない自治体の議会にも、陳情は出せますか？\n多
+ くの議会で可能ですが、「市内在住者に限る」「郵送
+ は配布のみ」など、運用が違います。作成画面で議会
+ を選ぶと、わかっている扱いが出ます。\nhttps://chinjo-act
+ ion.vercel.app/\n#陳情\n\n型：C 知識\nリンク先：/#faq\n画像
+ ：なし\n投稿前の確認：トップのFAQの該当の記述（住民
+ 以外）と同じか。
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の15分前
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の時刻
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:x-20261217T2230@chinjo-action
+DTSTAMP:20261123T124451Z
+DTSTART:20261217T133000Z
+DTEND:20261217T134500Z
+SUMMARY:X投稿：B 項目｜夫婦関係の修復相談に、助成はあ
+ りますか？
+DESCRIPTION:【本文（そのままコピーして X に貼る）】\n夫
+ 婦関係の修復相談に、助成はありますか？\n夫婦関係修
+ 復相談・カウンセリング費用の助成を求める陳情の項
+ 目です。\nhttps://chinjo-action.vercel.app/kodomo/easy/l_counsel\n#夫
+ 婦 #子どもの権利\n\n型：B 項目\nリンク先：/kodomo/easy/l_c
+ ounsel\n画像：docs/見本/紹介画像/kodomo-2.png\n投稿前の確認
+ ：意義のページ /kodomo/easy/l_counsel の題と、本文の言い
+ 回しが合っているか。
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の15分前
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の時刻
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:x-20261218T1215@chinjo-action
+DTSTAMP:20261123T124451Z
+DTSTART:20261218T031500Z
+DTEND:20261218T033000Z
+SUMMARY:X投稿：E 運営の透明性｜このサイトは、運営者ひ
+ とり（団体ではありません）と生成AIでつくっています
+ 。
+DESCRIPTION:【本文（そのままコピーして X に貼る）】\nこ
+ のサイトは、運営者ひとり（団体ではありません）と
+ 生成AIでつくっています。\n文面は、法令や公的な資料
+ の原文で確かめていますが、運営者は弁護士ではあり
+ ません。ソースコードは公開しています。\nhttps://chinjo-
+ action.vercel.app/trouble\n\n型：E 運営の透明性\nリンク先：/t
+ rouble\n画像：なし\n投稿前の確認：/trouble の「開発の手
+ 」の記述と同じか。
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の15分前
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の時刻
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:x-20261218T2230@chinjo-action
+DTSTAMP:20261123T124451Z
+DTSTART:20261218T133000Z
+DTEND:20261218T134500Z
+SUMMARY:X投稿：B 項目｜普段の草むしりやごみ拾いに、自
+ 治体の支援はありますか？
+DESCRIPTION:【本文（そのままコピーして X に貼る）】\n普
+ 段の草むしりやごみ拾いに、自治体の支援はあります
+ か？\n住民が行う除草・ごみ拾いの支援（ごみ袋・道具
+ ・回収）を求める陳情の項目です。\nhttps://chinjo-action.ve
+ rcel.app/sonota/easy/l_cleanup\n#地域\n\n型：B 項目\nリンク先：
+ /sonota/easy/l_cleanup\n画像：docs/見本/紹介画像/sonota-2.png\n
+ 投稿前の確認：意義のページ /sonota/easy/l_cleanup の題と
+ 、本文の言い回しが合っているか。
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の15分前
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の時刻
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:x-20261219T1215@chinjo-action
+DTSTAMP:20261123T124451Z
+DTSTART:20261219T031500Z
+DTEND:20261219T033000Z
+SUMMARY:X投稿：A 入口｜陳情は、全国の都道府県・市区町
+ 村の、約1\,780の議会に出せます。
+DESCRIPTION:【本文（そのままコピーして X に貼る）】\n陳
+ 情は、全国の都道府県・市区町村の、約1\,780の議会に
+ 出せます。\n1枚の陳情書が、議会の議題になります。\n
+ https://chinjo-action.vercel.app/\n#陳情 #地方議会\n\n型：A 入口
+ \nリンク先：/\n画像：なし\n投稿前の確認：「約1\,780」
+ を、トップの最新の値に合わせる。
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の15分前
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の時刻
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:x-20261219T2230@chinjo-action
+DTSTAMP:20261123T124451Z
+DTSTART:20261219T133000Z
+DTEND:20261219T134500Z
+SUMMARY:X投稿：B 項目｜学校で、裁判所や国民審査を学ぶ
+ 機会は足りていますか？
+DESCRIPTION:【本文（そのままコピーして X に貼る）】\n学
+ 校で、裁判所や国民審査を学ぶ機会は足りていますか
+ ？\n学校で司法と国民審査を学ぶ機会を増やすことを求
+ める陳情の項目です。\nhttps://chinjo-action.vercel.app/shiho/eas
+ y/l_school\n#国民審査 #教育\n\n型：B 項目\nリンク先：/shiho
+ /easy/l_school\n画像：docs/見本/紹介画像/shiho-3.png\n投稿前
+ の確認：意義のページ /shiho/easy/l_school の題と、本文の
+ 言い回しが合っているか。
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の15分前
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の時刻
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:x-20261220T0900@chinjo-action
+DTSTAMP:20261123T124451Z
+DTSTART:20261220T000000Z
+DTEND:20261220T001500Z
+SUMMARY:X投稿：E 運営の透明性（ソースコード）｜このサ
+ イトのソースコードは、GitHub で公開しています。
+DESCRIPTION:【本文（そのままコピーして X に貼る）】\nこ
+ のサイトのソースコードは、GitHub で公開しています。\
+ n誤りの指摘や改善の提案（Issue）、修正（プルリクエ
+ スト）を歓迎します。\nhttps://github.com/shin1007/chinjo-action\
+ n#陳情\n\n型：E 運営の透明性（ソースコード）\nリンク
+ 先：/trouble#support\n画像：なし\n投稿前の確認：GitHub の
+ リンクが開くか。
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の15分前
+TRIGGER:-PT15M
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:X の投稿の時刻
+TRIGGER:PT0M
+END:VALARM
+END:VEVENT
+END:VCALENDAR
