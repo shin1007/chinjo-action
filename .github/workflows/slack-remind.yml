@@ -1,0 +1,39 @@
+# 投稿予定の15分ほど前に、Slack に知らせる（本文・画像・動画の場所つき）。X への投稿は、運営者が手で行う。
+# 設定：リポジトリの Settings → Secrets and variables → Actions に、SLACK_WEBHOOK_URL（Slack の Incoming Webhook の URL）を入れる。
+# 入れていないあいだは、何も送らず、ログに出すだけ。
+name: slack-remind
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+    inputs:
+      now:
+        description: 時刻を指定して試す（例 2026-11-24T07:20:00+09:00）。空なら、いま
+        required: false
+        default: ''
+      dry_run:
+        description: 送らずに内容だけ確かめる
+        type: choice
+        options: ['true', 'false']
+        default: 'true'
+concurrency: slack-remind
+permissions:
+  contents: read
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 予定を確かめて、Slack に送る
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          NOW: ${{ inputs.now }}
+          DRY: ${{ inputs.dry_run }}
+        run: |
+          args=""
+          if [ -n "$NOW" ]; then args="$args --now $NOW"; fi
+          if [ "$DRY" = "true" ]; then args="$args --dry-run"; fi
+          node scripts/notify-slack.js $args
