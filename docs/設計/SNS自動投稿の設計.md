@@ -11,8 +11,8 @@
 ### やり方（作る順）
 1. X の開発者コンソールでアプリを作り、読み書きの権限（OAuth 1.0a の4つの鍵、または OAuth 2.0）を取る。
 2. GitHub の Settings → Secrets に鍵を入れる。**鍵はリポジトリに書かない**（公開リポジトリ）。
-3. `scripts/post-x.js`（Node の標準だけで書く）：投稿の文を1つ受け取り、API に送る。`--dry-run` では送らず、文と文字数だけ出す。
-4. `.github/workflows/post-x.yml`：`site/data/sns-queue.jsonl`（投稿の予定。1行1件、文・リンク・予定日・状態）に、main へ入った新しい行があれば、1件ずつ投稿する。GitHub の Environment に「承認が必要」を付け、運営者が承認した分だけ投稿されるようにする（最初の1か月はこの形）。
+3. `scripts/post-x.js`（2026-11-23 に作成済み。Node の標準だけ）：投稿の文を1つ受け取り、API に送る。`--dry-run` では送らず、文と文字数だけ出す。
+4. `.github/workflows/post-x.yml`（作成済み。いまは手動で動かす。dry_run を false にすると、Environment「x-post」の承認を待つ）：`site/data/sns-queue.jsonl`（投稿の予定。1行1件、文・リンク・予定日・状態）に、main へ入った新しい行があれば、1件ずつ投稿する。GitHub の Environment に「承認が必要」を付け、運営者が承認した分だけ投稿されるようにする（最初の1か月はこの形）。
 5. 機能更新のたびに、Claude が PR の中で `sns-queue.jsonl` に投稿の文を足す。文には、サイトの画面（URL と位置）と、変わったことだけを書く。事実・数字は載せない（載せるときは一次資料の出典つき）。
 
 ### 守ること
