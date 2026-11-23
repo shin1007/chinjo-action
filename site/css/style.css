@@ -532,6 +532,7 @@ summary { cursor: pointer; font-weight: 700; }
 .about-arrow { align-self: center; font-weight: 900; font-size: 1.4rem; color: var(--main-dark); }
 .about-punch { text-align: center; font-size: 1.15rem; margin: 24px 0; }
 .about-punch b { color: var(--main-dark); }
+.about-aside { font-size: .92rem; color: var(--muted); margin: -8px 0 24px; }
 .about-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; }
 .about-facts div { background: var(--bg-alt); border-radius: 12px; padding: 16px; text-align: center; display: flex; flex-direction: column; gap: 4px; }
 .about-facts b { font-size: 1.8rem; color: var(--main-dark); }

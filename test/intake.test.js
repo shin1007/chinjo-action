@@ -12,10 +12,13 @@ for (const kind of ['chinjo', 'yobo']) {
   });
 }
 
+// Windows で core.autocrlf=true だと、取り出したファイルが CRLF になる。改行の違いは比べない
+const lf = (t) => t.replace(/\r\n/g, '\n');
+
 test('site/data/intake.js が jsonl から書き出し直してある（node scripts/intake.js export）', () => {
-  assert.strictEqual(fs.readFileSync(EXPORT_FILE, 'utf8'), exportText());
+  assert.strictEqual(lf(fs.readFileSync(EXPORT_FILE, 'utf8')), exportText());
 });
 
 test('site/data/coverage.json が intake/*.jsonl から書き出し済み（node scripts/intake.js coverage）', () => {
-  assert.strictEqual(fs.readFileSync(COVERAGE_FILE, 'utf8'), coverageText());
+  assert.strictEqual(lf(fs.readFileSync(COVERAGE_FILE, 'utf8')), coverageText());
 });
