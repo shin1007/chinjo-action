@@ -43,6 +43,30 @@
     $('cov-table').replaceChildren(t);
   }
 
+  // 事務局・担当課に電話やメールで聞くときの文（公式サイトに書かれていないことだけを聞く）
+  function askText(kind, name, isPref) {
+    if (kind === 'c') {
+      const to = `${name}議会事務局`;
+      return [`${to}　ご担当者様`, '',
+        '陳情の出し方についてお尋ねします。公式サイトの案内を読みましたが、わからなかった点です。',
+        `1．${isPref ? '都道府県' : '市（町・村）'}の外に住む人が郵送で出した陳情は、審査されますか。それとも、審査はされず議員に配られるだけですか。',
+        '2．郵送・電子メール・電子申請で受け付けていますか。',
+        '3．提出の締切と、必要な部数を教えてください。',
+        '4．陳情者の住所・氏名は、会議録や議会のホームページで公開されますか。',
+        '5．審査の結果は、陳情者に知らせてもらえますか。',
+        '', 'お答えの日付と、わかったことを、「議会への出し方を確かめるページ」（/kakunin）から匿名で知らせます（担当者のお名前は書きません）。'].join('\n');
+    }
+    if (kind === 'y') {
+      const to = isPref ? `${name}の知事あて要望の担当課（広聴・秘書など）` : `${name}の市民の声・要望の担当課（広聴・秘書など）`;
+      return [`${to}　ご担当者様`, '',
+        '知事・市区町村長あての要望の出し方についてお尋ねします。公式サイトの案内を読みましたが、わからなかった点です。',
+        '1．郵送・電子メール・電子申請で受け付けていますか。送り先の部署はどこですか。',
+        '2．その自治体に住んでいない人（在勤・在学でない人）の要望も受け付けていますか。',
+        '3．回答はもらえますか。氏名は公開されますか。'].join('\n');
+    }
+    return '';
+  }
+
   function setupList(rows, prefs) {
     const prefSel = $('cov-pref');
     for (const p of prefs) prefSel.append(new Option(p, p));
@@ -65,7 +89,18 @@
         const target = kind === 'c' ? `${nm === '@' ? pf : nm}議会` : kind === 'y' ? `${nm === '@' ? pf + '知事' : nm + '長'}あての要望` : `${nm === '@' ? pf : nm}のパブリックコメント`;
         a.href = `/feedback?kind=council_procedure&target=${encodeURIComponent(name + '：' + target)}#fb-form`;
         tr.append(el('td', name), el('td', fmt(r[1])), el('td', known, 'small'));
-        const td = el('td'); td.append(a); tr.append(td);
+        const td = el('td'); td.append(a);
+        const ask = askText(kind, nm === '@' ? pf : nm, nm === '@');
+        if (ask) {
+          const c = el('button', '事務局に聞く文をコピー', 'btn btn-small cov-copy');
+          c.type = 'button';
+          c.addEventListener('click', () => {
+            const done = () => { c.textContent = 'コピーしました'; setTimeout(() => { c.textContent = '事務局に聞く文をコピー'; }, 2500); };
+            (navigator.clipboard ? navigator.clipboard.writeText(ask) : Promise.reject()).then(done).catch(() => { window.prompt('コピーして使ってください', ask); });
+          });
+          td.append(' ', c);
+        }
+        tr.append(td);
         tb.append(tr);
       }
       $('cov-more').hidden = list.length <= shown;
