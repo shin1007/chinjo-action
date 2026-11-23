@@ -167,6 +167,8 @@ function checkKind(kind) {
     for (const f of ['anonymous_ok', 'name_published', 'statement', 'result_notice', 'reply']) {
       if (r[f] !== undefined && !TRI.has(r[f])) errs.push(`${at} ${f} が「${r[f]}」`);
     }
+    // ref_copies：参考資料を添えるとき、公式案内が求めている部数（整数）。copies の文に、その数と条件が書いてあること
+    if (r.ref_copies !== undefined && (!Number.isInteger(r.ref_copies) || r.ref_copies < 2 || !String(r.copies || '').includes(String(r.ref_copies)))) errs.push(`${at} ref_copies が整数でないか、copies の文に書かれていない`);
     if (!Array.isArray(r.sources)) errs.push(`${at} sources がない`);
     else r.sources.forEach((s, j) => {
       if (!ROUTES.has(s.route)) errs.push(`${at} sources[${j}].route が「${s.route}」`);
@@ -230,7 +232,7 @@ function stats() {
 // 「自動で読み取り」と分かる形で出す（auto に項目名を入れる）。利用者からの情報（user_tip）は出さない
 const SURE = new Set(['official_site', 'office_reply']);
 const EXPORT_FIELDS = {
-  chinjo: ['page_url', 'form_url', 'email_addr', 'deadline', 'copies', 'format', 'format_url', 'format_title', 'name_published', 'statement', 'result_notice'],
+  chinjo: ['page_url', 'form_url', 'email_addr', 'deadline', 'copies', 'ref_copies', 'format', 'format_url', 'format_title', 'name_published', 'statement', 'result_notice'],
   yobo: ['page_url', 'form_url', 'email_addr', 'reply', 'anonymous_ok', 'pubcom_url', 'mail_to', 'mail_zip', 'mail_address', 'eligible'],
 };
 const newest = (list) => list.sort((x, y) => (y.checked_at || '').localeCompare(x.checked_at || ''))[0];

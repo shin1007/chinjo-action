@@ -6,7 +6,7 @@ window.SendMemo = (() => {
   const check = (t) => `${CHECK}${t}`;
 
   // o：{ kind: 'petition' | 'request', count: 通数（議会1つあたり）, titles: 件名の並び, figs: 送り方の図を入れるか,
-  //      councils: [{ name, page, mail, denshi, tel, address, access, deadline, sessions, stamp }] }
+  //      councils: [{ name, page, mail, denshi, tel, address, access, deadline, sessions, stamp, refCopies }] }
   //      recordUrl：出したら記録する画面のアドレス（なければ載せない）
 //      sessions：定例会の月（例：'3・6・9・12'。data/sessions.js）
   function build(o) {
@@ -75,6 +75,7 @@ window.SendMemo = (() => {
         if (c.denshi) L.push('・電子申請でも出せるようです。');
         if (!request && c.sessions) L.push(`・定例会：${c.sessions}月（開会日は議会の日程で確かめ、その3週間前までに届くように出す）`);
         if (c.deadline) L.push(`・締切：「${c.deadline}」`);
+        if (c.refCopies && !request) L.push(`・⚠ ${c.refCopies}`);
         if (c.tel) L.push(`・電話：${c.tel}`);
         if (c.address) L.push(`・住所：${c.address}`);
         if (c.access) L.push(`・持参：${c.access}`);

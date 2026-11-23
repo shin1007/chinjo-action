@@ -296,6 +296,16 @@
     return n.length ? `<ul class="wz-notes">${n.map((t) => `<li>${t}</li>`).join('')}</ul>` : '';
   }
 
+  // 参考資料を添えるときの部数（ref_copies）。コンビニの白黒コピーは1枚10円（トップの費用の目安と同じ）。1ページの資料を n 部なら n 枚
+  const refCopiesCost = (n) => `参考資料1ページにつき${n}枚、コンビニの白黒コピーで約${n * 10}円`;
+  // 出す議会のうち、参考資料の部数が決まっている議会（作成画面の最終画面と出し方メモに出す）
+  function refCopiesRows() {
+    return real().map((c) => {
+      const d = intakeOf(c, 'chinjo');
+      return d && d.ref_copies ? { name: `${label(c)}`, n: d.ref_copies, text: clip(d.copies || '') } : null;
+    }).filter(Boolean);
+  }
+
   // 受け付け方のデータベース（data/intake.js）から、公式サイト・事務局の回答で確かめたことだけを出す
   const intakeOf = (id, kind) => {
     const [pref, key] = officeKeys[id] || [];
@@ -326,7 +336,8 @@
     if (d.anonymous_ok === 'yes') push('anonymous_ok', '匿名でも受け付けますが、回答はもらえないことがあります。');
     if (d.format_url) push('format_url', `📄 この議会は書式の例（様式・記入例）を出しています：${link(d.format_url, esc(d.format_title || '様式を開く'))}。このサイトの文面を、その様式に写して出すと確実です。`);
     if (d.format) push('format', `書式：「${esc(clip(d.format))}」`);
-    if (d.copies) push('copies', `部数：「${esc(clip(d.copies))}」`);
+    if (d.ref_copies) push('ref_copies', `⚠ <b>参考資料を添えるときは、${d.ref_copies}部（コピー）が必要</b>と案内されています。印刷の部数に足してください（${refCopiesCost(d.ref_copies)}）。公式案内：「${esc(clip(d.copies))}」`);
+    else if (d.copies) push('copies', `部数：「${esc(clip(d.copies))}」`);
     // 機械で読み取っただけの項目には印を付ける
     const auto = new Set(d.auto || []);
     const mark = (t, f) => (auto.has(f) ? `${t}<small class="wz-checked">（公式ページから自動で読み取り）</small>` : t);
@@ -1370,7 +1381,23 @@
       : `${docName}は1通です。`;
     $('wzNowCount').classList.toggle('bump', !!bump);
     $('wzNowPdf').textContent = n > 1 ? `${n}通を印刷用のPDFで開く` : '印刷用のPDFを開く';
+    renderNowRefCopies();
     renderNowAsk();
+  }
+  // 参考資料を添えるときの部数が決まっている議会を、印刷の前に知らせる（陳情書そのものは、出す先1つにつき1通のまま）
+  function renderNowRefCopies() {
+    let box = $('wzNowRef');
+    if (!box) {
+      box = document.createElement('div');
+      box.id = 'wzNowRef';
+      $('wzNowCount').after(box);
+    }
+    const rows = state.kind === 'request' ? [] : refCopiesRows();
+    box.hidden = !rows.length;
+    box.className = 'wz-ref-copies';
+    box.innerHTML = rows.length
+      ? `<p><b>⚠ 参考資料を添える議会があります。印刷の部数に足してください。</b>${esc(docNameOf(state.kind))}そのものは、出す先1つにつき1通のままです。</p><ul class="wz-notes">${rows.map((r) => `<li>${esc(r.name)}：参考資料を添えるときは<b>${r.n}部</b>（${esc(refCopiesCost(r.n))}）。公式案内：「${esc(r.text)}」</li>`).join('')}</ul><p class="hint-sm">参考資料を添えないなら、不要です。出す前に、議会事務局に今の決まりを確かめてください。</p>`
+      : '';
   }
   // 要望書の出し方のページ。都道府県・政令指定都市・人口の多い市区町村は、公式サイトで確かめたページ（data/request-pages.js）へ直接案内する。
   // ないところは公式サイトの中を検索する。「要望」で探すと、県や市が国へ出した要望書の一覧が出てくるので、言葉に入れない
@@ -1586,6 +1613,7 @@
       access: a ? `${a[2]}駅（${a[3]}）から${a[4] <= 2500 ? `徒歩約${Math.ceil((a[4] * 1.3) / 80)}分` : `約${km(a[4])}。バスかタクシーが便利`}` : '',
       deadline: info.deadline ? clip(info.deadline) : '',
       sessions: ((((window.SESSIONS || {})[pref] || {})[key]) || [])[0] || '',
+      refCopies: ((intakeOf(c, 'chinjo') || {}).ref_copies && state.kind !== 'request') ? `参考資料を添えるときは${intakeOf(c, 'chinjo').ref_copies}部（コピー）が必要（${refCopiesCost(intakeOf(c, 'chinjo').ref_copies)}）。公式案内：「${clip(intakeOf(c, 'chinjo').copies || '')}」` : '',
       stamp: p ? (p.yen ? `${sheets}枚・約${p.g}g → ${p.safe ? `${p.safe}円（${p.yen}円の境目に近いので1つ上の料金）` : `${p.yen}円`}` : `${sheets}枚・約${p.g}g → 郵便局の窓口で出す`) : '',
     };
   }
