@@ -17,6 +17,8 @@ module.exports = {
   'kodomo/n_voice': '子どもの権利 子供の権利 意見 気持ち 子どもの声',
   'kodomo/n_childrep': '子どもの権利 手続代理人 弁護士 家庭裁判所',
   'kodomo/n_urgent': '共同親権 単独 急迫 連れ去り',
+  'kodomo/n_morahara': 'モラハラ モラルハラスメント 定義 法律 精神的暴力 DV 心理的攻撃 夫婦',
+  'kodomo/l_morahara': 'モラハラ DV 相談 聞き取り 記録 申告 女性相談 窓口',
   'kodomo/n_dvmeasure': 'DV 住民票 支援措置 居場所 虚偽',
   'kodomo/n_genderplan': '男女共同参画 共同養育 子育て',
   'kodomo/n_tempcare': '児相 児童相談所 一時保護 虐待',
