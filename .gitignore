@@ -27,3 +27,4 @@ docs/非公開/
 
 # 速さの測定の結果（npm run speed）
 scripts/.speed/
+__pycache__/
