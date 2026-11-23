@@ -1,0 +1,48 @@
+# X への告知の投稿（手動で動かす）。設計：docs/設計/SNS自動投稿の設計.md
+# 1. dry_run を true にして実行 … 送らずに、文と文字数と検査の結果だけを確かめる
+# 2. dry_run を false にして実行 … GitHub の Environment「x-post」の承認（運営者）を待ってから投稿する
+#    Environment は、リポジトリの Settings → Environments で作り、Required reviewers に運営者を入れておく
+#    鍵（X_API_KEY・X_API_SECRET・X_ACCESS_TOKEN・X_ACCESS_SECRET）は、その Environment の Secrets に入れる
+name: post-x
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 送らずに確かめるだけ（true）／実際に投稿する（false）
+        type: choice
+        options: ['true', 'false']
+        default: 'true'
+concurrency: post-x
+jobs:
+  check:
+    if: ${{ inputs.dry_run == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/post-x.js --dry-run
+  post:
+    if: ${{ inputs.dry_run == 'false' }}
+    runs-on: ubuntu-latest
+    environment: x-post
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/post-x.js
+        env:
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
+      - name: 投稿した記録を保存する
+        run: |
+          git config user.name "chinjo-action-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add site/data/sns-posted.jsonl
+          git diff --cached --quiet || (git commit -m "X に投稿した記録を保存する" && git push)
