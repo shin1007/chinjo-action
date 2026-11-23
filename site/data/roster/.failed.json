@@ -12,12 +12,7 @@
  "東京都/八王子市": {
   "url": "https://www.city.hachioji.tokyo.jp/contents/shigikai_1/giin/kakushu/p010627.html",
   "reason": "38人のうち7人しか取れない",
-  "checked_at": "2026-11-21"
- },
- "長崎県/長崎市": {
-  "url": "https://www.city.nagasaki.lg.jp/site/gikai/list41-196.html",
-  "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-21"
+  "checked_at": "2026-11-23"
  },
  "大阪府/高槻市": {
   "url": "https://www.city.takatsuki.osaka.jp/site/takatsukishigikai/list99-465.html",
@@ -257,7 +252,7 @@
  "熊本県/玉名市": {
   "url": "https://www.city.tamana.lg.jp/q/list/439.html",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-21"
+  "checked_at": "2026-11-23"
  },
  "愛知県/常滑市": {
   "url": "https://www.city.tokoname.aichi.jp/shisei/shigikai/1001561/index.html",
@@ -292,7 +287,7 @@
  "熊本県/宇城市": {
   "url": "https://www.city.uki.kumamoto.jp/toppage/shigikai/meibo",
   "reason": "名前でないものを拾っている",
-  "checked_at": "2026-11-21"
+  "checked_at": "2026-11-23"
  },
  "宮城県/気仙沼市": {
   "url": "https://www.kesennuma.miyagi.jp/li/shisei/160/030/index.html",
@@ -407,7 +402,7 @@
  "熊本県/上益城郡益城町": {
   "url": "https://www.town.mashiki.lg.jp/list00646.html",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-21"
+  "checked_at": "2026-11-23"
  },
  "沖縄県/島尻郡八重瀬町": {
   "url": "https://www.town.yaese.lg.jp/docs/2026092800029/",
@@ -487,7 +482,7 @@
  "熊本県/人吉市": {
   "url": "https://www.city.hitoyoshi.lg.jp/shisei/gikaijyoho/giin_shokai",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-21"
+  "checked_at": "2026-11-23"
  },
  "宮崎県/西都市": {
   "url": "https://www.city.saito.lg.jp/shiseigyosei/shigikai/post_474",
@@ -587,7 +582,7 @@
  "熊本県/上天草市": {
   "url": "https://www.city.kamiamakusa.kumamoto.jp/q/list/105.html",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-21"
+  "checked_at": "2026-11-23"
  },
  "神奈川県/足柄下郡湯河原町": {
   "url": "https://www.town.yugawara.kanagawa.jp/site/yugawara-gikai/1398.html",
@@ -692,7 +687,7 @@
  "熊本県/上益城郡御船町": {
   "url": "https://www.town.mifune.kumamoto.jp/gikai/hpkiji/pub/List.aspx?c_id=3&class_set_id=6&class_id=6001",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-21"
+  "checked_at": "2026-11-23"
  },
  "秋田県/仙北郡美郷町": {
   "url": "https://www.town.misato.akita.jp/archive/contents-3280",
@@ -772,7 +767,7 @@
  "熊本県/玉名郡長洲町": {
   "url": "https://www.town.nagasu.lg.jp/gyosei/gikai/meibo/",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-21"
+  "checked_at": "2026-11-23"
  },
  "群馬県/北群馬郡榛東村": {
   "url": "https://www.vill.shinto.gunma.jp/javascript:void(0);?idSubTop=4",
@@ -822,7 +817,7 @@
  "熊本県/球磨郡あさぎり町": {
   "url": "https://www.town.asagiri.lg.jp/list00296.html",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-21"
+  "checked_at": "2026-11-23"
  },
  "長野県/埴科郡坂城町": {
   "url": "https://www.town.sakaki.nagano.jp/site/gikai/list8-21.html",
@@ -922,7 +917,7 @@
  "熊本県/上益城郡山都町": {
   "url": "https://www.town.kumamoto-yamato.lg.jp/gikai/kiji0035132/index.html",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-21"
+  "checked_at": "2026-11-23"
  },
  "岡山県/久米郡美咲町": {
   "url": "https://www.town.okayama-misaki.lg.jp/kakuka/gikaijimukyoku/gyomu/1/2/130.html",
@@ -1012,7 +1007,7 @@
  "熊本県/球磨郡錦町": {
   "url": "https://www.town.kumamoto-nishiki.lg.jp/list00254.html",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-21"
+  "checked_at": "2026-11-23"
  },
  "長野県/南佐久郡佐久穂町": {
   "url": "https://www.town.sakuho.nagano.jp/choseijoho/chogikai/gikaikaranoshirase/gikai_7970.html",
@@ -1027,7 +1022,7 @@
  "熊本県/阿蘇郡南阿蘇村": {
   "url": "https://www.vill.minamiaso.lg.jp/gikai/list00353.html",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-21"
+  "checked_at": "2026-11-23"
  },
  "鹿児島県/大島郡徳之島町": {
   "url": "https://www.tokunoshima-town.org/gikaijimukyoku/chose/gikai/mebo.html",
@@ -1062,12 +1057,12 @@
  "熊本県/玉名郡南関町": {
   "url": "https://www.town.nankan.lg.jp/tyosei/gikai/meibo/",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-21"
+  "checked_at": "2026-11-23"
  },
  "熊本県/玉名郡和水町": {
   "url": "https://www.town.nagomi.lg.jp/chougikai/gikaigaiyou/giinnmeibo/",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-21"
+  "checked_at": "2026-11-23"
  },
  "大阪府/泉南郡田尻町": {
   "url": "https://www.town.tajiri.osaka.jp/gikai/giinshokai/index.html",
@@ -1326,8 +1321,8 @@
  },
  "熊本県/葦北郡津奈木町": {
   "url": "https://www.town.tsunagi.lg.jp/hpkiji/pub/List.aspx?c_id=3&class_set_id=1&class_id=849",
-  "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-21"
+  "reason": "6人しか取れない（人数が書いてない）",
+  "checked_at": "2026-11-23"
  },
  "北海道/河西郡中札内村": {
   "url": "https://www.vill.nakasatsunai.hokkaido.jp/gikai/giin_shokai/",
@@ -1347,7 +1342,7 @@
  "熊本県/阿蘇郡南小国町": {
   "url": "https://www.town.minamioguni.lg.jp/gikai/meibo.html",
   "reason": "よみがなを拾っている",
-  "checked_at": "2026-11-21"
+  "checked_at": "2026-11-23"
  },
  "北海道/十勝郡浦幌町": {
   "url": "https://www.urahoro.jp/council/?category=298",
@@ -1472,7 +1467,7 @@
  "熊本県/球磨郡水上村": {
   "url": "https://www.vill.mizukami.lg.jp/list00566.html",
   "reason": "0人しか取れない（人数が書いてない）",
-  "checked_at": "2026-11-21"
+  "checked_at": "2026-11-23"
  },
  "大分県/東国東郡姫島村": {
   "url": "https://www.himeshima.jp/wp-content/uploads/20230629_R5giinmeibo_6.27.pdf",
