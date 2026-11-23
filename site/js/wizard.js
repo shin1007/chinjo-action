@@ -336,7 +336,7 @@
     if (d.anonymous_ok === 'yes') push('anonymous_ok', '匿名でも受け付けますが、回答はもらえないことがあります。');
     if (d.format_url) push('format_url', `📄 この議会は書式の例（様式・記入例）を出しています：${link(d.format_url, esc(d.format_title || '様式を開く'))}。このサイトの文面を、その様式に写して出すと確実です。`);
     if (d.format) push('format', `書式：「${esc(clip(d.format))}」`);
-    if (d.ref_copies) push('ref_copies', `⚠ <b>参考資料を添えるときは、${d.ref_copies}部（コピー）が必要</b>と案内されています。印刷の部数に足してください（${refCopiesCost(d.ref_copies)}）。公式案内：「${esc(clip(d.copies))}」`);
+    if (d.ref_copies) push('ref_copies', `⚠ <b>参考資料を添える（議員に配ってもらう）ときは、${d.ref_copies}部（コピー）</b>を求める議会です。印刷の部数に足してください（${refCopiesCost(d.ref_copies)}）。公式案内：「${esc(clip(d.copies))}」`);
     else if (d.copies) push('copies', `部数：「${esc(clip(d.copies))}」`);
     // 機械で読み取っただけの項目には印を付ける
     const auto = new Set(d.auto || []);
@@ -1396,7 +1396,7 @@
     box.hidden = !rows.length;
     box.className = 'wz-ref-copies';
     box.innerHTML = rows.length
-      ? `<p><b>⚠ 参考資料を添える議会があります。印刷の部数に足してください。</b>${esc(docNameOf(state.kind))}そのものは、出す先1つにつき1通のままです。</p><ul class="wz-notes">${rows.map((r) => `<li>${esc(r.name)}：参考資料を添えるときは<b>${r.n}部</b>（${esc(refCopiesCost(r.n))}）。公式案内：「${esc(r.text)}」</li>`).join('')}</ul><p class="hint-sm">参考資料を添えないなら、不要です。出す前に、議会事務局に今の決まりを確かめてください。</p>`
+      ? `<p><b>⚠ 参考資料を添える議会があります。印刷の部数に足してください。</b>${esc(docNameOf(state.kind))}そのものは、出す先1つにつき1通のままです。</p><ul class="wz-notes">${rows.map((r) => `<li>${esc(r.name)}：参考資料を添える（議員に配ってもらう）ときは<b>${r.n}部</b>（${esc(refCopiesCost(r.n))}）。公式案内：「${esc(r.text)}」</li>`).join('')}</ul><p class="hint-sm">参考資料を添えないなら、不要です。出す前に、議会事務局に今の決まりを確かめてください。</p>`
       : '';
   }
   // 要望書の出し方のページ。都道府県・政令指定都市・人口の多い市区町村は、公式サイトで確かめたページ（data/request-pages.js）へ直接案内する。
@@ -1613,7 +1613,7 @@
       access: a ? `${a[2]}駅（${a[3]}）から${a[4] <= 2500 ? `徒歩約${Math.ceil((a[4] * 1.3) / 80)}分` : `約${km(a[4])}。バスかタクシーが便利`}` : '',
       deadline: info.deadline ? clip(info.deadline) : '',
       sessions: ((((window.SESSIONS || {})[pref] || {})[key]) || [])[0] || '',
-      refCopies: ((intakeOf(c, 'chinjo') || {}).ref_copies && state.kind !== 'request') ? `参考資料を添えるときは${intakeOf(c, 'chinjo').ref_copies}部（コピー）が必要（${refCopiesCost(intakeOf(c, 'chinjo').ref_copies)}）。公式案内：「${clip(intakeOf(c, 'chinjo').copies || '')}」` : '',
+      refCopies: ((intakeOf(c, 'chinjo') || {}).ref_copies && state.kind !== 'request') ? `参考資料を添える（議員に配ってもらう）ときは${intakeOf(c, 'chinjo').ref_copies}部（コピー）を求める議会です（${refCopiesCost(intakeOf(c, 'chinjo').ref_copies)}）。公式案内：「${clip(intakeOf(c, 'chinjo').copies || '')}」` : '',
       stamp: p ? (p.yen ? `${sheets}枚・約${p.g}g → ${p.safe ? `${p.safe}円（${p.yen}円の境目に近いので1つ上の料金）` : `${p.yen}円`}` : `${sheets}枚・約${p.g}g → 郵便局の窓口で出す`) : '',
     };
   }

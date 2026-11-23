@@ -168,7 +168,7 @@ function checkKind(kind) {
       if (r[f] !== undefined && !TRI.has(r[f])) errs.push(`${at} ${f} が「${r[f]}」`);
     }
     // ref_copies：参考資料を添えるとき、公式案内が求めている部数（整数）。copies の文に、その数と条件が書いてあること
-    if (r.ref_copies !== undefined && (!Number.isInteger(r.ref_copies) || r.ref_copies < 2 || !String(r.copies || '').includes(String(r.ref_copies)))) errs.push(`${at} ref_copies が整数でないか、copies の文に書かれていない`);
+    if (r.ref_copies !== undefined && (!Number.isInteger(r.ref_copies) || r.ref_copies < 2 || !String(r.copies || '').normalize('NFKC').includes(String(r.ref_copies)))) errs.push(`${at} ref_copies が整数でないか、copies の文に書かれていない`);
     if (!Array.isArray(r.sources)) errs.push(`${at} sources がない`);
     else r.sources.forEach((s, j) => {
       if (!ROUTES.has(s.route)) errs.push(`${at} sources[${j}].route が「${s.route}」`);
