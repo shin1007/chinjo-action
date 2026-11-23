@@ -89,5 +89,6 @@ https://chinjo-action.vercel.app/sonota
 
 ## 音声つきの紹介動画（試作・2026-11-21）
 - [docs/見本/紹介動画/](紹介動画/) の mail-howto-goki.mp4（後鬼）、mail-howto-no7.mp4（No.7）、mail-howto-yurei.mp4（ユーレイちゃん）。作り方は `python scripts/make-promo-video.py`。
+- 2026-11-23：声は No.7 に決め（後鬼はキャラクターのガイドラインに「特定の政治的主張を伴う利用」の禁止があるため。`docs/調査/宣伝動画の合成音声の規約.md`）、台本と字幕を作り直した（`docs/設計/紹介動画の台本案.md`）。上の3本は、試作の旧版。
 - 投稿の文にも、使った声のクレジットを書く（例「VOICEVOX:後鬼」「VOICEVOX:No.7」「VOICEVOX:ユーレイちゃん(CV:神崎零)」）。
 - 規約は docs/調査/宣伝動画の合成音声の規約.md。
