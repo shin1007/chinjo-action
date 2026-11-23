@@ -15,6 +15,7 @@ const ELECTION = {
     'https://www.city.funabashi.lg.jp/shisei/senkyo/007/p114955.html', // 令和5年 一般選挙
     'https://www.city.funabashi.lg.jp/shisei/senkyo/007/p137784.html', // 令和7年 補欠選挙
   ],
+  '長崎県/長崎市': ['https://www.city.nagasaki.lg.jp/page/5927.html'], // 令和5年 一般選挙
 };
 
 // PDF の文字から「姓 名」「姓名」の形のものを広く拾う（落選者・ほかの言葉が混じってもよい。名簿で確かめるので）
