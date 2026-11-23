@@ -1524,9 +1524,12 @@
   $('wzPickAll').addEventListener('click', () => {
     const all = pickBoxes().every((el) => el.checked);
     pickBoxes().forEach((el) => { el.checked = !all; });
+    $('wzWithFigs').disabled = !$('wzWithMemo').checked;
     renderPickAll();
   });
   PICKS.forEach((id) => $(id).addEventListener('change', renderPickAll));
+  // 送り方の図は出し方メモの中に入るので、メモを外したら選べないようにする
+  $('wzWithMemo').addEventListener('change', () => { $('wzWithFigs').disabled = !$('wzWithMemo').checked; });
 
   // 議会ごとに、封筒に入れる文書（送付状と陳情書）をまとめる。keys は参考図表の別紙を選ぶのに使う
   const envelopes = () => targets().map((c) => {
@@ -1617,7 +1620,8 @@
       doc.addLabels(window.PdfDoc.SHEETS.plain, window.PdfDoc.labelItems(rows, sender, { to: request ? 'head' : 'chair', zaichu: true, from: true, back: true }));
     }
     if (!labelsOnly && pick('wzWithMemo')) {
-      const png = await figsPng().catch(() => null);
+      // 送りなれている人は、送り方の図を外せる（wzWithFigs）
+      const png = pick('wzWithFigs') ? await figsPng().catch(() => null) : null;
       const text = window.SendMemo.build({
         kind: state.kind,
         count: docKeys().length,
