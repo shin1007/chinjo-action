@@ -34,13 +34,15 @@
   };
   // 調査中の欄から、ご意見のページを「根拠になる資料を知らせたい」・対象の議会名つきで開く
   const fb = (name, what) => window.Common.askUrl(`${name}の${what}`, `${what}の URL を教えてください`);
+  // いま公式の名簿のページが見つかっている議会の数（roster.json を数えただけ）
+  const counts = (ros) => { const v = Object.values(ros); return `全国${v.length.toLocaleString('ja-JP')}議会のうち${v.filter((x) => x.url).length.toLocaleString('ja-JP')}議会で確認済み`; };
   const card = (pref, muni, ros, nm) => {
     const name = council(pref, muni);
     const off = site(pref, muni);
     const meibo = (ros[`${pref}/${muni}`] || {}).url;
     return `<li><b>${esc(name)}</b>
       <a class="btn btn-small btn-primary" href="${ai(askLocal(name))}" target="_blank" rel="noopener noreferrer">GoogleのAIに議員の一覧を聞く ↗</a>
-      ${meibo ? `<a class="btn btn-small" href="${esc(meibo)}" target="_blank" rel="noopener noreferrer">議員名簿（公式）↗</a>` : `<span class="hint-sm">議員名簿（公式）のボタン：調査中（公式のページを探しています）。ご存じの方は<a href="${fb(name, '議員名簿の公式ページ')}" target="_blank" rel="noopener noreferrer">ご意見で URL を教えてください</a></span>`}
+      ${meibo ? `<a class="btn btn-small" href="${esc(meibo)}" target="_blank" rel="noopener noreferrer">議員名簿（公式）↗</a>` : `<span class="hint-sm">議員名簿（公式）のボタン：調査中（${counts(ros)}。公式のページを探しています）。ご存じの方は<a href="${fb(name, '議員名簿の公式ページ')}" target="_blank" rel="noopener noreferrer">ご意見で URL を教えてください</a></span>`}
       <a class="btn btn-small" href="${g(`${name} 議員名簿`)}" target="_blank" rel="noopener noreferrer">ふつうに検索 ↗</a>
       ${off ? `<a class="btn btn-small" href="${esc(off)}" target="_blank" rel="noopener noreferrer">公式サイト ↗</a>` : ''}
       <button type="button" class="btn btn-small" data-council="${esc(name)}">宛先の議会名に入れる</button>

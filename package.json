@@ -8,6 +8,7 @@
     "links": "node scripts/check-links.js",
     "speed": "node scripts/speed.js",
     "adopted": "python scripts/adopted-scan.py",
+    "progress": "node scripts/progress.js",
     "refresh": "node scripts/refresh.js",
     "asks-audit": "node scripts/asks-audit.js"
   },
