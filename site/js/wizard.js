@@ -1079,7 +1079,11 @@
       const guide = page
         ? `<a href="${esc(page)}" target="_blank" rel="noopener">陳情・請願の案内ページ</a>`
         : site && `<a href="https://www.google.com/search?q=${encodeURIComponent(`site:${new URL(site).hostname} 陳情 OR 請願 議会`)}" target="_blank" rel="noopener">陳情・請願の案内ページを検索</a>`;
-      const badge = mailBadge(info);
+      // mail.js・mail-policy.js・案内ページの一文にない議会でも、受け付け方のデータベース（data/intake.js）に郵送の扱いがあれば、それを出す
+      // （下の「出し方と締切の目安」には出ているのに、ここだけ「載っていませんでした」と矛盾するのを防ぐ）
+      const badge = mailBadge(info) || (mailRule(info) ? '' : intakeMail(c));
+      // 住民か住民以外のどちらかしか分かっていないときは、足りない分を教えられるリンクも出す
+      const partial = /まだ(この)?(サイトで)?確かめられていません/.test(badge);
       const check = [
         telHtml(pref, key, false).replace(/^\s*<span class="wz-tel">|<\/span>\s*$/g, ''),
         guide,
@@ -1094,7 +1098,7 @@
         ${sameHtml(c)}
         ${badge ? telHtml(pref, key, !page) : ''}
         ${page ? '' : `<span>陳情の出し方のページが見つかりませんでした（調査中${window.Common.known('chinjo', 'page_url')}）。小さな議会では案内ページを置いていないことも多いので、議会事務局に電話で出し方と締切を聞くのが確実です。<a href="${esc(window.Common.askUrl(`${label(c)}の陳情の出し方`, '出し方の案内ページの URL を教えてください', 'council_procedure'))}" target="_blank" rel="noopener">案内ページを知っていれば、ご意見で教えてください</a></span>`}
-        ${badge ? '' : `<span class="hint-sm">郵送の扱い：調査中${window.Common.known('chinjo', 'mail')}。<a href="${esc(window.Common.askUrl(`${label(c)}の陳情の郵送の扱い`, '郵送で審査されるかが分かる公式の案内ページの URL を教えてください', 'council_procedure'))}" target="_blank" rel="noopener">分かる方は、ご意見で教えてください</a></span>`}
+        ${badge && !partial ? '' : `<span class="hint-sm">郵送の扱い${partial ? '（分かっていない分）' : ''}：調査中${window.Common.known('chinjo', 'mail')}。<a href="${esc(window.Common.askUrl(`${label(c)}の陳情の郵送の扱い`, '郵送で審査されるかが分かる公式の案内ページの URL を教えてください', 'council_procedure'))}" target="_blank" rel="noopener">分かる方は、ご意見で教えてください</a></span>`}
         <span class="wz-links">${links}</span>
         ${window.Report.enabled ? reportBtn(c) : ''}</li>`;
     }).join('');
