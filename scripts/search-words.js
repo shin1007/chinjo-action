@@ -121,4 +121,6 @@ module.exports = {
   'sonota/l_npo_open': 'NPO 会計 公開 委託 補助金',
   'sonota/l_cleanup': 'ごみ拾い ゴミ ポイ捨て 清掃 除草 草刈り ボランティア フレイル 高齢者',
   'sonota/l_book_display': '図書館 本屋 書店 BL 本 ゾーニング',
+  'kenko/l_aed_women': 'AED 自動体外式除細動器 救命 心肺蘇生 女性 心停止 訴えられる 痴漢 冤罪 えん罪 救命講習',
+  'kenko/n_aed_women': 'AED 自動体外式除細動器 救命 心肺蘇生 女性 心停止 訴えられる 痴漢 冤罪 えん罪 政府広報 免責',
 };
