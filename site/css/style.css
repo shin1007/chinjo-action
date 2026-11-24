@@ -834,9 +834,9 @@ summary { cursor: pointer; font-weight: 700; }
 .hero-themes .item-search label { font-size: 0.92rem; }
 .hero-themes .item-search-results:not(:empty) { margin-top: 6px; padding: 4px 10px; border-radius: 8px; background: var(--surface); border: 1px solid var(--line); max-height: 60vh; overflow: auto; }
 @media (max-width: 640px) { .hero-themes .theme-list { grid-template-columns: repeat(2, 1fr); } }
-.hero-themes .theme-omakase a { background: var(--surface); color: var(--main-dark); border: 2px dashed var(--main); }
+.hero-themes .theme-omakase a { background: var(--surface); color: var(--main-dark); border: 2px solid var(--main); font-size: 1.05rem; font-weight: 700; padding-top: 14px; padding-bottom: 14px; }
 .hero-themes .theme-omakase a:hover, .hero-themes .theme-omakase a:focus-visible { background: var(--bg-alt); }
-.hero-themes .theme-omakase small { display: block; font-weight: 400; font-size: 0.72rem; color: var(--muted); }
+.hero-themes .theme-omakase small { display: block; font-weight: 400; font-size: 0.8rem; color: var(--muted); }
 .hero-themes .theme-omakase { grid-column: 1 / -1; }
 .wz-kind > p { grid-column: 1 / -1; margin: 0; }
 .recent-fold > summary { cursor: pointer; }
