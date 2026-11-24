@@ -54,6 +54,26 @@
       <li><b>印刷する</b>（陳情書と宛先ラベル）</li>
       <li><b>署名・押印して出す</b>（押印がいらない議会も多くあります）</li>
     </ol>
+    <div id="themes" class="hero-themes">
+      <h2>テーマを選んでつくる</h2>
+      <ul class="theme-list">
+        <li><a href="/kodomo/make">子どもの権利</a></li>
+        <li><a href="/dansei/make">男女平等</a></li>
+        <li><a href="/nihonjin/make">日本人の権利</a></li>
+        <li><a href="/shiho/make">司法への参加</a></li>
+        <li><a href="/kenko/make">国民の健康</a></li>
+        <li><a href="/sonota/make">その他（税・教育）</a></li>
+        <li class="theme-omakase"><a href="/omakase">おまかせ<small>テーマ・陳情・議会を3つずつ自動で</small></a></li>
+      </ul>
+      <div class="item-search">
+        <label for="itemSearch">どのテーマか分からないときは、言葉でさがす</label>
+        <input type="search" id="itemSearch" class="wz-filter" placeholder="例：受動喫煙、養育費、授業料（気になる言葉で探せます）" autocomplete="off">
+        <p id="itemSearchCount" class="hint-sm" aria-live="polite"></p>
+        <p><button type="button" id="itemListAll" class="btn btn-small" aria-expanded="false" aria-controls="itemSearchResults">陳情内容の一覧を見る</button></p>
+        <ul id="itemSearchResults" class="item-search-results"></ul>
+      </div>
+      <p class="hero-sub small">陳情書のほかに、要望書・議員への手紙にも作成画面で切り替えられます（<a href="#compare">違い</a>）。</p>
+    </div>
     <details class="lead-howto"><summary>郵送で出すまでの流れを動画で見る（約50秒・印刷から投函まで、金額つき）</summary>
       <img width="960" height="540" alt="郵送で出すまでの9つの手順：サイトで入力、PDFを保存、コンビニで印刷、日付を書いて署名、宛名と差出人を切る、クリアファイルに入れる、角2封筒に入れる、宛名と切手を貼る、ポストに出す。陳情5件で約480円（切手270円）。最後に「下からテーマを選ぶ」">
     </details>
@@ -96,26 +116,6 @@
       <p class="hint-sm">料金は<a href="https://www.post.japanpost.jp/send/fee/kokunai/one_two.html" target="_blank" rel="noopener">日本郵便の料金表</a>によります。厚さが3cmを超えると規格外になり、料金が上がります。境目に近いときは1つ上の料金分を貼っておくと安心です。</p>
       </details>
     </details>
-    <div id="themes" class="hero-themes">
-      <h2>テーマを選んでつくる</h2>
-      <ul class="theme-list">
-        <li><a href="/kodomo/make">子どもの権利</a></li>
-        <li><a href="/dansei/make">男女平等</a></li>
-        <li><a href="/nihonjin/make">日本人の権利</a></li>
-        <li><a href="/shiho/make">司法への参加</a></li>
-        <li><a href="/kenko/make">国民の健康</a></li>
-        <li><a href="/sonota/make">その他（税・教育）</a></li>
-        <li class="theme-omakase"><a href="/omakase">おまかせ<small>テーマ・陳情・議会を3つずつ自動で</small></a></li>
-      </ul>
-      <div class="item-search">
-        <label for="itemSearch">どのテーマか分からないときは、言葉でさがす</label>
-        <input type="search" id="itemSearch" class="wz-filter" placeholder="例：受動喫煙、養育費、授業料（気になる言葉で探せます）" autocomplete="off">
-        <p id="itemSearchCount" class="hint-sm" aria-live="polite"></p>
-        <p><button type="button" id="itemListAll" class="btn btn-small" aria-expanded="false" aria-controls="itemSearchResults">陳情内容の一覧を見る</button></p>
-        <ul id="itemSearchResults" class="item-search-results"></ul>
-      </div>
-      <p class="hero-sub small">陳情書のほかに、要望書・議員への手紙にも作成画面で切り替えられます（<a href="#compare">違い</a>）。</p>
-    </div>
   </div>
 </section>
 <section id="tally" class="tally" aria-label="これまでの歩み">
