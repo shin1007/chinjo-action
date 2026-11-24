@@ -298,8 +298,8 @@ summary { cursor: pointer; font-weight: 700; }
 
 @media (max-width: 800px) {
   html { scroll-padding-top: 128px; }
-  .header-inner { padding: 8px 16px; gap: 8px; min-height: 56px; }
-  .logo { flex: 1; font-size: 0.9rem; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .header-inner { padding: 8px 16px; gap: 4px 8px; min-height: 56px; flex-wrap: wrap; }
+  .logo { flex: 1 1 auto; font-size: 0.9rem; white-space: nowrap; }
   nav { display: flex; flex-shrink: 0; white-space: nowrap; gap: 14px; }
   nav a { margin: 0; font-size: 0.88rem; }
   .primary-nav { gap: 10px; }
