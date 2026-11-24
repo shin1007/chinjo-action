@@ -38,11 +38,11 @@
     const meibo = (ros[`${pref}/${muni}`] || {}).url;
     return `<li><b>${esc(name)}</b>
       <a class="btn btn-small btn-primary" href="${ai(askLocal(name))}" target="_blank" rel="noopener noreferrer">GoogleのAIに議員の一覧を聞く ↗</a>
-      ${meibo ? `<a class="btn btn-small" href="${esc(meibo)}" target="_blank" rel="noopener noreferrer">議員名簿（公式）↗</a>` : ''}
+      ${meibo ? `<a class="btn btn-small" href="${esc(meibo)}" target="_blank" rel="noopener noreferrer">議員名簿（公式）↗</a>` : '<span class="hint-sm">議員名簿（公式）のボタン：調査中（公式のページを探しています）</span>'}
       <a class="btn btn-small" href="${g(`${name} 議員名簿`)}" target="_blank" rel="noopener noreferrer">ふつうに検索 ↗</a>
       ${off ? `<a class="btn btn-small" href="${esc(off)}" target="_blank" rel="noopener noreferrer">公式サイト ↗</a>` : ''}
       <button type="button" class="btn btn-small" data-council="${esc(name)}">宛先の議会名に入れる</button>
-      ${list(name, (nm[pref] || {})[`${pref}/${muni}`])}</li>`;
+      ${list(name, (nm[pref] || {})[`${pref}/${muni}`]) || (meibo ? '<p class="hint-sm">議員の名前を押して宛先に入れる機能：調査中（名簿の書き方が読み取れていません。公式の名簿を見て、議員名は手で入れてください）</p>' : '')}</li>`;
   };
   async function run() {
     const zip = input.value.normalize('NFKC').replace(/\D/g, '');
