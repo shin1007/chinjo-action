@@ -4,9 +4,7 @@
 
 ## 項目の見直し（asks-audit の「見直し」8件）
 
-- [ ] 理由が長い項目を、削るか分ける（読まれにくい。目安は900字まで）。理由を削るときは、残す数字の根拠（refs）を一次資料で確かめ直す。
-  - `kodomo/n_feelink`（959字）
-  - `dansei/n_kaishun`（969字）
+- [ ] （2026-11-24：kodomo/n_feelink・dansei/n_kaishun は、結びの文・重なる要約の文を削って900字以内にした。数字・条文・出典は変えていない）理由が長い項目を、削るか分ける（読まれにくい。目安は900字まで）。理由を削るときは、残す数字の根拠（refs）を一次資料で確かめ直す。
   - `sonota/n_vehicle_light`（1152字）
   - `sonota/n_teacher_info`（1603字）
   - `sonota/n_regular_teacher`（1707字）
