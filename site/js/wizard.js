@@ -346,6 +346,7 @@
     // パブリックコメント（制度の案への意見募集）の一覧。自治体（首長部局）のページなので、要望の側のデータから出す
     const pc = (intakeOf(id, 'yobo') || {}).pubcom_url;
     if (pc) out.push(`📝 この自治体は、計画や条例の案への意見募集（パブリックコメント）もしています：${link(pc, '意見募集のページを開く')}`);
+    else if (id) out.push(`📝 この自治体のパブリックコメント（意見募集）のページ：調査中。<a href="${esc(window.Common.askUrl(`${municipalityName(id)}のパブリックコメントのページ`, '意見募集のページの URL を教えてください', 'council_procedure'))}" target="_blank" rel="noopener">ご存じなら、ご意見で教えてください</a>`);
     if (isStale(d.at)) out.push(`⚠ このサイトで確かめたのは${esc(ymd(d.at))}で、3か月以上たっています。変わっていることがあるので、出す前に公式の案内ページで確かめてください。`);
     return out;
   }
@@ -1092,7 +1093,8 @@
         ${notes(info)}
         ${sameHtml(c)}
         ${badge ? telHtml(pref, key, !page) : ''}
-        ${page ? '' : '<span>陳情の出し方のページが見つかりませんでした。小さな議会では案内ページを置いていないことも多いので、議会事務局に電話で出し方と締切を聞くのが確実です。</span>'}
+        ${page ? '' : `<span>陳情の出し方のページが見つかりませんでした（調査中）。小さな議会では案内ページを置いていないことも多いので、議会事務局に電話で出し方と締切を聞くのが確実です。<a href="${esc(window.Common.askUrl(`${label(c)}の陳情の出し方`, '出し方の案内ページの URL を教えてください', 'council_procedure'))}" target="_blank" rel="noopener">案内ページを知っていれば、ご意見で教えてください</a></span>`}
+        ${badge ? '' : `<span class="hint-sm">郵送の扱い：調査中。<a href="${esc(window.Common.askUrl(`${label(c)}の陳情の郵送の扱い`, '郵送で審査されるかが分かる公式の案内ページの URL を教えてください', 'council_procedure'))}" target="_blank" rel="noopener">分かる方は、ご意見で教えてください</a></span>`}
         <span class="wz-links">${links}</span>
         ${window.Report.enabled ? reportBtn(c) : ''}</li>`;
     }).join('');
