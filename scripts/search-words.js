@@ -93,6 +93,7 @@ module.exports = {
   'shiho/n_mediator': '調停委員 家裁 家庭裁判所 調停',
   'shiho/n_bar_statement': '日弁連 弁護士会 強制加入 声明 政治 税理士会',
   'shiho/l_review_info': '国民審査 最高裁 裁判官 選挙',
+  'shiho/l_prosecution_review': '検察審査会 検審 不起訴 起訴 くじ 審査員 検察',
   'shiho/l_school': '学校 教育 主権者教育 裁判 国民審査',
   'kenko/n_tobacco': 'タバコ 喫煙 たばこ税 禁煙 増税',
   'kenko/n_alcohol': 'お酒 酒 飲酒 酒税 増税',
