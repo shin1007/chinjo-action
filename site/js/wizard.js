@@ -859,7 +859,7 @@
       const who = el === 'resident' ? `${town}に住んでいる人だけ` : `${town}に住んでいる人・通勤や通学をしている人など、${town}に関わりのある人だけ`;
       const page = (intakeOf(c, 'yobo') || {}).page_url;
       const src = page ? `（<a href="${esc(page)}" target="_blank" rel="noopener">公式の案内</a>による）` : '（公式の案内による）';
-      if (!el) return lives === false ? `<li>${esc(town)}：差出人の住所が${esc(town)}ではありません。${esc(head(c))}あての要望を、住民以外からも受け付けるかは、このサイトではまだ確かめられていません。出す前に案内ページで確かめてください。</li>` : '';
+      if (!el) return lives === false ? `<li>${esc(town)}：差出人の住所が${esc(town)}ではありません。${esc(head(c))}あての要望を、住民以外からも受け付けるかは、このサイトではまだ確かめられていません（調査中）。出す前に案内ページで確かめてください。<a href="${esc(window.Common.askUrl(`${town}の要望を出せる人`, '住民以外からも受け付けるか、公式の案内ページの URL を教えてください', 'council_procedure'))}" target="_blank" rel="noopener">公式の案内ページを知っていれば、ご意見で教えてください</a></li>` : '';
       if (lives === null) return `<li>${esc(head(c))}への要望を出せるのは、<b>${esc(who)}</b>です${src}。下の「差出人」に住所を入れると、出せるかを確かめます。</li>`;
       if (lives) return '';
       if (el === 'resident') return `<li class="warn">⛔ <b>${esc(head(c))}への要望を出せるのは、${esc(who)}です</b>${src}。差出人の住所が${esc(town)}ではないので、${esc(town)}あての要望書は作りません。議会あての陳情書なら、住所に関係なく受け付ける議会もあります。</li>`;
@@ -1480,7 +1480,7 @@
   $('wzAlso').addEventListener('click', onKindClick);
   $('wzKindTabs').addEventListener('click', onKindClick);
 
-  const reqNotes = (id) => { const n = [...intakeNotes(id, 'yobo'), ...((intakeOf(id, 'yobo') || {}).mail ? [] : ['📮 郵送で受け付けるかは、このサイトではまだ確かめられていません（準備中）。郵送するなら、上の案内ページか代表電話で確かめてください。']), ...kaitoNotes(id)]; return n.length ? `<ul class="wz-notes">${n.map((t) => `<li>${t}</li>`).join('')}</ul>` : ''; };
+  const reqNotes = (id) => { const n = [...intakeNotes(id, 'yobo'), ...((intakeOf(id, 'yobo') || {}).mail ? [] : [`📮 郵送で受け付けるかは、このサイトではまだ確かめられていません（調査中）。郵送するなら、上の案内ページか代表電話で確かめてください。<a href="${esc(window.Common.askUrl(`${municipalityName(id)}の要望の郵送の扱い`, '郵送で受け付けるかが分かる公式の案内ページの URL を教えてください', 'council_procedure'))}" target="_blank" rel="noopener">分かる方は、ご意見で教えてください</a>`]), ...kaitoNotes(id)]; return n.length ? `<ul class="wz-notes">${n.map((t) => `<li>${t}</li>`).join('')}</ul>` : ''; };
   // 「今やること」の1つ目：議会ごとに、分かっている扱いか、電話で聞くことを出す
   function renderNowAsk() {
     const list = real();

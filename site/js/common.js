@@ -133,5 +133,8 @@ window.Common = (() => {
     a.lowcost && ['lowcost', '低予算で実現可能'],
   ].filter(Boolean);
   const askTags = (a) => tagsOf(a).map(([k, t]) => `<small class="ask-tag ask-tag-${k}">${esc(t)}</small>`).join('');
-  return { jstToday, BLANK_TEXT, esc, sender, bindSender, forgetSender, remembers, setRemember, flash, copy, printTexts, reiwaToday, DATE_BLANK, askGroups, scopeTag, tagsOf, askTags, routeOf, ROUTE_LABEL };
+  // 「調査中」の横から、ご意見のページを「種類・対象を自動で入れた」状態で開くリンク（利用者が種類を選ばなくてよい）
+  // kind は feedback の種類（既定：根拠になる資料を知らせたい）。need='text' のときは URL でなく文章でもよい
+  const askUrl = (target, ask, kind = 'missing_source', need = 'url') => `/feedback?quick=1&kind=${kind}&target=${encodeURIComponent(String(target).slice(0, 100))}&ask=${encodeURIComponent(String(ask).slice(0, 120))}${need === 'text' ? '&need=text' : ''}#fb-form`;
+  return { askUrl, jstToday, BLANK_TEXT, esc, sender, bindSender, forgetSender, remembers, setRemember, flash, copy, printTexts, reiwaToday, DATE_BLANK, askGroups, scopeTag, tagsOf, askTags, routeOf, ROUTE_LABEL };
 })();

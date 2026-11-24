@@ -33,7 +33,7 @@
       <p>${n.names.map((x) => `<button type="button" class="btn btn-small" data-council="${esc(name)}" data-member="${esc(x)}">${esc(x)}</button>`).join(' ')}</p></details>`;
   };
   // 調査中の欄から、ご意見のページを「根拠になる資料を知らせたい」・対象の議会名つきで開く
-  const fb = (name, what) => `/feedback?kind=missing_source&target=${encodeURIComponent(`${name}の${what}`.slice(0, 100))}`;
+  const fb = (name, what) => window.Common.askUrl(`${name}の${what}`, `${what}の URL を教えてください`);
   const card = (pref, muni, ros, nm) => {
     const name = council(pref, muni);
     const off = site(pref, muni);
