@@ -867,6 +867,15 @@
       "localPath": null
     },
     {
+      "id": "src-4b0e7e5b96",
+      "title": "総務省消防庁「令和7年版 救急・救助の現況」Ⅰ 救急編",
+      "url": "https://www.fdma.go.jp/publication/rescue/items/kkkg_r07_01_kyukyu.pdf",
+      "note": "PDFの70ページ（一般市民が目撃した心原性心肺機能停止傷病者27,769人、一般市民による除細動1,449人）と74ページ（第64図：一般市民が除細動を実施した場合の1か月後生存率53.6％・社会復帰率44.4％）。令和6年中の数字",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-4bd3480f09",
       "title": "Anderson ND ほか (2014) The benefits associated with volunteering among seniors: a critical review and recommendations for future research. Psychological Bulletin 140(6): 1505-1533（査読論文）",
       "url": "https://doi.org/10.1037/a0037610",
@@ -1079,6 +1088,15 @@
       "url": "https://laws.e-gov.go.jp/law/503AC0000000084",
       "note": null,
       "kind": "law",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-5d0d3bf71e",
+      "title": "Matsui S ほか (2019) Sex Disparities in Receipt of Bystander Interventions for Students Who Experienced Cardiac Arrest in Japan. JAMA Network Open 2(5): e195111（査読のある論文）",
+      "url": "https://doi.org/10.1001/jamanetworkopen.2019.5111",
+      "note": "学校で心停止になった児童生徒232人。AEDのパッドを貼られたのは女子63.2％・男子80.6％（調整オッズ比0.44）、高校・高専では女子55.6％・男子83.2％（同0.26）。心肺蘇生には男女差なし。考察で、服を脱がせることへのためらいと、性的な加害と誤解されるおそれを理由の推測として挙げている",
+      "kind": "research",
       "fetchedAt": null,
       "localPath": null
     },
@@ -1466,6 +1484,15 @@
       "url": "https://www.aeaweb.org/articles?id=10.1257/pol.1.2.190",
       "note": "要旨で確認。米国の女性の暮らしは客観的な指標では改善したが、主観的な幸福度は絶対的にも男性と比べても下がり、他の先進国でも同じ傾向",
       "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-8322528742",
+      "title": "厚生労働省「非医療従事者による自動体外式除細動器（AED）の使用のあり方検討会報告書」（平成16年7月1日）",
+      "url": "https://www.mhlw.go.jp/shingi/2004/07/s0701-3.html",
+      "note": "「刑事・民事の責任についても、人命救助の観点からやむを得ず行った場合には、関係法令の規定に照らし、免責されるべきであろう」",
+      "kind": "official",
       "fetchedAt": null,
       "localPath": null
     },
