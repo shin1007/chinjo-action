@@ -51,7 +51,7 @@
     <p class="hero-crumb"><a href="/">陳情アクション</a> ＞ 子どもの権利 ＞ <b>陳情書をつくる</b></p>
     <h1>陳情書をつくる</h1>
     <p class="lead-sm">選択肢を押していくだけで、議会に出せる陳情書ができます。</p>
-    <p class="theme-intro"><b>子どもが両方の親と関わり続けられる制度を、地方議会に求める。</b> 実子誘拐（一方的な子の連れ去り）の解決、共同親権の原則化、夫婦間の葛藤を不必要に高める離婚弁護活動の規制。</p>
+    <p class="theme-intro"><b>子どもが両方の親と関わり続けられる制度を、地方議会に求める。</b> 正当な理由のない子の連れ去りの防止、共同親権の原則化、夫婦間の葛藤を不必要に高める離婚弁護活動の規制。</p>
     <details id="adopted" class="theme-adopted">
       <summary>陳情が採択された例</summary>
       <p class="lead-sm">市民が出した1枚の陳情が、議会で認められた例です。</p>
@@ -61,6 +61,7 @@
         <li><b>秦野市議会（令和2年5月22日）</b>：「『面会交流』から『親子交流』への名称変更を国に求める陳情」（令2陳情第11号）が<b>採択</b>されました（<a href="https://www.city.hadano.kanagawa.jp/gikai/seigan-chinjo/1/11/463.html" target="_blank" rel="noopener">秦野市議会の令和2年6月第2回定例会の請願・陳情等</a>）。その後、令和6年の民法の改正で、法律の言葉も「親子交流」になりました。</li>
       </ul>
       <p class="hint-sm">採択は、議会がその内容を認めたという意味で、そのとおりに国や自治体の施策が決まるとは限りません。</p>
+      <p class="hint-sm">ほかにも採択された陳情をご存じの方は、<a href="/feedback?quick=1&amp;kind=missing_source&amp;theme=kodomo&amp;target=%E5%AD%90%E3%81%A9%E3%82%82%E3%81%AE%E6%A8%A9%E5%88%A9%E3%81%AE%E9%99%B3%E6%83%85%E3%81%AE%E6%8E%A1%E6%8A%9E%E4%BE%8B&amp;ask=%E8%AD%B0%E4%BC%9A%E3%81%AE%E5%85%AC%E5%BC%8F%E3%81%AE%E8%B3%87%E6%96%99%E3%81%A7%E6%8E%A1%E6%8A%9E%E3%82%92%E7%A2%BA%E3%81%8B%E3%82%81%E3%82%89%E3%82%8C%E3%82%8B%E9%99%B3%E6%83%85%E3%81%AE%20URL%20%E3%82%92%E6%95%99%E3%81%88%E3%81%A6%E3%81%8F%E3%81%A0%E3%81%95%E3%81%84#fb-form" target="_blank" rel="noopener">議会の公式の資料の URL を教えてください</a>（種類とテーマは自動で入ります）。</p>
     </details>
 
     <div id="wizard" class="wizard">
@@ -102,6 +103,7 @@
         <input type="search" id="wzItemFilter" class="wz-filter" placeholder="キーワードで内容を絞り込む" aria-label="キーワードで内容を絞り込む">
         <p class="wz-bulk"><button type="button" id="wzItemsAll" class="btn btn-small">見えている内容をすべて選ぶ</button> <span id="wzItemsAllNote" class="hint-sm"></span></p>
         <div id="wzItems" class="wz-cards"></div>
+        <p class="hint-sm">ほしい内容が見当たらないとき（このテーマは項目を増やしている途中です）：<a href="/feedback?quick=1&amp;kind=missing_item&amp;theme=kodomo&amp;target=%E9%99%B3%E6%83%85%E3%81%AE%E9%A0%85%E7%9B%AE%E3%81%AE%E8%BF%BD%E5%8A%A0&amp;ask=%E8%BF%BD%E5%8A%A0%E3%81%97%E3%81%A6%E3%81%BB%E3%81%97%E3%81%84%E9%A0%85%E7%9B%AE%E3%81%A8%E3%80%81%E3%81%9D%E3%81%AE%E6%A0%B9%E6%8B%A0%E3%81%AB%E3%81%AA%E3%82%8B%E5%85%AC%E5%BC%8F%E3%81%AE%E8%B3%87%E6%96%99&amp;need=text#fb-form" target="_blank" rel="noopener">追加してほしい項目を教える</a>（種類とテーマは自動で入ります）。</p>
         <details id="wzPreview" class="wz-preview" hidden><summary id="wzPreviewTitle">文面の見本を見る</summary>
           <p class="hint-sm">「〇〇市」と住所・氏名は、このあと選ぶ自治体と入力で入ります。最後の一文は、あなたの立場に合わせて変わります。</p>
           <pre id="wzPreviewText" class="wz-paper"></pre></details>
@@ -251,6 +253,7 @@
           <div id="wzAlso" class="wz-also" hidden></div>
           <p class="hint-sm" data-request-html="下は、出す前に確かめることです。このサイトは法的助言をするものではありません。受け付け方は自治体ごとに違い、変わることもあります。">確かめることやくわしい手順は、下を開くと見られます。このサイトは法的助言をするものではありません。</p>
         </section>
+        <div id="wzPubcom" class="pubcom-feed" hidden></div>
         <details class="wz-checklist">
           <summary><b>出す前に確かめること</b>（チェックリスト・開いて確かめる）</summary>
           <p class="wz-when">印刷する前に</p>
@@ -398,6 +401,7 @@
 <script defer src="/js/send-memo.js"></script>
 <script defer src="/js/followup.js"></script>
 <script defer src="/js/report.js"></script>
+<script defer src="/js/public-comment.js"></script>
 <script defer src="/js/wizard.js"></script>
 <script defer src="/js/ai-launch.js"></script>
 <script defer src="/js/send-figs.js"></script>

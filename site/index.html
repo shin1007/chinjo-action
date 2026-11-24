@@ -47,13 +47,37 @@
 <section class="hero">
   <div class="wrap">
     <p class="eyebrow">気になっている国内の問題を、地元の議会に正式に届ける。</p>
-    <h1>500円で、国を動かそう</h1>
+    <h1>500円で、議会に声を届けよう</h1>
     <ol class="lead-steps">
       <li><b>内容を選ぶ</b>（テーマを1つに決めて、内容は5つまでに絞るのがおすすめです）</li>
       <li><b>住所・氏名を入れる</b>（このサイトのサーバーには送られません）</li>
       <li><b>印刷する</b>（陳情書と宛先ラベル）</li>
       <li><b>署名・押印して出す</b>（押印がいらない議会も多くあります）</li>
     </ol>
+    <div id="themes" class="hero-themes">
+      <h2>テーマを選んでつくる</h2>
+      <ul class="theme-list">
+        <li><a href="/kodomo/make">子どもの権利</a></li>
+        <li><a href="/dansei/make">男女平等</a></li>
+        <li><a href="/nihonjin/make">日本人の権利</a></li>
+        <li><a href="/shiho/make">司法への参加</a></li>
+        <li><a href="/kenko/make">国民の健康</a></li>
+        <li><a href="/sonota/make">その他（税・教育）</a></li>
+        <li class="theme-omakase"><a href="/omakase">おまかせ<small>テーマ・陳情・議会を3つずつ自動で</small></a></li>
+      </ul>
+      <div class="item-search">
+        <label for="itemSearch">どのテーマか分からないときは、言葉でさがす</label>
+        <input type="search" id="itemSearch" class="wz-filter" placeholder="例：受動喫煙、養育費、授業料（気になる言葉で探せます）" autocomplete="off">
+        <p id="itemSearchCount" class="hint-sm" aria-live="polite"></p>
+        <p><button type="button" id="itemListAll" class="btn btn-small" aria-expanded="false" aria-controls="itemSearchResults">陳情内容の一覧を見る</button></p>
+        <ul id="itemSearchResults" class="item-search-results"></ul>
+      </div>
+      <p class="hero-sub small">陳情書のほかに、要望書・議員への手紙にも作成画面で切り替えられます（<a href="#compare">違い</a>）。</p>
+    </div>
+    <figure class="print-sample">
+      <img src="/img/print-sample.png" width="1354" height="936" loading="lazy" alt="印刷される書類の見本。左は陳情書の1ページ目（宛先・住所氏名の欄・件名・陳情の趣旨と理由）、右は封筒に貼る宛名と差出人の用紙。">
+      <figcaption class="hint-sm">印刷される書類の見本（左：陳情書の1ページ目、右：封筒に貼る宛名と差出人。〇〇市・見本 太郎は架空の例です）。住所・氏名・日付は、印刷してから手で書くこともできます。</figcaption>
+    </figure>
     <details class="lead-howto"><summary>郵送で出すまでの流れを動画で見る（約50秒・印刷から投函まで、金額つき）</summary>
       <img width="960" height="540" alt="郵送で出すまでの9つの手順：サイトで入力、PDFを保存、コンビニで印刷、日付を書いて署名、宛名と差出人を切る、クリアファイルに入れる、角2封筒に入れる、宛名と切手を貼る、ポストに出す。陳情5件で約480円（切手270円）。最後に「下からテーマを選ぶ」">
     </details>
@@ -96,26 +120,6 @@
       <p class="hint-sm">料金は<a href="https://www.post.japanpost.jp/send/fee/kokunai/one_two.html" target="_blank" rel="noopener">日本郵便の料金表</a>によります。厚さが3cmを超えると規格外になり、料金が上がります。境目に近いときは1つ上の料金分を貼っておくと安心です。</p>
       </details>
     </details>
-    <div id="themes" class="hero-themes">
-      <h2>テーマを選んでつくる</h2>
-      <ul class="theme-list">
-        <li><a href="/kodomo/make">子どもの権利</a></li>
-        <li><a href="/dansei/make">男女平等</a></li>
-        <li><a href="/nihonjin/make">日本人の権利</a></li>
-        <li><a href="/shiho/make">司法への参加</a></li>
-        <li><a href="/kenko/make">国民の健康</a></li>
-        <li><a href="/sonota/make">その他（税・教育）</a></li>
-        <li class="theme-omakase"><a href="/omakase">おまかせ<small>テーマ・陳情・議会を3つずつ自動で</small></a></li>
-      </ul>
-      <div class="item-search">
-        <label for="itemSearch">どのテーマか分からないときは、言葉でさがす</label>
-        <input type="search" id="itemSearch" class="wz-filter" placeholder="例：受動喫煙、養育費、授業料（気になる言葉で探せます）" autocomplete="off">
-        <p id="itemSearchCount" class="hint-sm" aria-live="polite"></p>
-        <p><button type="button" id="itemListAll" class="btn btn-small" aria-expanded="false" aria-controls="itemSearchResults">陳情内容の一覧を見る</button></p>
-        <ul id="itemSearchResults" class="item-search-results"></ul>
-      </div>
-      <p class="hero-sub small">陳情書のほかに、要望書・議員への手紙にも作成画面で切り替えられます（<a href="#compare">違い</a>）。</p>
-    </div>
   </div>
 </section>
 <section id="tally" class="tally" aria-label="これまでの歩み">
@@ -127,6 +131,7 @@
     </dl>
     <p id="tallyNote" class="small">準備中：提出の報告の受け付けを始めたら、ここに数が出ます。</p>
     <p id="tallyOutcome" class="small">準備中：出した陳情のその後（受け付け・審査・採択など）の集計は、報告のあった分だけ、ここに出す予定です。報告がない分は「未確認」とし、不採択として数えません。</p>
+    <p id="tallyExample" class="small"><b>採択された実例（議会の公式の記録で確かめたもの）：</b>港区議会の請願07第6号「改正民法施行を踏まえた離婚後の子育ての多様化に対応する港区の政策充実を求める請願」が、令和7年7月4日に「採択（賛成多数）」となりました（<a href="https://gikai2.city.minato.tokyo.jp/g07_Seigan_s.asp?sflg=3&amp;kaigi=136&amp;SrchID=792" target="_blank" rel="noopener">港区議会の公式ページ</a>）。この請願はこのサイトで作ったものではなく、紹介議員のつく「請願」です。陳情の採択例は、確かめられたものから順に載せます。</p>
   </div>
 </section>
 <section id="before" class="section">
@@ -196,7 +201,7 @@
 
 <footer class="site-footer">
   <div class="wrap">
-    <p class="small">本サイトは、運営者個人が運営する（団体ではありません）、市民による政策提言のための情報提供サイトです。法的助言を行うものではありません。</p>
+    <p class="small">本サイトは、運営者個人が運営する（団体ではありません）、市民による政策提言のための情報提供サイトです。「全国陳情アクション」など、名前の近い団体・アカウントとは関係ありません。法的助言を行うものではありません。</p>
     <p class="small"><a href="/trouble">運営が困っていること</a>　<a href="/feedback">運営へのご意見・質問</a></p>
   </div>
   <div class="wrap"><p class="small"><a href="/privacy">サイトの情報の扱い（外部送信・Cookie）</a>　<a href="https://github.com/shin1007/chinjo-action" target="_blank" rel="noopener">ソースコード（GitHub）</a>　このサイトの改善の提案（Issue・プルリクエスト）を歓迎します</p></div>

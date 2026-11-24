@@ -14,6 +14,53 @@
     setupList(d.rows, d.prefs);
   }).catch(() => { $('cov-asof').textContent = '読み込めませんでした。時間をおいて開き直してください。'; });
 
+  // ほかの調査の進み具合。調べきれていなくても、いまわかっている数をそのまま出す（node scripts/progress.js で作る）
+  fetch('/data/progress.json').then((r) => r.json()).then((d) => {
+    const box = $('cov-progress');
+    if (!box) return;
+    const t = el('table', null, 'cost-table');
+    const h = el('tr'); ['', '都道府県', '市区町村', '調べ方・メモ'].forEach((s) => h.append(el('th', s)));
+    t.append(el('thead')); t.tHead.append(h);
+    const b = el('tbody');
+    const cell2 = (x) => { const td = el('td'); td.append(`${fmt(x.n)} / ${fmt(x.of)}`); return td; };
+    const cellM = (x) => { const td = el('td'); td.append(`${fmt(x.n)} / ${fmt(x.of)}（人口で${pct(x)}%）`); return td; };
+    const rows = [
+      ['議員名簿の公式ページが見つかった', d.roster.page, '公式サイトのリンクをたどって探し、見つからないものは「調査中」と出しています（/letter）'],
+      ['議員の名前を取り込めた', d.roster.names, '名簿から機械で抜き出せた議会。書き方が読めないものは「調査中」です'],
+      ['陳情の案内ページが見つかった', d.chinjo.page, '案内ページがなくても、議会事務局に聞く方法を作成画面に出しています'],
+      ['陳情の郵送の扱い（住民）がわかった', d.chinjo.mailKnown, '審査される・議員に配るだけ・受け付けない、のどれかを公式の案内で確かめた議会'],
+      ['  うち、郵送でも審査される', d.chinjo.mailReviewed, '住民の郵送を審査する、と公式の案内で確かめた議会（住民以外の扱いは別です）'],
+      ['要望（首長）を郵送で受け付ける', d.yobo.mailAccepted, '公式の案内で確かめたもの'],
+    ];
+    const I = d.intake;
+    rows.push(
+      ['陳情：締切がわかった', I.chinjo.deadline, '公式の案内に締切（定例会ごとの日など）が書いてあった議会'],
+      ['陳情：住所・氏名が公開されるかがわかった', I.chinjo.name_published, '会議録・議会のホームページでの公開の扱い'],
+      ['陳情：審査の結果を知らせてもらえるかがわかった', I.chinjo.result_notice, ''],
+      ['陳情：必要な部数がわかった', I.chinjo.copies, ''],
+      ['陳情：Web・電子申請の窓口がわかった', I.chinjo.form, ''],
+      ['要望：住民以外も出せるかがわかった', I.yobo.eligible, '住民だけ・関わりのある人だけ、と公式の案内に書いてあった自治体（それ以外の自治体は、まだ確かめられていません）'],
+      ['要望：回答がもらえるかがわかった', I.yobo.reply, ''],
+      ['要望：Webフォームで出せる', I.yobo.form, ''],
+      ['要望：匿名で出せる', I.yobo.anonymous_ok, ''],
+      ['寄せられた意見と回答の一覧が見つかった', I.kaito, '市長への手紙などの「寄せられた意見と回答」。要望の文面づくりの参考にしています'],
+    );
+    for (const [label, x, memo] of rows) {
+      const tr = el('tr'); tr.append(el('th', label), cell2(x.pref), cellM(x.muni), el('td', memo, 'small')); b.append(tr);
+    }
+    t.append(b);
+    const names = { kodomo: '子どもの権利', dansei: '男女平等', nihonjin: '日本人の権利', shiho: '司法への参加', kenko: '国民の健康', sonota: 'その他の陳情' };
+    const t2 = el('table', null, 'cost-table');
+    const h2 = el('tr'); ['テーマ', '国への項目', '自治体への項目', '陳情が採択された例'].forEach((x) => h2.append(el('th', x)));
+    t2.append(el('thead')); t2.tHead.append(h2);
+    const b2 = el('tbody');
+    for (const [id, v] of Object.entries(d.themes)) {
+      const tr = el('tr'); tr.append(el('th', names[id]), el('td', `${v.national}`), el('td', `${v.local}`), el('td', v.adopted ? `${v.adopted}件` : '調査中（まだ確かめられていません）')); b2.append(tr);
+    }
+    t2.append(b2);
+    box.replaceChildren(t, el('p', `人口は総務省「住民基本台帳に基づく人口」（${d.population_as_of.slice(0, 4)}年1月1日現在）。市区町村の割合は、全市区町村の人口の合計に対する割合です。${d.asOf.replace(/-/g, '/')}時点の、わかっている数です。`, 'small'), t2);
+  }).catch(() => {});
+
   fetch('/data/verify-summary.json').then((r) => r.json()).then((v) => {
     const [y, m, dd] = v.checked_at.split('-').map(Number);
     $('cov-verify').textContent = `出典の照合（${y}年${m}月${dd}日）：根拠にした公式サイトのページ ${v.total.toLocaleString('ja-JP')} 件のうち、${v.ok.toLocaleString('ja-JP')} 件で根拠の一文がいまも載っていることを機械で確かめました。一文が見つからなかったもの ${v.missing} 件・ページを開けなかったもの ${v.unreachable} 件は、調べ直しています。毎月と、議員の改選のあとに確かめ直します。`;
@@ -87,7 +134,7 @@
         const known = ['c', 'y', 'p'].map((k, j) => `${LABEL[k]}：${k === 'p' ? (r[4] ? 'ある' : 'まだ') : STATE[r[2 + j]]}`).join('／');
         const a = el('a', '知らせる');
         const target = kind === 'c' ? `${nm === '@' ? pf : nm}議会` : kind === 'y' ? `${nm === '@' ? pf + '知事' : nm + '長'}あての要望` : `${nm === '@' ? pf : nm}のパブリックコメント`;
-        a.href = `/feedback?kind=council_procedure&target=${encodeURIComponent(name + '：' + target)}#fb-form`;
+        a.href = `/feedback?quick=1&kind=council_procedure&target=${encodeURIComponent((name + '：' + target).slice(0, 100))}&ask=${encodeURIComponent('出し方の案内ページの URL を教えてください')}#fb-form`;
         tr.append(el('td', name), el('td', fmt(r[1])), el('td', known, 'small'));
         const td = el('td'); td.append(a);
         const ask = askText(kind, nm === '@' ? pf : nm, nm === '@');

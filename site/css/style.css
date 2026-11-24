@@ -298,8 +298,8 @@ summary { cursor: pointer; font-weight: 700; }
 
 @media (max-width: 800px) {
   html { scroll-padding-top: 128px; }
-  .header-inner { padding: 8px 16px; gap: 8px; min-height: 56px; }
-  .logo { flex: 1; font-size: 0.9rem; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .header-inner { padding: 8px 16px; gap: 4px 8px; min-height: 56px; flex-wrap: wrap; }
+  .logo { flex: 1 1 auto; font-size: 0.9rem; white-space: nowrap; }
   nav { display: flex; flex-shrink: 0; white-space: nowrap; gap: 14px; }
   nav a { margin: 0; font-size: 0.88rem; }
   .primary-nav { gap: 10px; }
@@ -834,9 +834,9 @@ summary { cursor: pointer; font-weight: 700; }
 .hero-themes .item-search label { font-size: 0.92rem; }
 .hero-themes .item-search-results:not(:empty) { margin-top: 6px; padding: 4px 10px; border-radius: 8px; background: var(--surface); border: 1px solid var(--line); max-height: 60vh; overflow: auto; }
 @media (max-width: 640px) { .hero-themes .theme-list { grid-template-columns: repeat(2, 1fr); } }
-.hero-themes .theme-omakase a { background: var(--surface); color: var(--main-dark); border: 2px dashed var(--main); }
+.hero-themes .theme-omakase a { background: var(--surface); color: var(--main-dark); border: 2px solid var(--main); font-size: 1.05rem; font-weight: 700; padding-top: 14px; padding-bottom: 14px; }
 .hero-themes .theme-omakase a:hover, .hero-themes .theme-omakase a:focus-visible { background: var(--bg-alt); }
-.hero-themes .theme-omakase small { display: block; font-weight: 400; font-size: 0.72rem; color: var(--muted); }
+.hero-themes .theme-omakase small { display: block; font-weight: 400; font-size: 0.8rem; color: var(--muted); }
 .hero-themes .theme-omakase { grid-column: 1 / -1; }
 .wz-kind > p { grid-column: 1 / -1; margin: 0; }
 .recent-fold > summary { cursor: pointer; }
@@ -865,3 +865,7 @@ summary { cursor: pointer; font-weight: 700; }
 .followup-choices { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
 .followup-share { display: block; font-size: 0.9rem; margin-bottom: 6px; }
 .followup-note { margin: 0; }
+
+.print-sample { margin: 16px auto 12px; max-width: 720px; }
+.print-sample img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 8px; }
+.print-sample figcaption { margin-top: 6px; text-align: left; }

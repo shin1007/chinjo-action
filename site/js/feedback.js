@@ -30,10 +30,32 @@
 
   // /coverage などから ?kind=…&target=… で開いたときは、その値を入れておく
   const q = new URLSearchParams(location.search);
-  for (const k of ['kind', 'target']) {
+  for (const k of ['kind', 'theme', 'target']) {
     const v = q.get(k);
     const input = form.elements[k];
     if (v && input && (input.tagName !== 'SELECT' || [...input.options].some((o) => o.value === v))) input.value = v.slice(0, 100);
+  }
+
+  // 「調査中」の横のリンクなどから ?quick=1&kind=…&target=…&ask=… で開いたときは、種類・テーマ・対象を自動で入れ、
+  // 利用者には「分かったこと（URL）」だけを入れてもらう（選ぶ欄は隠す）。送る中身は同じ（FIELDS のとおり）
+  const ask = (q.get('ask') || '').slice(0, 120);
+  if (q.get('quick') === '1' && form.elements.kind.value && form.elements.target.value) {
+    for (const n of ['kind', 'theme', 'target']) { const l = form.elements[n].closest('label'); if (l) l.hidden = true; }
+    const body = form.elements.body;
+    const target = form.elements.target.value;
+    const textMode = q.get('need') === 'text';
+    if (!textMode) {
+      if (!body.value) body.value = `（自動入力）${target}について。分かったことは下の欄に書きました。`;
+      body.closest('label').firstChild.textContent = '補足（なくても送れます。分かったことの説明など）';
+    }
+    const note = document.createElement('p');
+    note.className = 'notice';
+    note.innerHTML = '<strong>調査にご協力ください。</strong> ';
+    note.append(`${target}：${ask || '分かったことを教えてください'}。種類と対象は自動で入れました。${textMode ? '下の「内容」の欄に分かったことを書いてください（根拠の URL があれば、その下の欄へ）。' : '下の URL の欄に、公式のページの URL を貼るだけで送れます。'}`);
+    form.prepend(note);
+    const src = form.elements.source_url;
+    if (!textMode) src.required = true;
+    (textMode ? body : src).focus();
   }
 
   const msg = document.getElementById('fb-msg');
