@@ -885,6 +885,15 @@
       "localPath": null
     },
     {
+      "id": "src-4c7b63e618",
+      "title": "裁判所「検察審査会での審査の流れ」",
+      "url": "https://www.courts.go.jp/about/sonota/kensin/shinsanonagare/index.html",
+      "note": "起訴議決がされると、裁判所が検察官の職務を行う弁護士を指定し、その弁護士が検察官に代わって起訴する。議決は11人中6人以上、起訴相当・起訴議決は11人中8人以上",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-4c8f00bd22",
       "title": "スウェーデン社会保険庁「養育費補助」",
       "url": "https://www.forsakringskassan.se/privatperson/foralder/for-foraldrar-som-inte-lever-ihop/barnet-bor-hos-dig/underhallsstod-fran-forsakringskassan",
@@ -1335,6 +1344,15 @@
       "localPath": null
     },
     {
+      "id": "src-766a4f9d4f",
+      "title": "裁判所「検察審査会の概要」",
+      "url": "https://www.courts.go.jp/about/sonota/kensin/seido_gaiyo/index.html",
+      "note": "「選挙権を有する国民の中からくじで選ばれた11人の検察審査員が、検察官が事件を裁判にかけなかったこと（不起訴処分）のよしあしを審査しています。」裁判所のページの原文を確認（2026年11月24日）",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-76980b470a",
       "title": "女性の職業生活における活躍の推進に関する法律（平成27年法律第64号）",
       "url": "https://laws.e-gov.go.jp/law/427AC0000000064",
@@ -1547,6 +1565,15 @@
       "url": "https://doi.org/10.3390/children8060473",
       "note": "デンマークの出生コホート31,519人を11歳まで追跡。父母の別居後、両方の家で暮らす子は、一方の親とだけ暮らす子より心の問題の割合が低かった（核家族と比べた調整オッズ比：共同 1.25、継親家庭 1.63、新しいパートナーのいない単独 1.72）。本文で確認。共同の家庭はもともと学歴・収入が高い傾向があり、収入・学歴・精神科の受診歴などで調整しているが、追跡の脱落が多い点を著者は限界としている",
       "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-87e2ec1534",
+      "title": "裁判所「検察審査会の受理件数、議決件数等（令和3年～令和7年）」",
+      "url": "https://www.courts.go.jp/assets/R7kenshintoukei.pdf",
+      "note": "令和7年に新たに受理した審査事件は延べ2,196人分（被疑者数による。速報値）。令和3年は3,862人分。PDFの本文から数字を確認（2026年11月24日）",
+      "kind": "official",
       "fetchedAt": null,
       "localPath": null
     },
@@ -1951,6 +1978,15 @@
       "title": "厚生労働省「令和6(2024)年度 地域保健・健康増進事業報告の概況」健康増進編 表10",
       "url": "https://www.mhlw.go.jp/toukei/saikin/hw/c-hoken/24/dl/R06gaikyo.pdf",
       "note": "令和5年度の市区町村のがん検診の精密検査受診率は、胃85.7％・肺82.7％・大腸71.1％・子宮頸78.0％",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-b0132af8a7",
+      "title": "裁判所「検察審査員の選ばれ方」",
+      "url": "https://www.courts.go.jp/about/sonota/kensin/erabarekata/index.html",
+      "note": "管内の市区町村の選挙管理委員会が、衆議院議員の選挙権を有する人の中からくじで選んだ名簿を作る",
       "kind": "official",
       "fetchedAt": null,
       "localPath": null
@@ -2793,6 +2829,15 @@
       "localPath": null
     },
     {
+      "id": "src-f254ec1acc",
+      "title": "裁判所「裁判員裁判の実施状況について（制度施行～令和8年6月末・速報）」表4",
+      "url": "https://www.courts.go.jp/saibanin/vc-files/saibanin/r8_6_saibaninsokuhou.pdf",
+      "note": "辞退率（辞退が認められた候補者の数÷選定された候補者数）は、平成21年53.1％→令和7年67.6％。出席率（選任手続期日に出席した人÷出席を求められた人）は、平成21年83.9％→令和7年67.1％。PDFの本文から数字を確認（2026年11月24日）",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-f2695e83d1",
       "title": "厚生労働省「健康づくりのための身体活動・運動ガイド2023」高齢者版",
       "url": "https://www.mhlw.go.jp/content/001195868.pdf",
@@ -2834,6 +2879,15 @@
       "url": "https://www.who.int/europe/publications/i/item/9789289053563",
       "note": "公開ページで確認。道路交通などの環境騒音から健康を守るための、根拠に基づく勧告",
       "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-f627863f7a",
+      "title": "裁判所「すっとわかる、裁判員制度なるほどブック」（2026年10月改訂版）",
+      "url": "https://www.courts.go.jp/saibanin/videopamph/naruhodo_book/index.html",
+      "note": "一般向けの案内。ページの存在を確認（中身は未確認）",
+      "kind": "official",
       "fetchedAt": null,
       "localPath": null
     },
@@ -2928,6 +2982,15 @@
       "localPath": null
     },
     {
+      "id": "src-fafc42f93c",
+      "title": "裁判所「名簿記載通知について」",
+      "url": "https://www.courts.go.jp/saibanin/kouhosha/notification/index.html",
+      "note": "名簿記載通知は、裁判員候補者名簿に記載された人に毎年11月に送られる。名簿の有効期間は、通知が届いた翌年の1月1日から12月31日まで",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-fc1419bd97",
       "title": "健康増進法 第19条の2",
       "url": "https://laws.e-gov.go.jp/law/414AC0000000103",
@@ -2942,6 +3005,15 @@
       "url": "https://kaken.nii.ac.jp/report/KAKENHI-PROJECT-20K03421/20K034212022jisseki/",
       "note": "行動に即して聞くと被害の男女差は非常に小さくなり、男性の被害は矮小化・暗数化されやすい",
       "kind": "secondary",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
+      "id": "src-fcefa0be28",
+      "title": "裁判所「裁判員の選ばれ方」",
+      "url": "https://www.courts.go.jp/saibanin/introduction/how_to_choose/index.html",
+      "note": "「地方裁判所ごとに，管内の市区町村の選挙管理委員会が，衆議院議員の選挙権を有する方の中から，くじで選んで作成した名簿に基づき，翌年の裁判員候補者名簿を作成します。」事件ごとに裁判員6人が選ばれる。裁判所のページの原文を確認（2026年11月24日）",
+      "kind": "official",
       "fetchedAt": null,
       "localPath": null
     },

@@ -34,7 +34,7 @@ function audit(theme, a) {
   if (!a.text) fix('求める事項（text）が空');
   if ((a.reason || '').length > 900) look(`理由が長い（${a.reason.length}字）。読まれにくい`);
   if ((a.text || '').length > 400) look(`求める事項が長い（${a.text.length}字）`);
-  if (/[。]\s*また|および.*および|ならびに.*ならびに/.test(a.text || '')) look('求める事項が2点以上に見える（1件＝1通・1〜2点に絞る）');
+  if (((a.text || '').match(/[。]\s*また/g) || []).length >= 2 || /および.*および|ならびに.*ならびに/.test(a.text || '')) look('求める事項が3点以上に見える（1件＝1通・1〜2点に絞る）');
   if (a.scope === 'local' && !(a.forStaff || a.yoboText)) look('自治体向けなのに、担当課の進め方（forStaff）がない');
   return out;
 }

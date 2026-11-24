@@ -5,14 +5,12 @@
 ## 項目の見直し（asks-audit の「見直し」8件）
 
 - [ ] （2026-11-24：kodomo/n_feelink・dansei/n_kaishun は、結びの文・重なる要約の文を削って900字以内にした。数字・条文・出典は変えていない）理由が長い項目を、削るか分ける（読まれにくい。目安は900字まで）。理由を削るときは、残す数字の根拠（refs）を一次資料で確かめ直す。
-  - `sonota/n_vehicle_light`（1152字）
-  - `sonota/n_teacher_info`（1603字）
-  - `sonota/n_regular_teacher`（1707字）
-- [ ] 求める事項が2点以上に見える項目を、1〜2点に絞るか、2件に分ける（1件＝1通）。分けるときは `id` を変えず、新しい項目として足す。
+  - （2026-11-24：sonota の3件も、重なる説明・細かい数字を削って900字前後にした。残した数字と出典は変えていない。n_teacher_info も900字以内にして、asks-audit の「見直し」は0件）
+- [x] （2026-11-24：3件とも「また」で2点つなぐ形で、ルールの範囲（1〜2点）だった。点検を「3点以上に見える」ときだけ出す形に直した）求める事項が2点以上に見える項目を、1〜2点に絞るか、2件に分ける（1件＝1通）。分けるときは `id` を変えず、新しい項目として足す。
   - `kodomo/l_dvmeasure`
   - `kodomo/l_counsel`
   - `sonota/l_book_display`
-- [ ] 見直したあと、`node scripts/refs.js`・`node scripts/samples.js`・`node scripts/easy.js` を実行して、関連資料・見本・やさしい説明を作り直す。
+- [x] （2026-11-24 実行済み）見直したあと、`node scripts/refs.js`・`node scripts/samples.js`・`node scripts/easy.js` を実行して、関連資料・見本・やさしい説明を作り直す。
 
 ## 根拠の確かめ直し
 
