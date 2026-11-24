@@ -14,7 +14,7 @@
 // 1件で1通の陳情書になるので、ほかの項目に頼らず1件だけで意味が通るように書きます。
 // 項目を増やすときは、{ ... }, のかたまりを丸ごとコピーして、id を新しいものにします。
 window.ASKS = (window.ASKS || []).concat([
-  { id: 'n_restore', scope: 'national', category: '子の連れ去りの防止', defaultOn: true, label: '実子誘拐（正当な理由のない子の連れ去り）の防止',
+  { id: 'n_restore', scope: 'national', category: '子の連れ去りの防止', defaultOn: true, label: '正当な理由のない子の連れ去りの防止',
     refs: [{ t: '法務省「ハーグ条約実施法の概要について」', url: 'https://www.moj.go.jp/MINJI/minji07_00148.html', note: '国境を越えた連れ去りでは、子を元の居住国に迅速に返還する' },
       { t: 'こども家庭庁「児童の権利条約」', url: 'https://www.cfa.go.jp/policies/international/convention', note: '条約の和文と、国連子どもの権利委員会の総括所見の仮訳' },
       { t: '法務省「Ｑ＆Ａ形式の解説資料（民法編）」（令和8年9月11日改訂）', url: 'https://www.moj.go.jp/MINJI/minji07_00377.html', note: 'Q2-1：正当な理由なく無断で子の居所を変更することと協力義務' },
