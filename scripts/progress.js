@@ -57,12 +57,25 @@ for (const id of ['kodomo', 'dansei', 'nihonjin', 'shiho', 'kenko', 'sonota']) {
   themes[id] = { national: n, local: l, adopted: (list.match(/<li>/g) || []).length };
 }
 
+// 受け付け方のデータ（intake.js）から、項目ごとに「確かめられた自治体の数」を数える（都道府県は 都道府県/@）
+global.window = {};
+require(path.join(DATA, 'intake.js'));
+const INTAKE = window.INTAKE;
+const has = (kind, field) => stat(Object.entries(INTAKE[kind]).filter(([, v]) => v[field]).map(([id]) => id));
+const kaitoLists = new Set(jsonl('site/data/kaito/lists.jsonl').map((r) => r.muni));
+const intake = {
+  chinjo: Object.fromEntries(['page_url', 'mail', 'deadline', 'name_published', 'result_notice', 'copies', 'form', 'email'].map((f) => [f, has('chinjo', f)])),
+  yobo: Object.fromEntries(['page_url', 'mail', 'pubcom_url', 'eligible', 'reply', 'form', 'email', 'anonymous_ok'].map((f) => [f, has('yobo', f)])),
+  kaito: stat([...kaitoLists].filter((id) => pop[id] !== undefined)),
+};
+
 const out = {
   asOf: new Date().toISOString().slice(0, 10),
   population_as_of: (chinjo[0] || {}).population_as_of,
   roster: { page: rosterPage, names: rosterNames },
   chinjo: { page: stat(chinjoPage), mailKnown: stat(mailKnown), mailReviewed: stat(mailReviewed) },
   yobo: { mailAccepted: stat(yoboMail) },
+  intake,
   themes,
 };
 fs.writeFileSync(path.join(DATA, 'progress.json'), JSON.stringify(out) + '\n');

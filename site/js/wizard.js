@@ -346,7 +346,7 @@
     // パブリックコメント（制度の案への意見募集）の一覧。自治体（首長部局）のページなので、要望の側のデータから出す
     const pc = (intakeOf(id, 'yobo') || {}).pubcom_url;
     if (pc) out.push(`📝 この自治体は、計画や条例の案への意見募集（パブリックコメント）もしています：${link(pc, '意見募集のページを開く')}`);
-    else if (id) out.push(`📝 この自治体のパブリックコメント（意見募集）のページ：調査中。<a href="${esc(window.Common.askUrl(`${municipalityName(id)}のパブリックコメントのページ`, '意見募集のページの URL を教えてください', 'council_procedure'))}" target="_blank" rel="noopener">ご存じなら、ご意見で教えてください</a>`);
+    else if (id) out.push(`📝 この自治体のパブリックコメント（意見募集）のページ：調査中${window.Common.known('yobo', 'pubcom_url')}。<a href="${esc(window.Common.askUrl(`${municipalityName(id)}のパブリックコメントのページ`, '意見募集のページの URL を教えてください', 'council_procedure'))}" target="_blank" rel="noopener">ご存じなら、ご意見で教えてください</a>`);
     if (isStale(d.at)) out.push(`⚠ このサイトで確かめたのは${esc(ymd(d.at))}で、3か月以上たっています。変わっていることがあるので、出す前に公式の案内ページで確かめてください。`);
     return out;
   }
@@ -860,7 +860,7 @@
       const who = el === 'resident' ? `${town}に住んでいる人だけ` : `${town}に住んでいる人・通勤や通学をしている人など、${town}に関わりのある人だけ`;
       const page = (intakeOf(c, 'yobo') || {}).page_url;
       const src = page ? `（<a href="${esc(page)}" target="_blank" rel="noopener">公式の案内</a>による）` : '（公式の案内による）';
-      if (!el) return lives === false ? `<li>${esc(town)}：差出人の住所が${esc(town)}ではありません。${esc(head(c))}あての要望を、住民以外からも受け付けるかは、このサイトではまだ確かめられていません（調査中）。出す前に案内ページで確かめてください。<a href="${esc(window.Common.askUrl(`${town}の要望を出せる人`, '住民以外からも受け付けるか、公式の案内ページの URL を教えてください', 'council_procedure'))}" target="_blank" rel="noopener">公式の案内ページを知っていれば、ご意見で教えてください</a></li>` : '';
+      if (!el) return lives === false ? `<li>${esc(town)}：差出人の住所が${esc(town)}ではありません。${esc(head(c))}あての要望を、住民以外からも受け付けるかは、このサイトではまだ確かめられていません（調査中${window.Common.known('yobo', 'eligible')}）。出す前に案内ページで確かめてください。<a href="${esc(window.Common.askUrl(`${town}の要望を出せる人`, '住民以外からも受け付けるか、公式の案内ページの URL を教えてください', 'council_procedure'))}" target="_blank" rel="noopener">公式の案内ページを知っていれば、ご意見で教えてください</a></li>` : '';
       if (lives === null) return `<li>${esc(head(c))}への要望を出せるのは、<b>${esc(who)}</b>です${src}。下の「差出人」に住所を入れると、出せるかを確かめます。</li>`;
       if (lives) return '';
       if (el === 'resident') return `<li class="warn">⛔ <b>${esc(head(c))}への要望を出せるのは、${esc(who)}です</b>${src}。差出人の住所が${esc(town)}ではないので、${esc(town)}あての要望書は作りません。議会あての陳情書なら、住所に関係なく受け付ける議会もあります。</li>`;
@@ -1093,8 +1093,8 @@
         ${notes(info)}
         ${sameHtml(c)}
         ${badge ? telHtml(pref, key, !page) : ''}
-        ${page ? '' : `<span>陳情の出し方のページが見つかりませんでした（調査中）。小さな議会では案内ページを置いていないことも多いので、議会事務局に電話で出し方と締切を聞くのが確実です。<a href="${esc(window.Common.askUrl(`${label(c)}の陳情の出し方`, '出し方の案内ページの URL を教えてください', 'council_procedure'))}" target="_blank" rel="noopener">案内ページを知っていれば、ご意見で教えてください</a></span>`}
-        ${badge ? '' : `<span class="hint-sm">郵送の扱い：調査中。<a href="${esc(window.Common.askUrl(`${label(c)}の陳情の郵送の扱い`, '郵送で審査されるかが分かる公式の案内ページの URL を教えてください', 'council_procedure'))}" target="_blank" rel="noopener">分かる方は、ご意見で教えてください</a></span>`}
+        ${page ? '' : `<span>陳情の出し方のページが見つかりませんでした（調査中${window.Common.known('chinjo', 'page_url')}）。小さな議会では案内ページを置いていないことも多いので、議会事務局に電話で出し方と締切を聞くのが確実です。<a href="${esc(window.Common.askUrl(`${label(c)}の陳情の出し方`, '出し方の案内ページの URL を教えてください', 'council_procedure'))}" target="_blank" rel="noopener">案内ページを知っていれば、ご意見で教えてください</a></span>`}
+        ${badge ? '' : `<span class="hint-sm">郵送の扱い：調査中${window.Common.known('chinjo', 'mail')}。<a href="${esc(window.Common.askUrl(`${label(c)}の陳情の郵送の扱い`, '郵送で審査されるかが分かる公式の案内ページの URL を教えてください', 'council_procedure'))}" target="_blank" rel="noopener">分かる方は、ご意見で教えてください</a></span>`}
         <span class="wz-links">${links}</span>
         ${window.Report.enabled ? reportBtn(c) : ''}</li>`;
     }).join('');
@@ -1482,7 +1482,7 @@
   $('wzAlso').addEventListener('click', onKindClick);
   $('wzKindTabs').addEventListener('click', onKindClick);
 
-  const reqNotes = (id) => { const n = [...intakeNotes(id, 'yobo'), ...((intakeOf(id, 'yobo') || {}).mail ? [] : [`📮 郵送で受け付けるかは、このサイトではまだ確かめられていません（調査中）。郵送するなら、上の案内ページか代表電話で確かめてください。<a href="${esc(window.Common.askUrl(`${municipalityName(id)}の要望の郵送の扱い`, '郵送で受け付けるかが分かる公式の案内ページの URL を教えてください', 'council_procedure'))}" target="_blank" rel="noopener">分かる方は、ご意見で教えてください</a>`]), ...kaitoNotes(id)]; return n.length ? `<ul class="wz-notes">${n.map((t) => `<li>${t}</li>`).join('')}</ul>` : ''; };
+  const reqNotes = (id) => { const n = [...intakeNotes(id, 'yobo'), ...((intakeOf(id, 'yobo') || {}).mail ? [] : [`📮 郵送で受け付けるかは、このサイトではまだ確かめられていません（調査中${window.Common.known('yobo', 'mail')}）。郵送するなら、上の案内ページか代表電話で確かめてください。<a href="${esc(window.Common.askUrl(`${municipalityName(id)}の要望の郵送の扱い`, '郵送で受け付けるかが分かる公式の案内ページの URL を教えてください', 'council_procedure'))}" target="_blank" rel="noopener">分かる方は、ご意見で教えてください</a>`]), ...kaitoNotes(id)]; return n.length ? `<ul class="wz-notes">${n.map((t) => `<li>${t}</li>`).join('')}</ul>` : ''; };
   // 「今やること」の1つ目：議会ごとに、分かっている扱いか、電話で聞くことを出す
   function renderNowAsk() {
     const list = real();

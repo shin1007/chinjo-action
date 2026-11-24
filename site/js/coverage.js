@@ -32,6 +32,19 @@
       ['  うち、郵送でも審査される', d.chinjo.mailReviewed, '住民の郵送を審査する、と公式の案内で確かめた議会（住民以外の扱いは別です）'],
       ['要望（首長）を郵送で受け付ける', d.yobo.mailAccepted, '公式の案内で確かめたもの'],
     ];
+    const I = d.intake;
+    rows.push(
+      ['陳情：締切がわかった', I.chinjo.deadline, '公式の案内に締切（定例会ごとの日など）が書いてあった議会'],
+      ['陳情：住所・氏名が公開されるかがわかった', I.chinjo.name_published, '会議録・議会のホームページでの公開の扱い'],
+      ['陳情：審査の結果を知らせてもらえるかがわかった', I.chinjo.result_notice, ''],
+      ['陳情：必要な部数がわかった', I.chinjo.copies, ''],
+      ['陳情：Web・電子申請の窓口がわかった', I.chinjo.form, ''],
+      ['要望：住民以外も出せるかがわかった', I.yobo.eligible, '住民だけ・関わりのある人だけ、と公式の案内に書いてあった自治体（それ以外の自治体は、まだ確かめられていません）'],
+      ['要望：回答がもらえるかがわかった', I.yobo.reply, ''],
+      ['要望：Webフォームで出せる', I.yobo.form, ''],
+      ['要望：匿名で出せる', I.yobo.anonymous_ok, ''],
+      ['寄せられた意見と回答の一覧が見つかった', I.kaito, '市長への手紙などの「寄せられた意見と回答」。要望の文面づくりの参考にしています'],
+    );
     for (const [label, x, memo] of rows) {
       const tr = el('tr'); tr.append(el('th', label), cell2(x.pref), cellM(x.muni), el('td', memo, 'small')); b.append(tr);
     }

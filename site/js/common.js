@@ -136,5 +136,12 @@ window.Common = (() => {
   // 「調査中」の横から、ご意見のページを「種類・対象を自動で入れた」状態で開くリンク（利用者が種類を選ばなくてよい）
   // kind は feedback の種類（既定：根拠になる資料を知らせたい）。need='text' のときは URL でなく文章でもよい
   const askUrl = (target, ask, kind = 'missing_source', need = 'url', theme = '') => `/feedback?quick=1&kind=${kind}${theme ? `&theme=${theme}` : ''}&target=${encodeURIComponent(String(target).slice(0, 100))}&ask=${encodeURIComponent(String(ask).slice(0, 120))}${need === 'text' ? '&need=text' : ''}#fb-form`;
-  return { askUrl, jstToday, BLANK_TEXT, esc, sender, bindSender, forgetSender, remembers, setRemember, flash, copy, printTexts, reiwaToday, DATE_BLANK, askGroups, scopeTag, tagsOf, askTags, routeOf, ROUTE_LABEL };
+  // 調べきれていない所に、いまわかっている数を添える（site/data/progress.json。node scripts/progress.js で作る）。読み込めるまでは空
+  const progress = {};
+  if (typeof fetch === 'function' && typeof document !== 'undefined') fetch('/data/progress.json').then((r) => (r.ok ? r.json() : null)).then((d) => { if (d) Object.assign(progress, d); }).catch(() => {});
+  const known = (group, field) => {
+    const x = ((progress.intake || {})[group] || {})[field];
+    return x ? `（全国の市区町村${x.muni.of.toLocaleString('ja-JP')}のうち${x.muni.n.toLocaleString('ja-JP')}で確認済み・人口で${(100 * x.muni.pop / x.muni.total).toFixed(0)}%）` : '';
+  };
+  return { known, askUrl, jstToday, BLANK_TEXT, esc, sender, bindSender, forgetSender, remembers, setRemember, flash, copy, printTexts, reiwaToday, DATE_BLANK, askGroups, scopeTag, tagsOf, askTags, routeOf, ROUTE_LABEL };
 })();
