@@ -102,6 +102,7 @@ module.exports = {
   'kenko/l_cancer_screening': 'がん 癌 検診 健康診断',
   'kenko/l_tokutei': '健診 健康診断 メタボ 国保 国民健康保険',
   'kenko/l_dental_screening': '歯 歯科 歯周病 歯ぐき 歯茎 歯医者 口腔 検診',
+  'kenko/l_osteoporosis_screening': '骨 骨粗鬆症 骨粗しょう症 骨密度 女性 検診',
   'kenko/l_smoke_free': 'タバコ 喫煙 受動喫煙 副流煙 公園 通学路',
   'kenko/l_gamble': 'パチンコ ギャンブル 依存症 相談',
   'sonota/n_school_tax': '私立学校 学校法人 非課税 税金',
