@@ -146,6 +146,7 @@
     }).join('');
     $('omSource').textContent = `議会の人口は、${pops.source}（${pops.asOf}時点）による。郵送の扱いは、各議会の公式案内で確かめたもの（このサイトの /kakunin と同じデータ）。`;
     renderTexts();
+    renderPreview();
   }
   // 文面を見る欄だけ作り直す（住所・氏名を直したときは、開いている欄を閉じずに中身だけ替える）
   function renderTexts() {
@@ -154,6 +155,21 @@
       el.innerHTML = docsOf(i).map((d) => `<pre class="om-pre">${esc(d)}</pre>`).join('');
     });
   }
+
+  // PDFに入るもの（議会ごとの封筒の中身）を、作る前に見せる
+  function renderPreview() {
+    if (!state.sets.length) return;
+    const on = (id) => $(id).checked;
+    const rows = state.sets.map((set, i) => {
+      const { P } = themes[set.theme];
+      const iken = on('omIken') ? set.items.filter((k) => P.isNational(P.ITEMS[k])).length : 0;
+      const parts = [on('omCover') ? '送付状1枚' : '', `陳情書${set.items.length}通`, iken ? `意見書の案${iken}通` : ''].filter(Boolean).join('・');
+      return `<li><b>${esc(state.councils[i].council)}</b>あての封筒：${parts}</li>`;
+    }).join('');
+    const extra = [on('omLabels') ? '宛名ラベル' : '', on('omMemo') ? `出し方メモ（議会ごとに1つ。手元に残す）` : ''].filter(Boolean).join('、');
+    $('omPreview').innerHTML = `<p><b>できあがるもの</b>（PDF 1つにまとまります）</p><ul>${rows}</ul>${extra ? `<p class="hint-sm">ほかに：${extra}</p>` : ''}<p class="hint-sm">陳情書の中身は、上の「文面を見る」で確かめられます。署名は、印刷したあとに手書きします。</p>`;
+  }
+  ['omCover', 'omIken', 'omLabels', 'omMemo'].forEach((id) => $(id).addEventListener('change', renderPreview));
 
   function setBusy(on, msg = '') {
     ['omDraw', 'omRedrawAll', 'omRedrawCouncils', 'omRedrawSets', 'omPdf', 'omPrint'].forEach((id) => { $(id).disabled = on; });
