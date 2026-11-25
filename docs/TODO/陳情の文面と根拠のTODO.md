@@ -15,6 +15,7 @@
 ## 根拠の確かめ直し
 
 - [ ] `npm run links`（2026-11-21、374件）：404・接続できないものは0件。403・503 などで自動では開けなかった46件（外務省、DOI の論文、JAMA、欧州議会、ドイツの法令サイトなど）は、ブラウザで開いて確かめる。結果は `scripts/.link-check.md`（Git には入れない）。開けないものは `docs/調査/一次資料に当たれていない資料.md` に、理由の区分（BOT制限・サイトダウン・その他）つきで書く。
+- [ ] 米国のビザ制限（国際的な子の連れ去り事案）を、ブラウザで開いて読む（2026-11-25、自動の取得は403）。①国務省の発表 https://www.state.gov/releases/office-of-the-spokesman/2026/09/new-visa-restriction-policy-to-promptly-resolve-international-parental-child-abduction-cases ②年次報告（Annual Report on International Child Abduction）の2026年版：入口 https://travel.state.gov/content/travel/en/International-Parental-Child-Abduction/for-providers/legal-reports-and-data.html 。読んだら `node scripts/archive.js <URL> "<題名>" --file <保存したファイル>` で登録。確かめたいのは、日付・対象者・適用の条件・根拠の条文、日本の扱い、日本国内の連れ去りに及ぶのか。確かめたら /kodomo/refs の「準備中」を本文に置き換え、/trouble の該当項目を消す。経過は `docs/調査/一次資料に当たれていない資料.md` の「米国のビザ制限」。
 - [ ] asks-audit は形だけを見る。引用した数字・条文が、資料に実際にあるかを、項目ごとに一次資料で確かめる（全132項目。数字の多い項目から）。
 - [ ] 法令の改正・統計の更新・判例の追加があった項目の数字と条文を、確かめ直す（年に数回）。
 
