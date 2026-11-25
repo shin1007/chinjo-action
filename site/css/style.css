@@ -586,6 +586,7 @@ summary { cursor: pointer; font-weight: 700; }
 .wz-cat { border: 1px solid var(--line); border-radius: 10px; margin: 8px 0; background: var(--surface); }
 .wz-cat > summary { display: flex; justify-content: space-between; gap: 8px; padding: 10px 14px; font-weight: 700; cursor: pointer; }
 .wz-cat > summary small { font-weight: 400; color: var(--muted); }
+.wz-cat-more { margin: 0 14px 12px; }
 .wz-cat > .wz-cards { padding: 0 10px 10px; }
 .wz-steps li[role="button"] { cursor: pointer; text-decoration: underline; }
 .wz-steps li[role="button"]:focus-visible { outline: 2px solid var(--main); outline-offset: 2px; }

@@ -369,6 +369,9 @@
 
   // 項目は見出しごとに折りたたむ。選んだ項目がある見出しと、最初の見出しは開いておく
   const openCats = new Set();
+  // 見出しの中は、まず最初の FIRST 件（と選んだ項目）だけを見せ、残りは「すべて見る」で開く（多すぎて迷うのを防ぐ）
+  const FIRST = 3;
+  const shownCats = new Set();
   // 要望書は自治体あての文書なので、国への意見書を求める項目と、議会の判断が要る陳情向けの項目は選べない。
   // 陳情書では、役所の担当課が運用で対応できる要望向けの項目は選べない（要望書のほうで選ぶ）
   const usable = (a) => (state.mode === 'both'
@@ -420,7 +423,7 @@
         const on = state.items.includes(a.id);
         const doc = state.kind === 'request' ? '要望' : '陳情';
         return `<button type="button" class="wz-card ${on ? 'on' : ''}" data-item="${a.id}" aria-pressed="${on}" data-text="${esc(a.label + a.reason)}"><b>${a.label}${window.Common.scopeTag(a)}</b><span>${a.reason.split('。')[0]}。</span><span class="wz-card-row">${window.Common.askTags(a) ? `<span class="ask-tags">${window.Common.askTags(a)}</span>` : ''}<span class="wz-bg" data-easy="/${window.THEME.id}/easy/${a.id}" title="なぜこの${doc}が必要か・どう役立つか（新しいタブで開きます）">この${doc}の意義 ↗</span></span>${a.pair && window.Petition.ITEMS[a.pair] ? `<small class="wz-pair">あわせて出すのがおすすめ：${esc(window.Petition.ITEMS[a.pair].label)}</small>` : ''}</button>`;
-      }).join('')}</div></details>`;
+      }).join('')}</div>${list.length > FIRST ? `<button type="button" class="btn btn-small wz-cat-more" data-more="${esc(cat)}"></button>` : ''}</details>`;
     }).join('');
     document.querySelectorAll('#wzItems .wz-cat').forEach((cat) => { cat.querySelector('.wz-cat-n').innerHTML = catCount(cat); });
     renderRouteNote();
@@ -431,7 +434,17 @@
     const q = $('wzItemFilter').value.trim();
     document.querySelectorAll('#wzItems .wz-cat').forEach((d) => {
       let hit = 0;
-      d.querySelectorAll('[data-item]').forEach((el) => { const ok = !q || el.dataset.text.includes(q); el.hidden = !ok; hit += ok; });
+      const all = q || shownCats.has(d.dataset.cat);
+      let rest = 0;
+      d.querySelectorAll('[data-item]').forEach((el, i) => {
+        const ok = !q || el.dataset.text.includes(q);
+        hit += ok;
+        const show = ok && (all || i < FIRST || state.items.includes(el.dataset.item));
+        if (ok && !show) rest += 1;
+        el.hidden = !show;
+      });
+      const more = d.querySelector('.wz-cat-more');
+      if (more) { more.hidden = !rest; more.textContent = `残り${rest}件をすべて見る`; }
       d.hidden = !hit;
       if (q && hit) d.open = true;
     });
@@ -459,6 +472,12 @@
     updateNav();
   });
   $('wzItemFilter').addEventListener('input', filterItems);
+  $('wzItems').addEventListener('click', (e) => {
+    const c = e.target.dataset && e.target.dataset.more;
+    if (!c) return;
+    shownCats.add(c);
+    filterItems();
+  });
   $('wzItems').addEventListener('toggle', (e) => {
     const c = e.target.dataset && e.target.dataset.cat;
     if (c && !$('wzItemFilter').value) (e.target.open ? openCats.add(c) : openCats.delete(c));
