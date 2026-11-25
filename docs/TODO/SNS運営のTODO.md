@@ -33,7 +33,6 @@ X の運用の全体は [Xの運用方法](../設計/Xの運用方法.md)。
 - [ ] 10. ボット用のアカウントを作る。プロフィールに「自動投稿」と運営者個人（団体ではない）を書き、Aへのリンクを置き、「自動化」ラベルをオンにする。
 - [ ] 11. 開発者コンソールでアプリを作り、読み書きの鍵を取る。URL つきの投稿の単価を画面で確かめ、月の上限を決める。
 - [ ] 12. 鍵を GitHub の Secrets に入れる（リポジトリには書かない）。
-- [x] 13. `scripts/post-x.js` と `.github/workflows/post-x.yml` を作った（2026-11-23。`--dry-run` つき、承認が要る Environment「x-post」。テストは `test/post-x.test.js`）。投稿の予定は `site/data/sns-queue.jsonl`、記録は `site/data/sns-posted.jsonl`。
 - [ ] 13a. GitHub の Settings → Environments で「x-post」を作り、Required reviewers に運営者を入れ、Secrets に X_API_KEY・X_API_SECRET・X_ACCESS_TOKEN・X_ACCESS_SECRET を入れる。Actions の「post-x」を、dry_run を true にして一度動かす。
 - [ ] 14. 最初の1か月は、承認してから投稿する。問題がなければ、承認を外すか決める。
 - [ ] 15. （候補）Bluesky にも同じ告知を出せるか確かめる（無料の API が使えるかは未確認）。
