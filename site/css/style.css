@@ -879,3 +879,5 @@ summary { cursor: pointer; font-weight: 700; }
 .om-preview { border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; margin: 12px 0; background: var(--surface); }
 .party-note { display: block; color: var(--muted); font-size: 0.82rem; line-height: 1.5; }
 .wz-field-list { list-style: none; padding: 0; margin: 6px 0; display: flex; flex-wrap: wrap; gap: 6px 12px; }
+
+.img-480 { max-width: min(100%, 480px); height: auto; }
