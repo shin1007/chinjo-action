@@ -62,9 +62,9 @@ function page() {
     .sort((a, b) => (b.population || 0) - (a.population || 0))
     .map((r) => ({ id: r.id, pref: r.pref, to: r.to || r.name, pop: r.population || 0, done: (r.sources || []).some((s) => s.from === 'phone'), ...(tel[r.pref + '|' + (r.to || r.name)] || {}) }));
   return `<!doctype html><meta charset="utf-8"><title>電話の答えの入力</title>
-<style>body{font:15px sans-serif;margin:0;display:flex;flex-direction:column;height:100vh}#l{flex:none;border-bottom:2px solid #ccc}#items{height:150px;overflow-y:auto}#items div{height:50px;box-sizing:border-box;padding:4px 8px;cursor:pointer;border-bottom:1px solid #eee}#items div.on{background:#def}#items .done{color:#888}
+<style>body{font:15px sans-serif;margin:0;display:flex;flex-direction:column;height:100vh}#l{flex:none;border-bottom:2px solid #ccc}#items{height:96px;overflow-y:auto}#items div{height:32px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-sizing:border-box;padding:4px 8px;cursor:pointer;border-bottom:1px solid #eee}#items div.on{background:#def}#items .done{color:#888}
 #f{padding:12px 20px}#sc p{margin:4px 0}table{border-collapse:collapse}td,th{padding:3px 8px;border:1px solid #ddd}fieldset{margin:10px 0}input[type=text],textarea{width:100%;box-sizing:border-box}label{display:block}.tel{font-size:22px;font-weight:bold}</style>
-<div id="l"><div style="display:flex;gap:12px;align-items:center;padding:6px 8px"><input id="q" placeholder="絞り込み（都道府県・議会の名前）" style="flex:1"><label><input type="checkbox" id="hide" checked>済みを隠す</label></div><div id="items"></div></div>
+<div id="l"><div style="display:flex;gap:12px;align-items:center;padding:6px 8px"><input id="q" placeholder="絞り込み（都道府県・議会の名前）" style="flex:1"><label><input type="checkbox" id="hide" checked>済みを隠す</label></div><div id="items"></div><div id="tel" style="padding:6px 8px;background:#eef6ff;border-top:1px solid #ccc">議会を選ぶと、ここに電話番号が出ます。</div></div>
 <main style="flex:1;min-height:0;overflow:auto"><details open id="sc" style="padding:8px 20px;background:#fffbe6;border-bottom:1px solid #ccc"><summary><b>台本</b>（クリックで閉じる）</summary>${script()}</details><form id="f"><p>上の一覧から議会を選んでください。</p></form></main>
 <script>
 const L=${JSON.stringify(list)},C=${JSON.stringify(CONDITIONS)};
@@ -74,12 +74,12 @@ const T=[['unknown','聞いていない'],['yes','はい'],['no','いいえ']];
 const E=[['','—'],['same','住民と同じ'],['distribute','配付・回覧だけ'],['may_distribute','議長などの判断で審査しないことがある'],['as_request','要望書として扱う'],['no','出せない']];
 const sel=(n,o,v)=>'<select name="'+n+'">'+o.map(([k,t])=>'<option value="'+k+'"'+(k===v?' selected':'')+'>'+t+'</option>').join('')+'</select>';
 function draw(){const q=document.getElementById('q').value,h=document.getElementById('hide').checked;
- document.getElementById('items').innerHTML=L.map((x,i)=>(q&&!(x.pref+x.to).includes(q))||(h&&x.done)?'':'<div data-i="'+i+'" class="'+(x.done?'done':'')+'">'+(i+1)+'. '+x.pref+' '+x.to+'<br><small>'+x.pop.toLocaleString()+'人 '+(x.tel||'番号なし')+'</small></div>').join('');}
+ document.getElementById('items').innerHTML=L.map((x,i)=>(q&&!(x.pref+x.to).includes(q))||(h&&x.done)?'':'<div data-i="'+i+'" class="'+(x.done?'done':'')+'">'+(i+1)+'. '+x.pref+' '+x.to+'　<small>'+x.pop.toLocaleString()+'人</small></div>').join('');}
 document.getElementById('q').oninput=draw;document.getElementById('hide').onchange=draw;
 document.getElementById('items').onclick=async e=>{const d=e.target.closest('[data-i]');if(!d)return;document.querySelectorAll('#items .on').forEach(x=>x.classList.remove('on'));d.classList.add('on');
- const x=L[d.dataset.i],r=await (await fetch('/row?id='+encodeURIComponent(x.id))).json();form(x,r);};
+ const x=L[d.dataset.i];document.getElementById('tel').innerHTML=x.pref+' '+x.to+'　<span class="tel">'+(x.tel?'<a href="tel:'+x.tel+'">'+x.tel+'</a>':'番号なし')+'</span>'+(x.tel&&x.url?'　<small>（番号の出典：<a target="_blank" href="'+x.url+'">案内ページ</a>）</small>':'');const r=await (await fetch('/row?id='+encodeURIComponent(x.id))).json();form(x,r);};
 function form(x,r){const nr=r.nonresident_rule||{};
- document.getElementById('f').innerHTML='<h2>'+x.pref+' '+x.to+'</h2><p class="tel">'+(x.tel||'番号なし')+'</p><p>'+(x.url?'<a target="_blank" href="'+x.url+'">案内ページ</a>':'案内ページなし')+(r.page_url&&r.page_url!==x.url?' / <a target="_blank" href="'+r.page_url+'">page_url</a>':'')+'</p>'
+ document.getElementById('f').innerHTML='<h2>'+x.pref+' '+x.to+'</h2><p>'+(x.url?'<a target="_blank" href="'+x.url+'">案内ページ</a>':'案内ページなし')+(r.page_url&&r.page_url!==x.url?' / <a target="_blank" href="'+r.page_url+'">page_url</a>':'')+'</p>'
  +'<input type="hidden" name="id" value="'+x.id+'"><label>聞いた日 <input type="date" name="date" value="'+new Date().toISOString().slice(0,10)+'"></label>'
  +'<fieldset><legend>1・3 出し方</legend><table><tr><th></th><th>住民</th><th>住民以外</th></tr>'+M.map(([m,t])=>'<tr><td>'+t+'</td><td>'+sel(m+'.resident',V,r.methods[m].resident)+'</td><td>'+sel(m+'.nonresident',V,r.methods[m].nonresident)+'</td></tr>').join('')+'</table>'
  +'<label>メールの宛先 <input type="text" name="email_addr" value="'+(r.email_addr||'')+'"></label><label>フォームのURL <input type="text" name="form_url" value="'+(r.form_url||'')+'"></label></fieldset>'
