@@ -50,9 +50,18 @@ const nextMirai = (data) => {
   const sent = data.sent.filter((r) => r.to === 'チームみらい' && r.ask);
   const done = new Set(sent.map((r) => r.ask));
   const id = data.mirai.order.find((x) => !done.has(x));
-  const last = sent.map((r) => r.date).sort().pop() || addDays(data.mirai.start, -data.mirai.everyDays);
-  return { id, due: addDays(last, data.mirai.everyDays), left: data.mirai.order.length - done.size };
+  const last = sent.map((r) => r.date).sort().pop();
+  return { id, due: nextDue(last, data.mirai.start), left: data.mirai.order.length - done.size };
 };
+// 次の予定日：最後に出した日から4日以上あけた、start と同じ曜日（毎週木曜）。
+// 数日遅れて出しても、次はいつもの曜日に戻る（遅れた分だけ予定がずれ続けない。2件をまとめて出すこともしない）
+const weekday = (s) => new Date(`${s}T00:00:00Z`).getUTCDay();
+function nextDue(last, start) {
+  if (!last) return start;
+  let d = addDays(last, 4);
+  while (weekday(d) !== weekday(start)) d = addDays(d, 1);
+  return d;
+}
 const currentRound = (data) => data.forms.rounds.find((r) => r.status !== 'done');
 
 const miraiText = (a) => `${THEME_NAME[a.theme]}について、国への政策提言です（市民の陳情づくりを手伝う公開サイト「陳情アクション」の運営から、サイトに載せている国への陳情項目を週に1件ずつお送りしています）。今回は「${a.label}」です。\n求める内容：${a.text}\n理由：${a.reason}`;
@@ -100,16 +109,19 @@ function roundDone(date = today()) {
   const r = currentRound(st.data);
   if (!r) return console.log('予定の回がありません。');
   r.status = 'done';
-  r.date = date;
-  // 次の回を仮に足す（3か月後・次のテーマ）。陳情番号の1番を狙う時期は、確かめたら手で直す
+  // 予定の日（r.date）は残し、出した日は doneDate に書く。遅れて出しても、次の回は予定の日から数える
+  r.doneDate = date;
+  // 次の回を仮に足す（予定の日の3か月後・次のテーマ。ただし出した日から1か月はあける）。陳情番号の1番を狙う時期は、確かめたら手で直す
   const themes = st.data.forms.themes;
   if (!currentRound(st.data)) {
-    const d = new Date(`${date}T00:00:00Z`);
+    const d = new Date(`${r.date}T00:00:00Z`);
     d.setUTCMonth(d.getUTCMonth() + st.data.forms.everyMonths);
+    const min = new Date(`${addDays(date, 30)}T00:00:00Z`);
+    if (d < min) d.setTime(min.getTime());
     st.data.forms.rounds.push({ date: d.toISOString().slice(0, 10), theme: themes[(themes.indexOf(r.theme) + 1) % themes.length], status: 'tentative' });
   }
   save(st);
-  console.log(`回を「出した」にしました：${dateJa(date)}`);
+  console.log(`回を「出した」にしました：${dateJa(date)}${date > r.date ? `（予定は${dateJa(r.date)}）` : ''}`);
 }
 
 function next() {
@@ -215,4 +227,4 @@ if (require.main !== module) {
 } else {
   Promise.resolve(run()).catch((e) => { console.error(e.message); process.exit(1); });
 }
-module.exports = { nextMirai, miraiText, dateJa, addDays };
+module.exports = { nextDue, nextMirai, miraiText, dateJa, addDays };
