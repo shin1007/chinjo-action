@@ -20,7 +20,7 @@
 | `access.js` | `ACCESS` | 同じキーから `[緯度, 経度, 最寄り駅, 路線, 距離]` への対応 |
 | `kana.js` | `KANA` | 同じキーから自治体名のカタカナ読みへの対応 |
 
-`councils.js`、`sites.js`、`tel.js`、`offices.js`、`access.js`、`kana.js` は大きな生成・収集済みデータです。編集や検証で必要なキーだけを明示して読みます。生成元や注意事項は [data/README.md](../data/README.md) を確認してください。
+`councils.js`、`sites.js`、`tel.js`、`offices.js`、`access.js`、`kana.js` は大きな生成・収集済みデータです。編集や検証で必要なキーだけを明示して読みます。生成元や注意事項は [data/README.md](../../site/data/README.md) を確認してください。
 
 ## `themes/`
 

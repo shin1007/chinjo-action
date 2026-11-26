@@ -7,9 +7,9 @@
 | X：収益の分配（Original Content Rewards）の参加条件・受付状況・支払い | https://help.x.com/en/using-x/original-content-rewards | 403 |
 | X：旧クリエイター収益配分が終わったか | https://help.x.com/en/using-x/creator-revenue-sharing | 403 |
 | X：収益化できないコンテンツ（政治・社会問題・AI生成の扱い） | https://help.x.com/en/rules-and-policies/content-monetization-standards | 403 |
-| note：販売の手数料 | https://help.note.com/hc/ja/articles/360011358873（301 で www.help-note.com の同じ記事へ） | 転送先が 403 |
-| note：利用規約（政治活動・寄付・署名・有料販売の対象・生成AI） | https://note.com/terms（301 で terms.help-note.com/hc/ja/articles/44943817565465 へ） | 転送先が 403 |
-| note：サポート・メンバーシップ・有料マガジンを始める条件 | https://help.note.com/hc/ja（301 で www.help-note.com/hc/ja へ） | 転送先が 403 |
+| note：販売の手数料 | <https://help.note.com/hc/ja/articles/360011358873>（301 で www.help-note.com の同じ記事へ） | 転送先が 403 |
+| note：利用規約（政治活動・寄付・署名・有料販売の対象・生成AI） | <https://note.com/terms>（301 で terms.help-note.com/hc/ja/articles/44943817565465 へ） | 転送先が 403 |
+| note：サポート・メンバーシップ・有料マガジンを始める条件 | <https://help.note.com/hc/ja>（301 で www.help-note.com/hc/ja へ） | 転送先が 403 |
 
 ## 確かめられていないこと
 - X の収益分配の条件と、いま新規に参加できるか（検索結果の要約には「2026年9月7日に旧制度が終了、後継は新規受付を2026年8月7日から停止」とあったが、ページ本文は読めておらず、使わない）。
