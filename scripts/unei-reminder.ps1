@@ -1,5 +1,5 @@
 ﻿# 運営の定期の提出のリマインダー（Windows のタスク スケジューラから毎朝9時に動かす）。
-# やることがある日（★）だけ、画面に知らせを出す。登録：powershell -File scripts/unei-reminder.ps1 -Register
+# やることがある日（★）と毎週月曜に、画面に知らせを出す（月曜は「次回は○月○日です。××の項目を…」も出す）。登録：powershell -File scripts/unei-reminder.ps1 -Register
 param([switch]$Register)
 $root = Split-Path -Parent $PSScriptRoot
 if ($Register) {
@@ -12,8 +12,12 @@ if ($Register) {
 }
 [Console]::OutputEncoding = [Text.Encoding]::UTF8
 $out = (& node "$root\scripts\unei.js" status) -join "`n"
-if ($out -match '★') {
-  $todo = ($out -split "`n" | Where-Object { $_ -match '★' }) -join "`n"
-  $ans = (New-Object -ComObject WScript.Shell).Popup("$todo`n`nメニュー（定期の提出.cmd）を開きますか？", 0, '陳情アクション：今日の提出', 4 + 64)
+$todo = ($out -split "`n" | Where-Object { $_ -match '★' }) -join "`n"
+$isMonday = (Get-Date).DayOfWeek -eq 'Monday'
+if ($todo -or $isMonday) {
+  $msg = ''
+  if ($todo) { $msg += "今日やること：`n$todo`n`n" }
+  if ($isMonday) { $msg += ((& node "$root\scripts\unei.js" next) -join "`n") + "`n`n" }
+  $ans = (New-Object -ComObject WScript.Shell).Popup("$($msg)メニュー（定期の提出.cmd）を開きますか？", 0, '陳情アクション：定期の提出', 4 + 64)
   if ($ans -eq 6) { Start-Process -FilePath "$root\定期の提出.cmd" -WorkingDirectory $root }
 }
