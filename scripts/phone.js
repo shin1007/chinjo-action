@@ -65,7 +65,7 @@ function page() {
 <style>body{font:15px sans-serif;margin:0;display:flex;flex-direction:column;height:100vh}#l{flex:none;border-bottom:2px solid #ccc}#items{height:96px;overflow-y:auto}#items div{height:32px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-sizing:border-box;padding:4px 8px;cursor:pointer;border-bottom:1px solid #eee}#items div.on{background:#def}#items .done{color:#888}
 #f{padding:12px 20px}#sc p{margin:4px 0}table{border-collapse:collapse}td,th{padding:3px 8px;border:1px solid #ddd}fieldset{margin:10px 0}input[type=text],textarea{width:100%;box-sizing:border-box}label{display:block}.tel{font-size:22px;font-weight:bold}</style>
 <div id="l"><div style="display:flex;gap:12px;align-items:center;padding:6px 8px"><input id="q" placeholder="絞り込み（都道府県・議会の名前）" style="flex:1"><label><input type="checkbox" id="hide" checked>済みを隠す</label></div><div id="items"></div><div id="tel" style="padding:6px 8px;background:#eef6ff;border-top:1px solid #ccc">議会を選ぶと、ここに電話番号が出ます。</div></div>
-<main style="flex:1;min-height:0;overflow:auto"><details open id="sc" style="padding:8px 20px;background:#fffbe6;border-bottom:1px solid #ccc"><summary><b>台本</b>（クリックで閉じる）</summary>${script()}</details><form id="f"><p>上の一覧から議会を選んでください。</p></form></main>
+<main style="flex:1;min-height:0;display:flex"><div id="sc" style="width:40%;overflow-y:auto;padding:8px 16px;background:#fffbe6;border-right:1px solid #ccc"><b>台本</b>${script()}</div><form id="f" style="flex:1;overflow-y:auto"><p>上の一覧から議会を選んでください。</p></form></main>
 <script>
 const L=${JSON.stringify(list)},C=${JSON.stringify(CONDITIONS)};
 const M=[['hand','持参'],['mail','郵送'],['email','メール'],['form','電子申請・フォーム'],['fax','FAX']];
