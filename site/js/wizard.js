@@ -1748,6 +1748,28 @@
     }
   });
   $('wzNowCopy').addEventListener('click', () => $('wzCopy').click());
+  // オンラインのフォームは「件名」「内容」などの欄に分かれていて、字数の制限もあるので、欄ごとにコピーできるようにする
+  const fieldsOf = (text) => {
+    const part = (from, to) => { const a = text.indexOf(from); if (a < 0) return ''; const b = to ? text.indexOf(to, a + from.length) : -1; return text.slice(a + from.length, b < 0 ? undefined : b).trim(); };
+    return [
+      ['件名', (text.match(/^件名　(.+)$/m) || [])[1] || ''],
+      ['趣旨', part('の趣旨】', '\n記\n')],
+      ['求める事項', part('\n記\n', '【').replace(/^[一二三四五]　/gm, '')],
+      ['理由', part('の理由】', '【参考資料】')],
+      ['参考資料', part('【参考資料】', '\n以上')],
+      ['本文（全部）', text],
+    ].filter(([, v]) => v);
+  };
+  const fieldTexts = [];
+  $('wzFields').addEventListener('toggle', () => {
+    if (!$('wzFields').open) return;
+    fieldTexts.length = 0;
+    const docs = allDocs();
+    $('wzFieldsBody').innerHTML = docs.map((d, n) => `${docs.length > 1 ? `<p><b>${n + 1}通目</b></p>` : ''}<ul class="wz-field-list">${
+      fieldsOf(d).map(([k, v]) => { fieldTexts.push(v); return `<li><button type="button" class="btn btn-small" data-f="${fieldTexts.length - 1}">${esc(k)}をコピー</button> <small>${v.length.toLocaleString('ja-JP')}字</small></li>`; }).join('')
+    }</ul>`).join('') + '<p class="hint-sm">字数の制限がある欄には、「本文（全部）」の代わりに「趣旨」「求める事項」「理由」を分けて貼れます。氏名・住所は、フォームの欄に自分で入れてください。</p>';
+  });
+  $('wzFieldsBody').addEventListener('click', (e) => { const b = e.target.closest('[data-f]'); if (b) copy(fieldTexts[+b.dataset.f]); });
 
   // 「今やること」の手順ごとに、済んだら印を付けられるようにする（読み飛ばしを防ぎ、どこまで済んだか分かるように）
   document.querySelectorAll('.wz-now-steps > li').forEach((li) => {

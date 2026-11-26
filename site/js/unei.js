@@ -34,6 +34,6 @@
   document.getElementById('ueForms').innerHTML = `<table class="unei-table"><thead><tr><th>日</th><th>テーマ</th><th>出す項目</th><th>状況</th></tr></thead><tbody>${
     f.rounds.map((r) => `<tr><td>${esc(dateJa(r.date))}</td><td>${esc(THEME_NAME[r.theme] || '')}</td><td>${r.chinjo ? `陳情：${esc(label(r.chinjo))}<br>` : ''}${r.yobo ? `要望：${esc(label(r.yobo))}` : ''}${!r.chinjo && !r.yobo ? '未定' : ''}${r.note ? `<br><small>${esc(r.note)}</small>` : ''}</td><td>${esc(STATUS[r.status] || r.status)}</td></tr>`).join('')
   }</tbody></table>
-  <p>対象（${targets.length}）：${targets.map((t) => `${esc(t.to)}${t.kind === 'yobo' ? '（要望）' : '（陳情）'}`).join('、')}</p>${
+  <p>対象（${targets.length}）：${targets.map((t) => `${esc(t.to)}${t.kind === 'yobo' ? '（要望）' : t.mail ? '（陳情・Word の様式を郵送）' : '（陳情）'}`).join('、')}</p>${
     skipped.length ? `<p class="small">対象から外したもの：${skipped.map((t) => `${esc(t.to)}（${esc(t.skip)}）`).join('、')}</p>` : ''}`;
 })();
