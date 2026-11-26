@@ -261,6 +261,10 @@ summary { cursor: pointer; font-weight: 700; }
 .ask-tag-research { background: #e8f0fb; color: #1d4f91; }
 .ask-tag-precedent { background: #e9f6ec; color: #1f6b35; }
 .ask-tag-lowcost { background: #fdf3e1; color: #7a4b00; }
+.ask-tag-sent { background: #e3eefc; color: #1d4f91; }
+.unei-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.unei-table th, .unei-table td { border-bottom: 1px solid var(--accent-line); padding: 6px 4px; text-align: left; vertical-align: top; }
+.unei-now { font-weight: 700; }
 .wz-report { margin-top: 6px; }
 .wz-report-btns { margin: 6px 0; display: flex; flex-wrap: wrap; gap: 6px; }
 .wz-same { background: #fdf3e1; padding: 4px 6px; border-radius: 4px; }
@@ -873,3 +877,4 @@ summary { cursor: pointer; font-weight: 700; }
 .print-sample img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 8px; }
 .print-sample figcaption { margin-top: 6px; text-align: left; }
 .om-preview { border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; margin: 12px 0; background: var(--surface); }
+.party-note { display: block; color: var(--muted); font-size: 0.82rem; line-height: 1.5; }
