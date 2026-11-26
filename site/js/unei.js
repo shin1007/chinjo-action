@@ -21,10 +21,14 @@
   const m = U.mirai;
   const done = new Set(sent.filter((r) => r.to === 'チームみらい' && r.ask).map((r) => r.ask));
   const rest = m.order.filter((id) => !done.has(id));
-  const lastDone = sent.filter((r) => r.to === 'チームみらい' && r.ask).map((r) => r.date).sort().pop() || addDays(m.start, -m.everyDays);
-  const rows = rest.slice(0, 8).map((id, i) => [addDays(lastDone, m.everyDays * (i + 1)), id]);
+  // 次の予定日は、最後に出した日から4日以上あけた、いつもの曜日（scripts/unei.js の nextDue と同じ決まり）。数日遅れても、次はいつもの曜日に戻る
+  const lastDone = sent.filter((r) => r.to === 'チームみらい' && r.ask).map((r) => r.date).sort().pop();
+  const wd = (s) => new Date(`${s}T00:00:00Z`).getUTCDay();
+  let first = lastDone ? addDays(lastDone, 4) : m.start;
+  while (wd(first) !== wd(m.start)) first = addDays(first, 1);
+  const rows = rest.slice(0, 8).map((id, i) => [addDays(first, m.everyDays * i), id]);
   document.getElementById('ueMirai').innerHTML = `<p>出した項目：${done.size}件／全${m.order.length}件。次からの予定（毎週${esc(dateJa(m.start).slice(-2, -1))}曜日ごろ）：</p><table class="unei-table"><thead><tr><th>予定日</th><th>項目</th></tr></thead><tbody>${
-    rows.map(([d, id]) => `<tr${d <= today ? ' class="unei-now"' : ''}><td>${esc(dateJa(d))}${d < today ? '（遅れています）' : ''}</td><td>${esc(label(id))}<br><small>${esc(THEME_NAME[m.themeOf[id]] || '')}</small></td></tr>`).join('')
+    rows.map(([d, id]) => `<tr${d <= today ? ' class="unei-now"' : ''}><td>${esc(dateJa(d))}${d < today ? '（遅れています。出せる日に出します）' : ''}</td><td>${esc(label(id))}<br><small>${esc(THEME_NAME[m.themeOf[id]] || '')}</small></td></tr>`).join('')
   }</tbody></table>${rest.length > rows.length ? `<p class="small">ほか${rest.length - rows.length}件が続きます。</p>` : ''}`;
 
   const f = U.forms;

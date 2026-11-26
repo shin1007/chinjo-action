@@ -1,5 +1,5 @@
 ﻿# 運営の定期の提出のリマインダー（Windows のタスク スケジューラから毎朝9時に動かす）。
-# やることがある日（★）と毎週月曜に、画面に知らせを出す（月曜は「次回は○月○日です。××の項目を…」も出す）。登録：powershell -File scripts/unei-reminder.ps1 -Register
+# やることがある日（★）と毎週の初め（月曜。切れていたらその週に初めて動いたとき）に、画面に知らせを出す（週の初めは「次回は○月○日です。××の項目を…」も出す）。登録：powershell -File scripts/unei-reminder.ps1 -Register
 param([switch]$Register)
 $root = Split-Path -Parent $PSScriptRoot
 if ($Register) {
@@ -13,11 +13,14 @@ if ($Register) {
 [Console]::OutputEncoding = [Text.Encoding]::UTF8
 $out = (& node "$root\scripts\unei.js" status) -join "`n"
 $todo = ($out -split "`n" | Where-Object { $_ -match '★' }) -join "`n"
-$isMonday = (Get-Date).DayOfWeek -eq 'Monday'
+# 週の初めの知らせは、月曜に PC が切れていても、その週に初めて動いたときに出す（出した週を覚えておく）
+$weekFile = Join-Path $env:LOCALAPPDATA 'chinjo-unei-week.txt'
+$monday = (Get-Date).Date.AddDays(-(([int](Get-Date).DayOfWeek + 6) % 7)).ToString('yyyy-MM-dd')
+$isMonday = -not ((Test-Path $weekFile) -and ((Get-Content $weekFile -Raw).Trim() -eq $monday))
 if ($todo -or $isMonday) {
   $msg = ''
   if ($todo) { $msg += "今日やること：`n$todo`n`n" }
-  if ($isMonday) { $msg += ((& node "$root\scripts\unei.js" next) -join "`n") + "`n`n" }
+  if ($isMonday) { Set-Content -Path $weekFile -Value $monday; $msg += ((& node "$root\scripts\unei.js" next) -join "`n") + "`n`n" }
   $ans = (New-Object -ComObject WScript.Shell).Popup("$($msg)メニュー（定期の提出.cmd）を開きますか？", 0, '陳情アクション：定期の提出', 4 + 64)
   if ($ans -eq 6) { Start-Process -FilePath "$root\定期の提出.cmd" -WorkingDirectory $root }
 }
