@@ -14,6 +14,7 @@ while ($true) {
   Write-Host ' 2  チームみらいに出す文面を見るだけ'
   Write-Host ' 3  議会・自治体の今の回の一覧（フォームの直リンク）'
   Write-Host ' 9  議会・自治体のフォームに文面と差出人を入れる（送信だけ自分で押す）'
+  Write-Host ' c  コピー用の画面だけを開く（欄ごとのコピーのボタン）'
   Write-Host ' 4  手で出したものを記録する'
   Write-Host ' 5  今の回を「出した」にする'
   Write-Host ' 6  記録を公開する（コミットして main に取り込む）'
@@ -38,6 +39,10 @@ while ($true) {
     '9' {
       $to = Read-Host '送り先（空のまま Enter で、まだ出していない次の送り先）'
       if ($to) { node scripts/unei-form.js $to } else { node scripts/unei-form.js }
+    }
+    'c' {
+      $to = Read-Host '送り先（空のまま Enter で次の送り先）'
+      if ($to) { node scripts/unei-form.js --copy $to } else { node scripts/unei-form.js --copy }
     }
     '0' { exit }
     default { Write-Host '1〜9 か 0 を入れてください。' }

@@ -211,7 +211,8 @@ window.UNEI = {
     "to": "能代市議会",
     "handling": "distribute",
     "page": "https://www.city.noshiro.lg.jp/city/gikai/seigan-chinjo/1403",
-    "form": ""
+    "form": "",
+    "skip": "案内にオンラインで出せるとあるが、フォームへのリンクが見つからない（2026年11月26日）"
    },
    {
     "kind": "chinjo",
@@ -299,7 +300,8 @@ window.UNEI = {
     "to": "神戸市議会",
     "handling": "distribute",
     "page": "https://www.city.kobe.lg.jp/a91127/shise/municipal/seigann_tinnjyou/seigan.html",
-    "form": ""
+    "form": "",
+    "mail": "Word の様式に入れて印刷・署名して郵送。市外からの郵送の陳情は要望書として扱う、と案内にある"
    },
    {
     "kind": "chinjo",
@@ -332,7 +334,8 @@ window.UNEI = {
     "to": "横浜市長",
     "handling": "accept",
     "page": "https://www.city.yokohama.lg.jp/kocho/teian.html",
-    "form": ""
+    "form": "",
+    "skip": "フォームが横浜市民だけのもの（2026年11月26日に運営者が確かめた）"
    },
    {
     "kind": "yobo",
