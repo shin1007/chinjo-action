@@ -3,6 +3,10 @@
 //   node scripts/unei-form.js                 … いまの回で、まだ出していない次の送り先を開いて入れる
 //   node scripts/unei-form.js 三鷹市議会       … 送り先を指定する
 //   node scripts/unei-form.js --text 三鷹市議会 … 入れる文面だけを出す（ブラウザを開かない）
+//   node scripts/unei-form.js --copy 三鷹市議会 … コピー用の画面だけを開く（ふだん使うブラウザで。自動入力が使えないときに）
+//
+// フォームを開くときは、同じウィンドウの別のタブに「コピー用の画面」も開く（欄ごとの「コピー」ボタン。CAPTCHA や自動入力が効かない欄に、手で貼る）。
+// Word の様式で出す送り先（DOCX）は、様式に文面を入れた .docx を docs/非公開/提出/ に作る（印刷して署名・郵送）。
 //
 // 差出人は docs/非公開/差出人.json（Git に入らない）から読む。空の欄は入れない。
 // 入れ方：画面の入力欄の見出し（label・表の見出し・placeholder）から、氏名・ふりがな・郵便番号・住所・電話・メール・件名・本文を見分けて入れる。
@@ -23,7 +27,20 @@ const ENTRY = {
   日立市議会: 'https://logoform.jp/form/tDgS/968285',
   鶴ヶ島市議会: 'https://logoform.jp/form/chro/958143',
   宝塚市議会: 'https://apply.e-tumo.jp/city-takarazuka-hyogo-u/offer/offerList_detail?tempSeq=3556',
-  横浜市長: 'https://shinsei.city.yokohama.lg.jp/cu/141003/ea/residents/procedures/apply/43e04da1-b2d8-4e4b-b1d3-27ab820f9c3d/start',
+  豊川市議会: 'https://ttzk.graffer.jp/city-toyokawa/smart-apply/apply-procedure-alias/chinjo-teshutsu/door',
+  秦野市議会: 'https://dshinsei.e-kanagawa.lg.jp/142115-u/offer/offerList_initDisplay',
+};
+
+// Word の様式で出す送り先。段落の番号は様式の並び（0から）。2026-11-26 に様式を開いて確かめた
+const DOCX = {
+  神戸市議会: {
+    url: 'https://www.city.kobe.lg.jp/documents/9046/20240528_seiganchinjo_youshiki.docx',
+    fill: (d, s) => ({
+      set: { 0: d.date, 3: `（住所）　〒${s.postal}　${s.pref}${s.city}${s.street}`, 4: `（氏名）　　　　${s.name}`, 5: `（電話番号）　　${s.tel}`, 8: d.subject, 10: '【陳情趣旨】', 24: '以上の理由から、以下の事項について陳情いたします。', 26: '【陳情事項】', 27: `　１．${d.items[0] || ''}` },
+      lines: { 11: [`　${d.purpose}`, '', ...d.reasons] },
+      drop: ['6', ...Array.from({ length: 12 }, (_, i) => String(12 + i)), '28', '29'],
+    }),
+  },
 };
 
 const loadUnei = () => {
@@ -51,7 +68,51 @@ function petitionText(theme, council, id, kind, sender) {
   // 日付の空欄は、出す日の日付に置き換える
   // オンラインでは押印も議長の氏名の空欄も要らない
   const body = text.replace(ctx.Common.DATE_BLANK, ctx.Common.reiwaToday()).replace(/　+印$/m, '').replace(`　${ctx.Common.BLANK_TEXT}　様`, '　様');
-  return { subject, body };
+  // 欄ごとに貼れるよう、趣旨・求める事項・理由に分ける
+  const part = (from, to) => { const a = body.indexOf(from); if (a < 0) return ''; const b = to ? body.indexOf(to, a + from.length) : -1; return body.slice(a + from.length, b < 0 ? undefined : b).trim(); };
+  const purpose = part('の趣旨】', '\n記\n');
+  const items = part('\n記\n', '【').split('\n').map((l) => l.replace(/^[一二三四五]　/, '').trim()).filter(Boolean);
+  const reasons = part('の理由】', '【参考資料】').split('\n').filter((l) => l.trim());
+  const refs = part('【参考資料】', '以上');
+  return { subject, body, purpose, items, reasons, refs, date: ctx.Common.reiwaToday() };
+}
+
+// コピー用の画面（欄ごとに「コピー」ボタン）。個人情報が入るので、ファイルにはせずブラウザの中だけで開く
+function copyPage(t, doc, s) {
+  const esc = (x) => String(x).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const rows = [
+    ['件名', doc.subject], ['本文（全部）', doc.body], ['趣旨', doc.purpose], ['求める事項', doc.items.join('\n')], ['理由', doc.reasons.join('\n')], ['参考資料', doc.refs],
+    ['氏名', s.name], ['姓', s.family], ['名', s.given], ['ふりがな', `${s.kana_family}　${s.kana_given}`], ['フリガナ', toKata(`${s.kana_family}　${s.kana_given}`)],
+    ['郵便番号', s.postal], ['郵便番号（ハイフンなし）', s.postal.replace(/-/g, '')], ['住所', `${s.pref}${s.city}${s.street}`], ['都道府県', s.pref], ['市区町村', s.city], ['番地', s.street],
+    ['住所（全角）', toFull(`${s.pref}${s.city}${s.street}`)], ['電話', s.tel], ['電話（ハイフンなし）', s.tel.replace(/-/g, '')], ['メール', s.email],
+  ].filter(([, v]) => v && v.trim());
+  return `<!doctype html><meta charset="utf-8"><title>コピー用：${esc(t.to)}</title>
+<style>body{font:15px sans-serif;margin:16px;max-width:900px}h1{font-size:18px}.r{display:flex;gap:8px;align-items:flex-start;border-bottom:1px solid #ddd;padding:6px 0}.k{width:11em;font-weight:bold}.v{flex:1;white-space:pre-wrap;max-height:6.5em;overflow:auto;background:#f6f6f6;padding:4px}button{font-size:15px;padding:6px 14px}.ok{background:#cfe9cf}</style>
+<h1>${esc(t.to)}（${t.kind === 'yobo' ? '要望' : '陳情'}）　コピー用</h1><p>「コピー」を押して、フォームの欄に貼り付けます（Ctrl+V）。字数の制限がある欄は、本文の代わりに「趣旨」「求める事項」「理由」を分けて貼れます。</p>
+${rows.map(([k, v], i) => `<div class="r"><span class="k">${esc(k)}<br><small>${v.length}字</small></span><div class="v" id="v${i}">${esc(v)}</div><button data-i="${i}">コピー</button></div>`).join('')}
+<script>document.querySelectorAll('button').forEach(b=>b.onclick=()=>{const t=document.createElement('textarea');t.value=document.getElementById('v'+b.dataset.i).textContent;document.body.append(t);t.select();document.execCommand('copy');t.remove();document.querySelectorAll('button').forEach(x=>{x.classList.remove('ok');x.textContent='コピー'});b.classList.add('ok');b.textContent='コピーしました'});</script>`;
+}
+const toKata = (x) => x.replace(/[ぁ-ゖ]/g, (c) => String.fromCharCode(c.charCodeAt(0) + 0x60));
+
+// Word の様式に入れて docs/非公開/提出/ に保存する
+async function makeDocx(t, doc, s) {
+  const conf = DOCX[t.to];
+  const cache = path.join(process.env.LOCALAPPDATA || require('os').tmpdir(), 'chinjo-unei-templates');
+  fs.mkdirSync(cache, { recursive: true });
+  const tpl = path.join(cache, path.basename(new URL(conf.url).pathname));
+  if (!fs.existsSync(tpl)) {
+    const r = await fetch(conf.url);
+    if (!r.ok) throw new Error(`様式を開けませんでした（HTTP ${r.status}）：${conf.url}`);
+    fs.writeFileSync(tpl, Buffer.from(await r.arrayBuffer()));
+  }
+  const outDir = path.join(ROOT, 'docs/非公開/提出');
+  fs.mkdirSync(outDir, { recursive: true });
+  const out = path.join(outDir, `${doc.date.replace(/[年月]/g, '-').replace('日', '')}_${t.to}.docx`);
+  const spec = path.join(cache, 'spec.json');
+  fs.writeFileSync(spec, JSON.stringify(conf.fill(doc, s)));
+  require('child_process').execFileSync('python', ['-I', path.join(__dirname, 'unei-docx.py'), tpl, spec, out], { stdio: 'inherit' });
+  fs.unlinkSync(spec);
+  return out;
 }
 
 // 全角・半角
@@ -182,6 +243,19 @@ async function main() {
   const doc = petitionText(round.theme, council, id, t.kind === 'yobo' ? 'request' : 'petition', sender);
   console.log(`送り先：${t.to}（${t.kind === 'yobo' ? '要望' : '陳情'}）　項目：${id}\n件名：${doc.subject}\n本文：${doc.body.length}字`);
   if (textOnly) { console.log(`---\n${doc.body}`); return; }
+  if (DOCX[t.to]) {
+    const out = await makeDocx(t, doc, sender);
+    console.log(`Word の様式に入れました：${out}\n開いて確かめ、印刷して氏名の横に署名（または押印）し、郵送してください。出したら：node scripts/unei.js record ${t.to} ${id}`);
+    require('child_process').exec(`start "" "${out}"`);
+    return;
+  }
+  if (args.includes('--copy')) {
+    const f = path.join(require('os').tmpdir(), 'chinjo-unei-copy.html');
+    fs.writeFileSync(f, copyPage(t, doc, sender));
+    require('child_process').exec(`start "" "${f}"`);
+    console.log('コピー用の画面を開きました（個人情報が入っているので、使い終わったら閉じてください。ファイルは次に開くときに上書きします）。');
+    return;
+  }
 
   const url = t.form || ENTRY[t.to] || t.page;
   const { chromium } = require(require.resolve('playwright', { paths: [process.env.PLAYWRIGHT_DIR || 'C:/Users/shin1/.claude/tools/browser'] }));
@@ -189,6 +263,10 @@ async function main() {
   const profile = path.join(process.env.LOCALAPPDATA || require('os').tmpdir(), 'chinjo-unei-browser');
   const browser = await chromium.launchPersistentContext(profile, { headless: !!process.env.HEADLESS, locale: 'ja-JP', viewport: null });
   const page = browser.pages()[0] || await browser.newPage();
+  // コピー用の画面を別のタブに開いておく（CAPTCHA のあとや、自動で入らない欄に手で貼る）
+  const copyTab = await browser.newPage();
+  await copyTab.setContent(copyPage(t, doc, sender));
+  await page.bringToFront();
   await page.goto(url);
   if (!t.form && !ENTRY[t.to]) console.log('フォームの入口がわかっていません。開いた案内ページからフォームまで進んで、Enter を押してください。');
   else await advance(page);
@@ -217,4 +295,4 @@ function execRecord(to, id) {
 }
 
 if (require.main === module) main().catch((e) => { console.error(e.message); process.exit(1); });
-module.exports = { plan, toHalf, toFull, petitionText };
+module.exports = { plan, toHalf, toFull, petitionText, copyPage };
