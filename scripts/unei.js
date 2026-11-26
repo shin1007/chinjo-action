@@ -2,6 +2,8 @@
 //
 //   node scripts/unei.js status            … 今日やること（チームみらいの週1・議会への3か月ごとの回）と遅れを出す
 //   node scripts/unei.js mirai --dry       … 次にチームみらいへ出す項目の文面だけを出す
+//   node scripts/unei.js mirai --trial     … ブラウザで文面を入れるところまで試す（送らない）
+//   node scripts/unei.js next              … 次回の予定を1〜2行で出す（月曜の知らせに使う）
 //   node scripts/unei.js mirai             … ブラウザを開いて、AIインタビューに出し（追加の質問はスキップ、公開せずに提出）、記録に足す
 //   node scripts/unei.js forms             … いまの回の対象（フォームの直リンク）と、作成画面の URL を出す
 //   node scripts/unei.js record <出した先> <項目id> [YYYY-MM-DD]   … 手で出したものを記録に足す（例：record 三鷹市議会 n_restore）
@@ -110,7 +112,19 @@ function roundDone(date = today()) {
   console.log(`回を「出した」にしました：${dateJa(date)}`);
 }
 
-async function mirai(dry) {
+function next() {
+  const { data } = load();
+  const A = asks();
+  const m = nextMirai(data);
+  if (m.id) console.log(`次回のチームみらいへの提言は${dateJa(m.due)}です。「${A[m.id].label}」の項目を提言します。`);
+  const r = currentRound(data);
+  if (r) {
+    const what = [r.chinjo && `陳情「${A[r.chinjo].label}」`, r.yobo && `要望「${A[r.yobo].label}」`].filter(Boolean).join('と');
+    console.log(`次回の議会・自治体への提出は${dateJa(r.date)}${r.status === 'tentative' ? '（仮）' : ''}です。${what ? `${what}を出します。` : `${THEME_NAME[r.theme]}の項目を出します（項目は未定）。`}`);
+  }
+}
+
+async function mirai(dry, trial) {
   const st = load();
   const m = nextMirai(st.data);
   if (!m.id) return console.log('全部の項目を出し終えました。');
@@ -131,7 +145,21 @@ async function mirai(dry) {
     await btn('インタビューを始める').click();
     const box = page.getByRole('textbox', { name: /メッセージを入力/ });
     await box.waitFor({ timeout: 30000 });
+    // 最初の質問が出てから入れる（AI が書いている途中に送ると順番が崩れる。質問と一緒に「スキップする」が出る）
+    await btn(/スキップする/).first().waitFor({ timeout: 90000 });
     await box.fill(text);
+    // 入力の知らせが画面に届かず「送信」が押せないままのときは、1文字打って消す
+    const send = btn('送信');
+    if (!(await send.isEnabled().catch(() => false))) { await box.press('End'); await box.pressSequentially(' '); await box.press('Backspace'); }
+    await page.waitForFunction(() => [...document.querySelectorAll('button')].some((b) => b.textContent.trim() === '送信' && !b.disabled), null, { timeout: 10000 });
+    console.log('「送信」が押せる状態になりました。');
+    if (trial) {
+      // 試し：文面を入れたところで止める（送らない）。画面を残して確かめられるよう少し待つ
+      await page.screenshot({ path: path.join(require('os').tmpdir(), 'unei-mirai-trial.png') });
+      console.log(`試し：入力欄に文面を入れたところで止めました（送っていません）。画面：${path.join(require('os').tmpdir(), 'unei-mirai-trial.png')}`);
+      await page.waitForTimeout(Number(process.env.TRIAL_WAIT || 15000));
+      return;
+    }
     await page.keyboard.press('Control+Enter');
     // 追加の質問はスキップし、「インタビューを終了する」が出たら押す。最後に「公開せずに提出」
     const end = Date.now() + 5 * 60e3;
@@ -175,7 +203,8 @@ function ics() {
 const [cmd, ...args] = process.argv.slice(2);
 const run = {
   status, forms, ics,
-  mirai: () => mirai(args.includes('--dry')),
+  mirai: () => mirai(args.includes('--dry'), args.includes('--trial')),
+  next,
   record: () => record(...args),
   'round-done': () => roundDone(...args),
 }[cmd];
