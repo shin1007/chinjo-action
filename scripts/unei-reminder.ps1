@@ -14,5 +14,6 @@ if ($Register) {
 $out = (& node "$root\scripts\unei.js" status) -join "`n"
 if ($out -match '★') {
   $todo = ($out -split "`n" | Where-Object { $_ -match '★' }) -join "`n"
-  (New-Object -ComObject WScript.Shell).Popup("$todo`n`nリポジトリで実行してください（予定：https://chinjo-action.vercel.app/unei）", 0, '陳情アクション：今日の提出', 64) | Out-Null
+  $ans = (New-Object -ComObject WScript.Shell).Popup("$todo`n`nメニュー（定期の提出.cmd）を開きますか？", 0, '陳情アクション：今日の提出', 4 + 64)
+  if ($ans -eq 6) { Start-Process -FilePath "$root\定期の提出.cmd" -WorkingDirectory $root }
 }
