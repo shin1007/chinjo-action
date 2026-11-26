@@ -132,7 +132,12 @@ window.Common = (() => {
     a.precedent && ['precedent', `他自治体で実例あり（${a.precedent}）`],
     a.lowcost && ['lowcost', '低予算で実現可能'],
   ].filter(Boolean);
-  const askTags = (a) => tagsOf(a).map(([k, t]) => `<small class="ask-tag ask-tag-${k}">${esc(t)}</small>`).join('');
+  // 運営がすでに出した項目の札（site/data/unei.js。読み込んでいないページでは付かない）
+  const WEEK = '日月火水木金土';
+  const dateJa = (ymd) => { const [y, m, d] = String(ymd).split('-').map(Number); const w = new Date(Date.UTC(y, m - 1, d)).getUTCDay(); return `${y}年${m}月${d}日（${WEEK[w]}）`; };
+  const sentOf = (id) => ((typeof window !== 'undefined' && window.UNEI && window.UNEI.sent) || []).filter((r) => r.ask === id);
+  const sentTag = (a) => sentOf(a.id).map((r) => `<small class="ask-tag ask-tag-sent">運営が${esc(r.to)}に提出済み（${esc(dateJa(r.date))}）</small>`).join('');
+  const askTags = (a) => tagsOf(a).map(([k, t]) => `<small class="ask-tag ask-tag-${k}">${esc(t)}</small>`).join('') + sentTag(a);
   // 「調査中」の横から、ご意見のページを「種類・対象を自動で入れた」状態で開くリンク（利用者が種類を選ばなくてよい）
   // kind は feedback の種類（既定：根拠になる資料を知らせたい）。need='text' のときは URL でなく文章でもよい
   const askUrl = (target, ask, kind = 'missing_source', need = 'url', theme = '') => `/feedback?quick=1&kind=${kind}${theme ? `&theme=${theme}` : ''}&target=${encodeURIComponent(String(target).slice(0, 100))}&ask=${encodeURIComponent(String(ask).slice(0, 120))}${need === 'text' ? '&need=text' : ''}#fb-form`;
@@ -143,5 +148,5 @@ window.Common = (() => {
     const x = ((progress.intake || {})[group] || {})[field];
     return x ? `（全国の市区町村${x.muni.of.toLocaleString('ja-JP')}のうち${x.muni.n.toLocaleString('ja-JP')}で確認済み・人口で${(100 * x.muni.pop / x.muni.total).toFixed(0)}%）` : '';
   };
-  return { known, askUrl, jstToday, BLANK_TEXT, esc, sender, bindSender, forgetSender, remembers, setRemember, flash, copy, printTexts, reiwaToday, DATE_BLANK, askGroups, scopeTag, tagsOf, askTags, routeOf, ROUTE_LABEL };
+  return { known, askUrl, jstToday, BLANK_TEXT, esc, sender, bindSender, forgetSender, remembers, setRemember, flash, copy, printTexts, reiwaToday, DATE_BLANK, askGroups, scopeTag, tagsOf, askTags, dateJa, sentOf, routeOf, ROUTE_LABEL };
 })();
