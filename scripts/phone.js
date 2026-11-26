@@ -62,10 +62,10 @@ function page() {
     .sort((a, b) => (b.population || 0) - (a.population || 0))
     .map((r) => ({ id: r.id, pref: r.pref, to: r.to || r.name, pop: r.population || 0, done: (r.sources || []).some((s) => s.from === 'phone'), ...(tel[r.pref + '|' + (r.to || r.name)] || {}) }));
   return `<!doctype html><meta charset="utf-8"><title>電話の答えの入力</title>
-<style>body{font:15px sans-serif;margin:0;display:flex;height:100vh}#l{width:340px;overflow:auto;border-right:1px solid #ccc}#l div{padding:4px 8px;cursor:pointer;border-bottom:1px solid #eee}#l div.on{background:#def}#l .done{color:#888}
+<style>body{font:15px sans-serif;margin:0;display:flex;flex-direction:column;height:100vh}#l{flex:none;border-bottom:2px solid #ccc}#items{height:150px;overflow-y:auto}#items div{height:50px;box-sizing:border-box;padding:4px 8px;cursor:pointer;border-bottom:1px solid #eee}#items div.on{background:#def}#items .done{color:#888}
 #f{padding:12px 20px}#sc p{margin:4px 0}table{border-collapse:collapse}td,th{padding:3px 8px;border:1px solid #ddd}fieldset{margin:10px 0}input[type=text],textarea{width:100%;box-sizing:border-box}label{display:block}.tel{font-size:22px;font-weight:bold}</style>
-<div id="l"><input id="q" placeholder="絞り込み" style="width:95%;margin:6px"><label style="padding:0 8px"><input type="checkbox" id="hide" checked>済みを隠す</label><div id="items"></div></div>
-<main style="flex:1;overflow:auto"><details open id="sc" style="padding:8px 20px;background:#fffbe6;border-bottom:1px solid #ccc"><summary><b>台本</b>（クリックで閉じる）</summary>${script()}</details><form id="f"><p>左から議会を選んでください。</p></form></main>
+<div id="l"><div style="display:flex;gap:12px;align-items:center;padding:6px 8px"><input id="q" placeholder="絞り込み（都道府県・議会の名前）" style="flex:1"><label><input type="checkbox" id="hide" checked>済みを隠す</label></div><div id="items"></div></div>
+<main style="flex:1;min-height:0;overflow:auto"><details open id="sc" style="padding:8px 20px;background:#fffbe6;border-bottom:1px solid #ccc"><summary><b>台本</b>（クリックで閉じる）</summary>${script()}</details><form id="f"><p>上の一覧から議会を選んでください。</p></form></main>
 <script>
 const L=${JSON.stringify(list)},C=${JSON.stringify(CONDITIONS)};
 const M=[['hand','持参'],['mail','郵送'],['email','メール'],['form','電子申請・フォーム'],['fax','FAX']];
