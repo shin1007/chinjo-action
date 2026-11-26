@@ -10,7 +10,8 @@
     "adopted": "python scripts/adopted-scan.py",
     "progress": "node scripts/progress.js",
     "refresh": "node scripts/refresh.js",
-    "asks-audit": "node scripts/asks-audit.js"
+    "asks-audit": "node scripts/asks-audit.js",
+    "unei": "node scripts/unei.js"
   },
   "devDependencies": {
     "eslint": "^9.39.5",
