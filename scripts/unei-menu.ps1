@@ -13,6 +13,7 @@ while ($true) {
   Write-Host ' 1  チームみらいに今週の項目を出す（ブラウザが開きます）'
   Write-Host ' 2  チームみらいに出す文面を見るだけ'
   Write-Host ' 3  議会・自治体の今の回の一覧（フォームの直リンク）'
+  Write-Host ' 9  議会・自治体のフォームに文面と差出人を入れる（送信だけ自分で押す）'
   Write-Host ' 4  手で出したものを記録する'
   Write-Host ' 5  今の回を「出した」にする'
   Write-Host ' 6  記録を公開する（コミットして main に取り込む）'
@@ -34,8 +35,12 @@ while ($true) {
     '6' { & "$PSScriptRoot\unei-publish.ps1" }
     '7' { node scripts/unei.js ics }
     '8' { node scripts/unei.js mirai --trial }
+    '9' {
+      $to = Read-Host '送り先（空のまま Enter で、まだ出していない次の送り先）'
+      if ($to) { node scripts/unei-form.js $to } else { node scripts/unei-form.js }
+    }
     '0' { exit }
-    default { Write-Host '1〜8 か 0 を入れてください。' }
+    default { Write-Host '1〜9 か 0 を入れてください。' }
   }
   Write-Host ''
   Read-Host 'Enter でメニューに戻ります' | Out-Null
