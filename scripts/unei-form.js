@@ -62,7 +62,7 @@ const toFull = (s) => s.replace(/[0-9A-Za-z]/g, (c) => String.fromCharCode(c.cha
 function plan(field, s, doc) {
   const L = field.label;
   const width = /全角/.test(field.hint) ? 'full' : /半角/.test(field.hint) ? 'half' : '';
-  const kana = /ふりがな|フリガナ|カナ|かな/.test(L);
+  const kana = /ふりがな|フリガナ|カナ|かな|^セイ|^メイ|^せい|^めい/.test(L);
   const hira = /ふりがな|ひらがな/.test(L) && !/カナ/.test(L);
   const k = (x) => (hira ? x : x.replace(/[ぁ-ゖ]/g, (c) => String.fromCharCode(c.charCodeAt(0) + 0x60)));
   const pc = s.postal.replace(/[^0-9０-９]/g, '');
@@ -74,7 +74,7 @@ function plan(field, s, doc) {
   else if (/市区町村|市町村/.test(L)) v = s.city;
   else if (/番地|町名|丁目/.test(L)) v = s.street;
   else if (/住所|所在地/.test(L)) v = field.siblings > 1 && field.part === 1 ? s.street : `${s.pref}${s.city}${s.street}`;
-  else if (kana && (s.kana_family || s.kana_given)) v = /姓|せい|セイ/.test(L) ? k(s.kana_family) : /名(?!前)|めい|メイ/.test(L) ? k(s.kana_given) : k(`${s.kana_family}　${s.kana_given}`.trim());
+  else if (kana && (s.kana_family || s.kana_given)) v = /姓|せい|セイ/.test(L) ? k(s.kana_family) : /（名）|(名)|^名|めい|メイ/.test(L.replace(/氏名|名前/g, "")) ? k(s.kana_given) : k(`${s.kana_family}　${s.kana_given}`.trim());
   else if (kana) v = null;
   else if (/^姓$|姓\b|（姓）|氏$/.test(L)) v = s.family;
   else if (/^名$|（名）/.test(L)) v = s.given;
