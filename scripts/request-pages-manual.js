@@ -1,6 +1,8 @@
 // 自動で見つけたページが違っていた・見つからなかったときに、手で確かめたページ（2026-11-11 に開いて題を確かめた）。
 // キー：都道府県/市区町村（"@" は都道府県）→ [URL, 題]
 module.exports = {
+  // 2026-11-28 に公式サイトで題を確かめたページ
+  '埼玉県/北本市': ['https://www.city.kitamoto.lg.jp/soshiki/seisakusuisinbu/koushitsu/gyomu/4/1421143279097.html', '市長への手紙・提言'],
   // 2026-11-20 に公式サイトで出し方を読んで確かめたページ
   '福島県/郡山市': ['https://www.city.koriyama.lg.jp/site/minasannokoe/', 'みなさんの声'],
   '三重県/鈴鹿市': ['https://www.city.suzuka.lg.jp/shisei/kohokocho/1006414/1010044.html', '市への意見・質問'],
