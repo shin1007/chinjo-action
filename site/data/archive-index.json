@@ -1202,6 +1202,84 @@
       "fetchedAt": "2026-11-27T15:32:16.613Z",
       "sha256": "090f29137c7004415aefb61f5e3d36b6d4b655992d2b934fbfb602b5eff072ed",
       "localPath": "sources/archive/2026-11-27-090f29137c70.html"
+    },
+    {
+      "url": "https://www.cas.go.jp/jp/seisaku/juten_keikaku/dai5/siryou2.pdf",
+      "title": "内閣官房「孤独・孤立に関連する各種調査について」（資料2）",
+      "note": "11頁 ISSP 2017：悩み事を相談できるような友人が「いない」男性は女性の約3倍",
+      "fetchedAt": "2026-11-27T15:48:48.521Z",
+      "sha256": "fe5ac8bf4b3099b03fe5a1448cfbba84f1922d2dae34f184e0d4b8e251dfbefb",
+      "localPath": "sources/archive/2026-11-27-fe5ac8bf4b30.pdf"
+    },
+    {
+      "url": "https://www.cas.go.jp/jp/seisaku/symbiotic_society/gaikokujin_tochishutoku/kaisai-jokyo/dai5/teigen.pdf",
+      "title": "内閣官房 検討会 提言（令和8年10月）",
+      "note": "①許可制の導入。日本人・日本法人も対象とし得る",
+      "fetchedAt": "2026-11-27T15:48:48.864Z",
+      "sha256": "861d4b82e377ee25888ba97ec30f4429c40269dd699bce336e4b58cd2c4f8403",
+      "localPath": "sources/archive/2026-11-27-861d4b82e377.pdf"
+    },
+    {
+      "url": "https://www.moj.go.jp/isa/content/001435885.pdf",
+      "title": "出入国在留管理庁「令和5年改正入管法の運用状況」",
+      "note": "送還停止効の例外（3回目以降の申請者・3年以上の実刑）",
+      "fetchedAt": "2026-11-27T15:48:49.207Z",
+      "sha256": "1b79e5e5c397f3f4d8d7cf5c0b650038343d297f90911e7e3f848fcfc7ca1666",
+      "localPath": "sources/archive/2026-11-27-1b79e5e5c397.pdf"
+    },
+    {
+      "url": "https://www.mhlw.go.jp/content/10804000/001698313.pdf",
+      "title": "厚労省 歯・口腔の健康づくりプランのベースライン値及び目標値（第17回専門委員会 資料1、令和8年5月8日）",
+      "note": "過去1年間に歯科検診を受診した者 56.0％（令和6年歯科疾患実態調査）→目標95％（令和14年度）",
+      "fetchedAt": "2026-11-27T15:48:49.554Z",
+      "sha256": "d6092400f59f274f94e7ff254db6ba774b96e65e274e0207f86096590e7ec2f8",
+      "localPath": "sources/archive/2026-11-27-d6092400f59f.pdf"
+    },
+    {
+      "url": "https://www.mhlw.go.jp/content/10901000/001664311.pdf",
+      "title": "厚労省 都道府県の肝炎対策に係る計画等（第36回肝炎対策推進協議会 参考資料5、令和8年3月6日）",
+      "note": "都道府県ごとの目標と達成状況。全国の精密検査受診率はない",
+      "fetchedAt": "2026-11-27T15:48:49.925Z",
+      "sha256": "21a50d95501ce1f616ecc0e85291b9f5236c66a496b521898d88a6799a7d0ebb",
+      "localPath": "sources/archive/2026-11-27-21a50d95501c.pdf"
+    },
+    {
+      "url": "https://www.nichibenren.or.jp/library/pdf/document/statistics/2022/4-9.pdf",
+      "title": "日弁連 弁護士白書2022 資料2-3-13 弁護士任官者数（常勤）",
+      "note": "1992〜2022年10月1日の累計127人",
+      "fetchedAt": "2026-11-27T15:48:50.275Z",
+      "sha256": "90f3758cf922d684d9de55772f7b6a408ec7414ea70be435a800d1e167786ece",
+      "localPath": "sources/archive/2026-11-27-90f3758cf922.pdf"
+    },
+    {
+      "url": "https://www.pref.osaka.lg.jp/documents/105336/20251008.pdf",
+      "title": "文科省 私学行政課 事務連絡（令和7年10月8日）改正民法のQ&Aの周知（大阪府の写し）",
+      "note": "学校行事・成績の開示の例",
+      "fetchedAt": "2026-11-27T15:48:50.630Z",
+      "sha256": "bc6ff3d1ba8931aa8649e80077f7e19db5f2ad7e6492909624cc137d8d08e610",
+      "localPath": "sources/archive/2026-11-27-bc6ff3d1ba89.pdf"
+    },
+    {
+      "url": "https://www.mhlw.go.jp/stf/newpage_59190.html",
+      "title": "厚労省「令和6年歯科疾患実態調査」の結果（概要）",
+      "fetchedAt": "2026-11-27T15:48:50.969Z",
+      "sha256": "ad5ebc075aa40f6d2cd97de6478eef25aaadc2b51cdcc4383663ef0ff68cd091",
+      "localPath": "sources/archive/2026-11-27-ad5ebc075aa4.html"
+    },
+    {
+      "url": "https://networkprint.ne.jp/info/price/price_f.html",
+      "title": "ネットワークプリント ファミリーマートのプリント料金",
+      "note": "文書 普通紙 B5/A4/B4 白黒20円・カラー60円",
+      "fetchedAt": "2026-11-27T15:48:51.310Z",
+      "sha256": "d5f070cb91e9aad9bde6671e6cb785214ffe77f35b77cee0fb8e381b941886c4",
+      "localPath": "sources/archive/2026-11-27-d5f070cb91e9.html"
+    },
+    {
+      "url": "https://www1.g-reiki.net/chiba/reiki_honbun/g002RG00001231.html",
+      "title": "千葉市受動喫煙の防止に関する条例（平成30年9月21日条例第36号）",
+      "fetchedAt": "2026-11-27T15:48:51.651Z",
+      "sha256": "2f4aaf670acc9e3bef9802ff8053dec76a6a50b9f6a359e971dc56fd4e54af9a",
+      "localPath": "sources/archive/2026-11-27-2f4aaf670acc.html"
     }
   ]
 }
