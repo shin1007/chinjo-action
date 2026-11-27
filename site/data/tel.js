@@ -413,6 +413,7 @@ window.TEL = {
 "小金井市":["gikai","042-387-9947","https://www.city.koganei.lg.jp/shisei/gikaijimukyoku/teianhoho/seigan_chinzyo.html"],
 "新宿区":["main","03-3209-9999","https://www.city.shinjuku.lg.jp/"],
 "西多摩郡奥多摩町":["gikai","0428-83-2302","https://www.town.okutama.tokyo.jp/gyosei/8/okutamachogikai/1270.html"],
+"利島村":["gikai","04992-9-0012","https://www.toshimamura.org/about/assembly.html"],
 "新島村":["gikai","04992-5-0240","https://www.niijima.com/gikai/shoukai/seigan-nagare.html"],
 "板橋区":["main","03-3964-1111","https://www.city.itabashi.tokyo.jp/"],
 "練馬区":["main","03-3993-1111","https://www.city.nerima.tokyo.jp/"],
