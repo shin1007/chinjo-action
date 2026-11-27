@@ -975,6 +975,146 @@
       "fetchedAt": "2026-11-27T14:24:09.216Z",
       "sha256": "e1ba9ae73a1b0927b4c9e6a04ae898fe53388d533fe5ce3133c166681e519946",
       "localPath": "sources/archive/2026-11-27-e1ba9ae73a1b.pdf"
+    },
+    {
+      "url": "https://doi.org/10.1016/S2468-2667(24)00097-5",
+      "title": "Zuckermann ほか（2024）Lancet Public Health（本文の PDF のページ）",
+      "note": "手で保存。お酒の容器の表示の系統的レビューの本文のページ",
+      "fetchedAt": "2026-11-27T15:00:17.271Z",
+      "sha256": "5dbe437712f7867bd09c401061fd525441e4900f042a77c0f382f18ad0c411dc",
+      "localPath": "sources/archive/2026-11-27-5dbe437712f7.html"
+    },
+    {
+      "url": "https://doi.org/10.1016/j.jadohealth.2018.11.016",
+      "title": "Coyne ほか（2019）Journal of Adolescent Health（要旨）",
+      "note": "手で保存。59研究・394の効果量。本文は購読が要る",
+      "fetchedAt": "2026-11-27T15:00:17.531Z",
+      "sha256": "f10b2d60b384630d766a26e750f411dff2242ea0bcced1b9530a276913335a01",
+      "localPath": "sources/archive/2026-11-27-f10b2d60b384.html"
+    },
+    {
+      "url": "https://doi.org/10.1111/j.1360-0443.2008.02438.x",
+      "title": "Wagenaar ほか（2009）Addiction（要旨）",
+      "note": "手で保存。本文は購読が要る",
+      "fetchedAt": "2026-11-27T15:00:17.774Z",
+      "sha256": "13649ff6d945ea5590f1fd527ff2e6d20491f85af489f531e136dbc829fbc717",
+      "localPath": "sources/archive/2026-11-27-13649ff6d945.html"
+    },
+    {
+      "url": "https://doi.org/10.1111/fare.12083",
+      "title": "Stanley ほか（2014）Family Relations（要旨）",
+      "note": "手で保存。本文は購読が要る",
+      "fetchedAt": "2026-11-27T15:00:18.021Z",
+      "sha256": "9d1d70cb769641cae5f19f1e512bcc2837db9a5e5d929fc008046a5957f9d505",
+      "localPath": "sources/archive/2026-11-27-9d1d70cb7696.html"
+    },
+    {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/23500155/",
+      "title": "Halford & Bodenmann（2013）Clinical Psychology Review（PubMed の要旨）",
+      "note": "手で保存。1年以上追跡した17件のうち14件で満足度の維持に効果。ブースターの記述は要旨にない",
+      "fetchedAt": "2026-11-27T15:00:18.293Z",
+      "sha256": "28cba4bef56436487df0df766ceb073234f8bddaa05fcf3887280ccc9b3b9dc3",
+      "localPath": "sources/archive/2026-11-27-28cba4bef564.html"
+    },
+    {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/32551734/",
+      "title": "Roddy ほか（2020）JCCP 夫婦療法のメタ分析（PubMed の要旨）",
+      "note": "手で保存。58研究・2,092組。セッション数との関係は要旨にない",
+      "fetchedAt": "2026-11-27T15:00:18.544Z",
+      "sha256": "92b380ba8a95d78c756c26ef340b5c964a8fce0e2d5182fb40b59ec431d142a6",
+      "localPath": "sources/archive/2026-11-27-92b380ba8a95.txt"
+    },
+    {
+      "url": "https://www.cafcass.gov.uk/about-cafcass",
+      "title": "Cafcass About us",
+      "note": "手で保存。We represent the interests of children and young people in the family court.",
+      "fetchedAt": "2026-11-27T15:00:18.782Z",
+      "sha256": "e3c96d1961b11353916cda82b3e13135a656dc4342863998f10f79de48e830e3",
+      "localPath": "sources/archive/2026-11-27-e3c96d1961b1.html"
+    },
+    {
+      "url": "https://www.mofa.go.jp/mofaj/gaiko/kiyaku/2c_004.html",
+      "title": "外務省 自由権規約（第6条〜第27条）",
+      "note": "手で保存。第25条・第26条の公定訳を確認",
+      "fetchedAt": "2026-11-27T15:00:19.021Z",
+      "sha256": "4e7df0ce6480fc337dd064de98015732674059fb860ebe2941fa35faf7f5fc3b",
+      "localPath": "sources/archive/2026-11-27-4e7df0ce6480.html"
+    },
+    {
+      "url": "https://www.mofa.go.jp/mofaj/gaiko/kiyaku/2b_004.html",
+      "title": "外務省 社会権規約（第6条〜）",
+      "note": "手で保存",
+      "fetchedAt": "2026-11-27T15:00:19.279Z",
+      "sha256": "6469a7186a0aee440ca5d5cdf7a6f4027001f4e9c34df3be9b7706ae34327827",
+      "localPath": "sources/archive/2026-11-27-6469a7186a0a.html"
+    },
+    {
+      "url": "https://www.europarl.europa.eu/petitions/en/home",
+      "title": "欧州議会 請願のポータル",
+      "note": "手で保存。EU 市民と住民の請願の権利",
+      "fetchedAt": "2026-11-27T15:00:19.521Z",
+      "sha256": "fc7680ba13f10457cecd953420ba434e0240e6502cd50ca993dba7fb32f14e2b",
+      "localPath": "sources/archive/2026-11-27-fc7680ba13f1.html"
+    },
+    {
+      "url": "https://www.city.tahara.aichi.jp/seisaku/kohou/1012016.html",
+      "title": "田原市 これまでの市民の声への回答",
+      "note": "手で保存。令和6・7年度の PDF",
+      "fetchedAt": "2026-11-27T15:00:19.771Z",
+      "sha256": "03062ba65b9692433f038fe33f86b2db7714eb90de6b33237cb09fea9be86df2",
+      "localPath": "sources/archive/2026-11-27-03062ba65b96.html"
+    },
+    {
+      "url": "https://cir.nii.ac.jp/crid/1390303653065685632",
+      "title": "CiNii 桐蔭法学 女子枠の論文の書誌",
+      "note": "手で保存",
+      "fetchedAt": "2026-11-27T15:00:20.011Z",
+      "sha256": "d9001a1f8e71b5adaea6a56438acd0e978ee79518d26c9da264c5cd2f9afe130",
+      "localPath": "sources/archive/2026-11-27-d9001a1f8e71.html"
+    },
+    {
+      "url": "https://liberapay.com/about/faq",
+      "title": "Grok-6 で見つかった公式ページ",
+      "fetchedAt": "2026-11-27T15:00:22.271Z",
+      "sha256": "2125e9f0e88af01712cdb9cc692f4713d7392a8db0f738491f5fa3501d4202c1",
+      "localPath": "sources/archive/2026-11-27-2125e9f0e88a.html"
+    },
+    {
+      "url": "https://www.printing.ne.jp/support/common/pricelist.html",
+      "title": "Grok-6 で見つかった公式ページ",
+      "fetchedAt": "2026-11-27T15:00:22.705Z",
+      "sha256": "b8a27f5006d9e91c40072a2d55e3cdb0566e3298ae89e02bcf065ee720490351",
+      "localPath": "sources/archive/2026-11-27-b8a27f5006d9.html"
+    },
+    {
+      "url": "https://www.gender.go.jp/policy/no_violence/e-vaw/law/pdf/kihon_gaiyou.pdf",
+      "title": "Grok-6 で見つかった公式ページ",
+      "fetchedAt": "2026-11-27T15:00:23.291Z",
+      "sha256": "3470b90538f5e4b4ed3fc3f0a6bc8408f9fe266039989138bacd1f0f02b1ca9c",
+      "localPath": "sources/archive/2026-11-27-3470b90538f5.pdf"
+    },
+    {
+      "url": "https://www.sangiin.go.jp/japanese/joho1/kousei/gian/213/meisai/m213080213047.htm",
+      "title": "参議院 議案情報 民法等の一部を改正する法律案（閣法213-47）",
+      "note": "法務委員会の可決 令和6年5月16日、本会議 5月17日",
+      "fetchedAt": "2026-11-27T15:03:10.232Z",
+      "sha256": "8c4cddd25dcf7e1fde2694c04f931d46e8f1c2d1041c4c5e008ded4af1062f4d",
+      "localPath": "sources/archive/2026-11-27-8c4cddd25dcf.html"
+    },
+    {
+      "url": "https://laws.e-gov.go.jp/api/1/articles;lawId=414AC0000000103;article=19_2",
+      "title": "健康増進法 第19条の2（e-Gov API）",
+      "fetchedAt": "2026-11-27T15:03:12.045Z",
+      "sha256": "5ed0eaf83df827398456df342e170951a25c06693167bee6e56f0f80fe6f9cbe",
+      "localPath": "sources/archive/2026-11-27-5ed0eaf83df8.bin"
+    },
+    {
+      "url": "https://laws.e-gov.go.jp/api/1/lawdata/323AC0000000147",
+      "title": "検察審査会法（e-Gov API）",
+      "note": "第2条第2項（申立てができる人）、第14条（任期）",
+      "fetchedAt": "2026-11-27T15:03:13.686Z",
+      "sha256": "d12e951b5910ddacb81df8ef9eefb2236db38c7becd22a963892e919a7242d45",
+      "localPath": "sources/archive/2026-11-27-d12e951b5910.bin"
     }
   ]
 }
