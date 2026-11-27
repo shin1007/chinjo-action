@@ -1280,6 +1280,60 @@
       "fetchedAt": "2026-11-27T15:48:51.651Z",
       "sha256": "2f4aaf670acc9e3bef9802ff8053dec76a6a50b9f6a359e971dc56fd4e54af9a",
       "localPath": "sources/archive/2026-11-27-2f4aaf670acc.html"
+    },
+    {
+      "url": "https://www.soumu.go.jp/menu_news/kaiken/01koho01_02001591.html",
+      "title": "総務大臣閣議後記者会見（令和8年11月10日）",
+      "note": "DV等支援措置対象者の情報漏えい：2016年度以降の報告は119件",
+      "fetchedAt": "2026-11-27T16:02:12.278Z",
+      "sha256": "25feb9621bd9306d1b98dddb0acb75d9c79988e67e07e4023bc694889c1be248",
+      "localPath": "sources/archive/2026-11-27-25feb9621bd9.html"
+    },
+    {
+      "url": "https://www.soumu.go.jp/main_content/000799137.pdf",
+      "title": "総務省 電気通信事業参入マニュアル（追補版）",
+      "note": "個人・企業のホームページ運営は自己の需要のため。自己の情報発信の手段は電気通信事業に該当しない",
+      "fetchedAt": "2026-11-27T16:02:12.583Z",
+      "sha256": "94d8eabd12ead26cda4e68c9634a5c744d115ddb0a9b5f319e0c0bf23b9c36eb",
+      "localPath": "sources/archive/2026-11-27-94d8eabd12ea.pdf"
+    },
+    {
+      "url": "https://www.nichibenren.or.jp/",
+      "title": "日弁連 弁護士等の業務広告に関する規程（会規第44号、令和7年12月5日改正まで。手で保存、保存元のURLは未確認）",
+      "fetchedAt": "2026-11-27T16:02:12.903Z",
+      "sha256": "a9690b3c0e8d998daeb7e2a1ad866c8e09dc0a8cbafa0d722e2751e48c03125e",
+      "localPath": "sources/archive/2026-11-27-a9690b3c0e8d.pdf"
+    },
+    {
+      "url": "https://www.nta.go.jp/about/organization/ntc/kenkyu/ronsou/100/04/index.htm",
+      "title": "税務大学校論叢100号 山田敏也「シェアリングエコノミーと消費税」",
+      "note": "本文 PDF",
+      "fetchedAt": "2026-11-27T16:02:13.251Z",
+      "sha256": "88692300cdd701ad5a38b83e0f279acbf4f9ffa97ab30d679ffd44660d59d2b3",
+      "localPath": "sources/archive/2026-11-27-88692300cdd7.pdf"
+    },
+    {
+      "url": "https://www.mlit.go.jp/report/press/jidosha10_hh_000311.html",
+      "title": "国交省 報道発表 ヘッドライトのオートレベリングの装備拡大（2024年9月20日）",
+      "note": "過去10年間（2012～2021年）で300件以上",
+      "fetchedAt": "2026-11-27T16:02:13.595Z",
+      "sha256": "2490762f0ef7f557d34c900e8100a7acf0423c5d9554baec20e2dad3447e4f6d",
+      "localPath": "sources/archive/2026-11-27-2490762f0ef7.html"
+    },
+    {
+      "url": "https://www.mext.go.jp/",
+      "title": "文科省 非正規教員の任用状況について（資料3。手で保存、保存元のURLは未確認）",
+      "note": "H17〜H23：非正規教員 8.4万人(12.3%)→11.2万人(16.0%)、うち臨時的任用 約6.2万人(8.8%)",
+      "fetchedAt": "2026-11-27T16:02:13.954Z",
+      "sha256": "d23dffc2d5f203e3844a11eba0da1d83157006f9eb1c9202233a43e63366c678",
+      "localPath": "sources/archive/2026-11-27-d23dffc2d5f2.pdf"
+    },
+    {
+      "url": "https://www.jstage.jst.go.jp/article/jhrm/27/1/27_57/_pdf",
+      "title": "車田・奥井・大内（2026）女性活躍と企業業績に関する分析 日本労務学会誌27(1)",
+      "fetchedAt": "2026-11-27T16:02:14.331Z",
+      "sha256": "c5317b370fa3faaf8f6ca9c546354004c8f2cbdf397bda506accf0f327b7cbfc",
+      "localPath": "sources/archive/2026-11-27-c5317b370fa3.pdf"
     }
   ]
 }
