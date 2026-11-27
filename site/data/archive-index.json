@@ -937,6 +937,44 @@
       "fetchedAt": "2026-11-27T14:17:59.231Z",
       "sha256": "a458b2ef676f8dd856bebc41cac983d388d2ac0f18110a5c3f7858d3d86417b8",
       "localPath": "sources/archive/2026-11-27-a458b2ef676f.html"
+    },
+    {
+      "url": "https://www.moj.go.jp/content/001425821.pdf",
+      "title": "参議院法務委員会「民法等の一部を改正する法律案に対する附帯決議」（法務省掲載・資料４）",
+      "note": "日付の記載なし",
+      "fetchedAt": "2026-11-27T14:24:07.454Z",
+      "sha256": "ffb159d483a8f1484e9c637990297589e8ae5603c3a03b79209caec6b5f518ef",
+      "localPath": "sources/archive/2026-11-27-ffb159d483a8.pdf"
+    },
+    {
+      "url": "https://www.moj.go.jp/content/001442329.pdf",
+      "title": "関係府省庁等連絡会議「Ｑ＆Ａ形式の解説資料（民法編）」（令和7年6月30日取りまとめの版）",
+      "fetchedAt": "2026-11-27T14:24:07.870Z",
+      "sha256": "2cff6925b9e1e7d92aebd27a2dfcab88d1d38f919d6079d8941a80d9f73bb8a5",
+      "localPath": "sources/archive/2026-11-27-2cff6925b9e1.pdf"
+    },
+    {
+      "url": "https://doi.org/10.1126/sciadv.adt1646",
+      "title": "Kaiser et al., Two paradoxes in women's well-being, Sci. Adv. 11, eadt1646 (2025)",
+      "fetchedAt": "2026-11-27T14:24:08.290Z",
+      "sha256": "ac2a11617cddb1a3effe46a3420e605aeb8ebec0256350acf6275d9bcaaacfa2",
+      "localPath": "sources/archive/2026-11-27-ac2a11617cdd.pdf"
+    },
+    {
+      "url": "https://www.paypal.com/jp/legalhub/paypal/acceptableuse-full",
+      "title": "PayPal利用規定ポリシー（日本、印刷用PDF 2026-11-27）",
+      "note": "承認を必要とする行為 2 慈善団体/非営利団体",
+      "fetchedAt": "2026-11-27T14:24:08.771Z",
+      "sha256": "b5d060b8d877020253dea04dab13fd8428cda814420f90ce909540ea89f00cb2",
+      "localPath": "sources/archive/2026-11-27-b5d060b8d877.pdf"
+    },
+    {
+      "url": "https://www.mext.go.jp/content/20260302-mxt_kyoikujinzai01-000047773_1_1.pdf",
+      "title": "文部科学省「令和7年度『教師不足』に関する実態調査」（令和8年3月5日）",
+      "note": "p.10 雇用形態別内訳",
+      "fetchedAt": "2026-11-27T14:24:09.216Z",
+      "sha256": "e1ba9ae73a1b0927b4c9e6a04ae898fe53388d533fe5ce3133c166681e519946",
+      "localPath": "sources/archive/2026-11-27-e1ba9ae73a1b.pdf"
     }
   ]
 }
