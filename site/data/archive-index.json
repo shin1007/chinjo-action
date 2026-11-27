@@ -1122,6 +1122,62 @@
       "fetchedAt": "2026-11-27T15:18:36.813Z",
       "sha256": "7be0b77b6bec7be93df784856530a9119f4ccabb8653656409b4775f9889d662",
       "localPath": "sources/archive/2026-11-27-7be0b77b6bec.html"
+    },
+    {
+      "url": "https://www.courts.go.jp/hanrei/search1/index.html?query=モラハラ",
+      "title": "裁判例検索「モラハラ」の結果（2件）",
+      "note": "家事事件なし",
+      "fetchedAt": "2026-11-27T15:24:54.864Z",
+      "sha256": "ecb5d7b5f5d367bc9e4d65e658ae81368d847cb18a7f62bdf2525025ba96e06f",
+      "localPath": "sources/archive/2026-11-27-ecb5d7b5f5d3.html"
+    },
+    {
+      "url": "https://www.courts.go.jp/hanrei/search1/index.html?query=精神的虐待",
+      "title": "裁判例検索「精神的虐待」の結果（10件）",
+      "note": "離婚は名古屋高裁金沢支部 平成14年2月27日 平成12(ネ)193 など",
+      "fetchedAt": "2026-11-27T15:24:55.217Z",
+      "sha256": "fc2ce92dffa2d84fadc95a4672c64954049bac2726709ddda0f9b3b7b1d9edcd",
+      "localPath": "sources/archive/2026-11-27-fc2ce92dffa2.html"
+    },
+    {
+      "url": "https://www.courts.go.jp/hanrei/3290/detail2/index.html",
+      "title": "名古屋高裁金沢支部 平成14年2月27日 平成12(ネ)193 離婚請求控訴",
+      "note": "暴力及び精神的虐待が婚姻破綻の主な原因。親権者を母に",
+      "fetchedAt": "2026-11-27T15:24:55.556Z",
+      "sha256": "76e5a73581608c15947312d8ff386371793abb68f9094ea41d4f09c0c20a1548",
+      "localPath": "sources/archive/2026-11-27-76e5a7358160.pdf"
+    },
+    {
+      "url": "https://fanbox.pixiv.help/hc/ja/articles/360003726293",
+      "title": "pixivFANBOX 手数料はいくらかかりますか",
+      "note": "R-18なし10%、あり12.9%、銀行振込200円/300円",
+      "fetchedAt": "2026-11-27T15:24:55.919Z",
+      "sha256": "9c1b76a3f9dd6eb77f2ec36543915e56a5d986cf3f9155b527c642900d1fe645",
+      "localPath": "sources/archive/2026-11-27-9c1b76a3f9dd.html"
+    },
+    {
+      "url": "https://www.gender.go.jp/research/kenkyu/pdf/seibetsu_r04/02_seigo.pdf",
+      "title": "内閣府 無意識の思い込み調査 正誤表",
+      "note": "4頁の測定項目の文言1か所の訂正だけ",
+      "fetchedAt": "2026-11-27T15:24:56.288Z",
+      "sha256": "e4f7f32cb9f70ce21bf7ae48a001737d4577268a58d81515f4234cb96ed14e3e",
+      "localPath": "sources/archive/2026-11-27-e4f7f32cb9f7.pdf"
+    },
+    {
+      "url": "https://mond.how/terms-of-service",
+      "title": "mond 利用規約",
+      "note": "第27条 受け取りの手数料は10%",
+      "fetchedAt": "2026-11-27T15:25:04.191Z",
+      "sha256": "6111ba3c13f74ba78da00df88511608b93a2dabbb68900480a20b9823e74a14b",
+      "localPath": "sources/archive/2026-11-27-6111ba3c13f7.html"
+    },
+    {
+      "url": "https://mond.how/commercial-transactions",
+      "title": "mond 特定商取引法に基づく表記",
+      "note": "収納代行の手数料 10%（税込）、株式会社ハウテレビジョン",
+      "fetchedAt": "2026-11-27T15:25:04.480Z",
+      "sha256": "f2eb08e9a8ef9134a3a722bde79da349943da14a0e9b4ce9ef1e9a1ee896790c",
+      "localPath": "sources/archive/2026-11-27-f2eb08e9a8ef.html"
     }
   ]
 }
