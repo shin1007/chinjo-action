@@ -1115,6 +1115,13 @@
       "fetchedAt": "2026-11-27T15:03:13.686Z",
       "sha256": "d12e951b5910ddacb81df8ef9eefb2236db38c7becd22a963892e919a7242d45",
       "localPath": "sources/archive/2026-11-27-d12e951b5910.bin"
+    },
+    {
+      "url": "https://warp.ndl.go.jp/20230423/20230404180946/www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000188147_00013.html",
+      "title": "WARP 厚労省 令和3年度全国ひとり親世帯等調査結果報告のページ（2023-04-23 保存）",
+      "fetchedAt": "2026-11-27T15:18:36.813Z",
+      "sha256": "7be0b77b6bec7be93df784856530a9119f4ccabb8653656409b4775f9889d662",
+      "localPath": "sources/archive/2026-11-27-7be0b77b6bec.html"
     }
   ]
 }
