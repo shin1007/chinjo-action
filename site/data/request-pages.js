@@ -110,6 +110,7 @@ window.REQUEST_PAGES = {
   "愛知県/豊橋市": ["https://www.city.toyohashi.lg.jp/8772.htm","市民のメールボックス・市長への手紙/豊橋市"],
   "長野県/長野市": ["https://www.city.nagano.nagano.jp/n042000/contents/p004814.html","みどりのはがき（市長への手紙）"],
   "東京都/新宿区": ["https://www.city.shinjuku.lg.jp/soshiki/211001kocho_00002.html","区政へのご意見・ご要望について：新宿区"],
+  "埼玉県/北本市": ["https://www.city.kitamoto.lg.jp/soshiki/seisakusuisinbu/koushitsu/gyomu/4/1421143279097.html","市長への手紙・提言"],
   "埼玉県/川越市": ["https://www.city.kawagoe.saitama.jp/shisei/koho/1009774/1010505/1010508/index.html","市長へのご意見"],
   "和歌山県/和歌山市": ["https://www.city.wakayama.wakayama.jp/shisei/koucho_iken/1049772/index.html","市政への提言"],
   "奈良県/奈良市": ["https://www.city.nara.lg.jp/soshiki/7/5517.html","市政へのご提言など（市長への手紙・ご意見箱メール）"],
