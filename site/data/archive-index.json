@@ -728,6 +728,215 @@
       "fetchedAt": "2026-11-12T06:35:16.761Z",
       "sha256": "fbdf9bb0b0897b4376eb427d3071ab1bfb9c99d954b0e1be900d417253615cee",
       "localPath": "sources/archive/2026-11-12-fbdf9bb0b089.json"
+    },
+    {
+      "url": "https://www.moj.go.jp/content/001452582.pdf",
+      "title": "法務省「養育費に関する法務省令の概要」（令和7年12月）",
+      "note": "法定養育費 月額2万円に子の数を乗じた額",
+      "fetchedAt": "2026-11-27T14:17:50.680Z",
+      "sha256": "5da9c06e17d159803fb245ff700f390ca7c098172adde3be6d143b8d2b5c8776",
+      "localPath": "sources/archive/2026-11-27-5da9c06e17d1.pdf"
+    },
+    {
+      "url": "https://www.moj.go.jp/content/001449160.pdf",
+      "title": "法務省民事局「父母の離婚後の子の養育に関するルールが改正されました」（2026年1月改訂）",
+      "note": "法定養育費 子一人当たり月額2万円",
+      "fetchedAt": "2026-11-27T14:17:50.979Z",
+      "sha256": "a8ce329f9c7b46ad0830708c37d1d07fa6b90eec384ff9402b5a91428a4afd3b",
+      "localPath": "sources/archive/2026-11-27-a8ce329f9c7b.pdf"
+    },
+    {
+      "url": "https://www.moj.go.jp/content/001341513.pdf",
+      "title": "法務省・厚生労働省 不払い養育費の確保のための支援に関するタスクフォース「論点整理」（令和2年12月24日）",
+      "note": "表紙",
+      "fetchedAt": "2026-11-27T14:17:51.291Z",
+      "sha256": "1aa04a320fb762270fbdfa0b0286114600a82c4cf3308c1fa05f9a44e5b03e38",
+      "localPath": "sources/archive/2026-11-27-1aa04a320fb7.pdf"
+    },
+    {
+      "url": "https://www.moj.go.jp/content/001462991.pdf",
+      "title": "関係府省庁等連絡会議「Ｑ＆Ａ形式の解説資料（民法編）」（令和8年9月11日改訂）",
+      "note": "Q2-1・Q2-2・Q2-3・Q4-8・Q4-9・Q4-14・Q4-16・Q4-20・Q4-21",
+      "fetchedAt": "2026-11-27T14:17:51.586Z",
+      "sha256": "35cc17f692160d6a64a0fc044cc6a99153d0928b7a60b3568fa3153dbb5f2b74",
+      "localPath": "sources/archive/2026-11-27-35cc17f69216.pdf"
+    },
+    {
+      "url": "https://www.moj.go.jp/content/001462992.pdf",
+      "title": "関係府省庁等連絡会議「Ｑ＆Ａ形式の解説資料（行政手続・支援編）」",
+      "fetchedAt": "2026-11-27T14:17:51.895Z",
+      "sha256": "d8f6549a7a3d64d821fae3ed4beb2f93455bec8ff7f2319c8c13b8b8e72c4247",
+      "localPath": "sources/archive/2026-11-27-d8f6549a7a3d.pdf"
+    },
+    {
+      "url": "https://www.moj.go.jp/content/001374742.pdf",
+      "title": "国立国会図書館 調査と情報 882号「離婚後面会交流及び養育費に係る法制度」（2015年11月17日、法務省掲載）",
+      "note": "フランス 居所変更の通知義務違反 6か月以下の拘禁刑又は7,500ユーロ以下の罰金",
+      "fetchedAt": "2026-11-27T14:17:52.198Z",
+      "sha256": "c6f926f326ffd70551a6d6bc9463bea22fc763d363090ecc031821789fc6bfff",
+      "localPath": "sources/archive/2026-11-27-c6f926f326ff.pdf"
+    },
+    {
+      "url": "https://www.moj.go.jp/content/001346918.pdf",
+      "title": "法務省委託「未成年期に父母の離婚を経験した子の養育に関する実態についての調査・分析業務報告書」（令和3年）",
+      "note": "Q11_1 p.21 相談した9.4% 適切な人がいなかった19.0% n=672",
+      "fetchedAt": "2026-11-27T14:17:52.501Z",
+      "sha256": "3ddd904c9d6b2aee340b57d15a1edf82cd1de0a9b0db86afea3c056d4c189837",
+      "localPath": "sources/archive/2026-11-27-3ddd904c9d6b.pdf"
+    },
+    {
+      "url": "https://www.moj.go.jp/content/001452581.pdf",
+      "title": "法務省令第五十六号（養育費の先取特権・法定養育費）",
+      "fetchedAt": "2026-11-27T14:17:52.806Z",
+      "sha256": "f660b56f8ba6b5358f0e8610baf34f3d888ecbb79e6a51b942c1922e32e39e2e",
+      "localPath": "sources/archive/2026-11-27-f660b56f8ba6.pdf"
+    },
+    {
+      "url": "https://www.moj.go.jp/content/001452583.pdf",
+      "title": "法務省民事局「民法等の一部を改正する法律の概要」（令和7年12月）",
+      "fetchedAt": "2026-11-27T14:17:53.130Z",
+      "sha256": "73c9f56a3c5c2802680122817b3316830a64069502c1bbed42e2ebe843b10d09",
+      "localPath": "sources/archive/2026-11-27-73c9f56a3c5c.pdf"
+    },
+    {
+      "url": "https://www.moj.go.jp/content/001419097.pdf",
+      "title": "民法等の一部を改正する法律（法律）",
+      "fetchedAt": "2026-11-27T14:17:53.426Z",
+      "sha256": "275f3d0fc88cab1230768a1bdd33cc68d01eca40aa8738a5add1d7bea518c6a2",
+      "localPath": "sources/archive/2026-11-27-275f3d0fc88c.pdf"
+    },
+    {
+      "url": "https://www.moj.go.jp/content/001419098.pdf",
+      "title": "民法等の一部を改正する法律案 新旧対照条文",
+      "fetchedAt": "2026-11-27T14:17:53.734Z",
+      "sha256": "a7e93a45ab67b6a8d1a04c5474dd2a982b41ea153b6be93f3e13d68bd86ed96a",
+      "localPath": "sources/archive/2026-11-27-a7e93a45ab67.pdf"
+    },
+    {
+      "url": "https://www.moj.go.jp/isa/publications/press/13_00071.html",
+      "title": "出入国在留管理庁「本邦における不法残留者数について（令和8年7月1日現在）」",
+      "note": "6万5,229人",
+      "fetchedAt": "2026-11-27T14:17:54.033Z",
+      "sha256": "78e5a37263fe0879cf03fae3bbe57c4f847eca26c546e94c21305b19665d0974",
+      "localPath": "sources/archive/2026-11-27-78e5a37263fe.html"
+    },
+    {
+      "url": "https://www.moj.go.jp/isa/publications/press/13_00061.html",
+      "title": "出入国在留管理庁「本邦における不法残留者数について（令和8年1月1日現在）」",
+      "note": "6万8,488人",
+      "fetchedAt": "2026-11-27T14:17:54.343Z",
+      "sha256": "71891fe25760b32bd6af145898e87bd3b12bc103c55e0ad03eb1fd0f59c21f6c",
+      "localPath": "sources/archive/2026-11-27-71891fe25760.html"
+    },
+    {
+      "url": "https://www.moj.go.jp/isa/publications/press/13_00062.html",
+      "title": "出入国在留管理庁「令和7年末現在における在留外国人数について」",
+      "note": "412万5,395人",
+      "fetchedAt": "2026-11-27T14:17:54.634Z",
+      "sha256": "101dbe31d6852ea6d16e2f6d2b73d6c77f7fab6e2d702b68bd8926524a0544a4",
+      "localPath": "sources/archive/2026-11-27-101dbe31d685.html"
+    },
+    {
+      "url": "https://www.moj.go.jp/isa/content/001425159.pdf",
+      "title": "出入国在留管理庁「技能実習生の失踪者数の推移」",
+      "note": "令和5年9,753人 令和7年3,950人",
+      "fetchedAt": "2026-11-27T14:17:54.934Z",
+      "sha256": "b2b41f33511c26bf436d9478d020b09bc03d00c4dab6656333293276880eda51",
+      "localPath": "sources/archive/2026-11-27-b2b41f33511c.pdf"
+    },
+    {
+      "url": "https://www.moj.go.jp/isa/content/930004165.pdf",
+      "title": "法務省 技能実習制度の運用に関するプロジェクトチーム「調査・検討結果報告書」（平成31年3月28日）",
+      "note": "5,218人 うち721人（631機関）p.13",
+      "fetchedAt": "2026-11-27T14:17:55.267Z",
+      "sha256": "5ee3a6d17ad0e1c7325c51a7e591dea3e54507eaa25e926ea4380e0eff368266",
+      "localPath": "sources/archive/2026-11-27-5ee3a6d17ad0.pdf"
+    },
+    {
+      "url": "https://www.moj.go.jp/isa/01_00643.html",
+      "title": "出入国在留管理庁「令和8年入管法等改正法について」",
+      "note": "JESTA 令和11年3月31日までの政令で定める日",
+      "fetchedAt": "2026-11-27T14:17:55.554Z",
+      "sha256": "032accfbeeeee4e41dcfebfc4e4fa3e65b4b8f41a9309e847862599568012589",
+      "localPath": "sources/archive/2026-11-27-032accfbeeee.html"
+    },
+    {
+      "url": "https://www.moj.go.jp/MINJI/minji07_00377.html",
+      "title": "法務省「Ｑ＆Ａ形式の解説資料（民法編）」のページ",
+      "note": "令和8年9月11日最新改訂",
+      "fetchedAt": "2026-11-27T14:17:55.865Z",
+      "sha256": "27099709b5ecace08828c0704d252157382772324141ac4480681c11157b08f0",
+      "localPath": "sources/archive/2026-11-27-27099709b5ec.html"
+    },
+    {
+      "url": "https://www.moj.go.jp/MINJI/minji07_00357.html",
+      "title": "法務省「民法等の一部を改正する法律（父母の離婚後等の子の養育に関する見直し）について」",
+      "fetchedAt": "2026-11-27T14:17:56.164Z",
+      "sha256": "39a1e46df59c4d2e901505b663fc61bdc80516a0578ab1b308c7ffe2c48c4a0f",
+      "localPath": "sources/archive/2026-11-27-39a1e46df59c.html"
+    },
+    {
+      "url": "https://www.pref.chiba.lg.jp/senkan/seijidantai/documents/seijidantainotebiki.pdf",
+      "title": "千葉県選挙管理委員会「政治団体の手引」（令和7年12月改訂）",
+      "fetchedAt": "2026-11-27T14:17:56.463Z",
+      "sha256": "69cbb0ac7c1883be4581e07d7f327934b3bfa91df27211ee5c8f50e7b5b12389",
+      "localPath": "sources/archive/2026-11-27-69cbb0ac7c18.pdf"
+    },
+    {
+      "url": "https://www.paypal.com/jp/legalhub/paypal/acceptableuse-full",
+      "title": "PayPal利用規定ポリシー（日本）",
+      "fetchedAt": "2026-11-27T14:17:56.753Z",
+      "sha256": "1b2c03880788e3ee23219966b35acce28f520f682ab98c1c5827e7be3e612690",
+      "localPath": "sources/archive/2026-11-27-1b2c03880788.html"
+    },
+    {
+      "url": "https://www.paypal.com/jp/legalhub/paypal/useragreement-full",
+      "title": "PayPalユーザー規約（日本）",
+      "fetchedAt": "2026-11-27T14:17:57.066Z",
+      "sha256": "101a9aa83a3f9fb237146cadb1dd7133991362d6bf021d95c08e8b2edb9a1771",
+      "localPath": "sources/archive/2026-11-27-101a9aa83a3f.html"
+    },
+    {
+      "url": "https://ofuse.me/terms",
+      "title": "OFUSE 利用規約",
+      "fetchedAt": "2026-11-27T14:17:57.590Z",
+      "sha256": "cd3afec9925a13892985f6c938f9de1b5a4d4e921f63ed51242f867abc0eef5c",
+      "localPath": "sources/archive/2026-11-27-cd3afec9925a.html"
+    },
+    {
+      "url": "https://help.ko-fi.com/hc/en-us/articles/11191462776477-Policies-FAQ",
+      "title": "Ko-fi Help: Policies FAQ",
+      "fetchedAt": "2026-11-27T14:17:58.008Z",
+      "sha256": "ab03385f5a4d10b7a55709d6f227df6b2621b77723ac6deb46b5f8b3867b390a",
+      "localPath": "sources/archive/2026-11-27-ab03385f5a4d.html"
+    },
+    {
+      "url": "https://help.ko-fi.com/hc/en-us/articles/360007937553-Ko-fi-Content-Guidelines",
+      "title": "Ko-fi Content Guidelines",
+      "fetchedAt": "2026-11-27T14:17:58.320Z",
+      "sha256": "daa009ae343c12703b32e2a54d5bfe1aa818dcbee000e9298c0ac72b709627ac",
+      "localPath": "sources/archive/2026-11-27-daa009ae343c.html"
+    },
+    {
+      "url": "https://help.ko-fi.com/hc/en-us/articles/10792069957661-How-tax-works-on-Ko-fi",
+      "title": "Ko-fi Help: How tax works on Ko-fi",
+      "fetchedAt": "2026-11-27T14:17:58.600Z",
+      "sha256": "bd86008da3cac23e7ad163062c76a4b164742e1da8b966777ee7a2f8c026b70c",
+      "localPath": "sources/archive/2026-11-27-bd86008da3ca.html"
+    },
+    {
+      "url": "https://help.ko-fi.com/hc/en-us/articles/115003980093-How-do-I-get-paid",
+      "title": "Ko-fi Help: How do I get paid?",
+      "fetchedAt": "2026-11-27T14:17:58.908Z",
+      "sha256": "5fa4b99fb1e7cd9a5916802fd08d645144d19572034a87a32f75f60ffd318a68",
+      "localPath": "sources/archive/2026-11-27-5fa4b99fb1e7.html"
+    },
+    {
+      "url": "https://docs.github.com/ja/sponsors/getting-started-with-github-sponsors/about-github-sponsors",
+      "title": "GitHub Docs「GitHub スポンサーについて」",
+      "fetchedAt": "2026-11-27T14:17:59.231Z",
+      "sha256": "a458b2ef676f8dd856bebc41cac983d388d2ac0f18110a5c3f7858d3d86417b8",
+      "localPath": "sources/archive/2026-11-27-a458b2ef676f.html"
     }
   ]
 }
