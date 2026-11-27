@@ -1178,6 +1178,30 @@
       "fetchedAt": "2026-11-27T15:25:04.480Z",
       "sha256": "f2eb08e9a8ef9134a3a722bde79da349943da14a0e9b4ce9ef1e9a1ee896790c",
       "localPath": "sources/archive/2026-11-27-f2eb08e9a8ef.html"
+    },
+    {
+      "url": "https://terms.help-note.com/hc/ja/articles/44943817565465",
+      "title": "note ご利用規約",
+      "note": "チップは販売価格に足す形。プラットフォーム利用料は事務手数料を引いた額の10%",
+      "fetchedAt": "2026-11-27T15:32:15.846Z",
+      "sha256": "012c4d97aab8f240f814eb5222771f5e4ad7d50081d685ca4bd96fe9f44d4120",
+      "localPath": "sources/archive/2026-11-27-012c4d97aab8.html"
+    },
+    {
+      "url": "https://policies.pixiv.net/",
+      "title": "ピクシブ 規約の一覧（サービス共通利用規約・BOOTH個別規約・FANBOX）",
+      "note": "BOOTH個別規約はサービス共通利用規約に紐づく。サービス利用料はヘルプに定める",
+      "fetchedAt": "2026-11-27T15:32:16.379Z",
+      "sha256": "2099c27c79faafa13aa12e06ab3869369dea0d50a6bc7e0dc72fce44207072d9",
+      "localPath": "sources/archive/2026-11-27-2099c27c79fa.html"
+    },
+    {
+      "url": "https://fanbox.pixiv.help/hc/ja/articles/13239721816217",
+      "title": "pixivFANBOXガイドライン",
+      "note": "過度な政治活動を表現しているもの",
+      "fetchedAt": "2026-11-27T15:32:16.613Z",
+      "sha256": "090f29137c7004415aefb61f5e3d36b6d4b655992d2b934fbfb602b5eff072ed",
+      "localPath": "sources/archive/2026-11-27-090f29137c70.html"
     }
   ]
 }
