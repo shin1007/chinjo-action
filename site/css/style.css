@@ -882,3 +882,7 @@ summary { cursor: pointer; font-weight: 700; }
 .wz-field-list { list-style: none; padding: 0; margin: 6px 0; display: flex; flex-wrap: wrap; gap: 6px 12px; }
 
 .img-480 { max-width: min(100%, 480px); height: auto; }
+/* /trouble の項目：見出しだけ見せ、押すとくわしい説明が開く */
+details.tr-more { background: none; border: 0; padding: 0; margin: 0 0 .3em; max-width: none; }
+details.tr-more > summary { cursor: pointer; }
+details.tr-more > p { margin: .4em 0 .6em; }

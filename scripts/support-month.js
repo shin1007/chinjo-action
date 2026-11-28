@@ -6,6 +6,7 @@
 //   node scripts/support-month.js                     為替レートを見直す。Webhook の記録（Supabase の support_month_totals）があれば、単発の応援の合計もそこから取る
 //   node scripts/support-month.js --extra-usd 10      Webhook で数えられない毎月の応援などを足す（support.json の extraJpy）
 //   毎月6日に GitHub Actions（.github/workflows/support-month.yml）が自動で動かして main に入れる
+//   node scripts/support-month.js --figure            support.json はそのままで、/trouble の図だけを書き直す
 //   node scripts/support-month.js --check             /trouble の図が support.json と合っているかだけを見る（npm test から使う）
 //
 // やること：
@@ -49,7 +50,7 @@ function costHtml(data) {
   const label = `目標の${yen(goal)}のうち、自費が約${yen(self)}（${Math.round(wS)}%）、カンパが${yen(kanpa)}、足りない分が約${yen(short)}`;
   return [
     '<figure id="support-cost" class="cost-chart">',
-    `    <figcaption><b>1か月の運営費</b>：いまは ${c.plan}（約${yen(planYen)}）。目標は ${yen(goal)}（Claude Max の約${yen(c.maxUsd * c.rate)}に、応援の手数料（約8%）・為替の動き・サイトの公開や X などの利用料の分を足した額）</figcaption>`,
+    `    <figcaption><b>1か月の運営費</b>：目標 ${yen(goal)}（いまは ${c.plan} の約${yen(planYen)}を運営者が自費で払っています）</figcaption>`,
     `    <svg class="cost-svg" viewBox="0 0 100 10" preserveAspectRatio="none" role="img" aria-label="${label}">`,
     `      <rect class="cost-kanpa" x="0" y="0" width="${wK}" height="10"/>`,
     `      <rect class="cost-self-rect" x="${wK}" y="0" width="${wS}" height="10"/>`,
@@ -61,7 +62,8 @@ function costHtml(data) {
     `      <li><span class="cost-key cost-key-kanpa"></span>カンパ：${yen(kanpa)}</li>`,
     `      <li><span class="cost-key cost-key-short"></span>足りない分：約${yen(short)}</li>`,
     '    </ul>',
-    `    <p class="small">月払い・税別の <a href="https://claude.com/pricing" target="_blank" rel="noopener">Pro ${c.planUsd}ドル・Max ${c.maxUsd}ドル</a>を、月初（${y}年${m}月${d}日）の<a href="${c.rateUrl}" target="_blank" rel="noopener">三菱UFJ銀行の仲値</a> 1ドル＝${c.rate.toFixed(2)}円で換算。カンパは${data.month ? `${data.month.replace('-', '年')}月の` : ''}応援の合計（手数料を引く前）。料金はドル建てなので、毎月はじめに換算し直し、必要なら目標の金額を見直します。</p>`,
+    '    <p id="support-progress" class="small" hidden></p>',
+    `    <details class="tr-more"><summary>金額の出し方</summary><p class="small">目標は Claude Max（約${yen(c.maxUsd * c.rate)}）に、応援の手数料（約8%）・為替の動き・サイトの公開や X などの利用料を足した額です。論文の購入の費用は含めていません。月払い・税別の <a href="https://claude.com/pricing" target="_blank" rel="noopener">Pro ${c.planUsd}ドル・Max ${c.maxUsd}ドル</a>を、月初（${y}年${m}月${d}日）の<a href="${c.rateUrl}" target="_blank" rel="noopener">三菱UFJ銀行の仲値</a> 1ドル＝${c.rate.toFixed(2)}円で換算。カンパは${data.month ? `${data.month.replace('-', '年')}月の` : ''}応援の合計（手数料を引く前）。毎月はじめに換算し直し、必要なら目標を見直します。</p></details>`,
     '  </figure>',
   ].join('\n');
 }
@@ -108,6 +110,7 @@ async function main() {
     if (now !== html) { console.error('/trouble の図が support.json と合っていない。node scripts/support-month.js を動かす'); process.exit(1); }
     return;
   }
+  if (process.argv.includes('--figure')) { fs.writeFileSync(TROUBLE, replaceFigure(html, costHtml(data))); return; }
   const today = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
   const month = arg('month') || today.slice(0, 7);
   if (!/^\d{4}-\d{2}$/.test(month)) throw new Error('--month は 2026-12 の形で');
