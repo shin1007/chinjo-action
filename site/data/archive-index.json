@@ -1478,6 +1478,14 @@
       "fetchedAt": "2026-11-28T00:18:43.683Z",
       "sha256": "4e7ac677dc91bcb94e1f000537fe573cd26dd116da6b55269efcf266311d832e",
       "localPath": "sources/archive/2026-11-28-4e7ac677dc91.html"
+    },
+    {
+      "url": "https://www.keisan.nta.go.jp/r1yokuaru/cat2/cat24/cat244/cid043.html",
+      "title": "国税庁 確定申告書等作成コーナー よくある質問「労務の無償提供や事務所の無償提供」（令和元年分）",
+      "note": "政治活動に関する寄附のうち労務・事務所の無償提供は寄附金控除の対象にならない",
+      "fetchedAt": "2026-11-28T00:22:50.935Z",
+      "sha256": "435a16473971f244f6ab902acc1f27ec00cfe15f5c461ccf235e642c2cebc615",
+      "localPath": "sources/archive/2026-11-28-435a16473971.html"
     }
   ]
 }
