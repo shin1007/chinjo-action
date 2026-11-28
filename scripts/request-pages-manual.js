@@ -1,6 +1,27 @@
 // 自動で見つけたページが違っていた・見つからなかったときに、手で確かめたページ（2026-11-11 に開いて題を確かめた）。
 // キー：都道府県/市区町村（"@" は都道府県）→ [URL, 題]
 module.exports = {
+  // 2026-11-28 に WebSearch で見つけ、公式ページの本文で出し方を確かめたページ
+  '石川県/金沢市': ['https://www4.city.kanazawa.lg.jp/soshikikarasagasu/shiminkyodosuishinka/yokuarushitsumon/2755.html', '市政に対して意見を言いたいのですが、どうしたらよいのですか。'],
+  '大阪府/茨木市': ['https://www.city.ibaraki.osaka.jp/kikou/sangyo/shiminseikatsu/menu/shiminsodankakari/ideashukei/koremadeniitadaitaaidea/R7_idea/67000.html', '市政へのアイデアと市の考え方'],
+  '東京都/日野市': ['https://www.city.hino.lg.jp/shisei/kocho/hitokoto/index.html', '市政にひとこと'],
+  '千葉県/習志野市': ['https://www.city.narashino.lg.jp/joho/mayor/18240.html', '市政に対するご意見・ご提案（市長へのメール・市長への手紙）'],
+  '富山県/高岡市': ['https://www.city.takaoka.toyama.jp/yokuarushitsumon/gyosei/2/5780.html', '市政に対して意見、苦情がある場合はどうすればよいですか。'],
+  '埼玉県/朝霞市': ['https://www.city.asaka.lg.jp/soshiki/5/sihenoiken-yobo.html', '市への意見・要望'],
+  '鳥取県/米子市': ['https://www.city.yonago.lg.jp/6784.htm', '市長にひとこと'],
+  '埼玉県/入間市': ['https://www.city.iruma.saitama.jp/soshiki/kikakukamiraikyososeisakusuisinsitsu/mayor/33/1194.html', '市政へのアイディア'],
+  '栃木県/足利市': ['https://www.city.ashikaga.tochigi.jp/goverment/000077/000430/index.html', 'ご意見お聞かせください'],
+  '三重県/桑名市': ['https://www.city.kuwana.lg.jp/hisyokoho/shiseijouhou/kouchoukouhou/25-15381-210-646.html', 'あなたの声'],
+  '静岡県/富士宮市': ['https://www.city.fujinomiya.lg.jp/municipal_government/llti2b000000271s.html', '市長への手紙'],
+  '宮城県/大崎市': ['https://www.city.osaki.miyagi.jp/shisei/soshikikarasagasu/somubu/hishokohoka/15/sityouhenotegami/13357.html', '市長への手紙について'],
+  '熊本県/八代市': ['https://www.city.yatsushiro.lg.jp/shicho/list00406.html', '市長・教育長への手紙'],
+  '大阪府/松原市': ['https://www.city.matsubara.lg.jp/docs/page4364.html', '広聴（要望書の受付）'],
+  '愛知県/半田市': ['https://www.city.handa.lg.jp/shisei/kocho/1010902.html', '市政への声ひろば'],
+  '山形県/鶴岡市': ['https://www.city.tsuruoka.lg.jp/shisei/koutyou/ikenteian/soumugoikengoteigen.html', '皆さんのご意見・ご提言をお聞かせください'],
+  '埼玉県/富士見市': ['https://www.city.fujimi.saitama.jp/05mayor/12letter/index.html', '市長へ手紙を出そう'],
+  '福島県/会津若松市': ['https://www.city.aizuwakamatsu.fukushima.jp/docs/2017122700013/', '市長への手紙'],
+  '群馬県/桐生市': ['https://www.city.kiryu.lg.jp/shisei/koho/toiawase/1003375.html', '投書箱（市民の「声」）のご案内'],
+  '長野県/安曇野市': ['https://www.city.azumino.nagano.jp/soshiki/7/75045.html', '市民の声'],
   // 2026-11-28 に公式サイトで題を確かめたページ
   '埼玉県/北本市': ['https://www.city.kitamoto.lg.jp/soshiki/seisakusuisinbu/koushitsu/gyomu/4/1421143279097.html', '市長への手紙・提言'],
   // 2026-11-20 に公式サイトで出し方を読んで確かめたページ
