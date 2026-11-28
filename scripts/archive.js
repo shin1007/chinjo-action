@@ -55,7 +55,25 @@ if (!url || !title) {
   index.pages.push({ url, title, ...(note ? { note } : {}), fetchedAt, sha256, localPath });
   fs.writeFileSync(INDEX_FILE, `${JSON.stringify(index, null, 2)}\n`);
   console.log(`${title} を ${localPath} に保存しました（SHA-256 ${sha256}）`);
+  showOpenLines(url, title);
 })().catch((error) => {
   console.error(`保存できませんでした：${error.message}`);
   process.exitCode = 1;
 });
+
+// 保存した資料の URL か題名の言葉が出てくる「未確認」の行を docs/ から探して見せる（直し漏れを防ぐ）。
+function showOpenLines(url, title) {
+  const docs = path.join(__dirname, '..', 'docs');
+  const words = [url.replace(/^https?:\/\//, '').replace(/\/$/, ''), ...(title.match(/[^\s「」『』（）()・、。]{4,}/g) || [])];
+  const walk = (d) => fs.readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.name === '非公開' ? []
+    : e.isDirectory() ? walk(path.join(d, e.name)) : e.name.endsWith('.md') ? [path.join(d, e.name)] : []));
+  const hits = [];
+  for (const f of walk(docs)) {
+    fs.readFileSync(f, 'utf8').split(/\r?\n/).forEach((l, i) => {
+      if ((l.includes('未確認') || /\[U-\d{3}\]/.test(l)) && words.some((w) => l.includes(w))) {
+        hits.push(`  ${path.relative(docs, f)}:${i + 1}  ${l.slice(0, 80)}`);
+      }
+    });
+  }
+  if (hits.length) console.log(`確かめたら直す行（docs/ の未確認）：\n${hits.slice(0, 20).join('\n')}`);
+}
