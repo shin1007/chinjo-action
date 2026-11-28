@@ -1,5 +1,5 @@
 {
-  "_memo": "応援の集まり具合と応援者の表示。手で更新する（各サービスの管理画面で金額を確かめて書き写す）。collected はその月の応援の合計（円）、stages は段階ごとの目標（goal はその月の合計がいくらに届けば達成か。前の段階より大きくする。goal が全部入り collected が入るまで、集まり具合は出さない）。supporters は掲載を希望された方の表示名（順位ではなく登録順。金額は持たない）。methods が空の間は「準備中」と表示する。Buy Me a Coffee（https://buymeacoffee.com/shin1007）は 2026-11-28 に公開を確かめて methods に入れた。 目標は 2026-11-28 に運営者が決めた（Pro 3,200円・Max と運営の費用 20,000円（2026-11-28 に16,000円から上げた。手数料約8%・為替・X や Vercel の利用料の分を含む））。料金はドル建てなので、毎月はじめに月初の仲値で換算し直し、足りなければ goal を上げる（trouble.html の図も合わせる）。",
+  "_memo": "応援の集まり具合と応援者の表示。手で更新する（各サービスの管理画面で金額を確かめて書き写す）。collected はその月の応援の合計（円）、stages は段階ごとの目標（goal はその月の合計がいくらに届けば達成か。前の段階より大きくする。goal が全部入り collected が入るまで、集まり具合は出さない）。supporters は掲載を希望された方の表示名（順位ではなく登録順。金額は持たない）。methods が空の間は「準備中」と表示する。Buy Me a Coffee（https://buymeacoffee.com/shin1007）は 2026-11-28 に公開を確かめて methods に入れた。 目標は 2026-11-28 に運営者が決めた（Pro 3,200円・Max と運営の費用 20,000円（2026-11-28 に16,000円から上げた。手数料約8%・為替・X や Vercel の利用料の分を含む））。料金はドル建てなので、毎月はじめに月初の仲値で換算し直し、足りなければ goal を上げる（trouble.html の図も合わせる）。 毎月の更新は node scripts/support-month.js --usd <その月の合計ドル>（cost・collected・/trouble の図・収入の記録をまとめて直す）。cost.plan はいま払っているプラン（Max に上げたら plan と planUsd を直す）。",
   "updated": "2026-11-28",
   "month": "2026-11",
   "collected": 0,
@@ -22,5 +22,13 @@
       "note": "運営費（生成AIの利用料、根拠を原文で確かめるための有料の論文の購入、サイトの公開やXなどのサービスの利用料）に充てます。金額はドル建てで、カード会社の換算で円で請求されます。見返りはありません。"
     }
   ],
-  "supporters": []
+  "supporters": [],
+  "cost": {
+    "plan": "Claude Pro",
+    "planUsd": 20,
+    "maxUsd": 100,
+    "rate": 157.8,
+    "rateDate": "2026-11-02",
+    "rateUrl": "https://www.murc-kawasesouba.jp/fx/past/index.php?id=261102"
+  }
 }

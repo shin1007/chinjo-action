@@ -71,3 +71,10 @@ test('応援者の欄には表示名だけを持ち、金額は持たない', ()
     assert.ok(r.name.length <= 20);
   }
 });
+
+test('/trouble の運営費の図が support.json と合っている（node scripts/support-month.js が書く）', () => {
+  const { costHtml, replaceFigure } = require('../scripts/support-month.js');
+  const file = path.join(__dirname, '..', 'site/trouble.html');
+  const html = fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n');
+  assert.strictEqual(replaceFigure(html, costHtml(data)), html, 'node scripts/support-month.js を動かして図を作り直す');
+});
