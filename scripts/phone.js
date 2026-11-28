@@ -79,7 +79,7 @@ const L=${JSON.stringify(list)},C=${JSON.stringify(CONDITIONS)};
 const M=[['hand','持参'],['mail','郵送'],['email','メール'],['form','電子申請・フォーム'],['fax','FAX']];
 const V=[['unknown','聞いていない'],['review','受け付けて審査'],['distribute','受け付けるが配付・回覧だけ'],['accept','受け付ける（扱いは未確認）'],['no','受け付けない']];
 const T=[['unknown','聞いていない'],['yes','はい'],['no','いいえ']];
-const E=[['','—'],['same','住民と同じ'],['distribute','配付・回覧だけ'],['may_distribute','議長などの判断で審査しないことがある'],['as_request','要望書として扱う'],['no','出せない']];
+const E=[['','—'],['same','住民と同じ'],['distribute','配付・回覧だけ'],['may_distribute','議長などの判断で審査しないことがある'],['as_request','要望書として扱う'],['not_reviewed','審査しない（配付するかは書いていない）'],['no','出せない']];
 const sel=(n,o,v)=>'<select name="'+n+'">'+o.map(([k,t])=>'<option value="'+k+'"'+(k===v?' selected':'')+'>'+t+'</option>').join('')+'</select>';
 function draw(){const q=document.getElementById('q').value,h=document.getElementById('hide').checked,p=document.getElementById('phoneOnly').checked;
  document.getElementById('items').innerHTML=L.map((x,i)=>(q&&!(x.pref+x.to).includes(q))||(h&&x.done)||(p&&x.asked)?'':'<div data-i="'+i+'" class="'+(x.done?'done':'')+'">'+(i+1)+'. '+x.pref+' '+x.to+'　<small>'+x.pop.toLocaleString()+'人</small></div>').join('');}

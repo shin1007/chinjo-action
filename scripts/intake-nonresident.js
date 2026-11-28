@@ -1,7 +1,7 @@
 // 住民以外（自治体の外に住む人）の陳情の扱いを、案内ページの原文で確かめて chinjo.jsonl に書き込む。
 //   node scripts/intake-nonresident.js <spec.jsonl>
 // spec の1行：{"id","url","quote","checked_at","who","methods":["mail"]|["all"],"effect","unless","set":{"mail":"distribute",...},"note"}
-//   effect：distribute 審査せず配付・回覧だけ／may_distribute 議長などの判断で審査しないことがある／as_request 要望書として扱う／no 受け付けない
+//   effect：distribute 審査せず配付・回覧だけ／not_reviewed 審査しない（配付するかは書いていない）／may_distribute 議長などの判断で審査しないことがある／as_request 要望書として扱う／no 受け付けない
 //   set：methods.<出し方>.nonresident に入れる値（はっきり書いてあるときだけ）
 const fs = require('fs');
 const path = require('path');
