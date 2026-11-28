@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // 議会事務局に電話で聞いた答えを入力する画面。
-//   node scripts/phone.js        → http://localhost:8787 をブラウザで開く
+//   node scripts/phone.js        → http://localhost:8787 を起動して、ブラウザで自動で開く（--no-open で開かない）
 // 一覧は docs/調査/電話で聞く議会.md（人口順・電話番号）。保存すると site/data/intake/chinjo.jsonl の行を直し、
 // 根拠に route: "office_reply" を足す。メモの原文は docs/非公開/電話の記録.jsonl（Git に入れない）に残す。
 // 保存のあとは node scripts/intake.js check と export を流す（画面の「保存」でも自動で流す）。
@@ -144,7 +144,7 @@ function save(o) {
   fs.appendFileSync(LOG, JSON.stringify({ at: new Date().toISOString(), ...o }) + '\n');
 }
 
-http.createServer((req, res) => {
+const server = http.createServer((req, res) => {
   const u = new URL(req.url, 'http://x');
   const send = (code, type, body) => { res.writeHead(code, { 'content-type': type + '; charset=utf-8' }); res.end(body); };
   if (u.pathname === '/') return send(200, 'text/html', page());
@@ -158,4 +158,17 @@ http.createServer((req, res) => {
     return;
   }
   send(404, 'text/plain', 'not found');
-}).listen(PORT, '127.0.0.1', () => console.log(`http://localhost:${PORT} を開いてください（止めるときは Ctrl+C）`));
+});
+// 起動したらブラウザで開く（--no-open で開かない）。すでに動いていたら、開くだけにする
+const URL_ = `http://localhost:${PORT}`;
+const openBrowser = () => {
+  if (process.argv.includes('--no-open')) return;
+  const cmd = process.platform === 'win32' ? ['cmd', ['/c', 'start', '', URL_]] : [process.platform === 'darwin' ? 'open' : 'xdg-open', [URL_]];
+  require('child_process').spawn(cmd[0], cmd[1], { stdio: 'ignore', detached: true }).unref();
+};
+server.on('error', (e) => {
+  if (e.code !== 'EADDRINUSE') throw e;
+  console.log(`${URL_} はもう動いています。ブラウザで開きます`);
+  openBrowser();
+});
+server.listen(PORT, '127.0.0.1', () => { console.log(`${URL_} を開きました（止めるときは Ctrl+C）`); openBrowser(); });

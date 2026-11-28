@@ -10,6 +10,10 @@ while ($true) {
   Write-Host ''
   node scripts/unei.js next
   Write-Host ''
+  Write-Host ' t  電話で聞く画面（議会の一覧・番号・台本・入力。ブラウザが開きます）'
+  Write-Host ' o  毎朝見る画面をまとめて開く（Issues・Gmail・Vercel・BMC）'
+  Write-Host ' p  運営者のTODO とダッシュボードを VS Code で開く'
+  Write-Host ''
   Write-Host ' 1  チームみらいに今週の項目を出す（ブラウザが開きます）'
   Write-Host ' 2  チームみらいに出す文面を見るだけ'
   Write-Host ' 3  議会・自治体の今の回の一覧（フォームの直リンク）'
@@ -46,8 +50,23 @@ while ($true) {
       $to = Read-Host '送り先（空のまま Enter で次の送り先）'
       if ($to) { node scripts/unei-form.js --copy $to } else { node scripts/unei-form.js --copy }
     }
+    't' {
+      # 別の窓で動かす（メニューはそのまま使える）。すでに動いていればブラウザで開くだけ
+      Start-Process powershell -ArgumentList '-NoExit', '-Command', "Set-Location '$PWD'; node scripts/phone.js" -WindowStyle Minimized
+      continue
+    }
+    'o' {
+      @(
+        'https://github.com/shin1007/chinjo-action/issues?q=is%3Aopen+label%3A%E9%81%8B%E5%96%B6%E8%80%85%E3%81%AE%E4%BD%9C%E6%A5%AD',
+        'https://mail.google.com/mail/u/0/#inbox',
+        'https://vercel.com/shin1007s-projects/chinjo-action/analytics',
+        'https://buymeacoffee.com/dashboard'
+      ) | ForEach-Object { Start-Process $_ }
+      continue
+    }
+    'p' { code 'docs/非公開/運営者のTODO.md' 'docs/非公開/運営のダッシュボード.md'; continue }
     '0' { exit }
-    default { Write-Host '1〜9 か 0 を入れてください。' }
+    default { Write-Host 'メニューの番号か文字を入れてください。' }
   }
   Write-Host ''
   Read-Host 'Enter でメニューに戻ります' | Out-Null
