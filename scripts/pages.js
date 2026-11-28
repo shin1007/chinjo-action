@@ -73,9 +73,12 @@ function withParts(html, themeId, page) {
     // 本文へ移動（キーボード・読み上げで使う人が、毎回ヘッダーを通らずに済むように。Tab を押したときだけ見える）
     .replace(/(<body[^>]*>)\n(?:<a class="skip-link"[^\n]*\n)?/, (_, body) => `${body}\n${SKIP}\n`)
     .replace(/<main(?! id="main")([^>]*)>/, '<main id="main"$1>')
+    // 閲覧数（Vercel Web Analytics。Cookie を使わず、同じドメインから読む。/privacy に書いている）
+    .replace(/(?:<script defer src="\/_vercel\/insights\/script\.js"><\/script>\n)?<\/body>/, () => `${ANALYTICS}\n</body>`)
     // スマホのブラウザの上の帯の色を、ヘッダーと同じ色にする（明るい表示・暗い表示）
     .replace(/(<meta name="viewport"[^>]*>)\n(?:<meta name="theme-color"[^\n]*\n)*/, (_, vp) => `${vp}\n${THEME_COLOR}\n`);
 }
+const ANALYTICS = '<script defer src="/_vercel/insights/script.js"></script>';
 const SKIP = '<a class="skip-link" href="#main">本文へ移動</a>';
 const THEME_COLOR = [
   '<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">',
