@@ -64,7 +64,7 @@ function payload(e) {
     if (IMG.test(f)) blocks.push({ type: 'image', image_url: url, alt_text: path.basename(f) });
     else blocks.push({ type: 'section', text: { type: 'mrkdwn', text: `${VID.test(f) ? '動画' : 'ファイル'}：<${url}|${path.basename(f)}>（開いて保存し、X の投稿画面で添付します）` } });
   }
-  blocks.push({ type: 'context', elements: [{ type: 'mrkdwn', text: `投稿前の確認：${e.check || 'なし'}\nリンク先：\`${e.link}\`　投稿したら、毎朝のメニューの x（または node scripts/post-done.js）で済みにする。` }] });
+  blocks.push({ type: 'context', elements: [{ type: 'mrkdwn', text: `投稿前の確認：${e.check || 'なし'}\nリンク先：\`${e.link}\`　この予定は送ったときに自動で済みになる（出せなかった日は飛ばしてよい）。` }] });
   return { text: title, blocks };
 }
 
@@ -88,10 +88,12 @@ async function main() {
   const stats = statsDue(events, nowMs);
   console.log(`いま ${new Date(nowMs).toISOString()}／予定 ${events.length} 件／これから${AHEAD_MIN}分以内 ${list.length} 件${dry ? '（dry-run）' : ''}`);
   const url = process.env.SLACK_WEBHOOK_URL;
+  const sent = [];
   for (const e of list) {
     const body = payload(e);
     if (dry || !url) { console.log(JSON.stringify(body, null, 1)); continue; }
     await send(url, body);
+    sent.push(e);
     console.log(`Slack に送りました：${e.month}/${e.day} ${e.hour}:${String(e.min).padStart(2, '0')}`);
   }
   for (const e of stats) {
@@ -99,6 +101,19 @@ async function main() {
     if (dry || !url) { console.log(JSON.stringify(body, null, 1)); continue; }
     await send(url, body);
     console.log(`数字の知らせを Slack に送りました：${e.month}/${e.day}`);
+  }
+  // 送った予定は済み（[x]）にする。投稿したかどうかは聞かない（出せなかった日は飛ばしてよい、の方針）。GitHub Actions が main に入れる
+  if (args.includes('--mark-done') && sent.length) {
+    const { mark } = require('./post-done.js');
+    for (const f of fs.readdirSync(DIR).filter((n) => n.endsWith('.md') && /\d{4}/.test(n))) {
+      const file = path.join(DIR, f);
+      let md = fs.readFileSync(file, 'utf8').split(String.fromCharCode(13)).join('');
+      const year = +f.match(/(\d{4})/)[1];
+      const mine = sent.filter((e) => e.year === year);
+      for (const e of mine) md = mark(md, e);
+      if (mine.length) { fs.writeFileSync(file, md); require('child_process').execFileSync('node', [path.join(__dirname, 'schedule-to-ics.js'), file], { stdio: 'inherit' }); }
+    }
+    console.log(`済みにしました：${sent.length}件`);
   }
   if (!dry && list.length && !url) console.log('SLACK_WEBHOOK_URL が設定されていないので、送っていません。');
 }
