@@ -14,6 +14,7 @@
     { "label": "サイト：テスト", "type": "shell", "command": "npm test", "problemMatcher": [], "group": "test" },
     { "label": "問い合わせ：フォームに入れて送る", "type": "shell", "command": "node \"docs/非公開/道具/fill.js\" \"${input:formList}\" \"${input:formLog}\"", "problemMatcher": [] },
     { "label": "問い合わせ：フォームに入れるだけ（送らない・画面を保存）", "type": "shell", "command": "node \"docs/非公開/道具/fill.js\" \"${input:formList}\" \"${input:formLog}\" --dry", "problemMatcher": [] },
+    { "label": "電話：聞いた答えを入力する画面（http://localhost:8787）", "type": "shell", "command": "node scripts/phone.js", "problemMatcher": [] },
     { "label": "問い合わせ：台帳を作り直す（送った・まだ・電話）", "type": "shell", "command": "node \"docs/非公開/道具/tel.js\"", "problemMatcher": [] },
     { "label": "問い合わせ：議会のページからフォームのURLを探す", "type": "shell", "command": "node \"docs/非公開/道具/formcrawl.js\" \"${input:crawlTargets}\" \"${input:crawlOut}\"", "problemMatcher": [] },
     { "label": "要望：市外から出せるかの文を拾う", "type": "shell", "command": "node \"docs/非公開/道具/elig.js\" site/data/intake/yobo.jsonl \"${input:eligOut}\"", "problemMatcher": [] }
