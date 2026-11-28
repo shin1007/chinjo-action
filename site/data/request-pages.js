@@ -479,7 +479,7 @@ window.REQUEST_PAGES = {
   "秋田県/能代市": ["https://www.city.noshiro.lg.jp/city/koho/shicho/mail/","市長への手紙（Ｅメール）"],
   "長野県/岡谷市": ["https://www.city.okaya.lg.jp/shiseijoho/shinotorikumi/10324.html","市長へのメール／岡谷市"],
   "茨城県/鉾田市": ["https://www.city.hokota.lg.jp/page/dir008301.html","市政へのご意見・ご提言"],
-  "和歌山県/海南市": ["https://www.city.kainan.lg.jp/kakubusho/soumubu/citypromotion/1312419913695.html","市長への「市政目安箱」にご意見をお寄せください／海南市"],
+  "和歌山県/海南市": ["https://www.city.kainan.lg.jp/shiseijoho/citypromotion/iken/1423435104153.html","市長への「市政目安箱」にご意見をお寄せください／海南市"],
   "茨城県/常陸太田市": ["https://www.city.hitachiota.ibaraki.jp/about-site/page000409.html","ご意見・ご要望"],
   "岐阜県/恵那市": ["https://www.city.ena.lg.jp/shiseijoho/koho_kocho/shiseihenoiken_sankaku/index.html","市政への意見・参画／ようこそ恵那市へ"],
   "静岡県/伊豆の国市": ["https://www.city.izunokuni.shizuoka.jp/shiminnokoe.html","伊豆の国市／市民の声"],
