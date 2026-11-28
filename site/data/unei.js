@@ -1,5 +1,5 @@
 // 運営が自分で出した陳情・要望・政党への提言の記録と予定（/unei に表示し、作成画面の項目にも「運営が提出済み」の札を付ける）。
-// 出したら sent に足す（date は日本時間の YYYY-MM-DD。曜日は表示のときに計算する）。forms.rounds の status：planned＝出す予定／done＝出した／tentative＝仮の予定。
+// 出したら sent に足す（date は日本時間の YYYY-MM-DD。曜日は表示のときに計算する）。forms.rounds の status：planned＝出す予定／done＝出した／tentative＝仮の予定／postponed＝延期（日は未定）。
 window.UNEI = {
  "sent": [
   {
@@ -195,7 +195,8 @@ window.UNEI = {
     "theme": "kodomo",
     "chinjo": "n_restore",
     "yobo": "l_school",
-    "status": "planned"
+    "status": "postponed",
+    "note": "2026年11月26日の予定だったが、まだ出していない。項目の調査を進めてから出す（日は未定）"
    },
    {
     "date": "2027-01-04",

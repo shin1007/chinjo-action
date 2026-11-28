@@ -32,7 +32,7 @@
   }</tbody></table>${rest.length > rows.length ? `<p class="small">ほか${rest.length - rows.length}件が続きます。</p>` : ''}`;
 
   const f = U.forms;
-  const STATUS = { planned: '出す予定（運営者が手で出します。出したら「出したもの」に載せます）', done: '出した', tentative: '仮の予定' };
+  const STATUS = { planned: '出す予定（運営者が手で出します。出したら「出したもの」に載せます）', done: '出した', tentative: '仮の予定', postponed: 'まだ出していません（項目の調査を進めてから出します）' };
   const targets = f.targets.filter((t) => !t.skip);
   const skipped = f.targets.filter((t) => t.skip);
   document.getElementById('ueForms').innerHTML = `<table class="unei-table"><thead><tr><th>日</th><th>テーマ</th><th>出す項目</th><th>状況</th></tr></thead><tbody>${
