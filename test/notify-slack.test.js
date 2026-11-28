@@ -50,3 +50,15 @@ test('post-done：見出しの [ ] を [x] にし、指定がなければ一番�
   assert.deepStrictEqual(pick(ev, now, '12/2', '12:15').map((e) => e.day), [2]);
   assert.match(mark(md, ev[0]), /^### \[x\] 12月1日/m);
 });
+
+test('24時間後の数字：知らせの対象と、記録の行', () => {
+  const { statsDue, when } = require('../scripts/notify-slack.js');
+  const { pending, row } = require('../scripts/post-stats.js');
+  const e = { done: true, year: 2026, month: 12, day: 1, hour: 7, min: 30, type: 'A 入口', link: 'https://chinjo-action.vercel.app/kodomo/make', text: '' };
+  assert.strictEqual(statsDue([e], when(e) + 24 * 3600000 - 10 * 60000).length, 1);
+  assert.strictEqual(statsDue([e], when(e)).length, 0);
+  const head = '投稿日時,時間帯\n';
+  assert.strictEqual(pending([e], head).length, 1);
+  assert.strictEqual(pending([e], head + '2026-12-01 07:30,朝\n').length, 0);
+  assert.match(row(e, [e], { views: 100, likes: 2, replies: 0, links: 1, profile: 3, follow: '+1', memo: '' }), /^2026-12-01 07:30,朝,A 入口,kodomo,,1,100,2,0,1,3,\+1,$/);
+});
