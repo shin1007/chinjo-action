@@ -15,10 +15,9 @@ while ($true) {
   Write-Host ' x  X に投稿した（今の投稿予定を済みにして公開。Slack のリマインドが止まる）'
   Write-Host ' n  X の投稿の24時間後の数字を入れる（記録の CSV に足して公開）'
   Write-Host ' m  毎月の応援（BMC の Webhook で数えられない分）を入れて、/trouble の運営費の図を作り直す'
-  Write-Host ' p  運営者のTODO とダッシュボードを VS Code で開く'
   Write-Host ' r  手で開いて保存してほしい資料のページを、まとめてブラウザで開く（TODO の13の節）'
   Write-Host ' f  手で送る問い合わせフォームの一覧を開く（入れる内容のコピーつき）'
-  Write-Host ' s  Supabase に SQL を反映する（schema.sql をコピーして SQL Editor を開く。貼って Run）'
+  Write-Host ' s  Supabase に SQL を反映する（毎日は不要。Claude が「反映して」と言ったときだけ。schema.sql をコピーして SQL Editor を開く。貼って Run）'
   Write-Host ''
   Write-Host ' 1  チームみらいに今週の項目を出す（ブラウザが開きます）'
   Write-Host ' 2  チームみらいに出す文面を見るだけ'
@@ -93,7 +92,6 @@ while ($true) {
       Start-Process 'https://supabase.com/dashboard/project/oquuysfeistgpgrpeswq/sql/new'
       Write-Host 'schema.sql をコピーしました。開いた SQL Editor に Ctrl+V で貼って Run（何度実行しても同じ結果になる作り）。'
     }
-    'p' { code 'docs/非公開/運営者のTODO.md' 'docs/非公開/運営のダッシュボード.md'; continue }
     '0' { exit }
     default { Write-Host 'メニューの番号か文字を入れてください。' }
   }

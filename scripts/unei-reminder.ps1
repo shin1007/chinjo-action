@@ -23,6 +23,6 @@ if ($todo -or $isMonday -or $isWeekday) {
   $msg = ''
   if ($todo) { $msg += "今日やること：`n$todo`n`n" }
   if ($isMonday) { Set-Content -Path $weekFile -Value $monday; $msg += ((& node "$root\scripts\unei.js" next) -join "`n") + "`n`n" }
-  $ans = (New-Object -ComObject WScript.Shell).Popup("$($msg)メニューを開きますか？（t 電話の画面・o 毎朝見る画面・p TODO も選べます）", 0, '陳情アクション：定期の提出', 4 + 64)
+  $ans = (New-Object -ComObject WScript.Shell).Popup("$($msg)メニューを開きますか？（t 電話の画面・o 毎朝見る画面も選べます）", 0, '陳情アクション：定期の提出', 4 + 64)
   if ($ans -eq 6) { Start-Process -FilePath "$root\定期の提出.cmd" -WorkingDirectory $root }
 }
