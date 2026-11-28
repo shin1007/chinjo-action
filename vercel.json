@@ -30,6 +30,11 @@
   ],
   "redirects": [
     {
+      "source": "/tokushoho",
+      "destination": "/ouen",
+      "permanent": true
+    },
+    {
       "source": "/board",
       "destination": "/feedback#answers",
       "permanent": true
