@@ -82,25 +82,42 @@ revoke all on public.reports, public.councils, public.report_guard from anon, au
 grant insert (pref, council, items, asks, pow) on public.reports to anon;
 
 -- 読めるのは議会ごとの件数だけ
-create or replace view public.council_counts as
+-- 集計のビューの本体は API に出さない private スキーマに置き、作った人（postgres）の権限で元の表を読む。
+-- public には security_invoker のビューだけを置く（Supabase の security_definer_view の警告への対応。2026-11-28）
+create schema if not exists private;
+revoke all on schema private from public, anon, authenticated;
+grant usage on schema private to anon;
+create or replace view private.council_counts as
   select pref, council, count(*)::int as n, max(created_at)::date as last
   from public.reports where not hidden group by pref, council;
+revoke all on private.council_counts from anon, authenticated;
+grant select on private.council_counts to anon;
+drop view if exists public.council_counts;
+create view public.council_counts with (security_invoker = true) as select * from private.council_counts;
 revoke all on public.council_counts from anon, authenticated;
 grant select on public.council_counts to anon;
 
 -- 議会ごと・内容ごとの提出の記録の数と、最後の記録の日（1件ずつの行は読めない）
-create or replace view public.council_asks as
+create or replace view private.council_asks as
   select pref, council, ask, count(*)::int as n, max(created_at)::date as last
   from public.reports, unnest(asks) as ask where not hidden group by pref, council, ask;
+revoke all on private.council_asks from anon, authenticated;
+grant select on private.council_asks to anon;
+drop view if exists public.council_asks;
+create view public.council_asks with (security_invoker = true) as select * from private.council_asks;
 revoke all on public.council_asks from anon, authenticated;
 grant select on public.council_asks to anon;
 
 -- トップページの数字用：陳情を出した自治体の数と、要望の件数（項目数×議会数）の合計。1行だけ返す
-create or replace view public.action_totals as
+create or replace view private.action_totals as
   select count(distinct (pref, council))::int as councils,
          coalesce(sum(coalesce(items, 1)), 0)::int as items,
          count(*)::int as reports
   from public.reports where not hidden;
+revoke all on private.action_totals from anon, authenticated;
+grant select on private.action_totals to anon;
+drop view if exists public.action_totals;
+create view public.action_totals with (security_invoker = true) as select * from private.action_totals;
 revoke all on public.action_totals from anon, authenticated;
 grant select on public.action_totals to anon;
 
@@ -250,12 +267,19 @@ create or replace view public.feedback_by_target as
 create or replace view public.feedback_faq as
   select id, theme, target, body, owner_note, resolution_url from public.feedback where faq order by created_at;
 revoke all on public.feedback_inbox, public.feedback_by_target, public.feedback_faq from anon, authenticated;
+alter view public.feedback_inbox set (security_invoker = true);
+alter view public.feedback_by_target set (security_invoker = true);
+alter view public.feedback_faq set (security_invoker = true);
 
 -- 掲示板（/board）用：運営が published にして public_text を書いたものだけを、だれでも読める。
 -- 本文の原文・対象・根拠 URL は出さない。日付は日単位まで。
-create or replace view public.feedback_public as
+create or replace view private.feedback_public as
   select id, created_at::date as day, theme, kind, public_text
   from public.feedback where published and public_text is not null order by created_at desc;
+revoke all on private.feedback_public from anon, authenticated;
+grant select on private.feedback_public to anon;
+drop view if exists public.feedback_public;
+create view public.feedback_public with (security_invoker = true) as select * from private.feedback_public;
 revoke all on public.feedback_public from anon, authenticated;
 grant select on public.feedback_public to anon;
 
@@ -308,8 +332,12 @@ revoke all on public.outcomes from anon, authenticated;
 grant insert (pref, council, stage, result) on public.outcomes to anon;
 
 -- 読めるのは結果ごとの合計だけ（議会ごとの行は読めない）
-create or replace view public.outcome_totals as
+create or replace view private.outcome_totals as
   select result, count(*)::int as n from public.outcomes where not hidden group by result;
+revoke all on private.outcome_totals from anon, authenticated;
+grant select on private.outcome_totals to anon;
+drop view if exists public.outcome_totals;
+create view public.outcome_totals with (security_invoker = true) as select * from private.outcome_totals;
 revoke all on public.outcome_totals from anon, authenticated;
 grant select on public.outcome_totals to anon;
 
@@ -333,10 +361,14 @@ alter table public.support_payments enable row level security;
 revoke all on public.support_payments from anon, authenticated;
 
 -- 月（日本時間）ごとの合計。テストのイベント（live = false）と返金されたものは数えない
-create or replace view public.support_month_totals as
+create or replace view private.support_month_totals as
   select to_char(paid_at at time zone 'Asia/Tokyo', 'YYYY-MM') as month, currency,
     sum(amount)::float8 as amount, count(*)::int as n
   from public.support_payments where live and not refunded
   group by 1, 2;
+revoke all on private.support_month_totals from anon, authenticated;
+grant select on private.support_month_totals to anon;
+drop view if exists public.support_month_totals;
+create view public.support_month_totals with (security_invoker = true) as select * from private.support_month_totals;
 revoke all on public.support_month_totals from anon, authenticated;
 grant select on public.support_month_totals to anon;

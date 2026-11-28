@@ -48,7 +48,7 @@ test('掲示板：読むのは feedback_public ビューだけで、書き込ま
   assert.match(boardJs, /const LIVE = (true|false);/);
   assert.match(boardJs, /rest\/v1\/feedback_public\?select=id,day,theme,public_text&/);
   assert.ok(!/method:\s*'(PATCH|DELETE|PUT)'/.test(boardJs));
-  const view = sql.match(/create or replace view public\.feedback_public as([\s\S]*?);/)[1];
+  const view = sql.match(/create or replace view private\.feedback_public as([\s\S]*?);/)[1];
   assert.match(view, /where published and public_text is not null/);
   for (const col of ['body', 'target', 'source_url', 'status', 'owner_note']) assert.ok(!new RegExp(`\\b${col}\\b`).test(view), `${col} を出している`);
   assert.match(sql, /new\.published := false;/);
