@@ -1,0 +1,55 @@
+# 毎月の応援の合計と為替の見直し（scripts/support-month.js）。
+# 月の最初の営業日の三菱UFJ銀行の仲値を取り、site/data/support.json と /trouble の「1か月の運営費」の図を直して、main に入れる。
+# 単発の応援の合計は Buy Me a Coffee の Webhook の記録（Supabase の公開の support_month_totals）から取る。Secrets は要らない。
+# 毎月の応援（Webhook で数えられない分）は、運営者が手で --extra-usd を付けて動かす（Actions の画面の「Run workflow」で入れられる）。
+# 目標の金額で Claude Max を賄えなくなったら、Issue を立てて知らせる。
+# 収入の記録（docs/非公開/収入の記録.csv）は Git の外なので、ここでは書かない。
+name: support-month
+on:
+  schedule:
+    - cron: '0 3 6 * *'   # 毎月6日 12:00（日本時間）。年始・連休でも、最初の営業日の相場が出たあと
+  workflow_dispatch:
+    inputs:
+      extra_usd:
+        description: 毎月の応援など、Webhook で数えられない分（ドル。なければ空）
+        required: false
+permissions:
+  contents: write
+  issues: write
+concurrency:
+  group: support-month
+  cancel-in-progress: false
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 為替と応援の合計を直す
+        env:
+          EXTRA_USD: ${{ inputs.extra_usd }}
+        run: |
+          args=()
+          if [ -n "$EXTRA_USD" ]; then args+=(--extra-usd "$EXTRA_USD"); fi
+          node scripts/support-month.js "${args[@]}" | tee out.txt
+      - run: node --test test/support.test.js test/bmc-webhook.test.js
+      - name: main に入れる
+        run: |
+          git diff --quiet && exit 0
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add site/data/support.json site/trouble.html
+          git commit -m "応援の合計と為替を見直す（$(date +%Y-%m)、support-month）"
+          git push origin HEAD:main
+      - name: 目標で足りなければ Issue で知らせる
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          grep -q '【見直し】' out.txt || exit 0
+          gh issue create --title "応援の目標の見直し（$(date +%Y-%m)）" --label "資金と税金" --label "決めること" \
+            --body "$(grep '【見直し】' out.txt)
+
+          site/data/support.json の stages の goal を上げるか決める（#727）。"
