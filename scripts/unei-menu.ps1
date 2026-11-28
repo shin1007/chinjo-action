@@ -11,7 +11,8 @@ while ($true) {
   node scripts/unei.js next
   Write-Host ''
   Write-Host ' t  電話で聞く画面（議会の一覧・番号・台本・入力。ブラウザが開きます）'
-  Write-Host ' o  毎朝見る画面をまとめて開く（Issues・Gmail・Vercel・BMC）'
+  Write-Host ' o  毎朝見る画面をまとめて開く（Issues・議会や自治体からの返事・Vercel・BMC）'
+  Write-Host ' x  X に投稿した（今の投稿予定を済みにして公開。Slack のリマインドが止まる）'
   Write-Host ' p  運営者のTODO とダッシュボードを VS Code で開く'
   Write-Host ''
   Write-Host ' 1  チームみらいに今週の項目を出す（ブラウザが開きます）'
@@ -58,11 +59,15 @@ while ($true) {
     'o' {
       @(
         'https://github.com/shin1007/chinjo-action/issues?q=is%3Aopen+label%3A%E9%81%8B%E5%96%B6%E8%80%85%E3%81%AE%E4%BD%9C%E6%A5%AD',
-        'https://mail.google.com/mail/u/0/#inbox',
+        'https://mail.google.com/mail/u/0/#search/in%3Ainbox%20-from%3Ame%20(%E8%AD%B0%E4%BC%9A%20OR%20%E8%AD%B0%E4%BC%9A%E4%BA%8B%E5%8B%99%E5%B1%80%20OR%20%E9%99%B3%E6%83%85%20OR%20%E8%AB%8B%E9%A1%98%20OR%20%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B)%20newer_than%3A14d',
         'https://vercel.com/shin1007s-projects/chinjo-action/analytics',
         'https://buymeacoffee.com/dashboard'
       ) | ForEach-Object { Start-Process $_ }
       continue
+    }
+    'x' {
+      $when = Read-Host '日時（空のまま Enter で、いちばん近い予定。指定するなら 12/1 7:30）'
+      if ($when) { node scripts/post-done.js ($when -split ' ') } else { node scripts/post-done.js }
     }
     'p' { code 'docs/非公開/運営者のTODO.md' 'docs/非公開/運営のダッシュボード.md'; continue }
     '0' { exit }

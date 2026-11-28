@@ -30,6 +30,9 @@ function mediaPaths(img) {
   return String(img || '').split(/[、,，\s]+/).map((s) => s.trim()).filter((s) => /\.[A-Za-z0-9]{2,4}$/.test(s));
 }
 
+// X の投稿画面（本文を入れた状態で開く）。https://x.com/intent/post?text=…
+const intentUrl = (text) => 'https://x.com/intent/post?text=' + encodeURIComponent(text);
+
 // Slack に送る内容（blocks）。本文は、コードブロックに入れる（コピーしやすい）。
 function payload(e) {
   const hh = `${e.hour}:${String(e.min).padStart(2, '0')}`;
@@ -38,13 +41,15 @@ function payload(e) {
     { type: 'header', text: { type: 'plain_text', text: title.slice(0, 150) } },
     { type: 'section', text: { type: 'mrkdwn', text: '```' + e.text.replace(/```/g, "'''") + '```' } },
   ];
+  // 本文を入れた X の投稿画面を開くボタン（押して画像を付け、ポストを押すだけ）
+  blocks.push({ type: 'actions', elements: [{ type: 'button', text: { type: 'plain_text', text: 'X の投稿画面を開く（本文入り）' }, url: intentUrl(e.text), style: 'primary' }] });
   const files = mediaPaths(e.img);
   for (const f of files) {
     const url = mediaUrl(f);
     if (IMG.test(f)) blocks.push({ type: 'image', image_url: url, alt_text: path.basename(f) });
     else blocks.push({ type: 'section', text: { type: 'mrkdwn', text: `${VID.test(f) ? '動画' : 'ファイル'}：<${url}|${path.basename(f)}>（開いて保存し、X の投稿画面で添付します）` } });
   }
-  blocks.push({ type: 'context', elements: [{ type: 'mrkdwn', text: `投稿前の確認：${e.check || 'なし'}\nリンク先：\`${e.link}\`　投稿したら、予定の \`[ ]\` を \`[x]\` に。` }] });
+  blocks.push({ type: 'context', elements: [{ type: 'mrkdwn', text: `投稿前の確認：${e.check || 'なし'}\nリンク先：\`${e.link}\`　投稿したら、毎朝のメニューの x（または node scripts/post-done.js）で済みにする。` }] });
   return { text: title, blocks };
 }
 
@@ -62,7 +67,7 @@ async function main() {
   let events = [];
   for (const f of fs.readdirSync(DIR).filter((n) => n.endsWith('.md'))) {
     const year = +(f.match(/(\d{4})/) || [])[1] || new Date(nowMs).getFullYear();
-    events = events.concat(parse(fs.readFileSync(path.join(DIR, f), 'utf8'), year));
+    events = events.concat(parse(fs.readFileSync(path.join(DIR, f), 'utf8').split(String.fromCharCode(13)).join(''), year));
   }
   const list = due(events, nowMs);
   console.log(`いま ${new Date(nowMs).toISOString()}／予定 ${events.length} 件／これから${AHEAD_MIN}分以内 ${list.length} 件${dry ? '（dry-run）' : ''}`);
@@ -77,4 +82,4 @@ async function main() {
 }
 
 if (require.main === module) main().catch((e) => { console.error(e.message); process.exit(1); });
-module.exports = { due, payload, mediaPaths, mediaUrl, when };
+module.exports = { due, payload, mediaPaths, mediaUrl, when, intentUrl };

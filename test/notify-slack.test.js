@@ -31,3 +31,22 @@ test('本文にコードブロックの記号があっても壊れない', () =>
   const p = payload(E(11, 24, 7, 30, { text: 'a```b' }));
   assert.ok(!p.blocks[1].text.text.slice(3, -3).includes('```'));
 });
+
+test('notify-slack：本文入りの X の投稿画面のボタンが付く', () => {
+  const { payload, intentUrl } = require('../scripts/notify-slack.js');
+  const p = payload({ month: 12, day: 1, hour: 7, min: 30, type: 'A 入口', text: '陳情とは？ https://example.com', img: '', check: '', link: '' });
+  const btn = p.blocks.find((b) => b.type === 'actions').elements[0];
+  assert.strictEqual(btn.url, intentUrl('陳情とは？ https://example.com'));
+  assert.ok(btn.url.startsWith('https://x.com/intent/post?text='));
+});
+
+test('post-done：見出しの [ ] を [x] にし、指定がなければ一番近い過去の予定を選ぶ', () => {
+  const { pick, mark } = require('../scripts/post-done.js');
+  const md = '### [ ] 12月1日（火）07:30｜A 入口\n```\na\n```\n### [ ] 12月2日（水）12:15｜C 知識\n```\nb\n```\n';
+  const { parse } = require('../scripts/schedule-to-ics.js');
+  const ev = parse(md, 2026);
+  const now = Date.UTC(2026, 11, 1, 23, 0); // 12/2 8:00 JST
+  assert.deepStrictEqual(pick(ev, now).map((e) => e.day), [1]);
+  assert.deepStrictEqual(pick(ev, now, '12/2', '12:15').map((e) => e.day), [2]);
+  assert.match(mark(md, ev[0]), /^### \[x\] 12月1日/m);
+});
