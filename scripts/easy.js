@@ -82,14 +82,16 @@ function indexPage(theme, asks, easy) {
   const name = siteName(theme);
   const nat = asks.filter((a) => a.scope === 'national').length;
   const L = [`  <h1>陳情の内容のあらまし</h1>`,
-    `  <p>「${esc(LABEL[theme])}」について出せる陳情の内容を、1ページにまとめました。全${asks.length}件（国への意見書を求めるもの${nat}件、自治体の取り組みを求めるもの${asks.length - nat}件）で、1件が1通の陳情書になります。議員・自治体の職員の方が全体を短い時間で見られるよう、それぞれ「何をお願いしているか」を一文で書き、詳しい説明・数字・資料へのリンクを付けています。</p>`,
+    `  <p>「${esc(LABEL[theme])}」について出せる陳情の内容を、1ページにまとめました。全${asks.length}件（国への意見書を求めるもの${nat}件、自治体の取り組みを求めるもの${asks.length - nat}件）で、1件が1通の陳情書です。名前を押すと、詳しい説明・数字・資料が開きます。</p>`,
     '  <p class="hint-sm">札の意味：<span class="ask-tag ask-tag-research">研究の裏づけあり</span>論文や公的機関の報告がある　<span class="ask-tag ask-tag-precedent">他自治体で実例あり</span>ほかの自治体ですでに行っている　<span class="ask-tag ask-tag-lowcost">低予算で実現可能</span>予算がほとんど要らない。印刷するときは、ブラウザの印刷を使ってください。</p>'];
   const cats = [...new Set(asks.map((a) => a.category || 'そのほか'))];
   for (const c of cats) {
     L.push(`  <h2>${esc(c)}</h2>`);
     for (const a of asks.filter((x) => (x.category || 'そのほか') === c)) {
       const tags = tagsOf(a).map(([k, t]) => `<small class="ask-tag ask-tag-${k}">${esc(t)}</small>`).join('');
-      const what = easy[a.id] ? easy[a.id].what : a.text.replace(/{宛先}/g, '提出先の自治体');
+      // 一覧では、札（国へ意見書・自治体の取り組み）と重なる文末を省く
+      const what = (easy[a.id] ? easy[a.id].what : a.text.replace(/{宛先}/g, '提出先の自治体'))
+        .replace(/と、議会から国に伝えてもらう陳情です。$/, '。').replace(/と(、議会から)?(自治体|市|県|提出先の自治体)に(お願いする|求める)(陳情|要望)です。$/, '。');
       L.push('  <section class="sum-item">',
         `    <h3><a href="/${theme}/easy/${a.id}">${esc(a.label)}</a> <small class="ask-scope">${a.scope === 'national' ? '国へ意見書' : '自治体の取り組み'}</small></h3>`,
         `    <p>${esc(what)}</p>`, tags ? `    <p class="ask-tags">${tags}</p>` : '', '  </section>');
