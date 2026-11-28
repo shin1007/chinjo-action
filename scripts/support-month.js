@@ -5,6 +5,7 @@
 //   node scripts/support-month.js --month 2026-12 --usd 25 --count 3
 //   node scripts/support-month.js                     為替レートを見直す。Webhook の記録（Supabase の support_month_totals）があれば、単発の応援の合計もそこから取る
 //   node scripts/support-month.js --extra-usd 10      Webhook で数えられない毎月の応援などを足す（support.json の extraJpy）
+//   毎月6日に GitHub Actions（.github/workflows/support-month.yml）が自動で動かして main に入れる
 //   node scripts/support-month.js --check             /trouble の図が support.json と合っているかだけを見る（npm test から使う）
 //
 // やること：
