@@ -1334,6 +1334,118 @@
       "fetchedAt": "2026-11-27T16:02:14.331Z",
       "sha256": "c5317b370fa3faaf8f6ca9c546354004c8f2cbdf397bda506accf0f327b7cbfc",
       "localPath": "sources/archive/2026-11-27-c5317b370fa3.pdf"
+    },
+    {
+      "url": "https://ops-jg.d1-law.com/opensearch/SrJbF01/init?jctcd=8A80260D40&houcd=H339915100001&no=6&totalCount=15&fromJsp=SrMj",
+      "title": "小田原市議会会議規則 第88〜90条（小田原市例規集、令和8年11月28日時点）",
+      "note": "第90条 陳情書又はこれに類するものは、請願書の例により処理する。ただし議長が必要がないと認める場合はこの限りでない。Chrome で開いて本文を写した",
+      "fetchedAt": "2026-11-28T00:01:56.953Z",
+      "sha256": "b7d91c8aa1edbf0a7831b0877a672f4ca7061f07c6f551389ca6ce88eb88ff50",
+      "localPath": "sources/archive/2026-11-28-b7d91c8aa1ed.txt"
+    },
+    {
+      "url": "https://news.ntv.co.jp/info/75bc1a6375fe48ae9e65910b33adfb4b",
+      "title": "日テレNEWS NNN「【お詫び】『緊急世論調査』支持率グラフの誤りについて」（2025年10月23日）",
+      "note": "支持しない18％の点が36％付近を指していた。作業上のミスと確認不足が原因",
+      "fetchedAt": "2026-11-28T00:01:57.220Z",
+      "sha256": "b82bd607b16defb94efcddd6a35d0cd2e38e95b868004245597ba04619c9f695",
+      "localPath": "sources/archive/2026-11-28-b82bd607b16d.html"
+    },
+    {
+      "url": "https://www.pref.chiba.lg.jp/kyouiku/syokuin/saiyou/koushi/taiguu.html",
+      "title": "千葉県教育委員会「待遇について（公立学校臨時的任用教職員等）」",
+      "note": "臨時的任用の月額給与の例（大学新卒306,795円）",
+      "fetchedAt": "2026-11-28T00:01:57.488Z",
+      "sha256": "21a2a0c64793465a7ea95cdeef0caa6fea80ba037d06f5c916c3cd5b689ea880",
+      "localPath": "sources/archive/2026-11-28-21a2a0c64793.html"
+    },
+    {
+      "url": "https://www.kyoiku.metro.tokyo.lg.jp/",
+      "title": "東京都教育委員会 臨時的任用教職員の案内（1-8temporary_staff.pdf、保存元のURLは未確認）",
+      "note": "臨時的任用教職員の限度号給：教諭は教育職給料表2級77号給・給料月額339,900円",
+      "fetchedAt": "2026-11-28T00:01:57.777Z",
+      "sha256": "1e8e31d7bfb039b171d77125e7a35abd441fca01c70938e98081b35d2358c71c",
+      "localPath": "sources/archive/2026-11-28-1e8e31d7bfb0.pdf"
+    },
+    {
+      "url": "https://www.nta.go.jp/publication/pamph/koho/kurashi/html/05_4.htm",
+      "title": "国税庁「暮らしの税情報（令和8年度版）財産をもらったとき」",
+      "note": "個人から財産をもらったときは贈与税、法人からは所得税",
+      "fetchedAt": "2026-11-28T00:01:58.050Z",
+      "sha256": "de57f633b76e362b5925377a376400cd5d4859d47d62646e881aa22cd0162b7f",
+      "localPath": "sources/archive/2026-11-28-de57f633b76e.html"
+    },
+    {
+      "url": "https://www.city.handa.lg.jp/kenko/fukushi/1002475/1002479.html",
+      "title": "半田市「DV、ストーカー被害者等保護のための支援措置」",
+      "note": "DV等支援措置の市の案内",
+      "fetchedAt": "2026-11-28T00:01:58.333Z",
+      "sha256": "b550e66fbb8314d716d2b755b7247a6a667a0bedd978066e0e7f4964b40495ab",
+      "localPath": "sources/archive/2026-11-28-b550e66fbb83.html"
+    },
+    {
+      "url": "https://www.town.oyamazaki.kyoto.jp/reiki/reiki_honbun/k114RG00000675.html",
+      "title": "大山崎町 DV等の被害者に対する住民基本台帳事務における支援措置に関する事務処理要綱（平成26年告示第50号）",
+      "note": "町の要綱。国の事務処理要領そのものではない",
+      "fetchedAt": "2026-11-28T00:01:58.598Z",
+      "sha256": "9e9ca8a15f7c081832606606955e2d9652435108aeb9d6a0da06e8403812fc84",
+      "localPath": "sources/archive/2026-11-28-9e9ca8a15f7c.html"
+    },
+    {
+      "url": "https://www.city.chiba.jp/",
+      "title": "千葉市 DV等の被害者の保護に関する住民基本台帳事務処理要綱（保存元のURLは未確認）",
+      "note": "住民基本台帳事務処理要領（昭和42年10月4日 法務省民事甲第2671号・自治振第150号）に基づく市の要綱",
+      "fetchedAt": "2026-11-28T00:01:58.910Z",
+      "sha256": "fe778df3283cb0db3974acd8e242e2962d05ae106eac9b084654c334610163c7",
+      "localPath": "sources/archive/2026-11-28-fe778df3283c.pdf"
+    },
+    {
+      "url": "https://mhlw-grants.niph.go.jp/project/148592",
+      "title": "厚生労働科学研究成果データベース「新たな手法を用いた肝炎ウイルス検査受検率・陽性者受診率の向上に資する研究」（令和2年度、是永匡紹）",
+      "note": "研究の概要",
+      "fetchedAt": "2026-11-28T00:01:59.144Z",
+      "sha256": "b5191e71af7b26cf18fb0f1e01f4d3d884c2b96022cae65decd8af99738e5ee6",
+      "localPath": "sources/archive/2026-11-28-b5191e71af7b.html"
+    },
+    {
+      "url": "https://mhlw-grants.niph.go.jp/",
+      "title": "厚労科研 分担研究報告書「職域促進事業の肝炎ウイルス受検率および自治体肝炎ウイルス検診陽性者の精密検査受検の実態」（202199006A、保存元のURLは未確認）",
+      "note": "自治体陽性者の受診確認（精密検査受検）率は20〜50％と差がある（研究要旨）",
+      "fetchedAt": "2026-11-28T00:01:59.405Z",
+      "sha256": "89d4d468b1a9dcf74a6f5df946d8489cf9bc79bf38bec5876fdf76584626bf2f",
+      "localPath": "sources/archive/2026-11-28-89d4d468b1a9.pdf"
+    },
+    {
+      "url": "https://jaf.or.jp/common/safety-drive/car-learning/safety-light/twilight-time",
+      "title": "JAF「発生時間帯別交通事故統計」",
+      "note": "ヘッドライト300件の集計のもとではない（参考）",
+      "fetchedAt": "2026-11-28T00:01:59.704Z",
+      "sha256": "dd6b2e10a619bb5a5f6e1966d684e5b3cd03d71fbc1b38644637bb2aa419e0ea",
+      "localPath": "sources/archive/2026-11-28-dd6b2e10a619.html"
+    },
+    {
+      "url": "https://www.itarda.or.jp/",
+      "title": "ITARDA インフォメーション No.147（2024）（保存元のURLは未確認）",
+      "note": "自動車用照明の課題。300件の集計はない",
+      "fetchedAt": "2026-11-28T00:02:00.008Z",
+      "sha256": "d13a41087eb5a9e64bd1db9412815452cb2196bfa42629ea3a551b7c8545d2dd",
+      "localPath": "sources/archive/2026-11-28-d13a41087eb5.pdf"
+    },
+    {
+      "url": "https://www.itarda.or.jp/",
+      "title": "ITARDA 第26回研究発表会「夜間の四輪対歩行者死亡事故と高機能前照灯」（保存元のURLは未確認）",
+      "note": "300件の集計はない",
+      "fetchedAt": "2026-11-28T00:02:00.294Z",
+      "sha256": "7a3d428a6d593edbb4da783918d41a1ff6d5c43f4f2e8b2cb5fa30d9552fde2b",
+      "localPath": "sources/archive/2026-11-28-7a3d428a6d59.pdf"
+    },
+    {
+      "url": "https://www.mext.go.jp/",
+      "title": "日教組「事例からみる臨時的任用教員の処遇に関する検討課題」説明資料（000440945.pdf、保存元のURLは未確認）",
+      "note": "当事者団体の資料。文面には使わない",
+      "fetchedAt": "2026-11-28T00:02:00.592Z",
+      "sha256": "1605e84fd69790c6fe99aa0835adbba6269ce3f8a0ab3d9607d2b1a863431e7e",
+      "localPath": "sources/archive/2026-11-28-1605e84fd697.pdf"
     }
   ]
 }
