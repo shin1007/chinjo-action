@@ -103,16 +103,27 @@ test('Supabase：テーブルは RLS を有効にし、anon に渡すのは決�
   const grants = [...sql.matchAll(/^grant .*$/gm)].map((m) => m[0].replace(/\s+/g, ' '));
   assert.deepStrictEqual(grants, [
     'grant insert (pref, council, items, asks, pow) on public.reports to anon;',
+    'grant usage on schema private to anon;',
+    'grant select on private.council_counts to anon;',
     'grant select on public.council_counts to anon;',
+    'grant select on private.council_asks to anon;',
     'grant select on public.council_asks to anon;',
+    'grant select on private.action_totals to anon;',
     'grant select on public.action_totals to anon;',
     'grant insert (pref, council, mail, bring, online, online_url, deadline, copies, source_url, note) on public.council_tips to anon;',
     'grant insert (kind, theme, target, body, source_url, file_path) on public.feedback to anon;',
+    'grant select on private.feedback_public to anon;',
     'grant select on public.feedback_public to anon;',
     'grant insert (pref, council, stage, result) on public.outcomes to anon;',
+    'grant select on private.outcome_totals to anon;',
     'grant select on public.outcome_totals to anon;',
+    'grant select on private.support_month_totals to anon;',
     'grant select on public.support_month_totals to anon;',
   ]);
+  // public のビューは security_invoker にする（集計の本体は API に出さない private スキーマに置く）
+  for (const [, v, inv] of sql.matchAll(/create (?:or replace )?view public\.(\w+)( with \(security_invoker = true\))?/g)) {
+    assert.ok(inv || sql.includes(`alter view public.${v} set (security_invoker = true);`), `${v} が security definer のまま`);
+  }
   assert.ok(!/to anon[^;]*\b(update|delete|all)\b/i.test(sql), 'anon に更新・削除を渡している');
   for (const t of ['reports', 'council_tips', 'feedback', 'outcomes']) assert.match(sql, new RegExp(`on public\\.${t} for insert to anon`), `${t} は insert だけ`);
 });
