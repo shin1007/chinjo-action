@@ -1,0 +1,27 @@
+{
+  // 運営の道具を VS Code から動かす。Ctrl+Shift+P →「Tasks: Run Task」→ 名前を選ぶ。
+  // 一覧と説明は docs/非公開/道具の一覧.md（Git に入れていない手元のファイル）。
+  "version": "2.0.0",
+  "tasks": [
+    { "label": "運営：今日やること", "type": "shell", "command": "node scripts/unei.js status; node scripts/unei.js next", "problemMatcher": [] },
+    { "label": "運営：定期の提出のメニュー", "type": "shell", "command": "powershell -ExecutionPolicy Bypass -File scripts/unei-menu.ps1", "problemMatcher": [] },
+    { "label": "運営：今の回の提出先（フォームの直リンク）", "type": "shell", "command": "node scripts/unei.js forms", "problemMatcher": [] },
+    { "label": "運営：フォームで出せる先をDBから足す", "type": "shell", "command": "node scripts/unei.js sync", "problemMatcher": [] },
+    { "label": "DB：項目ごとの埋まり具合（人口の割合つき）", "type": "shell", "command": "node scripts/progress.js", "problemMatcher": [] },
+    { "label": "DB：点検する", "type": "shell", "command": "node scripts/intake.js check", "problemMatcher": [] },
+    { "label": "DB：直したあとに全部作り直す（点検・書き出し・カバー率・テスト）", "type": "shell", "command": "node scripts/intake.js check; if ($?) { node scripts/intake.js export; node scripts/intake.js coverage; node scripts/intake.js report; node scripts/split-pref-data.js; node scripts/progress.js; node scripts/unei.js sync; npm test }", "problemMatcher": [] },
+    { "label": "DB：出典の一文が今もページにあるか照合する（時間がかかる）", "type": "shell", "command": "node scripts/refresh.js", "problemMatcher": [] },
+    { "label": "サイト：テスト", "type": "shell", "command": "npm test", "problemMatcher": [], "group": "test" },
+    { "label": "問い合わせ：フォームに入れて送る", "type": "shell", "command": "node \"docs/非公開/道具/fill.js\" \"${input:formList}\" \"${input:formLog}\"", "problemMatcher": [] },
+    { "label": "問い合わせ：フォームに入れるだけ（送らない・画面を保存）", "type": "shell", "command": "node \"docs/非公開/道具/fill.js\" \"${input:formList}\" \"${input:formLog}\" --dry", "problemMatcher": [] },
+    { "label": "問い合わせ：議会のページからフォームのURLを探す", "type": "shell", "command": "node \"docs/非公開/道具/formcrawl.js\" \"${input:crawlTargets}\" \"${input:crawlOut}\"", "problemMatcher": [] },
+    { "label": "要望：市外から出せるかの文を拾う", "type": "shell", "command": "node \"docs/非公開/道具/elig.js\" site/data/intake/yobo.jsonl \"${input:eligOut}\"", "problemMatcher": [] }
+  ],
+  "inputs": [
+    { "id": "formList", "type": "promptString", "description": "送り先の一覧（TSV：id・フォームURL・リンクの文字）", "default": "${env:TEMP}/w/ff/t1.tsv" },
+    { "id": "formLog", "type": "promptString", "description": "結果を書く先（送れたものは次から飛ばす）", "default": "${env:TEMP}/w/ff/sent.jsonl" },
+    { "id": "crawlTargets", "type": "promptString", "description": "調べる議会の一覧（JSON）", "default": "${env:TEMP}/w/ftargets.json" },
+    { "id": "crawlOut", "type": "promptString", "description": "結果を書く先", "default": "${env:TEMP}/w/forms.json" },
+    { "id": "eligOut", "type": "promptString", "description": "結果を書く先", "default": "${env:TEMP}/w/elig.json" }
+  ]
+}
