@@ -49,7 +49,7 @@
 
   <h2>いつも言えること</h2>
   <ul>
-    <li><b>アクセス解析・広告のプログラムは入れていません。</b>閲覧数や行動を調べるための外部のサービス（Google アナリティクスなど）は使っていません。このサイトのページは、自分のサイトのプログラム以外を読み込まない設定にしています。</li>
+    <li><b>広告のプログラムと、Google アナリティクスなどの外部の解析サービスは入れていません。</b>閲覧数だけは、サイトを置いている Vercel の解析（Vercel Web Analytics）で数えています（下の表）。このサイトのページは、自分のサイトのプログラム以外を読み込まない設定にしています。</li>
     <li><b>Cookie は使っていません。</b></li>
     <li>住所・氏名・陳情の文面は、あなたの端末の中だけで文書にします。運営のサーバーにも、下の会社にも送りません。</li>
   </ul>
@@ -58,6 +58,7 @@
   <p>ページを開く、または画面で操作すると、次の通信が起きます。どれも、通信の相手には、通信のしくみ上かならず届く情報（あなたの IP アドレス、ブラウザの種類、見ているサイトの名前）が届きます。</p>
   <table>
     <tr><th scope="row">どこで</th><th scope="row">送る先</th><th scope="row">送る情報と、使いみち</th></tr>
+    <tr><td>どのページでも、開いたとき</td><td>このサイトのサーバー（Vercel）の閲覧数の解析（Vercel Web Analytics）</td><td>開いたページの URL などを送り、ページごとの閲覧数を数えます（送る項目の細かい一覧は、Vercel の説明で確かめきれていません）。Cookie は使いません。Vercel の説明では、訪問者の区別にはリクエストから作った値を使い、24時間で捨てるとされています（<a href="https://vercel.com/docs/analytics/privacy-policy" target="_blank" rel="noopener">Vercel の説明</a>）。数字を見られるのは運営者だけで、個人を特定するためには使いません。</td></tr>
     <tr><td>トップページ（<a href="/">/</a>）を開いたとき</td><td>Supabase（データベースの会社）</td><td>こちらから送る内容はありません。「これまでの歩み」の数（提出の報告の件数）を読み出すだけです。</td></tr>
     <tr><td>各テーマの作成画面（例：<a href="/kodomo/make">/kodomo/make</a>）で、議会・自治体を選ぶ画面</td><td>Supabase</td><td>こちらから送る内容はありません。ほかの人が報告した、議会ごとの提出の数と、寄せられた情報を読み出します。「出したら押す」を押したときだけ、押した議会・件数・（任意で）項目の報告を送ります。氏名・住所は送りません。</td></tr>
     <tr><td><a href="/feedback">/feedback</a>（ご意見のページ）</td><td>Supabase</td><td>開いたとき：公開している質問と答えを読み出します。送信ボタンを押したとき：書いたご意見（と、付けた資料）を送ります。</td></tr>
@@ -93,5 +94,6 @@
   </div>
   <div class="wrap"><p class="small"><a href="/privacy">サイトの情報の扱い（外部送信・Cookie）</a>　<a href="https://github.com/shin1007/chinjo-action" target="_blank" rel="noopener">ソースコード（GitHub）</a>　このサイトの改善の提案（Issue・プルリクエスト）を歓迎します</p></div>
 </footer>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
