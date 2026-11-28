@@ -1,77 +1,47 @@
 # SNS（note と X）運営の TODO
 
+> **やることの正本は GitHub Issues**（[ラベルの一覧](https://github.com/shin1007/chinjo-action/labels)）。このファイルは背景・経緯・決めたことのメモで、やることの一覧は持たない（2026-11-28 から）。
+
 最終更新：2026-11-25
 
 X の運用の全体は [Xの運用方法](../設計/Xの運用方法.md)。
 
-陳情アクションの宣伝用に note と X のアカウントを作り、収益化できるものはする。1行が1ステップ。上から順に、済んだら `[x]` にする。個人情報（電話番号・メールアドレス・口座）は、このファイルに書かない。このプロジェクトは運営者個人が運営しており、団体ではない（各ページのフッターに明記）。SNS のプロフィールにも同じことを書く。
+陳情アクションの宣伝用に note と X のアカウントを作り、収益化できるものはする。1行が1ステップ。済んだら Issue の側で `[x]` にする。個人情報（電話番号・メールアドレス・口座）は、このファイルに書かない。このプロジェクトは運営者個人が運営しており、団体ではない（各ページのフッターに明記）。SNS のプロフィールにも同じことを書く。
 
 規約・手数料・収益化の条件は、公式ページが自動では開けなかった（[記録](../調査/SNS収益化の規約に当たれなかった資料.md)）。このリポジトリの方針では陳情の文面には二次資料を使わないが、SNS の運営の手続きについては、二次資料（解説記事・検索結果の要約）でも足りるとして進める。ただし、二次資料に基づく数字や条件には「二次資料」と付けて残す。
 
 ## 先にやる：政治資金規正法（応援の受け付けの前提）
-- [ ] 1. 総務省の政治資金の案内（[記録](../調査/政治資金規正法と応援の受け付け.md)）を、ブラウザで開いて読む（[なるほど！政治資金](https://www.soumu.go.jp/senkyo/seiji_s/naruhodo01.html)、[あらまし（PDF）](https://www.soumu.go.jp/main_content/000174716.pdf)）。「政治団体」の解説と Q&A を確かめる。
-- [ ] 2. 個人が運営するサイトが、運営費の応援を受けることが「政治団体」にも「政治活動に関する寄附」にも当たらないか、総務省（代表 03-5253-5111。「政治資金課へ」）か都道府県の選挙管理委員会（[一覧・電話番号](https://www.soumu.go.jp/senkyo/senkyo_s/links/senkan/index.html)）に電話で聞く（話す内容は [相談の台本](相談の台本.md) の A。聞いた日と答えを記録する）。
-- [ ] 3. 答えが出るまで、応援の受け付け・収益化（サポート・Premium・広告）は始めない。
+- やること・進み具合は GitHub の Issue [#736](https://github.com/shin1007/chinjo-action/issues/736) で管理する。
 
 ## 手元の準備
-- [ ] 4. 使っていない電話番号を、人が運営する X のアカウント用に使うと決める（SMS が受け取れる状態か確認する）。
-- [ ] 5. 陳情アクション用のメールアドレスを1つ決める（運営者の個人のものと分ける）。
-- [ ] 6. アカウント名（表示名とID）を決める。サイトの名前（権利を守る陳情アクション）と合わせる。
-- [ ] 7. アイコンとヘッダーの画像を決める（`site/og-image.png`・`site/favicon.svg` を流用できる）。
+- やること・進み具合は GitHub の Issue [#737](https://github.com/shin1007/chinjo-action/issues/737) で管理する。
 
 ## X（アカウントは2つ）
 ### A. 人が運営するアカウント（収益化を検討するのはこちらだけ）
-- [ ] 8. 運営者の既存のアカウントを使う（新しく作らない）。プロフィールに「運営者個人が運営。団体ではない」と書く。[プロフィールの編集](https://x.com/settings/profile)
-- [ ] 9. プロフィール文を書く（サイトの URL、「陳情書づくりは無料」、「運営者個人が運営。団体ではない」、AI を使っていること）。
-- [ ] 10. 固定ポストを1本書く（陳情とは何か＋サイトへのリンク）。
-- [ ] 11. 最初の1週間の投稿を5本書く。調べた結果（「◯◯市議会は郵送でも審査すると公式サイトで確認」）、議会の締切、新しい項目と根拠。事実・数字は出典つきで。
-- [ ] 12. 収益化の条件（Premium、フォロワー数、インプレッション）を、公式ヘルプ（[X ヘルプセンター](https://help.x.com/)）をブラウザで開いて確かめて書く。3 が済むまで加入しない。
+- やること・進み具合は GitHub の Issue [#738](https://github.com/shin1007/chinjo-action/issues/738) で管理する。
 
 ### B. ボットのアカウント（任意。2026-11-23 に、自動投稿は必須としないと決めた。保留）
 投稿の頻度と内容は [X投稿のパターン](../設計/X投稿のパターン.md)。運営者の既存のアカウントから手で投稿する。
 設計は [SNS自動投稿の設計](../設計/SNS自動投稿の設計.md)。
-- [ ] 13. ボット用のアカウントを作る。プロフィールに「自動投稿」と運営者個人（団体ではない）を書き、Aへのリンクを置き、「自動化」ラベルをオンにする。
-- [ ] 14. 開発者コンソール（[https://developer.x.com/en/portal/dashboard](https://developer.x.com/en/portal/dashboard)）でアプリを作り、読み書きの鍵を取る。URL つきの投稿の単価を画面で確かめ、月の上限を決める。
-- [ ] 15. 鍵を GitHub の Secrets（[https://github.com/shin1007/chinjo-action/settings/secrets/actions](https://github.com/shin1007/chinjo-action/settings/secrets/actions)）に入れる（リポジトリには書かない）。
-- [ ] 16. GitHub の Settings → Environments（[https://github.com/shin1007/chinjo-action/settings/environments](https://github.com/shin1007/chinjo-action/settings/environments)）で「x-post」を作り、Required reviewers に運営者を入れ、Secrets に X_API_KEY・X_API_SECRET・X_ACCESS_TOKEN・X_ACCESS_SECRET を入れる。Actions の「post-x」（[https://github.com/shin1007/chinjo-action/actions/workflows/post-x.yml](https://github.com/shin1007/chinjo-action/actions/workflows/post-x.yml)）を、dry_run を true にして一度動かす。
-- [ ] 17. 最初の1か月は、承認してから投稿する。問題がなければ、承認を外すか決める。
-- [ ] 18. （候補）Bluesky にも同じ告知を出せるか確かめる（無料の API が使えるかは未確認）。
+- やること・進み具合は GitHub の Issue [#739](https://github.com/shin1007/chinjo-action/issues/739) で管理する。
 
 ## note
-- [ ] 19. 5のメールアドレスで、note のアカウントを作る（[https://note.com/signup](https://note.com/signup)）。名前・自己紹介（運営者個人、団体ではない、AI を使っていること）・アイコンを設定する。
-- [ ] 20. 最初の記事を1本書く：「陳情とは何か、SNS への投稿と何が違うか」（`/about` を元にする）。終わりに、サイトへのリンクと、「陳情書づくりは無料」を入れる。
-- [ ] 21. 記事は、Claude が `docs/投稿/note/` に下書きを置き、運営者が読んで画面に貼って公開する（公式の API は個人には使えないため）。頻度は、大きめの更新のときと、**2週に1本**のテーマ紹介（6テーマを順に。1周12週。続けられるなら週1本に）。
-- [ ] 22. note の収益化（サポート・メンバーシップ・有料記事）の手続きと、本人確認・口座が要るかを公式ヘルプで確かめる。始めるのは 3 の後。収益は期待せず、有料にするのは本文以外（舞台裏の記録など）にとどめる。
+- やること・進み具合は GitHub の Issue [#740](https://github.com/shin1007/chinjo-action/issues/740) で管理する。
 
 ## 投稿の材料（[海外の請願制度](../調査/海外の請願制度.md)）
-- [ ] 23. 海外の請願制度のうち確かめられていないもの（ドイツ連邦議会の公開請願の署名数の基準＝取扱い指針、欧州議会の請願＝403）を、ブラウザで公式ページを開いて確かめる。（2026-11-24：ドイツ連邦議会の基本法第17条と手続の原則、欧州市民イニシアティブは公式ページで確かめて [海外の請願制度](../調査/海外の請願制度.md) に書いた）（日本の請願法・憲法第16条・地方自治法第99/124/125条・国会法第79条は、2026-11-23 に e-Gov の API v2 で取り直した。済み）
-- [ ] 24. （2026-11-24：ジャンル別の下書き18本とnote見出し案を [下書きのパターン](../投稿予定/下書きのパターン.md) に書いた。運営者が口調・型を選ぶ）確かめられたものから、X の投稿と note の記事の下書きを作る（日本の制度と同じものとして書かない）。
-- [ ] 25. Grok で X 上の情報を集める（X は自動では読めないため）。依頼文は `scripts/collect-prompt-grok.md`。【テーマ】を書き換えて貼り、結果を貼ってもらう。受け取ったあとの手順は同じファイルの末尾。Grok の回答は二次資料で、事実の根拠にも陳情の文面にも使わない。X の投稿の URL は運営者が開いて確かめる。下書きの外部レビューは従来どおり `scripts/review-prompt-grok.md`。投稿文の自動生成・自動返信には使わない。
+- やること・進み具合は GitHub の Issue [#741](https://github.com/shin1007/chinjo-action/issues/741) で管理する。
 
 ## 時間・フォロー（[Xの時間とフォローの方針](../設計/Xの時間とフォローの方針.md)）
-- [ ] 26. カレンダー用のファイルを取り込む（[投稿予定](../投稿予定/2026年11-12月.md) の「リマインド」）。通知が付くか、1件で確かめる。
-- [ ] 27. （Slack を使うなら）Slack の Webhook URL を作り（[https://api.slack.com/apps](https://api.slack.com/apps)）、GitHub の Secrets（[https://github.com/shin1007/chinjo-action/settings/secrets/actions](https://github.com/shin1007/chinjo-action/settings/secrets/actions)）に `SLACK_WEBHOOK_URL` を入れ、`slack-remind`（[https://github.com/shin1007/chinjo-action/actions/workflows/slack-remind.yml](https://github.com/shin1007/chinjo-action/actions/workflows/slack-remind.yml)）を `now=2026-11-24T07:20:00+09:00`・`dry_run=false` で動かして、届くか確かめる（[手順](../投稿予定/2026年11-12月.md)）。
-- [ ] 28. X の「予約投稿」の使える条件と動画の上限を、公式の説明で確かめる。動画を作ったら、予定の「画像」の行にファイルの場所を書く。
-- [ ] 29. （保留）X の API で動画つきの投稿を自動で出す。公式の手順を確かめ、鍵を入れてから。
-- [ ] 30. [投稿予定](../投稿予定/2026年11-12月.md) の最初の投稿（11/24 7:30）を出す。
-- [ ] 31. 4週間の試し（時間帯と頻度）を始める。1本ごとに、24時間後の数字を `docs/調査/X投稿の記録.csv` に書く。
-- [ ] 32. 非公開リストを作る（議会・自治体・省庁・裁判所・報道・研究者・団体）。公式アカウントの一覧は、`scripts/collect-prompt-grok.md` の B で Grok に頼み、運営者が確かめる。
-- [ ] 33. フォローは、最初の2週間は1日5〜10件まで。理由のあるアカウントだけにし、フォロー後1週間のうちに1回やりとりする。一括フォロー・フォロー解除のくり返しはしない。
+- やること・進み具合は GitHub の Issue [#742](https://github.com/shin1007/chinjo-action/issues/742) で管理する。
 
 ## 運用のきまり
-- [ ] 34. 誤った投稿を見つけたときの止め方（自動投稿を止める操作）と訂正の手順を、このファイルに書く。
-- [ ] 35. 議員・政党・自治体を名指しで批判しない、議員への自動のメンションをしない、返信・反対意見への対応の方針を決めて書く。
-- [ ] 36. 二段階認証（[https://x.com/settings/account/login_verification](https://x.com/settings/account/login_verification)）を入れ、運営者以外の復旧手段（回復コードの保管）を用意する。
+- やること・進み具合は GitHub の Issue [#743](https://github.com/shin1007/chinjo-action/issues/743) で管理する。
 
 ## サイトに出す
-- [ ] 37. 更新のお知らせのページ `/news`（トップページ `/` の「これまでの歩み」の下からリンク）を作る。X も note も、これを元に書く。できるまでは「準備中」と出す。
-- [ ] 38. アカウントができたら、`/trouble#support` の「応援の方法」の下と、トップページ `/` のフッターにリンクを出す。`/trouble` の SNS の項目を「開設した」に書き換える。
-- [ ] 39. 収益化・外部リンクを始めたら、`/tokushoho` と `/privacy`（外部送信の一覧）に書く。
-- [ ] 40. SNS からの訪問を測る方法を決める（サイトのプライバシー方針を崩さない範囲で）。
+- やること・進み具合は GitHub の Issue [#744](https://github.com/shin1007/chinjo-action/issues/744) で管理する。
 
 ## 税・お金
-- [ ] 41. 収益が出たときの扱い（雑所得・事業所得、金額のめやす、確定申告の要否）を、国税庁の公式の案内（[税の相談](https://www.nta.go.jp/taxes/shiraberu/sodan/index.htm)、[所轄の税務署](https://www.nta.go.jp/about/organization/access/map.htm)）で確かめる。
-- [ ] 42. 収益と運営費（Claude の利用料）の月ごとの記録を、`docs/非公開/` に付け始める。
+- やること・進み具合は GitHub の Issue [#745](https://github.com/shin1007/chinjo-action/issues/745) で管理する。
 
 ## 続けるきまり
 - 同じ文面の大量投稿・自動の連投・フォロワーの購入はしない。
