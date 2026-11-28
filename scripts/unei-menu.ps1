@@ -10,9 +10,10 @@ while ($true) {
   Write-Host ''
   node scripts/unei.js next
   Write-Host ''
-  Write-Host ' t  電話で聞く画面（議会の一覧・番号・台本・入力。ブラウザが開きます）'
-  Write-Host ' o  毎朝見る画面をまとめて開く（Issues・議会や自治体からの返事・Vercel・BMC）'
-  Write-Host ' x  X に投稿した（今の投稿予定を済みにして公開。Slack のリマインドが止まる）'
+  Write-Host ' a  【毎日】まとめて：Issues（運営者の作業）を開く＋電話の画面（1日3件ほど）'
+  Write-Host ''
+  Write-Host ' ---- 個別に ----'
+  Write-Host ' t  電話の画面だけ（議会の一覧・番号・台本・入力。ブラウザが開きます）'
   Write-Host ' n  X の投稿の24時間後の数字を入れる（記録の CSV に足して公開）'
   Write-Host ' m  毎月の応援（BMC の Webhook で数えられない分）を入れて、/trouble の運営費の図を作り直す'
   Write-Host ' r  手で開いて保存してほしい資料のページを、まとめてブラウザで開く（TODO の13の節）'
@@ -60,18 +61,12 @@ while ($true) {
       Start-Process powershell -ArgumentList '-NoExit', '-Command', "Set-Location '$PWD'; node scripts/phone.js" -WindowStyle Minimized
       continue
     }
-    'o' {
-      @(
-        'https://github.com/shin1007/chinjo-action/issues?q=is%3Aopen+label%3A%E9%81%8B%E5%96%B6%E8%80%85%E3%81%AE%E4%BD%9C%E6%A5%AD',
-        'https://mail.google.com/mail/u/0/#search/in%3Ainbox%20-from%3Ame%20(%E8%AD%B0%E4%BC%9A%20OR%20%E8%AD%B0%E4%BC%9A%E4%BA%8B%E5%8B%99%E5%B1%80%20OR%20%E9%99%B3%E6%83%85%20OR%20%E8%AB%8B%E9%A1%98%20OR%20%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B)%20newer_than%3A14d',
-        'https://vercel.com/shin1007s-projects/chinjo-action/analytics',
-        'https://buymeacoffee.com/dashboard'
-      ) | ForEach-Object { Start-Process $_ }
+    'a' {
+      # 毎日の分：Issues（運営者の作業）を開き、電話の画面を起動する（すでに動いていれば開くだけ）
+      Start-Process 'https://github.com/shin1007/chinjo-action/issues?q=is%3Aopen+label%3A%E9%81%8B%E5%96%B6%E8%80%85%E3%81%AE%E4%BD%9C%E6%A5%AD'
+      Start-Process powershell -ArgumentList '-NoExit', '-Command', "Set-Location '$PWD'; node scripts/phone.js" -WindowStyle Minimized
+      Write-Host '電話は平日1日3件ほど（電話の画面の一覧の上から）。'
       continue
-    }
-    'x' {
-      $when = Read-Host '日時（空のまま Enter で、いちばん近い予定。指定するなら 12/1 7:30）'
-      if ($when) { node scripts/post-done.js ($when -split ' ') } else { node scripts/post-done.js }
     }
     'n' { node scripts/post-stats.js }
     'm' {
