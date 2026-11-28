@@ -1510,6 +1510,30 @@
       "fetchedAt": "2026-11-28T01:33:32.263Z",
       "sha256": "861d4b82e377ee25888ba97ec30f4429c40269dd699bce336e4b58cd2c4f8403",
       "localPath": "sources/archive/2026-11-28-861d4b82e377.pdf"
+    },
+    {
+      "url": "https://www.moj.go.jp/isa/content/001435885.pdf",
+      "title": "出入国在留管理庁「令和5年改正入管法の運用状況」",
+      "note": "Web検索で見つけた",
+      "fetchedAt": "2026-11-28T01:36:15.306Z",
+      "sha256": "1b79e5e5c397f3f4d8d7cf5c0b650038343d297f90911e7e3f848fcfc7ca1666",
+      "localPath": "sources/archive/2026-11-28-1b79e5e5c397.pdf"
+    },
+    {
+      "url": "https://www.moj.go.jp/content/001445665.pdf",
+      "title": "法務省「女性に関する人権相談について」",
+      "note": "Web検索で見つけた",
+      "fetchedAt": "2026-11-28T01:36:15.562Z",
+      "sha256": "e36bd6d83afff8b010a9fff94dc811ba77ab24c0f853b9e5aa6aed2efa12b219",
+      "localPath": "sources/archive/2026-11-28-e36bd6d83aff.pdf"
+    },
+    {
+      "url": "https://www.pref.osaka.lg.jp/documents/105336/20251008.pdf",
+      "title": "文部科学省私学行政課 事務連絡（令和7年10月8日、大阪府の写し）",
+      "note": "Web検索で見つけた",
+      "fetchedAt": "2026-11-28T01:36:15.824Z",
+      "sha256": "bc6ff3d1ba8931aa8649e80077f7e19db5f2ad7e6492909624cc137d8d08e610",
+      "localPath": "sources/archive/2026-11-28-bc6ff3d1ba89.pdf"
     }
   ]
 }
