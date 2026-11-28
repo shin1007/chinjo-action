@@ -142,7 +142,16 @@ def card(lines, big=None, big_sub=None, note=None, accent=False):
 
 def step_frame(i):
     total = sum(s[3] for s in howto.STEPS[:i + 1])
-    return howto.frame(i, total, howto.STEPS[i][4] in ('stamp', 'post'), BASE)
+    steps = howto.STEPS
+    if steps[i][4] == 'post':  # 締切に遅れても次の議会に回るだけなので、動画では締切に触れない
+        howto.STEPS = steps[:i] + [steps[i][:1] + ('近くのポストに入れる',) + steps[i][2:]] + steps[i + 1:]
+    try:
+        return howto.frame(i, total, steps[i][4] in ('stamp', 'post'), BASE)
+    finally:
+        howto.STEPS = steps
+
+
+MOCHIMONO = ROOT / 'site' / 'img' / 'mochimono.png'  # 持ちものの絵（/dansei/guide などに載せているもの。1080×1350）
 
 
 # 台本の可変部分。固定：4（262の議会）・5（署名と費用）・6（手順）・9（検索）。
@@ -206,6 +215,7 @@ def scenes(pattern=0):
               note=f'公式サイトの案内で確かめた数（全{r["total"]}議会のうち）'), f'確かめられた{r["reach"]}の議会では、陳情は議員に届きます。'),
         (card(['署名を集める必要は', 'ありません。'], big=f'約{cost}円', big_sub='陳情5件を郵送で出す費用',
               note='参考資料を添えるときは、議会の決まりを確かめてください'), f'署名を集める必要はありません。費用は、5件で、およそ{cost}円です。'),
+        (Image.open(MOCHIMONO).convert('RGB'), '用意するのは、USBメモリーかスマホ、封筒、クリアファイル、ペン、切手です。'),
         (step_frame(0), 'サイトで、求めることと、出す先の議会を選びます。'),
         (step_frame(2), 'コンビニで印刷します。'),
         (step_frame(6), '名前を書いて、封筒に入れて、'),
@@ -298,7 +308,7 @@ def sheets(out_dir, per=8):
             d.text((12, y + 10), f'案{pi:02d}', font=font(34), fill=INK)
             d.text((12, y + 56), PATTERNS[pi][0], font=font(24, False), fill=SUB)
             sc = scenes(pi)
-            for ci, si in enumerate((0, 1, 2, 9, 10)):
+            for ci, si in enumerate((0, 1, 2, 10, 11)):
                 im = compose(*sc[si]).resize((tw, th), Image.LANCZOS)
                 sheet.paste(im, (lab + ci * (tw + 8), y))
         name = out_dir / f'sheet-{rows[0]:02d}-{rows[-1]:02d}.png'
