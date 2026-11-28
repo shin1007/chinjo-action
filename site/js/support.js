@@ -1,6 +1,6 @@
 (() => {
   // supabase/schema.sql の support_payments を反映し、Webhook を登録して確かめたら true にする（それまでは support.json の手で書き写した額）
-  const SUPPORT_LIVE = false;
+  const SUPPORT_LIVE = true;
   const URL = 'https://oquuysfeistgpgrpeswq.supabase.co';
   const KEY = 'sb_publishable_IAXFoFaXZ3bjk-49Z-pD9w_SQZEgzXE';
   const el = (tag, text, cls) => {
