@@ -30,7 +30,7 @@ window.ASKS = (window.ASKS || []).concat([
     text: '{宛先}の国民健康保険において、外国人の加入者の保険料の未納の状況を把握し、国が進める在留審査との情報連携に確実に対応できるよう、システムの改修の要否の確認や事務の手順の整備を前もって行うこと。' },
   { id: 'l_land', scope: 'local', route: 'chinjo', defaultOn: true, label: '水源地・重要な土地の取引の把握',
     refs: [{ t: '北海道「水資源保全地域内の土地取引行為に係る事前届出」', url: 'https://www.pref.hokkaido.lg.jp/ss/stt/mizusigen/mizusigen_todokede.html', note: '3か月前までに届出。面積の基準なし' },
-      { t: '内閣官房 検討会「安全保障上重要な土地等の取得等に関するルールの在り方について 提言」（令和8年10月）', url: 'https://www.cas.go.jp/jp/seisaku/symbiotic_society/gaikokujin_tochishutoku/kaisai-jokyo/dai5/teigen.pdf' },
+      { t: '内閣官房 検討会「安全保障上重要な土地等の取得等に関するルールの在り方について 提言」（令和8年10月）', url: 'https://www.cas.go.jp/jp/seisaku/symbiotic_society/gaikokujin_tochishutoku/kaisai-jokyo/dai5/teigen.pdf', note: '7〜8ページ「許可制の導入について」（許可制が本制度の目的に最も適合）、10ページ「対象となる者」（日本人及び日本法人も含める）' },
       { t: '新井賢治「重要土地等調査法の運用状況と課題」『立法と調査』第462号（参議院、2023年12月）', url: 'https://www.sangiin.go.jp/japanese/annai/chousa/rippou_chousa/backnumber/2023pdf/20231218006.pdf', note: '2. 外国人等による土地所有規制の限界', secondary: true }],
     forStaff: '実施にあたっては、北海道の水資源保全地域の制度のように、条例で対象の地域を指定し、その地域内の土地の取引について事前の届出を求める方法が考えられます。条例の制定までの間は、国土利用計画法に基づく届出や登記の情報など、既に得られる情報を所管課で整理することから始められます。',
     title: '水源地等の重要な土地の取引の把握',
