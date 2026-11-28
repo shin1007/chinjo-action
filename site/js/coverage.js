@@ -43,6 +43,13 @@
       ['要望：回答がもらえるかがわかった', I.yobo.reply, ''],
       ['要望：Webフォームで出せる', I.yobo.form, ''],
       ['要望：匿名で出せる', I.yobo.anonymous_ok, ''],
+      ...(I.extra ? [
+        ['陳情：住民以外の扱いがわかった', I.extra.chinjo_nonresident, '郵送・持参・電子申請などのどれかで、住民以外の陳情を審査するか・配るだけか・受け付けないかを確かめた議会'],
+        ['陳情：住民以外もWebで出せる', I.extra.chinjo_form_nonresident_ok, '電子申請・フォームで、住民以外の陳情も受け付けると確かめた議会'],
+        ['陳情：議会事務局のメールアドレスがわかった', I.extra.chinjo_email_addr, '問い合わせに使うもの'],
+        ['要望：住民以外の扱いがわかった', I.extra.yobo_nonresident, ''],
+        ['要望：住民以外もWebで出せる', I.extra.yobo_form_nonresident_ok, '公式の案内か、担当課の回答で確かめた自治体'],
+      ] : []),
       ['寄せられた意見と回答の一覧が見つかった', I.kaito, '市長への手紙などの「寄せられた意見と回答」。要望の文面づくりの参考にしています'],
     );
     for (const [label, x, memo] of rows) {
