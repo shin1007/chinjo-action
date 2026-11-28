@@ -20,6 +20,7 @@ while ($true) {
   Write-Host ' 6  記録を公開する（コミットして main に取り込む）'
   Write-Host ' 7  カレンダーの .ics を作り直す'
   Write-Host ' 8  チームみらいへの提出を試す（文面を入れるところまで。送りません）'
+  Write-Host ' d  済んだこと（出したもの）を見る'
   Write-Host ' 0  終わる'
   Write-Host ''
   $n = Read-Host '番号を入れて Enter'
@@ -36,6 +37,7 @@ while ($true) {
     '6' { & "$PSScriptRoot\unei-publish.ps1" }
     '7' { node scripts/unei.js ics }
     '8' { node scripts/unei.js mirai --trial }
+    'd' { node scripts/unei.js done }
     '9' {
       $to = Read-Host '送り先（空のまま Enter で、まだ出していない次の送り先）'
       if ($to) { node scripts/unei-form.js $to } else { node scripts/unei-form.js }

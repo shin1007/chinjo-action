@@ -9,6 +9,7 @@
 //   node scripts/unei.js sync              … 受け付け方のDBから、住民以外もフォームで出せるとわかった議会・自治体を対象に足す（status・forms でも毎回自動で行う）
 //   node scripts/unei.js record <出した先> <項目id> [YYYY-MM-DD]   … 手で出したものを記録に足す（例：record 三鷹市議会 n_restore）
 //   node scripts/unei.js round-done [YYYY-MM-DD]                    … いまの回を「出した」にする
+//   node scripts/unei.js done [--since YYYY-MM-DD] [--json] … 済んだこと（出したもの・済んだ回・チームみらいの進み）を出す
 //   node scripts/unei.js ics               … リマインダー用のカレンダー（docs/提言/リマインダー.ics）を書き出す
 //
 // mirai は Playwright を使う。既定では C:/Users/shin1/.claude/tools/browser の Playwright を読む（PLAYWRIGHT_DIR で変えられる）。
@@ -77,8 +78,10 @@ function status() {
   if (m.id) console.log(`${m.due <= t ? '★ やる' : '  まだ'}　チームみらい：${dateJa(m.due)}${m.due < t ? '（遅れています）' : ''}　「${A[m.id] ? A[m.id].label : m.id}」（残り${m.left}件）→ node scripts/unei.js mirai`);
   else console.log('  チームみらい：全部の項目を出し終えました');
   const r = currentRound(data);
-  if (r) console.log(`${r.date <= t ? '★ やる' : '  まだ'}　議会・自治体（${THEME_NAME[r.theme]}）：${dateJa(r.date)}${r.status === 'tentative' ? '（仮の予定）' : r.status === 'postponed' ? '（延期中。調査を進めてから）' : ''}　→ node scripts/unei.js forms`);
-  return { miraiDue: m.id && m.due <= t, formsDue: r && r.date <= t };
+  if (r) console.log(`${r.status === 'postponed' ? '  保留' : r.date <= t ? '★ やる' : '  まだ'}　議会・自治体（${THEME_NAME[r.theme]}）：${dateJa(r.date)}${r.status === 'tentative' ? '（仮の予定）' : r.status === 'postponed' ? '（延期中。調査を進めてから）' : ''}　→ node scripts/unei.js forms`);
+  const last = data.sent.map((x) => x.date).sort().pop();
+  console.log(`  済んだこと：出したもの${data.sent.length}件${last ? `（最後は${dateJa(last)}）` : ''}　→ node scripts/unei.js done`);
+  return { miraiDue: m.id && m.due <= t, formsDue: r && r.status !== 'postponed' && r.date <= t };
 }
 
 // 受け付け方のDB（site/data/intake/*.jsonl）で、オンラインのフォームを住民以外も使える（審査・配付・受付）とわかったところを forms.targets に足す。
@@ -242,9 +245,30 @@ function ics() {
   console.log(`書き出しました：${out}`);
 }
 
+// 済んだこと：sent（出したもの）と、done の回、チームみらいの進み。--since で日を絞り、--json で機械向けに出す
+function doneList(since = '') {
+  const { data } = load();
+  const A = asks();
+  const label = (id) => (A[id] ? A[id].label : id);
+  const sent = data.sent.filter((r) => r.date >= since).sort((a, b) => a.date.localeCompare(b.date))
+    .map((r) => ({ date: r.date, to: r.to, via: r.via || '', what: r.ask ? label(r.ask) : r.title || '' }));
+  const rounds = data.forms.rounds.filter((r) => r.status === 'done' && r.date >= since).map((r) => ({ date: r.date, theme: THEME_NAME[r.theme] }));
+  const m = nextMirai(data);
+  return { sent, rounds, mirai: { done: data.mirai.order.length - m.left, of: data.mirai.order.length, next: m.id ? { what: label(m.id), due: m.due } : null } };
+}
+function done() {
+  const i = args.indexOf('--since');
+  const r = doneList(i >= 0 ? args[i + 1] : '');
+  if (args.includes('--json')) { console.log(JSON.stringify(r, null, 1)); return; }
+  console.log(`出したもの（${r.sent.length}件）`);
+  for (const x of r.sent) console.log(`  ${dateJa(x.date)}　${x.to}　${x.what}`);
+  console.log(`議会・自治体の回で済んだもの：${r.rounds.length ? r.rounds.map((x) => `${dateJa(x.date)}（${x.theme}）`).join('、') : 'まだない'}`);
+  console.log(`チームみらい：${r.mirai.done}／${r.mirai.of}件${r.mirai.next ? `。次は${dateJa(r.mirai.next.due)}「${r.mirai.next.what}」` : '。全部出した'}`);
+}
+
 const [cmd, ...args] = process.argv.slice(2);
 const run = {
-  status, forms, ics, sync: () => sync(false),
+  status, forms, ics, done, sync: () => sync(false),
   mirai: () => mirai(args.includes('--dry'), args.includes('--trial')),
   next,
   record: () => record(...args),
@@ -257,4 +281,4 @@ if (require.main !== module) {
 } else {
   Promise.resolve(run()).catch((e) => { console.error(e.message); process.exit(1); });
 }
-module.exports = { sync, nextDue, nextMirai, miraiText, dateJa, addDays };
+module.exports = { doneList, sync, nextDue, nextMirai, miraiText, dateJa, addDays };
