@@ -1446,6 +1446,38 @@
       "fetchedAt": "2026-11-28T00:02:00.592Z",
       "sha256": "1605e84fd69790c6fe99aa0835adbba6269ce3f8a0ab3d9607d2b1a863431e7e",
       "localPath": "sources/archive/2026-11-28-1605e84fd697.pdf"
+    },
+    {
+      "url": "https://www.soumu.go.jp/main_content/001094645.pdf",
+      "title": "総務省「住民基本台帳事務処理要領」（昭和42年10月4日 法務省民事甲第2671号・自治振第150号ほか、最新の改正版）",
+      "note": "第5-10：DV等支援措置。期間は1年、終了の1か月前から延長の申出、市町村長が支援の必要性がなくなったと認めるときは終了",
+      "fetchedAt": "2026-11-28T00:18:42.523Z",
+      "sha256": "aee75810dca37cd181768c03f6d1885aa635a14279ba0967298cf9135148383c",
+      "localPath": "sources/archive/2026-11-28-aee75810dca3.pdf"
+    },
+    {
+      "url": "https://www.soumu.go.jp/main_sosiki/jichi_gyousei/daityo/gaiyou.html",
+      "title": "総務省「住民基本台帳等」",
+      "note": "制度の案内と通知の一覧",
+      "fetchedAt": "2026-11-28T00:18:42.895Z",
+      "sha256": "222e66bb960eb37e534d984d69f8034a890934083bae7fb4ae60fea5ed1e1044",
+      "localPath": "sources/archive/2026-11-28-222e66bb960e.html"
+    },
+    {
+      "url": "https://www.senkyo.metro.tokyo.lg.jp/qa/qa-kifu",
+      "title": "東京都選挙管理委員会「選挙Q&A（寄附）」",
+      "note": "政治家の選挙区内への寄附の禁止の一般的な説明。役務の無償提供には触れていない",
+      "fetchedAt": "2026-11-28T00:18:43.286Z",
+      "sha256": "ac9ebe804c32626969904844bd70a4584aeb3d4174dfbd1ebc47619cde2499f7",
+      "localPath": "sources/archive/2026-11-28-ac9ebe804c32.html"
+    },
+    {
+      "url": "https://faq.city.kobe.lg.jp/faq/show/1498?site_domain=default",
+      "title": "神戸市FAQ「個人が政治家（公職の候補者等）に寄附はできますか？」",
+      "note": "政治資金規正法：個人から候補者への労務の無償提供も寄附として量的制限の対象",
+      "fetchedAt": "2026-11-28T00:18:43.683Z",
+      "sha256": "4e7ac677dc91bcb94e1f000537fe573cd26dd116da6b55269efcf266311d832e",
+      "localPath": "sources/archive/2026-11-28-4e7ac677dc91.html"
     }
   ]
 }
