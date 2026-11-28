@@ -75,7 +75,10 @@ create trigger check_report before insert on public.reports for each row execute
 -- 誰でも報告を書き込めるが、1件ずつの行は読めない
 alter table public.reports enable row level security;
 drop policy if exists "anyone can report" on public.reports;
-create policy "anyone can report" on public.reports for insert to anon with check (true);
+-- 利用者が入れられるのは運営用の列が初期値のままの行だけ（運営用の列はトリガーでも初期値に戻す）
+create policy "anyone can report" on public.reports for insert to anon with check (not hidden);
+-- トリガーの関数は API から呼ばせない（トリガーとしては動く）
+revoke execute on function public.check_report() from public, anon, authenticated;
 -- 書き込めるのは都道府県と議会名だけ（created_at を偽って「最後の報告日」を変えられないように）
 -- Supabase は public のテーブルに anon・authenticated の全権限を最初から付けるので、使うものだけを残す
 revoke all on public.reports, public.councils, public.report_guard from anon, authenticated;
@@ -173,7 +176,10 @@ create trigger check_tip before insert on public.council_tips for each row execu
 -- 誰でも書き込めるが、だれも読めない（運営は Supabase の管理画面で見る）
 alter table public.council_tips enable row level security;
 drop policy if exists "anyone can tip" on public.council_tips;
-create policy "anyone can tip" on public.council_tips for insert to anon with check (true);
+-- 利用者が入れられるのは運営用の列が初期値のままの行だけ（運営用の列はトリガーでも初期値に戻す）
+create policy "anyone can tip" on public.council_tips for insert to anon with check (status = 'new');
+-- トリガーの関数は API から呼ばせない（トリガーとしては動く）
+revoke execute on function public.check_tip() from public, anon, authenticated;
 revoke all on public.council_tips from anon, authenticated;
 grant insert (pref, council, mail, bring, online, online_url, deadline, copies, source_url, note) on public.council_tips to anon;
 
@@ -242,7 +248,10 @@ create trigger check_feedback before insert on public.feedback for each row exec
 -- 誰でも書き込めるが、だれも読めない（運営は Supabase の管理画面か、下のビューで見る）
 alter table public.feedback enable row level security;
 drop policy if exists "anyone can send feedback" on public.feedback;
-create policy "anyone can send feedback" on public.feedback for insert to anon with check (true);
+-- 利用者が入れられるのは運営用の列が初期値のままの行だけ（運営用の列はトリガーでも初期値に戻す）
+create policy "anyone can send feedback" on public.feedback for insert to anon with check (status = 'new' and not published and not faq);
+-- トリガーの関数は API から呼ばせない（トリガーとしては動く）
+revoke execute on function public.check_feedback() from public, anon, authenticated;
 revoke all on public.feedback from anon, authenticated;
 grant insert (kind, theme, target, body, source_url, file_path) on public.feedback to anon;
 
@@ -327,7 +336,10 @@ create trigger check_outcome before insert on public.outcomes for each row execu
 
 alter table public.outcomes enable row level security;
 drop policy if exists "anyone can report outcome" on public.outcomes;
-create policy "anyone can report outcome" on public.outcomes for insert to anon with check (true);
+-- 利用者が入れられるのは運営用の列が初期値のままの行だけ（運営用の列はトリガーでも初期値に戻す）
+create policy "anyone can report outcome" on public.outcomes for insert to anon with check (not hidden);
+-- トリガーの関数は API から呼ばせない（トリガーとしては動く）
+revoke execute on function public.check_outcome() from public, anon, authenticated;
 revoke all on public.outcomes from anon, authenticated;
 grant insert (pref, council, stage, result) on public.outcomes to anon;
 
