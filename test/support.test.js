@@ -62,7 +62,7 @@ test('plan：現在額・目標が揃っていない、または段階が前よ�
   assert.strictEqual(plan({ collected: 100, stages: [{ name: 'a', goal: 5000 }, { name: 'b', goal: 5000 }] }), null);
   assert.strictEqual(plan({ collected: -1, stages }), null);
   assert.strictEqual(plan({ collected: 100 }), null);
-  assert.strictEqual(plan(data), plan(data));
+  assert.deepStrictEqual(plan(data), plan(data));
 });
 
 test('応援者の欄には表示名だけを持ち、金額は持たない', () => {
