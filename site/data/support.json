@@ -1,5 +1,5 @@
 {
-  "_memo": "応援の集まり具合と応援者の表示。手で更新する（各サービスの管理画面で金額を確かめて書き写す）。collected はその月の応援の合計（円）、stages は段階ごとの目標（goal はその月の合計がいくらに届けば達成か。前の段階より大きくする。goal が全部入り collected が入るまで、集まり具合は出さない）。supporters は掲載を希望された方の表示名（順位ではなく登録順。金額は持たない）。methods が空の間は「準備中」と表示する。Buy Me a Coffee（https://buymeacoffee.com/shin1007）は 2026-11-15 も 404 のため外した。直ったら methods に戻す。",
+  "_memo": "応援の集まり具合と応援者の表示。手で更新する（各サービスの管理画面で金額を確かめて書き写す）。collected はその月の応援の合計（円）、stages は段階ごとの目標（goal はその月の合計がいくらに届けば達成か。前の段階より大きくする。goal が全部入り collected が入るまで、集まり具合は出さない）。supporters は掲載を希望された方の表示名（順位ではなく登録順。金額は持たない）。methods が空の間は「準備中」と表示する。Buy Me a Coffee（https://buymeacoffee.com/shin1007）は 2026-11-28 に公開を確かめて methods に入れた。",
   "updated": null,
   "month": null,
   "collected": null,
@@ -15,6 +15,12 @@
       "note": "使用量が Pro の5倍になる"
     }
   ],
-  "methods": [],
+  "methods": [
+    {
+      "name": "Buy Me a Coffee",
+      "url": "https://buymeacoffee.com/shin1007",
+      "note": "Buy Me a Coffee（海外のサービス）の画面で、金額を選んで応援できます。金額はドル建てで、カード会社の換算で円で請求されます。見返りはありません。"
+    }
+  ],
   "supporters": []
 }
