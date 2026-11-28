@@ -1,6 +1,26 @@
 // 自動で見つけたページが違っていた・見つからなかったときに、手で確かめたページ（2026-11-11 に開いて題を確かめた）。
 // キー：都道府県/市区町村（"@" は都道府県）→ [URL, 題]
 module.exports = {
+  // 2026-11-28 にサイトマップ・WebSearch で見つけ、公式ページの本文で確かめたページ
+  '北海道/滝川市': ['https://www.city.takikawa.lg.jp/site/shimin-koe/', '市民の声を公表しています'],
+  '北海道/紋別市': ['https://mombetsu.jp/administration/?content=542', '市長へのメール'],
+  '千葉県/袖ヶ浦市': ['https://www.city.sodegaura.lg.jp/life/18/157/1311/', '市民の声制度'],
+  '埼玉県/和光市': ['https://www.city.wako.lg.jp/shisei/kocho/index.html', '市民の声・広聴'],
+  '埼玉県/蕨市': ['https://www.city.warabi.saitama.jp/shisei/mayor/tegami/index.html', '市長への手紙'],
+  '大阪府/交野市': ['https://www.city.katano.osaka.jp/contact/toiawase', '市へのお問い合わせ'],
+  '大阪府/泉南郡岬町': ['https://www.town.misaki.osaka.jp/soshiki/4218.html', '町へのご意見やご提案に対する回答について'],
+  '大阪府/藤井寺市': ['https://www.city.fujiidera.lg.jp/soshiki/shiminseikatsu/kyoudoujinken/shitsumon/1437714838555.html', '市への意見や要望の提出はどうすればいいですか。'],
+  '山形県/天童市': ['https://www.city.tendo.yamagata.jp/municipal/teigen/teigenform.html', '山形県天童市'],
+  '山梨県/笛吹市': ['https://www.city.fuefuki.yamanashi.jp/shisejoho/shinogaiyo/shichohenotegami.html', '笛吹市'],
+  '愛知県/碧南市': ['https://www.city.hekinan.lg.jp/city_info/public_hearing/13659.html', '市長への手紙'],
+  '新潟県/佐渡市': ['https://www.city.sado.niigata.jp/life/4/36/184/', '市政へのご意見'],
+  '新潟県/見附市': ['https://www.city.mitsuke.niigata.jp/soshiki/2/1036.html', '「市長への提案」の紹介'],
+  '福岡県/筑後市': ['https://www.city.chikugo.lg.jp/shisei/_6166/_1594/_1596.html', '市政についての意見・要望'],
+  '福島県/双葉郡葛尾村': ['https://www.katsurao.org/soshiki/21/92.html', '「かつらお意見箱」の設置について'],
+  '茨城県/潮来市': ['https://www.city.itako.lg.jp/shisei/ko-koc/koucyo/page000890.html', '市長へのたより&nbsp;'],
+  '茨城県/龍ヶ崎市': ['https://www.city.ryugasaki.ibaraki.jp/shisei/koho/tegami/index.html', '市長への手紙'],
+  '青森県/東津軽郡外ケ浜町': ['https://www.town.sotogahama.lg.jp/gyosei/koutyou/', '広聴（まちづくり提案・意見）'],
+  '鳥取県/日野郡江府町': ['https://www.town-kofu.jp/2/1/2/7-copy/m190/', '未来のまちをつくるあなたの声'],
   // 2026-11-28 に WebSearch で見つけ、公式ページの本文で出し方を確かめたページ
   '石川県/金沢市': ['https://www4.city.kanazawa.lg.jp/soshikikarasagasu/shiminkyodosuishinka/yokuarushitsumon/2755.html', '市政に対して意見を言いたいのですが、どうしたらよいのですか。'],
   '大阪府/茨木市': ['https://www.city.ibaraki.osaka.jp/kikou/sangyo/shiminseikatsu/menu/shiminsodankakari/ideashukei/koremadeniitadaitaaidea/R7_idea/67000.html', '市政へのアイデアと市の考え方'],
