@@ -440,6 +440,54 @@ window.UNEI = {
     "handling": "accept",
     "page": "https://www.city.niihama.lg.jp/soshiki/hisyokouhou/siminnokoe.html",
     "form": ""
+   },
+   {
+    "kind": "yobo",
+    "id": "北海道/根室市",
+    "to": "根室市長",
+    "handling": "accept",
+    "page": "https://www.city.nemuro.hokkaido.jp/lifeinfo/kakuka/soumubu/soumu/kouhoukoutyou/4711.html",
+    "form": ""
+   },
+   {
+    "kind": "yobo",
+    "id": "青森県/東津軽郡外ケ浜町",
+    "to": "東津軽郡外ケ浜町長",
+    "handling": "accept",
+    "page": "https://www.town.sotogahama.lg.jp/gyosei/koutyou/",
+    "form": ""
+   },
+   {
+    "kind": "yobo",
+    "id": "埼玉県/上尾市",
+    "to": "上尾市長",
+    "handling": "accept",
+    "page": "https://www.city.ageo.lg.jp/page/4-hagaki.html",
+    "form": ""
+   },
+   {
+    "kind": "yobo",
+    "id": "神奈川県/茅ヶ崎市",
+    "to": "茅ヶ崎市長",
+    "handling": "accept",
+    "page": "https://www.city.chigasaki.kanagawa.jp/1052150/soudan/1003933.html",
+    "form": ""
+   },
+   {
+    "kind": "yobo",
+    "id": "静岡県/富士宮市",
+    "to": "富士宮市長",
+    "handling": "accept",
+    "page": "https://www.city.fujinomiya.lg.jp/municipal_government/llti2b000000271s.html",
+    "form": ""
+   },
+   {
+    "kind": "yobo",
+    "id": "愛知県/常滑市",
+    "to": "常滑市長",
+    "handling": "accept",
+    "page": "https://www.city.tokoname.aichi.jp/shisei/koho/1001617.html",
+    "form": ""
    }
   ]
  }
