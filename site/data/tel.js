@@ -1058,7 +1058,7 @@ window.TEL = {
 "日高郡美浜町":["main","0738-22-4123","http://www.town.mihama.wakayama.jp/"],
 "日高郡印南町":["gikai","0738-42-1739","https://www.town.wakayama-inami.lg.jp/soshiki/14-12-0-0-0_1.html"],
 "東牟婁郡串本町":["gikai","0735-67-7261","https://www.town.kushimoto.wakayama.jp/gikai/seigan.html"],
-"海南市":["gikai","073-483-8700","https://www.city.kainan.lg.jp/kakubusho/gikaijimukyoku/1451976729685.html"],
+"海南市":["gikai","073-483-8700","https://www.city.kainan.lg.jp/kakubusho/gikaijimukyoku/seigantinnzyo/1451976729685.html"],
 "岩出市":["gikai","0736-62-2141","https://www.city.iwade.lg.jp/site/gikai/1212.html"],
 "東牟婁郡太地町":["gikai","0735-59-2760","https://www.town.taiji.wakayama.jp/gikai/index.html"],
 "御坊市":["gikai","0738-23-5514","https://www.city.gobo.lg.jp/sigikai/shiminsankagikai/1383019037760.html"],
