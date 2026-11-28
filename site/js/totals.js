@@ -6,7 +6,7 @@
   const KEY = 'sb_publishable_IAXFoFaXZ3bjk-49Z-pD9w_SQZEgzXE';
   const LIVE = true;
   // site/js/support.js の SUPPORT_LIVE と合わせる
-  const SUPPORT_LIVE = false;
+  const SUPPORT_LIVE = true;
 
   const box = document.getElementById('tally');
   if (!box) return;
