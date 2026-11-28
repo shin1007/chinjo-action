@@ -16,6 +16,9 @@ while ($true) {
   Write-Host ' n  X の投稿の24時間後の数字を入れる（記録の CSV に足して公開）'
   Write-Host ' m  毎月の応援（BMC の Webhook で数えられない分）を入れて、/trouble の運営費の図を作り直す'
   Write-Host ' p  運営者のTODO とダッシュボードを VS Code で開く'
+  Write-Host ' r  手で開いて保存してほしい資料のページを、まとめてブラウザで開く（TODO の13の節）'
+  Write-Host ' f  手で送る問い合わせフォームの一覧を開く（入れる内容のコピーつき）'
+  Write-Host ' s  Supabase に SQL を反映する（schema.sql をコピーして SQL Editor を開く。貼って Run）'
   Write-Host ''
   Write-Host ' 1  チームみらいに今週の項目を出す（ブラウザが開きます）'
   Write-Host ' 2  チームみらいに出す文面を見るだけ'
@@ -75,6 +78,20 @@ while ($true) {
     'm' {
       $usd = Read-Host '今月の毎月の応援の合計（ドル。例 15）'
       if ($usd) { gh workflow run support-month.yml -f extra_usd=$usd; Write-Host 'GitHub で動かしました。数分で図が直ります：https://github.com/shin1007/chinjo-action/actions/workflows/support-month.yml' }
+    }
+    'r' {
+      $t = Get-Content 'docs/非公開/運営者のTODO.md' -Raw -Encoding UTF8
+      $sec = [regex]::Match($t, '(?s)## 13\..*?(?=<a id=)').Value
+      $urls = [regex]::Matches($sec, 'https?://[^\s)\]<>）]+') | ForEach-Object { $_.Value } | Select-Object -Unique
+      Write-Host "$($urls.Count) 件のページを開きます。保存したら Downloads に置いたままで、Claude に「保存した」と伝える。"
+      $urls | ForEach-Object { Start-Process $_ }
+      continue
+    }
+    'f' { Start-Process (Resolve-Path 'docs/非公開/手で送る問い合わせフォーム.html'); continue }
+    's' {
+      Get-Content 'supabase/schema.sql' -Raw -Encoding UTF8 | Set-Clipboard
+      Start-Process 'https://supabase.com/dashboard/project/oquuysfeistgpgrpeswq/sql/new'
+      Write-Host 'schema.sql をコピーしました。開いた SQL Editor に Ctrl+V で貼って Run（何度実行しても同じ結果になる作り）。'
     }
     'p' { code 'docs/非公開/運営者のTODO.md' 'docs/非公開/運営のダッシュボード.md'; continue }
     '0' { exit }
