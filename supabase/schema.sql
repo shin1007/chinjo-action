@@ -312,3 +312,31 @@ create or replace view public.outcome_totals as
   select result, count(*)::int as n from public.outcomes where not hidden group by result;
 revoke all on public.outcome_totals from anon, authenticated;
 grant select on public.outcome_totals to anon;
+
+-- 運営費の応援（Buy Me a Coffee の Webhook。2026-11-28）。api/bmc-webhook.js が secret キーで書き込む。
+-- 応援した人の名前・メールアドレス・メッセージは受け取っても保存しない（列を作らない）。金額・通貨・手数料・日時・種類だけ。
+-- 公開するのは月ごとの合計（support_month_totals）だけ。
+-- 反映するまで site/js/support.js・site/js/totals.js の SUPPORT_LIVE は false のままにしておく（手で書き写した support.json の額を出す）。
+create table if not exists public.support_payments (
+  -- Buy Me a Coffee の支払いの ID（data.id）。同じ支払いの再送・返金は同じ行を更新する
+  payment_id bigint primary key,
+  kind text not null check (kind in ('donation')),
+  amount numeric(12, 2) not null check (amount >= 0),
+  currency text not null check (char_length(currency) = 3),
+  fee numeric(12, 2),
+  refunded boolean not null default false,
+  live boolean not null,
+  paid_at timestamptz not null,
+  updated_at timestamptz not null default now()
+);
+alter table public.support_payments enable row level security;
+revoke all on public.support_payments from anon, authenticated;
+
+-- 月（日本時間）ごとの合計。テストのイベント（live = false）と返金されたものは数えない
+create or replace view public.support_month_totals as
+  select to_char(paid_at at time zone 'Asia/Tokyo', 'YYYY-MM') as month, currency,
+    sum(amount)::float8 as amount, count(*)::int as n
+  from public.support_payments where live and not refunded
+  group by 1, 2;
+revoke all on public.support_month_totals from anon, authenticated;
+grant select on public.support_month_totals to anon;
