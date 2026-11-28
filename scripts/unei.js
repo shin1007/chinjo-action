@@ -77,7 +77,7 @@ function status() {
   if (m.id) console.log(`${m.due <= t ? '★ やる' : '  まだ'}　チームみらい：${dateJa(m.due)}${m.due < t ? '（遅れています）' : ''}　「${A[m.id] ? A[m.id].label : m.id}」（残り${m.left}件）→ node scripts/unei.js mirai`);
   else console.log('  チームみらい：全部の項目を出し終えました');
   const r = currentRound(data);
-  if (r) console.log(`${r.date <= t ? '★ やる' : '  まだ'}　議会・自治体（${THEME_NAME[r.theme]}）：${dateJa(r.date)}${r.status === 'tentative' ? '（仮の予定）' : ''}　→ node scripts/unei.js forms`);
+  if (r) console.log(`${r.date <= t ? '★ やる' : '  まだ'}　議会・自治体（${THEME_NAME[r.theme]}）：${dateJa(r.date)}${r.status === 'tentative' ? '（仮の予定）' : r.status === 'postponed' ? '（延期中。調査を進めてから）' : ''}　→ node scripts/unei.js forms`);
   return { miraiDue: m.id && m.due <= t, formsDue: r && r.date <= t };
 }
 
