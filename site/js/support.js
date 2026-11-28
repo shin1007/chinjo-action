@@ -27,38 +27,13 @@
     }
   };
 
+  // 運営費の図の下に1行だけ出す（図は月はじめの値なので、今月の応援の合計をここで新しくする）
   const renderProgress = (box, data) => {
     const p = window.SupportPlan.plan(data);
-    if (!p) { box.hidden = true; return false; }
-    box.textContent = '';
-    box.appendChild(el('h2', data.month ? `${data.month.replace('-', '年')}月の集まり具合` : '集まり具合'));
-    box.appendChild(el('p', `応援の合計：${yen(p.collected)}`, 'support-total'));
-    if (p.current) {
-      box.appendChild(el('p', `${p.current.name}　目標 ${yen(p.current.goal)} の ${p.pct}%（あと ${yen(p.remaining)}）`));
-      const bar = el('div', null, 'wz-progress');
-      bar.setAttribute('role', 'progressbar');
-      bar.setAttribute('aria-valuemin', '0');
-      bar.setAttribute('aria-valuemax', '100');
-      bar.setAttribute('aria-valuenow', String(p.pct));
-      bar.setAttribute('aria-label', `${p.current.name}の集まり具合`);
-      const fill = el('div', null, 'support-fill');
-      fill.style.width = `${p.pct}%`;
-      bar.appendChild(fill);
-      box.appendChild(bar);
-      if (p.next) box.appendChild(el('p', `次の目標（${p.next.name}）まで、あと ${yen(p.remainingNext)}`, 'small'));
-    } else {
-      box.appendChild(el('p', 'すべての目標に届きました。ありがとうございます。'));
-    }
-    const list = el('ol', null, 'support-stages');
-    for (const st of p.stages) {
-      const mark = st.state === 'done' ? '達成' : st.state === 'current' ? '目指している段階' : 'この次';
-      const li = el('li', `${st.name}　目標 ${yen(st.goal)}　［${mark}］`);
-      if (st.note) li.appendChild(el('span', `　${st.note}`, 'small'));
-      list.appendChild(li);
-    }
-    box.appendChild(list);
-    if (data.updated) box.appendChild(el('p', `${data.updated.replace(/-/g, '/')} 時点（運営が各サービスの管理画面で確かめて更新しています）`, 'small'));
-    else if (SUPPORT_LIVE) box.appendChild(el('p', 'Buy Me a Coffee からの知らせで自動で数えています（単発の応援。毎月の応援は、運営が月はじめに足します）', 'small'));
+    if (!box || !p) { if (box) box.hidden = true; return false; }
+    const month = data.month ? `${data.month.replace('-', '年')}月` : '今月';
+    const rest = p.current ? `目標 ${yen(p.stages[p.stages.length - 1].goal)} まで、あと ${yen(p.stages[p.stages.length - 1].goal - p.collected)}` : 'すべての目標に届きました。ありがとうございます';
+    box.textContent = `${month}の応援：${yen(p.collected)}（${rest}）`;
     box.hidden = false;
     return true;
   };
@@ -85,10 +60,7 @@
         if (yen != null) { data.collected = yen; data.month = month; data.updated = null; }
       }
       renderMethods(document.getElementById('support-methods'), Array.isArray(data.methods) ? data.methods : []);
-      if (renderProgress(document.getElementById('support-progress'), data)) {
-        const note = document.getElementById('support-stages-note');
-        if (note) note.hidden = true;
-      }
+      renderProgress(document.getElementById('support-progress'), data);
       renderSupporters(document.getElementById('support-supporters'), data.supporters);
     } catch (error) {
       console.warn('応援の情報を読み込めませんでした。', error);
