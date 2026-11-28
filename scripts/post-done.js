@@ -35,6 +35,20 @@ function mark(md, e) {
   return md.replace(re, '### [x]$1');
 }
 
+// 変えたファイルを、ブランチ → プルリクエスト → main への取り込みまで進めて公開する
+function publish(paths, msg) {
+  const git = (...a) => execFileSync('git', a, { cwd: ROOT, stdio: 'inherit' });
+  const branch = 'claude/x-' + new Date().toISOString().slice(0, 16).replace(/[-:T]/g, '');
+  git('checkout', '-q', 'main'); git('pull', '-q');
+  git('checkout', '-q', '-b', branch);
+  git('add', ...paths);
+  git('commit', '-q', '-m', msg);
+  git('push', '-q', '-u', 'origin', branch);
+  execFileSync('gh', ['pr', 'create', '--fill', '--body', msg], { cwd: ROOT, stdio: 'inherit' });
+  execFileSync('gh', ['pr', 'merge', '--merge', '--delete-branch'], { cwd: ROOT, stdio: 'inherit' });
+  git('checkout', '-q', 'main'); git('pull', '-q');
+}
+
 function main() {
   const args = process.argv.slice(2);
   const dry = args.includes('--dry');
@@ -55,18 +69,9 @@ function main() {
   if (!changed.length) { console.log(dry ? '' : '済みにする予定はありませんでした（日時を指定するなら：node scripts/post-done.js 12/1 7:30）'); return; }
   for (const file of changed) execFileSync('node', [path.join(__dirname, 'schedule-to-ics.js'), file], { stdio: 'inherit' });
   if (args.includes('--no-publish')) return;
-  const git = (...a) => execFileSync('git', a, { cwd: ROOT, stdio: 'inherit' });
-  const branch = 'claude/post-done-' + new Date().toISOString().slice(0, 16).replace(/[-:T]/g, '');
-  git('checkout', '-q', 'main'); git('pull', '-q');
-  git('checkout', '-q', '-b', branch);
-  git('add', 'docs/投稿予定');
-  git('commit', '-q', '-m', 'X に投稿した予定を済みにする（post-done.js）');
-  git('push', '-q', '-u', 'origin', branch);
-  execFileSync('gh', ['pr', 'create', '--fill', '--body', '投稿した予定を済みにする（scripts/post-done.js）。'], { cwd: ROOT, stdio: 'inherit' });
-  execFileSync('gh', ['pr', 'merge', '--merge', '--delete-branch'], { cwd: ROOT, stdio: 'inherit' });
-  git('checkout', '-q', 'main'); git('pull', '-q');
+  publish(['docs/投稿予定'], 'X に投稿した予定を済みにする（post-done.js）');
   console.log('公開しました（この予定の Slack のリマインドは送られません）。');
 }
 
 if (require.main === module) { try { main(); } catch (e) { console.error(e.message); process.exit(1); } }
-module.exports = { pick, mark };
+module.exports = { pick, mark, publish };

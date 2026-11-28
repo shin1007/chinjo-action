@@ -22,6 +22,21 @@ function due(events, nowMs, aheadMin = AHEAD_MIN) {
   return events.filter((e) => !e.done && when(e) > nowMs && when(e) <= nowMs + aheadMin * 60000).sort((a, b) => when(a) - when(b));
 }
 
+// 投稿してから24時間たった予定（済み）。数字を入れる知らせを出す
+function statsDue(events, nowMs, aheadMin = AHEAD_MIN) {
+  const day = 24 * 60 * 60000;
+  return events.filter((e) => e.done && when(e) + day > nowMs && when(e) + day <= nowMs + aheadMin * 60000);
+}
+function statsPayload(e) {
+  const hh = `${e.hour}:${String(e.min).padStart(2, '0')}`;
+  const title = `24時間たちました：${e.month}月${e.day}日 ${hh}｜${e.type} の数字を入れる`;
+  return { text: title, blocks: [
+    { type: 'header', text: { type: 'plain_text', text: title.slice(0, 150) } },
+    { type: 'section', text: { type: 'mrkdwn', text: 'X でこの投稿の「アクティビティ」（表示回数・いいね・返信・リンクのクリック・プロフィールのクリック）を見て、毎朝のメニューの *n* で入れる（node scripts/post-stats.js）。入れると記録の CSV に足して公開する。' } },
+    { type: 'actions', elements: [{ type: 'button', text: { type: 'plain_text', text: '自分の投稿を開く' }, url: 'https://x.com/pedmWay1hR85704' }] },
+  ] };
+}
+
 const IMG = /\.(png|jpe?g|gif)$/i;
 const VID = /\.(mp4|mov|webm)$/i;
 const mediaUrl = (p) => RAW + p.split('/').map(encodeURIComponent).join('/');
@@ -70,6 +85,7 @@ async function main() {
     events = events.concat(parse(fs.readFileSync(path.join(DIR, f), 'utf8').split(String.fromCharCode(13)).join(''), year));
   }
   const list = due(events, nowMs);
+  const stats = statsDue(events, nowMs);
   console.log(`いま ${new Date(nowMs).toISOString()}／予定 ${events.length} 件／これから${AHEAD_MIN}分以内 ${list.length} 件${dry ? '（dry-run）' : ''}`);
   const url = process.env.SLACK_WEBHOOK_URL;
   for (const e of list) {
@@ -78,8 +94,14 @@ async function main() {
     await send(url, body);
     console.log(`Slack に送りました：${e.month}/${e.day} ${e.hour}:${String(e.min).padStart(2, '0')}`);
   }
+  for (const e of stats) {
+    const body = statsPayload(e);
+    if (dry || !url) { console.log(JSON.stringify(body, null, 1)); continue; }
+    await send(url, body);
+    console.log(`数字の知らせを Slack に送りました：${e.month}/${e.day}`);
+  }
   if (!dry && list.length && !url) console.log('SLACK_WEBHOOK_URL が設定されていないので、送っていません。');
 }
 
 if (require.main === module) main().catch((e) => { console.error(e.message); process.exit(1); });
-module.exports = { due, payload, mediaPaths, mediaUrl, when, intentUrl };
+module.exports = { due, payload, mediaPaths, mediaUrl, when, intentUrl, statsDue, statsPayload };

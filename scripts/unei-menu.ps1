@@ -13,6 +13,8 @@ while ($true) {
   Write-Host ' t  電話で聞く画面（議会の一覧・番号・台本・入力。ブラウザが開きます）'
   Write-Host ' o  毎朝見る画面をまとめて開く（Issues・議会や自治体からの返事・Vercel・BMC）'
   Write-Host ' x  X に投稿した（今の投稿予定を済みにして公開。Slack のリマインドが止まる）'
+  Write-Host ' n  X の投稿の24時間後の数字を入れる（記録の CSV に足して公開）'
+  Write-Host ' m  毎月の応援（BMC の Webhook で数えられない分）を入れて、/trouble の運営費の図を作り直す'
   Write-Host ' p  運営者のTODO とダッシュボードを VS Code で開く'
   Write-Host ''
   Write-Host ' 1  チームみらいに今週の項目を出す（ブラウザが開きます）'
@@ -68,6 +70,11 @@ while ($true) {
     'x' {
       $when = Read-Host '日時（空のまま Enter で、いちばん近い予定。指定するなら 12/1 7:30）'
       if ($when) { node scripts/post-done.js ($when -split ' ') } else { node scripts/post-done.js }
+    }
+    'n' { node scripts/post-stats.js }
+    'm' {
+      $usd = Read-Host '今月の毎月の応援の合計（ドル。例 15）'
+      if ($usd) { gh workflow run support-month.yml -f extra_usd=$usd; Write-Host 'GitHub で動かしました。数分で図が直ります：https://github.com/shin1007/chinjo-action/actions/workflows/support-month.yml' }
     }
     'p' { code 'docs/非公開/運営者のTODO.md' 'docs/非公開/運営のダッシュボード.md'; continue }
     '0' { exit }
