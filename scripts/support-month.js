@@ -3,7 +3,8 @@
 // 実行：
 //   node scripts/support-month.js --usd 25            今月の応援の合計（Buy Me a Coffee の管理画面のドルの額）を書き写す
 //   node scripts/support-month.js --month 2026-12 --usd 25 --count 3
-//   node scripts/support-month.js                     為替レートだけを見直す（応援の合計は変えない）
+//   node scripts/support-month.js                     為替レートを見直す。Webhook の記録（Supabase の support_month_totals）があれば、単発の応援の合計もそこから取る
+//   node scripts/support-month.js --extra-usd 10      Webhook で数えられない毎月の応援などを足す（support.json の extraJpy）
 //   node scripts/support-month.js --check             /trouble の図が support.json と合っているかだけを見る（npm test から使う）
 //
 // やること：
@@ -25,6 +26,9 @@ const END = '<!-- support-cost:end -->';
 // Buy Me a Coffee の手数料（利用規約 第4条の5%）と、カードの決済手数料（ヘルプの 2.9%＋30セント）
 const FEE_RATE = 0.05 + 0.029;
 const FEE_FIXED_USD = 0.3;
+const SUPABASE_URL = 'https://oquuysfeistgpgrpeswq.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_IAXFoFaXZ3bjk-49Z-pD9w_SQZEgzXE';
+const { liveCollected } = require('../site/js/support-plan.js');
 
 const yen = (n) => `${Math.round(n).toLocaleString('ja-JP')}円`;
 const pct = (n, total) => Math.max(0, Math.min(100, Math.round((n / total) * 1000) / 10));
@@ -97,7 +101,7 @@ function arg(name) {
 
 async function main() {
   const data = JSON.parse(fs.readFileSync(SUPPORT, 'utf8'));
-  const html = fs.readFileSync(TROUBLE, 'utf8');
+  const html = fs.readFileSync(TROUBLE, 'utf8').replace(/\r\n/g, '\n');
   if (process.argv.includes('--check')) {
     const now = replaceFigure(html, costHtml(data));
     if (now !== html) { console.error('/trouble の図が support.json と合っていない。node scripts/support-month.js を動かす'); process.exit(1); }
@@ -108,6 +112,7 @@ async function main() {
   if (!/^\d{4}-\d{2}$/.test(month)) throw new Error('--month は 2026-12 の形で');
   const usd = arg('usd') == null ? null : Number(arg('usd'));
   const count = arg('count') == null ? null : Number(arg('count'));
+  const extraUsd = arg('extra-usd') == null ? null : Number(arg('extra-usd'));
   if (usd != null && !(usd >= 0)) throw new Error('--usd は0以上の数');
 
   const r = await fetchRate(month);
@@ -115,13 +120,27 @@ async function main() {
   data.cost = { ...data.cost, ...r };
   data.month = month;
   data.updated = today;
+  if (newMonth) data.extraJpy = 0;
+  if (extraUsd != null) data.extraJpy = Math.round(extraUsd * r.rate);
+  let liveUsd = null;
   if (usd != null) data.collected = Math.round(usd * r.rate);
-  else if (newMonth) data.collected = 0;
+  else {
+    const t = await fetch(`${SUPABASE_URL}/rest/v1/support_month_totals?select=month,currency,amount&month=eq.${month}`, { headers: { apikey: SUPABASE_KEY } }).catch(() => null);
+    const rows = t && t.ok ? await t.json().catch(() => null) : null;
+    const liveYen = liveCollected(data, rows, month);
+    if (liveYen != null && rows.length) {
+      data.collected = liveYen;
+      liveUsd = rows.filter((x) => x.currency === 'USD').reduce((a, x) => a + x.amount, 0);
+      console.log(`Webhook の記録から：単発の応援 ${liveUsd}ドル${data.extraJpy ? `＋手で足した分 ${yen(data.extraJpy)}` : ''}`);
+    } else if (newMonth) data.collected = 0;
+  }
   fs.writeFileSync(SUPPORT, `${JSON.stringify(data, null, 2)}\n`);
   fs.writeFileSync(TROUBLE, replaceFigure(html, costHtml(data)));
 
   console.log(`${month}：1ドル＝${r.rate}円（${r.rateDate}）`);
-  if (usd != null) {
+  const gross = usd != null ? usd : liveUsd != null ? liveUsd + (extraUsd || 0) : null;
+  if (gross != null) {
+    const usd = gross;
     const fee = usd * FEE_RATE + (count || 0) * FEE_FIXED_USD;
     console.log(`応援の合計 ${usd}ドル＝${yen(usd * r.rate)}（手数料の見込み 約${yen(fee * r.rate)}${count ? '' : '。--count を付けると1件30セントも引く'}）`);
     if (fs.existsSync(path.dirname(LEDGER))) {

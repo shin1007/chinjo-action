@@ -1,4 +1,8 @@
 (() => {
+  // supabase/schema.sql の support_payments を反映し、Webhook を登録して確かめたら true にする（それまでは support.json の手で書き写した額）
+  const SUPPORT_LIVE = false;
+  const URL = 'https://oquuysfeistgpgrpeswq.supabase.co';
+  const KEY = 'sb_publishable_IAXFoFaXZ3bjk-49Z-pD9w_SQZEgzXE';
   const el = (tag, text, cls) => {
     const node = document.createElement(tag);
     if (text != null) node.textContent = text;
@@ -54,6 +58,7 @@
     }
     box.appendChild(list);
     if (data.updated) box.appendChild(el('p', `${data.updated.replace(/-/g, '/')} 時点（運営が各サービスの管理画面で確かめて更新しています）`, 'small'));
+    else if (SUPPORT_LIVE) box.appendChild(el('p', 'Buy Me a Coffee からの知らせで自動で数えています（単発の応援。毎月の応援は、運営が月はじめに足します）', 'small'));
     box.hidden = false;
     return true;
   };
@@ -72,6 +77,13 @@
       const response = await fetch('/data/support.json', { cache: 'no-cache' });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const data = await response.json();
+      if (SUPPORT_LIVE) {
+        const month = window.SupportPlan.jstMonth();
+        const r = await fetch(`${URL}/rest/v1/support_month_totals?select=month,currency,amount&month=eq.${month}`, { headers: { apikey: KEY } }).catch(() => null);
+        const rows = r && r.ok ? await r.json().catch(() => null) : null;
+        const yen = window.SupportPlan.liveCollected(data, rows, month);
+        if (yen != null) { data.collected = yen; data.month = month; data.updated = null; }
+      }
       renderMethods(document.getElementById('support-methods'), Array.isArray(data.methods) ? data.methods : []);
       if (renderProgress(document.getElementById('support-progress'), data)) {
         const note = document.getElementById('support-stages-note');

@@ -25,7 +25,25 @@
     };
   };
 
-  const api = { plan };
+  // Webhook の記録（support_month_totals の行）と support.json から、その月の応援の合計（円）を出す。
+  // 単発の応援はドルの合計を cost.rate で円にし、毎月の応援など手で足した分（extraJpy。同じ月のときだけ）を足す
+  const liveCollected = (data, rows, month) => {
+    const rate = data && data.cost && data.cost.rate;
+    if (!isAmount(rate) || !Array.isArray(rows)) return null;
+    let yen = 0;
+    for (const r of rows) {
+      if (!r || r.month !== month || !isAmount(r.amount)) continue;
+      if (r.currency === 'USD') yen += r.amount * rate;
+      else if (r.currency === 'JPY') yen += r.amount;
+    }
+    const extra = data.month === month && isAmount(data.extraJpy) ? data.extraJpy : 0;
+    return Math.round(yen + extra);
+  };
+
+  // 日本時間の今月（YYYY-MM）
+  const jstMonth = (now = Date.now()) => new Date(now + 9 * 3600e3).toISOString().slice(0, 7);
+
+  const api = { plan, liveCollected, jstMonth };
   if (typeof window !== 'undefined') window.SupportPlan = api;
   if (typeof module !== 'undefined') module.exports = api;
 })();
