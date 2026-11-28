@@ -1695,6 +1695,15 @@
       "localPath": null
     },
     {
+      "id": "src-915aa2d31c",
+      "title": "総務省「住民基本台帳事務処理要領」第5-10（DV等支援措置）",
+      "url": "https://www.soumu.go.jp/main_content/001094645.pdf",
+      "note": "支援措置の期間は確認の結果を申出者に連絡した日から1年。終了の1か月前から延長の申出を受け、改めて支援の必要性を確認する。市町村長が支援の必要性がなくなったと認めるときは終了する",
+      "kind": "official",
+      "fetchedAt": null,
+      "localPath": null
+    },
+    {
       "id": "src-924245b233",
       "title": "内閣府男女共同参画局「令和4年度 性別による無意識の思い込み（アンコンシャス・バイアス）に関する調査研究」",
       "url": "https://www.gender.go.jp/research/kenkyu/seibetsu_r04.html",
