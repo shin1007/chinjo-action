@@ -1502,6 +1502,14 @@
       "fetchedAt": "2026-11-28T01:32:10.764Z",
       "sha256": "aa545a4b791d906a28f09ba4fd6025d9cee750fd69cbd7023419420cd1ffccf9",
       "localPath": "sources/archive/2026-11-28-aa545a4b791d.html"
+    },
+    {
+      "url": "https://www.cas.go.jp/jp/seisaku/symbiotic_society/gaikokujin_tochishutoku/kaisai-jokyo/dai5/teigen.pdf",
+      "title": "外国人による土地取得等のルールの在り方検討会「安全保障上重要な土地等の取得等に関するルールの在り方について 提言」（令和8年10月）",
+      "note": "人が手で保存",
+      "fetchedAt": "2026-11-28T01:33:32.263Z",
+      "sha256": "861d4b82e377ee25888ba97ec30f4429c40269dd699bce336e4b58cd2c4f8403",
+      "localPath": "sources/archive/2026-11-28-861d4b82e377.pdf"
     }
   ]
 }
