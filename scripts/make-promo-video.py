@@ -142,13 +142,7 @@ def card(lines, big=None, big_sub=None, note=None, accent=False):
 
 def step_frame(i):
     total = sum(s[3] for s in howto.STEPS[:i + 1])
-    steps = howto.STEPS
-    if steps[i][4] == 'post':  # 締切に遅れても次の議会に回るだけなので、動画では締切に触れない
-        howto.STEPS = steps[:i] + [steps[i][:1] + ('近くのポストに入れる',) + steps[i][2:]] + steps[i + 1:]
-    try:
-        return howto.frame(i, total, steps[i][4] in ('stamp', 'post'), BASE)
-    finally:
-        howto.STEPS = steps
+    return howto.frame(i, total, howto.STEPS[i][4] in ('stamp', 'post'), BASE)
 
 
 MOCHIMONO = ROOT / 'site' / 'img' / 'mochimono.png'  # 持ちものの絵（/dansei/guide などに載せているもの。1080×1350）
