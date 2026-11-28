@@ -65,20 +65,23 @@
   <h3>お金の使い道</h3>
   <p>運営費（生成AIの利用料、根拠を原文で確かめるための有料の論文の購入、サイトの公開やXなどのサービスの利用料）に充てます。</p>
   <p><strong>いまの状況：</strong>生成AI（Claude Pro）の利用料金は、いまはすべて運営者が自費で支払っています。2026年11月28日から、下の「応援の方法」の Buy Me a Coffee で応援を受け付けています。下の図は生成AIの利用料だけで、論文の購入の費用は含めていません。</p>
+  <!-- support-cost:start（node scripts/support-month.js が書く。手で直さない） -->
   <figure id="support-cost" class="cost-chart">
-    <figcaption><b>1か月の運営費</b>：いまは Claude Pro（約3,156円）をすべて自費で。目標は 20,000円（Claude Max の約15,780円に、応援の手数料（約8%）・為替の動き・サイトの公開や X などの利用料の分を足した額）</figcaption>
-    <div class="cost-bar" role="img" aria-label="目標の20,000円のうち、自費が約3,156円（16%）、カンパが0円、足りない分が約16,844円">
-      <div class="cost-self">自費</div>
-      <div class="cost-short">足りない分 約16,844円</div>
-    </div>
-    <div class="cost-scale small"><span>0円</span><span class="cost-pro">Pro</span><span>目標 20,000円</span></div>
+    <figcaption><b>1か月の運営費</b>：いまは Claude Pro（約3,156円）。目標は 20,000円（Claude Max の約15,780円に、応援の手数料（約8%）・為替の動き・サイトの公開や X などの利用料の分を足した額）</figcaption>
+    <svg class="cost-svg" viewBox="0 0 100 10" preserveAspectRatio="none" role="img" aria-label="目標の20,000円のうち、自費が約3,156円（16%）、カンパが0円、足りない分が約16,844円">
+      <rect class="cost-kanpa" x="0" y="0" width="0" height="10"/>
+      <rect class="cost-self-rect" x="0" y="0" width="15.8" height="10"/>
+      <rect class="cost-short-rect" x="15.8" y="0" width="84.2" height="10"/>
+    </svg>
+    <div class="cost-scale small"><span>0円</span><span>目標 20,000円</span></div>
     <ul class="cost-legend small">
       <li><span class="cost-key cost-key-self"></span>自費：約3,156円</li>
       <li><span class="cost-key cost-key-kanpa"></span>カンパ：0円</li>
       <li><span class="cost-key cost-key-short"></span>足りない分：約16,844円</li>
     </ul>
-    <p class="small">月払い・税別の <a href="https://claude.com/pricing" target="_blank" rel="noopener">Pro 20ドル・Max 100ドル</a>を、月初（2026年11月2日）の<a href="https://www.murc-kawasesouba.jp/fx/past/index.php?id=261102" target="_blank" rel="noopener">三菱UFJ銀行の仲値</a> 1ドル＝157.80円で換算。料金はドル建てなので、毎月はじめに換算し直し、必要なら目標の金額を見直します。</p>
+    <p class="small">月払い・税別の <a href="https://claude.com/pricing" target="_blank" rel="noopener">Pro 20ドル・Max 100ドル</a>を、月初（2026年11月2日）の<a href="https://www.murc-kawasesouba.jp/fx/past/index.php?id=261102" target="_blank" rel="noopener">三菱UFJ銀行の仲値</a> 1ドル＝157.80円で換算。カンパは2026年11月の応援の合計（手数料を引く前）。料金はドル建てなので、毎月はじめに換算し直し、必要なら目標の金額を見直します。</p>
   </figure>
+  <!-- support-cost:end -->
   <section id="support-progress" hidden></section>
   <h3>応援の方法</h3>
   <div id="support-methods" class="hero-actions about-cta">
