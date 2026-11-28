@@ -6,6 +6,7 @@
 //   node scripts/unei.js next              … 次回の予定を1〜2行で出す（月曜の知らせに使う）
 //   node scripts/unei.js mirai             … ブラウザを開いて、AIインタビューに出し（追加の質問はスキップ、公開せずに提出）、記録に足す
 //   node scripts/unei.js forms             … いまの回の対象（フォームの直リンク）と、作成画面の URL を出す
+//   node scripts/unei.js sync              … 受け付け方のDBから、住民以外もフォームで出せるとわかった議会・自治体を対象に足す（status・forms でも毎回自動で行う）
 //   node scripts/unei.js record <出した先> <項目id> [YYYY-MM-DD]   … 手で出したものを記録に足す（例：record 三鷹市議会 n_restore）
 //   node scripts/unei.js round-done [YYYY-MM-DD]                    … いまの回を「出した」にする
 //   node scripts/unei.js ics               … リマインダー用のカレンダー（docs/提言/リマインダー.ics）を書き出す
@@ -67,6 +68,7 @@ const currentRound = (data) => data.forms.rounds.find((r) => r.status !== 'done'
 const miraiText = (a) => `${THEME_NAME[a.theme]}について、国への政策提言です（市民の陳情づくりを手伝う公開サイト「陳情アクション」の運営から、サイトに載せている国への陳情項目を週に1件ずつお送りしています）。今回は「${a.label}」です。\n求める内容：${a.text}\n理由：${a.reason}`;
 
 function status() {
+  sync(true);
   const { data } = load();
   const t = today();
   const m = nextMirai(data);
@@ -79,7 +81,35 @@ function status() {
   return { miraiDue: m.id && m.due <= t, formsDue: r && r.date <= t };
 }
 
+// 受け付け方のDB（site/data/intake/*.jsonl）で、オンラインのフォームを住民以外も使える（審査・配付・受付）とわかったところを forms.targets に足す。
+// すでにある対象は skip・handling を残し、フォームの URL・案内のページが空ならDBの値で埋める。要望で「住民だけ」（eligible: resident）のところは足さない。
+const OK = ['accept', 'review', 'distribute'];
+function sync(quiet) {
+  const st = load();
+  const T = st.data.forms.targets;
+  const before = JSON.stringify(T);
+  const added = [];
+  for (const kind of ['chinjo', 'yobo']) {
+    const rows = fs.readFileSync(path.join(ROOT, `site/data/intake/${kind}.jsonl`), 'utf8').trim().split('\n').map((l) => JSON.parse(l));
+    for (const r of rows) {
+      const h = r.methods && r.methods.form && r.methods.form.nonresident;
+      if (!OK.includes(h) || (kind === 'yobo' && r.eligible === 'resident')) continue;
+      const t = T.find((x) => x.kind === kind && x.id === r.id);
+      if (t) { if (!t.form && r.form_url) t.form = r.form_url; if (!t.page && r.page_url) t.page = r.page_url; continue; }
+      T.push({ kind, id: r.id, to: r.to, handling: h, page: r.page_url || '', form: r.form_url || '' });
+      added.push(`${r.to}（${kind === 'yobo' ? '要望' : '陳情'}）`);
+    }
+  }
+  if (JSON.stringify(T) !== before) save(st);
+  if (added.length) console.log(`フォームで出せる先を${added.length}件足しました：${added.join('、')}
+（site/data/unei.js が変わったのでコミットしてください）
+`);
+  else if (!quiet) console.log('足す先はありませんでした。');
+  return added;
+}
+
 function forms() {
+  sync(true);
   const { data } = load();
   const r = currentRound(data);
   if (!r) return console.log('予定の回がありません。site/data/unei.js の forms.rounds に足してください。');
@@ -214,7 +244,7 @@ function ics() {
 
 const [cmd, ...args] = process.argv.slice(2);
 const run = {
-  status, forms, ics,
+  status, forms, ics, sync: () => sync(false),
   mirai: () => mirai(args.includes('--dry'), args.includes('--trial')),
   next,
   record: () => record(...args),
@@ -227,4 +257,4 @@ if (require.main !== module) {
 } else {
   Promise.resolve(run()).catch((e) => { console.error(e.message); process.exit(1); });
 }
-module.exports = { nextDue, nextMirai, miraiText, dateJa, addDays };
+module.exports = { sync, nextDue, nextMirai, miraiText, dateJa, addDays };

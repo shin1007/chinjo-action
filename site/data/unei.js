@@ -292,7 +292,7 @@ window.UNEI = {
     "to": "豊川市議会",
     "handling": "distribute",
     "page": "https://www.city.toyokawa.lg.jp/shisei/shigikai/1/15956.html",
-    "form": ""
+    "form": "https://ttzk.graffer.jp/city-toyokawa/smart-apply/apply-procedure-alias/chinjo-teshutsu/door"
    },
    {
     "kind": "chinjo",
@@ -344,6 +344,102 @@ window.UNEI = {
     "handling": "accept",
     "page": "https://www.city.hiratsuka.kanagawa.jp/kocho/page-c_01456.html",
     "form": "https://dshinsei.e-kanagawa.lg.jp/142034-u/offer/offerList_detail?tempSeq=120645"
+   },
+   {
+    "kind": "chinjo",
+    "id": "岩手県/北上市",
+    "to": "北上市議会",
+    "handling": "distribute",
+    "page": "https://www.city.kitakami.iwate.jp/life/kitakamishigikai/gikainittei_shingikekka/9525.html",
+    "form": ""
+   },
+   {
+    "kind": "chinjo",
+    "id": "千葉県/成田市",
+    "to": "成田市議会",
+    "handling": "distribute",
+    "page": "https://www.city.narita.chiba.jp/gikai/index0087.html",
+    "form": "https://logoform.jp/procedure/kR3j/1039"
+   },
+   {
+    "kind": "chinjo",
+    "id": "愛知県/豊橋市",
+    "to": "豊橋市議会",
+    "handling": "review",
+    "page": "https://www.city.toyohashi.lg.jp/8134.htm",
+    "form": "https://ttzk.graffer.jp/city-toyohashi/smart-apply/apply-procedure-alias/chinjyo"
+   },
+   {
+    "kind": "chinjo",
+    "id": "島根県/浜田市",
+    "to": "浜田市議会",
+    "handling": "review",
+    "page": "https://www.city.hamada.shimane.jp/www/gikai/contents/1731023779477/index.html",
+    "form": ""
+   },
+   {
+    "kind": "yobo",
+    "id": "埼玉県/八潮市",
+    "to": "八潮市長",
+    "handling": "accept",
+    "page": "https://www.city.yashio.lg.jp/shisei/koho_kocho/shiminnokoe/index.html",
+    "form": "https://www.city.yashio.lg.jp/cgi-bin/formmail/formmail.cgi?d=koebox"
+   },
+   {
+    "kind": "yobo",
+    "id": "千葉県/成田市",
+    "to": "成田市長",
+    "handling": "accept",
+    "page": "https://www.city.narita.chiba.jp/shisei/page101500.html",
+    "form": "https://logoform.jp/form/kR3j/1874300"
+   },
+   {
+    "kind": "yobo",
+    "id": "千葉県/佐倉市",
+    "to": "佐倉市長",
+    "handling": "accept",
+    "page": "https://www.city.sakura.lg.jp/soshiki/hishoka/96/4696.html",
+    "form": ""
+   },
+   {
+    "kind": "yobo",
+    "id": "東京都/狛江市",
+    "to": "狛江市長",
+    "handling": "accept",
+    "page": "https://www.city.komae.tokyo.jp/index.cfm/50,0,413,html",
+    "form": ""
+   },
+   {
+    "kind": "yobo",
+    "id": "福井県/鯖江市",
+    "to": "鯖江市長",
+    "handling": "accept",
+    "page": "https://www.city.sabae.fukui.jp/about_city/shichonoheya/mayor.html",
+    "form": "https://www.city.sabae.fukui.jp/cgi-bin/formmail/formmail.cgi?d=Mayorsabae_inq"
+   },
+   {
+    "kind": "yobo",
+    "id": "長野県/上水内郡飯綱町",
+    "to": "上水内郡飯綱町長",
+    "handling": "accept",
+    "page": "https://www.town.iizuna.nagano.jp/docs/874.html",
+    "form": "https://www.town.iizuna.nagano.jp/inquiry/"
+   },
+   {
+    "kind": "yobo",
+    "id": "山口県/周南市",
+    "to": "周南市長",
+    "handling": "accept",
+    "page": "https://www.city.shunan.lg.jp/soshiki/3/3906.html",
+    "form": "https://logoform.jp/form/mn2n/896981"
+   },
+   {
+    "kind": "yobo",
+    "id": "愛媛県/新居浜市",
+    "to": "新居浜市長",
+    "handling": "accept",
+    "page": "https://www.city.niihama.lg.jp/soshiki/hisyokouhou/siminnokoe.html",
+    "form": ""
    }
   ]
  }
