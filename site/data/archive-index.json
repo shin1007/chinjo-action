@@ -1486,6 +1486,22 @@
       "fetchedAt": "2026-11-28T00:22:50.935Z",
       "sha256": "435a16473971f244f6ab902acc1f27ec00cfe15f5c461ccf235e642c2cebc615",
       "localPath": "sources/archive/2026-11-28-435a16473971.html"
+    },
+    {
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:12016E227",
+      "title": "Consolidated version of the TFEU (OJ C 202, 7.6.2016) Article 227",
+      "note": "人が手で保存",
+      "fetchedAt": "2026-11-28T01:32:10.478Z",
+      "sha256": "c8a5df8b1781ec74ecf7ea1bde5d9b591933d68184b3d867415aa8c8e5a4297c",
+      "localPath": "sources/archive/2026-11-28-c8a5df8b1781.html"
+    },
+    {
+      "url": "https://eur-lex.europa.eu/eli/reg/2019/788/oj",
+      "title": "Regulation (EU) 2019/788 on the European citizens' initiative (OJ L 130, 17.5.2019)",
+      "note": "人が手で保存",
+      "fetchedAt": "2026-11-28T01:32:10.764Z",
+      "sha256": "aa545a4b791d906a28f09ba4fd6025d9cee750fd69cbd7023419420cd1ffccf9",
+      "localPath": "sources/archive/2026-11-28-aa545a4b791d.html"
     }
   ]
 }
