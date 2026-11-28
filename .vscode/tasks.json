@@ -1,6 +1,6 @@
 {
   // 運営の道具を VS Code から動かす。Ctrl+Shift+P →「Tasks: Run Task」→ 名前を選ぶ。
-  // 一覧と説明は docs/非公開/道具の一覧.md（Git に入れていない手元のファイル）。
+  // 一覧と説明は docs/非公開/運営のダッシュボード.md（Git に入れていない手元のファイル）。
   "version": "2.0.0",
   "tasks": [
     { "label": "運営：今日やること", "type": "shell", "command": "node scripts/unei.js status; node scripts/unei.js next", "problemMatcher": [] },
